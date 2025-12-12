@@ -1,0 +1,154 @@
+import { Link } from "react-router-dom";
+import { Facebook, Instagram, Mail, MapPin, Phone, PhoneCallIcon } from "lucide-react";
+import heroImage from "@/assets/hero-children.jpg";
+
+const footerLinks = {
+  navigation: [
+    { label: "Accueil", href: "/" },
+    { label: "Événements", href: "/evenements" },
+    { label: "Comptes-rendus", href: "/comptes-rendus" },
+    { label: "Partenaires", href: "/partenaires" },
+  ],
+  association: [
+    { label: "À propos", href: "/a-propos" },
+    { label: "Le bureau", href: "/a-propos#bureau" },
+    { label: "Adhérer", href: "/a-propos#adherer" },
+    { label: "Contact", href: "/contact" },
+  ],
+};
+
+const socialLinks = [
+  { icon: Facebook, href: "https://www.facebook.com/LesPtitsTrinquats", label: "Facebook" },
+  { icon: Instagram, href: "https://www.instagram.com/Les_ptits_trinquat?fbclid=IwY2xjawOmlxFleHRuA2FlbQIxMABicmlkETFnZjNRdDdMVHp6cHdIM3pwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvXM-UMnkp69r5uScbYVykNF5ZVtr9MQa1_k2se0iqZ3IfRUEmOZXgHqWCes_aem_hUyrVdxiVyWFisTvxVlyRw&brid=boREg9T10BACz4NodPBJ3w", label: "Instagram" },
+  { icon: Mail, href: "mailto:contact@ptits-trinquat.fr", label: "Email" },
+  { icon: PhoneCallIcon, href: "https://www.helloasso.com/associations/les-p-tits-trinquat", label: "HelloAsso" },
+];
+
+export function Footer() {
+  return (
+    <footer className="relative overflow-hidden bg-foreground text-background">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-primary/20 watercolor-blob" />
+        <div className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-secondary/20 watercolor-blob" />
+      </div>
+
+      <div className="container relative py-12 md:py-16">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          {/* Brand */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary">
+                <span className="text-xl font-bold text-primary-foreground">
+                  <img
+                  src={heroImage}
+                  alt="Logo enfants"
+                  className="h-10 w-10 rounded-xl object-cover"
+                  />
+                </span>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold">Les P'tits Trinquât</h3>
+                <p className="text-sm text-background/70">Association de parents d'élèves</p>
+              </div>
+            </div>
+            <p className="text-sm text-background/70 leading-relaxed">
+              Ensemble pour l'épanouissement de nos enfants au sein du groupe scolaire Anne Frank – Charles Dickens.
+            </p>
+            {/* Social Links */}
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-background/10 transition-colors hover:bg-primary hover:text-primary-foreground"
+                  aria-label={social.label}
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-background/50">
+              Navigation
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.navigation.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-sm text-background/70 transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Association */}
+          <div>
+            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-background/50">
+              Association
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.association.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-sm text-background/70 transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-background/50">
+              Contact
+            </h4>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 text-primary" />
+                <span className="text-sm text-background/70">
+                  Groupe scolaire Anne Frank – Charles Dickens<br />
+                  Les Aiguerelles, Montpellier, France
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="h-4 w-4 text-primary" />
+                <span className="text-sm text-background/70">04 67 65 66 68</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="h-4 w-4 text-primary" />
+                <span className="text-sm text-background/70">contact@ptits-trinquat.fr</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-background/10 pt-8 md:flex-row">
+          <p className="text-sm text-background/50">
+            © {new Date().getFullYear()} Les P'tits Trinquât. Tous droits réservés.
+          </p>
+          <div className="flex gap-4">
+            <Link to="/mentions-legales" className="text-sm text-background/50 hover:text-primary">
+              Mentions légales
+            </Link>
+            <Link to="/confidentialite" className="text-sm text-background/50 hover:text-primary">
+              Confidentialité
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
