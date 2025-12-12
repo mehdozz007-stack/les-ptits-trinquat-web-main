@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
-  base: "/", // Si domaine personnalisé, sinon "/les-ptits-trinquat-web/"
+  base: "/les-ptits-trinquat-web-main/",
   server: {
     host: "::",
     port: 8080,
