@@ -400,3 +400,4 @@ bun run dev -- --port 3000
 ---
 
 Fait avec ❤️ pour les enfants du groupe scolaire Anne Frank – Charles Dickens
+# Déploiement
