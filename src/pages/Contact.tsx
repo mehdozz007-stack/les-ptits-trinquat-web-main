@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, MessageSquare, HelpCircle, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, HelpCircle, Clock, Heart, ExternalLink, Instagram, Facebook } from "lucide-react";
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Heart, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const faqs = [
@@ -198,13 +197,24 @@ const Contact = () => {
               </Card>
 
               <Card variant="elevated">
-                <CardContent className="flex items-start gap-4 p-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary/20">
-                    <Phone className="h-6 w-6 text-secondary" />
+                <CardContent className="flex items-center justify-between gap-4 p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary/20">
+                      <Heart className="h-6 w-6 text-secondary" />
+                    </div>
+                    <h3 className="font-bold text-foreground">Suivez-nous</h3>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-foreground">Téléphone</h3>
-                    <p className="text-muted-foreground">04 00 00 00 00</p>
+                  <div className="flex gap-3">
+                    <Button variant="ghost" size="icon" asChild className="h-14 w-14 rounded-full bg-pink-200 hover:bg-pink-300">
+                      <a href="https://www.instagram.com/Les_ptits_trinquat" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <Instagram className="h-7 w-7 text-pink-600" />
+                      </a>
+                    </Button>
+                    <Button variant="ghost" size="icon" asChild className="h-14 w-14 rounded-full bg-sky-200 hover:bg-sky-300">
+                      <a href="https://www.facebook.com/LesPtitsTrinquats" target="_blank" rel="noopener noreferrer" title="Facebook">
+                        <Facebook className="h-7 w-7 text-sky-600" />
+                      </a>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -214,29 +224,29 @@ const Contact = () => {
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky/20">
                     <MapPin className="h-6 w-6 text-sky" />
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <h3 className="font-bold text-foreground">Adresse</h3>
                     <p className="text-muted-foreground">
-                      Groupe scolaire Anne Frank – Charles Dickens<br />
-                      Montpellier, France
-                      {/* Link */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="mt-auto"
-                      asChild
-                    >
-                      <a
-                        href="https://digipad.app/p/1394770/39b6b0ff88979"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      > 
-                      <ExternalLink className="ml-2 h-3.5 w-3.5" />
-                      Code d'accès nécessaire.
-                      </a>
-                    </Button>
+                      686 Avenue du Pont Trinquat <br /> 34070 Montpellier
                     </p>
                   </div>
+                  {/* Link */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-fit flex-shrink-0"
+                    asChild
+                  >
+                    <a
+                      href="https://digipad.app/p/1394770/39b6b0ff88979"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1"
+                    > 
+                      Code d'accès nécessaire
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </Button>
                 </CardContent>
               </Card>
 

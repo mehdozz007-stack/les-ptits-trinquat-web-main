@@ -5,13 +5,11 @@ import { Button } from "@/components/ui/button";
 
 const partners = [
   { id: 1, name: "Mairie de Montpellier", logo: "🏛️" },
-  { id: 2, name: "Librairie Sauramps", logo: "📚" },
-  { id: 3, name: "Théâtre La Vista", logo: "🎭" },
+  { id: 2, name: "Nomaïa", logo: "🍰"  },
+  { id: 3, name: "ParfumeMoi", logo: "🌹" },
   { id: 4, name: "Sport et Loisirs", logo: "⚽" },
   { id: 5, name: "Centre Équestre Sud Occitanie", logo: "🐴" },
   { id: 6, name: "Musée Fabre", logo: "🎨" },
-  { id: 7, name: "Nomaïa", logo: "🍰" },
-  { id: 8, name: "ParfumeMoi", logo: "🌹" },
 ];
 
 export function PartnersPreview() {

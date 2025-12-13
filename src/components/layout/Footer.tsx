@@ -118,7 +118,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 text-primary" />
                 <span className="text-sm text-background/70">
-                  Les Aiguerelles, Montpellier, France
+                  686 Avenue du Pont Trinquat <br /> 34070 Montpellier
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -127,7 +127,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-primary" />
-                <span className="text-sm text-background/70">Page Contact</span>
+                <Link to="/contact" className="text-sm text-background/70 transition-colors hover:text-primary">Contactez-nous</Link>
               </li>
             </ul>
           </div>
