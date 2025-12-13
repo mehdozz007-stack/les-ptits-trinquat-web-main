@@ -118,7 +118,6 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 text-primary" />
                 <span className="text-sm text-background/70">
-                  Groupe scolaire Anne Frank – Charles Dickens<br />
                   Les Aiguerelles, Montpellier, France
                 </span>
               </li>
