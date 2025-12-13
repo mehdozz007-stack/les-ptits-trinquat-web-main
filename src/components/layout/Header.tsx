@@ -35,8 +35,8 @@ export function Header() {
             <h1 className="text-xs sm:text-base md:text-lg font-bold leading-tight text-foreground">
               Les P'tits Trinquât
             </h1>
-            <p className="hidden xs:block sm:block text-xs text-muted-foreground">
-              Association de parents d'élèves
+            <p className="text-xs text-muted-foreground">
+              Association parents d'élèves
             </p>
           </div>
         </Link>
@@ -61,7 +61,7 @@ export function Header() {
 
         {/* CTA Button - Desktop */}
         <div className="hidden lg:block">
-          <Button variant="playful" size="md">
+          <Button variant="playful">
             <a href="https://www.helloasso.com/associations/les-p-tits-trinquat#membership" target="_blank" rel="noopener noreferrer">
               Rejoindre
             </a>
