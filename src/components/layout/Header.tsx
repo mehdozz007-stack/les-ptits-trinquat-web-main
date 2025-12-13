@@ -21,34 +21,34 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-card/80 backdrop-blur-lg">
-      <div className="container flex h-16 items-center justify-between md:h-20">
+      <div className="container flex h-14 sm:h-16 md:h-20 items-center justify-between px-3 sm:px-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary shadow-soft transition-transform group-hover:scale-110">
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
+          <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-primary to-secondary shadow-soft transition-transform group-hover:scale-110 flex-shrink-0">
             <img 
             src={heroImage} 
             alt="Logo enfants"
-            className="h-10 w-10 rounded-xl object-cover"
+            className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl object-cover"
             />
           </div>
-          <div className="hidden sm:block">
-            <h1 className="text-lg font-bold leading-tight text-foreground">
+          <div>
+            <h1 className="text-xs sm:text-base md:text-lg font-bold leading-tight text-foreground">
               Les P'tits Trinquât
             </h1>
-            <p className="text-xs text-muted-foreground">
+            <p className="hidden xs:block sm:block text-xs text-muted-foreground">
               Association de parents d'élèves
             </p>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-0.5">
           {navItems.map((item) => (
             <Link
               key={item.href}
               to={item.href}
               className={cn(
-                "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
+                "px-3 lg:px-4 py-2 rounded-lg lg:rounded-xl text-xs lg:text-sm font-medium transition-all duration-200",
                 location.pathname === item.href
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -61,9 +61,9 @@ export function Header() {
 
         {/* CTA Button - Desktop */}
         <div className="hidden lg:block">
-          <Button variant="playful" size="lg">
+          <Button variant="playful" size="md">
             <a href="https://www.helloasso.com/associations/les-p-tits-trinquat#membership" target="_blank" rel="noopener noreferrer">
-              Rejoindre l'association
+              Rejoindre
             </a>
           </Button>
         </div>
@@ -72,10 +72,10 @@ export function Header() {
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden"
+          className="lg:hidden h-9 w-9"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {isOpen ? <X className="h-4 w-4 sm:h-5 sm:w-5" /> : <Menu className="h-4 w-4 sm:h-5 sm:w-5" />}
         </Button>
       </div>
 
@@ -88,7 +88,7 @@ export function Header() {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden border-t border-border/50 bg-card"
           >
-            <nav className="container py-4 space-y-1">
+            <nav className="container py-3 sm:py-4 space-y-1 px-3 sm:px-6">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.href}
@@ -100,13 +100,13 @@ export function Header() {
                     to={item.href}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all",
+                      "flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm sm:text-base font-medium transition-all",
                       location.pathname === item.href
                         ? "bg-primary/10 text-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     )}
                   >
-                    <item.icon className="h-5 w-5" />
+                    <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     {item.label}
                   </Link>
                 </motion.div>
@@ -117,8 +117,10 @@ export function Header() {
                 transition={{ delay: navItems.length * 0.05 }}
                 className="pt-2"
               >
-                <Button variant="playful" className="w-full">
-                  Rejoindre l'association
+                <Button variant="playful" className="w-full text-sm sm:text-base">
+                  <a href="https://www.helloasso.com/associations/les-p-tits-trinquat#membership" target="_blank" rel="noopener noreferrer" className="w-full">
+                    Rejoindre l'association
+                  </a>
                 </Button>
               </motion.div>
             </nav>
