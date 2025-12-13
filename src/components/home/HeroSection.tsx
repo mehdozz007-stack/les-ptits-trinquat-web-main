@@ -88,7 +88,7 @@ export function HeroSection() {
               </span>
               {/* Texte */}
               <span className="leading-snug">
-              Notre TOMBOLA 2025-2026 est lancée ! Participez et gagnez de super lots !
+              Notre TOMBOLA 2025-2026 est lancée !
               </span>
              </div>
               {/* Link */}
