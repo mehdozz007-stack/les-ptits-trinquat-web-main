@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { url } from "inspector";
 
 const events = [
     {
@@ -223,10 +222,10 @@ const Evenements = () => {
       </section>
 
       {/* Past Events */}
-      <section className="bg-muted/50 py-16">
+      <section className="bg-muted/50 py-12 sm:py-16">
         <div className="container">
-          <h2 className="mb-8 text-2xl font-bold">Événements passés</h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <h2 className="mb-6 sm:mb-8 text-xl sm:text-2xl font-bold">Événements passés</h2>
+          <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
             {pastEvents.map((event, index) => {
               const colors = colorClasses[event.color as keyof typeof colorClasses];
               return (
@@ -236,17 +235,17 @@ const Evenements = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card variant="elevated" className="group">
-                    <CardContent className="flex items-center gap-4 p-4">
-                      <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
-                        <Calendar className={`h-6 w-6 ${colors.text}`} />
+                  <Card variant="elevated" className="group h-full">
+                    <CardContent className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-3 sm:p-4">
+                      <div className={`flex h-12 sm:h-14 w-12 sm:w-14 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
+                        <Calendar className={`h-5 sm:h-6 w-5 sm:w-6 ${colors.text}`} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-foreground truncate">{event.title}</h3>
-                        <p className="text-sm text-muted-foreground">{event.date}</p>
+                        <h3 className="font-bold text-sm sm:text-base text-foreground line-clamp-2">{event.title}</h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{event.date}</p>
                       </div>
-                      <Button asChild variant="ghost" size="sm">
-                         <a href={event.url} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                      <Button asChild variant="ghost" size="sm" className="w-full sm:w-auto sm:ml-auto">
+                        <a href={event.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start">
                           Voir
                           <ChevronRight className="ml-1 h-4 w-4" />
                         </a>
