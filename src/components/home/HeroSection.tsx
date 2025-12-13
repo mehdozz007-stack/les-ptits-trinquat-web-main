@@ -113,7 +113,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
+              className="mb-6 text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
             >
               <span className="text-gradient">Grandir ensemble</span>
               <br />
@@ -184,17 +184,17 @@ export function HeroSection() {
               {/* Background decoration */}
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/20 to-sky/20 blur-2xl" />
               
-              <div className="text-center mb-4 lg:hidden">
+              <div className="text-center mb-4">
               <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight"
+              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
             >
               <span className="text-gradient">Les P'tits Trinquât</span>
               <br />
-              <p className="text-xs sm:text-sm mt-1 font-semibold text-black">
-               Association de parents.
+              <p className="text-xs sm:text-sm lg:text-base mt-1 font-semibold text-black">
+               Association de parents d'élèves.
               </p>
             </motion.h1>
             </div>
