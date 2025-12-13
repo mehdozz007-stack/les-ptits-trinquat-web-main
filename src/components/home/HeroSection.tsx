@@ -88,7 +88,7 @@ export function HeroSection() {
               </span>
               {/* Texte */}
               <span className="leading-tight text-xs sm:text-sm whitespace-nowrap sm:whitespace-normal">
-              TOMBOLA 2025-2026 !
+              TOMBOLA 2025-2026 est lancée !
               </span>
              </div>
               {/* Link */}

@@ -123,11 +123,11 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-primary" />
-                <span className="text-sm text-background/70">04 67 65 66 68</span>
+                <span className="text-sm text-background/70">04 00 00 00 00</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-primary" />
-                <span className="text-sm text-background/70">contact@ptits-trinquat.fr</span>
+                <span className="text-sm text-background/70">Page Contact</span>
               </li>
             </ul>
           </div>
