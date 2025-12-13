@@ -54,7 +54,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="relative mb-6 inline-flex flex-col sm:flex-row items-start sm:items-center gap-2 rounded-2xl sm:rounded-full bg-primary/10 px-3 sm:px-4 py-3 sm:py-2 text-sm sm:text-lg font-bold text-blue-900 overflow-visible"
+              className="relative mb-6 inline-flex flex-row items-center gap-1 sm:gap-3 rounded-2xl sm:rounded-full bg-primary/10 px-2 sm:px-4 py-2 sm:py-2 text-xs sm:text-lg font-bold text-blue-900 overflow-visible"
             >
               {/* Dynamic Sparks */}
               {sparks.map((_, i) => (
@@ -76,26 +76,26 @@ export function HeroSection() {
             ))}
 
               {/* Ping indicator */}
-              <span className="text-lg sm:text-xl">📣</span>
-              <div className="flex items-start sm:items-center gap-2 sm:gap-3 font-kid text-transparent bg-clip-text 
+              <span className="text-base sm:text-xl flex-shrink-0">📣</span>
+              <div className="flex items-center gap-1 sm:gap-2 font-kid text-transparent bg-clip-text 
                bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 
-               text-xs sm:text-base font-bold leading-tight drop-shadow-lg">
+               text-xs sm:text-sm font-bold leading-tight drop-shadow-lg">
   
               {/* Point vert */}
-              <span className="relative flex h-2 w-2 sm:h-3 sm:w-3 flex-shrink-0 mt-1 sm:mt-0">
+              <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-green-500" />
+                <span className="relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full bg-green-500" />
               </span>
               {/* Texte */}
-              <span className="leading-snug">
-              Notre TOMBOLA 2025-2026 est lancée ! Participez et gagnez de super lots !
+              <span className="leading-tight text-xs sm:text-sm whitespace-nowrap sm:whitespace-normal">
+              TOMBOLA 2025-2026 lancée !
               </span>
              </div>
               {/* Link */}
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="mt-2 sm:mt-0"
+                      className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm"
                       asChild
                     >
                       <a
@@ -103,8 +103,8 @@ export function HeroSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Visiter
-                        <ExternalLink className="ml-2 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                        Voir
+                        <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
                       </a>
                     </Button>
             </motion.div>
@@ -113,7 +113,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
+              className="mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight"
             >
               <span className="text-gradient">Grandir ensemble</span>
               <br />
