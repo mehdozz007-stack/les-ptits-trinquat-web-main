@@ -236,20 +236,24 @@ const Evenements = () => {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Card variant="elevated" className="group h-full">
-                    <CardContent className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-3 sm:p-4">
-                      <div className={`flex h-12 sm:h-14 w-12 sm:w-14 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
-                        <Calendar className={`h-5 sm:h-6 w-5 sm:w-6 ${colors.text}`} />
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <div className={`flex h-12 sm:h-14 w-12 sm:w-14 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
+                            <Calendar className={`h-5 sm:h-6 w-5 sm:w-6 ${colors.text}`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-bold text-sm sm:text-base text-foreground line-clamp-2">{event.title}</h3>
+                            <p className="text-xs sm:text-sm text-muted-foreground">{event.date}</p>
+                          </div>
+                        </div>
+                        <Button asChild variant="ghost" size="sm" className="w-full sm:w-auto">
+                          <a href={event.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start">
+                            Voir
+                            <ChevronRight className="ml-1 h-4 w-4" />
+                          </a>
+                        </Button>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-sm sm:text-base text-foreground line-clamp-2">{event.title}</h3>
-                        <p className="text-xs sm:text-sm text-muted-foreground">{event.date}</p>
-                      </div>
-                      <Button asChild variant="ghost" size="sm" className="w-full sm:w-auto sm:ml-auto">
-                        <a href={event.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start">
-                          Voir
-                          <ChevronRight className="ml-1 h-4 w-4" />
-                        </a>
-                      </Button>
                     </CardContent>
                   </Card>
                 </motion.div>
