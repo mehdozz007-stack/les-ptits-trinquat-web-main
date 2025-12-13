@@ -154,7 +154,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="mt-10 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 sm:flex"
+              className="mt-10 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 sm:flex place-items-center sm:place-items-stretch"
             >
               <div>
                 <div className="text-2xl sm:text-3xl font-bold text-[#A8D479]">100+</div>
