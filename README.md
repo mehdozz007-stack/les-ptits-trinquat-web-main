@@ -63,12 +63,6 @@ Ce site permet aux parents d'élèves de :
 - **Bun 1.0+** (recommandé) ou Node.js 18+
 - Git
 
-### Installer Bun (optionnel mais recommandé)
-
-```bash
-curl -fsSL https://bun.sh/install | bash
-```
-
 ### Étapes
 
 ```bash
@@ -78,11 +72,11 @@ git clone https://github.com/votre-username/les-ptits-trinquat-web-main.git
 # Accéder au répertoire
 cd les-ptits-trinquat-web-main
 
-# Installer les dépendances (avec Bun)
-bun install
-
-# Ou avec npm
+# Installer les dépendances avec npm
 npm install
+
+# Ou avec Bun (optionnel mais recommandé)
+bun install
 ```
 
 ## 📁 Structure du projet
@@ -119,7 +113,7 @@ les-ptits-trinquat-web-main/
 ### Lancer le serveur de développement
 
 ```bash
-bun run dev
+npm run dev
 ```
 
 Le site sera accessible sur `http://localhost:8080`
@@ -128,19 +122,19 @@ Le site sera accessible sur `http://localhost:8080`
 
 ```bash
 # Lancer le serveur de développement
-bun run dev
+npm run dev
 
 # Build pour la production
-bun run build
+npm run build
 
 # Preview du build en local
-bun run preview
+npm run preview
 
 # Linting (ESLint)
-bun run lint
+npm run lint
 
 # Build en mode développement (avec sourcemaps)
-bun run build:dev
+npm run build:dev
 ```
 
 ### Hot Module Replacement (HMR)
@@ -152,7 +146,7 @@ Le code se recharge automatiquement lors de vos modifications. Aucune configurat
 ### Build de production
 
 ```bash
-bun run build
+npm run build
 ```
 
 Les fichiers seront générés dans le dossier `dist/`.
@@ -172,7 +166,7 @@ Les fichiers seront générés dans le dossier `dist/`.
 3. Connectez votre dépôt GitHub
 4. Configurez:
    - **Framework**: React
-   - **Build command**: `bun run build`
+   - **Build command**: `npm run build`
    - **Build output directory**: `dist`
 5. Cliquez sur **Save and Deploy**
 
@@ -205,7 +199,7 @@ git push origin main
 2. **New site from Git**
 3. Connectez votre dépôt GitHub
 4. Configurez:
-   - **Build command**: `bun run build`
+   - **Build command**: `npm run build`
    - **Publish directory**: `dist`
 5. Cliquez sur **Deploy**
 
@@ -368,24 +362,23 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 🆘 Troubleshooting
 
-### "npm/bun install échoue"
+### \"npm install échoue\"
 ```bash
-# Vérifier la version de Node/Bun
+# Vérifier la version de Node
 node --version
-bun --version
 
 # Supprimer les fichiers de cache
-rm -rf node_modules bun.lockb
-bun install
+rm -rf node_modules package-lock.json
+npm install
 ```
 
-### "Le serveur dev ne démarre pas"
+### \"Le serveur dev ne démarre pas\"
 ```bash
 # Vérifier que le port 8080 est libre
 lsof -i :8080
 
 # Lancer sur un port différent
-bun run dev -- --port 3000
+npm run dev -- --port 3000
 ```
 
 ### "DNS non résolu après déploiement"
