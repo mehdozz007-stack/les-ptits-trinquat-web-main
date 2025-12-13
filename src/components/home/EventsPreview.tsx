@@ -43,6 +43,7 @@ const upcomingEvents = [
     location: "Salle polyvalente",
     description: "Bilan du trimestre et préparation aux prochains événements.",
     color: "sky",
+    status: "past",
   },
     {
     id: 4,

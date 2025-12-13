@@ -26,7 +26,7 @@ const events = [
     location: "Salle polyvalente",
     description: "Bilan du trimestre et préparation aux prochains événements.",
     color: "secondary",
-    status: "upcoming",
+    status: "past",
     attendees: 30,
   },
   {
