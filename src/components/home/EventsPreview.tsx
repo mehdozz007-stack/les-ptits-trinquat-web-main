@@ -72,15 +72,15 @@ export function EventsPreview() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 text-center"
+          className="mb-12 flex flex-col sm:text-center items-start sm:items-center gap-2 sm:gap-4"
         >
-          <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+          <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs sm:text-sm font-semibold text-primary">
             Événements
           </span>
-          <h2 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
             Prochains rendez-vous
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <p className="max-w-2xl text-sm sm:text-lg text-muted-foreground">
             Retrouvez-nous lors de nos prochains événements et partagez des moments conviviaux avec la communauté scolaire.
           </p>
         </motion.div>
