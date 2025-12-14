@@ -64,7 +64,7 @@ const APropos = () => {
               <span className="text-gradient">P'tits Trinquat</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Depuis plus de 20 ans, notre association rassemble les parents d'élèves du groupe scolaire Anne Frank – Charles Dickens pour accompagner et enrichir la vie scolaire de nos enfants.
+              Depuis 2019, notre association rassemble les parents d'élèves du groupe scolaire Anne Frank – Charles Dickens pour accompagner et enrichir la vie scolaire de nos enfants.
             </p>
           </motion.div>
         </div>
@@ -183,7 +183,7 @@ const APropos = () => {
                 Au fil des années, nous avons organisé des centaines d'événements : fêtes de l'école, marchés de Noël, ventes de gâteaux, sorties scolaires... Chaque action contribue à financer des projets pédagogiques et à créer des moments de partage inoubliables.
               </p>
               <p>
-                Aujourd'hui, nous sommes fiers de rassembler plus de 150 familles et de compter sur une équipe de bénévoles engagés qui font vivre l'association au quotidien.
+                Aujourd'hui, nous sommes fiers de rassembler plus de 100 familles et de compter sur une équipe de bénévoles engagés qui font vivre l'association au quotidien.
               </p>
             </div>
           </motion.div>
@@ -211,7 +211,7 @@ const APropos = () => {
                 size="xl"
                 className="bg-background text-primary hover:bg-background/90 shadow-lg rounded-2xl font-bold"
                 >
-                  <Link to="https://www.helloasso.com/associations/les-p-tits-trinquat#membership" target="_blank">
+                  <Link to="https://www.helloasso.com/associations/les-p-tits-trinquat/adhesions/nous-soutenir" target="_blank">
                     Adhérer maintenant
                   </Link>
               </Button>

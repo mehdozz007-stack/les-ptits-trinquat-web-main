@@ -62,7 +62,7 @@ export function Header() {
         {/* CTA Button - Desktop */}
         <div className="hidden lg:block">
           <Button variant="playful" size="lg" className="text-base sm:text-base font-semibold px-6 sm:px-8 py-3">
-            <a href="https://www.helloasso.com/associations/les-p-tits-trinquat#membership" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.helloasso.com/associations/les-p-tits-trinquat/adhesions/nous-soutenir" target="_blank" rel="noopener noreferrer">
               Rejoindre l'association
             </a>
           </Button>

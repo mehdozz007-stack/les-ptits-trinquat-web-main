@@ -54,7 +54,7 @@ export function CTASection() {
               className="bg-background text-primary hover:bg-background/90 shadow-lg hover:shadow-xl hover:-translate-y-1 rounded-2xl font-bold"
               asChild
             >
-              <Link to="https://www.helloasso.com/associations/les-p-tits-trinquat#membership" target="_blank">
+              <Link to="https://www.helloasso.com/associations/les-p-tits-trinquat/adhesions/nous-soutenir" target="_blank">
                 Adhérer à l'association
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

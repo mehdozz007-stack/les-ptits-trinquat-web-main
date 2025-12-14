@@ -126,7 +126,7 @@ export function HeroSection() {
               transition={{ delay: 0.4 }}
               className="mb-8 text-base sm:text-lg text-muted-foreground leading-relaxed"
             >
-              L'association Les P'tits Trinquat rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">FRANK-DICKENS</strong>, 
+              L'association Les P'tits Trinquat rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong>, 
               pour accompagner et enrichir la vie scolaire de nos enfants à travers des événements, des projets 
               et une communauté bienveillante.
             </motion.p>
@@ -169,7 +169,7 @@ export function HeroSection() {
               </div>
               <div className="h-8 sm:h-12 w-px bg-border hidden sm:block" />
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">10</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">5+</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Ans</div>
               </div>
             </motion.div>
