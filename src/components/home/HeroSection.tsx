@@ -126,7 +126,9 @@ export function HeroSection() {
               transition={{ delay: 0.4 }}
               className="mb-8 text-base sm:text-lg text-muted-foreground leading-relaxed"
             >
-              L'association Les P'tits Trinquât rassemble les parents d'élèves du groupe scolaire FRANK-DICKENS, les Aiguerelles, pour accompagner et enrichir la vie scolaire de nos enfants à travers des événements, des projets et une communauté bienveillante.
+              L'association Les P'tits Trinquat rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">FRANK-DICKENS</strong>, 
+              pour accompagner et enrichir la vie scolaire de nos enfants à travers des événements, des projets 
+              et une communauté bienveillante.
             </motion.p>
 
             <motion.div
@@ -191,7 +193,7 @@ export function HeroSection() {
               transition={{ delay: 0.3 }}
               className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
             >
-              <span className="text-gradient">Les P'tits Trinquât</span>
+              <span className="text-gradient">Les P'tits Trinquat</span>
               <br />
               <p className="text-xs sm:text-sm lg:text-base mt-1 font-semibold text-black">
                Association de parents d'élèves.
@@ -202,7 +204,7 @@ export function HeroSection() {
               {/* Main image */}
               <img
                 src={heroImage}
-                alt="Enfants joyeux - Les P'tits Trinquât"
+                alt="Enfants joyeux - Les P'tits Trinquat"
                 className="relative rounded-3xl shadow-2xl w-full h-auto"
                 style={{ maxHeight: "400px", objectFit: "cover" }}
               />

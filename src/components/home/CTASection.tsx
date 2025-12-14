@@ -43,7 +43,7 @@ export function CTASection() {
         >
           <h2 className="mb-6 text-3xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
             Rejoignez l'aventure des<br />
-            P'tits Trinquât !
+            P'tits Trinquat !
           </h2>
           <p className="mb-8 text-lg text-primary-foreground/80 leading-relaxed">
             Que vous souhaitiez participer activement au bureau, donner un coup de main ponctuel lors des événements, ou simplement adhérer pour soutenir nos actions, votre engagement compte !

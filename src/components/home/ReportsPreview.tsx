@@ -82,7 +82,7 @@ export function ReportsPreview() {
                 </>
               )}
             </span>
-            <h2 className="mb-4 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
+            <h2 className="mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
               Comptes-rendus et<br />
               <span className="text-gradient">procès-verbaux</span>
             </h2>

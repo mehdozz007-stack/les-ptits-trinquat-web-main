@@ -33,7 +33,7 @@ export function Header() {
           </div>
           <div>
             <h1 className="text-xs sm:text-base md:text-lg font-bold leading-tight text-foreground">
-              Les P'tits Trinquât
+              Les P'tits Trinquat
             </h1>
             <p className="text-xs text-muted-foreground">
               Association de parents d'élèves

@@ -4,12 +4,54 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const partners = [
-  { id: 1, name: "Mairie de Montpellier", logo: "🏛️" },
-  { id: 2, name: "Nomaïa", logo: "🍰"  },
-  { id: 3, name: "ParfumeMoi", logo: "🌹" },
-  { id: 4, name: "Sport et Loisirs", logo: "⚽" },
-  { id: 5, name: "Centre Équestre Sud Occitanie", logo: "🐴" },
-  { id: 6, name: "Musée Fabre", logo: "🎨" },
+  {
+    id: 1,
+    name: "Les petits bilingues",
+    category: "Éducation",
+    description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
+    logo: "🇬🇧",
+    website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
+  },
+  {
+    id: 2,
+    name: "Atelier Tuffery",
+    category: "Shopping",
+    description: "Jean français fabriqué artisanalement en Lozère depuis 1892.",
+    logo: "👖",
+    website: "https://www.ateliertuffery.com/pages/boutique-jeans-francais-montpellier",
+  },
+  {
+    id: 3,
+    name: "Brin de Terre",
+    category: "Éducation",
+    description: "Ateliers nature et jardinage pour sensibiliser les enfants à l'environnement.",
+    logo: "🌱",
+    website: "https://www.instagram.com/atelierbrindeterre/",
+  },
+  {
+    id: 4,
+    name: "Manu Créations Couture",
+    category: "Éducation",
+    description: "Ateliers créatifs de couture pour enfants et adultes.",
+    logo: "🧵",
+    website: "https://www.manu-creations.com/",
+  },
+  {
+    id: 5,
+    name: "Astroludik",
+    category: "Éducation",
+    description: "Animations ludiques autour de l'astronomie pour éveiller la curiosité des enfants.",
+    logo: "🔭",
+    website: "https://www.astroludik.com/",
+  },
+  {
+    id: 6,
+    name: "Massages d'Isa",
+    category: "Bien-être",
+    description: "Massages bien-être et relaxation pour toute la famille.",
+    logo: "💆",
+    website: "https://isabellerichez34.wixsite.com/monsite-6",
+  },
 ];
 
 export function PartnersPreview() {
@@ -38,19 +80,22 @@ export function PartnersPreview() {
         {/* Partners Grid */}
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
           {partners.map((partner, index) => (
-            <motion.div
+            <motion.a
               key={partner.id}
+              href={partner.website}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1"
+              className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer"
             >
               <div className="mb-3 text-4xl">{partner.logo}</div>
               <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                 {partner.name}
               </span>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
 

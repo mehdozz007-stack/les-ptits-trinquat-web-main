@@ -61,7 +61,7 @@ const APropos = () => {
             </span>
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
               À propos des<br />
-              <span className="text-gradient">P'tits Trinquât</span>
+              <span className="text-gradient">P'tits Trinquat</span>
             </h1>
             <p className="text-lg text-muted-foreground">
               Depuis plus de 20 ans, notre association rassemble les parents d'élèves du groupe scolaire Anne Frank – Charles Dickens pour accompagner et enrichir la vie scolaire de nos enfants.
@@ -84,7 +84,7 @@ const APropos = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Les P'tits Trinquât est une association de parents d'élèves qui œuvre pour le bien-être et l'épanouissement des enfants au sein du groupe scolaire Anne Frank – Charles Dickens à Montpellier.
+                  Les P'tits Trinquat est une association de parents d'élèves qui œuvre pour le bien-être et l'épanouissement des enfants au sein du groupe scolaire Anne Frank – Charles Dickens à Montpellier.
                 </p>
                 <p>
                   Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> des projets pédagogiques grâce à nos actions.
@@ -177,7 +177,7 @@ const APropos = () => {
 
             <div className="space-y-6 text-muted-foreground">
               <p>
-                Fondée en 2019, l'association Les P'tits Trinquât est née de la volonté de quelques parents de créer un lien fort entre les familles et l'école. Le nom "Trinquât" fait référence au quartier de Montpellier où se situe notre groupe scolaire.
+                Fondée en 2019, l'association Les P'tits Trinquat est née de la volonté de quelques parents de créer un lien fort entre les familles et l'école. Le nom "Trinquat" fait référence au quartier de Montpellier où se situe notre groupe scolaire.
               </p>
               <p>
                 Au fil des années, nous avons organisé des centaines d'événements : fêtes de l'école, marchés de Noël, ventes de gâteaux, sorties scolaires... Chaque action contribue à financer des projets pédagogiques et à créer des moments de partage inoubliables.

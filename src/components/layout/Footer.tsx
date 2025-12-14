@@ -48,7 +48,7 @@ export function Footer() {
                 </span>
               </div>
               <div>
-                <h3 className="text-lg font-bold">Les P'tits Trinquât</h3>
+                <h3 className="text-lg font-bold">Les P'tits Trinquat</h3>
                 <p className="text-sm text-background/70">Association de parents d'élèves</p>
               </div>
             </div>
@@ -136,7 +136,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-background/10 pt-8 md:flex-row">
           <p className="text-sm text-background/50">
-            © {new Date().getFullYear()} Les P'tits Trinquât. Tous droits réservés.
+            © {new Date().getFullYear()} Les P'tits Trinquat. Tous droits réservés.
           </p>
           <div className="flex gap-4">
             <Link to="/mentions-legales" className="text-sm text-background/50 hover:text-primary">

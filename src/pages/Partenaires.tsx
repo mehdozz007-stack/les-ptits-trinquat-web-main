@@ -19,7 +19,7 @@ const mainPartners = [
     category: "Éducation",
     description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
     logo: "🇬🇧",
-    website: "#",
+    website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const mainPartners = [
     category: "Shopping",
     description: "Jean français fabriqué artisanalement en Lozère depuis 1892.",
     logo: "👖",
-    website: "#",
+    website: "https://www.ateliertuffery.com/pages/boutique-jeans-francais-montpellier",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const mainPartners = [
     category: "Éducation",
     description: "Ateliers nature et jardinage pour sensibiliser les enfants à l'environnement.",
     logo: "🌱",
-    website: "#",
+    website: "https://www.instagram.com/atelierbrindeterre/",
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const mainPartners = [
     category: "Éducation",
     description: "Ateliers créatifs de couture pour enfants et adultes.",
     logo: "🧵",
-    website: "#",
+    website: "https://www.manu-creations.com/",
   },
   {
     id: 5,
@@ -51,7 +51,7 @@ const mainPartners = [
     category: "Éducation",
     description: "Animations ludiques autour de l'astronomie pour éveiller la curiosité des enfants.",
     logo: "🔭",
-    website: "#",
+    website: "https://www.astroludik.com/",
   },
   {
     id: 6,
@@ -66,70 +66,65 @@ const mainPartners = [
 // Partenaires par catégorie pour le carrousel
 const carouselPartners = [
   // Restauration
-  { id: 7, name: "Moutarde et Wasabi", logo: "🍣", category: "Restauration" },
-  { id: 8, name: "Pate'oche", logo: "🍝", category: "Restauration" },
-  { id: 9, name: "Yo & Co", logo: "🍦", category: "Restauration" },
-  { id: 10, name: "M&lice", logo: "🧁", category: "Restauration" },
-  { id: 11, name: "Cafés et Gourmandises", logo: "☕", category: "Restauration" },
-  { id: 12, name: "Café Joyeux", logo: "😊", category: "Restauration" },
+  { id: 7, name: "Moutarde et Wasabi", logo: "🍣", category: "Restauration", website: "http://moutarde-et-wasabi.fr/index.html" },
+  { id: 8, name: "Pate'oche", logo: "🍝", category: "Restauration", website: "https://www.instagram.com/pate_oche34/?hl=en" },
+  { id: 9, name: "Yo & Co", logo: "🍦", category: "Restauration", website: "https://www.yoandco.net/" },
+  { id: 10, name: "M&lice", logo: "🧁", category: "Restauration", website: "https://www.melice.fr/" },
+  { id: 11, name: "Cafés et Gourmandises", logo: "☕", category: "Restauration", website: "https://www.facebook.com/CafesGourmandises/" },
+  { id: 12, name: "Café Joyeux", logo: "😊", category: "Restauration", website: "https://www.cafejoyeux.com/fr/content/49-cafe-joyeux-montpellier?srsltid=AfmBOopcympFwDGMq35jj09dnuDK-4HepNBcUHO6_0wtv8BrtiZDJEI6" },
   
   // Culture & Spectacles
-  { id: 13, name: "South Comédie", logo: "🎤", category: "Culture" },
-  { id: 14, name: "Cinéma Diagonal", logo: "🎬", category: "Culture" },
-  { id: 15, name: "Théâtre Jean Vilar", logo: "🎭", category: "Culture" },
-  { id: 16, name: "Rêves de Cirques", logo: "🎪", category: "Culture" },
-  { id: 17, name: "Théâtre la Chocolaterie", logo: "🍫", category: "Culture" },
-  { id: 18, name: "Théâtre de la Plume", logo: "🪶", category: "Culture" },
-  
-  // Éducation
-  { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation" },
-  
-  // Shopping
-  { id: 20, name: "Atol", logo: "👓", category: "Shopping" },
-  { id: 21, name: "Comme Avant", logo: "🧴", category: "Shopping" },
-  { id: 22, name: "Cartapapa", logo: "📮", category: "Shopping" },
-  { id: 23, name: "Parfume Moi", logo: "🌸", category: "Shopping" },
-  
-  // Bien-être & Services
-  { id: 24, name: "Self Défense Féminine Occitanie", logo: "🥋", category: "Bien-être" },
-  { id: 25, name: "Centre Équestre Occitanie", logo: "🐴", category: "Bien-être" },
-  { id: 26, name: "Cocon des Doulas", logo: "🤱", category: "Bien-être" },
-  { id: 27, name: "Terres de Lumières", logo: "✨", category: "Bien-être" },
-  { id: 28, name: "Nails by Marion", logo: "💅", category: "Bien-être" },
-  
-  // Photo & Événements
-  { id: 29, name: "Sticker Kid", logo: "🏷️", category: "Événements" },
-  { id: 30, name: "Fabrique Photos", logo: "📸", category: "Événements" },
-  { id: 31, name: "Festikid", logo: "🎉", category: "Événements" },
-  { id: 32, name: "Morphée", logo: "😴", category: "Événements" },
-  { id: 33, name: "Civiletti Elodie Photographie", logo: "📷", category: "Événements" },
-  { id: 34, name: "Royaume des Princesses", logo: "👑", category: "Événements" },
-  { id: 35, name: "L'Atelier des Pelotes", logo: "🧶", category: "Événements" },
-  { id: 36, name: "Studio Nyps", logo: "🎞️", category: "Événements" },
-  
-  // Loisirs & Parcs
-  { id: 37, name: "Roc de Massereau", logo: "🏕️", category: "Loisirs" },
-  { id: 38, name: "Micropolis", logo: "🐜", category: "Loisirs" },
-  { id: 39, name: "Rochers de Maguelone", logo: "🦪", category: "Loisirs" },
-  { id: 40, name: "Green Park", logo: "🌳", category: "Loisirs" },
-  { id: 41, name: "Ferme du Dolmen", logo: "🐄", category: "Loisirs" },
-  { id: 42, name: "Domaine de Launac", logo: "🏰", category: "Loisirs" },
-  { id: 43, name: "Parc Spirou", logo: "🎢", category: "Loisirs" },
-  { id: 44, name: "Aquaforest", logo: "🌊", category: "Loisirs" },
-  { id: 45, name: "Mad Monkey", logo: "🐒", category: "Loisirs" },
-  { id: 46, name: "Teraventura", logo: "🗺️", category: "Loisirs" },
-  { id: 47, name: "Tyroliane", logo: "🧗", category: "Loisirs" },
-  { id: 48, name: "Europark Indoor", logo: "🎠", category: "Loisirs" },
-  { id: 49, name: "Space Games", logo: "🚀", category: "Loisirs" },
-  { id: 50, name: "Petits Fermiers", logo: "🐑", category: "Loisirs" },
-  { id: 51, name: "Dinopedia", logo: "🦕", category: "Loisirs" },
-  { id: 52, name: "Seaquarium", logo: "🦈", category: "Loisirs" },
-  { id: 53, name: "Village des Enfants", logo: "🏡", category: "Loisirs" },
-  { id: 54, name: "Planet Océan", logo: "🐋", category: "Loisirs" },
-  { id: 55, name: "Creamondes", logo: "🎨", category: "Loisirs" },
-  { id: 56, name: "Train Vapeur des Cévennes", logo: "🚂", category: "Loisirs" },
-  { id: 57, name: "Vélorail Cévennes", logo: "🚴", category: "Loisirs" },
-  { id: 58, name: "Goolfy", logo: "⛳", category: "Loisirs" },
+  { id: 13, name: "South Comédie", logo: "🎤", category: "Culture", website: "https://www.instagram.com/south.comedyclub/?hl=en" },
+  { id: 14, name: "Cinéma Diagonal", logo: "🎬", category: "Culture", website: "https://www.cinediagonal.com/" }, // official site found :contentReference[oaicite:0]{index=0}
+  { id: 15, name: "Théâtre Jean Vilar", logo: "🎭", category: "Culture", website: "https://theatrejeanvilar.montpellier.fr/" }, // official Montpellier site :contentReference[oaicite:1]{index=1}
+  { id: 16, name: "Rêves de Cirques", logo: "🎪", category: "Culture", website: "https://www.reves-de-cirque.com/montpellier" },
+  { id: 17, name: "Théâtre la Chocolaterie", logo: "🍫", category: "Culture", website: "https://lachocolaterie.org/" },
+  { id: 18, name: "Théâtre de la Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
+
+  { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation", website: "https://www.kittyenglishschool.fr/" },
+
+  { id: 20, name: "Atol", logo: "👓", category: "Shopping", website: "https://www.atol.fr/" },
+  { id: 21, name: "Comme Avant", logo: "🧴", category: "Shopping", website: "https://www.comme-avant.bio/pages/la-boutique-comme-avant-a-montpellier?srsltid=AfmBOoohHGzktxYXZLmUaSKHOB5aUJogOp5ZJ8hL9f7HQ2kCpYTb3T5C" },
+  { id: 22, name: "Cartapapa", logo: "📮", category: "Shopping", website: "https://cartapapa.fr/" },
+  { id: 23, name: "Parfume Moi", logo: "🌸", category: "Shopping", website: "https://parfumemoi.fr/" },
+
+  { id: 24, name: "Self Défense Féminine Occitanie", logo: "🥋", category: "Bien-être", website: "https://www.helloasso.com/associations/self-defense-feminine-occitanie" },
+  { id: 25, name: "Centre Équestre Occitanie", logo: "🐴", category: "Bien-être", website: "https://sites.google.com/ceso34.com/info/accueil" },
+  { id: 26, name: "Cocon des Doulas", logo: "🤱", category: "Bien-être", website: "https://lecocondesdoulas.wixsite.com/le-cocon-des-doulas" },
+  { id: 27, name: "Terres de Lumières", logo: "✨", category: "Bien-être", website: "https://www.terres-de-lumiere.fr/" },
+  { id: 28, name: "Nails by Marion", logo: "💅", category: "Bien-être", website: "https://www.instagram.com/nails_by_marion34/" },
+
+  { id: 29, name: "Sticker Kid", logo: "🏷️", category: "Événements", website: "https://www.stickerkid.fr/fr_fr/?gc_id=22380077972&h_ga_id=177763846235&h_ad_id=741963232215&h_keyword_id=kwd-3117029590&h_keyword=commander%20stickers&h_placement=&gad_source=1&gad_campaignid=22380077972&gclid=Cj0KCQiAuvTJBhCwARIsAL6DemgaL7OxCXFNHQau9UlzioyJXf4UmNtsAzqCMynLY3KGKkVPhdE15U0aAs-vEALw_wcB" },
+  { id: 30, name: "Fabrique Photos", logo: "📸", category: "Événements", website: "https://lafabriquephotos.fr/" },
+  { id: 31, name: "Festikid", logo: "🎉", category: "Événements", website: "https://www.festikid.com/" },
+  { id: 32, name: "Morphée", logo: "🐈", category: "Événements", website: "https://danslespattesdemorphee.jimdofree.com/" },
+  { id: 33, name: "Civiletti Elodie Photographie", logo: "📷", category: "Événements", website: "https://www.elodie-civiletti-photographie.fr/" },
+  { id: 34, name: "Royaume des Princesses", logo: "👑", category: "Événements", website: "https://anniversaireprincesse.fr/" },
+  { id: 35, name: "L'Atelier des Pelotes", logo: "🧶", category: "Événements", website: "https://antigonedesassociations.montpellier.fr/latelier-des-pelotes" },
+  { id: 36, name: "Studio Nyps", logo: "🎞️", category: "Événements", website: "https://www.studionyps.fr/montpellier/" },
+
+  { id: 37, name: "Roc de Massereau", logo: "🏕️", category: "Loisirs", website: "https://rocdemassereau.com/" },
+  { id: 38, name: "Micropolis", logo: "🐜", category: "Loisirs", website: "https://www.micropolis-aveyron.com/" },
+  { id: 39, name: "Rochers de Maguelone", logo: "🦪", category: "Loisirs", website: "https://www.les-rochers-de-maguelone.com/" },
+  { id: 40, name: "Green Park", logo: "🌳", category: "Loisirs", website: "https://www.uzes-pontdugard.com/equipement/green-park/" },
+  { id: 41, name: "Ferme du Dolmen", logo: "🐄", category: "Loisirs", website: "https://lafermedudolmen.fr/" },
+  { id: 42, name: "Domaine de Launac", logo: "🏰", category: "Loisirs", website: "https://www.ledomainedelaunac.com/" },
+  { id: 43, name: "Parc Spirou", logo: "🎢", category: "Loisirs", website: "https://www.parc-spirou.com/" },
+  { id: 44, name: "Aquaforest", logo: "🌊", category: "Loisirs", website: "https://aquaforest.fr/" },
+  { id: 45, name: "Mad Monkey", logo: "🐒", category: "Loisirs", website: "https://madmonkey.fr/montpellier/" },
+  { id: 46, name: "Teraventura", logo: "🗺️", category: "Loisirs", website: "https://www.teraventura.fr/" },
+  { id: 47, name: "Tyroliane", logo: "🧗", category: "Loisirs", website: "https://www.tyroliane.fr/" },
+  { id: 48, name: "Europark Indoor", logo: "🎠", category: "Loisirs", website: "https://www.europarkindoor.com/" },
+  { id: 49, name: "Space Games", logo: "🚀", category: "Loisirs", website: "https://spacegamesindustry.com/" },
+  { id: 50, name: "Petits Fermiers", logo: "🐑", category: "Loisirs", website: "https://www.lespetitsfermiers.fr/" },
+  { id: 51, name: "Dinopedia", logo: "🦕", category: "Loisirs", website: "https://www.le-monde-de-dinopedia.fr/nos-parcs/dinopedia-parc-cevennes/" },
+  { id: 52, name: "Seaquarium", logo: "🦈", category: "Loisirs", website: "https://www.seaquarium.fr/" },
+  { id: 53, name: "Village des Enfants", logo: "🏡", category: "Loisirs", website: "https://www.levillagedesenfants.net/" },
+  { id: 54, name: "Planet Océan", logo: "🐋", category: "Loisirs", website: "https://www.planetoceanworld.fr/" },
+  { id: 55, name: "Creamondes", logo: "🎨", category: "Loisirs", website: "https://www.creamondes.com/" },
+  { id: 56, name: "Train Vapeur des Cévennes", logo: "🚂", category: "Loisirs", website: "https://www.trainavapeur.com/" },
+  { id: 57, name: "Vélorail Cévennes", logo: "🚴", category: "Loisirs", website: "https://www.veloraildescevennes.fr/" },
+  { id: 58, name: "Goolfy", logo: "⛳", category: "Loisirs", website: "https://goolfy-montpellier.com/" }
 ];
 
 const categories = ["Tous", "Restauration", "Culture", "Éducation", "Shopping", "Bien-être", "Événements", "Loisirs"];
@@ -198,9 +193,11 @@ const Partenaires = () => {
                     </p>
 
                     {/* Link */}
-                    <Button variant="ghost" size="sm" className="mt-auto">
-                      Visiter
-                      <ExternalLink className="ml-2 h-3.5 w-3.5" />
+                    <Button variant="ghost" size="sm" className="mt-auto" asChild>
+                      <a href={partner.website} target="_blank" rel="noopener noreferrer">
+                        Visiter
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
                     </Button>
                   </CardContent>
                 </Card>
@@ -240,14 +237,30 @@ const Partenaires = () => {
               <CarouselContent className="-ml-2">
                 {carouselPartners.map((partner) => (
                   <CarouselItem key={partner.id} className="pl-2 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6">
-                    <div className="flex flex-col items-center p-3">
-                      <div className="mb-2 flex h-14 w-14 items-center justify-center rounded-xl bg-background text-2xl shadow-sm transition-transform hover:scale-110">
-                        {partner.logo}
+                    {partner.website ? (
+                      <a 
+                        href={partner.website} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center p-3 cursor-pointer hover:opacity-80 transition-opacity rounded-lg"
+                      >
+                        <div className="mb-2 flex h-14 w-14 items-center justify-center rounded-xl bg-background text-2xl shadow-sm transition-transform hover:scale-110">
+                          {partner.logo}
+                        </div>
+                        <span className="text-xs font-medium text-foreground text-center line-clamp-1">
+                          {partner.name}
+                        </span>
+                      </a>
+                    ) : (
+                      <div className="flex flex-col items-center p-3">
+                        <div className="mb-2 flex h-14 w-14 items-center justify-center rounded-xl bg-background text-2xl shadow-sm transition-transform hover:scale-110">
+                          {partner.logo}
+                        </div>
+                        <span className="text-xs font-medium text-foreground text-center line-clamp-1">
+                          {partner.name}
+                        </span>
                       </div>
-                      <span className="text-xs font-medium text-foreground text-center line-clamp-1">
-                        {partner.name}
-                      </span>
-                    </div>
+                    )}
                   </CarouselItem>
                 ))}
               </CarouselContent>
