@@ -33,7 +33,7 @@ const mainPartners = [
     id: 3,
     name: "Brin de Terre",
     category: "Éducation",
-    description: "Ateliers nature et jardinage pour sensibiliser les enfants à l'environnement.",
+    description: "Ateliers poterie pour enfants et adultes.",
     logo: "🌱",
     website: "https://www.instagram.com/atelierbrindeterre/",
   },
