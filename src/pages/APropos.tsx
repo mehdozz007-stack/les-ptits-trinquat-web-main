@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const bureauMembers = [
   { name: "Cindy", role: "Co-Présidente", emoji: "👩‍💼" },
   { name: "Vincent", role: "Co-Président", emoji: "👨‍💼" },
-  { name: "Mehdi", role: "Co-Secrétaire", emoji: "👩‍💻" },
+  { name: "Mehdi", role: "Co-Secrétaire", emoji: "👨‍💻" },
   { name: "Alexia", role: "Co-Secrétaire", emoji: "📝" },
   { name: "Camille", role: "Co-Trésorière", emoji: "💰" },
   { name: "Chiara", role: "Co-Trésorière", emoji: "🧮" },

@@ -25,7 +25,7 @@ const partners = [
     name: "Brin de Terre",
     category: "Éducation",
     description: "Ateliers nature et jardinage pour sensibiliser les enfants à l'environnement.",
-    logo: "🌱",
+    logo: "🏺",
     website: "https://www.instagram.com/atelierbrindeterre/",
   },
   {

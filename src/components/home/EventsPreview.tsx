@@ -27,7 +27,7 @@ const upcomingEvents = [
    id: 5,
    title: "📣 TOMBOLA de la rentrée, lancée par nos partenaires ! 🎁",
    date: "8 Décembre 2025 - Lancée",
-   time: "8 Décembre 2025 - 1 Mars 2026",
+   time: "8 Décembre 2025 - 16 Février 2026",
    location: "Groupe scolaire FRANK-DICKENS",
    description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires, la liste des lots à gagner et achetez vos billets pour soutenir les projets de l'association.",
    color: "accent",

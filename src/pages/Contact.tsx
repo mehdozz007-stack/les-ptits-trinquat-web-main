@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageSquare, HelpCircle, Clock, Heart, ExternalLink, Instagram, Facebook } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -29,6 +30,7 @@ const faqs = [
 ];
 
 const Contact = () => {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -54,21 +56,17 @@ const Contact = () => {
       throw new Error("Submission failed");
     }
 
-    toast({
-      title: "📩 Message envoyé !",
-      description: "Nous vous répondrons dans les plus brefs délais.",
-    });
-
     form.reset();
+    // Redirect to success page
+    navigate("/message-envoye");
   } catch (err) {
     toast({
       title: "Erreur",
       description: "Impossible d’envoyer le message. Merci de réessayer.",
       variant: "destructive",
     });
+    setIsSubmitting(false);
   }
-
-  setIsSubmitting(false);
 };
 
   return (

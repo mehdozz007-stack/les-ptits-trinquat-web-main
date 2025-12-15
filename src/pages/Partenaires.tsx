@@ -34,7 +34,7 @@ const mainPartners = [
     name: "Brin de Terre",
     category: "Éducation",
     description: "Ateliers poterie pour enfants et adultes.",
-    logo: "🌱",
+    logo: "🏺",
     website: "https://www.instagram.com/atelierbrindeterre/",
   },
   {

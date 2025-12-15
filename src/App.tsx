@@ -10,6 +10,7 @@ import ComptesRendus from "./pages/ComptesRendus";
 import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
+import MessageEnvoye from "./pages/MessageEnvoye";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/partenaires" element={<Partenaires />} />
           <Route path="/a-propos" element={<APropos />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/message-envoye" element={<MessageEnvoye />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
