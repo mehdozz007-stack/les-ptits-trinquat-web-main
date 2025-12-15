@@ -44,10 +44,10 @@ const Contact = () => {
   // Required fields for FormSubmit
   formData.append("_captcha", "false");
   formData.append("_template", "box");
-  formData.append("_subject", "📩 Nouveau message depuis le site Les P'tits Trinquat");
+  formData.append("_subject", "🔔 📩 lespetitstrinquat.fr - Nouveau message depuis le site Les P'tits Trinquat");
 
   try {
-    const response = await fetch("https://formsubmit.co/ajax/mehdozz007@gmail.com", {
+    const response = await fetch("https://formsubmit.co/ajax/parents.frank.dickens@gmail.com", {
       method: "POST",
       body: formData,
     });

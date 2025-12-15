@@ -168,7 +168,7 @@ const Evenements = () => {
                           {event.title}
                         </h3>
 
-                        <p className="mb-4 text-muted-foreground line-clamp-4">
+                        <p className="mb-4 text-muted-foreground">
                           {event.description}
                         </p>
 
@@ -188,28 +188,28 @@ const Evenements = () => {
                         </div>
 
                         <Button
-  variant="outline"
-  size="sm"
-  className="mt-6"
-  disabled={!event.url} // désactive le bouton si pas d'URL
->
-  {event.url ? (
-    <a
-      href={event.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center"
-    >
-      En savoir plus
-      <ChevronRight className="ml-2 h-5 w-5" />
-    </a>
-  ) : (
-    <span className="flex items-center text-muted-foreground cursor-not-allowed">
-      En savoir plus
-      <ChevronRight className="ml-2 h-5 w-5" />
-    </span>
-  )}
-</Button>
+                          variant="outline"
+                          size="sm"
+                          className="mt-6"
+                          disabled={!event.url} // désactive le bouton si pas d'URL
+                        >
+                          {event.url ? (
+                            <a
+                              href={event.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center"
+                            >
+                              En savoir plus
+                              <ChevronRight className="ml-2 h-5 w-5" />
+                            </a>
+                          ) : (
+                            <span className="flex items-center text-muted-foreground cursor-not-allowed">
+                              En savoir plus
+                              <ChevronRight className="ml-2 h-5 w-5" />
+                            </span>
+                          )}
+                        </Button>
 
                       </div>
                     </CardContent>
@@ -247,12 +247,19 @@ const Evenements = () => {
                             <p className="text-xs sm:text-sm text-muted-foreground">{event.date}</p>
                           </div>
                         </div>
-                        <Button asChild variant="ghost" size="sm" className="w-full sm:w-auto">
-                          <a href={event.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center sm:justify-start">
+                        {event.url ? (
+                          <Button asChild variant="ghost" size="sm" className="w-full sm:w-auto">
+                            <a href={event.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center text-xs sm:text-sm sm:justify-start">
+                              Voir
+                              <ChevronRight className="ml-1 h-4 w-4" />
+                            </a>
+                          </Button>
+                        ) : (
+                          <div className="flex items-center justify-center sm:justify-start text-muted-foreground text-xs sm:text-sm cursor-default">
                             Voir
                             <ChevronRight className="ml-1 h-4 w-4" />
-                          </a>
-                        </Button>
+                          </div>
+                        )}
                       </div>
                     </CardContent>
                   </Card>

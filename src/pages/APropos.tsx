@@ -12,9 +12,9 @@ const bureauMembers = [
   { name: "Alexia", role: "Co-Secrétaire", emoji: "📝" },
   { name: "Camille", role: "Co-Trésorière", emoji: "💰" },
   { name: "Chiara", role: "Co-Trésorière", emoji: "🧮" },
-  { name: "Nora", role: "Responsable reseaux", emoji: "📢" },
+  { name: "Nora", role: "Responsable réseaux", emoji: "📢" },
   { name: "Yasmine", role: "Responsable communication", emoji: "🤝" },
-  { name: "Maité", role: "Responsable SI", emoji: "🌍" },
+  { name: "Maité", role: "Responsable système international", emoji: "🌍" },
   { name: "Hanan", role: "Responsable événements", emoji: "🎈" },
 ];
 
