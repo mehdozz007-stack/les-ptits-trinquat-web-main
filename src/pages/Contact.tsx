@@ -102,9 +102,9 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-16">
+      <section className="py-12 md:py-16">
         <div className="container">
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid gap-6 md:gap-8 lg:gap-12 lg:grid-cols-2">
             {/* Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -112,11 +112,11 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <Card variant="elevated">
-                <CardContent className="p-6 md:p-8">
-                  <h2 className="mb-6 text-2xl font-bold">Envoyez-nous un message</h2>
+                <CardContent className="p-4 sm:p-6 md:p-8">
+                  <h2 className="mb-4 sm:mb-6 text-xl sm:text-2xl font-bold">Envoyez-nous un message</h2>
                   <form 
                   onSubmit={handleSubmit}
-                  className="space-y-6"
+                  className="space-y-4 sm:space-y-6"
                   >
                     {/* Anti-spam honeypot */}
                     <input type="hidden" name="_captcha" value="false" />
@@ -197,22 +197,22 @@ const Contact = () => {
               </Card>
 
               <Card variant="elevated">
-                <CardContent className="flex items-center justify-between gap-4 p-6">
+                <CardContent className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6">
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary/20">
                       <Heart className="h-6 w-6 text-secondary" />
                     </div>
                     <h3 className="font-bold text-foreground">Suivez-nous</h3>
                   </div>
-                  <div className="flex gap-3">
-                    <Button variant="ghost" size="icon" asChild className="h-14 w-14 rounded-full bg-pink-200 hover:bg-pink-300">
+                  <div className="flex gap-3 ml-auto sm:ml-0">
+                    <Button variant="ghost" size="icon" asChild className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-pink-200 hover:bg-pink-300">
                       <a href="https://www.instagram.com/Les_ptits_trinquat" target="_blank" rel="noopener noreferrer" title="Instagram">
-                        <Instagram className="h-7 w-7 text-pink-600" />
+                        <Instagram className="h-6 w-6 sm:h-7 sm:w-7 text-pink-600" />
                       </a>
                     </Button>
-                    <Button variant="ghost" size="icon" asChild className="h-14 w-14 rounded-full bg-sky-200 hover:bg-sky-300">
+                    <Button variant="ghost" size="icon" asChild className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-sky-200 hover:bg-sky-300">
                       <a href="https://www.facebook.com/LesPtitsTrinquats" target="_blank" rel="noopener noreferrer" title="Facebook">
-                        <Facebook className="h-7 w-7 text-sky-600" />
+                        <Facebook className="h-6 w-6 sm:h-7 sm:w-7 text-sky-600" />
                       </a>
                     </Button>
                   </div>
@@ -220,21 +220,23 @@ const Contact = () => {
               </Card>
 
               <Card variant="elevated">
-                <CardContent className="flex items-start gap-4 p-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky/20">
-                    <MapPin className="h-6 w-6 text-sky" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-foreground">Adresse</h3>
-                    <p className="text-muted-foreground">
-                      686 Avenue du Pont Trinquat <br /> 34070 Montpellier
-                    </p>
+                <CardContent className="flex flex-col gap-4 p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky/20">
+                      <MapPin className="h-6 w-6 text-sky" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-foreground">Adresse</h3>
+                      <p className="text-muted-foreground">
+                        686 Avenue du Pont Trinquat <br /> 34070 Montpellier
+                      </p>
+                    </div>
                   </div>
                   {/* Link */}
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-fit flex-shrink-0"
+                    className="w-auto h-fit ml-auto"
                     asChild
                   >
                     <a
