@@ -140,7 +140,7 @@ export function HeroSection() {
               <Button variant="hero" size="lg" asChild>
                 <Link to="/evenements">
                   <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                  <span className="text-sm sm:text-base">Nos événements</span>
+                  <span className="text-sm sm:text-base">Découvrir nos événements</span>
                 </Link>
               </Button>
               <Button variant="hero-outline" size="lg" asChild>
