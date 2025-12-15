@@ -90,7 +90,7 @@ const APropos = () => {
                   Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> des projets pédagogiques grâce à nos actions.
                 </p>
                 <p>
-                  Nous travaillons en étroite collaboration avec l'équipe enseignante et la direction pour créer un environnement éducatif stimulant et bienveillant.
+                  Nous travaillons en étroite collaboration avec l'équipe pédagogique pour créer un environnement éducatif stimulant et bienveillant.
                 </p>
               </div>
             </motion.div>
