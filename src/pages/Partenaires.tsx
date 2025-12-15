@@ -247,7 +247,7 @@ const Partenaires = () => {
                         <div className="mb-2 flex h-14 w-14 items-center justify-center rounded-xl bg-background text-2xl shadow-sm transition-transform hover:scale-110">
                           {partner.logo}
                         </div>
-                        <span className="text-xs font-medium text-foreground text-center line-clamp-1">
+                        <span className="text-xs font-medium text-foreground text-center">
                           {partner.name}
                         </span>
                       </a>
@@ -256,7 +256,7 @@ const Partenaires = () => {
                         <div className="mb-2 flex h-14 w-14 items-center justify-center rounded-xl bg-background text-2xl shadow-sm transition-transform hover:scale-110">
                           {partner.logo}
                         </div>
-                        <span className="text-xs font-medium text-foreground text-center line-clamp-1">
+                        <span className="text-xs font-medium text-foreground text-center">
                           {partner.name}
                         </span>
                       </div>
