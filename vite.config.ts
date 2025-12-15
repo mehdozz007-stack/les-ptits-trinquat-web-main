@@ -8,6 +8,10 @@ export default defineConfig(() => ({
   server: {
     host: "::",
     port: 8080,
+    fs: {
+      // Permet à Vite de servir les fichiers du dossier public
+      allow: ["."],
+    },
   },
   plugins: [react()],
   resolve: {

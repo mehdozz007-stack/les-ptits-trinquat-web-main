@@ -6,12 +6,13 @@ export async function onRequest(context) {
 
     // Si c'est un asset statique, laisse Cloudflare servir
     if (
-      pathname.match(/\.(js|css|json|png|jpg|jpeg|svg|gif|woff|woff2|ttf|eot)$/i) ||
+      pathname.match(/\.(js|css|json|png|jpg|jpeg|svg|gif|woff|woff2|ttf|eot|pdf)$/i) ||
       pathname === "/robots.txt" ||
       pathname === "/CNAME" ||
       pathname === "/_redirects" ||
       pathname === "/_routes.json" ||
-      pathname.startsWith("/assets/")
+      pathname.startsWith("/assets/") ||
+      pathname.startsWith("/documents/")
     ) {
       return context.env.ASSETS.fetch(request);
     }
