@@ -9,7 +9,7 @@ import { url } from "inspector";
 const events = [
     {
     id: 7,
-    title: "📣 TOMBOLA de la rentrée, lancée par nos partenaires ! 🎁",
+    title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez de superbes lots !",
     date: "8 Décembre 2025 - Lancement",
     time: "8 Décembre 2025 - 16 Février 2026",
     location: "Groupe scolaire FRANK-DICKENS",
@@ -17,7 +17,7 @@ const events = [
     color: "accent",
     status: "upcoming",
     attendees: 350,
-    url: "https://www.facebook.com/photo/?fbid=1156492946651981&set=a.1156492909985318"
+    url: "/partenaires"
   },
   {
     id: 3,

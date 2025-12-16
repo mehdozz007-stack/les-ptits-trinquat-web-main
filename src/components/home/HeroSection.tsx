@@ -88,7 +88,7 @@ export function HeroSection() {
               </span>
               {/* Texte */}
               <span className="leading-tight text-xs sm:text-sm whitespace-normal sm:whitespace-normal">
-              TOMBOLA 2025-2026 est lancée par nos partenaires !
+              Notre TOMBOLA 2025-2026 est lancée ! Gagnez de superbes lots !
               </span>
              </div>
               {/* Link */}
