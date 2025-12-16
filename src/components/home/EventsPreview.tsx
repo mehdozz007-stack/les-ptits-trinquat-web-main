@@ -33,7 +33,7 @@ const upcomingEvents = [
    color: "accent",
    status: "upcoming",
    attendees: 350,
-   url: "https://www.facebook.com/photo/?fbid=1156492946651981&set=a.1156492909985318"
+   url: "/partenaires"
   },
   {
     id: 2,
