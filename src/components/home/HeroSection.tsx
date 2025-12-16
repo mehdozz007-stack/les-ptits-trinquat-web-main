@@ -87,8 +87,8 @@ export function HeroSection() {
                 <span className="relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full bg-green-500" />
               </span>
               {/* Texte */}
-              <span className="leading-tight text-xs sm:text-sm whitespace-nowrap sm:whitespace-normal">
-              TOMBOLA 2025-2026 est lancée !
+              <span className="leading-tight text-xs sm:text-sm whitespace-normal sm:whitespace-normal">
+              TOMBOLA 2025-2026 est lancée par nos partenaires !
               </span>
              </div>
               {/* Link */}
@@ -99,7 +99,65 @@ export function HeroSection() {
                       asChild
                     >
                       <a
-                        href="https://scontent.fmpl1-1.fna.fbcdn.net/v/t39.30808-6/595919813_1156492949985314_3198213975125715598_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=f727a1&_nc_ohc=MhGfL8XhkN4Q7kNvwG3LwiC&_nc_oc=AdlneLmL5sgCAG0kn9ZPZ2piCEtOPrJwsoOuOf1LJCCNHz7Mvtc7G30TUbPkVTS--ts&_nc_zt=23&_nc_ht=scontent.fmpl1-1.fna&_nc_gid=iAqTz6VIFvvqTIU3lGSLMw&oh=00_AfmtrcqdRkCloIDTmJtimBFHUaUDAPqdx-yf4oTeVECKMw&oe=69403F03"
+                        href="https://www.facebook.com/photo/?fbid=1156492946651981&set=a.1156492909985318"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Voir
+                        <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                      </a>
+                    </Button>
+            </motion.div>
+
+            {/* Gâteaux de Noël Block */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+              className="relative mb-6 inline-flex flex-row items-center gap-1 sm:gap-3 rounded-2xl sm:rounded-full bg-violet/10 px-2 sm:px-4 py-2 text-xs sm:text-lg font-bold text-violet-900 overflow-visible"
+            >
+              {/* Dynamic Sparks */}
+              {sparks.map((_, i) => (
+              <Spark
+                key={i}
+                color={
+                  [
+                    "bg-red-400",
+                    "bg-green-400",
+                    "bg-yellow-300",
+                    "bg-orange-400",
+                    "bg-pink-400",
+                    "bg-white-400",
+                  ][i % 6]
+                }
+              />
+            ))}
+
+              {/* Ping indicator */}
+              <span className="text-base sm:text-xl flex-shrink-0">🎄</span>
+              <div className="flex items-center gap-1 sm:gap-2 font-kid text-transparent bg-clip-text 
+               bg-gradient-to-r from-red-500 via-green-500 to-yellow-500 
+               text-xs sm:text-base font-bold leading-tight drop-shadow-lg">
+  
+              {/* Point rouge */}
+              <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full bg-red-400" />
+              </span>
+              {/* Texte */}
+              <span className="leading-tight text-xs sm:text-sm whitespace-normal sm:whitespace-normal">
+              Vente de gâteaux : ce vendredi 19 décembre !
+              </span>
+             </div>
+              {/* Link */}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm"
+                      asChild
+                    >
+                      <a
+                        href="https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

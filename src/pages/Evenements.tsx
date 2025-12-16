@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { url } from "inspector";
 
 const events = [
     {
@@ -16,7 +17,7 @@ const events = [
     color: "accent",
     status: "upcoming",
     attendees: 350,
-    url: "https://www.instagram.com/p/DSBRTloCLJh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+    url: "https://www.facebook.com/photo/?fbid=1156492946651981&set=a.1156492909985318"
   },
   {
     id: 3,
@@ -34,11 +35,12 @@ const events = [
     title: "Vente de gâteaux de Noël",
     date: "19 Décembre 2025",
     time: "16h30 - 18h00",
-    location: "Le parvis de l'école",
-    description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires.",
+    location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
+    description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires. Les conditions météorologiques peuvent influencer le lieu. L'événement pourra se tenir à la salle d'événement annexe de la maison pour tous Boris Vian.",
     color: "violet",
     status: "upcoming",
     attendees: 100,
+    url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
   },
   {
     id: 4,

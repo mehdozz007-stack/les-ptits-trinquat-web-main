@@ -33,26 +33,30 @@ const upcomingEvents = [
    color: "accent",
    status: "upcoming",
    attendees: 350,
-   url: "https://www.facebook.com/photo.php?fbid=1156492946651981&set=a.1156492909985318&type=3&ref=embed_post"
+   url: "https://www.facebook.com/photo/?fbid=1156492946651981&set=a.1156492909985318"
   },
   {
-    id: 3,
-    title: "Réunion mensuelle des parents",
-    date: "12 Décembre 2025",
-    time: "17h30 - 19h00",
-    location: "Salle polyvalente",
-    description: "Bilan du trimestre et préparation aux prochains événements.",
-    color: "sky",
-    status: "past",
-  },
-    {
-    id: 4,
-    title: "Conseil d'école SI",
-    date: "7 Janvier 2026",
-    time: "17h30 - 20h00",
-    location: "Salle polyvalente",
-    description: "Bilan annuel et échanges parents - enseignants.",
+    id: 2,
+    title: "Vente de gâteaux de Noël",
+    date: "19 Décembre 2025",
+    time: "16h30 - 18h00",
+    location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
+    description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires.",
     color: "violet",
+    status: "upcoming",
+    attendees: 100,
+    url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
+  },
+  {
+    id: 4,
+    title: "Conseil de l'école SI",
+    date: "7 Janvier 2026",
+    time: "18h30 - 20h00",
+    location: "Salle polyvalente",
+    description: "Bilan de l'année, présentation des projets et resultats élection des parents.",
+    color: "sky",
+    status: "upcoming",
+    attendees: 50,
   },
 ];
 
@@ -103,16 +107,29 @@ export function EventsPreview() {
                   
                   <div className="p-6">
                     {/* Date Badge */}
-                    <div className={`mb-4 inline-flex items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colorClasses[event.color as keyof typeof colorClasses]}`}>
+                    <div className={`mb-6 flex w-fit items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colorClasses[event.color as keyof typeof colorClasses]}`}>
                       <Calendar className="h-4 w-4" />
                       {event.date}
                     </div>
 
                     {/* Title */}
-                    <h3 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                      {event.title}
-                    </h3>
-
+                    {event.url ? (
+                      <a
+                        href={event.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary hover:underline transition-colors inline-block"
+                      >
+                        {event.title}
+                      </a>
+                    ) : (
+                      <Link
+                        to="/evenements"
+                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary hover:underline transition-colors inline-block no-underline"
+                      >
+                        {event.title}
+                      </Link>
+                    )}
                     {/* Description */}
                     <p className="mb-4 text-muted-foreground">
                       {event.description}
