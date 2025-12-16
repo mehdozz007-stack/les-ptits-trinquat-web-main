@@ -16,7 +16,7 @@ const events = [
     description: "Gagnez des gros cadeaux avec notre TOMBOLA. Suivez la liste de nos lots à gagner sur nos réseaux et achetez vos billets pour soutenir les projets de l'association.",
     color: "accent",
     status: "upcoming",
-    attendees: 350,
+    attendees: 500,
     url: "/partenaires"
   },
   {
@@ -39,7 +39,7 @@ const events = [
     description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires. Les conditions météorologiques peuvent influencer le lieu. L'événement pourra se tenir à la salle d'événement annexe de la maison pour tous Boris Vian.",
     color: "violet",
     status: "upcoming",
-    attendees: 100,
+    attendees: 300,
     url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
   },
   {
@@ -62,7 +62,7 @@ const events = [
     description: "Les enfants auront le choix de se déguiser en des insectes ou des fleurs, pour célébrer le printemps dans les classes.",
     color: "accent",
     status: "upcoming",
-    attendees: 350,
+    attendees: 380,
   },
   {
     id: 1,
@@ -73,7 +73,7 @@ const events = [
     description: "Jeux, spectacles, stands gourmands et animations pour célébrer ensemble la fin d'année scolaire !",
     color: "primary",
     status: "upcoming",
-    attendees: 380,
+    attendees: 800,
   },
   {
     id: 5,
@@ -84,7 +84,7 @@ const events = [
     description: "Stands de créations, boissons chaudes et animations pour petits et grands.",
     color: "violet",
     status: "past",
-    attendees: 150,
+    attendees: 250,
     url: "https://www.instagram.com/p/DPn9cLdiBTC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {

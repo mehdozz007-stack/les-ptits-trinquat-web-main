@@ -99,7 +99,7 @@ export function HeroSection() {
                       asChild
                     >
                       <a
-                        href="https://www.facebook.com/photo/?fbid=1156492946651981&set=a.1156492909985318"
+                        href="/partenaires"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

@@ -32,7 +32,7 @@ const upcomingEvents = [
    description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires, la liste des lots à gagner et achetez vos billets pour soutenir les projets de l'association.",
    color: "accent",
    status: "upcoming",
-   attendees: 350,
+   attendees: 500,
    url: "/partenaires"
   },
   {
@@ -44,7 +44,7 @@ const upcomingEvents = [
     description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires.",
     color: "violet",
     status: "upcoming",
-    attendees: 100,
+    attendees: 300,
     url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
   },
   {
