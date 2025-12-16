@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Heart, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -283,8 +284,10 @@ const Partenaires = () => {
             <p className="mb-6 text-muted-foreground">
               Vous souhaitez soutenir nos actions et participer à la vie scolaire ? Contactez-nous pour discuter d'un partenariat.
             </p>
-            <Button variant="playful" size="lg">
-              Nous contacter
+            <Button variant="playful" size="lg" asChild>
+              <Link to="/contact">
+                Nous contacter
+              </Link>
             </Button>
           </motion.div>
         </div>

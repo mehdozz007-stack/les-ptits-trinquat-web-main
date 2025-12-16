@@ -9,11 +9,11 @@ import { url } from "inspector";
 const events = [
     {
     id: 7,
-    title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez de superbes lots !",
+    title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez avec nous de superbes lots !",
     date: "8 Décembre 2025 - Lancement",
     time: "8 Décembre 2025 - 16 Février 2026",
     location: "Groupe scolaire FRANK-DICKENS",
-    description: "Gagnez des gros cadeaux avec notre TOMBOLA. Suivez la liste de nos lots à gagner sur nos réseaux et achetez vos billets pour soutenir les projets de l'association.",
+    description: "Gagnez des gros cadeaux avec notre TOMBOLA.\nSuivez la liste de nos lots à gagner sur nos réseaux et achetez vos billets pour soutenir les projets de l'association.",
     color: "accent",
     status: "upcoming",
     attendees: 500,
@@ -36,7 +36,7 @@ const events = [
     date: "19 Décembre 2025",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
-    description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires. Les conditions météorologiques peuvent influencer le lieu. L'événement pourra se tenir à la salle d'événement annexe de la maison pour tous Boris Vian.",
+    description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires.\nLes conditions météorologiques peuvent influencer le lieu. L'événement pourra se tenir à la salle d'événement annexe de la maison pour tous Boris Vian.",
     color: "violet",
     status: "upcoming",
     attendees: 300,
@@ -170,7 +170,7 @@ const Evenements = () => {
                           {event.title}
                         </h3>
 
-                        <p className="mb-4 text-muted-foreground">
+                        <p className="mb-4 text-muted-foreground whitespace-pre-line">
                           {event.description}
                         </p>
 

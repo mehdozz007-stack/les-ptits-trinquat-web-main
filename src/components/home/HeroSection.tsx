@@ -88,7 +88,7 @@ export function HeroSection() {
               </span>
               {/* Texte */}
               <span className="leading-tight text-xs sm:text-sm whitespace-normal sm:whitespace-normal">
-              Notre TOMBOLA 2025-2026 est lancée ! Gagnez de superbes lots !
+              TOMBOLA 2025-2026 lancée ! Gagnez de superbes lots !
               </span>
              </div>
               {/* Link */}
@@ -146,7 +146,7 @@ export function HeroSection() {
               </span>
               {/* Texte */}
               <span className="leading-tight text-xs sm:text-sm whitespace-normal sm:whitespace-normal">
-              Vente de gâteaux : ce vendredi 19 décembre !
+              Vente de gâteaux : le vendredi 19 décembre !
               </span>
              </div>
               {/* Link */}
