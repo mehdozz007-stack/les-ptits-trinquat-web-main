@@ -204,7 +204,7 @@ const APropos = () => {
               Rejoignez l'aventure !
             </h2>
             <p className="mb-8 text-lg text-primary-foreground/80">
-              L'adhésion annuelle est de seulement <strong className="text-primary-foreground">1€ par personne</strong>. Elle nous permet de financer nos actions et vous donne accès à tous nos événements.
+              L'adhésion annuelle est de seulement <strong className="text-primary-foreground">2€ par personne</strong>. Elle nous permet de financer nos actions et vous donne accès à tous nos événements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
