@@ -30,6 +30,88 @@ const Spark = ({ color }: { color: string }) => {
 
 export function HeroSection() {
   const sparks = Array.from({ length: 150 }); // total sparks around the TOMBOLA
+  type InfoBadgeProps = {
+  icon: string
+  text: string
+  href: string
+  delay: number
+  bgClass: string
+  textGradient: string
+  pingOuter: string
+  pingInner: string
+  sparksColors: string[]
+  sparks: any[]
+}
+
+const InfoBadge = ({
+  icon,
+  text,
+  href,
+  delay,
+  bgClass,
+  textGradient,
+  pingOuter,
+  pingInner,
+  sparksColors,
+  sparks,
+}: InfoBadgeProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+      className={`relative inline-flex items-center gap-1 sm:gap-3 
+        rounded-2xl sm:rounded-full px-2 sm:px-4 py-2 
+        text-xs sm:text-lg font-bold overflow-visible ${bgClass}`}
+    >
+      {/* Sparks */}
+      {sparks.map((_, i) => (
+        <Spark
+          key={i}
+          color={sparksColors[i % sparksColors.length]}
+        />
+      ))}
+
+      {/* Icon */}
+      <span className="text-base sm:text-xl flex-shrink-0">{icon}</span>
+
+      {/* Text */}
+      <div
+        className={`flex items-center gap-1 sm:gap-2 font-kid 
+        text-transparent bg-clip-text ${textGradient} 
+        text-xs sm:text-base font-bold leading-tight drop-shadow-lg`}
+      >
+        {/* Ping */}
+        <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
+          <span
+            className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${pingOuter}`}
+          />
+          <span
+            className={`relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full ${pingInner}`}
+          />
+        </span>
+
+        {/* Message */}
+        <span className="leading-tight text-xs sm:text-sm whitespace-normal">
+          {text}
+        </span>
+      </div>
+
+      {/* Link */}
+      <Button
+        variant="ghost"
+        size="sm"
+        className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm ml-auto"
+        asChild
+      >
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          Voir
+          <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+        </a>
+      </Button>
+    </motion.div>
+  )
+}
 
   return (
     <section className="relative min-h-[90vh] sm:min-h-[115vh] lg:min-h-[110vh] overflow-hidden bg-hero">
@@ -50,123 +132,49 @@ export function HeroSection() {
             transition={{ duration: 0.6 }}
             className="max-w-xl w-full"
           >
-            {/* TOMBOLA Block with sparks */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="relative mb-6 inline-flex flex-row items-center gap-1 sm:gap-3 rounded-2xl sm:rounded-full bg-primary/10 px-2 sm:px-4 py-2 text-xs sm:text-lg font-bold text-blue-900 overflow-visible"
-            >
-              {/* Dynamic Sparks */}
-              {sparks.map((_, i) => (
-              <Spark
-                key={i}
-                color={
-                  [
-                    "bg-pink-400",
-                    "bg-violet-400",
-                    "bg-yellow-300",
-                    "bg-teal-300",
-                    "bg-orange-400",
-                    "bg-green-400",
-                    "bg-white-400",
-                    "bg-red-400",
-                  ][i % 6]
-                }
-              />
-            ))}
+            <div className="mb-8 flex flex-col gap-2 sm:gap-3">
+            <InfoBadge
+              icon="📣"
+              text="TOMBOLA 2025-2026 lancée ! Gagnez de superbes lots !"
+              href="/partenaires"
+              delay={0.2}
+              bgClass="bg-primary/10 text-blue-900"
+              textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"
+              pingOuter="bg-green-600"
+              pingInner="bg-green-500"
+              sparks={sparks}
+              sparksColors={[
+                "bg-pink-400",
+                "bg-violet-400",
+                "bg-yellow-300",
+                "bg-teal-300",
+                "bg-orange-400",
+                "bg-green-400",
+                "bg-red-400",
+              ]}
+            />
 
-              {/* Ping indicator */}
-              <span className="text-base sm:text-xl flex-shrink-0">📣</span>
-              <div className="flex items-center gap-1 sm:gap-2 font-kid text-transparent bg-clip-text 
-               bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 
-               text-xs sm:text-base font-bold leading-tight drop-shadow-lg">
-  
-              {/* Point vert */}
-              <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-600 opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full bg-green-500" />
-              </span>
-              {/* Texte */}
-              <span className="leading-tight text-xs sm:text-sm whitespace-normal sm:whitespace-normal">
-              TOMBOLA 2025-2026 lancée ! Gagnez de superbes lots !
-              </span>
-             </div>
-              {/* Link */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm"
-                      asChild
-                    >
-                      <a
-                        href="/partenaires"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Voir
-                        <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                      </a>
-                    </Button>
-            </motion.div>
+            <InfoBadge
+              icon="🎄"
+              text="Vente de gâteaux : le vendredi 19 décembre !"
+              href="https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
+              delay={0.25}
+              bgClass="bg-violet/10 text-violet-900"
+              textGradient="bg-gradient-to-r from-red-500 via-green-500 to-yellow-500"
+              pingOuter="bg-red-500"
+              pingInner="bg-red-400"
+              sparks={sparks}
+              sparksColors={[
+                "bg-red-400",
+                "bg-green-400",
+                "bg-yellow-300",
+                "bg-orange-400",
+                "bg-pink-400",
+                "bg-white-400",
+              ]}
+            />
+          </div>
 
-            {/* Gâteaux de Noël Block */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
-              className="relative mb-8 inline-flex flex-row items-center gap-1 sm:gap-3 rounded-2xl sm:rounded-full bg-violet/10 px-2 sm:px-4 py-2 text-xs sm:text-lg font-bold text-violet-900 overflow-visible"
-            >
-              {/* Dynamic Sparks */}
-              {sparks.map((_, i) => (
-              <Spark
-                key={i}
-                color={
-                  [
-                    "bg-red-400",
-                    "bg-green-400",
-                    "bg-yellow-300",
-                    "bg-orange-400",
-                    "bg-pink-400",
-                    "bg-white-400",
-                  ][i % 6]
-                }
-              />
-            ))}
-
-              {/* Ping indicator */}
-              <span className="text-base sm:text-xl flex-shrink-0">🎄</span>
-              <div className="flex items-center gap-1 sm:gap-2 font-kid text-transparent bg-clip-text 
-               bg-gradient-to-r from-red-500 via-green-500 to-yellow-500 
-               text-xs sm:text-base font-bold leading-tight drop-shadow-lg">
-  
-              {/* Point rouge */}
-              <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full bg-red-400" />
-              </span>
-              {/* Texte */}
-              <span className="leading-tight text-xs sm:text-sm whitespace-normal sm:whitespace-normal">
-              Vente de gâteaux : le vendredi 19 décembre !
-              </span>
-             </div>
-              {/* Link */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm"
-                      asChild
-                    >
-                      <a
-                        href="https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Voir
-                        <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                      </a>
-                    </Button>
-            </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
