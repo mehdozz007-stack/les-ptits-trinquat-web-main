@@ -32,7 +32,7 @@ export function HeroSection() {
   const sparks = Array.from({ length: 150 }); // total sparks around the TOMBOLA
 
   return (
-    <section className="relative min-h-[115vh] overflow-hidden bg-hero">
+    <section className="relative min-h-[110vh] overflow-hidden bg-hero">
       {/* Decorative watercolor blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/30 watercolor-blob animate-pulse-soft" />
@@ -266,7 +266,7 @@ export function HeroSection() {
                 transition={{ delay: 0.4 }}
                 className="mb-4 text-xs sm:text-sm text-muted-foreground text-center"
               >
-                Association Parents d'Elèves du groupe scolaire FRANK-DICKENS.
+                Association Parents d'Elèves.
               </motion.p>
             </div>
 
