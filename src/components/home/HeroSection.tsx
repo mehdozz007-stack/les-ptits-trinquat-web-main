@@ -266,15 +266,8 @@ export function HeroSection() {
                 transition={{ delay: 0.4 }}
                 className="mb-4 text-xs sm:text-sm text-muted-foreground text-center"
               >
-                Association Parents d'Elèves.
+                Association Parents d'Elèves du groupe scolaire FRANK-DICKENS.
               </motion.p>
-              <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
-            >
-            </motion.h1>
             </div>
 
               {/* Main image */}
