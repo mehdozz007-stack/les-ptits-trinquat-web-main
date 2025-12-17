@@ -36,7 +36,7 @@ export function Header() {
               Les P'tits Trinquat
             </h1>
             <p className="text-xs text-muted-foreground">
-              Association de parents d'élèves
+              Association parents d'élèves
             </p>
           </div>
         </Link>
