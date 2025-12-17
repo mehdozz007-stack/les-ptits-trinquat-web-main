@@ -160,7 +160,7 @@ const InfoBadge = ({
               href="https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
               delay={0.25}
               bgClass="bg-violet/10 text-violet-900"
-              textGradient="bg-gradient-to-r from-red-500 via-green-500 to-yellow-500"
+              textGradient="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
               pingOuter="bg-red-500"
               pingInner="bg-red-400"
               sparks={sparks}
@@ -261,11 +261,40 @@ const InfoBadge = ({
                 className="mb-2 flex justify-center"
               >
                 <div className="relative p-3 sm:p-4 lg:p-6 rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-sky/5 backdrop-blur-sm shadow-lg">
-                  <img
-                    src={logoAsso}
-                    alt="Logo Les P'tits Trinquat"
-                    className="h-30 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
-                  />
+                  <div className="relative inline-block">
+                    <img
+                      src={logoAsso}
+                      alt="Logo Les P'tits Trinquat"
+                      className="h-30 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
+                    />
+                    
+                    {/* Social Links on logo */}
+                    <div className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 sm:gap-3">
+                      <a
+                        href="https://www.instagram.com/Les_ptits_trinquat?fbclid=IwY2xjawOmlxFleHRuA2FlbQIxMABicmlkETFnZjNRdDdMVHp6cHdIM3pwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvXM-UMnkp69r5uScbYVykNF5ZVtr9MQa1_k2se0iqZ3IfRUEmOZXgHqWCes_aem_hUyrVdxiVyWFisTvxVlyRw&brid=boREg9T10BACz4NodPBJ3w"
+                        target="_blank"
+                        className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none"
+                          viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                            d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                            d="M16.5 7.51h.01M12 8.25A3.75 3.75 0 1 0 12 15.75A3.75 3.75 0 1 0 12 8.25Z" />
+                        </svg>
+                      </a>
+                      <a
+                        href="https://www.facebook.com/LesPtitsTrinquats"
+                        target="_blank"
+                        className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6"
+                          fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M13.5 8.5V6.75c0-.62.5-1.12 1.12-1.12H16V3h-2.25A3.75 3.75 0 0 0 10 6.75V8.5H8v3h2v9h3v-9h2.25l.25-3h-2.5z"/>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
               <motion.div
@@ -291,46 +320,22 @@ const InfoBadge = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-card p-3 sm:p-4 shadow-card text-xs sm:text-sm"
+                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6"
               >
-                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-accent flex-shrink-0">
-                  <Users className="h-5 w-5 sm:h-6 sm:w-6 text-accent-foreground" />
-                </div>
-                <div>
-                  <div className="font-bold text-foreground">Communauté active</div>
-                  <div className="text-xs text-muted-foreground">Parents engagés</div>
-                </div>
+                <Link
+                  to="/a-propos#bureau"
+                  className="flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-card p-3 sm:p-4 shadow-card text-xs sm:text-sm"
+                >
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-accent flex-shrink-0">
+                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-accent-foreground" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-foreground">Communauté active</div>
+                    <div className="text-xs text-muted-foreground">Parents engagés</div>
+                  </div>
+                </Link>
               </motion.div>
             </div>
-            
-            {/* Social Links */}
-            <div className="absolute -right-3 sm:-right-6 bottom-6 sm:bottom-6 flex flex-col gap-2 sm:gap-3">
-              <a
-                href="https://www.instagram.com/Les_ptits_trinquat?fbclid=IwY2xjawOmlxFleHRuA2FlbQIxMABicmlkETFnZjNRdDdMVHp6cHdIM3pwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvXM-UMnkp69r5uScbYVykNF5ZVtr9MQa1_k2se0iqZ3IfRUEmOZXgHqWCes_aem_hUyrVdxiVyWFisTvxVlyRw&brid=boREg9T10BACz4NodPBJ3w"
-                target="_blank"
-                className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none"
-                  viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                    d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                    d="M16.5 7.51h.01M12 8.25A3.75 3.75 0 1 0 12 15.75A3.75 3.75 0 1 0 12 8.25Z" />
-                </svg>
-              </a>
-
-              <a
-                href="https://www.facebook.com/LesPtitsTrinquats"
-                target="_blank"
-                className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6"
-                  fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M13.5 8.5V6.75c0-.62.5-1.12 1.12-1.12H16V3h-2.25A3.75 3.75 0 0 0 10 6.75V8.5H8v3h2v9h3v-9h2.25l.25-3h-2.5z"/>
-                </svg>
-              </a>
-            </div>
-
           </motion.div>
         </div>
       </div>
