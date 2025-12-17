@@ -8,10 +8,10 @@ import heroImage from "@/assets/hero-children.jpg";
 
 const navItems = [
   { label: "Accueil", href: "/", icon: Home },
+  { label: "À propos", href: "/a-propos", icon: Users },
   { label: "Événements", href: "/evenements", icon: Calendar },
   { label: "Comptes-rendus", href: "/comptes-rendus", icon: FileText },
   { label: "Partenaires", href: "/partenaires", icon: Heart },
-  { label: "À propos", href: "/a-propos", icon: Users },
   { label: "Contact", href: "/contact", icon: Mail },
 ];
 

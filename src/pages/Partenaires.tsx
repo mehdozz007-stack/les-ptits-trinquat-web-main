@@ -134,7 +134,7 @@ const Partenaires = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-hero py-20">
+      <section className="relative overflow-hidden bg-sky-gradient py-20" >
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-20 left-1/4 h-60 w-60 rounded-full bg-accent/20 watercolor-blob" />
           <div className="absolute bottom-10 right-10 h-40 w-40 rounded-full bg-secondary/20 watercolor-blob" />

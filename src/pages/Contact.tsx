@@ -189,7 +189,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">Ecrivez-nous depuis le formulaire</p>
+                    <p className="text-muted-foreground">Ecrivez-nous depuis le formulaire.<br />Votre message sera reçu dans notre boîte email.</p>
                   </div>
                 </CardContent>
               </Card>
@@ -226,7 +226,7 @@ const Contact = () => {
                     <div className="flex-1">
                       <h3 className="font-bold text-foreground">Adresse</h3>
                       <p className="text-muted-foreground">
-                        686 Avenue du Pont Trinquat <br /> 34070 Montpellier
+                        Ecole Anne Frank-Charles Dickens <br /> 686 Avenue du Pont Trinquat <br /> 34070 Montpellier
                       </p>
                     </div>
                   </div>
@@ -243,7 +243,7 @@ const Contact = () => {
                       rel="noopener noreferrer"
                       className="flex items-center gap-1"
                     > 
-                      Code d'accès nécessaire
+                      Voir sur le DigiPad
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   </Button>
@@ -259,7 +259,7 @@ const Contact = () => {
                     <h3 className="font-bold text-foreground">Permanences</h3>
                     <p className="text-muted-foreground">
                       Mardi et vendredi de 16h30 à 18h00<br />
-                      devant l'école élémentaire
+                      devant l'école élémentaire hormis les vacances scolaires.
                     </p>
                   </div>
                 </CardContent>

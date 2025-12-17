@@ -55,7 +55,7 @@ const APropos = () => {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-2xl"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+            <span className="mb-4 inline-flex items-sdfcenter gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
               <Users className="h-4 w-4" />
               Notre association
             </span>
@@ -64,7 +64,7 @@ const APropos = () => {
               <span className="text-gradient">P'tits Trinquat</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Depuis 2019, notre association rassemble les parents d'élèves du groupe scolaire Anne Frank – Charles Dickens pour accompagner et enrichir la vie scolaire de nos enfants.
+              Depuis 2019, notre association rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong> pour accompagner et enrichir la vie scolaire de nos enfants.
             </p>
           </motion.div>
         </div>
@@ -84,10 +84,10 @@ const APropos = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Les P'tits Trinquat est une association de parents d'élèves qui œuvre pour le bien-être et l'épanouissement des enfants au sein du groupe scolaire Anne Frank – Charles Dickens à Montpellier.
+                  Les P'tits Trinquat est une association de parents d'élèves qui œuvre pour le bien-être et l'épanouissement des enfants au sein du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong> à Montpellier.
                 </p>
                 <p>
-                  Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> des projets pédagogiques grâce à nos actions.
+                  Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> les activités ludiques grâce à nos actions.
                 </p>
                 <p>
                   Nous travaillons en étroite collaboration avec l'équipe pédagogique pour créer un environnement éducatif stimulant et bienveillant.

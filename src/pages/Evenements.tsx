@@ -127,7 +127,7 @@ const Evenements = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-sky-gradient py-20">
+      <section className="relative overflow-hidden bg-hero py-20">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-sky/20 watercolor-blob" />
           <div className="absolute bottom-10 left-10 h-40 w-40 rounded-full bg-primary/20 watercolor-blob" />
