@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-children.jpg";
+import logoAsso from "@/assets/logos/logoAsso2.svg";
 
 // Spark component for floating particles
 const Spark = ({ color }: { color: string }) => {
@@ -31,7 +32,7 @@ export function HeroSection() {
   const sparks = Array.from({ length: 150 }); // total sparks around the TOMBOLA
 
   return (
-    <section className="relative min-h-[90vh] overflow-hidden bg-hero">
+    <section className="relative min-h-[113vh] overflow-hidden bg-hero">
       {/* Decorative watercolor blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/30 watercolor-blob animate-pulse-soft" />
@@ -245,17 +246,34 @@ export function HeroSection() {
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/20 to-sky/20 blur-2xl" />
               
               <div className="text-center mb-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className="mb-2 flex justify-center"
+              >
+                <div className="relative p-3 sm:p-4 lg:p-6 rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-sky/5 backdrop-blur-sm shadow-lg">
+                  <img
+                    src={logoAsso}
+                    alt="Logo Les P'tits Trinquat"
+                    className="h-32 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
+                  />
+                </div>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="mb-4 text-xs sm:text-sm text-muted-foreground text-center"
+              >
+                Association Parents d'Elèves.
+              </motion.p>
               <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
             >
-              <span className="text-gradient">Les P'tits Trinquat</span>
-              <br />
-              <p className="text-xs sm:text-sm lg:text-base mt-1 font-semibold text-black">
-               Association de parents d'élèves.
-              </p>
             </motion.h1>
             </div>
 
