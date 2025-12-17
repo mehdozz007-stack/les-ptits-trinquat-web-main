@@ -256,7 +256,7 @@ export function HeroSection() {
                   <img
                     src={logoAsso}
                     alt="Logo Les P'tits Trinquat"
-                    className="h-32 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
+                    className="h-30 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
                   />
                 </div>
               </motion.div>
