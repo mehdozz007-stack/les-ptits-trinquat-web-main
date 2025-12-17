@@ -189,28 +189,28 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">Ecrivez-nous depuis le formulaire.<br />Votre message sera reçu dans notre boîte email.</p>
+                    <p className="text-muted-foreground">Ecrivez-nous depuis le formulaire. Votre message arrivera directement entre les mains de notre équipe.</p>
                   </div>
                 </CardContent>
               </Card>
 
               <Card variant="elevated">
-                <CardContent className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6">
+                <CardContent className="flex items-center justify-between gap-4 p-6">
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-secondary/20">
                       <Heart className="h-6 w-6 text-secondary" />
                     </div>
                     <h3 className="font-bold text-foreground">Suivez-nous</h3>
                   </div>
-                  <div className="flex gap-3 ml-auto sm:ml-0">
-                    <Button variant="ghost" size="icon" asChild className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-pink-200 hover:bg-pink-300">
+                  <div className="flex gap-3">
+                    <Button variant="ghost" size="icon" asChild className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-pink-200 hover:bg-pink-300">
                       <a href="https://www.instagram.com/Les_ptits_trinquat" target="_blank" rel="noopener noreferrer" title="Instagram">
-                        <Instagram className="h-6 w-6 sm:h-7 sm:w-7 text-pink-600" />
+                        <Instagram className="h-5 w-5 sm:h-6 sm:w-6 text-pink-600" />
                       </a>
                     </Button>
-                    <Button variant="ghost" size="icon" asChild className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-sky-200 hover:bg-sky-300">
+                    <Button variant="ghost" size="icon" asChild className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-sky-200 hover:bg-sky-300">
                       <a href="https://www.facebook.com/LesPtitsTrinquats" target="_blank" rel="noopener noreferrer" title="Facebook">
-                        <Facebook className="h-6 w-6 sm:h-7 sm:w-7 text-sky-600" />
+                        <Facebook className="h-5 w-5 sm:h-6 sm:w-6 text-sky-600" />
                       </a>
                     </Button>
                   </div>
@@ -226,7 +226,7 @@ const Contact = () => {
                     <div className="flex-1">
                       <h3 className="font-bold text-foreground">Adresse</h3>
                       <p className="text-muted-foreground">
-                        Ecole Anne Frank-Charles Dickens <br /> 686 Avenue du Pont Trinquat <br /> 34070 Montpellier
+                        Ecole Anne Frank-Charles Dickens, 686 Avenue du Pont Trinquat <br /> 34070 Montpellier
                       </p>
                     </div>
                   </div>
@@ -243,7 +243,7 @@ const Contact = () => {
                       rel="noopener noreferrer"
                       className="flex items-center gap-1"
                     > 
-                      Voir sur le DigiPad
+                      Voir sur DigiPad
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   </Button>
@@ -258,8 +258,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-bold text-foreground">Permanences</h3>
                     <p className="text-muted-foreground">
-                      Mardi et vendredi de 16h30 à 18h00<br />
-                      devant l'école élémentaire hormis les vacances scolaires.
+                      Des parents bénévoles sont présents chaque matin devant l’école.<br />Venez discuter librement avec l’association.
                     </p>
                   </div>
                 </CardContent>

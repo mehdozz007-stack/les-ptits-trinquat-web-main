@@ -9,7 +9,7 @@ import { url } from "inspector";
 const events = [
     {
     id: 7,
-    title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez avec nous de superbes lots !",
+    title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez avec nous de superbes lots ! 🎁",
     date: "8 Décembre 2025 - Lancement",
     time: "8 Décembre 2025 - 16 Février 2026",
     location: "Groupe scolaire FRANK-DICKENS",
@@ -32,7 +32,7 @@ const events = [
   },
   {
     id: 2,
-    title: "Vente de gâteaux de Noël",
+    title: "🎄 Vente de gâteaux de Noël 🎄",
     date: "19 Décembre 2025",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
@@ -44,7 +44,7 @@ const events = [
   },
   {
     id: 4,
-    title: "Conseil de l'école SI",
+    title: "📝 Conseil d'école SI 🌍",
     date: "7 Janvier 2026",
     time: "18h30 - 20h00",
     location: "Salle polyvalente",
@@ -55,8 +55,8 @@ const events = [
   },
   {
     id: 9,
-    title: "Réunion mensuelle des parents",
-    date: "30 Avril 2026",
+    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
+    date: "30 Janvier 2026",
     time: "17h30 - 19h30",
     location: "Salle polyvalente",
     description: "Préparation aux prochains événements.",
@@ -66,7 +66,7 @@ const events = [
   },
   {
     id: 8,
-    title: "Carnaval",
+    title: "🎉 Carnaval 🎭",
     date: "17 Avril 2026",
     time: "08h30 - 16h30",
     location: "Toute l'école",
@@ -77,7 +77,7 @@ const events = [
   },
   {
     id: 1,
-    title: "Fête de l'école",
+    title: "🏫 Fête d'école 🎊",
     date: "19 Juin 2026",
     time: "14h00 - 19h00",
     location: "Cour de l'école",

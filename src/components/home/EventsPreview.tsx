@@ -37,7 +37,7 @@ const upcomingEvents = [
   },
   {
     id: 2,
-    title: "Vente de gâteaux de Noël",
+    title: "🎄 Vente de gâteaux de Noël 🎄",
     date: "19 Décembre 2025",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
@@ -49,7 +49,7 @@ const upcomingEvents = [
   },
   {
     id: 4,
-    title: "Conseil de l'école SI",
+    title: "📝 Conseil d'école SI 🌍",
     date: "7 Janvier 2026",
     time: "18h30 - 20h00",
     location: "Salle polyvalente",
