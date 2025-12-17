@@ -54,6 +54,17 @@ const events = [
     attendees: 50,
   },
   {
+    id: 9,
+    title: "Réunion mensuelle des parents",
+    date: "30 Avril 2026",
+    time: "17h30 - 19h30",
+    location: "Salle polyvalente",
+    description: "Préparation aux prochains événements.",
+    color: "secondary",
+    status: "upcoming",
+    attendees: 30,
+  },
+  {
     id: 8,
     title: "Carnaval",
     date: "17 Avril 2026",

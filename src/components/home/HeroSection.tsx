@@ -32,7 +32,7 @@ export function HeroSection() {
   const sparks = Array.from({ length: 150 }); // total sparks around the TOMBOLA
 
   return (
-    <section className="relative min-h-[110vh] overflow-hidden bg-hero">
+    <section className="relative min-h-[117vh] sm:min-h-[115vh] lg:min-h-[110vh] overflow-hidden bg-hero">
       {/* Decorative watercolor blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/30 watercolor-blob animate-pulse-soft" />
@@ -115,7 +115,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 }}
-              className="relative mb-6 inline-flex flex-row items-center gap-1 sm:gap-3 rounded-2xl sm:rounded-full bg-violet/10 px-2 sm:px-4 py-2 text-xs sm:text-lg font-bold text-violet-900 overflow-visible"
+              className="relative mb-8 inline-flex flex-row items-center gap-1 sm:gap-3 rounded-2xl sm:rounded-full bg-violet/10 px-2 sm:px-4 py-2 text-xs sm:text-lg font-bold text-violet-900 overflow-visible"
             >
               {/* Dynamic Sparks */}
               {sparks.map((_, i) => (
@@ -260,14 +260,14 @@ export function HeroSection() {
                   />
                 </div>
               </motion.div>
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="mb-4 text-xs sm:text-sm text-muted-foreground text-center"
+                className="mb-8 text-xs sm:text-sm text-muted-foreground text-center"
               >
                 Association Parents d'Elèves.
-              </motion.p>
+              </motion.div>
             </div>
 
               {/* Main image */}

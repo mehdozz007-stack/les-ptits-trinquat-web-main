@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 const faqs = [
   {
     question: "Comment adhérer à l'association ?",
-    answer: "L'adhésion se fait en ligne ou lors de nos événements. Le coût est à partir de 1€ par personne pour l'année scolaire.",
+    answer: "L'adhésion se fait en ligne ou lors de nos événements. Le coût est à partir de 2€ par personne pour l'année scolaire.",
   },
   {
     question: "Comment participer aux événements ?",
