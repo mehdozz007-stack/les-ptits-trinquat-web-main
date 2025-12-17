@@ -32,7 +32,7 @@ export function HeroSection() {
   const sparks = Array.from({ length: 150 }); // total sparks around the TOMBOLA
 
   return (
-    <section className="relative min-h-[117vh] sm:min-h-[115vh] lg:min-h-[110vh] overflow-hidden bg-hero">
+    <section className="relative min-h-[90vh] sm:min-h-[115vh] lg:min-h-[110vh] overflow-hidden bg-hero">
       {/* Decorative watercolor blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/30 watercolor-blob animate-pulse-soft" />
@@ -41,7 +41,7 @@ export function HeroSection() {
         <div className="absolute top-1/4 right-1/3 h-40 w-40 rounded-full bg-accent/30 watercolor-blob animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
       </div>
 
-      <div className="container relative flex min-h-[90vh] items-center py-8 sm:py-16 lg:py-20 px-4 sm:px-6">
+      <div className="container relative flex min-h-[90vh] items-center py-8 sm:py-16 lg:py-20 px-4 sm:px-6 pb-16">
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-8 items-center w-full">
           {/* Text Content */}
           <motion.div
