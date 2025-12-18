@@ -24,7 +24,7 @@ const upcomingEvents = [
     color: "secondary",
   },*/
   {
-   id: 5,
+   id: 1,
    title: "📣 TOMBOLA de la rentrée 2025-2026 est lancée ! 🎁",
    date: "8 Décembre 2025 - Lancée",
    time: "8 Décembre 2025 - 16 Février 2026",
@@ -36,12 +36,12 @@ const upcomingEvents = [
    url: "/partenaires"
   },
   {
-    id: 2,
+    id: 3,
     title: "🎄 Vente de gâteaux de Noël 🎄",
     date: "19 Décembre 2025",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
-    description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires.",
+    description: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l'école.",
     color: "violet",
     status: "upcoming",
     attendees: 300,
@@ -118,14 +118,14 @@ export function EventsPreview() {
                         href={event.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary hover:underline transition-colors inline-block"
+                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors inline-block no-underline"
                       >
                         {event.title}
                       </a>
                     ) : (
                       <Link
                         to="/evenements"
-                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary hover:underline transition-colors inline-block no-underline"
+                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors inline-block no-underline"
                       >
                         {event.title}
                       </Link>
@@ -134,6 +134,19 @@ export function EventsPreview() {
                     <p className="mb-4 text-muted-foreground">
                       {event.description}
                     </p>
+
+                    {/* Read More Button */}
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      className="rounded-full bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/10 transition-all mb-4"
+                      asChild
+                    >
+                      <Link to={`/evenements#event-${event.id}`}>
+                        Lire plus
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    </Button>
 
                     {/* Meta */}
                     <div className="space-y-2 text-sm text-muted-foreground">

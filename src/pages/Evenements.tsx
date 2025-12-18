@@ -8,19 +8,19 @@ import { url } from "inspector";
 
 const events = [
     {
-    id: 7,
+    id: 1,
     title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez avec nous de superbes lots ! 🎁",
     date: "8 Décembre 2025 - Lancement",
     time: "8 Décembre 2025 - 16 Février 2026",
     location: "Groupe scolaire FRANK-DICKENS",
-    description: "Gagnez des gros cadeaux avec notre TOMBOLA.\nSuivez la liste de nos lots à gagner sur nos réseaux et achetez vos billets pour soutenir les projets de l'association.",
+    description: "La tombola de l’association est un moment convivial qui permet aux enfants de s’impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance.\nGrâce au soutien de nos partenaires, de nombreux lots attendent les participants. Chaque ticket contribue directement aux projets ludiques de l’association.\nUn futur espace en ligne viendra également faciliter les échanges autour des lots, pour prolonger l’esprit de partage après le tirage.\nConsultez la liste de nos partenaires et tentez votre chance !",
     color: "accent",
     status: "upcoming",
     attendees: 500,
     url: "/partenaires"
   },
   {
-    id: 3,
+    id: 2,
     title: "Réunion mensuelle des parents",
     date: "12 Décembre 2025",
     time: "17h30 - 19h30",
@@ -31,12 +31,12 @@ const events = [
     attendees: 30,
   },
   {
-    id: 2,
+    id: 3,
     title: "🎄 Vente de gâteaux de Noël 🎄",
     date: "19 Décembre 2025",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
-    description: "Participez à notre traditionnelle vente de gâteaux pour financer les projets scolaires.\nLes conditions météorologiques peuvent influencer le lieu. L'événement pourra se tenir à la salle d'événement annexe de la maison pour tous Boris Vian.",
+    description: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l’école.\nSelon la météo, l’événement pourra se dérouler à la salle d’événement annexe de la Maison pour Tous Boris Vian.",
     color: "violet",
     status: "upcoming",
     attendees: 300,
@@ -48,46 +48,46 @@ const events = [
     date: "7 Janvier 2026",
     time: "18h30 - 20h00",
     location: "Salle polyvalente",
-    description: "Bilan de l'année, présentation des projets et resultats élection des parents.",
+    description: "Un temps de partage pour revenir ensemble sur l’année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l’élection des parents.",
     color: "sky",
     status: "upcoming",
     attendees: 50,
   },
   {
-    id: 9,
+    id: 5,
     title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
     date: "30 Janvier 2026",
     time: "17h30 - 19h30",
     location: "Salle polyvalente",
-    description: "Préparation aux prochains événements.",
+    description: "Un temps d’échange pour construire ensemble les futurs temps forts de l’école.",
     color: "secondary",
     status: "upcoming",
     attendees: 30,
   },
   {
-    id: 8,
+    id: 6,
     title: "🎉 Carnaval 🎭",
     date: "17 Avril 2026",
     time: "08h30 - 16h30",
     location: "Toute l'école",
-    description: "Les enfants auront le choix de se déguiser en des insectes ou des fleurs, pour célébrer le printemps dans les classes.",
+    description: "Le carnaval s’invite à l’école pendant le temps de classe pour un moment joyeux et coloré.\nLes enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l’arrivée du printemps dans leurs classes 🌼🐝",
     color: "accent",
     status: "upcoming",
     attendees: 380,
   },
   {
-    id: 1,
+    id: 7,
     title: "🏫 Fête d'école 🎊",
     date: "19 Juin 2026",
     time: "14h00 - 19h00",
     location: "Cour de l'école",
-    description: "Jeux, spectacles, stands gourmands et animations pour célébrer ensemble la fin d'année scolaire !",
+    description: "Rires, jeux, spectacles et douceurs gourmandes vous attendent pour partager ensemble un moment joyeux et festif et célébrer la fin de l’année scolaire 🌟🍭",
     color: "primary",
     status: "upcoming",
     attendees: 800,
   },
   {
-    id: 5,
+    id: 8,
     title: "Vente de Toussaint",
     date: "16 et 17 Octobre 2025",
     time: "16h30 - 19h00",
@@ -99,7 +99,7 @@ const events = [
     url: "https://www.instagram.com/p/DPn9cLdiBTC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
-    id: 6,
+    id: 9,
     title: "Fête des Lanternes",
     date: "10 Novembre 2025",
     time: "14h00 - 17h00",
@@ -163,8 +163,7 @@ const Evenements = () => {
               const colors = colorClasses[event.color as keyof typeof colorClasses];
               return (
                 <motion.div
-                  key={event.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={event.id}                  id={`event-${event.id}`}                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >

@@ -136,7 +136,7 @@ const InfoBadge = ({
             <InfoBadge
               icon="📣"
               text="TOMBOLA 2025-2026 lancée ! Gagnez de superbes lots !"
-              href="/partenaires"
+              href="/evenements#event-1"
               delay={0.2}
               bgClass="bg-primary/10 text-blue-900"
               textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"
@@ -157,7 +157,7 @@ const InfoBadge = ({
             <InfoBadge
               icon="🎄"
               text="Vente de gâteaux : le vendredi 19 décembre !"
-              href="https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
+              href="/evenements#event-3"
               delay={0.25}
               bgClass="bg-violet/10 text-violet-900"
               textGradient="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"

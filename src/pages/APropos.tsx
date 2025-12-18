@@ -87,7 +87,7 @@ const APropos = () => {
                   Les P'tits Trinquat est une association de parents d'élèves qui œuvre pour le bien-être et l'épanouissement des enfants au sein du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong> à Montpellier.
                 </p>
                 <p>
-                  Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> les activités ludiques grâce à nos actions.
+                  Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> les activités ludiques pour nos enfants grâce à nos actions.
                 </p>
                 <p>
                   Nous travaillons en étroite collaboration avec l'équipe pédagogique pour créer un environnement éducatif stimulant et bienveillant.
@@ -180,7 +180,7 @@ const APropos = () => {
                 Fondée en 2019, l'association Les P'tits Trinquat est née de la volonté de quelques parents de créer un lien fort entre les familles et l'école. Le nom "Trinquat" fait référence au quartier de Montpellier où se situe notre groupe scolaire.
               </p>
               <p>
-                Au fil des années, nous avons organisé des centaines d'événements : fêtes de l'école, marchés de Noël, ventes de gâteaux, sorties scolaires... Chaque action contribue à financer des projets pédagogiques et à créer des moments de partage inoubliables.
+                Au fil des années, nous avons organisé des centaines d'événements : fêtes d'école, marchés de Noël, ventes de gâteaux, vides-grenier, sorties scolaires... Chaque action contribue à financer des projets ludiques pour nos enfants et à créer des moments de partage inoubliables avec notre équipe enseignante.
               </p>
               <p>
                 Aujourd'hui, nous sommes fiers de rassembler plus de 100 familles et de compter sur une équipe de bénévoles engagés qui font vivre l'association au quotidien.
