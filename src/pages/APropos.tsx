@@ -179,7 +179,7 @@ const APropos = () => {
                   Les P'tits Trinquat est une association de parents d'élèves qui œuvre pour le bien-être et l'épanouissement des enfants au sein du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong> à Montpellier.
                 </p>
                 <p>
-                  Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> les activités ludiques pour nos enfants grâce à nos actions.
+                  Notre mission est triple : <strong>accompagner</strong> les familles dans leur relation avec l'école, <strong>enrichir</strong> la vie scolaire par des activités et événements, et <strong>financer</strong> les activités dédiées à nos enfants grâce à nos actions.
                 </p>
                 <p>
                   Nous travaillons en étroite collaboration avec l'équipe pédagogique pour créer un environnement éducatif stimulant et bienveillant.
@@ -322,19 +322,18 @@ const APropos = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="mt-8 flex justify-center"
+                className="mt-14 flex px-4 sm:px-0 sm:justify-center"
               >
-                <div className="w-full max-w-xs">
+                <div className="w-full sm:max-w-xs">
                   <motion.label 
-                    className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2"
+                    className="block text-xs sm:text-sm font-semibold text-foreground mb-3 flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <span className="text-lg">🎓</span>
-                    Filtrer par classe
+                    <span className="text-lg">🎓 Filtrer par classe</span>
                   </motion.label>
                   <Select value={selectedClasse} onValueChange={setSelectedClasse}>
-                    <SelectTrigger className="bg-gradient-to-r from-orange-50 via-pink-50 to-white border-2 border-orange-200/60 hover:border-orange-300 hover:shadow-lg transition-all duration-300 rounded-2xl shadow-soft">
-                      <SelectValue placeholder="✨ Sélectionnez votre classe..." />
+                    <SelectTrigger className="bg-gradient-to-r from-orange-50 via-pink-50 to-white border-2 border-orange-200/60 hover:border-orange-300 hover:shadow-lg transition-all duration-300 rounded-xl sm:rounded-2xl shadow-soft text-sm sm:text-base">
+                      <SelectValue placeholder="✨ Classe..." />
                     </SelectTrigger>
                     <SelectContent className="rounded-2xl border-2 border-orange-200/50 bg-gradient-to-b from-orange-50/95 via-pink-50/95 to-white/95 backdrop-blur-sm">
                       {classesUniques.map((classe, idx) => (
@@ -443,8 +442,20 @@ const APropos = () => {
       )}
 
       {/* History */}
-      <section className="py-16">
-        <div className="container">
+      <section className="relative overflow-hidden py-16 bg-gradient-to-b from-pink-30/30 via-orange-50/20 to-pink-30/30">
+        {/* Blobs doux en arrière-plan */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 left-1/4 h-80 w-80 rounded-full bg-orange-400/20 watercolor-blob" />
+          <div className="absolute top-1/3 -right-32 h-72 w-72 rounded-full bg-pink-200/15 watercolor-blob" />
+          <div className="absolute -bottom-40 right-1/4 h-96 w-96 rounded-full bg-orange-600/15 watercolor-blob" />
+          <motion.div
+            className="absolute top-1/2 left-1/3 h-60 w-60 rounded-full bg-pink-100/10 watercolor-blob"
+            animate={{ y: [0, 30, 0] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          />
+        </div>
+
+        <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
