@@ -1,22 +1,59 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Users, Heart, Target, History, UserCheck, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const bureauMembers = [
-  { name: "Cindy", role: "Co-Présidente", emoji: "👩‍💼" },
-  { name: "Vincent", role: "Co-Président", emoji: "👨‍💼" },
-  { name: "Mehdi", role: "Co-Secrétaire", emoji: "👨‍💻" },
-  { name: "Alexia", role: "Co-Secrétaire", emoji: "📝" },
-  { name: "Camille", role: "Co-Trésorière", emoji: "💰" },
-  { name: "Chiara", role: "Co-Trésorière", emoji: "🧮" },
-  { name: "Nora", role: "Responsable réseaux", emoji: "📢" },
-  { name: "Yasmine", role: "Responsable communication", emoji: "🤝" },
-  { name: "Maité", role: "Responsable système international", emoji: "🌍" },
-  { name: "Hanan", role: "Responsable événements", emoji: "🎈" },
+  { name: "Cindy", role: "Co-Présidente", emoji: "👩‍💼", classe: [12, 14, 18] },
+  { name: "Vincent", role: "Co-Président", emoji: "👨‍💼", classe: [9, 17] },
+  { name: "Mehdi", role: "Co-Secrétaire", emoji: "👨‍💻", classe: [1, 3] },
+  { name: "Alexia", role: "Co-Secrétaire", emoji: "📝", classe: [12] },
+  { name: "Camille L", role: "Co-Trésorière", emoji: "💰", classe: [1] },
+  { name: "Chiara", role: "Co-Trésorière", emoji: "🧮", classe: [4, 11, 18] },
+  { name: "Nora D", role: "Responsable réseaux sociaux", emoji: "📢", classe: [6, 7] },
+  { name: "Yasmine", role: "Responsable communication", emoji: "🤝", classe: [4, 5] },
+  { name: "Maité", role: "Responsable section internationale", emoji: "🌍", classe: [17] },
+  { name: "Hanane S", role: "Co-Responsable événementiel", emoji: "🎊", classe: [6] },
+  { name: "Hanan A", role: "Co-Responsable événementiel", emoji: "🎈", classe: [7, 13, 18] },
+  { name: "Frédérique", role: "Conseillère principale", emoji: "🌸", classe: [14] },
+   
+  { name: "Linda", emoji: "🎨", classe: [12, 14, 18] },
+  { name: "Redha", emoji: "🎉", classe: [10] },
+  { name: "Sana", emoji: "🧸", classe: [5, 12, 15] },
+  { name: "Benjamin", emoji: "🎲", classe: [13] },
+  { name: "Ophélie", emoji: "🎭", classe: [6] },
+  { name: "Khalem", emoji: "⚽", classe: [18] },
+  { name: "Leïa", emoji: "🦋", classe: [5, 16] },
+  { name: "Asma", emoji: "🌺", classe: [6] },
+  { name: "Camille A", emoji: "🖍️", classe: [5] },
+  { name: "Julie", emoji: "🎶", classe: [10, 15] },
+  { name: "Loraine", emoji: "🌷", classe: [14] },
+  { name: "Nadira", emoji: "✨", classe: [11] },
+  { name: "Nora S", emoji: "🎊", classe: [12, 13] },
+  { name: "Sebastien", emoji: "🎯", classe: [7, 11] },
+  { name: "Juliette", emoji: "🎤", classe: [10] },
+  { name: "Akila", emoji: "🧩", classe: [12, 16] },
+  { name: "Guilhem", emoji: "🚲", classe: [14] },
+  { name: "Ghania", emoji: "🎪", classe: [14, 16] },
+  { name: "Cassandra", emoji: "🎨", classe: [7] },
+  { name: "Mathieu", emoji: "⚽", classe: [1] },
+  { name: "Olga", emoji: "🌻", classe: [14] },
+  { name: "Zohra", emoji: "🍀", classe: [5] },
+  { name: "Feriel", emoji: "🎈", classe: [6, 9] },
+  { name: "Marie", emoji: "🎀", classe: [5] },
 ];
+
+
 
 const values = [
   {
@@ -40,6 +77,61 @@ const values = [
 ];
 
 const APropos = () => {
+  const parentsElus = bureauMembers.slice(6);
+  const bureau = bureauMembers.slice(0, 6);
+  const allMembers = bureauMembers; // Tous les membres (bureau + parents)
+  
+  // Parser les classes (array de nombres) et extraire toutes les classes uniques
+  const parseClasses = (classes: number[] | string): string[] => {
+    if (!classes) return [];
+    
+    // Si c'est un array de nombres
+    if (Array.isArray(classes)) {
+      return classes.map(c => `Classe [${c}]`);
+    }
+    
+    // Sinon retourner la classe telle quelle
+    return [classes];
+  };
+  
+  // Formater les classes pour l'affichage avec "&"
+  const formatClasses = (classes: number[] | string): string => {
+    if (!classes) return "";
+    
+    if (Array.isArray(classes)) {
+      const count = classes.length;
+      const classesStr = classes.join(" & ");
+      return count > 1 ? `Classes : ${classesStr}` : `Classe : ${classesStr}`;
+    }
+    
+    return `Classe : ${String(classes)}`;
+  };
+  
+  // Créer une map classe -> tous les parents (bureau + parents élus)
+  const classeParentMap: { [key: string]: typeof allMembers } = {};
+  allMembers.forEach(member => {
+    const classes = parseClasses(member.classe);
+    classes.forEach(classe => {
+      if (!classeParentMap[classe]) {
+        classeParentMap[classe] = [];
+      }
+      classeParentMap[classe].push(member);
+    });
+  });
+  
+  const classesUniques = Object.keys(classeParentMap).sort((a, b) => {
+    const numA = parseInt(a.match(/\d+/)?.[0] || "0");
+    const numB = parseInt(b.match(/\d+/)?.[0] || "0");
+    return numA - numB;
+  });
+  
+  const [selectedClasse, setSelectedClasse] = useState<string>("");
+  
+  // Afficher tous les parents (bureau + parents élus) si une classe est sélectionnée
+  const parentsFiltrés = selectedClasse && classeParentMap[selectedClasse] 
+    ? classeParentMap[selectedClasse] 
+    : [];
+
   return (
     <Layout>
       {/* Hero */}
@@ -131,26 +223,67 @@ const APropos = () => {
           >
             <h2 className="mb-4 text-3xl font-bold">Le bureau</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Notre équipe de bénévoles dévoués qui font vivre l'association au quotidien.
+              Notre équipe exécutive de bénévoles dévoués qui pilotent l'association.
             </p>
           </motion.div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {bureauMembers.map((member, index) => (
+            {bureauMembers.slice(0, 6).map((member, index) => (
               <motion.div
-                key={member.name}
+                key={`${member.name}-${index}`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
               >
-                <Card variant="elevated" className="text-center">
-                  <CardContent className="p-6">
-                    <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 text-4xl">
+                <Card variant="elevated" className="text-center h-full bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 hover:border-orange-300 shadow-soft hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+                  {/* Animated background elements */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-orange-500/0 via-orange-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    animate={{ scale: [1, 1.5], opacity: [0, 0.5, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  />
+                  
+                  <CardContent className="p-6 relative z-10">
+                    <motion.div
+                      className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-orange-300/40 to-orange-200/40 text-4xl shadow-soft"
+                      whileHover={{ 
+                        rotate: 360,
+                        scale: 1.15,
+                        transition: { duration: 0.6 }
+                      }}
+                    >
                       {member.emoji}
-                    </div>
-                    <h3 className="font-bold text-foreground">{member.name}</h3>
-                    <p className="text-sm text-muted-foreground">{member.role}</p>
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 + 0.1 }}
+                    >
+                      <h3 className="font-bold text-foreground text-center group-hover:text-orange-600 transition-colors duration-300">{member.name}</h3>
+                    </motion.div>
+                    
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 + 0.15 }}
+                      className="text-sm font-semibold text-orange-500 mb-2 text-center group-hover:text-orange-600 transition-colors duration-300"
+                    >
+                      {member.role}
+                    </motion.p>
+                    
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 + 0.2 }}
+                      className="text-xs text-muted-foreground italic text-center"
+                    >
+                      {formatClasses(member.classe)}
+                    </motion.p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -158,6 +291,156 @@ const APropos = () => {
           </div>
         </div>
       </section>
+
+      {/* Parents élus */}
+      {bureauMembers.length > 6 && (
+        <section className="py-16 bg-gradient-to-b from-transparent via-secondary/5 to-pink-30/20">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-12 text-center"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 100 }}
+                className="flex flex-col items-center justify-center gap-6"
+              >
+                <span className="inline-flex items-center gap-2 rounded-full bg-accent/20 px-4 py-1.5 text-sm font-semibold text-accent-foreground">
+                  <Heart className="h-4 w-4 text-secondary" />
+                  Sans eux, rien ne serait possible
+                </span>
+                <h2 className="text-3xl font-bold">Parents représentants</h2>
+              </motion.div>
+
+              {/* Filtre par classe */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="mt-8 flex justify-center"
+              >
+                <div className="w-full max-w-xs">
+                  <motion.label 
+                    className="block text-sm font-semibold text-foreground mb-3 flex items-center gap-2"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <span className="text-lg">🎓</span>
+                    Filtrer par classe
+                  </motion.label>
+                  <Select value={selectedClasse} onValueChange={setSelectedClasse}>
+                    <SelectTrigger className="bg-gradient-to-r from-orange-50 via-pink-50 to-white border-2 border-orange-200/60 hover:border-orange-300 hover:shadow-lg transition-all duration-300 rounded-2xl shadow-soft">
+                      <SelectValue placeholder="✨ Sélectionnez votre classe..." />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-2xl border-2 border-orange-200/50 bg-gradient-to-b from-orange-50/95 via-pink-50/95 to-white/95 backdrop-blur-sm">
+                      {classesUniques.map((classe, idx) => (
+                        <SelectItem 
+                          key={classe} 
+                          value={classe}
+                          className="rounded-lg hover:bg-gradient-to-r hover:from-orange-200/60 hover:via-orange-100/60 hover:to-pink-100/60 cursor-pointer py-3 px-2 transition-colors duration-200 data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-orange-300/40 data-[state=checked]:via-orange-200/40 data-[state=checked]:to-pink-200/40"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg">{['🎯', '📚', '🌟', '💡', '🎨', '🚀', '🎭', '🎪', '🎬', '🎸', '🎯', '📖', '✏️', '🖊️', '📐', '🔬', '🧪', '🧬'][idx % 18]}</span>
+                            {classe}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {parentsFiltrés.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="rounded-3xl p-8 bg-gradient-to-br from-orange-50/80 via-pink-50/80 to-orange-50/40 mb-8"
+              >
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {parentsFiltrés.map((member, index) => (
+                    <motion.div
+                      key={`${member.name}-${index}`}
+                      initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        delay: index * 0.08,
+                        type: "spring",
+                        stiffness: 120,
+                        damping: 12
+                      }}
+                      whileHover={{ 
+                        y: -8,
+                        scale: 1.05,
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <Card variant="elevated" className="h-full bg-gradient-to-br from-secondary/5 via-accent/5 to-primary/5 border-secondary/20 hover:border-orange-300 shadow-soft hover:shadow-md transition-all duration-300 relative overflow-hidden group">
+                        {/* Animated background elements */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-br from-orange-500/0 via-orange-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          animate={{ scale: [1, 1.5], opacity: [0, 0.5, 0] }}
+                          transition={{ duration: 3, repeat: Infinity }}
+                        />
+                        
+                        <CardContent className="p-4 text-center relative z-10">
+                          <motion.div
+                            className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-orange-200/40 to-orange-100/40 text-3xl sm:text-2xl shadow-soft"
+                            whileHover={{ 
+                              rotate: 360,
+                              scale: 1.15,
+                              transition: { duration: 0.6 }
+                            }}
+                          >
+                            {member.emoji}
+                          </motion.div>
+                          
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.08 + 0.1 }}
+                          >
+                            <h3 className="font-bold text-foreground text-sm group-hover:text-orange-600 transition-colors duration-300">
+                              {member.name}
+                            </h3>
+                          </motion.div>
+                          
+                          <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.08 + 0.15 }}
+                            className="text-xs text-orange-500 font-semibold mb-1 group-hover:text-orange-600 transition-colors duration-300"
+                          >
+                            {member.role}
+                          </motion.p>
+                          
+                          <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.08 + 0.2 }}
+                            className="text-xs text-muted-foreground italic"
+                          >
+                            {formatClasses(member.classe)}
+                          </motion.p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* History */}
       <section className="py-16">
