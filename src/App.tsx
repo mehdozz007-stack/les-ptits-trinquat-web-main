@@ -9,7 +9,6 @@ import Evenements from "./pages/Evenements";
 import ComptesRendus from "./pages/ComptesRendus";
 import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
-import NotreEcole from "./pages/NotreEcole";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
 import NotFound from "./pages/NotFound";
@@ -32,7 +31,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/a-propos" element={<APropos />} />
-          <Route path="/notre-ecole" element={<NotreEcole />} />
           <Route path="/evenements" element={<Evenements />} />
           <Route path="/comptes-rendus" element={<ComptesRendus />} />
           <Route path="/partenaires" element={<Partenaires />} />
