@@ -156,7 +156,7 @@ const InfoBadge = ({
 
             <InfoBadge
               icon="🎄"
-              text="Vente de gâteaux : le vendredi 19 décembre !"
+              text="Vente de gâteaux le vendredi 19 décembre. Merci d'être venu et d'avoir participé !"
               href="/evenements#event-3"
               delay={0.25}
               bgClass="bg-violet/10 text-violet-900"

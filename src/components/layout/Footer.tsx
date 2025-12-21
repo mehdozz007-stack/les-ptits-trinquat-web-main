@@ -84,7 +84,7 @@ export function Footer() {
               </div>
               <div>
                 <h3 className="text-lg font-bold">Les P'tits Trinquat</h3>
-                <p className="text-sm text-background/70">Association de parents d'élèves</p>
+                <p className="text-sm text-background/70">Association parents d'élèves</p>
               </div>
             </div>
             <p className="text-sm text-background/70 leading-relaxed">
