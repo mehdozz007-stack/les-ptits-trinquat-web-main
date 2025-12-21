@@ -38,7 +38,7 @@ const events = [
     location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
     description: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l’école.\nSelon la météo, l’événement pourra se dérouler à la salle d’événement annexe de la Maison pour Tous Boris Vian.",
     color: "violet",
-    status: "upcoming",
+    status: "past",
     attendees: 300,
     url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
   },
