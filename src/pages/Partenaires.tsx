@@ -125,7 +125,23 @@ const carouselPartners = [
   { id: 55, name: "Creamondes", logo: "🎨", category: "Loisirs", website: "https://www.creamondes.com/" },
   { id: 56, name: "Train Vapeur des Cévennes", logo: "🚂", category: "Loisirs", website: "https://www.trainavapeur.com/" },
   { id: 57, name: "Vélorail Cévennes", logo: "🚴", category: "Loisirs", website: "https://www.veloraildescevennes.fr/" },
-  { id: 58, name: "Goolfy", logo: "⛳", category: "Loisirs", website: "https://goolfy-montpellier.com/" }
+  { id: 58, name: "Goolfy", logo: "⛳", category: "Loisirs", website: "https://goolfy-montpellier.com/" },
+
+  /*{ id: 59, name: "Pirates Paradise", logo: "🏴‍☠️", category: "Loisirs", website: "" },
+  { id: 60, name: "Théâtre La Vista", logo: "🎭", category: "Culture", website: "" },
+  { id: 61, name: "Théâtre La Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
+  { id: 62, name: "L'Atelier de Mo", logo: "🎨", category: "Éducation", website: "" },
+  { id: 63, name: "Grottes de Trabuc", logo: "⛏️", category: "Loisirs", website: "https://www.grottesdetrabuc.com/" },
+  { id: 64, name: "Uniikon", logo: "👔", category: "Shopping", website: "" },
+  { id: 65, name: "Ptit Club", logo: "🎮", category: "Loisirs", website: "" },
+  { id: 66, name: "Quiz Room", logo: "🧩", category: "Loisirs", website: "" },
+  { id: 67, name: "Times Xpérience", logo: "⏰", category: "Loisirs", website: "" },
+  { id: 68, name: "Nomaïa", logo: "🧘", category: "Bien-être", website: "" },
+  { id: 69, name: "Assadia", logo: "📚", category: "Éducation", website: "" },
+  { id: 70, name: "BC Végé", logo: "🥗", category: "Restauration", website: "" },
+  { id: 71, name: "Mademoiselle Coiff", logo: "💇", category: "Bien-être", website: "" },
+  { id: 72, name: "Just Fit", logo: "💪", category: "Bien-être", website: "" },
+  { id: 73, name: "Fit Family", logo: "🏃", category: "Bien-être", website: "" }*/
 ];
 
 const categories = ["Tous", "Restauration", "Culture", "Éducation", "Shopping", "Bien-être", "Événements", "Loisirs"];

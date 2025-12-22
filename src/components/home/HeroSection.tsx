@@ -182,9 +182,9 @@ const InfoBadge = ({
               transition={{ delay: 0.3 }}
               className="mb-6 text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
             >
-              <span className="text-gradient">Grandir ensemble</span>
+              <span className="text-gradient">Tous unis</span>
               <br />
-              <span className="text-foreground">pour nos enfants !</span>
+              <span className="text-foreground">pour nos petits !</span>
             </motion.h1>
 
             <motion.p

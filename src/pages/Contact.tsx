@@ -13,11 +13,11 @@ import { useToast } from "@/hooks/use-toast";
 const faqs = [
   {
     question: "Comment adhérer à l'association ?",
-    answer: "L'adhésion se fait en ligne ou lors de nos événements. Le coût est à partir de 2€ par personne pour l'année scolaire.",
+    answer: "L'adhésion se fait en ligne sur la plateforme HelloAsso. Le coût est à partir de 2€ par personne pour l'année scolaire.",
   },
   {
     question: "Comment participer aux événements ?",
-    answer: "Tous les parents sont les bienvenus ! Inscrivez-vous via notre formulaire de contact ou sur la plateforme en ligne HelloAsso.",
+    answer: "Tous les parents sont les bienvenues ! Inscrivez-vous via notre formulaire de contact ou sur la plateforme en ligne HelloAsso.",
   },
   {
     question: "Comment devenir bénévole ?",
@@ -258,7 +258,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-bold text-foreground">Permanences</h3>
                     <p className="text-muted-foreground">
-                      Des parents bénévoles sont présents chaque matin devant l’école.<br />Venez discuter librement avec l’association.
+                      Des parents bénévoles sont présents chaque matin devant l'école.<br />Venez discuter librement avec l'association.
                     </p>
                   </div>
                 </CardContent>
