@@ -325,17 +325,11 @@ const APropos = () => {
                 className="mt-14 flex px-4 sm:px-0 sm:justify-center"
               >
                 <div className="w-full sm:max-w-xs">
-                  <motion.label 
-                    className="block text-xs sm:text-sm font-semibold text-foreground mb-3 flex items-center gap-2"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <span className="text-lg">🎓 Filtrer par classe</span>
-                  </motion.label>
                   <Select value={selectedClasse} onValueChange={setSelectedClasse}>
-                    <SelectTrigger className="bg-gradient-to-r from-orange-50 via-pink-50 to-white border-2 border-orange-200/60 hover:border-orange-300 hover:shadow-lg transition-all duration-300 rounded-xl sm:rounded-2xl shadow-soft text-sm sm:text-base">
-                      <SelectValue placeholder="✨ Classe..." />
+                    <SelectTrigger className="bg-gradient-to-r from-orange-50 via-pink-50 to-white border-2 border-orange-200/60 hover:border-orange-300 hover:shadow-lg transition-all duration-300 rounded-xl sm:rounded-2xl shadow-soft text-xs sm:text-sm max-h-[250px] overflow-y-auto [&>svg]:hidden">
+                      <SelectValue placeholder="✨ Filtrez par classe..." />
                     </SelectTrigger>
-                    <SelectContent className="rounded-2xl border-2 border-orange-200/50 bg-gradient-to-b from-orange-50/95 via-pink-50/95 to-white/95 backdrop-blur-sm">
+                    <SelectContent className="rounded-2xl border-2 border-orange-200/50 bg-gradient-to-b from-orange-50/95 via-pink-50/95 to-white/95 backdrop-blur-sm max-h-[250px] overflow-y-auto">
                       {classesUniques.map((classe, idx) => (
                         <SelectItem 
                           key={classe} 
@@ -359,7 +353,7 @@ const APropos = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="rounded-3xl p-8 bg-gradient-to-br from-orange-50/80 via-pink-50/80 to-orange-50/40 mb-8"
+                className="rounded-3xl p-4 sm:p-6 bg-gradient-to-br from-orange-50/80 via-pink-50/80 to-orange-50/40 mb-8"
               >
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {parentsFiltrés.map((member, index) => (
@@ -474,7 +468,7 @@ const APropos = () => {
                 Fondée en 2019, l'association Les P'tits Trinquat est née de la volonté de quelques parents de créer un lien fort entre les familles et l'école. Le nom "Trinquat" fait référence au quartier de Montpellier où se situe notre groupe scolaire.
               </p>
               <p>
-                Au fil des années, nous avons organisé des centaines d'événements : fêtes d'école, marchés de Noël, ventes de gâteaux, vides-grenier, sorties scolaires... Chaque action contribue à financer des projets ludiques pour nos enfants et à créer des moments de partage inoubliables avec notre équipe enseignante.
+                Au fil des années, nous avons organisé des centaines d'événements : fêtes d'école, marchés de Noël, ventes de gâteaux, vides-grenier, sorties scolaires... Chaque action contribue à financer des projets scolaires pour nos enfants et à créer des moments de partage inoubliables avec notre équipe enseignante.
               </p>
               <p>
                 Aujourd'hui, nous sommes fiers de rassembler plus de 100 familles et de compter sur une équipe de bénévoles engagés qui font vivre l'association au quotidien.

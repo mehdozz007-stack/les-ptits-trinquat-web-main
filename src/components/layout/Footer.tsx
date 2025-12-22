@@ -158,7 +158,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-primary" />
-                <Link to="/contact" className="text-sm text-background/70 transition-colors hover:text-primary">Ecrivez-nous </Link>
+                <Link to="/contact" className="text-sm text-background/70 transition-colors hover:text-primary">Ecrivez-nous 🧡</Link>
               </li>
             </ul>
           </div>

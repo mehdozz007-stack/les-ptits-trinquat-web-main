@@ -21,7 +21,7 @@ const events = [
   },
   {
     id: 2,
-    title: "Réunion mensuelle des parents",
+    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
     date: "12 Décembre 2025",
     time: "17h30 - 19h30",
     location: "Salle polyvalente",
@@ -32,7 +32,7 @@ const events = [
   },
   {
     id: 3,
-    title: "🎄 Vente de gâteaux de Noël 🎄",
+    title: "🎄 Vente de gâteaux de Noël 🎅",
     date: "19 Décembre 2025",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
@@ -40,7 +40,7 @@ const events = [
     color: "violet",
     status: "past",
     attendees: 300,
-    url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
+    url: "https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
   },
   {
     id: 4,
@@ -88,7 +88,7 @@ const events = [
   },
   {
     id: 8,
-    title: "Vente de Toussaint",
+    title: "🧛 Vente de Toussaint 🎃",
     date: "16 et 17 Octobre 2025",
     time: "16h30 - 19h00",
     location: "Préau de l'école",
@@ -100,7 +100,7 @@ const events = [
   },
   {
     id: 9,
-    title: "Fête des Lanternes",
+    title: "🏮 Fête des Lanternes 🕯️",
     date: "10 Novembre 2025",
     time: "14h00 - 17h00",
     location: "Cour de l'école",
