@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Users, BookOpen, Heart, Lightbulb, ArrowRight } from "lucide-react";
+import { MapPin, Users, BookOpen, Heart, Lightbulb, ArrowRight, Globe, Sparkles, Camera } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -145,14 +145,13 @@ const NotreEcole = () => {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
             >
-              <div className="relative h-80 overflow-hidden rounded-2xl shadow-xl">
-                <img
-                  src="/api/placeholder/600/400"
-                  alt="École Anne FRANK - Charles DICKENS"
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <img
+                src="/api/placeholder/600/400"
+                alt="École Anne FRANK - Charles DICKENS"
+                className="w-full h-auto rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-500"
+              />
             </motion.div>
 
             <motion.div
@@ -187,11 +186,17 @@ const NotreEcole = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 text-center"
+            transition={{ duration: 0.6 }}
+            className="mb-16"
           >
-            <h2 className="mb-4 text-3xl font-bold">Nos points forts</h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Ce qui fait la singularité et la force de notre groupe scolaire.
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-200/40 to-pink-100/30">
+                <Sparkles className="h-6 w-6 text-pink-400" />
+              </div>
+              <h2 className="text-3xl font-bold">Ce qui nous rend uniques</h2>
+            </div>
+            <p className="max-w-2xl text-muted-foreground leading-relaxed">
+              Les caractéristiques qui font la force et la singularité de notre groupe scolaire, et pourquoi tant de familles nous font confiance.
             </p>
           </motion.div>
 
@@ -226,11 +231,17 @@ const NotreEcole = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 text-center"
+            transition={{ duration: 0.6 }}
+            className="mb-16 text-center"
           >
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-green-200/40 to-green-100/30">
+                <BookOpen className="h-6 w-6 text-green-500" />
+              </div>
+            </div>
             <h2 className="mb-4 text-3xl font-bold">Les niveaux scolaires</h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Nous accueillons les enfants de la petite section à l'élémentaire.
+            <p className="max-w-2xl text-muted-foreground leading-relaxed mx-auto">
+              Nous accueillons les enfants de la petite section à l'élémentaire, avec une progression pédagogique douce et adaptée à chaque âge.
             </p>
           </motion.div>
 
@@ -244,10 +255,16 @@ const NotreEcole = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <Card variant="playful" className="h-full overflow-hidden">
-                  <CardContent className="p-6">
-                    <div className="mb-4 text-4xl">{level.emoji}</div>
-                    <h3 className="mb-3 text-xl font-bold text-foreground">{level.title}</h3>
-                    <p className="text-muted-foreground">{level.description}</p>
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <motion.div 
+                      className="mb-4 text-5xl inline-block"
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      {level.emoji}
+                    </motion.div>
+                    <h3 className="mb-2 text-lg font-bold text-foreground">{level.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed flex-1">{level.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -263,11 +280,17 @@ const NotreEcole = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 text-center"
+            transition={{ duration: 0.6 }}
+            className="mb-16"
           >
-            <h2 className="mb-4 text-3xl font-bold">Nos valeurs éducatives</h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Les principes qui guident nos actions et nos décisions quotidiennes.
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-200/40 to-orange-100/30">
+                <Heart className="h-6 w-6 text-orange-500" />
+              </div>
+              <h2 className="text-3xl font-bold">Nos valeurs éducatives</h2>
+            </div>
+            <p className="max-w-2xl text-muted-foreground leading-relaxed">
+              Les principes fondamentaux qui guident nos actions et nos décisions, quotidiennement, au service de chaque enfant et de chaque famille.
             </p>
           </motion.div>
 
@@ -299,7 +322,12 @@ const NotreEcole = () => {
             viewport={{ once: true }}
             className="mb-12 text-center"
           >
-            <h2 className="mb-4 text-3xl font-bold">Galerie photo</h2>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-200/40 to-sky-100/30">
+                <Camera className="h-6 w-6 text-sky-400" />
+              </div>
+              <h2 className="text-3xl font-bold">Galerie photo</h2>
+            </div>
             <p className="mx-auto max-w-2xl text-muted-foreground">
               Découvrez les coulisses et l'ambiance de notre école.
             </p>
@@ -313,7 +341,7 @@ const NotreEcole = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group relative h-64 overflow-hidden rounded-lg shadow-md"
+                className="group relative h-64 overflow-hidden rounded-lg shadow-md flex flex-col"
               >
                 <img
                   src={image.src}
