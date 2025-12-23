@@ -11,6 +11,7 @@ import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
+import NotreEcole from "./pages/NotreEcole";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/notre-ecole" element={<NotreEcole />} />
           <Route path="/a-propos" element={<APropos />} />
           <Route path="/evenements" element={<Evenements />} />
           <Route path="/comptes-rendus" element={<ComptesRendus />} />
