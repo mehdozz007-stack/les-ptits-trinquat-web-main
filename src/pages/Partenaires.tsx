@@ -55,7 +55,7 @@ const mainPartners = [
     logo: manuCreation,
     website: "https://www.manu-creations.com/",
   },
-  {
+  /*{
     id: 5,
     name: "Astroludik",
     category: "Éducation",
@@ -70,18 +70,20 @@ const mainPartners = [
     description: "Massages bien-être et relaxation pour toute la famille.",
     logo: massagesIsa,
     website: "https://isabellerichez34.wixsite.com/monsite-6",
-  },
+  },*/
 ];
 
 // Partenaires par catégorie pour le carrousel
 const carouselPartners = [
   // Restauration
+  
   { id: 7, name: "Moutarde et Wasabi", logo: "🍣", category: "Restauration", website: "http://moutarde-et-wasabi.fr/index.html" },
   { id: 8, name: "Pate'oche", logo: "🍝", category: "Restauration", website: "https://www.instagram.com/pate_oche34/?hl=en" },
   { id: 9, name: "Yo & Co", logo: "🍦", category: "Restauration", website: "https://www.yoandco.net/" },
   { id: 10, name: "M&lice", logo: "🧁", category: "Restauration", website: "https://www.melice.fr/" },
   { id: 11, name: "Cafés et Gourmandises", logo: "☕", category: "Restauration", website: "https://www.facebook.com/CafesGourmandises/" },
   { id: 12, name: "Café Joyeux", logo: "😊", category: "Restauration", website: "https://www.cafejoyeux.com/fr/content/49-cafe-joyeux-montpellier?srsltid=AfmBOopcympFwDGMq35jj09dnuDK-4HepNBcUHO6_0wtv8BrtiZDJEI6" },
+  { id: 70, name: "BC Végé", logo: "🥗", category: "Restauration", website: "https://bc-vege.fr/" },
   
   // Culture & Spectacles
   { id: 13, name: "South Comédie", logo: "🎤", category: "Culture", website: "https://www.instagram.com/south.comedyclub/?hl=en" },
@@ -90,20 +92,31 @@ const carouselPartners = [
   { id: 16, name: "Rêves de Cirques", logo: "🎪", category: "Culture", website: "https://www.reves-de-cirque.com/montpellier" },
   { id: 17, name: "Théâtre la Chocolaterie", logo: "🍫", category: "Culture", website: "https://lachocolaterie.org/" },
   { id: 18, name: "Théâtre de la Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
+  { id: 60, name: "Théâtre La Vista", logo: "🎭", category: "Culture", website: "https://www.theatrelavista.fr/" },
+  { id: 61, name: "Théâtre La Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
+  
 
   { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation", website: "https://www.kittyenglishschool.fr/" },
-
+  { id: 5, name: "Astroludik", category: "Éducation", logo: "🔭", website: "https://www.astroludik.com/"},
+  { id: 62, name: "L'Atelier de Mo", logo: "🎨", category: "Éducation", website: "https://www.latelier-de-mo.com/" },
+  
   { id: 20, name: "Atol", logo: "👓", category: "Shopping", website: "https://www.atol.fr/" },
   { id: 21, name: "Comme Avant", logo: "🧴", category: "Shopping", website: "https://www.comme-avant.bio/pages/la-boutique-comme-avant-a-montpellier?srsltid=AfmBOoohHGzktxYXZLmUaSKHOB5aUJogOp5ZJ8hL9f7HQ2kCpYTb3T5C" },
   { id: 22, name: "Cartapapa", logo: "📮", category: "Shopping", website: "https://cartapapa.fr/" },
   { id: 23, name: "Parfume Moi", logo: "🌸", category: "Shopping", website: "https://parfumemoi.fr/" },
+  { id: 64, name: "Uniikon", logo: "👔", category: "Shopping", website: "https://uniikon.com/pages/store-map?srsltid=AfmBOopXaLEZjulU-VHfOEUrzOhNcIX9Mp_YF15niXmHvl5dacBBq8w3" },
 
+  { id: 6, name: "Massages d'Isa", category: "Bien-être", logo: "💆‍♀️", website: "https://isabellerichez34.wixsite.com/monsite-6"},
   { id: 24, name: "Self Défense Féminine Occitanie", logo: "🥋", category: "Bien-être", website: "https://www.helloasso.com/associations/self-defense-feminine-occitanie" },
   { id: 25, name: "Centre Équestre Occitanie", logo: "🐴", category: "Bien-être", website: "https://sites.google.com/ceso34.com/info/accueil" },
   { id: 26, name: "Cocon des Doulas", logo: "🤱", category: "Bien-être", website: "https://lecocondesdoulas.wixsite.com/le-cocon-des-doulas" },
   { id: 27, name: "Terres de Lumières", logo: "✨", category: "Bien-être", website: "https://www.terres-de-lumiere.fr/" },
   { id: 28, name: "Nails by Marion", logo: "💅", category: "Bien-être", website: "https://www.instagram.com/nails_by_marion34/" },
-
+  { id: 71, name: "Mademoiselle Coiff", logo: "💇", category: "Bien-être", website: "https://mademoiselle-coiffe.fr/" },
+  { id: 72, name: "Just Fit", logo: "💪", category: "Bien-être", website: "" },
+  { id: 73, name: "Fit Family", logo: "🏃", category: "Bien-être", website: "https://fitfamily.fr/" },
+  { id: 68, name: "Nomaïa", logo: "🧘", category: "Bien-être", website: "https://www.instagram.com/nomaia_montpellier/" },
+  
   { id: 29, name: "Sticker Kid", logo: "🏷️", category: "Événements", website: "https://www.stickerkid.fr/fr_fr/?gc_id=22380077972&h_ga_id=177763846235&h_ad_id=741963232215&h_keyword_id=kwd-3117029590&h_keyword=commander%20stickers&h_placement=&gad_source=1&gad_campaignid=22380077972&gclid=Cj0KCQiAuvTJBhCwARIsAL6DemgaL7OxCXFNHQau9UlzioyJXf4UmNtsAzqCMynLY3KGKkVPhdE15U0aAs-vEALw_wcB" },
   { id: 30, name: "Fabrique Photos", logo: "📸", category: "Événements", website: "https://lafabriquephotos.fr/" },
   { id: 31, name: "Festikid", logo: "🎉", category: "Événements", website: "https://www.festikid.com/" },
@@ -135,22 +148,11 @@ const carouselPartners = [
   { id: 56, name: "Train Vapeur des Cévennes", logo: "🚂", category: "Loisirs", website: "https://www.trainavapeur.com/" },
   { id: 57, name: "Vélorail Cévennes", logo: "🚴", category: "Loisirs", website: "https://www.veloraildescevennes.fr/" },
   { id: 58, name: "Goolfy", logo: "⛳", category: "Loisirs", website: "https://goolfy-montpellier.com/" },
-
-  /*{ id: 59, name: "Pirates Paradise", logo: "🏴‍☠️", category: "Loisirs", website: "" },
-  { id: 60, name: "Théâtre La Vista", logo: "🎭", category: "Culture", website: "" },
-  { id: 61, name: "Théâtre La Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
-  { id: 62, name: "L'Atelier de Mo", logo: "🎨", category: "Éducation", website: "" },
+  { id: 65, name: "Ptit Club", logo: "🎮", category: "Loisirs", website: "https://leptitclub.fr/nos-clubs/montpellier/" },
+  { id: 66, name: "Quiz Room", logo: "🧩", category: "Loisirs", website: "https://escapegame.lol/salle/quizz-room-apero/?gad_source=1&gad_campaignid=23380697435&gclid=EAIaIQobChMIq_i6t6rbkQMVGKb9BR1wYBz2EAAYASAAEgI1y_D_BwE#/catalog/dce14b71-57cc-4da9-8bd2-2ea7d73db283" },
+  { id: 67, name: "Times Xpérience", logo: "⏰", category: "Loisirs", website: "https://timexperience-montpellier.fr/" },
+  { id: 59, name: "Pirates Paradise", logo: "🏴‍☠️", category: "Loisirs", website: "https://montpellier.pirates-paradise.fr/" },
   { id: 63, name: "Grottes de Trabuc", logo: "⛏️", category: "Loisirs", website: "https://www.grottesdetrabuc.com/" },
-  { id: 64, name: "Uniikon", logo: "👔", category: "Shopping", website: "" },
-  { id: 65, name: "Ptit Club", logo: "🎮", category: "Loisirs", website: "" },
-  { id: 66, name: "Quiz Room", logo: "🧩", category: "Loisirs", website: "" },
-  { id: 67, name: "Times Xpérience", logo: "⏰", category: "Loisirs", website: "" },
-  { id: 68, name: "Nomaïa", logo: "🧘", category: "Bien-être", website: "" },
-  { id: 69, name: "Assadia", logo: "📚", category: "Éducation", website: "" },
-  { id: 70, name: "BC Végé", logo: "🥗", category: "Restauration", website: "" },
-  { id: 71, name: "Mademoiselle Coiff", logo: "💇", category: "Bien-être", website: "" },
-  { id: 72, name: "Just Fit", logo: "💪", category: "Bien-être", website: "" },
-  { id: 73, name: "Fit Family", logo: "🏃", category: "Bien-être", website: "" }*/
 ];
 
 const categories = ["Tous", "Restauration", "Culture", "Éducation", "Shopping", "Bien-être", "Événements", "Loisirs"];
@@ -161,7 +163,7 @@ const specialEventCards = [
     id: 1,
     title: "Quiz Room Montpellier - Tombola Familiale",
     description: "Une expérience immersive de jeu et divertissement en famille. Offre spéciale pour nos membres !",
-    partner: "Quiz Room",
+    partner: "Escape Game",
     gradientFrom: "from-violet-200/40",
     gradientTo: "to-purple-200/40",
     borderColor: "border-violet-200/60",
@@ -172,7 +174,7 @@ const specialEventCards = [
   {
     id: 2,
     title: "Morphée - Garde de votre animal de compagnie",
-    description: "Avec le code TRINQUAT10, bénéficiez de 10% de réduction sur la garde de votre animal de compagnie. (Offre valable uniquement sur site, sans limite de validité)",
+    description: "Avec le code TRINQUAT10, bénéficiez de 10% de réduction sur la garde de votre animal de compagnie. (Offre valable uniquement sur site, sans limite de validité !)",
     partner: "Pet Sitting",
     gradientFrom: "from-rose-200/40",
     gradientTo: "to-pink-200/40",
@@ -226,7 +228,7 @@ const Partenaires = () => {
       </section>
 
       {/* Événements spéciaux & Partenariats */}
-      <section className="py-16">
+      <section className="py-16 sm:py-20 lg:py-24">
         <div className="container">
           {/* Section Header */}
           <motion.div
@@ -234,7 +236,7 @@ const Partenaires = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-12 text-center"
+            className="mb-12 text-left"
           >
             <h2 className="mb-2 text-2xl font-bold">
               Événements spéciaux <span className="text-gradient">&</span> Partenariats exclusives
@@ -303,8 +305,12 @@ const Partenaires = () => {
       </section>
 
       {/* Partners Grid - First 6 partners */}
-      <section className="py-16">
-        <div className="container">
+      <section className="bg-muted/50 py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+        {/* Decorative blobs */}
+        <div className="absolute -left-20 top-1/2 h-72 w-72 rounded-full bg-secondary/10 watercolor-blob" />
+        <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-accent/10 watercolor-blob" />
+        
+        <div className="container relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
