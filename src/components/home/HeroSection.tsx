@@ -165,8 +165,8 @@ const InfoBadge = ({
             />
             <InfoBadge
               icon="🏆"
-              text="Quiz Room Montpellier - Tombola & Loto : Profitez de l'offre spéciale !"
-              href="https://www.quiz-room.com/villes/montpellier"
+              text="Profitez de nos offres issues de partenariats exclusifs !"
+              href="/partenaires#special-event-1"
               delay={0.2}
               bgClass="bg-violet/10 text-violet-900"
               textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
