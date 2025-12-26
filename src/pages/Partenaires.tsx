@@ -241,7 +241,7 @@ const Partenaires = () => {
             className="mb-12 text-center"
           >
             <h2 className="mb-2 text-2xl font-bold">
-              Événements spéciaux <span className="text-gradient">&</span> Partenariats exclusives
+              Événements spéciaux <span className="text-gradient">&</span> Partenariats exclusifs
             </h2>
             <p className="text-muted-foreground">
               Découvrez les collaborations exclusives et activités spéciales proposées par nos partenaires pour enrichir la vie de nos enfants.
