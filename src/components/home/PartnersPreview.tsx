@@ -99,11 +99,11 @@ export function PartnersPreview() {
               transition={{ delay: index * 0.05 }}
               className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer"
             >
-              <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-lg bg-muted overflow-hidden">
+              <div className="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden">
                 <img 
                   src={partner.logo} 
                   alt={partner.name}
-                  className="h-full w-full object-contain p-1.5 rounded-lg"
+                  className="h-full w-full object-contain p-2 rounded-lg"
                 />
               </div>
               <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">

@@ -55,7 +55,7 @@ const mainPartners = [
     logo: manuCreation,
     website: "https://www.manu-creations.com/",
   },
-  /*{
+  {
     id: 5,
     name: "Astroludik",
     category: "Éducation",
@@ -70,7 +70,7 @@ const mainPartners = [
     description: "Massages bien-être et relaxation pour toute la famille.",
     logo: massagesIsa,
     website: "https://isabellerichez34.wixsite.com/monsite-6",
-  },*/
+  }, 
 ];
 
 // Partenaires par catégorie pour le carrousel
@@ -97,7 +97,7 @@ const carouselPartners = [
   
 
   { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation", website: "https://www.kittyenglishschool.fr/" },
-  { id: 5, name: "Astroludik", category: "Éducation", logo: "🔭", website: "https://www.astroludik.com/"},
+  //{ id: 5, name: "Astroludik", category: "Éducation", logo: "🔭", website: "https://www.astroludik.com/"},
   { id: 62, name: "L'Atelier de Mo", logo: "🎨", category: "Éducation", website: "https://www.latelier-de-mo.com/" },
   
   { id: 20, name: "Atol", logo: "👓", category: "Shopping", website: "https://www.atol.fr/" },
@@ -106,7 +106,7 @@ const carouselPartners = [
   { id: 23, name: "Parfume Moi", logo: "🌸", category: "Shopping", website: "https://parfumemoi.fr/" },
   { id: 64, name: "Uniikon", logo: "👔", category: "Shopping", website: "https://uniikon.com/pages/store-map?srsltid=AfmBOopXaLEZjulU-VHfOEUrzOhNcIX9Mp_YF15niXmHvl5dacBBq8w3" },
 
-  { id: 6, name: "Massages d'Isa", category: "Bien-être", logo: "💆‍♀️", website: "https://isabellerichez34.wixsite.com/monsite-6"},
+  //{ id: 6, name: "Massages d'Isa", category: "Bien-être", logo: "💆‍♀️", website: "https://isabellerichez34.wixsite.com/monsite-6"},
   { id: 24, name: "Self Défense Féminine Occitanie", logo: "🥋", category: "Bien-être", website: "https://www.helloasso.com/associations/self-defense-feminine-occitanie" },
   { id: 25, name: "Centre Équestre Occitanie", logo: "🐴", category: "Bien-être", website: "https://sites.google.com/ceso34.com/info/accueil" },
   { id: 26, name: "Cocon des Doulas", logo: "🤱", category: "Bien-être", website: "https://lecocondesdoulas.wixsite.com/le-cocon-des-doulas" },
@@ -236,7 +236,7 @@ const Partenaires = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-12 text-left"
+            className="mb-12 text-center"
           >
             <h2 className="mb-2 text-2xl font-bold">
               Événements spéciaux <span className="text-gradient">&</span> Partenariats exclusives
@@ -332,14 +332,14 @@ const Partenaires = () => {
                   <CardContent className="flex flex-col items-center p-6 text-center h-full">
                     {/* Logo */}
                     <motion.div 
-                      className="mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-muted shadow-md overflow-hidden transition-all group-hover:shadow-lg"
+                      className="mb-4 flex h-32 w-32 items-center justify-center overflow-hidden transition-all"
                       whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.3 }}
                     >
                       <img 
                         src={partner.logo} 
                         alt={partner.name}
-                        className="h-full w-full object-contain p-2 rounded-2xl"
+                        className="h-full w-full object-contain p-2 rounded-lg"
                       />
                     </motion.div>
 

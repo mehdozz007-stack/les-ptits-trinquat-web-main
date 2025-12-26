@@ -287,7 +287,7 @@ const InfoBadge = ({
               </div>
               <div className="h-8 sm:h-12 w-px bg-border hidden sm:block" />
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">5+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">3+</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Ans</div>
               </div>
             </motion.div>
