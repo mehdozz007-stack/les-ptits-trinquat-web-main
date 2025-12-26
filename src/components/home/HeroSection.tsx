@@ -157,12 +157,31 @@ const InfoBadge = ({
             <InfoBadge
               icon="🎄"
               text="Vente de gâteaux le 19 décembre. Merci d'avoir participé ! Joyeuses fêtes 🤍"
-              href="/evenements#event-3"
-              delay={0.25}
-              bgClass="bg-violet/10 text-violet-900"
+              href="https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
+              delay={0.2}
+              bgClass="bg-red-500/10 text-red-900"
               textGradient="bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
               pingOuter="bg-red-500"
               pingInner="bg-red-400"
+              sparks={sparks}
+              sparksColors={[
+                "bg-red-400",
+                "bg-green-400",
+                "bg-yellow-300",
+                "bg-orange-400",
+                "bg-pink-400",
+                "bg-white-400",
+              ]}
+            />
+            <InfoBadge
+              icon="🏆"
+              text="Quizz Room Montpellier, Tombola & Loto : Profitez de l'offre spéciale !"
+              href="/partenaires#special-event-1"
+              delay={0.2}
+              bgClass="bg-violet/10 text-violet-900"
+              textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
+              pingOuter="bg-purple-500"
+              pingInner="bg-purple-400"
               sparks={sparks}
               sparksColors={[
                 "bg-red-400",

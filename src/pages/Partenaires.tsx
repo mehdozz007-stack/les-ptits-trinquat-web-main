@@ -11,6 +11,15 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
+import quizzRoomImage from "@/assets/quizzroomtombola.jpg";
+
+// Import des logos
+import lesPetitsBilinguesLogo from "@/assets/logos/lesPetitsBilingues.jpeg";
+import atelierTufferyLogo from "@/assets/logos/atelier_tuffery_logo.svg";
+import brinDeTerre from "@/assets/logos/brindeterre.jpg";
+import manuCreation from "@/assets/logos/manucreation.jpg";
+import astroludik from "@/assets/logos/logo-astroludik.png";
+import massagesIsa from "@/assets/logos/isamassage.avif";
 
 // Les 6 partenaires principaux
 const mainPartners = [
@@ -19,7 +28,7 @@ const mainPartners = [
     name: "Les petits bilingues",
     category: "Éducation",
     description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
-    logo: "🇬🇧",
+    logo: lesPetitsBilinguesLogo,
     website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
   },
   {
@@ -27,7 +36,7 @@ const mainPartners = [
     name: "Atelier Tuffery",
     category: "Shopping",
     description: "Jean français fabriqué artisanalement en Lozère depuis 1892.",
-    logo: "👖",
+    logo: atelierTufferyLogo,
     website: "https://www.ateliertuffery.com/pages/boutique-jeans-francais-montpellier",
   },
   {
@@ -35,7 +44,7 @@ const mainPartners = [
     name: "Brin de Terre",
     category: "Éducation",
     description: "Ateliers poterie pour enfants et adultes.",
-    logo: "🏺",
+    logo: brinDeTerre,
     website: "https://www.instagram.com/atelierbrindeterre/",
   },
   {
@@ -43,7 +52,7 @@ const mainPartners = [
     name: "Manu Créations Couture",
     category: "Éducation",
     description: "Ateliers créatifs de couture pour enfants et adultes.",
-    logo: "🧵",
+    logo: manuCreation,
     website: "https://www.manu-creations.com/",
   },
   {
@@ -51,7 +60,7 @@ const mainPartners = [
     name: "Astroludik",
     category: "Éducation",
     description: "Animations ludiques autour de l'astronomie pour éveiller la curiosité des enfants.",
-    logo: "🔭",
+    logo: astroludik,
     website: "https://www.astroludik.com/",
   },
   {
@@ -59,7 +68,7 @@ const mainPartners = [
     name: "Massages d'Isa",
     category: "Bien-être",
     description: "Massages bien-être et relaxation pour toute la famille.",
-    logo: "💆",
+    logo: massagesIsa,
     website: "https://isabellerichez34.wixsite.com/monsite-6",
   },
 ];
@@ -146,6 +155,46 @@ const carouselPartners = [
 
 const categories = ["Tous", "Restauration", "Culture", "Éducation", "Shopping", "Bien-être", "Événements", "Loisirs"];
 
+// Événements spéciaux et partenariats
+const specialEventCards = [
+  {
+    id: 1,
+    title: "Quiz Room Montpellier - Tombola Familiale",
+    description: "Une expérience immersive de jeu et divertissement en famille. Offre spéciale pour nos membres !",
+    partner: "Quiz Room",
+    gradientFrom: "from-violet-200/40",
+    gradientTo: "to-purple-200/40",
+    borderColor: "border-violet-200/60",
+    emoji: "🎮",
+    url: quizzRoomImage,
+    type: "image"
+  },
+  {
+    id: 2,
+    title: "Morphée - Garde de votre animal de compagnie",
+    description: "Avec le code TRINQUAT10, bénéficiez de 10% de réduction sur la garde de votre animal de compagnie. (Offre valable uniquement sur site, sans limite de validité)",
+    partner: "Pet Sitting",
+    gradientFrom: "from-rose-200/40",
+    gradientTo: "to-pink-200/40",
+    borderColor: "border-rose-200/60",
+    emoji: "🐈",
+    url: "https://danslespattesdemorphee.jimdofree.com/",
+    type: "link"
+  },
+  /*{
+    id: 3,
+    title: "Animations astronomie",
+    description: "Éveillez la curiosité des enfants avec les animations ludiques autour des étoiles et de l'espace.",
+    partner: "Astroludik",
+    gradientFrom: "from-sky-200/40",
+    gradientTo: "to-blue-200/40",
+    borderColor: "border-sky-200/60",
+    emoji: "🔭",
+    url: "https://www.astroludik.com",
+    type: "link"
+  }*/
+];
+
 const Partenaires = () => {
   return (
     <Layout>
@@ -176,23 +225,117 @@ const Partenaires = () => {
         </div>
       </section>
 
+      {/* Événements spéciaux & Partenariats */}
+      <section className="py-16">
+        <div className="container">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mb-12 text-center"
+          >
+            <h2 className="mb-2 text-2xl font-bold">
+              Événements spéciaux <span className="text-gradient">&</span> Partenariats exclusives
+            </h2>
+            <p className="text-muted-foreground">
+              Découvrez les collaborations exclusives et activités spéciales proposées par nos partenaires pour enrichir la vie de nos enfants.
+            </p>
+          </motion.div>
+
+          {/* Cards Grid */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {specialEventCards.map((event, index) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+              >
+                <Card 
+                  variant="playful" 
+                  className={`h-full overflow-hidden border-2 ${event.borderColor} transition-all hover:shadow-lg hover:shadow-current/20`}
+                  id={index === 0 ? "special-event-1" : undefined}
+                >
+                  <CardContent className="flex flex-col p-0 h-full">
+                    {/* Gradient Background */}
+                    <div className={`h-32 bg-gradient-to-br ${event.gradientFrom} ${event.gradientTo} relative flex items-center justify-center`}>
+                      <div className="text-6xl opacity-80">{event.emoji}</div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-1">
+                      {/* Partner Badge */}
+                      <div className="mb-2 flex justify-center w-full">
+                        <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                          {event.partner}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="mb-2 text-xl font-bold text-foreground">
+                        {event.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                        {event.description}
+                      </p>
+
+                      {/* Link Button */}
+                      <div className="flex justify-center w-full">
+                        <Button variant="ghost" size="sm" className="mt-4" asChild>
+                          <a href={event.url} target="_blank" rel="noopener noreferrer">
+                            Visiter
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Partners Grid - First 6 partners */}
       <section className="py-16">
         <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mb-8 text-center"
+          >
+            <h2 className="mb-2 text-2xl font-bold">Nos partenaires</h2>
+            <p className="text-muted-foreground">Découvrez les entreprises et organismes qui soutiennent nos actions</p>
+          </motion.div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {mainPartners.map((partner, index) => (
               <motion.div
                 key={partner.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.05 }}
+                transition={{ delay: index * 0.05, duration: 0.6, ease: "easeOut" }}
               >
                 <Card variant="playful" className="group h-full">
                   <CardContent className="flex flex-col items-center p-6 text-center h-full">
                     {/* Logo */}
-                    <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-muted text-4xl transition-transform group-hover:scale-110">
-                      {partner.logo}
-                    </div>
+                    <motion.div 
+                      className="mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-muted shadow-md overflow-hidden transition-all group-hover:shadow-lg"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img 
+                        src={partner.logo} 
+                        alt={partner.name}
+                        className="h-full w-full object-contain p-2 rounded-2xl"
+                      />
+                    </motion.div>
 
                     {/* Category Badge */}
                     <span className="mb-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
