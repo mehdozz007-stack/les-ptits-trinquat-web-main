@@ -173,14 +173,14 @@ const specialEventCards = [
   },
   {
     id: 2,
-    title: "Morphée - Garde de votre animal de compagnie",
-    description: "Avec le code TRINQUAT10, bénéficiez de 10% de réduction sur la garde de votre animal de compagnie. (Offre valable uniquement sur site, sans limite de validité !)",
-    partner: "Pet Sitting",
+    title: "Morphée Breathe & Shine",
+    description: "Avec le code TRINQUAT10, bénéficiez de 10% de réduction sur vos commandes. (Offre valable uniquement sur site, sans limite de validité !)",
+    partner: "Shopping",
     gradientFrom: "from-rose-200/40",
     gradientTo: "to-pink-200/40",
     borderColor: "border-rose-200/60",
-    emoji: "🐈",
-    url: "https://danslespattesdemorphee.jimdofree.com/",
+    emoji: "📻",
+    url: "https://www.morphee.co/products/mon-petit-morphee?utm_source=GoogleAds&utm_medium=cpc&utm_campaign=elio",
     type: "link"
   },
   /*{
