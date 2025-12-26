@@ -14,6 +14,8 @@ import { useRef } from "react";
 import quizzRoomImage from "@/assets/quizzroomtombola.jpg";
 
 // Import des logos
+import quizRoomLogo from "@/assets/logos/quizRoom.webp";
+import morpheeLogo from "@/assets/logos/Morphee_Logo2025.svg";
 import lesPetitsBilinguesLogo from "@/assets/logos/lesPetitsBilingues.jpeg";
 import atelierTufferyLogo from "@/assets/logos/atelier_tuffery_logo.svg";
 import brinDeTerre from "@/assets/logos/brindeterre.jpg";
@@ -167,7 +169,7 @@ const specialEventCards = [
     gradientFrom: "from-violet-200/40",
     gradientTo: "to-purple-200/40",
     borderColor: "border-violet-200/60",
-    emoji: "🎮",
+    logo: quizRoomLogo,
     url: quizzRoomImage,
     type: "image"
   },
@@ -179,7 +181,7 @@ const specialEventCards = [
     gradientFrom: "from-rose-200/40",
     gradientTo: "to-pink-200/40",
     borderColor: "border-rose-200/60",
-    emoji: "📻",
+    logo: morpheeLogo,
     url: "https://www.morphee.co/products/mon-petit-morphee?utm_source=GoogleAds&utm_medium=cpc&utm_campaign=elio",
     type: "link"
   },
@@ -262,9 +264,13 @@ const Partenaires = () => {
                   id={index === 0 ? "special-event-1" : undefined}
                 >
                   <CardContent className="flex flex-col p-0 h-full">
-                    {/* Gradient Background */}
-                    <div className={`h-32 bg-gradient-to-br ${event.gradientFrom} ${event.gradientTo} relative flex items-center justify-center`}>
-                      <div className="text-6xl opacity-80">{event.emoji}</div>
+                    {/* Logo Background */}
+                    <div className={`h-32 bg-gradient-to-br ${event.gradientFrom} ${event.gradientTo} relative flex items-center justify-center overflow-hidden`}>
+                      <img 
+                        src={event.logo}
+                        alt={event.partner}
+                        className="h-full w-full object-contain p-4"
+                      />
                     </div>
 
                     {/* Content */}
