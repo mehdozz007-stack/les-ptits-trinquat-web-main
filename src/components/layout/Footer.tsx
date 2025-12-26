@@ -9,6 +9,7 @@ import logoAssadia from "@/assets/logos/logoAssadia.svg";
 const footerLinks = {
   navigation: [
     { label: "Accueil", href: "/" },
+    { label: "Notre école", href: "/notre-ecole" },
     { label: "Événements", href: "/evenements" },
     { label: "Comptes-rendus", href: "/comptes-rendus" },
     { label: "Partenaires", href: "/partenaires" },

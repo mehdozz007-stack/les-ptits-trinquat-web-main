@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import panneauImage from "@/assets/logos/PanneauDickensMontpellier.jpg";
 
 const schoolFeatures = [
   {
     icon: MapPin,
     title: "Localisation privilégiée",
-    description: "Située au cœur du quartier Trinité-Préfecture à Montpellier, notre école bénéficie d'un environnement calme et verdoyant, idéal pour l'apprentissage.",
+    description: "A deux pas de la vie du quartier, notre école offre aux enfants un cadre accueillant et rassurant, propice à l'épanouissement et à l'apprentissage.",
     color: "primary",
   },
   {
@@ -120,18 +121,18 @@ const NotreEcole = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl"
+            className="max-w-3xl mx-auto text-center"
           >
             <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
               <BookOpen className="h-4 w-4" />
               Notre école
             </span>
             <h1 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl">
-              Bienvenue au groupe scolaire<br />
+              Groupe scolaire<br />
               <span className="text-gradient">Anne FRANK - Charles DICKENS</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Un lieu d'apprentissage bienveillant où chaque enfant grandit, se épanouit et s'épanouit à son rythme, accompagné par une équipe pédagogique engagée et des parents investis.
+              Un lieu doux et rassurant où chaque enfant grandit en confiance, entouré d'attention et de bienveillance. Ici, l'apprentissage se fait avec le sourire, la curiosité s'éveille naturellement et les amitiés se construisent chaque jour.
             </p>
           </motion.div>
         </div>
@@ -148,7 +149,7 @@ const NotreEcole = () => {
               transition={{ duration: 0.7 }}
             >
               <img
-                src="/api/placeholder/600/400"
+                src={panneauImage}
                 alt="École Anne FRANK - Charles DICKENS"
                 className="w-full h-auto rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-500"
               />
@@ -164,14 +165,14 @@ const NotreEcole = () => {
                 <span className="text-gradient">optimal pour apprendre</span>
               </h2>
               <div className="space-y-4 text-muted-foreground">
-                <p>
-                  Notre groupe scolaire se distingue par son engagement envers l'excellence éducative et le bien-être de chaque enfant. Nous créons un environnement inclusif où la bienveillance, le respect et l'écoute sont les piliers de notre action quotidienne.
+               <p>
+                Notre groupe scolaire est un lieu où chaque enfant grandit en confiance, entouré d'adultes attentifs et bienveillants. Ici, le respect, l'écoute et l'envie d'apprendre sont au cœur de la vie quotidienne, afin que chaque élève puisse s'épanouir sereinement.
                 </p>
                 <p>
-                  Nos locaux, régulièrement rénovés et adaptés, offrent des espaces modernes de vie et d'apprentissage. Des salles de classe lumineuses, des zones de jeu sécurisées, et des espaces de détente complètent nos installations.
+                Notre école propose une section internationale allemande unique, permettant aux enfants de bénéficier d'un apprentissage bilingue dès la maternelle et tout au long de leur scolarité élémentaire. 
                 </p>
                 <p>
-                  Grâce au soutien de l'Association des Parents d'Élèves <strong className="font-bold text-foreground">Les P'tits Trinquat</strong>, nous enrichissons régulièrement les projets pédagogiques et les activités périscolaires pour le plus grand bénéfice de nos élèves.
+                Les espaces, pensés pour le confort et le bien-être des enfants, offrent un cadre lumineux et agréable pour apprendre, jouer et se détendre. Avec l'appui de l'Association des Parents d'Élèves <strong>Les P'tits Trinquat</strong>, de nombreux projets et activités viennent enrichir la vie scolaire et créer de beaux souvenirs partagés.  
                 </p>
               </div>
             </motion.div>
@@ -196,7 +197,7 @@ const NotreEcole = () => {
               <h2 className="text-3xl font-bold">Ce qui nous rend uniques</h2>
             </div>
             <p className="max-w-2xl text-muted-foreground leading-relaxed">
-              Les caractéristiques qui font la force et la singularité de notre groupe scolaire, et pourquoi tant de familles nous font confiance.
+              Ce qui rend notre école si spéciale, et pourquoi tant de familles nous confient chaque jour ce qu'elles ont de plus précieux.
             </p>
           </motion.div>
 

@@ -151,7 +151,7 @@ const APropos = () => {
               <Users className="h-4 w-4" />
               Notre association
             </span>
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+            <h1 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl">
               À propos des<br />
               <span className="text-gradient">P'tits Trinquat</span>
             </h1>
