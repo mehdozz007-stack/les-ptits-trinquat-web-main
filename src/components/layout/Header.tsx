@@ -13,6 +13,7 @@ const navItems = [
   { label: "Comptes-rendus", href: "/comptes-rendus", icon: FileText },
   { label: "Partenaires", href: "/partenaires", icon: Heart },
   { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Trombinoscope", href: "/trombinoscope", icon: Building2 },
 ];
 
 export function Header() {
