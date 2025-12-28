@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ===== ENUMS =====
+
+/// Statut d'un lot de tombola
+enum LotStatus {
+  AVAILABLE // Disponible pour réservation
+  RESERVED  // Réservé par un autre parent
+  GIVEN     // Remis au gagnant
+}
+
+// ===== MODELS =====
+
+/// Parent participant à la tombola
+model Parent {
+  id        String   @id @default(cuid())
+  firstName String   // Prénom du parent
+  emoji     String   // Emoji choisi par le parent
+  role      String   // Ex: "Parent participant", "Membre du bureau"
+  classes   String?  // Classes de l'enfant(s)
+  email     String   @unique // PRIVÉ - jamais affiché en UI
+  createdAt DateTime @default(now())
+
+  // Relations
+  proposedLots Lot[]  @relation("ProposedLots")  // Lots proposés par ce parent
+  reservedLots Lot[]  @relation("ReservedLots")  // Lots réservés par ce parent
+
+  @@map("parents")
+}
+
+/// Lot de tombola proposé par un parent
+model Lot {
+  id          String    @id @default(cuid())
+  title       String    // Nom du lot
+  description String?   // Description courte
+  icon        String    // Emoji du lot (ex: 🎁)
+  status      LotStatus @default(AVAILABLE) // Statut du lot
+  
+  // Clés étrangères
+  ownerId     String    // Parent qui propose le lot
+  owner       Parent    @relation("ProposedLots", fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  reservedById String?  // Parent qui réserve le lot (nullable)
+  reservedBy   Parent?  @relation("ReservedLots", fields: [reservedById], references: [id], onDelete: SetNull)
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([ownerId])
+  @@index([reservedById])
+  @@index([status])
+  @@map("lots")
+}
