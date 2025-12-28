@@ -1,0 +1,288 @@
+```
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                     🎁 ARCHITECTURE BD - TOMBOLA & TROMBINOSCOPE                  ║
+║                        Base de Données SQLite + Prisma ORM                        ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                          📚 COUCHE DONNÉES (SQLite)                                 │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                     │
+│  ┌──────────────────────┐              ┌──────────────────────┐                   │
+│  │    Table PARENTS     │              │    Table LOTS        │                   │
+│  ├──────────────────────┤              ├──────────────────────┤                   │
+│  │ id (PK)              │              │ id (PK)              │                   │
+│  │ firstName            │      1       │ title                │                   │
+│  │ emoji                ├─────────────►├ description          │       ∞           │
+│  │ role                 │              │ icon                 │                   │
+│  │ classes              │              │ status (enum)        │                   │
+│  │ email (UNIQUE) ⚠️    │              │ ownerId (FK)─────────┘                   │
+│  │ createdAt            │              │ reservedById (FK) ┐                      │
+│  └──────────────────────┘              │ createdAt         │                      │
+│          ▲                             │ updatedAt         │                      │
+│          │              INDEXES:        └───────────────────┘                      │
+│          │              - email unique                                             │
+│          │              - ownerId                                                  │
+│          │              - reservedById                                             │
+│          └──────────────┐              - status                                    │
+│                         │                                                          │
+│                         └────────────────────────────────────────────────────────┘  │
+│                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          │
+┌─────────────────────────────────────────┼──────────────────────────────────────────┐
+│                        🔗 COUCHE ORM (Prisma Client)                               │
+├──────────────────────────────────────────┼──────────────────────────────────────────┤
+│                                          │                                          │
+│  ┌────────────────────────────────────────────────────────────────────────────┐   │
+│  │                      src/lib/db/prisma.ts                                  │   │
+│  │                    Singleton Prisma Client                                 │   │
+│  │  - auto-generated types                                                    │   │
+│  │  - logging en développement                                               │   │
+│  │  - gestion HMR (hot reload)                                               │   │
+│  └────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                    │
+└────────────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          │
+┌─────────────────────────────────────────┼──────────────────────────────────────────┐
+│                    📝 COUCHE SERVICES (TypeScript)                                  │
+├──────────────────────────────────────────┼──────────────────────────────────────────┤
+│                                          │                                          │
+│  ┌──────────────────────────┐  ┌──────────────────────────┐  ┌─────────────────┐  │
+│  │  parentService.ts        │  │  lotService.ts           │  │  utils.ts       │  │
+│  ├──────────────────────────┤  ├──────────────────────────┤  ├─────────────────┤  │
+│  │ createParent()           │  │ createLot()              │  │ validateEmail() │  │
+│  │ getAllParents() ✅       │  │ getAllLots()             │  │ validateParent()│  │
+│  │ getParentById()          │  │ getAvailableLots()       │  │ validateLot()   │  │
+│  │ getParentEmail() ⚠️      │  │ getParentLots()          │  │ canReserveLot() │  │
+│  │ updateParent()           │  │ getParentReservedLots()  │  │ getSecureEmail()│  │
+│  │ deleteParent()           │  │ reserveLot()             │  │ getLotWithOwner()  │
+│  │                          │  │ markLotAsGiven()         │  │                 │  │
+│  │                          │  │ cancelReservation()      │  │                 │  │
+│  │                          │  │ updateLot()              │  │                 │  │
+│  │                          │  │ deleteLot()              │  │                 │  │
+│  │                          │  │ getLotStats()            │  │                 │  │
+│  └──────────────────────────┘  └──────────────────────────┘  └─────────────────┘  │
+│                                                                                    │
+│  ✅ = SAFE: Email excluded                                                        │
+│  ⚠️  = PROTECTED: Serveur/API only                                               │
+│                                                                                    │
+└────────────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          │
+┌─────────────────────────────────────────┼──────────────────────────────────────────┐
+│                    🎨 COUCHE PRÉSENTATION (React)                                  │
+├──────────────────────────────────────────┼──────────────────────────────────────────┤
+│                                          │                                          │
+│  ┌──────────────────────────────────────────────────────────────────────────────┐  │
+│  │                          Tombola.tsx (Page complète)                         │  │
+│  │                                                                              │  │
+│  │  ┌────────────────────┐  ┌──────────────────┐  ┌──────────────────────────┐ │  │
+│  │  │ TombolaHero        │  │ Trombinoscope    │  │ Lot Management           │ │  │
+│  │  │ (Section Titre)    │  │ (Grille Parents) │  │ (Add + Display Lots)     │ │  │
+│  │  ├────────────────────┤  ├──────────────────┤  ├──────────────────────────┤ │  │
+│  │  │ 🎁 La Tombola      │  │ Emoji            │  │ Form: Ajouter un lot     │ │  │
+│  │  │ Titre + Subtitle   │  │ firstName        │  │ Statut: 🟢🟡🔴           │ │  │
+│  │  │ + Illustration     │  │ role             │  │ Boutons: Réserver       │ │  │
+│  │  │                    │  │ classes          │  │          Contacter      │ │  │
+│  │  │                    │  │ ❌ Pas d'email!  │  │          Supprimer      │ │  │
+│  │  └────────────────────┘  └──────────────────┘  └──────────────────────────┘ │  │
+│  │                                                                              │  │
+│  │  ┌──────────────────────────────────────────────────────────────────────┐   │  │
+│  │  │ Register Parent Form         + Email Contact System (Sécurisé)       │   │  │
+│  │  │ ┌────────────────┐           ┌──────────────────────────────────┐   │   │  │
+│  │  │ │ Emoji Picker   │           │ User A clique "Contacter"       │   │   │  │
+│  │  │ │ firstName      │           │ ↓                               │   │   │  │
+│  │  │ │ email (hidden) │           │ API Call: /api/contact-owner    │   │   │  │
+│  │  │ │ role selector  │           │ ↓                               │   │   │  │
+│  │  │ │ classes input  │           │ Backend récupère email secret   │   │   │  │
+│  │  │ │ Submit button  │           │ ↓                               │   │   │  │
+│  │  │ └────────────────┘           │ Retourne: mailto:... link       │   │   │  │
+│  │  │                              │ ↓                               │   │   │  │
+│  │  │                              │ Frontend ouvre client email      │   │   │  │
+│  │  │                              │ ✅ Email reste PRIVÉ!            │   │   │  │
+│  │  │                              └──────────────────────────────────┘   │   │  │
+│  │  └──────────────────────────────────────────────────────────────────────┘   │  │
+│  │                                                                              │  │
+│  └──────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                    │
+└────────────────────────────────────────────────────────────────────────────────────┘
+
+
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                           🔐 SÉCURITÉ EMAIL - PATTERN                              ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+❌ INTERDIT:
+┌─────────────────────────────────────────────────────┐
+│ const parent = await parentService.getParentById(); │
+│ return <div>{parent.email}</div>;  // DANGER!      │
+└─────────────────────────────────────────────────────┘
+
+✅ PATTERN SÉCURISÉ:
+
+Frontend (React):
+┌──────────────────────────────────────────────┐
+│ const parents = await getAllParents();       │
+│ // { id, firstName, emoji, role, classes }   │
+│ // ❌ Email ABSENT = SAFE                     │
+└──────────────────────────────────────────────┘
+                         │
+                         │ User clicks "Contact"
+                         ▼
+┌──────────────────────────────────────────────┐
+│ POST /api/lots/contact-owner { lotId }       │
+└──────────────────────────────────────────────┘
+                         │
+                         ▼
+Backend (Node/API):
+┌──────────────────────────────────────────────┐
+│ const lot = await getLot(lotId);             │
+│ const email = await getParentEmail(lot.owner)│
+│ const mailto = `mailto:${email}?...`;        │
+│ return { mailto };  // Email kept SECRET     │
+└──────────────────────────────────────────────┘
+                         │
+                         ▼
+Frontend (React):
+┌──────────────────────────────────────────────┐
+│ window.location.href = response.mailto;      │
+│ // Opens email client WITHOUT exposing email │
+│ // User sees their OWN email, not secrets    │
+└──────────────────────────────────────────────┘
+
+
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                         📊 FLUX DONNÉES - LES 3 CAS D'USAGE                        ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+1️⃣  INSCRIPTION PARENT
+┌──────────────────┐
+│ User remplissage │
+│ formulaire       │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ parentService.createParent() │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ INSERT INTO parents (        │
+│   firstName, emoji, role,    │
+│   classes, email, createdAt) │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ Parent enregistré en BD ✅   │
+└──────────────────────────────┘
+
+
+2️⃣  CRÉER UN LOT
+┌──────────────────┐
+│ Parent connecté  │
+│ ajoute un lot    │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ lotService.createLot()       │
+│ { title, description, icon,  │
+│   ownerId: parentConnected } │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ INSERT INTO lots (           │
+│   title, description, icon,  │
+│   ownerId, status, ...)      │
+│ VALUES (..., AVAILABLE, ...)│
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ Lot créé 🎁 (AVAILABLE)      │
+│ Visible à tous les parents   │
+└──────────────────────────────┘
+
+
+3️⃣  RÉSERVER UN LOT
+┌──────────────────┐
+│ Parent A clique  │
+│ "Réserver lot X" │
+└────────┬─────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ canParentReserveLot(         │
+│   parentA, lotX) ?           │
+│ - Pas le sien ?              │
+│ - Dispo (AVAILABLE) ?        │
+└────────┬─────────────────────┘
+         │
+    ✅ OUI
+         │
+         ▼
+┌──────────────────────────────┐
+│ lotService.reserveLot(       │
+│   lotX, parentA)             │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ UPDATE lots SET              │
+│   status = 'RESERVED',       │
+│   reservedById = parentA     │
+│ WHERE id = lotX              │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│ Lot réservé 🟡 (RESERVED)    │
+│ Parent B (propriétaire)      │
+│ peut contacter Parent A      │
+└──────────────────────────────┘
+
+
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                    📚 FICHIERS DE DOCUMENTATION CRÉÉS                              ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+/src/lib/db/
+├── INDEX.md                    🗺️ COMMENCE PAR CELUI-CI
+├── README.md                   📖 Documentation COMPLÈTE
+├── USAGE_EXAMPLES.tsx          💡 6 exemples React (copy/paste)
+├── SETUP_GUIDE.ts              🛠️ Commandes + troubleshooting
+├── SCHEMA_VERIFICATION.ts      ✅ Schéma + intégrité BD
+├── prisma.ts                   ⚙️ Singleton client (lire une fois)
+├── parentService.ts            📝 API parents (utiliser souvent)
+├── lotService.ts               📝 API lots (utiliser souvent)
+├── utils.ts                    🔐 Validation + sécurité (utiliser souvent)
+└── index.ts                    📦 Exports centralisés (importer depuis ici)
+
+/DATABASE_SUMMARY.md            🎁 Résumé complet de l'implémentation
+
+
+╔════════════════════════════════════════════════════════════════════════════════════╗
+║                         ✅ PROCHAINES ÉTAPES                                      ║
+╚════════════════════════════════════════════════════════════════════════════════════╝
+
+1. Lire src/lib/db/INDEX.md (5 min)
+2. Lire src/lib/db/README.md (20 min)
+3. Copier exemples de USAGE_EXAMPLES.tsx dans Tombola.tsx
+4. Remplacer localStorage par services Prisma
+5. Tester que tout fonctionne
+6. Créer API REST pour les contacts sécurisés
+7. Merger vers main et déployer
+
+Status: 🟢 PRÊT POUR INTÉGRATION!
+
+Database Version: 1.0.0
+Created: 28 Dec 2025
+Branch: tombinoscope
+Build: ✅ passing
+```
