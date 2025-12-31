@@ -33,13 +33,13 @@ export default {
 
       // Route: /api/parents
       if (pathSegments[1] === 'parents') {
-        const response = await handleParentsRequest(request, env, {});
+        const response = await handleParentsRequest(request, env, pathSegments);
         return addCorsHeaders(response);
       }
 
       // Route: /api/lots
       if (pathSegments[1] === 'lots') {
-        const response = await handleLotsRequest(request, env, {});
+        const response = await handleLotsRequest(request, env, pathSegments);
         return addCorsHeaders(response);
       }
 

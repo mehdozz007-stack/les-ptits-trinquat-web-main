@@ -6,10 +6,8 @@ import { LotService } from '../services/lot.service';
 export async function handleParentsRequest(
   request: Request,
   env: Env,
-  params: Record<string, string>
+  pathSegments: string[]
 ): Promise<Response> {
-  const url = new URL(request.url);
-  const pathSegments = url.pathname.split('/').filter(Boolean);
   const parentId = pathSegments[2];
 
   // GET /api/parents - List all parents (public, no email exposed)
