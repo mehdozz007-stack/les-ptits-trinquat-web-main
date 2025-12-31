@@ -7,9 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import TombolaValidation from "@/lib/tombola-validation";
-import AuthService from "@/lib/authService";
-import SecurityService from "@/lib/securityService";
-import { HybridStorage } from "@/lib/db/hybridStorage";
+import { TombolaAPI } from "@/lib/db/tombolaAPI";
 import { Parent, Lot, ValidationError } from "@/lib/types";
 import { AnimatedSuccessMessage, AnimatedErrorMessage } from "@/components/AnimatedMessage";
 import { AnimatedFormContainer, FormFieldsContainer, AnimatedFormField } from "@/components/AnimatedForm";
@@ -29,10 +27,10 @@ export default function Tombola() {
 
   // Form states
   const [parentForm, setParentForm] = useState({
-    prenom: "",
-    role: "Parent participant",
-    classes: "",
+    first_name: "",
     email: "",
+    emoji: "😊",
+    classes: "",
   });
 
   const [lotForm, setLotForm] = useState({
@@ -53,34 +51,32 @@ export default function Tombola() {
   "🎨", "🎭",
   "🎪", "🧸",
   "📚", "🖍️"];
-
-  // Load data from server API (with IndexedDB cache fallback)
+  // Load data from D1 API on mount
   useEffect(() => {
     const loadData = async () => {
       try {
-        const { parents: parsedParents, lots: parsedLots } = await HybridStorage.loadData();
+        const [parents, lots] = await Promise.all([
+          TombolaAPI.getParents(),
+          TombolaAPI.getLots(),
+        ]);
 
-        // Clean orphan lots (critical rule)
-        const cleanedLots = SecurityService.removeOrphanLots(parsedLots, parsedParents);
-        
-        setParents(parsedParents);
-        setLots(cleanedLots);
+        setParents(parents || []);
+        setLots(lots || []);
 
-        // Restore auth session (reconnect parent automatically)
-        const session = AuthService.getSession();
-        if (session) {
-          const parent = parsedParents.find((p) => p.id === session.parentId);
-          if (parent) {
-            setCurrentParentId(session.parentId);
-            console.log(`✅ Welcome back ${parent.prenom}!`);
+        // Restore auth session from localStorage
+        const auth = TombolaAPI.getAuth();
+        if (auth) {
+          const parentExists = parents?.some((p) => p.id === auth.parentId);
+          if (parentExists) {
+            setCurrentParentId(auth.parentId);
+            console.log(`✅ Welcome back!`);
           } else {
             // Parent was deleted, logout
-            AuthService.logout();
+            TombolaAPI.setAuth(null);
           }
         }
       } catch (error) {
         console.error("Error loading data:", error);
-        // Fallback to empty state
         setParents([]);
         setLots([]);
       }
@@ -97,18 +93,6 @@ export default function Tombola() {
     }
   }, [successMessage]);
 
-  // Save parents to server (HybridStorage handles caching)
-  const saveParents = async (newParents: Parent[]) => {
-    setParents(newParents);
-    // Sync with server happens when individual operations are performed
-  };
-
-  // Save lots to server (HybridStorage handles caching)
-  const saveLots = async (newLots: Lot[]) => {
-    setLots(newLots);
-    // Sync with server happens when individual operations are performed
-  };
-
   // Ajouter un parent
   const handleAddParent = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,10 +100,10 @@ export default function Tombola() {
 
     // Validation complète
     const validation = TombolaValidation.validateParentRegistration({
-      prenom: parentForm.prenom,
+      prenom: parentForm.first_name,
       email: parentForm.email,
       emoji: selectedEmoji,
-      role: parentForm.role,
+      role: "Parent",
       classes: parentForm.classes,
     });
 
@@ -146,51 +130,41 @@ export default function Tombola() {
       return;
     }
 
-    // Générer un parentId unique
-    const newParentId = AuthService.generateParentId();
-
-    const newParent: Parent = {
-      id: newParentId,
-      prenom: parentForm.prenom,
-      role: parentForm.role,
-      classes: parentForm.classes,
-      emoji: selectedEmoji,
-      email: parentForm.email,
-      createdAt: new Date().toISOString(),
-    };
-
-    // Save parent via HybridStorage (to server + IndexedDB cache)
-    const savedParent = await HybridStorage.createParent({
-      prenom: newParent.prenom,
-      role: newParent.role,
-      classes: newParent.classes,
-      emoji: newParent.emoji,
-      email: newParent.email,
-      createdAt: newParent.createdAt,
-    });
-
-    if (savedParent) {
-      setParents([...parents, savedParent]);
-      
-      // Create auth session for this parent
-      AuthService.createSession(savedParent.id);
-      setCurrentParentId(savedParent.id);
-
-      setParentForm({ prenom: "", role: "Parent participant", classes: "", email: "" });
-      setSelectedEmoji("😊");
-      setShowFormParent(false);
-      setSuccessMessage({
-        title: `Bienvenue ${savedParent.prenom}! 🎉`,
-        message: "Tu peux maintenant ajouter un lot à la tombola!",
-        emoji: savedParent.emoji,
+    try {
+      // Create parent via D1 API
+      const savedParent = await TombolaAPI.createParent({
+        first_name: parentForm.first_name,
+        email: parentForm.email,
+        emoji: selectedEmoji,
+        classes: parentForm.classes,
       });
-      setShowFormLot(true);
-    } else {
+
+      if (savedParent) {
+        setParents([...parents, savedParent]);
+        
+        // Store auth token in localStorage
+        TombolaAPI.setAuth({
+          parentId: savedParent.id,
+          email: savedParent.email,
+        });
+        setCurrentParentId(savedParent.id);
+
+        setParentForm({ first_name: "", email: "", emoji: "😊", classes: "" });
+        setSelectedEmoji("😊");
+        setShowFormParent(false);
+        setSuccessMessage({
+          title: `Bienvenue ${savedParent.first_name}! 🎉`,
+          message: "Tu peux maintenant ajouter un lot à la tombola!",
+          emoji: savedParent.emoji,
+        });
+        setShowFormLot(true);
+      }
+    } catch (error) {
       setValidationErrors([
         {
           field: "parent",
           title: "Erreur d'inscription",
-          message: "Impossible d'inscrire le parent. Veuillez réessayer.",
+          message: error instanceof Error ? error.message : "Impossible d'inscrire le parent. Veuillez réessayer.",
         },
       ]);
     }
@@ -201,7 +175,7 @@ export default function Tombola() {
     e.preventDefault();
     setValidationErrors([]);
 
-    // Vérifier que le parent existe
+    // Vérifier que le parent est connecté
     if (!currentParentId || !TombolaValidation.parentExists(currentParentId, parents)) {
       setValidationErrors([
         {
@@ -227,37 +201,29 @@ export default function Tombola() {
       return;
     }
 
-    const ownerParent = parents.find((p) => p.id === currentParentId);
-    if (!ownerParent) return;
-
-    const newLot: Lot = {
-      id: Math.random().toString(36).substr(2, 9),
-      nom: lotForm.nom,
-      description: lotForm.description,
-      emoji: lotForm.emoji,
-      statut: "disponible",
-      parentId: currentParentId,
-      parentPrenom: ownerParent.prenom,
-      parentEmail: ownerParent.email,
-      dateAjout: new Date().toLocaleDateString("fr-FR"),
-    };
-
-    const savedLot = await HybridStorage.createLot(newLot);
-    if (savedLot) {
-      setLots([...lots, savedLot]);
-      setLotForm({ nom: "", description: "", emoji: "🎁" });
-      setShowFormLot(false);
-      setSuccessMessage({
-        title: `${savedLot.emoji} Lot ajouté! 🎉`,
-        message: `"${savedLot.nom}" est maintenant en tombola!`,
-        emoji: savedLot.emoji,
+    try {
+      // Create lot via D1 API
+      const savedLot = await TombolaAPI.createLot({
+        title: lotForm.nom,
+        description: lotForm.description,
       });
-    } else {
+
+      if (savedLot) {
+        setLots([...lots, savedLot]);
+        setLotForm({ nom: "", description: "", emoji: "🎁" });
+        setShowFormLot(false);
+        setSuccessMessage({
+          title: `📦 Lot ajouté! 🎉`,
+          message: `"${lotForm.nom}" est maintenant en tombola!`,
+          emoji: "📦",
+        });
+      }
+    } catch (error) {
       setValidationErrors([
         {
           field: "lot",
           title: "Erreur lors de l'ajout",
-          message: "Impossible d'ajouter le lot. Veuillez réessayer.",
+          message: error instanceof Error ? error.message : "Impossible d'ajouter le lot. Veuillez réessayer.",
         },
       ]);
     }
@@ -267,14 +233,12 @@ export default function Tombola() {
   const handleReserveLot = async (lotId: string, reserverId: string) => {
     setValidationErrors([]);
 
-    // Check access rights using SecurityService
-    const canReserve = SecurityService.canReserveLot(lotId, lots);
-    if (!canReserve.allowed) {
+    if (!currentParentId) {
       setValidationErrors([
         {
           field: "reservation",
-          title: "Réservation impossible",
-          message: canReserve.reason,
+          title: "Non connecté",
+          message: "Vous devez être connecté pour réserver",
         },
       ]);
       return;
@@ -283,27 +247,50 @@ export default function Tombola() {
     const lot = lots.find((l) => l.id === lotId);
     if (!lot) return;
 
-    const updatedLot = { ...lot, statut: "reserve" as const };
-    
-    const success = await HybridStorage.updateLot(lotId, updatedLot);
-    
-    if (success) {
-      const updated = lots.map((l) =>
-        l.id === lotId ? { ...l, statut: "reserve" as const } : l
-      );
-      setLots(updated);
-      setSuccessMessage({
-        title: `✨ Lot réservé! ✨`,
-        message: `Tu peux contacter ${lot.parentPrenom} pour les détails.`,
-        emoji: lot.emoji,
-      });
+    // Prevent self-reservation
+    if (lot.parent_id === currentParentId) {
+      setValidationErrors([
+        {
+          field: "reservation",
+          title: "Réservation impossible",
+          message: "Vous ne pouvez pas réserver vos propres lots!",
+        },
+      ]);
+      return;
+    }
+
+    try {
+      const updatedLot = await TombolaAPI.reserveLot(lotId);
+      
+      if (updatedLot) {
+        const updated = lots.map((l) =>
+          l.id === lotId ? updatedLot : l
+        );
+        setLots(updated);
+        
+        // Find parent name for message
+        const owner = parents.find((p) => p.id === lot.parent_id);
+        setSuccessMessage({
+          title: `✨ Lot réservé! ✨`,
+          message: `Tu peux contacter ${owner?.first_name} pour les détails.`,
+          emoji: "🎉",
+        });
+      }
+    } catch (error) {
+      setValidationErrors([
+        {
+          field: "reservation",
+          title: "Erreur lors de la réservation",
+          message: error instanceof Error ? error.message : "Impossible de réserver le lot. Veuillez réessayer.",
+        },
+      ]);
     }
   };
 
   // Supprimer un parent (supprime aussi ses lots en cascade)
   const handleDeleteParent = async (id: string) => {
     // Check access rights: can only delete own parent
-    if (!SecurityService.canDeleteParent(id)) {
+    if (id !== currentParentId) {
       setValidationErrors([
         {
           field: "delete",
@@ -314,46 +301,50 @@ export default function Tombola() {
       return;
     }
 
-    // Delete parent via HybridStorage
-    const success = await HybridStorage.deleteParent(id);
-    
-    if (success) {
-      // Supprimer le parent localement
+    try {
+      // Delete parent via D1 API (cascade delete lots)
+      await TombolaAPI.deleteParent(id);
+
+      // Update local state
       const updatedParents = parents.filter((p) => p.id !== id);
       setParents(updatedParents);
-      
-      // Supprimer TOUS ses lots (règle critique : pas d'orphelins)
-      const parentLots = SecurityService.getParentLots(id, lots);
-      const remainingLots = lots.filter((l) => l.parentId !== id);
-      
-      for (const lot of parentLots) {
-        await HybridStorage.deleteLot(lot.id);
-      }
-      
+
+      // Remove parent's lots from local state
+      const deletedParent = parents.find((p) => p.id === id);
+      const parentLots = lots.filter((l) => l.parent_id === id);
+      const remainingLots = lots.filter((l) => l.parent_id !== id);
       setLots(remainingLots);
 
       // If it was the current parent, logout
       if (id === currentParentId) {
         setCurrentParentId(null);
-        AuthService.logout();
+        TombolaAPI.setAuth(null);
       }
 
-      // Message de confirmation
-      const deletedParent = parents.find((p) => p.id === id);
+      // Success message
       if (parentLots.length > 0) {
         setSuccessMessage({
-          title: `À bientôt ${deletedParent?.prenom}! 👋`,
+          title: `À bientôt ${deletedParent?.first_name}! 👋`,
           message: `Profil supprimé. Ses ${parentLots.length} lot(s) ont été retirés.`,
           emoji: "👋",
         });
       }
+    } catch (error) {
+      setValidationErrors([
+        {
+          field: "delete",
+          title: "Erreur lors de la suppression",
+          message: error instanceof Error ? error.message : "Impossible de supprimer le profil. Veuillez réessayer.",
+        },
+      ]);
     }
   };
 
   // Supprimer un lot (only if it's yours)
   const handleDeleteLot = async (id: string, lotName: string) => {
-    // Check access rights: can only delete own lots
-    if (!SecurityService.canModifyLot(id, lots)) {
+    // Check if lot belongs to current user
+    const lot = lots.find(l => l.id === id);
+    if (!lot || lot.parent_id !== currentParentId) {
       setValidationErrors([
         {
           field: "delete",
@@ -371,15 +362,22 @@ export default function Tombola() {
 
     if (!confirmed) return;
 
-    const success = await HybridStorage.deleteLot(id);
-    
-    if (success) {
+    try {
+      await TombolaAPI.deleteLot(id);
       setLots(lots.filter((l) => l.id !== id));
       setSuccessMessage({
         title: `Lot supprimé 👋`,
         message: `"${lotName}" a été retiré de la tombola.`,
         emoji: "✨",
       });
+    } catch (error) {
+      setValidationErrors([
+        {
+          field: "delete",
+          title: "Erreur lors de la suppression",
+          message: error instanceof Error ? error.message : "Impossible de supprimer le lot. Veuillez réessayer.",
+        },
+      ]);
     }
   };
 
@@ -466,10 +464,10 @@ export default function Tombola() {
               {currentParentId && (
                 <AnimatedAuthStatus
                   isConnected={true}
-                  parentName={parents.find((p) => p.id === currentParentId)?.prenom}
+                  parentName={parents.find((p) => p.id === currentParentId)?.first_name}
                   parentEmoji={parents.find((p) => p.id === currentParentId)?.emoji}
                   onDisconnect={() => {
-                    AuthService.logout();
+                    TombolaAPI.setAuth(null);
                     setCurrentParentId(null);
                     setSuccessMessage({
                       title: "À bientôt! 👋",
@@ -587,24 +585,10 @@ export default function Tombola() {
                       <Input
                         type="text"
                         placeholder="Ex: Marie"
-                        value={parentForm.prenom}
-                        onChange={(e) => setParentForm({ ...parentForm, prenom: e.target.value })}
+                        value={parentForm.first_name}
+                        onChange={(e) => setParentForm({ ...parentForm, first_name: e.target.value })}
                         required
                       />
-                    </div>
-
-                    {/* Rôle */}
-                    <div>
-                      <label className="text-sm font-semibold mb-2 block">Votre rôle</label>
-                      <select
-                        value={parentForm.role}
-                        onChange={(e) => setParentForm({ ...parentForm, role: e.target.value })}
-                        className="w-full px-3 py-2 rounded-lg border border-border bg-background"
-                      >
-                        <option>Parent participant</option>
-                        <option>Membre du bureau</option>
-                        <option>Bénévole</option>
-                      </select>
                     </div>
 
                     {/* Classes */}
@@ -676,8 +660,7 @@ export default function Tombola() {
 
                         {/* Info */}
                         <div className="flex-1">
-                          <h3 className="font-bold text-foreground mb-1">{parent.prenom}</h3>
-                          <p className="text-xs text-muted-foreground mb-2">{parent.role}</p>
+                          <h3 className="font-bold text-foreground mb-1">{parent.first_name}</h3>
                           {parent.classes && (
                             <span className="inline-block bg-primary/10 px-2 py-1 rounded-full text-xs font-medium text-primary">
                               {parent.classes}
@@ -708,10 +691,13 @@ export default function Tombola() {
                             size="sm"
                             className="w-full mt-3 text-xs"
                             onClick={() => {
-                              AuthService.createSession(parent.id);
+                              TombolaAPI.setAuth({
+                                parentId: parent.id,
+                                email: parent.email,
+                              });
                               setCurrentParentId(parent.id);
                               setSuccessMessage({
-                                title: `Bienvenue de retour ${parent.prenom}! 🎉`,
+                                title: `Bienvenue de retour ${parent.first_name}! 🎉`,
                                 message: "Vous êtes maintenant connecté.",
                                 emoji: parent.emoji,
                               });
@@ -755,7 +741,7 @@ export default function Tombola() {
               Les <span className="text-gradient">lots de tombola</span>
             </h2>
             <p className="text-muted-foreground mb-6">
-              {lots.length} lot{lots.length !== 1 ? "s" : ""} ({lots.filter((l) => l.statut === "disponible").length} disponible{lots.filter((l) => l.statut === "disponible").length !== 1 ? "s" : ""})
+              {lots.length} lot{lots.length !== 1 ? "s" : ""} ({lots.filter((l) => l.status === "available").length} disponible{lots.filter((l) => l.status === "available").length !== 1 ? "s" : ""})
             </p>
 
             {parents.length > 0 && !showFormLot && (
@@ -862,7 +848,7 @@ export default function Tombola() {
           </AnimatedFormContainer>
 
           {/* Lots du parent actuel */}
-          {currentParentId && lots.filter(lot => lot.parentId === currentParentId).length > 0 && (
+          {currentParentId && lots.filter(lot => lot.parent_id === currentParentId).length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -872,7 +858,7 @@ export default function Tombola() {
               <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
                 ✨ Tes lots
                 <span className="text-sm font-normal text-muted-foreground">
-                  ({lots.filter(lot => lot.parentId === currentParentId).length})
+                  ({lots.filter(lot => lot.parent_id === currentParentId).length})
                 </span>
               </h3>
               <motion.div
@@ -882,14 +868,14 @@ export default function Tombola() {
                 viewport={{ once: true }}
                 className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
               >
-                {lots.filter(lot => lot.parentId === currentParentId).map((lot) => (
+                {lots.filter(lot => lot.parent_id === currentParentId).map((lot) => (
                   <motion.div key={lot.id} variants={itemVariants}>
                     <Card
                       variant="playful"
                       className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 border-2 border-blue-500/50 bg-blue-50/30 ${
-                        lot.statut === "disponible"
+                        lot.status === "available"
                           ? "border-2 border-green-500/50"
-                          : lot.statut === "reserve"
+                          : lot.status === "reserved"
                           ? "border-2 border-yellow-500/50"
                           : "border-2 border-red-500/50 opacity-75"
                       }`}
@@ -897,19 +883,19 @@ export default function Tombola() {
                       <CardContent className="p-6 flex flex-col h-full">
                         {/* Header avec emoji et statut */}
                         <div className="flex justify-between items-start mb-4">
-                          <div className="text-4xl">{lot.emoji}</div>
+                          <div className="text-4xl">🎁</div>
                           <div className="text-right">
-                            {lot.statut === "disponible" && (
+                            {lot.status === "available" && (
                               <span className="inline-block bg-green-500/20 px-3 py-1 rounded-full text-xs font-semibold text-green-700">
                                 🟢 Disponible
                               </span>
                             )}
-                            {lot.statut === "reserve" && (
+                            {lot.status === "reserved" && (
                               <span className="inline-block bg-yellow-500/20 px-3 py-1 rounded-full text-xs font-semibold text-yellow-700">
                                 🟡 Réservé
                               </span>
                             )}
-                            {lot.statut === "remis" && (
+                            {lot.status === "delivered" && (
                               <span className="inline-block bg-red-500/20 px-3 py-1 rounded-full text-xs font-semibold text-red-700">
                                 🔴 Remis
                               </span>
@@ -918,7 +904,7 @@ export default function Tombola() {
                         </div>
 
                         {/* Contenu */}
-                        <h3 className="text-lg font-bold text-foreground mb-2">{lot.nom}</h3>
+                        <h3 className="text-lg font-bold text-foreground mb-2">{lot.title}</h3>
                         {lot.description && (
                           <p className="text-sm text-muted-foreground mb-4 flex-1">{lot.description}</p>
                         )}
@@ -926,12 +912,12 @@ export default function Tombola() {
                         {/* Info parent */}
                         <div className="bg-blue-100/50 p-3 rounded-lg mb-4 border border-blue-200/50">
                           <p className="text-xs text-muted-foreground mb-1">C'est ton lot</p>
-                          <p className="font-semibold text-blue-700">{lot.parentPrenom} 🎁</p>
+                          <p className="font-semibold text-blue-700">{parents.find(p => p.id === lot.parent_id)?.first_name} 🎁</p>
                         </div>
 
                         {/* Actions */}
                         <div className="flex gap-2">
-                          {lot.statut === "reserve" && (
+                          {lot.status === "reserved" && (
                             <Button
                               variant="outline"
                               size="sm"
@@ -939,7 +925,7 @@ export default function Tombola() {
                               asChild
                             >
                               <a
-                                href={`mailto:${lot.parentEmail}?subject=Lot: ${lot.nom}`}
+                                href={`mailto:${parents.find(p => p.id === lot.parent_id)?.email}?subject=Lot: ${lot.title}`}
                                 className="flex items-center justify-center gap-2"
                               >
                                 <MessageCircle className="h-4 w-4" />
@@ -952,9 +938,9 @@ export default function Tombola() {
                             variant="ghost"
                             size="sm"
                             className="flex-1 hover:bg-red-100 text-red-600"
-                            onClick={() => handleDeleteLot(lot.id, lot.nom)}
-                            disabled={!SecurityService.isOwnLot(lot)}
-                            title={!SecurityService.isOwnLot(lot) ? "Vous ne pouvez supprimer que vos propres lots" : ""}
+                            onClick={() => handleDeleteLot(lot.id, lot.title)}
+                            disabled={lot.parent_id !== currentParentId}
+                            title={lot.parent_id !== currentParentId ? "Vous ne pouvez supprimer que vos propres lots" : ""}
                           >
                             Supprimer
                           </Button>
@@ -993,9 +979,9 @@ export default function Tombola() {
                 <Card
                   variant="playful"
                   className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 ${
-                    lot.statut === "disponible"
+                    lot.status === "available"
                       ? "border-2 border-green-500/30"
-                      : lot.statut === "reserve"
+                      : lot.status === "reserved"
                       ? "border-2 border-yellow-500/30"
                       : "border-2 border-red-500/30 opacity-75"
                   }`}
@@ -1003,19 +989,19 @@ export default function Tombola() {
                   <CardContent className="p-6 flex flex-col h-full">
                     {/* Header avec emoji et statut */}
                     <div className="flex justify-between items-start mb-4">
-                      <div className="text-4xl">{lot.emoji}</div>
+                      <div className="text-4xl">🎁</div>
                       <div className="text-right">
-                        {lot.statut === "disponible" && (
+                        {lot.status === "available" && (
                           <span className="inline-block bg-green-500/20 px-3 py-1 rounded-full text-xs font-semibold text-green-700">
                             🟢 Disponible
                           </span>
                         )}
-                        {lot.statut === "reserve" && (
+                        {lot.status === "reserved" && (
                           <span className="inline-block bg-yellow-500/20 px-3 py-1 rounded-full text-xs font-semibold text-yellow-700">
                             🟡 Réservé
                           </span>
                         )}
-                        {lot.statut === "remis" && (
+                        {lot.status === "delivered" && (
                           <span className="inline-block bg-red-500/20 px-3 py-1 rounded-full text-xs font-semibold text-red-700">
                             🔴 Remis
                           </span>
@@ -1024,7 +1010,7 @@ export default function Tombola() {
                     </div>
 
                     {/* Contenu */}
-                    <h3 className="text-lg font-bold text-foreground mb-2">{lot.nom}</h3>
+                    <h3 className="text-lg font-bold text-foreground mb-2">{lot.title}</h3>
                     {lot.description && (
                       <p className="text-sm text-muted-foreground mb-4 flex-1">{lot.description}</p>
                     )}
@@ -1032,12 +1018,12 @@ export default function Tombola() {
                     {/* Info parent */}
                     <div className="bg-muted/50 p-3 rounded-lg mb-4">
                       <p className="text-xs text-muted-foreground mb-1">Proposé par</p>
-                      <p className="font-semibold">{lot.parentPrenom}</p>
+                      <p className="font-semibold">{parents.find(p => p.id === lot.parent_id)?.first_name}</p>
                     </div>
 
                     {/* Actions */}
                     <div className="flex gap-2">
-                      {lot.statut === "disponible" && currentParentId !== lot.parentId && (
+                      {lot.status === "available" && currentParentId !== lot.parent_id && (
                         <Button
                           variant="playful"
                           size="sm"
@@ -1049,7 +1035,7 @@ export default function Tombola() {
                         </Button>
                       )}
 
-                      {lot.statut === "reserve" && (
+                      {lot.status === "reserved" && (
                         <Button
                           variant="outline"
                           size="sm"
@@ -1057,7 +1043,7 @@ export default function Tombola() {
                           asChild
                         >
                           <a
-                            href={`mailto:${lot.parentEmail}?subject=Lot: ${lot.nom}`}
+                            href={`mailto:${parents.find(p => p.id === lot.parent_id)?.email}?subject=Lot: ${lot.title}`}
                             className="flex items-center justify-center gap-2"
                           >
                             <MessageCircle className="h-4 w-4" />
@@ -1070,9 +1056,9 @@ export default function Tombola() {
                         variant="ghost"
                         size="sm"
                         className="flex-1 text-red-600 hover:bg-red-100"
-                        onClick={() => handleDeleteLot(lot.id, lot.nom)}
-                        disabled={!SecurityService.isOwnLot(lot)}
-                        title={!SecurityService.isOwnLot(lot) ? "Vous ne pouvez supprimer que vos propres lots" : ""}
+                        onClick={() => handleDeleteLot(lot.id, lot.title)}
+                        disabled={lot.parent_id !== currentParentId}
+                        title={lot.parent_id !== currentParentId ? "Vous ne pouvez supprimer que vos propres lots" : ""}
                       >
                         Supprimer
                       </Button>
@@ -1086,7 +1072,7 @@ export default function Tombola() {
           )}
 
           {/* Lots des autres parents (filtre optionnel) */}
-          {currentParentId && lots.filter(lot => lot.parentId !== currentParentId).length > 0 && (
+          {currentParentId && lots.filter(lot => lot.parent_id !== currentParentId).length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1096,7 +1082,7 @@ export default function Tombola() {
               <h3 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
                 👥 Propositions des autres parents
                 <span className="text-sm font-normal text-muted-foreground">
-                  ({lots.filter(lot => lot.parentId !== currentParentId).length})
+                  ({lots.filter(lot => lot.parent_id !== currentParentId).length})
                 </span>
               </h3>
               <motion.div
@@ -1106,14 +1092,14 @@ export default function Tombola() {
                 viewport={{ once: true }}
                 className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
               >
-                {lots.filter(lot => lot.parentId !== currentParentId).map((lot) => (
+                {lots.filter(lot => lot.parent_id !== currentParentId).map((lot) => (
               <motion.div key={lot.id} variants={itemVariants}>
                 <Card
                   variant="playful"
                   className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 ${
-                    lot.statut === "disponible"
+                    lot.status === "available"
                       ? "border-2 border-green-500/30"
-                      : lot.statut === "reserve"
+                      : lot.status === "reserved"
                       ? "border-2 border-yellow-500/30"
                       : "border-2 border-red-500/30 opacity-75"
                   }`}
@@ -1121,19 +1107,19 @@ export default function Tombola() {
                   <CardContent className="p-6 flex flex-col h-full">
                     {/* Header avec emoji et statut */}
                     <div className="flex justify-between items-start mb-4">
-                      <div className="text-4xl">{lot.emoji}</div>
+                      <div className="text-4xl">🎁</div>
                       <div className="text-right">
-                        {lot.statut === "disponible" && (
+                        {lot.status === "available" && (
                           <span className="inline-block bg-green-500/20 px-3 py-1 rounded-full text-xs font-semibold text-green-700">
                             🟢 Disponible
                           </span>
                         )}
-                        {lot.statut === "reserve" && (
+                        {lot.status === "reserved" && (
                           <span className="inline-block bg-yellow-500/20 px-3 py-1 rounded-full text-xs font-semibold text-yellow-700">
                             🟡 Réservé
                           </span>
                         )}
-                        {lot.statut === "remis" && (
+                        {lot.status === "delivered" && (
                           <span className="inline-block bg-red-500/20 px-3 py-1 rounded-full text-xs font-semibold text-red-700">
                             🔴 Remis
                           </span>
@@ -1142,7 +1128,7 @@ export default function Tombola() {
                     </div>
 
                     {/* Contenu */}
-                    <h3 className="text-lg font-bold text-foreground mb-2">{lot.nom}</h3>
+                    <h3 className="text-lg font-bold text-foreground mb-2">{lot.title}</h3>
                     {lot.description && (
                       <p className="text-sm text-muted-foreground mb-4 flex-1">{lot.description}</p>
                     )}
@@ -1150,12 +1136,12 @@ export default function Tombola() {
                     {/* Info parent */}
                     <div className="bg-muted/50 p-3 rounded-lg mb-4">
                       <p className="text-xs text-muted-foreground mb-1">Proposé par</p>
-                      <p className="font-semibold">{lot.parentPrenom}</p>
+                      <p className="font-semibold">{parents.find(p => p.id === lot.parent_id)?.first_name}</p>
                     </div>
 
                     {/* Actions */}
                     <div className="flex gap-2">
-                      {lot.statut === "disponible" && (
+                      {lot.status === "available" && (
                         <Button
                           variant="playful"
                           size="sm"
@@ -1167,7 +1153,7 @@ export default function Tombola() {
                         </Button>
                       )}
 
-                      {lot.statut === "reserve" && (
+                      {lot.status === "reserved" && (
                         <Button
                           variant="outline"
                           size="sm"
@@ -1175,7 +1161,7 @@ export default function Tombola() {
                           asChild
                         >
                           <a
-                            href={`mailto:${lot.parentEmail}?subject=Lot: ${lot.nom}`}
+                            href={`mailto:${parents.find(p => p.id === lot.parent_id)?.email}?subject=Lot: ${lot.title}`}
                             className="flex items-center justify-center gap-2"
                           >
                             <MessageCircle className="h-4 w-4" />
@@ -1188,9 +1174,9 @@ export default function Tombola() {
                         variant="ghost"
                         size="sm"
                         className="flex-1 text-red-600 hover:bg-red-100"
-                        onClick={() => handleDeleteLot(lot.id, lot.nom)}
-                        disabled={!SecurityService.isOwnLot(lot)}
-                        title={!SecurityService.isOwnLot(lot) ? "Vous ne pouvez supprimer que vos propres lots" : ""}
+                        onClick={() => handleDeleteLot(lot.id, lot.title)}
+                        disabled={lot.parent_id !== currentParentId}
+                        title={lot.parent_id !== currentParentId ? "Vous ne pouvez supprimer que vos propres lots" : ""}
                       >
                         Supprimer
                       </Button>

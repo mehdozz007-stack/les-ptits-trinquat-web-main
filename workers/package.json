@@ -1,0 +1,24 @@
+{
+  "name": "tombola-api",
+  "version": "1.0.0",
+  "description": "Tombola API powered by Cloudflare Workers and D1",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --minify --sourcemap --format=esm --outfile=dist/index.js --target=es2020",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create tombola",
+    "db:create:dev": "wrangler d1 create tombola-dev",
+    "db:execute": "wrangler d1 execute tombola --file=src/db/schema.sql",
+    "db:execute:dev": "wrangler d1 execute tombola-dev --file=src/db/schema.sql --local",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0",
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.27.2",
+    "typescript": "^5.3.0",
+    "wrangler": "^4.54.0"
+  }
+}

@@ -1,0 +1,24 @@
+name = "tombola-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-12"
+
+# Build configuration
+build = { command = "npm run build" }
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "tombola-dev"
+database_id = "4f519cb2-40f8-433d-9da0-4c250a95b45c"
+
+# Environment configuration
+[env.development]
+vars = { ENVIRONMENT = "development" }
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+d1_databases = [{ binding = "DB", database_name = "tombola" }]
+
+# Observability
+[observability]
+enabled = true

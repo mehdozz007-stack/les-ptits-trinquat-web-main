@@ -2,24 +2,21 @@
 
 export interface Parent {
   id: string;
-  prenom: string;
-  role: string;
-  classes: string;
-  emoji: string;
+  first_name: string;
   email: string;
-  createdAt?: string;
+  emoji?: string;
+  classes?: string;
+  created_at?: string;
 }
 
 export interface Lot {
   id: string;
-  nom: string;
-  description: string;
-  emoji: string;
-  statut: "disponible" | "reserve" | "remis";
-  parentId: string;
-  parentPrenom: string;
-  parentEmail: string;
-  dateAjout: string;
+  parent_id: string;
+  title: string;
+  description?: string;
+  status: "available" | "reserved" | "delivered";
+  reserved_by?: string;
+  created_at?: string;
 }
 
 export interface ValidationError {
