@@ -5,7 +5,7 @@
  */
 
 import { prisma } from "./prisma";
-import { Parent } from "@prisma/client";
+import type { Parent } from "../../../generated/prisma";
 
 /**
  * Créer un nouveau parent

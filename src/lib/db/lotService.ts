@@ -6,7 +6,7 @@
  */
 
 import { prisma } from "./prisma";
-import { Lot, LotStatus } from "@prisma/client";
+import type { Lot, LotStatus } from "../../../generated/prisma";
 
 /**
  * Créer un nouveau lot

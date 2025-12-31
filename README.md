@@ -40,7 +40,7 @@ Ce site permet aux parents d'élèves de :
 - **À propos** : Mission, valeurs et membres du bureau
 - **Contact** : Formulaire de contact et FAQ
 - **Optimisé Mobile** : Design responsive
-- **Animations** : Transitions fluides avec Framer Motion
+- **Animations Enfantines** : Confetti, emoji animés, transitions fluides avec Framer Motion
 - **Accessibilité** : Composants WCAG compliant
 
 ## 🛠️ Technologies utilisées
@@ -109,6 +109,45 @@ les-ptits-trinquat-web-main/
 ```
 
 ## 🔧 Développement
+
+### Animations Enfantines
+
+Le projet inclut 4 composants d'animation réutilisables pour les inscriptions, connexions et désinscriptions:
+
+**Composants:**
+- `<AnimatedMessage />` - Messages de succès/erreur avec confetti
+- `<AnimatedForm />` - Animations fluides des formulaires
+- `<AnimatedAuth />` - Statut de connexion et reconnexion animés
+- `<AnimatedSection />` - Sections avec emojis animés et grilles staggered
+
+**Caractéristiques:**
+- ✨ Confetti avec trajectoires aléatoires
+- 🎯 Animations spring douces (stiffness: 200, damping: 15)
+- 🎨 Couleurs pastel cohérentes (vert émeraude, rose, bleu ciel)
+- 📱 Responsive et mobile-optimisé
+- ♿ Accessibilité WCAG AA
+
+**Exemples:**
+```tsx
+// Message de succès avec confetti
+<AnimatedSuccessMessage
+  title="Bienvenue Alice! 🎉"
+  message="Tu peux maintenant ajouter un lot!"
+  emoji="😊"
+/>
+
+// Formulaire animé
+<AnimatedFormContainer isOpen={showForm}>
+  <form>{/* ... */}</form>
+</AnimatedFormContainer>
+
+// Statut de connexion
+<AnimatedAuthStatus
+  parentName="Alice"
+  parentEmoji="😊"
+  onDisconnect={handleLogout}
+/>
+```
 
 ### Lancer le serveur de développement
 
@@ -295,11 +334,20 @@ curl https://votredomaine.com
 
 ### Contenu
 
-- **Événements** : Modifier `src/pages/Evenements.tsx`
+**Pages principales:**
+- **Accueil** : Présentation avec hero animé
+- **Événements** : Liste des événements
+- **Comptes-rendus** : Téléchargement de documents (PDF)
+- **Partenaires** : Galerie des partenaires
+- **À propos** : Mission et membres du bureau
+- **Contact** : Formulaire et FAQ
+- **Tombola** : Système d'inscription et de lot avec authentification (page /tombola)
+
+**Modifier les contenus:**
+- **Événements** : `src/pages/Evenements.tsx`
 - **Comptes-rendus** : Ajouter les PDFs dans `public/documents/` et mettre à jour `src/pages/ComptesRendus.tsx`
-- **Partenaires** : Modifier `src/pages/Partenaires.tsx`
-- **Membres du bureau** : Modifier `src/pages/APropos.tsx`
-- **Informations de contact** : Modifier `src/pages/Contact.tsx`
+- **Partenaires** : `src/pages/Partenaires.tsx`
+- **Tombola** : `src/pages/Tombola.tsx`
 
 ### Couleurs et Design
 

@@ -159,7 +159,7 @@ export function RegisterParentExample() {
 
 import { lotService, type Lot } from "@/lib/db";
 
-export function AvailableLotsExample() {
+export function AvailableLotsExample({ currentParentId }: { currentParentId: string }) {
   const [lots, setLots] = useState<any[]>([]);
 
   useEffect(() => {
@@ -179,7 +179,7 @@ export function AvailableLotsExample() {
           <p className="text-sm text-gray-600">{lot.description}</p>
           <p className="text-xs">Par {lot.owner.firstName}</p>
           <button
-            onClick={() => reserveThisLot(lot.id)}
+            onClick={() => reserveThisLot(lot.id, currentParentId)}
             className="mt-2 px-3 py-1 bg-green-600 text-white rounded text-sm"
           >
             Réserver
