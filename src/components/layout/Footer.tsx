@@ -179,13 +179,13 @@ export function Footer() {
                   href={partner.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center rounded-lg bg-background/5 p-4 md:p-5 transition-all hover:bg-background/10 hover:shadow-soft"
+                  className="flex items-center justify-center transition-all hover:scale-105"
                   aria-label={`Visiter ${partner.name}`}
                 >
                   <img
                     src={partner.logo}
                     alt={partner.alt}
-                    className="h-16 w-auto object-contain md:h-20"
+                    className="h-20 w-auto object-contain md:h-24 rounded-lg"
                   />
                 </a>
               ))}

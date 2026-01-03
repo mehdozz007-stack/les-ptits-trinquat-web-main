@@ -13,22 +13,11 @@ const events = [
     date: "8 Décembre 2025 - Lancement",
     time: "8 Décembre 2025 - 16 Février 2026",
     location: "Groupe scolaire FRANK-DICKENS",
-    description: "La tombola de l'association est un moment convivial qui permet aux enfants de s'impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance.\nGrâce au soutien de nos partenaires, de nombreux lots attendent les participants. Chaque ticket contribue directement aux projets ludiques de l'association.\nUn futur espace en ligne viendra également faciliter les échanges autour des lots, pour prolonger l'esprit de partage après le tirage.\nConsultez la liste de nos partenaires et tentez votre chance !",
+    description: "La tombola de l'association est un moment convivial qui permet aux enfants de s'impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance.\nGrâce au soutien de nos partenaires, de nombreux lots attendent les participants. Chaque ticket contribue directement aux projets ludiques de l'association.\nUn futur espace en ligne viendra également faciliter les échanges autour des lots, pour prolonger l'esprit de partage après le tirage.\n\nConsultez la liste de nos partenaires et tentez votre chance !",
     color: "accent",
     status: "upcoming",
     attendees: 500,
     url: "/partenaires"
-  },
-  {
-    id: 2,
-    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
-    date: "12 Décembre 2025",
-    time: "17h30 - 19h30",
-    location: "Salle polyvalente",
-    description: "Bilan du trimestre et préparation aux prochains événements.",
-    color: "secondary",
-    status: "past",
-    attendees: 30,
   },
   {
     id: 3,
@@ -41,6 +30,17 @@ const events = [
     status: "past",
     attendees: 300,
     url: "https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
+  },
+  {
+    id: 2,
+    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
+    date: "12 Décembre 2025",
+    time: "17h30 - 19h30",
+    location: "Salle polyvalente",
+    description: "Bilan du trimestre et préparation aux prochains événements.",
+    color: "secondary",
+    status: "past",
+    attendees: 30,
   },
   {
     id: 4,

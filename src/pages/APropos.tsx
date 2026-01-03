@@ -25,7 +25,7 @@ const bureauMembers = [
   { name: "Maité", role: "Responsable section internationale", emoji: "🌍", classe: [17] },
   { name: "Hanane S", role: "Co-Responsable événementiel", emoji: "🎊", classe: [6] },
   { name: "Hanan A", role: "Co-Responsable événementiel", emoji: "🎈", classe: [7, 13, 18] },
-  { name: "Frédérique", role: "Conseillère principale", emoji: "🌸", classe: [14] },
+  { name: "Frédérique", emoji: "🌸", classe: [14] },
    
   { name: "Linda", emoji: "🎨", classe: [12, 14, 18] },
   { name: "Redha", emoji: "🎉", classe: [10] },
@@ -156,7 +156,7 @@ const APropos = () => {
               <span className="text-gradient">P'tits Trinquat</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Depuis 2019, notre association rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong> pour accompagner et enrichir la vie scolaire de nos enfants.
+              Depuis 2022, notre association rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong> pour accompagner et enrichir la vie scolaire de nos enfants.
             </p>
           </motion.div>
         </div>
@@ -465,7 +465,7 @@ const APropos = () => {
 
             <div className="space-y-6 text-muted-foreground">
               <p>
-                Fondée en 2019, l'association Les P'tits Trinquat est née de la volonté de quelques parents de créer un lien fort entre les familles et l'école. Le nom "Trinquat" fait référence au quartier de Montpellier où se situe notre groupe scolaire.
+                Fondée en janvier 2022, l'association Les P'tits Trinquat est née de la volonté de quelques parents de créer un lien fort entre les familles et l'école. Le nom "Trinquat" fait référence au quartier de Montpellier où se situe notre groupe scolaire.
               </p>
               <p>
                 Au fil des années, nous avons organisé des centaines d'événements : fêtes d'école, marchés de Noël, ventes de gâteaux, vides-grenier, sorties scolaires... Chaque action contribue à financer des projets scolaires pour nos enfants et à créer des moments de partage inoubliables avec notre équipe enseignante.

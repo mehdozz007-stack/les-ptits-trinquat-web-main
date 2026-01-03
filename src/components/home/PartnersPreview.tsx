@@ -3,13 +3,21 @@ import { ArrowRight, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
+// Import des logos
+import lesPetitsBilinguesLogo from "@/assets/logos/lesPetitsBilingues.jpeg";
+import atelierTufferyLogo from "@/assets/logos/atelier_tuffery_logo.svg";
+import brinDeTerre from "@/assets/logos/brindeterre.jpg";
+import manuCreation from "@/assets/logos/manucreation.jpg";
+import astroludik from "@/assets/logos/logo-astroludik.png";
+import massagesIsa from "@/assets/logos/isamassage.avif";
+
 const partners = [
   {
     id: 1,
     name: "Les petits bilingues",
     category: "Éducation",
     description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
-    logo: "🇬🇧",
+    logo: lesPetitsBilinguesLogo,
     website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
   },
   {
@@ -17,7 +25,7 @@ const partners = [
     name: "Atelier Tuffery",
     category: "Shopping",
     description: "Jean français fabriqué artisanalement en Lozère depuis 1892.",
-    logo: "👖",
+    logo: atelierTufferyLogo,
     website: "https://www.ateliertuffery.com/pages/boutique-jeans-francais-montpellier",
   },
   {
@@ -25,7 +33,7 @@ const partners = [
     name: "Brin de Terre",
     category: "Éducation",
     description: "Ateliers nature et jardinage pour sensibiliser les enfants à l'environnement.",
-    logo: "🏺",
+    logo: brinDeTerre,
     website: "https://www.instagram.com/atelierbrindeterre/",
   },
   {
@@ -33,7 +41,7 @@ const partners = [
     name: "Manu Créations Couture",
     category: "Éducation",
     description: "Ateliers créatifs de couture pour enfants et adultes.",
-    logo: "🧵",
+    logo: manuCreation,
     website: "https://www.manu-creations.com/",
   },
   {
@@ -41,7 +49,7 @@ const partners = [
     name: "Astroludik",
     category: "Éducation",
     description: "Animations ludiques autour de l'astronomie pour éveiller la curiosité des enfants.",
-    logo: "🔭",
+    logo: astroludik,
     website: "https://www.astroludik.com/",
   },
   {
@@ -49,7 +57,7 @@ const partners = [
     name: "Massages d'Isa",
     category: "Bien-être",
     description: "Massages bien-être et relaxation pour toute la famille.",
-    logo: "💆",
+    logo: massagesIsa,
     website: "https://isabellerichez34.wixsite.com/monsite-6",
   },
 ];
@@ -91,7 +99,13 @@ export function PartnersPreview() {
               transition={{ delay: index * 0.05 }}
               className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer"
             >
-              <div className="mb-3 text-4xl">{partner.logo}</div>
+              <div className="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden">
+                <img 
+                  src={partner.logo} 
+                  alt={partner.name}
+                  className="h-full w-full object-contain p-2 rounded-lg"
+                />
+              </div>
               <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                 {partner.name}
               </span>
