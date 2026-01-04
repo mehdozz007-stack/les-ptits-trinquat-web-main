@@ -95,7 +95,6 @@ const carouselPartners = [
   { id: 17, name: "Théâtre la Chocolaterie", logo: "🍫", category: "Culture", website: "https://lachocolaterie.org/" },
   { id: 18, name: "Théâtre de la Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
   { id: 60, name: "Théâtre La Vista", logo: "🎭", category: "Culture", website: "https://www.theatrelavista.fr/" },
-  { id: 61, name: "Théâtre La Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
   
 
   { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation", website: "https://www.kittyenglishschool.fr/" },
