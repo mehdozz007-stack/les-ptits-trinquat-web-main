@@ -11,7 +11,7 @@ import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
-import NotreEcole from "./pages/NotreEcole";
+import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

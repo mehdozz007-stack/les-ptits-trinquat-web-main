@@ -134,6 +134,37 @@ const InfoBadge = ({
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
             <InfoBadge
+              icon="🎊"
+              text="Bonne année 2026 à toutes les familles 🤍 !"
+              href="https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
+              delay={0.2}
+              bgClass="bg-red-500/10 text-red-900"
+              textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"
+              pingOuter="bg-red-500"
+              pingInner="bg-red-400"
+              sparks={sparks}
+              sparksColors={[
+                    "bg-red-400",
+                    "bg-orange-400",
+                    "bg-yellow-300",
+                    "bg-lime-400",
+                    "bg-green-400",
+                    "bg-emerald-400",
+                    "bg-teal-400",
+                    "bg-cyan-400",
+                    "bg-sky-400",
+                    "bg-blue-400",
+                    "bg-indigo-400",
+                    "bg-violet-400",
+                    "bg-purple-400",
+                    "bg-pink-400",
+                    "bg-rose-400",
+                    "bg-amber-400",
+                    "bg-white",
+                  ]}
+
+            />
+            <InfoBadge
               icon="📣"
               text="TOMBOLA 2025-2026 lancée ! Gagnez de superbes lots !"
               href="/evenements#event-1"
@@ -192,37 +223,6 @@ const InfoBadge = ({
                     "bg-amber-400",
                     "bg-white",
                   ]}
-            />
-            <InfoBadge
-              icon="🎄"
-              text="Vente de gâteaux le 19 décembre. Merci d'avoir participé ! Joyeuses fêtes 🤍"
-              href="https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
-              delay={0.2}
-              bgClass="bg-red-500/10 text-red-900"
-              textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"
-              pingOuter="bg-red-500"
-              pingInner="bg-red-400"
-              sparks={sparks}
-              sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
-                    "bg-green-400",
-                    "bg-emerald-400",
-                    "bg-teal-400",
-                    "bg-cyan-400",
-                    "bg-sky-400",
-                    "bg-blue-400",
-                    "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-amber-400",
-                    "bg-white",
-                  ]}
-
             />
           </div>
 
