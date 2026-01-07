@@ -81,7 +81,7 @@ const reports = [
   },
   {
     id: 6,
-    title: "Annexe - Présence",
+    title: "Annexe - Présence Conseil d'École - 2025",
     date: "2025",
     type: "Document",
     category: "reunion",
@@ -108,7 +108,7 @@ const reports = [
   },
   {
     id: 9,
-    title: "Réponses Parents Dickens Frank - Annexe 3",
+    title: "Questions-Réponses Parents Conseil d'École - Annexe 3",
     date: "2025-2026",
     type: "Sondage",
     category: "reunion",
@@ -372,7 +372,7 @@ const ComptesRendus = () => {
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
+                      <h3 className="font-bold text-foreground group-hover:text-primary transition-colors md:line-clamp-1">
                         {report.title}
                       </h3>
                       <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
