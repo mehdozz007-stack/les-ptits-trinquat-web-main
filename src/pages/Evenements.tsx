@@ -45,7 +45,7 @@ const events = [
   {
     id: 4,
     title: "📝 Conseil d'école SI 🌍",
-    date: "7 Janvier 2026",
+    date: "27 Janvier 2026",
     time: "18h30 - 20h00",
     location: "Salle polyvalente",
     description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
@@ -167,11 +167,11 @@ const Evenements = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card variant="playful" className="group h-full overflow-hidden">
-                    <CardContent className="p-0">
+                  <Card variant="playful" className="group h-full overflow-hidden flex flex-col">
+                    <CardContent className="p-0 flex flex-col h-full">
                       <div className={`h-2 ${colors.bg}`} />
-                      <div className="p-6">
-                        <div className={`mb-4 inline-flex items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colors.bg} text-primary-foreground`}>
+                      <div className="p-6 flex-1 flex flex-col">
+                        <div className={`mb-4 inline-flex items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colors.bg} text-primary-foreground w-fit`}>
                           <Calendar className="h-4 w-4" />
                           {event.date}
                         </div>
@@ -180,7 +180,7 @@ const Evenements = () => {
                           {event.title}
                         </h3>
 
-                        <p className="mb-4 text-muted-foreground whitespace-pre-line">
+                        <p className="mb-4 text-muted-foreground whitespace-pre-line flex-1">
                           {event.description}
                         </p>
 
@@ -198,31 +198,32 @@ const Evenements = () => {
                             {event.attendees} participants attendus
                           </div>
                         </div>
+                      </div>
 
+                      <div className="p-6 pt-0">
                         <Button
                           variant="outline"
                           size="sm"
-                          className="mt-6"
-                          disabled={!event.url} // désactive le bouton si pas d'URL
+                          className="w-full"
+                          disabled={!event.url}
                         >
                           {event.url ? (
                             <a
                               href={event.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center"
+                              className="flex items-center justify-center w-full"
                             >
                               En savoir plus
                               <ChevronRight className="ml-2 h-5 w-5" />
                             </a>
                           ) : (
-                            <span className="flex items-center text-muted-foreground cursor-not-allowed">
+                            <span className="flex items-center justify-center text-muted-foreground cursor-not-allowed">
                               En savoir plus
                               <ChevronRight className="ml-2 h-5 w-5" />
                             </span>
                           )}
                         </Button>
-
                       </div>
                     </CardContent>
                   </Card>
