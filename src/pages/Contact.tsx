@@ -313,7 +313,7 @@ const Contact = () => {
                 <CardContent className="flex flex-col gap-4 p-6">
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                      <FileText className="h-6 w-6 text-primary" />
+                      <HelpCircle className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="font-bold text-foreground">Besoin de réponses plus détaillées ?</h3>
                   </div>
