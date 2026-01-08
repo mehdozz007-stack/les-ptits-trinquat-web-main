@@ -147,10 +147,10 @@ const APropos = () => {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-2xl"
           >
-            <span className="mb-4 inline-flex items-sdfcenter gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-              <Users className="h-4 w-4" />
-              Notre association
-            </span>
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/20 px-4 py-1.5 text-sm font-semibold text-accent-foreground">
+                          <Heart className="h-4 w-4 text-secondary" />
+                          Notre association
+                        </span>
             <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
               À propos des<br />
               <span className="text-gradient">P'tits Trinquat</span>

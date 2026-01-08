@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import { FileText, Download, Clock, Search, Lock, KeyRound } from "lucide-react";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { FileText, Download, Clock, Search } from "lucide-react";
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
-// Liste des codes d'accès valides
+// ===== CODE D'ACCÈS - DÉSACTIVÉ POUR LE MOMENT =====
+// Liste des codes d'accès valides (à activer si besoin)
 // Ces codes peuvent être distribués aux parents après contact via le formulaire
-const VALID_ACCESS_CODES = [
+/*const VALID_ACCESS_CODES = [
   "FCPE-2026-ALPHA",
   "FCPE-2026-BETA",
   "FCPE-2026-GAMMA",
@@ -31,7 +31,8 @@ const VALID_ACCESS_CODES = [
   "CONSEIL-ACCES-01",
   "CONSEIL-ACCES-02",
   "CONSEIL-ACCES-03",
-];
+];*/
+// ===== FIN CODE D'ACCÈS =====
 
 const reports = [
   {
@@ -41,9 +42,9 @@ const reports = [
     type: "Conseil d'école",
     category: "conseil",
     hasFile: true,
-    fileUrl: "/documents/Procés Vérbale n°1 CONSEIL D'ECOLE FRANK DICKENS 2025-2026.pdf",
+    fileUrl: "/documents/Proces Verbale n°1 CONSEIL D'ECOLE FRANK DICKENS 2025-2026.pdf",
   },
-  {
+  /*{
     id: 2,
     title: "Compte-rendu Conseil d'école - Novembre 2025",
     date: "Novembre 2025",
@@ -51,7 +52,7 @@ const reports = [
     category: "conseil",
     hasFile: true,
     fileUrl: "/documents/Compte Rendu Conseil d'école Asso Novembre 2025.pdf",
-  },
+  },*/
   {
     id: 3,
     title: "Procès-Verbal Assemblée Générale - 25 Septembre 2025",
@@ -59,9 +60,9 @@ const reports = [
     type: "Assemblée",
     category: "assemblee",
     hasFile: true,
-    fileUrl: "/documents/Procés Vérbale Assemblé Générale Ptits Trinquat - 25092025.pdf",
+    fileUrl: "/documents/Proces VVerbale Assemblee Generale Ptits Trinquat - 25092025.pdf",
   },
-  {
+  /*{
     id: 4,
     title: "Compte Rendu Assemblée Générale - 2025-2026",
     date: "2025-2026",
@@ -69,7 +70,7 @@ const reports = [
     category: "assemblee",
     hasFile: true,
     fileUrl: "/documents/Compte Rendu  Assemblé Générale Asso 2025-2026.pdf",
-  },
+  },*/
   {
     id: 5,
     title: "Procès-Verbal Conseil d'Administration - 2025-2026",
@@ -77,9 +78,9 @@ const reports = [
     type: "Bureau",
     category: "reunion",
     hasFile: true,
-    fileUrl: "/documents/Procés Vérbale CONSEIL ADMINISTRATION LES PTITS TRINQUAT 25_26.pdf",
+    fileUrl: "/documents/Proces Verbale CONSEIL ADMINISTRATION LES PTITS TRINQUAT 25_26.pdf",
   },
-  {
+  /*{
     id: 6,
     title: "Annexe - Présence Conseil d'École - 2025",
     date: "2025",
@@ -87,7 +88,7 @@ const reports = [
     category: "reunion",
     hasFile: true,
     fileUrl: "/documents/Annexe-0 presence.pdf",
-  },
+  },*/
   {
     id: 7,
     title: "Procès-Verbal Elections Parents - Annexe 1",
@@ -106,7 +107,7 @@ const reports = [
     hasFile: true,
     fileUrl: "/documents/Annexe-1-bis-pv-elections-parents-2025-2026.pdf",
   },
-  {
+  /*{
     id: 9,
     title: "Questions-Réponses Parents Conseil d'École - Annexe 3",
     date: "2025-2026",
@@ -114,7 +115,7 @@ const reports = [
     category: "reunion",
     hasFile: true,
     fileUrl: "/documents/annexe-3-reponses-parents-dickens-frank.pdf",
-  },
+  },*/
   {
     id: 10,
     title: "Compte de Résultat - 2024-2025",
@@ -124,7 +125,7 @@ const reports = [
     hasFile: true,
     fileUrl: "/documents/COMPTE DE RESULTAT 2024-2025 LES PTITS TRINQUAT.pdf",
   },
-  {
+  /*{
     id: 11,
     title: "Compte-rendu Installation Barrière",
     date: "2025",
@@ -132,7 +133,7 @@ const reports = [
     category: "reunion",
     hasFile: true,
     fileUrl: "/documents/Compte rendu _Barriere installation.pdf",
-  },
+  },*/
   {
     id: 12,
     title: "Rapport d'Activités - 2024-2025",
@@ -165,18 +166,29 @@ const categories = [
 const ComptesRendus = () => {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
-  const [isUnlocked, setIsUnlocked] = useState(false);
-  const [accessCode, setAccessCode] = useState("");
   const { toast } = useToast();
 
-  // Vérifier si l'accès a déjà été accordé (stocké en session)
-  useEffect(() => {
-    const storedAccess = sessionStorage.getItem("comptesrendus_access");
-    if (storedAccess === "granted") {
-      setIsUnlocked(true);
-    }
-  }, []);
+  const filteredReports = reports.filter((report) => {
+    const matchesSearch = report.title.toLowerCase().includes(search.toLowerCase());
+    const matchesCategory = activeCategory === "all" || report.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
 
+  const handleDownload = (fileUrl: string, title: string) => {
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = `${title.replace(/[^a-zA-Z0-9]/g, "-")}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // ===== PAGE DE VERROUILLAGE - DÉSACTIVÉE =====
+  // Pour réactiver le système de code d'accès:
+  // 1. Décommenter les codes VALID_ACCESS_CODES en haut du fichier
+  // 2. Décommenter la logique ci-dessous
+  // 3. Utiliser: if (!isUnlocked) { return (...page verrouillée...); }
+  /*
   const handleCodeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const normalizedCode = accessCode.trim().toUpperCase();
@@ -197,92 +209,17 @@ const ComptesRendus = () => {
     }
   };
 
-  const filteredReports = reports.filter((report) => {
-    const matchesSearch = report.title.toLowerCase().includes(search.toLowerCase());
-    const matchesCategory = activeCategory === "all" || report.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const handleDownload = (fileUrl: string, title: string) => {
-    const link = document.createElement("a");
-    link.href = fileUrl;
-    link.download = `${title.replace(/[^a-zA-Z0-9]/g, "-")}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  // Page de verrouillage
   if (!isUnlocked) {
     return (
       <Layout>
         <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-muted/50 py-20">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-20 right-20 h-60 w-60 rounded-full bg-secondary/20 watercolor-blob" />
-            <div className="absolute bottom-10 -left-10 h-40 w-40 rounded-full bg-violet/20 watercolor-blob" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-primary/5 watercolor-blob" />
-          </div>
-
-          <div className="container relative">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mx-auto max-w-md text-center"
-            >
-              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-                <Lock className="h-10 w-10 text-primary" />
-              </div>
-              
-              <h1 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Accès protégé
-              </h1>
-              <p className="mb-8 text-muted-foreground">
-                Cette section est réservée aux membres de l'association. 
-                Entrez votre code d'accès pour consulter les documents.
-              </p>
-
-              <Card variant="elevated" className="text-left">
-                <CardContent className="p-6">
-                  <form onSubmit={handleCodeSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                      <label htmlFor="accessCode" className="text-sm font-medium">
-                        Code d'accès
-                      </label>
-                      <div className="relative">
-                        <KeyRound className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input
-                          id="accessCode"
-                          type="text"
-                          placeholder="Entrez votre code..."
-                          value={accessCode}
-                          onChange={(e) => setAccessCode(e.target.value)}
-                          className="pl-10 uppercase"
-                          autoComplete="off"
-                        />
-                      </div>
-                    </div>
-                    <Button type="submit" className="w-full" disabled={!accessCode.trim()}>
-                      Accéder aux documents
-                    </Button>
-                  </form>
-
-                  <div className="mt-6 pt-6 border-t border-border">
-                    <p className="text-sm text-muted-foreground text-center">
-                      Vous n'avez pas de code ?{" "}
-                      <Link to="/contact" className="text-primary font-medium hover:underline">
-                        Contactez-nous
-                      </Link>{" "}
-                      pour en obtenir un.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+          ... page de verrouillage ...
         </section>
       </Layout>
     );
   }
+  */
+  // ===== FIN PAGE DE VERROUILLAGE =====
 
   return (
     <Layout>
@@ -359,6 +296,7 @@ const ComptesRendus = () => {
             {filteredReports.map((report, index) => (
               <motion.div
                 key={report.id}
+                id={`report-${report.id}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}

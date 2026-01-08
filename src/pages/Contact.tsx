@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, MessageSquare, HelpCircle, Clock, Heart, ExternalLink, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, HelpCircle, Clock, Heart, ExternalLink, Instagram, Facebook, FileText, Download } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
@@ -301,6 +301,43 @@ const Contact = () => {
                 </Card>
               </motion.div>
             ))}
+
+            {/* Download FAQ Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: faqs.length * 0.1 }}
+            >
+              <Card variant="elevated" className="bg-gradient-to-br from-primary/5 to-secondary/5">
+                <CardContent className="flex flex-col gap-4 p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                      <FileText className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-foreground">Besoin de réponses plus détaillées ?</h3>
+                  </div>
+                  <p className="text-muted-foreground">
+                    Un petit guide pensé pour les familles, à lire tranquillement à la maison, qui rassemble toutes les questions essentielles sur la vie de l'école et de l'association.
+                  </p>
+                  <Button
+                    variant="default"
+                    size="lg"
+                    className="w-full sm:w-fit sm:mx-auto mt-2 block"
+                    asChild
+                  >
+                    <a
+                      href="/documents/FAQ-Full-Lesptitstrinquat.PDF"
+                      download
+                      className="flex items-center gap-2 justify-center"
+                    >
+                      <Download className="h-4 w-4" />
+                      Télécharger la FAQ complète
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </section>
