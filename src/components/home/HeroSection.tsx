@@ -98,17 +98,19 @@ const InfoBadge = ({
       </div>
 
       {/* Link */}
-      <Button
-        variant="ghost"
-        size="sm"
-        className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm ml-auto"
-        asChild
-      >
-        <a href={href} target="_blank" rel="noopener noreferrer">
-          Voir
-          <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
-        </a>
-      </Button>
+      {href && (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm ml-auto"
+          asChild
+        >
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            Voir
+            <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+          </a>
+        </Button>
+      )}
     </motion.div>
   )
 }
@@ -135,8 +137,8 @@ const InfoBadge = ({
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
             <InfoBadge
               icon="🎊"
-              text="Bonne année 2026 à toutes les familles 🤍 !"
-              href="https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
+              text="Bonne année 2026 et bonne santé à tous 🤍"
+              href=""
               delay={0.2}
               bgClass="bg-red-500/10 text-red-900"
               textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"

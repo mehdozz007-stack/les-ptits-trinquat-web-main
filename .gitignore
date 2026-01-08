@@ -22,7 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-generated/prisma/runtime/wasm-compiler-edge.js
 generated/prisma/client.d.ts
 generated/prisma/client.js
 generated/prisma/default.d.ts
@@ -33,8 +32,8 @@ generated/prisma/index-browser.js
 generated/prisma/index.d.ts
 generated/prisma/index.js
 generated/prisma/package.json
-generated/prisma/query_compiler_bg.js
 generated/prisma/query_compiler_bg.wasm
+generated/prisma/query_compiler_bg.js
 generated/prisma/query_compiler_bg.wasm-base64.js
 generated/prisma/schema.prisma
 generated/prisma/wasm-edge-light-loader.mjs
@@ -43,3 +42,4 @@ generated/prisma/runtime/client.d.ts
 generated/prisma/runtime/client.js
 generated/prisma/runtime/index-browser.d.ts
 generated/prisma/runtime/index-browser.js
+generated/prisma/runtime/wasm-compiler-edge.js

@@ -86,6 +86,7 @@ const carouselPartners = [
   { id: 11, name: "Cafés et Gourmandises", logo: "☕", category: "Restauration", website: "https://www.facebook.com/CafesGourmandises/" },
   { id: 12, name: "Café Joyeux", logo: "😊", category: "Restauration", website: "https://www.cafejoyeux.com/fr/content/49-cafe-joyeux-montpellier?srsltid=AfmBOopcympFwDGMq35jj09dnuDK-4HepNBcUHO6_0wtv8BrtiZDJEI6" },
   { id: 70, name: "BC Végé", logo: "🥗", category: "Restauration", website: "https://bc-vege.fr/" },
+  { id: 75, name: "French Kiss", logo: "🍽️", category: "Restauration", website: "https://www.frenchkiss.fr/nos-adresses/montpellier" },
   
   // Culture & Spectacles
   { id: 13, name: "South Comédie", logo: "🎤", category: "Culture", website: "https://www.instagram.com/south.comedyclub/?hl=en" },
@@ -95,7 +96,7 @@ const carouselPartners = [
   { id: 17, name: "Théâtre la Chocolaterie", logo: "🍫", category: "Culture", website: "https://lachocolaterie.org/" },
   { id: 18, name: "Théâtre de la Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
   { id: 60, name: "Théâtre La Vista", logo: "🎭", category: "Culture", website: "https://www.theatrelavista.fr/" },
-  { id: 61, name: "Théâtre La Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
+  { id: 74, name: "Théâtre Le Point Comedie", logo: "🏋️‍♀️", category: "Bien-être", website: "https://www.lepointcomedie.fr/" },
   
 
   { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation", website: "https://www.kittyenglishschool.fr/" },
@@ -118,6 +119,7 @@ const carouselPartners = [
   { id: 72, name: "Just Fit", logo: "💪", category: "Bien-être", website: "" },
   { id: 73, name: "Fit Family", logo: "🏃", category: "Bien-être", website: "https://fitfamily.fr/" },
   { id: 68, name: "Nomaïa", logo: "🧘", category: "Bien-être", website: "https://www.instagram.com/nomaia_montpellier/" },
+  { id: 61, name: "Sport Break", logo: "🏋️‍♀️", category: "Bien-être", website: "https://www.sport-break.fr/" },
   
   { id: 29, name: "Sticker Kid", logo: "🏷️", category: "Événements", website: "https://www.stickerkid.fr/fr_fr/?gc_id=22380077972&h_ga_id=177763846235&h_ad_id=741963232215&h_keyword_id=kwd-3117029590&h_keyword=commander%20stickers&h_placement=&gad_source=1&gad_campaignid=22380077972&gclid=Cj0KCQiAuvTJBhCwARIsAL6DemgaL7OxCXFNHQau9UlzioyJXf4UmNtsAzqCMynLY3KGKkVPhdE15U0aAs-vEALw_wcB" },
   { id: 30, name: "Fabrique Photos", logo: "📸", category: "Événements", website: "https://lafabriquephotos.fr/" },
@@ -155,6 +157,7 @@ const carouselPartners = [
   { id: 67, name: "Times Xpérience", logo: "⏰", category: "Loisirs", website: "https://timexperience-montpellier.fr/" },
   { id: 59, name: "Pirates Paradise", logo: "🏴‍☠️", category: "Loisirs", website: "https://montpellier.pirates-paradise.fr/" },
   { id: 63, name: "Grottes de Trabuc", logo: "⛏️", category: "Loisirs", website: "https://www.grottesdetrabuc.com/" },
+  { id: 69, name: "Swim Stars", logo: "🏊‍♀️", category: "Loisirs", website: "https://swimstars.co/piscines/montpellier/" },
 ];
 
 const categories = ["Tous", "Restauration", "Culture", "Éducation", "Shopping", "Bien-être", "Événements", "Loisirs"];
