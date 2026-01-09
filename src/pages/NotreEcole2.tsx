@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import {
-  MapPin,
+  Globe,
   GraduationCap,
   Heart,
   Users,
@@ -60,6 +60,13 @@ const schoolValues = [
     icon: GraduationCap,
     color: "bg-violet/20 text-violet",
   },
+  {
+    title: "Ouverture internationale",
+    description: "Une section allemande et un apprentissage des langues dès la maternelle pour grandir ouvert au monde.",
+    icon: Globe,
+    color: "bg-green-50 text-green-600",
+  },
+
 ];
 
 const schoolActivities = [
@@ -246,8 +253,9 @@ const NotreEcole = () => {
             </div>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">De la maternelle au CM2</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Un parcours complet et cohérent pour accompagner votre enfant 
-              dans toutes les étapes de sa scolarité.
+              Un parcours complet et cohérent pour accompagner votre enfant dans les étapes de sa scolarité. 
+              L'<strong>apprentissage de l'allemand commence dès la maternelle</strong>, de manière progressive 
+              et ludique, permettant aux élèves de développer naturellement une sensibilité aux langues et au monde qui les entoure.
             </p>
           </motion.div>
 
