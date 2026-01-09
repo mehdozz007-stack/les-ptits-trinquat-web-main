@@ -64,7 +64,7 @@ const Contact = () => {
   } catch (err) {
     toast({
       title: "Erreur",
-      description: "Impossible d’envoyer le message. Merci de réessayer.",
+      description: "Impossible d'envoyer le message. Merci de réessayer.",
       variant: "destructive",
     });
     setIsSubmitting(false);

@@ -8,12 +8,12 @@ import {
   Users,
   Sparkles,
   BookOpen,
-  TreePine,
   Bus,
   Calendar,
   HandHeart,
   Mail,
   School,
+  Leaf,
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -126,8 +126,8 @@ const NotreEcole = () => {
               Un lieu où grandir <span className="text-gradient">avec bonheur</span>
             </h1>
             <p className="text-lg text-muted-foreground md:text-xl leading-relaxed">
-              Au cœur de notre groupe scolaire, chaque enfant trouve sa place dans un environnement chaleureux, 
-              stimulant et bienveillant. Découvrez un cadre idéal pour apprendre et s'épanouir.
+              Un lieu où chaque enfant trouve sa place dans un environnement chaleureux, 
+              stimulant et bienveillant. Un cadre idéal pour apprendre et s'épanouir.
             </p>
           </motion.div>
         </div>
@@ -152,7 +152,7 @@ const NotreEcole = () => {
               <img 
                 src={panneauImage}
                 alt="École Anne Frank - Charles Dickens" 
-                className="w-full h-80 object-cover"
+                className="w-full h-48 md:h-80 object-cover"
               />
             </motion.div>
 
@@ -164,21 +164,21 @@ const NotreEcole = () => {
               className="space-y-4 text-muted-foreground leading-relaxed"
             >
               <p>
-                Le groupe scolaire Anne Frank - Charles Dickens accueille les enfants de la maternelle au CM2 
-                dans un cadre pensé pour leur épanouissement. Nos équipes pédagogiques dévouées accompagnent 
-                chaque élève avec attention et bienveillance.
+                Le groupe scolaire <strong>Anne Frank - Charles Dickens</strong> accueille les enfants de la maternelle au CM2 dans un environnement doux et rassurant, pensé pour favoriser leur épanouissement. Chaque jour, nos équipes pédagogiques attentives accompagnent les élèves avec bienveillance et engagement.
               </p>
+
               <p>
-                Ici, l'apprentissage rime avec plaisir. Les enseignants travaillent main dans la main avec 
-                les familles pour offrir aux enfants les meilleures conditions de réussite, dans le respect 
-                du rythme de chacun.
+                Ici, apprendre rime avec plaisir et confiance. Enseignants et familles avancent main dans la main pour offrir à chaque enfant un parcours scolaire respectueux de son rythme, de sa curiosité et de ses talents.
               </p>
+
               <p>
-                Notre école est un lieu de vie où se tissent des liens durables, où les valeurs de respect, 
-                de partage et d'entraide sont cultivées au quotidien.
+                Plus qu'un lieu d'apprentissage, le groupe scolaire <strong>Anne Frank - Charles Dickens</strong> est un véritable lieu de vie, où se construisent des liens durables et où les valeurs de respect, de partage et d'entraide grandissent au quotidien.
               </p>
+
             </motion.div>
           </div>
+
+
 
           {/* Valeurs alignées sur une ligne */}
           <motion.div
@@ -186,16 +186,18 @@ const NotreEcole = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            className="grid grid-cols-1 md:grid-cols-4 gap-4"
           >
             {schoolValues.map((value, index) => (
-              <Card key={index} variant="elevated" className="overflow-hidden">
-                <CardContent className="p-5">
-                  <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${value.color}`}>
-                    <value.icon className="h-5 w-5" />
+              <Card key={index} variant="elevated" className="overflow-hidden h-full">
+                <CardContent className="p-5 flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${value.color}`}>
+                      <value.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-bold text-base sm:text-base text-foreground">{value.title}</h3>
                   </div>
-                  <h3 className="mb-1 font-bold text-foreground">{value.title}</h3>
-                  <p className="text-sm text-muted-foreground">{value.description}</p>
+                  <p className="text-sm sm:text-base text-muted-foreground">{value.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -203,6 +205,31 @@ const NotreEcole = () => {
         </div>
       </section>
 
+      {/* Lien vers le Digipad et ENT - Séparation visuelle */}
+      <section className="bg-muted/80 py-12 md:py-16">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center gap-4 flex-wrap"
+          >
+            <Button asChild variant="playful" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
+              <a href="https://digipad.app/p/1394770/39b6b0ff88979" target="_blank" rel="noopener noreferrer">
+                <BookOpen className="mr-2 h-5 w-5" />
+                Consulter le DigiPad de l'école
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
+              <a href="https://www.ent-ecole.fr/cardboard/0193c4aa-f45c-792c-81bc-0703a3006b58" target="_blank" rel="noopener noreferrer">
+                <Leaf className="mr-1 md:mr-2 h-4 md:h-5 w-4 md:w-5" />
+                Accéder à l'ENT
+              </a>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Niveaux et parcours */}
       <section className="py-16 md:py-20">
@@ -234,12 +261,14 @@ const NotreEcole = () => {
                 transition={{ delay: index * 0.15 }}
               >
                 <Card variant="playful" className="h-full">
-                  <CardContent className="p-8">
-                    <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${level.color}`}>
-                      <level.icon className="h-7 w-7" />
+                  <CardContent className="p-8 flex flex-col gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${level.color}`}>
+                        <level.icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-bold">{level.title}</h3>
                     </div>
-                    <h3 className="mb-3 text-2xl font-bold">{level.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{level.description}</p>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{level.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -278,11 +307,13 @@ const NotreEcole = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <Card variant="elevated" className="h-full">
-                  <CardContent className="p-6">
-                    <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${activity.color}`}>
-                      <activity.icon className="h-6 w-6" />
+                  <CardContent className="p-6 flex flex-col gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${activity.color}`}>
+                        <activity.icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="font-bold text-foreground">{activity.title}</h3>
                     </div>
-                    <h3 className="mb-2 font-bold text-foreground">{activity.title}</h3>
                     <p className="text-sm text-muted-foreground">{activity.description}</p>
                   </CardContent>
                 </Card>
@@ -304,10 +335,12 @@ const NotreEcole = () => {
             >
               <Card variant="playful" className="overflow-hidden">
                 <CardContent className="p-8">
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/20">
-                    <HandHeart className="h-8 w-8 text-accent" />
+                  <div className="mb-6 flex items-center gap-4">
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-accent/20">
+                      <HandHeart className="h-8 w-8 text-accent" />
+                    </div>
+                    <h3 className="text-lg font-bold">Parents et école, main dans la main</h3>
                   </div>
-                  <h3 className="mb-4 text-2xl font-bold">Parents et école, main dans la main</h3>
                   <ul className="space-y-3 text-muted-foreground">
                     <li className="flex items-start gap-3">
                       <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
@@ -315,7 +348,7 @@ const NotreEcole = () => {
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-secondary" />
-                      Financement de projets pédagogiques
+                      Aide au financement de projets pédagogiques
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-sky" />
@@ -345,26 +378,17 @@ const NotreEcole = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  L'Association des Parents d'Élèves « Les P'tits Trinquat » joue un rôle essentiel 
-                  dans la vie de l'école. En collaboration étroite avec l'équipe pédagogique, 
-                  nous œuvrons pour le bien-être et l'épanouissement de tous les enfants.
+                  L'Association des Parents d'Élèves <strong>Les P'tits Trinquat</strong> accompagne la vie de l'école avec cœur et engagement, en étroite collaboration avec l'équipe pédagogique, pour le bien-être et l'épanouissement de chaque enfant.
                 </p>
                 <p>
-                  Grâce à l'implication des familles bénévoles, nous organisons des événements 
-                  qui rythment l'année scolaire et créons des liens durables entre tous les 
-                  membres de notre communauté éducative.
+                  Portée par l'énergie des familles bénévoles, l'association anime l'année scolaire à travers des moments de partage qui renforcent les liens et la convivialité au sein de notre communauté.
                 </p>
+
               </div>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button asChild variant="playful" size="lg">
+              <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
+                <Button asChild variant="playful" className="text-base md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
                   <Link to="/a-propos">
                     Découvrir l'APE
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/contact">
-                    <Mail className="mr-2 h-4 w-4" />
-                    Nous contacter
                   </Link>
                 </Button>
               </div>
@@ -439,16 +463,11 @@ const NotreEcole = () => {
               Parce que chaque enfant mérite un environnement où il peut grandir en confiance, 
               s'épanouir et développer tout son potentiel. Rejoignez notre belle communauté !
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild variant="playful" size="xl">
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
+              <Button asChild variant="outline" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
                 <Link to="/contact">
-                  <Mail className="mr-2 h-5 w-5" />
+                  <Mail className="mr-1 md:mr-2 h-4 md:h-5 w-4 md:w-5" />
                   Nous contacter
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/a-propos">
-                  En savoir plus sur l'APE
                 </Link>
               </Button>
             </div>
