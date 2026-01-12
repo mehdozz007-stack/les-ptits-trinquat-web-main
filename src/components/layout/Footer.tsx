@@ -184,7 +184,7 @@ export function Footer() {
                   <img
                     src={partner.logo}
                     alt={partner.alt}
-                    className="h-20 w-auto object-contain md:h-24 rounded-lg"
+                    className="h-24 w-auto object-contain md:h-32 rounded-lg"
                   />
                 </a>
               ))}

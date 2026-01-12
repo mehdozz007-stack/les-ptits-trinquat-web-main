@@ -45,8 +45,8 @@ const events = [
   {
     id: 4,
     title: "📝 Conseil d'école SI 🌍",
-    date: "27 Janvier 2026",
-    time: "18h30 - 20h00",
+    date: "20 Janvier 2026",
+    time: "17h45 - 19h15",
     location: "Salle polyvalente",
     description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
     color: "sky",

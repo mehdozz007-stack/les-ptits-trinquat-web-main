@@ -136,43 +136,12 @@ const InfoBadge = ({
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
             <InfoBadge
-              icon="🎊"
-              text="Bonne année 2026 et bonne santé à tous 🤍"
-              href=""
-              delay={0.2}
-              bgClass="bg-red-500/10 text-red-900"
-              textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"
-              pingOuter="bg-red-500"
-              pingInner="bg-red-400"
-              sparks={sparks}
-              sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
-                    "bg-green-400",
-                    "bg-emerald-400",
-                    "bg-teal-400",
-                    "bg-cyan-400",
-                    "bg-sky-400",
-                    "bg-blue-400",
-                    "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-amber-400",
-                    "bg-white",
-                  ]}
-
-            />
-            <InfoBadge
-              icon="📣"
-              text="TOMBOLA 2025-2026 lancée ! Gagnez de superbes lots !"
+              icon="🌍"
+              text="Conseil d'école SI le 20 Janvier 2026"
               href="/evenements#event-1"
               delay={0.2}
-              bgClass="bg-primary/10 text-blue-900"
-              textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"
+              bgClass="bg-pink-100/70 text-pink-900"
+              textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"
               pingOuter="bg-green-600"
               pingInner="bg-green-500"
               sparks={sparks}
@@ -197,11 +166,41 @@ const InfoBadge = ({
                   ]}
             />
             <InfoBadge
+              icon="📣"
+              text="TOMBOLA 2026 lancée ! Gagnez des supers lots !"
+              href="/evenements#event-1"
+              delay={0.2}
+              bgClass="bg-red-100/80 text-red-900"
+              textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
+              pingOuter="bg-red-600"
+              pingInner="bg-red-500"
+              sparks={sparks}
+              sparksColors={[
+                    "bg-red-400",
+                    "bg-orange-400",
+                    "bg-yellow-300",
+                    "bg-lime-400",
+                    "bg-green-400",
+                    "bg-emerald-400",
+                    "bg-teal-400",
+                    "bg-cyan-400",
+                    "bg-sky-400",
+                    "bg-blue-400",
+                    "bg-indigo-400",
+                    "bg-violet-400",
+                    "bg-purple-400",
+                    "bg-pink-400",
+                    "bg-rose-400",
+                    "bg-amber-400",
+                    "bg-white",
+                  ]}
+            />
+            <InfoBadge
               icon="🏆"
-              text="Profitez de nos offres issues de partenariats exclusifs !"
+              text="Profitez de nos offres de partenariats exclusifs !"
               href="/partenaires#special-event-1"
               delay={0.2}
-              bgClass="bg-violet/10 text-violet-900"
+              bgClass="bg-violet-100/50 text-violet-900"
               textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
               pingOuter="bg-purple-500"
               pingInner="bg-purple-400"

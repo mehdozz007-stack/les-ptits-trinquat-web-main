@@ -10,6 +10,7 @@ import brinDeTerre from "@/assets/logos/brindeterre.jpg";
 import manuCreation from "@/assets/logos/manucreation.jpg";
 import astroludik from "@/assets/logos/logo-astroludik.png";
 import massagesIsa from "@/assets/logos/isamassage.avif";
+import frenchKissLogo from "@/assets/logos/frenchkiss.png";
 
 const partners = [
   {
@@ -19,6 +20,13 @@ const partners = [
     description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
     logo: lesPetitsBilinguesLogo,
     website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
+  },
+  { id: 76, 
+    name: "French Kiss", 
+    category: "Restauration",
+    description: "Restaurant français proposant une cuisine savoureuse et authentique dans un cadre convivial.", 
+    logo: frenchKissLogo, 
+    website: "https://www.frenchkiss.fr/nos-adresses/montpellier",
   },
   {
     id: 2,
@@ -52,14 +60,6 @@ const partners = [
     logo: astroludik,
     website: "https://www.astroludik.com/",
   },
-  {
-    id: 6,
-    name: "Massages d'Isa",
-    category: "Bien-être",
-    description: "Massages bien-être et relaxation pour toute la famille.",
-    logo: massagesIsa,
-    website: "https://isabellerichez34.wixsite.com/monsite-6",
-  },
 ];
 
 export function PartnersPreview() {
@@ -86,7 +86,7 @@ export function PartnersPreview() {
         </motion.div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-6">
           {partners.map((partner, index) => (
             <motion.a
               key={partner.id}
@@ -97,18 +97,24 @@ export function PartnersPreview() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer"
+              className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-5 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer"
             >
-              <div className="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden">
+              <div className="mb-3 flex h-40 w-40 items-center justify-center overflow-hidden">
                 <img 
                   src={partner.logo} 
                   alt={partner.name}
                   className="h-full w-full object-contain p-2 rounded-lg"
                 />
               </div>
-              <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+              <span className="mb-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                {partner.category}
+              </span>
+              <span className="mb-2 text-lg font-bold text-foreground">
                 {partner.name}
               </span>
+              <p className="text-sm text-muted-foreground text-center">
+                {partner.description}
+              </p>
             </motion.a>
           ))}
         </div>

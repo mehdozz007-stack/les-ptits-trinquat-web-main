@@ -22,6 +22,7 @@ import brinDeTerre from "@/assets/logos/brindeterre.jpg";
 import manuCreation from "@/assets/logos/manucreation.jpg";
 import astroludik from "@/assets/logos/logo-astroludik.png";
 import massagesIsa from "@/assets/logos/isamassage.avif";
+import frenchKissLogo from "@/assets/logos/frenchkiss.png";
 
 // Les 6 partenaires principaux
 const mainPartners = [
@@ -32,6 +33,12 @@ const mainPartners = [
     description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
     logo: lesPetitsBilinguesLogo,
     website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
+  },
+  { id: 76, 
+    name: "French Kiss", 
+    category: "Restauration",
+    description: "Restaurant français proposant une cuisine savoureuse et authentique dans un cadre convivial.", 
+    logo: frenchKissLogo, website: "https://www.frenchkiss.fr/nos-adresses/montpellier",
   },
   {
     id: 2,
@@ -65,14 +72,6 @@ const mainPartners = [
     logo: astroludik,
     website: "https://www.astroludik.com/",
   },
-  {
-    id: 6,
-    name: "Massages d'Isa",
-    category: "Bien-être",
-    description: "Massages bien-être et relaxation pour toute la famille.",
-    logo: massagesIsa,
-    website: "https://isabellerichez34.wixsite.com/monsite-6",
-  }, 
 ];
 
 // Partenaires par catégorie pour le carrousel
@@ -95,8 +94,8 @@ const carouselPartners = [
   { id: 16, name: "Rêves de Cirques", logo: "🎪", category: "Culture", website: "https://www.reves-de-cirque.com/montpellier" },
   { id: 17, name: "Théâtre la Chocolaterie", logo: "🍫", category: "Culture", website: "https://lachocolaterie.org/" },
   { id: 18, name: "Théâtre de la Plume", logo: "🎭", category: "Culture", website: "https://www.theatredelaplume.com/" },
-  { id: 60, name: "Théâtre La Vista", logo: "🎭", category: "Culture", website: "https://www.theatrelavista.fr/" },
-  { id: 74, name: "Théâtre Le Point Comedie", logo: "🏋️‍♀️", category: "Bien-être", website: "https://www.lepointcomedie.fr/" },
+  { id: 60, name: "Théâtre La Vista", logo: "👏", category: "Culture", website: "https://www.theatrelavista.fr/" },
+  { id: 74, name: "Théâtre Le Point Comedie", logo: "🎬", category: "Culture", website: "https://www.lepointcomedie.fr/" },
   
 
   { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation", website: "https://www.kittyenglishschool.fr/" },
@@ -108,8 +107,9 @@ const carouselPartners = [
   { id: 22, name: "Cartapapa", logo: "📮", category: "Shopping", website: "https://cartapapa.fr/" },
   { id: 23, name: "Parfume Moi", logo: "🌸", category: "Shopping", website: "https://parfumemoi.fr/" },
   { id: 64, name: "Uniikon", logo: "👔", category: "Shopping", website: "https://uniikon.com/pages/store-map?srsltid=AfmBOopXaLEZjulU-VHfOEUrzOhNcIX9Mp_YF15niXmHvl5dacBBq8w3" },
-
-  //{ id: 6, name: "Massages d'Isa", category: "Bien-être", logo: "💆‍♀️", website: "https://isabellerichez34.wixsite.com/monsite-6"},
+  { id: 82, name: "La Salamandre", logo: "🦎", category: "Shopping", website: "https://www.salamandre.org/" },
+  
+  { id: 6, name: "Massages d'Isa", category: "Bien-être", logo: "💆‍♀️", website: "https://isabellerichez34.wixsite.com/monsite-6"},
   { id: 24, name: "Self Défense Féminine Occitanie", logo: "🥋", category: "Bien-être", website: "https://www.helloasso.com/associations/self-defense-feminine-occitanie" },
   { id: 25, name: "Centre Équestre Occitanie", logo: "🐴", category: "Bien-être", website: "https://sites.google.com/ceso34.com/info/accueil" },
   { id: 26, name: "Cocon des Doulas", logo: "🤱", category: "Bien-être", website: "https://lecocondesdoulas.wixsite.com/le-cocon-des-doulas" },
@@ -120,6 +120,8 @@ const carouselPartners = [
   { id: 73, name: "Fit Family", logo: "🏃", category: "Bien-être", website: "https://fitfamily.fr/" },
   { id: 68, name: "Nomaïa", logo: "🧘", category: "Bien-être", website: "https://www.instagram.com/nomaia_montpellier/" },
   { id: 61, name: "Sport Break", logo: "🏋️‍♀️", category: "Bien-être", website: "https://www.sport-break.fr/" },
+  { id: 77, name: "Dali Berber", logo: "💇‍♂️", category: "Bien-être", website: "https://share.google/SYtjN5i9ed5u1nKPK" },
+  { id: 78, name: "Harmonie de l'âme", logo: "💇", category: "Bien-être", website: "https://share.google/UwSsbW8NWxhp0QiBe" },
   
   { id: 29, name: "Sticker Kid", logo: "🏷️", category: "Événements", website: "https://www.stickerkid.fr/fr_fr/?gc_id=22380077972&h_ga_id=177763846235&h_ad_id=741963232215&h_keyword_id=kwd-3117029590&h_keyword=commander%20stickers&h_placement=&gad_source=1&gad_campaignid=22380077972&gclid=Cj0KCQiAuvTJBhCwARIsAL6DemgaL7OxCXFNHQau9UlzioyJXf4UmNtsAzqCMynLY3KGKkVPhdE15U0aAs-vEALw_wcB" },
   { id: 30, name: "Fabrique Photos", logo: "📸", category: "Événements", website: "https://lafabriquephotos.fr/" },
@@ -158,6 +160,9 @@ const carouselPartners = [
   { id: 59, name: "Pirates Paradise", logo: "🏴‍☠️", category: "Loisirs", website: "https://montpellier.pirates-paradise.fr/" },
   { id: 63, name: "Grottes de Trabuc", logo: "⛏️", category: "Loisirs", website: "https://www.grottesdetrabuc.com/" },
   { id: 69, name: "Swim Stars", logo: "🏊‍♀️", category: "Loisirs", website: "https://swimstars.co/piscines/montpellier/" },
+  { id: 79, name: "Boulder Line", logo: "🧗‍♀️", category: "Loisirs", website: "https://boulderline.fr/" },
+  { id: 80, name: "La Bambouseraie", logo: "🚶", category: "Loisirs", website: "https://bambouseraie.fr/" },
+  { id: 81, name: "Librairie Nemo", logo: "📚", category: "Loisirs", website: "https://www.librairienemo.com/" },
 ];
 
 const categories = ["Tous", "Restauration", "Culture", "Éducation", "Shopping", "Bien-être", "Événements", "Loisirs"];
@@ -241,10 +246,10 @@ const Partenaires = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-12 text-center"
+            className="mb-12  text-center"
           >
             <h2 className="mb-2 text-2xl font-bold">
-              Événements spéciaux <span className="text-gradient">&</span> Partenariats exclusifs
+              Événements spéciaux <span className="text-gradient">& Partenariats exclusifs</span>
             </h2>
             <p className="text-muted-foreground">
               Découvrez les collaborations exclusives et activités spéciales proposées par nos partenaires pour enrichir la vie de nos enfants.
@@ -341,7 +346,7 @@ const Partenaires = () => {
                   <CardContent className="flex flex-col items-center p-6 text-center h-full">
                     {/* Logo */}
                     <motion.div 
-                      className="mb-4 flex h-32 w-32 items-center justify-center overflow-hidden transition-all"
+                      className="mb-4 flex h-40 w-40 items-center justify-center overflow-hidden transition-all"
                       whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.3 }}
                     >
