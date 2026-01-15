@@ -166,6 +166,36 @@ const InfoBadge = ({
                   ]}
             />
             <InfoBadge
+              icon="📰"
+              text="À l'attention des parents de CM2 SI"
+              href="/documents/Affiche_SI_écoles_260115_044150.pdf"
+              delay={0.2}
+              bgClass="bg-blue-100/30 text-blue-900"
+              textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-amber-500"
+              pingOuter="bg-pink-500"
+              pingInner="bg-pink-400"
+              sparks={sparks}
+              sparksColors={[
+                    "bg-red-400",
+                    "bg-orange-400",
+                    "bg-yellow-300",
+                    "bg-lime-400",
+                    "bg-green-400",
+                    "bg-emerald-400",
+                    "bg-teal-400",
+                    "bg-cyan-400",
+                    "bg-sky-400",
+                    "bg-blue-400",
+                    "bg-indigo-400",
+                    "bg-violet-400",
+                    "bg-purple-400",
+                    "bg-pink-400",
+                    "bg-rose-400",
+                    "bg-amber-400",
+                    "bg-white",
+                  ]}
+            />
+            <InfoBadge
               icon="📣"
               text="TOMBOLA 2026 lancée ! Gagnez des supers lots !"
               href="/evenements#event-1"
