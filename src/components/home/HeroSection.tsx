@@ -172,8 +172,8 @@ const InfoBadge = ({
               delay={0.2}
               bgClass="bg-blue-100/30 text-blue-900"
               textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-amber-500"
-              pingOuter="bg-pink-500"
-              pingInner="bg-pink-400"
+              pingOuter="bg-blue-500"
+              pingInner="bg-blue-400"
               sparks={sparks}
               sparksColors={[
                     "bg-red-400",
