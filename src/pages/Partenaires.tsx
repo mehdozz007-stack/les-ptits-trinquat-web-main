@@ -23,6 +23,7 @@ import manuCreation from "@/assets/logos/manucreation.jpg";
 import astroludik from "@/assets/logos/logo-astroludik.png";
 import massagesIsa from "@/assets/logos/isamassage.avif";
 import frenchKissLogo from "@/assets/logos/frenchkiss.png";
+import enviForm from "@/assets/logos/enviForm.png";
 
 // Les 6 partenaires principaux
 const mainPartners = [
@@ -50,11 +51,11 @@ const mainPartners = [
   },
   {
     id: 3,
-    name: "Brin de Terre",
-    category: "Éducation",
-    description: "Ateliers poterie pour enfants et adultes.",
-    logo: brinDeTerre,
-    website: "https://www.instagram.com/atelierbrindeterre/",
+    name: "Enviform Sport Santé",
+    category: "Bien être",
+    description: "coaching sportif et bien-être.",
+    logo: enviForm,
+    website: "https://www.enviform-sport-sante.fr/",
   },
   {
     id: 4,
@@ -101,7 +102,14 @@ const carouselPartners = [
   { id: 19, name: "Kitty English School", logo: "🐱", category: "Éducation", website: "https://www.kittyenglishschool.fr/" },
   //{ id: 5, name: "Astroludik", category: "Éducation", logo: "🔭", website: "https://www.astroludik.com/"},
   { id: 62, name: "L'Atelier de Mo", logo: "🎨", category: "Éducation", website: "https://www.latelier-de-mo.com/" },
-  
+  {
+    id: 83,
+    name: "Brin de Terre",
+    category: "Éducation",
+    description: "Ateliers poterie pour enfants et adultes.",
+    logo: "🏺",
+    website: "https://www.instagram.com/atelierbrindeterre/",
+  },
   { id: 20, name: "Atol", logo: "👓", category: "Shopping", website: "https://www.atol.fr/" },
   { id: 21, name: "Comme Avant", logo: "🧴", category: "Shopping", website: "https://www.comme-avant.bio/pages/la-boutique-comme-avant-a-montpellier?srsltid=AfmBOoohHGzktxYXZLmUaSKHOB5aUJogOp5ZJ8hL9f7HQ2kCpYTb3T5C" },
   { id: 22, name: "Cartapapa", logo: "📮", category: "Shopping", website: "https://cartapapa.fr/" },
@@ -346,7 +354,7 @@ const Partenaires = () => {
                   <CardContent className="flex flex-col items-center p-6 text-center h-full">
                     {/* Logo */}
                     <motion.div 
-                      className="mb-4 flex h-40 w-40 items-center justify-center overflow-hidden transition-all"
+                      className="mb-4 flex h-48 w-48 items-center justify-center overflow-hidden transition-all"
                       whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.3 }}
                     >
