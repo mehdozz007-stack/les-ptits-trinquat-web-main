@@ -53,7 +53,7 @@ const mainPartners = [
     id: 3,
     name: "Enviform Sport Santé",
     category: "Bien être",
-    description: "coaching sportif et bien-être.",
+    description: "Coaching sportif et bien-être.",
     logo: enviForm,
     website: "https://www.enviform-sport-sante.fr/",
   },
