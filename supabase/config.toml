@@ -1,0 +1,14 @@
+# Supabase Configuration
+
+[project]
+account_id = ""
+database_url = "postgresql://postgres:[YOUR-PASSWORD]@127.0.0.1:54322/postgres"
+default_branch = "main"
+infrastructure_version = "1.0.0"
+project_id = "les-ptits-trinquat"
+
+[functions.send-newsletter]
+verify_jwt = false  # Validation manuelle dans le code pour plus de contrôle
+
+[api]
+enabled = true
