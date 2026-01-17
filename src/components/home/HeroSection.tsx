@@ -255,6 +255,26 @@ const InfoBadge = ({
                     "bg-white",
                   ]}
             />
+            <InfoBadge
+              icon="❤️"
+              text="Un collecte de fonds, votre aide est précieuse - Un toit Un Avenir !"
+              href="https://www.helloasso.com/associations/une-ecole-un-avenir/collectes/fonds-d-urgence-un-toit-un-avenir"
+              delay={0.2}
+              bgClass="bg-red-100/80 text-red-900"
+              textGradient="bg-gradient-to-r from-rose-500 via-red-600 to-orange-500"
+              pingOuter="bg-rose-600"
+              pingInner="bg-rose-500"
+              sparks={sparks}
+              sparksColors={[
+                    "bg-red-400",
+                    "bg-orange-400",
+                    "bg-yellow-300",
+                    "bg-pink-400",
+                    "bg-rose-400",
+                    "bg-red-400",
+                    "bg-white",
+                  ]}
+            />
           </div>
 
 
