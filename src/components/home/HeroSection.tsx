@@ -140,28 +140,17 @@ const InfoBadge = ({
               text="Conseil d'école SI le 20 Janvier 2026"
               href="/evenements#event-1"
               delay={0.2}
-              bgClass="bg-pink-100/80 text-pink-900"
+              bgClass="bg-green-100/30 text-green-700"
               textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"
               pingOuter="bg-green-600"
               pingInner="bg-green-500"
               sparks={sparks}
               sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
                     "bg-green-400",
-                    "bg-emerald-400",
-                    "bg-teal-400",
                     "bg-cyan-400",
                     "bg-sky-400",
                     "bg-blue-400",
                     "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-amber-400",
                     "bg-white",
                   ]}
             />
@@ -176,10 +165,6 @@ const InfoBadge = ({
               pingInner="bg-blue-400"
               sparks={sparks}
               sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
                     "bg-green-400",
                     "bg-emerald-400",
                     "bg-teal-400",
@@ -187,10 +172,6 @@ const InfoBadge = ({
                     "bg-sky-400",
                     "bg-blue-400",
                     "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
                     "bg-amber-400",
                     "bg-white",
                   ]}
@@ -210,15 +191,10 @@ const InfoBadge = ({
                     "bg-orange-400",
                     "bg-yellow-300",
                     "bg-lime-400",
-                    "bg-green-400",
                     "bg-emerald-400",
                     "bg-teal-400",
                     "bg-cyan-400",
-                    "bg-sky-400",
-                    "bg-blue-400",
                     "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
                     "bg-pink-400",
                     "bg-rose-400",
                     "bg-amber-400",
@@ -232,8 +208,8 @@ const InfoBadge = ({
               delay={0.2}
               bgClass="bg-violet-100/50 text-violet-900"
               textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
-              pingOuter="bg-purple-500"
-              pingInner="bg-purple-400"
+              pingOuter="bg-violet-500"
+              pingInner="bg-violet-400"
               sparks={sparks}
               sparksColors={[
                     "bg-red-400",
