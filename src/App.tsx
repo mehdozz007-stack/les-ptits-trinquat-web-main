@@ -11,6 +11,7 @@ import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
+import AdminNewsletter from "./pages/AdminNewsletter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/partenaires" element={<Partenaires />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/message-envoye" element={<MessageEnvoye />} />
+          <Route path="/admin/newsletter" element={<AdminNewsletter />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

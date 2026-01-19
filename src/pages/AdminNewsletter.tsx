@@ -8,7 +8,6 @@ import { NewsletterEditor } from "@/components/admin/NewsletterEditor";
 import { NewsletterHistory } from "@/components/admin/NewsletterHistory";
 import { useNewsletterAdmin } from "@/hooks/useNewsletterAdmin";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { Helmet } from "react-helmet-async";
 
 export default function AdminNewsletter() {
   const { user, signOut } = useAdminAuth();
@@ -29,11 +28,6 @@ export default function AdminNewsletter() {
 
   return (
     <AdminLayout>
-      <Helmet>
-        <title>Administration Newsletter - Les P'tits Trinquât</title>
-        <meta name="robots" content="noindex, nofollow" />
-      </Helmet>
-
       <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
         {/* Header */}
         <header className="sticky top-0 z-50 border-b border-border/50 bg-card/80 backdrop-blur-lg">
