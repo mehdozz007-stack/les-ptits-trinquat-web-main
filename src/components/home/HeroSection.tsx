@@ -178,7 +178,7 @@ const InfoBadge = ({
             />
             <InfoBadge
               icon="📣"
-              text="TOMBOLA 2026 lancée ! Gagnez des supers lots !"
+              text="Dérniers jours pour notre Tombola. Jusqu'au mardi 20 janvier le soir ❤️"
               href="/evenements#event-1"
               delay={0.2}
               bgClass="bg-red-100/80 text-red-900"
