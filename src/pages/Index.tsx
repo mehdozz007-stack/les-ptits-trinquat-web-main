@@ -1,11 +1,20 @@
 import { Layout } from "@/components/layout/Layout";
+import { HeroSection } from "@/components/home/HeroSection";
+import { EventsPreview } from "@/components/home/EventsPreview";
+import { ReportsPreview } from "@/components/home/ReportsPreview";
+import { PartnersPreview } from "@/components/home/PartnersPreview";
+import { NewsletterSection } from "@/components/newsletter/NewsletterSection";
+import { CTASection } from "@/components/home/CTASection";
 
 const Index = () => {
   return (
     <Layout>
-      <div className="flex items-center justify-center min-h-screen">
-        <h1 className="text-4xl font-bold">Chargement...</h1>
-      </div>
+      <HeroSection />
+      <EventsPreview />
+      <ReportsPreview />
+      <PartnersPreview />
+      <NewsletterSection />
+      <CTASection />
     </Layout>
   );
 };
