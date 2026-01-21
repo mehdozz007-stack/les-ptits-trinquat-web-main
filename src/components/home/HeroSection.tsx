@@ -167,7 +167,7 @@ const InfoBadge = ({
             />
             <InfoBadge
               icon="📣"
-              text="Tombola 2026 - Ramassage de tickets le 22 jancvier"
+              text="Tombola 2026 - Ramassage de tickets le 22 janvier 9h30"
               href="/evenements#event-1"
               delay={0.2}
               bgClass="bg-red-100/80 text-purple-600"
