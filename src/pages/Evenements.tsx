@@ -56,10 +56,10 @@ const events = [
   {
     id: 10,
     title: "La crèpe party de l'école ! 🥞🎉",
-    date: "13 Février 2026",
+    date: "20 Février 2026",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école",
-    description: "Participez à notre traditionnelle vente de crêpes, un moment gourmand et convivial pour soutenir les projets de l'école.",
+    description: "Partagez un doux moment de gourmandise lors de notre vente de crêpes, une belle occasion de se retrouver et de soutenir ensemble les projets de l'école.",
     color: "violet",
     status: "upcoming",
     attendees: 500,
