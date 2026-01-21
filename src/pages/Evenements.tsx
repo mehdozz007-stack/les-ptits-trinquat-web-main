@@ -20,6 +20,17 @@ const events = [
     url: "/partenaires"
   },
   {
+    id: 4,
+    title: "📝 Conseil d'école SI 🌍",
+    date: "20 Janvier 2026",
+    time: "17h45 - 19h15",
+    location: "Salle polyvalente",
+    description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
+    color: "sky",
+    status: "past",
+    attendees: 50,
+  },
+  {
     id: 3,
     title: "🎄 Vente de gâteaux de Noël 🎅",
     date: "19 Décembre 2025",
@@ -32,28 +43,6 @@ const events = [
     url: "https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
   },
   {
-    id: 2,
-    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
-    date: "12 Décembre 2025",
-    time: "17h30 - 19h30",
-    location: "Salle polyvalente",
-    description: "Bilan du trimestre et préparation aux prochains événements.",
-    color: "secondary",
-    status: "past",
-    attendees: 30,
-  },
-  {
-    id: 4,
-    title: "📝 Conseil d'école SI 🌍",
-    date: "20 Janvier 2026",
-    time: "17h45 - 19h15",
-    location: "Salle polyvalente",
-    description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
-    color: "sky",
-    status: "upcoming",
-    attendees: 50,
-  },
-  {
     id: 5,
     title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
     date: "30 Janvier 2026",
@@ -63,6 +52,18 @@ const events = [
     color: "secondary",
     status: "upcoming",
     attendees: 30,
+  },
+  {
+    id: 10,
+    title: "La crèpe party de l'école ! 🥞🎉",
+    date: "13 Février 2026",
+    time: "16h30 - 18h00",
+    location: "Le parvis de l'école",
+    description: "Participez à notre traditionnelle vente de crêpes, un moment gourmand et convivial pour soutenir les projets de l'école.",
+    color: "violet",
+    status: "upcoming",
+    attendees: 500,
+    url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
   },
   {
     id: 6,

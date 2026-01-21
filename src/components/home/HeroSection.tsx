@@ -136,36 +136,6 @@ const InfoBadge = ({
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
             <InfoBadge
-              icon="🌍"
-              text="Conseil d'école SI le 20 Janvier 2026"
-              href="/evenements#event-1"
-              delay={0.2}
-              bgClass="bg-pink-100/80 text-pink-900"
-              textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"
-              pingOuter="bg-green-600"
-              pingInner="bg-green-500"
-              sparks={sparks}
-              sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
-                    "bg-green-400",
-                    "bg-emerald-400",
-                    "bg-teal-400",
-                    "bg-cyan-400",
-                    "bg-sky-400",
-                    "bg-blue-400",
-                    "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-amber-400",
-                    "bg-white",
-                  ]}
-            />
-            <InfoBadge
               icon="📰"
               text="À l'attention des parents de CM2 SI"
               href="/documents/Affiche_SI_écoles_260115_044150.pdf"
@@ -197,10 +167,10 @@ const InfoBadge = ({
             />
             <InfoBadge
               icon="📣"
-              text="Dérniers jours pour notre Tombola. Jusqu'au mardi 20 janvier le soir ❤️"
+              text="Tombola 2026 - Ramassage de tickets le 22 jancvier"
               href="/evenements#event-1"
               delay={0.2}
-              bgClass="bg-red-100/80 text-red-900"
+              bgClass="bg-red-100/80 text-purple-600"
               textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
               pingOuter="bg-red-600"
               pingInner="bg-red-500"
@@ -230,7 +200,7 @@ const InfoBadge = ({
               text="Profitez de nos offres de partenariats exclusifs !"
               href="/partenaires#special-event-1"
               delay={0.2}
-              bgClass="bg-violet-100/50 text-violet-900"
+              bgClass="bg-green-100/40 text-green-600"
               textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
               pingOuter="bg-purple-500"
               pingInner="bg-purple-400"
@@ -260,8 +230,8 @@ const InfoBadge = ({
               text="Un collecte de fonds, votre aide est précieuse - Un toit Un Avenir !"
               href="https://www.helloasso.com/associations/une-ecole-un-avenir/collectes/fonds-d-urgence-un-toit-un-avenir"
               delay={0.2}
-              bgClass="bg-red-100/80 text-red-900"
-              textGradient="bg-gradient-to-r from-rose-500 via-red-600 to-orange-500"
+              bgClass="bg-red-100/80 text-red-600"
+              textGradient="bg-gradient-to-r from-rose-400 via-red-600 to-orange-500"
               pingOuter="bg-rose-600"
               pingInner="bg-rose-500"
               sparks={sparks}
@@ -338,7 +308,7 @@ const InfoBadge = ({
               </div>
               <div className="h-8 sm:h-12 w-px bg-border hidden sm:block" />
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">3+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">4+</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Ans</div>
               </div>
             </motion.div>
