@@ -67,7 +67,7 @@ const upcomingEvents = [
     color: "violet",
     status: "upcoming",
     attendees: 500,
-    url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
+    url: "/evenements#event-10"
   },
 ];
 
