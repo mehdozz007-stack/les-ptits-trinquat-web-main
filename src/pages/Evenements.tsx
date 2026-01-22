@@ -5,19 +5,30 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { url } from "inspector";
-
+import crepesParty from "@/assets/Crepes_party_Affiche.jpg";
 const events = [
     {
     id: 1,
     title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez avec nous de superbes lots ! 🎁",
     date: "8 Décembre 2025 - Lancement",
-    time: "8 Décembre 2025 - 16 Février 2026",
+    time: "Remise de tickets jusqu'au 20 janvier 2026",
     location: "Groupe scolaire FRANK-DICKENS",
-    description: "La tombola de l'association est un moment convivial qui permet aux enfants de s'impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance.\nGrâce au soutien de nos partenaires, de nombreux lots attendent les participants. Chaque ticket contribue directement aux projets ludiques de l'association.\nUn futur espace en ligne viendra également faciliter les échanges autour des lots, pour prolonger l'esprit de partage après le tirage.\n\nConsultez la liste de nos partenaires et tentez votre chance !",
+    description: "La tombola de l'association est un moment convivial qui permet aux enfants de s'impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance.\nGrâce au soutien de nos partenaires, de nombreux lots attendent les participants. Chaque ticket contribue directement aux projets ludiques de l'association.\nUn futur espace en ligne viendra également faciliter les échanges autour des lots, pour prolonger l'esprit de partage après le tirage.\n\nConsultez la liste de nos partenaires et tentez votre chance !\n16 Février 2026 le tirage au sort. Bonne chance à tous !",
     color: "accent",
     status: "upcoming",
     attendees: 500,
     url: "/partenaires"
+  },
+  {
+    id: 4,
+    title: "📝 Conseil d'école SI 🌍",
+    date: "20 Janvier 2026",
+    time: "17h45 - 19h15",
+    location: "Salle polyvalente",
+    description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
+    color: "sky",
+    status: "past",
+    attendees: 50,
   },
   {
     id: 3,
@@ -32,28 +43,6 @@ const events = [
     url: "https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
   },
   {
-    id: 2,
-    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
-    date: "12 Décembre 2025",
-    time: "17h30 - 19h30",
-    location: "Salle polyvalente",
-    description: "Bilan du trimestre et préparation aux prochains événements.",
-    color: "secondary",
-    status: "past",
-    attendees: 30,
-  },
-  {
-    id: 4,
-    title: "📝 Conseil d'école SI 🌍",
-    date: "27 Janvier 2026",
-    time: "18h30 - 20h00",
-    location: "Salle polyvalente",
-    description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
-    color: "sky",
-    status: "upcoming",
-    attendees: 50,
-  },
-  {
     id: 5,
     title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
     date: "30 Janvier 2026",
@@ -63,6 +52,18 @@ const events = [
     color: "secondary",
     status: "upcoming",
     attendees: 30,
+  },
+  {
+    id: 10,
+    title: "La crèpe party de l'école ! 🥞🎉",
+    date: "20 Février 2026",
+    time: "16h30 - 18h00",
+    location: "Le parvis de l'école",
+    description: "Partagez un doux moment de gourmandise lors de notre vente de crêpes, une belle occasion de se retrouver et de soutenir ensemble les projets de l'école.",
+    color: "violet",
+    status: "upcoming",
+    attendees: 500,
+    url: crepesParty
   },
   {
     id: 6,

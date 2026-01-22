@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button";
 // Import des logos
 import lesPetitsBilinguesLogo from "@/assets/logos/lesPetitsBilingues.jpeg";
 import atelierTufferyLogo from "@/assets/logos/atelier_tuffery_logo.svg";
-import brinDeTerre from "@/assets/logos/brindeterre.jpg";
+import enviForm from "@/assets/logos/enviForm.png";
 import manuCreation from "@/assets/logos/manucreation.jpg";
 import astroludik from "@/assets/logos/logo-astroludik.png";
 import massagesIsa from "@/assets/logos/isamassage.avif";
+import frenchKissLogo from "@/assets/logos/frenchkiss.png";
 
 const partners = [
   {
@@ -19,6 +20,13 @@ const partners = [
     description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
     logo: lesPetitsBilinguesLogo,
     website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
+  },
+  { id: 76, 
+    name: "French Kiss", 
+    category: "Restauration",
+    description: "Restaurant français proposant une cuisine savoureuse et authentique dans un cadre convivial.", 
+    logo: frenchKissLogo, 
+    website: "https://www.frenchkiss.fr/nos-adresses/montpellier",
   },
   {
     id: 2,
@@ -30,11 +38,11 @@ const partners = [
   },
   {
     id: 3,
-    name: "Brin de Terre",
-    category: "Éducation",
-    description: "Ateliers nature et jardinage pour sensibiliser les enfants à l'environnement.",
-    logo: brinDeTerre,
-    website: "https://www.instagram.com/atelierbrindeterre/",
+    name: "Enviform Sport Santé",
+    category: "Bien être",
+    description: "Coaching sportif et bien-être.",
+    logo: enviForm,
+    website: "https://www.enviform-sport-sante.fr/",
   },
   {
     id: 4,
@@ -51,14 +59,6 @@ const partners = [
     description: "Animations ludiques autour de l'astronomie pour éveiller la curiosité des enfants.",
     logo: astroludik,
     website: "https://www.astroludik.com/",
-  },
-  {
-    id: 6,
-    name: "Massages d'Isa",
-    category: "Bien-être",
-    description: "Massages bien-être et relaxation pour toute la famille.",
-    logo: massagesIsa,
-    website: "https://isabellerichez34.wixsite.com/monsite-6",
   },
 ];
 
@@ -86,7 +86,7 @@ export function PartnersPreview() {
         </motion.div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {partners.map((partner, index) => (
             <motion.a
               key={partner.id}
@@ -97,18 +97,25 @@ export function PartnersPreview() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer"
+              className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-1 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer aspect-square"
             >
-              <div className="mb-3 flex h-24 w-24 items-center justify-center overflow-hidden">
+              <div className="mt-5 mb-2 flex h-40 w-40 items-center justify-center overflow-hidden flex-shrink-0">
                 <img 
                   src={partner.logo} 
                   alt={partner.name}
                   className="h-full w-full object-contain p-2 rounded-lg"
                 />
               </div>
-              <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                {partner.name}
-              </span>
+                <span className="mb-2 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+                  {partner.category}
+                </span>
+                <span className="mb-2 rounded-lg bg-amber-50 px-3 py-1.5 text-base font-bold text-foreground inline-block">
+                  {partner.name}
+                </span>
+                <p className="text-base text-muted-foreground text-center line-clamp-3 px-6 py-6">
+                  {partner.description}
+                </p>
+              
             </motion.a>
           ))}
         </div>

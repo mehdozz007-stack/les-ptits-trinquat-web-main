@@ -136,14 +136,14 @@ const InfoBadge = ({
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
             <InfoBadge
-              icon="🎊"
-              text="Bonne année 2026 et bonne santé à tous 🤍"
-              href=""
+              icon="📰"
+              text="À l'attention des parents de CM2 SI"
+              href="/documents/Affiche_SI_écoles_260115_044150.pdf"
               delay={0.2}
-              bgClass="bg-red-500/10 text-red-900"
-              textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-green-500"
-              pingOuter="bg-red-500"
-              pingInner="bg-red-400"
+              bgClass="bg-blue-100/30 text-blue-900"
+              textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-lime-500"
+              pingOuter="bg-blue-500"
+              pingInner="bg-blue-400"
               sparks={sparks}
               sparksColors={[
                     "bg-red-400",
@@ -164,17 +164,16 @@ const InfoBadge = ({
                     "bg-amber-400",
                     "bg-white",
                   ]}
-
             />
             <InfoBadge
               icon="📣"
-              text="TOMBOLA 2025-2026 lancée ! Gagnez de superbes lots !"
+              text="Tombola 2026 - Tirage au sort par les  enfants le 16 février !"
               href="/evenements#event-1"
               delay={0.2}
-              bgClass="bg-primary/10 text-blue-900"
-              textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"
-              pingOuter="bg-green-600"
-              pingInner="bg-green-500"
+              bgClass="bg-red-100/80 text-purple-600"
+              textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
+              pingOuter="bg-purple-600"
+              pingInner="bg-purple-500"
               sparks={sparks}
               sparksColors={[
                     "bg-red-400",
@@ -198,13 +197,13 @@ const InfoBadge = ({
             />
             <InfoBadge
               icon="🏆"
-              text="Profitez de nos offres issues de partenariats exclusifs !"
+              text="Profitez de nos offres de partenariats exclusifs !"
               href="/partenaires#special-event-1"
               delay={0.2}
-              bgClass="bg-violet/10 text-violet-900"
+              bgClass="bg-green-100/40 text-green-600"
               textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
-              pingOuter="bg-purple-500"
-              pingInner="bg-purple-400"
+              pingOuter="bg-green-500"
+              pingInner="bg-green-400"
               sparks={sparks}
               sparksColors={[
                     "bg-red-400",
@@ -223,6 +222,26 @@ const InfoBadge = ({
                     "bg-pink-400",
                     "bg-rose-400",
                     "bg-amber-400",
+                    "bg-white",
+                  ]}
+            />
+            <InfoBadge
+              icon="❤️"
+              text="Un collecte de fonds. Votre aide est précieuse - Un toit Un Avenir !"
+              href="https://www.helloasso.com/associations/une-ecole-un-avenir/collectes/fonds-d-urgence-un-toit-un-avenir"
+              delay={0.2}
+              bgClass="bg-rose-100/80 text-red-600"
+              textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"
+              pingOuter="bg-rose-600"
+              pingInner="bg-rose-500"
+              sparks={sparks}
+              sparksColors={[
+                    "bg-red-400",
+                    "bg-orange-400",
+                    "bg-yellow-300",
+                    "bg-pink-400",
+                    "bg-rose-400",
+                    "bg-red-400",
                     "bg-white",
                   ]}
             />
@@ -289,7 +308,7 @@ const InfoBadge = ({
               </div>
               <div className="h-8 sm:h-12 w-px bg-border hidden sm:block" />
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">3+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">4+</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Ans</div>
               </div>
             </motion.div>

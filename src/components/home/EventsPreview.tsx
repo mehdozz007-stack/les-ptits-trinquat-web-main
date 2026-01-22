@@ -27,25 +27,25 @@ const upcomingEvents = [
    id: 1,
    title: "📣 TOMBOLA de la rentrée 2025-2026 est lancée ! 🎁",
    date: "8 Décembre 2025 - Lancée",
-   time: "8 Décembre 2025 - 16 Février 2026",
+   time: "Remise de tickets jusqu'au 20 janvier 2026",
    location: "Groupe scolaire FRANK-DICKENS",
-   description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires !",
+   description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires ! 16 Février 2026 le tirage au sort. Bonne chance à tous !",
    color: "accent",
    status: "upcoming",
    attendees: 500,
    url: "/partenaires"
   },
-  {
+  /*{
     id: 4,
     title: "📝 Conseil d'école SI 🌍",
-    date: "27 Janvier 2026",
-    time: "18h30 - 20h00",
+    date: "20 Janvier 2026",
+    time: "17h45 - 19h15",
     location: "Salle polyvalente",
     description: "Bilan de l'année, présentation des projets et resultats élection des parents.",
     color: "sky",
-    status: "upcoming",
+    status: "past",
     attendees: 50,
-  },
+  },*/
   {
     id: 5,
     title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
@@ -57,18 +57,18 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 30,
   },
-  /*{
-    id: 3,
-    title: "🎄 Vente de gâteaux de Noël 🎄",
-    date: "19 Décembre 2025",
+  {
+    id: 10,
+    title: "🥞 La crèpe party de l'école ! 🎉",
+    date: "20 Février 2026",
     time: "16h30 - 18h00",
-    location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
-    description: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l'école.",
+    location: "Le parvis de l'école",
+    description: "Participez à notre traditionnelle vente de crêpes, un moment gourmand et convivial pour soutenir les projets de l'école.",
     color: "violet",
-    status: "past",
-    attendees: 300,
-    url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
-  },*/
+    status: "upcoming",
+    attendees: 500,
+    url: "/evenements#event-10"
+  },
 ];
 
 const colorClasses = {
