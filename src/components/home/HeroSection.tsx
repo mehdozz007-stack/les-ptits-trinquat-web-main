@@ -141,7 +141,7 @@ const InfoBadge = ({
               href="/documents/Affiche_SI_écoles_260115_044150.pdf"
               delay={0.2}
               bgClass="bg-blue-100/30 text-blue-900"
-              textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-amber-500"
+              textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-lime-500"
               pingOuter="bg-blue-500"
               pingInner="bg-blue-400"
               sparks={sparks}
@@ -167,13 +167,13 @@ const InfoBadge = ({
             />
             <InfoBadge
               icon="📣"
-              text="Tombola 2026 - Ramassage de tickets le 22 janvier 9h30"
+              text="Tombola 2026 - Tirage au sort par les  enfants le 16 février !"
               href="/evenements#event-1"
               delay={0.2}
               bgClass="bg-red-100/80 text-purple-600"
               textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
-              pingOuter="bg-red-600"
-              pingInner="bg-red-500"
+              pingOuter="bg-purple-600"
+              pingInner="bg-purple-500"
               sparks={sparks}
               sparksColors={[
                     "bg-red-400",
@@ -202,8 +202,8 @@ const InfoBadge = ({
               delay={0.2}
               bgClass="bg-green-100/40 text-green-600"
               textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
-              pingOuter="bg-purple-500"
-              pingInner="bg-purple-400"
+              pingOuter="bg-green-500"
+              pingInner="bg-green-400"
               sparks={sparks}
               sparksColors={[
                     "bg-red-400",
@@ -227,11 +227,11 @@ const InfoBadge = ({
             />
             <InfoBadge
               icon="❤️"
-              text="Un collecte de fonds, votre aide est précieuse - Un toit Un Avenir !"
+              text="Un collecte de fonds. Votre aide est précieuse - Un toit Un Avenir !"
               href="https://www.helloasso.com/associations/une-ecole-un-avenir/collectes/fonds-d-urgence-un-toit-un-avenir"
               delay={0.2}
-              bgClass="bg-red-100/80 text-red-600"
-              textGradient="bg-gradient-to-r from-rose-400 via-red-600 to-orange-500"
+              bgClass="bg-rose-100/80 text-red-600"
+              textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"
               pingOuter="bg-rose-600"
               pingInner="bg-rose-500"
               sparks={sparks}
