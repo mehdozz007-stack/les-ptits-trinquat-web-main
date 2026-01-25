@@ -61,6 +61,8 @@ export function ParticipantForm() {
 
     setLoading(true);
     
+    console.log('📝 Submitting participant form with data:', formData);
+    
     const { error } = await addParticipant({
       prenom: formData.prenom.trim(),
       email: formData.email.trim(),
@@ -72,14 +74,16 @@ export function ParticipantForm() {
     setLoading(false);
 
     if (error) {
+      console.error('❌ Registration error:', error);
       toast({
-        title: "Erreur",
-        description: "Impossible de vous inscrire. Veuillez réessayer.",
+        title: "Erreur d'inscription",
+        description: error || "Impossible de vous inscrire. Vérifiez votre connexion.",
         variant: "destructive",
       });
       return;
     }
 
+    console.log('✅ Registration successful!');
     setSuccess(true);
     toast({
       title: "Bienvenue ! 🎉",

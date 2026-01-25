@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiUrl } from '@/lib/api-config';
 
 export interface TombolaLot {
   id: string;
@@ -29,10 +30,10 @@ export function useTombolaLots() {
   const fetchLots = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/tombola/lots');
+      const response = await fetch(apiUrl('/api/tombola/lots'));
       if (!response.ok) throw new Error('Failed to fetch lots');
       const data = await response.json();
-      setLots(Array.isArray(data) ? data : []);
+      setLots(Array.isArray(data?.data || data) ? (data?.data || data) : []);
       setError(null);
     } catch (err: any) {
       setError(err.message);
@@ -44,7 +45,7 @@ export function useTombolaLots() {
 
   const addLot = async (lot: { nom: string; description?: string; icone: string; parent_id: string }) => {
     try {
-      const response = await fetch('/api/tombola/lots', {
+      const response = await fetch(apiUrl('/api/tombola/lots'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(lot),
@@ -60,7 +61,7 @@ export function useTombolaLots() {
 
   const reserveLot = async (lotId: string, reserverId: string) => {
     try {
-      const response = await fetch(`/api/tombola/lots/${lotId}/reserve`, {
+      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reserverId }),
@@ -75,7 +76,7 @@ export function useTombolaLots() {
 
   const cancelReservation = async (lotId: string) => {
     try {
-      const response = await fetch(`/api/tombola/lots/${lotId}/cancel-reservation`, {
+      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel-reservation`), {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to cancel reservation');
@@ -88,7 +89,7 @@ export function useTombolaLots() {
 
   const markAsRemis = async (lotId: string) => {
     try {
-      const response = await fetch(`/api/tombola/lots/${lotId}/mark-remis`, {
+      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/mark-remis`), {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to mark as remis');
@@ -101,7 +102,7 @@ export function useTombolaLots() {
 
   const getContactLink = async (lotId: string, senderName: string): Promise<string | null> => {
     try {
-      const response = await fetch('/api/tombola/contact-link', {
+      const response = await fetch(apiUrl('/api/tombola/contact-link'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ lotId, senderName }),

@@ -89,9 +89,9 @@ tombola.get('/lots', async (c) => {
 });
 
 // ============================================================
-// POST /tombola/participants - Créer un participant (auth requis)
+// POST /tombola/participants - Créer un participant (public)
 // ============================================================
-tombola.post('/participants', requireAuth, rateLimitMiddleware, async (c) => {
+tombola.post('/participants', rateLimitMiddleware, async (c) => {
   try {
     const body = await c.req.json<TombolaParticipantCreateRequest>();
     const authContext = getAuthContext(c);

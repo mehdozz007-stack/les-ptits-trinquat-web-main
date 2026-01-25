@@ -12,8 +12,8 @@ compatibility_flags = ["nodejs_compat"]
 # ============================================================
 [[d1_databases]]
 binding = "DB"
-database_name = "les-ptits-trinquat-db"
-database_id = "YOUR_DATABASE_ID_HERE"
+database_name = "tombola-dev"
+database_id = "4f519cb2-40f8-433d-9da0-4c250a95b45c"
 
 # ============================================================
 # Variables d'environnement (non sensibles)
