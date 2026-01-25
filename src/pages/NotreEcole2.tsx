@@ -13,6 +13,7 @@ import {
   HandHeart,
   Mail,
   School,
+  Music,
   Leaf,
 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
@@ -23,7 +24,7 @@ import panneauImage from "@/assets/logos/PanneauDickensMontpellier.jpg";
 const schoolLevels = [
   {
     title: "Maternelle",
-    description: "Petite, Moyenne et Grande section - Un premier pas vers l'apprentissage dans un cadre bienveillant.",
+    description: "Petite, Moyenne et Grande section, mélangée dans les classes - Un premier pas vers l'apprentissage dans un cadre bienveillant et responsable.",
     icon: Sparkles,
     color: "bg-primary/10 text-primary",
   },
@@ -222,16 +223,22 @@ const NotreEcole = () => {
             transition={{ duration: 0.6 }}
             className="flex justify-center gap-4 flex-wrap"
           >
-            <Button asChild variant="playful" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
-              <a href="https://digipad.app/p/1394770/39b6b0ff88979" target="_blank" rel="noopener noreferrer">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Consulter le DigiPad de l'école
-              </a>
-            </Button>
             <Button asChild variant="outline" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
               <a href="https://www.ent-ecole.fr/cardboard/0193c4aa-f45c-792c-81bc-0703a3006b58" target="_blank" rel="noopener noreferrer">
                 <Leaf className="mr-1 md:mr-2 h-4 md:h-5 w-4 md:w-5" />
                 Accéder à l'ENT
+              </a>
+            </Button>
+            <Button asChild variant="playful" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
+              <a href="https://digipad.app/p/1394770/39b6b0ff88979" target="_blank" rel="noopener noreferrer">
+                <BookOpen className="mr-2 h-5 w-5" />
+                Consulter le DigiPad
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
+              <a href="https://alsh34.wixsite.com/centre" target="_blank" rel="noopener noreferrer">
+                <Music className=" mr-2 h-5 w-5" />
+                Notre Acceuil de Loisirs ALSH
               </a>
             </Button>
           </motion.div>
