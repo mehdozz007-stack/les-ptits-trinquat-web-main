@@ -11,6 +11,7 @@ import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
+import Tombola2 from "./pages/Tombola2";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/evenements" element={<Evenements />} />
           <Route path="/comptes-rendus" element={<ComptesRendus />} />
           <Route path="/partenaires" element={<Partenaires />} />
+          <Route path="/tombola" element={<Tombola2 />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/message-envoye" element={<MessageEnvoye />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

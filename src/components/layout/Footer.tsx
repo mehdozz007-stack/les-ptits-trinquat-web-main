@@ -10,6 +10,7 @@ const footerLinks = {
   navigation: [
     { label: "Accueil", href: "/" },
     { label: "Événements", href: "/evenements" },
+    { label: "Tombola", href: "/tombola" },
     { label: "Comptes-rendus", href: "/comptes-rendus" },
     { label: "Partenaires", href: "/partenaires" },
   ],
