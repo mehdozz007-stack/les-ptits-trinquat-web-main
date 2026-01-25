@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
+import { useInitializeDatabase } from "@/hooks/useInitializeDatabase";
 import Index from "./pages/Index";
 import Evenements from "./pages/Evenements";
 import ComptesRendus from "./pages/ComptesRendus";
@@ -16,9 +17,10 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Composant pour gérer le scroll au top
+// Composant pour gérer le scroll au top et l'initialisation DB
 const ScrollToTop = () => {
   useScrollToTop();
+  useInitializeDatabase();
   return null;
 };
 
