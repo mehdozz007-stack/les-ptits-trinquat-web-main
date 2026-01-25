@@ -63,13 +63,17 @@ export function ParticipantForm() {
     
     console.log('📝 Submitting participant form with data:', formData);
     
-    const { error } = await addParticipant({
+    const payload = {
       prenom: formData.prenom.trim(),
       email: formData.email.trim(),
       role: formData.role,
-      classes: formData.classes.trim() || null,
       emoji: formData.emoji,
-    });
+      ...(formData.classes.trim() && { classes: formData.classes.trim() }),
+    };
+    
+    console.log('📤 Payload to send:', payload);
+    
+    const { error } = await addParticipant(payload as any);
 
     setLoading(false);
 

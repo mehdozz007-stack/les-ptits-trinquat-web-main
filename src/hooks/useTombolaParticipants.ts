@@ -63,7 +63,7 @@ export function useTombolaParticipants() {
     }
   };
 
-  const addParticipant = async (participant: Omit<TombolaParticipant, 'id' | 'created_at'>) => {
+  const addParticipant = async (participant: Omit<TombolaParticipant, 'id' | 'created_at'> & { classes?: string | null }) => {
     const url = apiUrl('/api/tombola/participants');
     console.log('📤 POST request to:', url);
     
