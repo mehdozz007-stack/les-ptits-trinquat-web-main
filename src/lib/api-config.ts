@@ -4,10 +4,11 @@
  */
 
 export const API_BASE_URL = 
-  process.env.NODE_ENV === 'production' 
-    ? 'https://les-ptits-trinquat-api.medhozz007.workers.dev'
-    : 'https://les-ptits-trinquat-api.medhozz007.workers.dev'; // Use remote API in dev for now
+  typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? '' // Use relative paths in development (proxied via Vite)
+    : 'https://les-ptits-trinquat-api.medhozz007.workers.dev'; // Use remote API in production
 
 export function apiUrl(endpoint: string): string {
   return `${API_BASE_URL}${endpoint}`;
 }
+

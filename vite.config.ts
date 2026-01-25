@@ -12,6 +12,14 @@ export default defineConfig(() => ({
       // Permet à Vite de servir les fichiers du dossier public
       allow: ["."],
     },
+    // Proxy pour les requêtes API vers le backend local
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8787',
+        changeOrigin: true,
+        rewrite: (path) => path,
+      }
+    }
   },
   plugins: [react()],
   resolve: {

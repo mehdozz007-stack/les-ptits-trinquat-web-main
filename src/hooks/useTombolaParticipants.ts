@@ -27,16 +27,31 @@ export function useTombolaParticipants() {
   const fetchParticipants = async () => {
     const url = apiUrl('/api/tombola/participants');
     console.log('📥 GET request to:', url);
+    console.log('📍 Current origin:', window.location.origin);
     
     try {
       setLoading(true);
-      const response = await fetch(url);
+      
+      // Add a timeout to the fetch
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        signal: controller.signal,
+      });
+      
+      clearTimeout(timeoutId);
       
       console.log('📊 Response status:', response.status);
+      console.log('📊 Response headers:', Array.from(response.headers.entries()));
       
       // Handle non-OK responses
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
       }
       
       // Try to parse JSON
@@ -55,8 +70,18 @@ export function useTombolaParticipants() {
       setParticipants(Array.isArray(data) ? data : []);
       setError(null);
     } catch (err: any) {
-      console.error('❌ fetchParticipants error:', err.message);
-      setError(err.message);
+      if (err.name === 'AbortError') {
+        console.error('❌ Request timeout after 10 seconds');
+        setError('Timeout: L\'API ne répond pas. Vérifiez votre connexion Internet.');
+      } else {
+        console.error('❌ fetchParticipants error:', err.message);
+        console.error('❌ Full error:', err);
+        // More helpful error message
+        const errorMsg = err.message.includes('fetch')
+          ? 'Impossible de contacter le serveur. Vérifiez votre connexion Internet et le domaine: ' + url
+          : err.message;
+        setError(errorMsg);
+      }
       setParticipants([]);
     } finally {
       setLoading(false);
@@ -66,13 +91,21 @@ export function useTombolaParticipants() {
   const addParticipant = async (participant: Omit<TombolaParticipant, 'id' | 'created_at'> & { classes?: string | null }) => {
     const url = apiUrl('/api/tombola/participants');
     console.log('📤 POST request to:', url);
+    console.log('📋 Payload:', participant);
     
     try {
+      // Add a timeout to the fetch
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(participant),
+        signal: controller.signal,
       });
+      
+      clearTimeout(timeoutId);
       
       console.log('📊 Response status:', response.status);
       
@@ -94,8 +127,15 @@ export function useTombolaParticipants() {
       setParticipants(prev => [data.data || data, ...prev]);
       return { data, error: null };
     } catch (err: any) {
+      if (err.name === 'AbortError') {
+        console.error('❌ Request timeout after 10 seconds');
+        return { data: null, error: 'Timeout: L\'API ne répond pas.' };
+      }
       console.error('❌ addParticipant error:', err.message);
-      return { data: null, error: err.message };
+      const errorMsg = err.message.includes('fetch')
+        ? 'Impossible de contacter le serveur. Vérifiez votre connexion Internet.'
+        : err.message;
+      return { data: null, error: errorMsg };
     }
   };
 
