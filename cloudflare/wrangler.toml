@@ -1,0 +1,42 @@
+# ============================================================
+# Configuration Cloudflare Workers - Les P'tits Trinquat
+# ============================================================
+
+name = "les-ptits-trinquat-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ============================================================
+# Base de données D1
+# ============================================================
+[[d1_databases]]
+binding = "DB"
+database_name = "les-ptits-trinquat-db"
+database_id = "YOUR_DATABASE_ID_HERE"
+
+# ============================================================
+# Variables d'environnement (non sensibles)
+# ============================================================
+[vars]
+ENVIRONMENT = "production"
+CORS_ORIGIN = "https://les-ptits-trinquat.pages.dev"
+# Durée de session en secondes (7 jours)
+SESSION_DURATION = "604800"
+# Limite de requêtes par minute
+RATE_LIMIT_MAX = "60"
+# Fenêtre de rate limiting en secondes
+RATE_LIMIT_WINDOW = "60"
+
+# ============================================================
+# Environnement de développement
+# ============================================================
+[env.dev]
+vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173" }
+
+# ============================================================
+# Secrets à configurer avec: wrangler secret put <NAME>
+# ============================================================
+# - RESEND_API_KEY: Clé API Resend pour l'envoi d'emails
+# - JWT_SECRET: Clé secrète pour la signature des tokens (min 32 chars)
+# - BCRYPT_ROUNDS: Nombre de rounds bcrypt (default: 12)
