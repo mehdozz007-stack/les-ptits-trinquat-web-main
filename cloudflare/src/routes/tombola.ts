@@ -162,12 +162,11 @@ tombola.post('/participants', rateLimitMiddleware, async (c) => {
 });
 
 // ============================================================
-// POST /tombola/lots - Créer un lot (auth requis)
+// POST /tombola/lots - Créer un lot (public - pas d'auth requise)
 // ============================================================
-tombola.post('/lots', requireAuth, rateLimitMiddleware, async (c) => {
+tombola.post('/lots', rateLimitMiddleware, async (c) => {
   try {
     const body = await c.req.json<TombolaLotCreateRequest>();
-    const authContext = getAuthContext(c);
     
     // Validation nom
     const nomValidation = validateInputLength(body.nom, 'Nom', 1, 200);
@@ -193,14 +192,6 @@ tombola.post('/lots', requireAuth, rateLimitMiddleware, async (c) => {
         success: false,
         error: 'Parent participant not found'
       }, 404);
-    }
-    
-    // Vérifier que l'utilisateur est le propriétaire ou admin
-    if (authContext?.role !== 'admin' && parent.user_id !== authContext?.user.id) {
-      return c.json<ApiResponse>({
-        success: false,
-        error: 'You can only add lots for your own participant profile'
-      }, 403);
     }
     
     // Validation description (optionnel)

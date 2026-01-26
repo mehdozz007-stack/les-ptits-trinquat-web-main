@@ -45,16 +45,23 @@ export function useTombolaLots() {
 
   const addLot = async (lot: { nom: string; description?: string; icone: string; parent_id: string }) => {
     try {
+      console.log('📤 Adding lot:', lot);
       const response = await fetch(apiUrl('/api/tombola/lots'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(lot),
       });
-      if (!response.ok) throw new Error('Failed to add lot');
+      console.log('📥 Add lot response status:', response.status);
       const data = await response.json();
+      console.log('📥 Add lot response data:', data);
+      if (!response.ok) {
+        console.error('❌ Add lot failed:', data);
+        throw new Error(data?.error || 'Failed to add lot');
+      }
       await fetchLots();
       return { data, error: null };
     } catch (err: any) {
+      console.error('❌ Add lot error:', err.message);
       return { data: null, error: err.message };
     }
   };
