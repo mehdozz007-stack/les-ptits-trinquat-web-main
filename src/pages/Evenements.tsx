@@ -5,7 +5,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { url } from "inspector";
-
+import crepesParty from "@/assets/Crepes_party_Affiche.jpg";
 const events = [
     {
     id: 1,
@@ -63,7 +63,7 @@ const events = [
     color: "violet",
     status: "upcoming",
     attendees: 500,
-    url: "https://www.facebook.com/photo/?fbid=1161733842794558&set=pcb.1161735462794396"
+    url: crepesParty
   },
   {
     id: 6,
