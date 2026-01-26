@@ -49,12 +49,12 @@ const schoolValues = [
     icon: Sparkles,
     color: "bg-secondary/20 text-secondary",
   },
-  {
+  /*{
     title: "Collectif",
     description: "Une communauté soudée où parents et enseignants collaborent.",
     icon: Users,
     color: "bg-sky/20 text-sky",
-  },
+  },*/
   {
     title: "Excellence",
     description: "Un enseignement de qualité dans un cadre structurant.",
@@ -134,7 +134,7 @@ const NotreEcole = () => {
               Un lieu où grandir <span className="text-gradient">avec bonheur</span>
             </h1>
             <p className="text-lg text-muted-foreground md:text-xl leading-relaxed">
-              Un lieu où chaque enfant trouve sa place dans un environnement chaleureux, 
+              Un lieu où chaque enfant trouve sa place dans un environnement chaleureux,
               stimulant et bienveillant. Un cadre idéal pour apprendre et s'épanouir.
             </p>
           </motion.div>
@@ -147,7 +147,7 @@ const NotreEcole = () => {
           <h2 className="mb-10 text-3xl font-bold md:text-4xl text-center">
             Une école à <span className="text-gradient">taille humaine</span>
           </h2>
-          
+
           {/* Photo à gauche, texte à droite */}
           <div className="grid gap-10 lg:grid-cols-2 items-center mb-12">
             <motion.div
@@ -157,9 +157,9 @@ const NotreEcole = () => {
               transition={{ duration: 0.6 }}
               className="overflow-hidden rounded-2xl shadow-lg"
             >
-              <img 
+              <img
                 src={panneauImage}
-                alt="École Anne Frank - Charles Dickens" 
+                alt="École Anne Frank - Charles Dickens"
                 className="w-full h-48 md:h-80 object-cover"
               />
             </motion.div>
@@ -260,8 +260,8 @@ const NotreEcole = () => {
             </div>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">De la maternelle au CM2</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Un parcours complet et cohérent pour accompagner votre enfant dans les étapes de sa scolarité. 
-              L'<strong>apprentissage de l'allemand commence dès la maternelle</strong>, de manière progressive 
+              Un parcours complet et cohérent pour accompagner votre enfant dans les étapes de sa scolarité.
+              L'<strong>apprentissage de l'allemand commence dès la maternelle</strong>, de manière progressive
               et ludique, permettant aux élèves de développer naturellement une sensibilité aux langues et au monde qui les entoure.
             </p>
           </motion.div>
@@ -307,7 +307,7 @@ const NotreEcole = () => {
             </div>
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">Une école vivante et dynamique</h2>
             <p className="mx-auto max-w-2xl text-muted-foreground">
-              Tout au long de l'année, les élèves participent à des projets enrichissants 
+              Tout au long de l'année, les élèves participent à des projets enrichissants
               qui développent leur curiosité et leur créativité.
             </p>
           </motion.div>
@@ -475,7 +475,7 @@ const NotreEcole = () => {
               Pourquoi choisir notre école ?
             </h2>
             <p className="mb-8 text-lg text-muted-foreground">
-              Parce que chaque enfant mérite un environnement où il peut grandir en confiance, 
+              Parce que chaque enfant mérite un environnement où il peut grandir en confiance,
               s'épanouir et développer tout son potentiel. Rejoignez notre belle communauté !
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
