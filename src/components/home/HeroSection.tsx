@@ -140,7 +140,7 @@ export function HeroSection() {
                 text="À l'attention des parents de CM2 SI"
                 href="/documents/Affiche_SI_écoles_260115_044150.pdf"
                 delay={0.2}
-                bgClass="bg-blue-100/30 text-blue-900"
+                bgClass="bg-orange-200/30 text-blue-900"
                 textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-lime-500"
                 pingOuter="bg-blue-500"
                 pingInner="bg-blue-400"
