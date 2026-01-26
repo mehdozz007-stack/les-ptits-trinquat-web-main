@@ -20,6 +20,16 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import panneauImage from "@/assets/logos/PanneauDickensMontpellier.jpg";
+import entree from "@/assets/Ecole/entree.jpg";
+import courtGrand from "@/assets/Ecole/cour-recre-grand.jpg";
+import courtGrand2 from "@/assets/Ecole/cour-recre-grand2.jpg";
+import courtPetits from "@/assets/Ecole/court-recre-petits.jpg";
+import jardPedag1 from "@/assets/Ecole/jardin-pedag1.jpg";
+import jardPedag2 from "@/assets/Ecole/jardin-pedag2.jpg";
+import cantine from "@/assets/Ecole/cantine.jpg";
+import salleMotricite from "@/assets/Ecole/salle-motricite.jpg";
+import cityStadium from "@/assets/Ecole/city-stadium.jpg";
+import salleClasse from "@/assets/Ecole/salle-classe.jpg";
 
 const schoolLevels = [
   {
@@ -98,12 +108,16 @@ const schoolActivities = [
 ];
 
 const galleryImages = [
-  { src: "/placeholder.svg", alt: "Cour de récréation" },
-  { src: "/placeholder.svg", alt: "Salle de classe" },
-  { src: "/placeholder.svg", alt: "Bibliothèque" },
-  { src: "/placeholder.svg", alt: "Cantine" },
-  { src: "/placeholder.svg", alt: "Jardin pédagogique" },
-  { src: "/placeholder.svg", alt: "Salle de motricité" },
+  { src: entree, alt: "Entrée de l'école" },
+  { src: courtGrand, alt: "Cour de récréation des grands" },
+  { src: courtGrand2, alt: "Cour de récréation des grands 2" },
+  { src: courtPetits, alt: "Cour de récréation des petits" },
+  { src: jardPedag1, alt: "Jardin pédagogique 1" },
+  { src: jardPedag2, alt: "Jardin pédagogique 2" },
+  { src: cantine, alt: "Cantine" },
+  { src: salleMotricite, alt: "Salle de motricité" },
+  { src: cityStadium, alt: "City stade" },
+  { src: salleClasse, alt: "Salle de classe" },
 ];
 
 const NotreEcole = () => {
@@ -131,7 +145,7 @@ const NotreEcole = () => {
               Notre école
             </span>
             <h1 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              Un lieu où grandir <span className="text-gradient">avec bonheur</span>
+              Un lieu où grandir <span className="bg-gradient-to-r from-primary via-secondary to-sky bg-clip-text text-transparent">avec bonheur</span>
             </h1>
             <p className="text-lg text-muted-foreground md:text-xl leading-relaxed">
               Un lieu où chaque enfant trouve sa place dans un environnement chaleureux,
@@ -221,26 +235,32 @@ const NotreEcole = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex justify-center gap-4 flex-wrap"
+            className="flex flex-col items-center gap-6"
           >
-            <Button asChild variant="outline" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
-              <a href="https://www.ent-ecole.fr/cardboard/0193c4aa-f45c-792c-81bc-0703a3006b58" target="_blank" rel="noopener noreferrer">
-                <Leaf className="mr-1 md:mr-2 h-4 md:h-5 w-4 md:w-5" />
-                Accéder à l'ENT
-              </a>
-            </Button>
-            <Button asChild variant="playful" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
-              <a href="https://digipad.app/p/1394770/39b6b0ff88979" target="_blank" rel="noopener noreferrer">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Consulter le DigiPad
-              </a>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto">
-              <a href="https://alsh34.wixsite.com/centre" target="_blank" rel="noopener noreferrer">
-                <Music className=" mr-2 h-5 w-5" />
-                Notre Acceuil de Loisirs ALSH
-              </a>
-            </Button>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/20 px-4 py-1.5 text-sm font-semibold text-accent-foreground">
+              <Globe className="h-4 w-4" />
+              Liens utiles
+            </div>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">
+                <a href="https://www.ent-ecole.fr/cardboard/0193c4aa-f45c-792c-81bc-0703a3006b58" target="_blank" rel="noopener noreferrer">
+                  <Leaf className="mr-1 md:mr-2 h-4 md:h-5 w-4 md:w-5" />
+                  Accéder à l'ENT
+                </a>
+              </Button>
+              <Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">
+                <a href="https://digipad.app/p/1394770/39b6b0ff88979" target="_blank" rel="noopener noreferrer">
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  Consulter le DigiPad
+                </a>
+              </Button>
+              <Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">
+                <a href="https://alsh34.wixsite.com/centre" target="_blank" rel="noopener noreferrer">
+                  <Music className="mr-2 h-5 w-5" />
+                  Notre Acceuil de Loisirs ALSH
+                </a>
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -431,7 +451,7 @@ const NotreEcole = () => {
             </p>
           </motion.div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {galleryImages.map((image, index) => (
               <motion.div
                 key={index}
