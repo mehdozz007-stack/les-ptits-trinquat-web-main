@@ -31,89 +31,89 @@ const Spark = ({ color }: { color: string }) => {
 export function HeroSection() {
   const sparks = Array.from({ length: 150 }); // total sparks around the TOMBOLA
   type InfoBadgeProps = {
-  icon: string
-  text: string
-  href: string
-  delay: number
-  bgClass: string
-  textGradient: string
-  pingOuter: string
-  pingInner: string
-  sparksColors: string[]
-  sparks: any[]
-}
+    icon: string
+    text: string
+    href: string
+    delay: number
+    bgClass: string
+    textGradient: string
+    pingOuter: string
+    pingInner: string
+    sparksColors: string[]
+    sparks: any[]
+  }
 
-const InfoBadge = ({
-  icon,
-  text,
-  href,
-  delay,
-  bgClass,
-  textGradient,
-  pingOuter,
-  pingInner,
-  sparksColors,
-  sparks,
-}: InfoBadgeProps) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay }}
-      className={`relative inline-flex items-center gap-1 sm:gap-3 
+  const InfoBadge = ({
+    icon,
+    text,
+    href,
+    delay,
+    bgClass,
+    textGradient,
+    pingOuter,
+    pingInner,
+    sparksColors,
+    sparks,
+  }: InfoBadgeProps) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay }}
+        className={`relative inline-flex items-center gap-1 sm:gap-3 
         rounded-2xl sm:rounded-full px-2 sm:px-4 py-2 
         text-xs sm:text-lg font-bold overflow-visible ${bgClass}`}
-    >
-      {/* Sparks */}
-      {sparks.map((_, i) => (
-        <Spark
-          key={i}
-          color={sparksColors[i % sparksColors.length]}
-        />
-      ))}
+      >
+        {/* Sparks */}
+        {sparks.map((_, i) => (
+          <Spark
+            key={i}
+            color={sparksColors[i % sparksColors.length]}
+          />
+        ))}
 
-      {/* Icon */}
-      <span className="text-base sm:text-xl flex-shrink-0">{icon}</span>
+        {/* Icon */}
+        <span className="text-base sm:text-xl flex-shrink-0">{icon}</span>
 
-      {/* Text */}
-      <div
-        className={`flex items-center gap-1 sm:gap-2 font-kid 
+        {/* Text */}
+        <div
+          className={`flex items-center gap-1 sm:gap-2 font-kid 
         text-transparent bg-clip-text ${textGradient} 
         text-xs sm:text-base font-bold leading-tight drop-shadow-lg`}
-      >
-        {/* Ping */}
-        <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
-          <span
-            className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${pingOuter}`}
-          />
-          <span
-            className={`relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full ${pingInner}`}
-          />
-        </span>
-
-        {/* Message */}
-        <span className="leading-tight text-xs sm:text-sm whitespace-normal">
-          {text}
-        </span>
-      </div>
-
-      {/* Link */}
-      {href && (
-        <Button
-          variant="ghost"
-          size="sm"
-          className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm ml-auto"
-          asChild
         >
-          <a href={href} target="_blank" rel="noopener noreferrer">
-            Voir
-            <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
-          </a>
-        </Button>
-      )}
-    </motion.div>
-  )
-}
+          {/* Ping */}
+          <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
+            <span
+              className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${pingOuter}`}
+            />
+            <span
+              className={`relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full ${pingInner}`}
+            />
+          </span>
+
+          {/* Message */}
+          <span className="leading-tight text-xs sm:text-sm whitespace-normal">
+            {text}
+          </span>
+        </div>
+
+        {/* Link */}
+        {href && (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm ml-auto"
+            asChild
+          >
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              Voir
+              <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+            </a>
+          </Button>
+        )}
+      </motion.div>
+    )
+  }
 
   return (
     <section className="relative min-h-[90vh] sm:min-h-[115vh] lg:min-h-[110vh] overflow-hidden bg-hero">
@@ -135,117 +135,117 @@ const InfoBadge = ({
             className="max-w-xl w-full"
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
-            <InfoBadge
-              icon="📰"
-              text="À l'attention des parents de CM2 SI"
-              href="/documents/Affiche_SI_écoles_260115_044150.pdf"
-              delay={0.2}
-              bgClass="bg-blue-100/30 text-blue-900"
-              textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-lime-500"
-              pingOuter="bg-blue-500"
-              pingInner="bg-blue-400"
-              sparks={sparks}
-              sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
-                    "bg-green-400",
-                    "bg-emerald-400",
-                    "bg-teal-400",
-                    "bg-cyan-400",
-                    "bg-sky-400",
-                    "bg-blue-400",
-                    "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-amber-400",
-                    "bg-white",
-                  ]}
-            />
-            <InfoBadge
-              icon="📣"
-              text="Tombola 2026 - Tirage au sort par les  enfants le 16 février !"
-              href="/evenements#event-1"
-              delay={0.2}
-              bgClass="bg-red-100/80 text-purple-600"
-              textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
-              pingOuter="bg-purple-600"
-              pingInner="bg-purple-500"
-              sparks={sparks}
-              sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
-                    "bg-green-400",
-                    "bg-emerald-400",
-                    "bg-teal-400",
-                    "bg-cyan-400",
-                    "bg-sky-400",
-                    "bg-blue-400",
-                    "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-amber-400",
-                    "bg-white",
-                  ]}
-            />
-            <InfoBadge
-              icon="🏆"
-              text="Profitez de nos offres de partenariats exclusifs !"
-              href="/partenaires#special-event-1"
-              delay={0.2}
-              bgClass="bg-green-100/40 text-green-600"
-              textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
-              pingOuter="bg-green-500"
-              pingInner="bg-green-400"
-              sparks={sparks}
-              sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-lime-400",
-                    "bg-green-400",
-                    "bg-emerald-400",
-                    "bg-teal-400",
-                    "bg-cyan-400",
-                    "bg-sky-400",
-                    "bg-blue-400",
-                    "bg-indigo-400",
-                    "bg-violet-400",
-                    "bg-purple-400",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-amber-400",
-                    "bg-white",
-                  ]}
-            />
-            <InfoBadge
-              icon="❤️"
-              text="Un collecte de fonds. Votre aide est précieuse - Un toit Un Avenir !"
-              href="https://www.helloasso.com/associations/une-ecole-un-avenir/collectes/fonds-d-urgence-un-toit-un-avenir"
-              delay={0.2}
-              bgClass="bg-rose-100/80 text-red-600"
-              textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"
-              pingOuter="bg-rose-600"
-              pingInner="bg-rose-500"
-              sparks={sparks}
-              sparksColors={[
-                    "bg-red-400",
-                    "bg-orange-400",
-                    "bg-yellow-300",
-                    "bg-pink-400",
-                    "bg-rose-400",
-                    "bg-red-400",
-                    "bg-white",
-                  ]}
-            />
-          </div>
+              <InfoBadge
+                icon="📰"
+                text="À l'attention des parents de CM2 SI"
+                href="/documents/Affiche_SI_écoles_260115_044150.pdf"
+                delay={0.2}
+                bgClass="bg-blue-100/30 text-blue-900"
+                textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-lime-500"
+                pingOuter="bg-blue-500"
+                pingInner="bg-blue-400"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-red-400",
+                  "bg-orange-400",
+                  "bg-yellow-300",
+                  "bg-lime-400",
+                  "bg-green-400",
+                  "bg-emerald-400",
+                  "bg-teal-400",
+                  "bg-cyan-400",
+                  "bg-sky-400",
+                  "bg-blue-400",
+                  "bg-indigo-400",
+                  "bg-violet-400",
+                  "bg-purple-400",
+                  "bg-pink-400",
+                  "bg-rose-400",
+                  "bg-amber-400",
+                  "bg-white",
+                ]}
+              />
+              <InfoBadge
+                icon="📣"
+                text="Tombola 2026 - Tirage au sort par les  enfants le 16 février !"
+                href="/evenements#event-1"
+                delay={0.2}
+                bgClass="bg-red-100/80 text-purple-600"
+                textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
+                pingOuter="bg-purple-600"
+                pingInner="bg-purple-500"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-red-400",
+                  "bg-orange-400",
+                  "bg-yellow-300",
+                  "bg-lime-400",
+                  "bg-green-400",
+                  "bg-emerald-400",
+                  "bg-teal-400",
+                  "bg-cyan-400",
+                  "bg-sky-400",
+                  "bg-blue-400",
+                  "bg-indigo-400",
+                  "bg-violet-400",
+                  "bg-purple-400",
+                  "bg-pink-400",
+                  "bg-rose-400",
+                  "bg-amber-400",
+                  "bg-white",
+                ]}
+              />
+              <InfoBadge
+                icon="🏆"
+                text="Profitez de nos offres de partenariats exclusifs !"
+                href="/partenaires#special-event-1"
+                delay={0.2}
+                bgClass="bg-orange-100/40 text-green-600"
+                textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
+                pingOuter="bg-green-500"
+                pingInner="bg-green-400"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-red-400",
+                  "bg-orange-400",
+                  "bg-yellow-300",
+                  "bg-lime-400",
+                  "bg-green-400",
+                  "bg-emerald-400",
+                  "bg-teal-400",
+                  "bg-cyan-400",
+                  "bg-sky-400",
+                  "bg-blue-400",
+                  "bg-indigo-400",
+                  "bg-violet-400",
+                  "bg-purple-400",
+                  "bg-pink-400",
+                  "bg-rose-400",
+                  "bg-amber-400",
+                  "bg-white",
+                ]}
+              />
+              <InfoBadge
+                icon="❤️"
+                text="Un collecte de fonds. Votre aide est précieuse - Un toit Un Avenir !"
+                href="https://www.helloasso.com/associations/une-ecole-un-avenir/collectes/fonds-d-urgence-un-toit-un-avenir"
+                delay={0.2}
+                bgClass="bg-rose-100/80 text-red-600"
+                textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"
+                pingOuter="bg-rose-600"
+                pingInner="bg-rose-500"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-red-400",
+                  "bg-orange-400",
+                  "bg-yellow-300",
+                  "bg-pink-400",
+                  "bg-rose-400",
+                  "bg-red-400",
+                  "bg-white",
+                ]}
+              />
+            </div>
 
 
             <motion.h1
@@ -265,8 +265,8 @@ const InfoBadge = ({
               transition={{ delay: 0.4 }}
               className="mb-8 text-base sm:text-lg text-muted-foreground leading-relaxed"
             >
-              L'association Les P'tits Trinquat rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong>, 
-              pour accompagner et enrichir la vie scolaire de nos enfants à travers des événements, des projets 
+              L'association Les P'tits Trinquat rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong>,
+              pour accompagner et enrichir la vie scolaire de nos enfants à travers des événements, des projets
               et une communauté bienveillante.
             </motion.p>
 
@@ -324,60 +324,60 @@ const InfoBadge = ({
             <div className="relative w-full max-w-sm lg:max-w-none flex flex-col items-center lg:items-start">
               {/* Background decoration */}
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 via-secondary/20 to-sky/20 blur-2xl" />
-              
+
               <div className="w-full text-center mb-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 }}
-                className="flex justify-center"
-              >
-                <div className="relative p-3 sm:p-4 lg:p-6 rounded-2xl">
-                  <div className="relative inline-block">
-                    <img
-                      src={logoAsso}
-                      alt="Logo Les P'tits Trinquat"
-                      className="h-30 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
-                    />
-                    
-                    {/* Social Links on logo */}
-                    <div className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 sm:gap-3">
-                      <a
-                        href="https://www.instagram.com/Les_ptits_trinquat?fbclid=IwY2xjawOmlxFleHRuA2FlbQIxMABicmlkETFnZjNRdDdMVHp6cHdIM3pwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvXM-UMnkp69r5uScbYVykNF5ZVtr9MQa1_k2se0iqZ3IfRUEmOZXgHqWCes_aem_hUyrVdxiVyWFisTvxVlyRw&brid=boREg9T10BACz4NodPBJ3w"
-                        target="_blank"
-                        className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none"
-                          viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                            d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                            d="M16.5 7.51h.01M12 8.25A3.75 3.75 0 1 0 12 15.75A3.75 3.75 0 1 0 12 8.25Z" />
-                        </svg>
-                      </a>
-                      <a
-                        href="https://www.facebook.com/LesPtitsTrinquats"
-                        target="_blank"
-                        className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6"
-                          fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M13.5 8.5V6.75c0-.62.5-1.12 1.12-1.12H16V3h-2.25A3.75 3.75 0 0 0 10 6.75V8.5H8v3h2v9h3v-9h2.25l.25-3h-2.5z"/>
-                        </svg>
-                      </a>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="flex justify-center"
+                >
+                  <div className="relative p-3 sm:p-4 lg:p-6 rounded-2xl">
+                    <div className="relative inline-block">
+                      <img
+                        src={logoAsso}
+                        alt="Logo Les P'tits Trinquat"
+                        className="h-30 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
+                      />
+
+                      {/* Social Links on logo */}
+                      <div className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 sm:gap-3">
+                        <a
+                          href="https://www.instagram.com/Les_ptits_trinquat?fbclid=IwY2xjawOmlxFleHRuA2FlbQIxMABicmlkETFnZjNRdDdMVHp6cHdIM3pwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvXM-UMnkp69r5uScbYVykNF5ZVtr9MQa1_k2se0iqZ3IfRUEmOZXgHqWCes_aem_hUyrVdxiVyWFisTvxVlyRw&brid=boREg9T10BACz4NodPBJ3w"
+                          target="_blank"
+                          className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                              d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                              d="M16.5 7.51h.01M12 8.25A3.75 3.75 0 1 0 12 15.75A3.75 3.75 0 1 0 12 8.25Z" />
+                          </svg>
+                        </a>
+                        <a
+                          href="https://www.facebook.com/LesPtitsTrinquats"
+                          target="_blank"
+                          className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6"
+                            fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13.5 8.5V6.75c0-.62.5-1.12 1.12-1.12H16V3h-2.25A3.75 3.75 0 0 0 10 6.75V8.5H8v3h2v9h3v-9h2.25l.25-3h-2.5z" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="mb-8 text-xs sm:text-sm text-muted-foreground text-center"
-              >
-                Association Parents d'Elèves.
-              </motion.div>
-            </div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="mb-8 text-xs sm:text-sm text-muted-foreground text-center"
+                >
+                  Association Parents d'Elèves.
+                </motion.div>
+              </div>
 
               {/* Main image */}
               <img

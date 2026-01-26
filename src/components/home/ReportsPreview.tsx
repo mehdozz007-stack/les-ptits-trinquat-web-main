@@ -7,9 +7,12 @@ import { Card, CardContent } from "@/components/ui/card";
 const reports = [
   {
     id: 1,
-    title: "Procès-Verbal Conseil d'école - 2025-2026",
+    title: "Conseil d'école - 2025-2026",
     date: "2025-2026",
     type: "Conseil d'école",
+    category: "conseil",
+    hasFile: true,
+    fileUrl: "https://www.ent-ecole.fr/cardboard/0193c594-bf68-798a-97b7-aedda95767a2",
   },
   /*{
     id: 2,
@@ -18,17 +21,20 @@ const reports = [
     type: "Conseil d'école",
   },*/
   {
-    id: 3,
-    title: "Procès-Verbal Assemblée Générale - 25 Septembre 2025",
-    date: "25 Septembre 2025",
-    type: "Assemblée",
+    id: 13,
+    title: "Fiche RSST",
+    date: "2025",
+    type: "Sécurité",
+    category: "reunion",
+    hasFile: true,
+    fileUrl: "/documents/RSST_FICHE.pdf",
   },
-  {
+  /*{
     id: 4,
     title: "Compte de Résultat - 2024-2025",
     date: "2024-2025",
     type: "Financier",
-  },
+  },*/
 ];
 
 export function ReportsPreview() {
@@ -125,10 +131,10 @@ export function ReportsPreview() {
             viewport={{ once: true }}
             className="flex justify-center lg:col-span-2 mt-6"
           >
-            <Button 
-              variant="default" 
+            <Button
+              variant="default"
               size="lg"
-              className="text-sm sm:text-base" 
+              className="text-sm sm:text-base"
               asChild
             >
               <Link to="/comptes-rendus" className="flex items-center gap-2">

@@ -24,16 +24,16 @@ const upcomingEvents = [
     color: "secondary",
   },*/
   {
-   id: 1,
-   title: "📣 TOMBOLA de la rentrée 2025-2026 est lancée ! 🎁",
-   date: "8 Décembre 2025 - Lancée",
-   time: "Remise de tickets jusqu'au 20 janvier 2026",
-   location: "Groupe scolaire FRANK-DICKENS",
-   description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires ! 16 Février 2026 le tirage au sort. Bonne chance à tous !",
-   color: "accent",
-   status: "upcoming",
-   attendees: 500,
-   url: "/partenaires"
+    id: 1,
+    title: " TOMBOLA de la rentrée 2025-2026 est lancée !",
+    date: "8 Décembre 2025 - Lancée",
+    time: "Remise de tickets jusqu'au 20 janvier 2026",
+    location: "Groupe scolaire FRANK-DICKENS",
+    description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires ! 16 Février 2026 le tirage au sort. Bonne chance à tous !",
+    color: "accent",
+    status: "upcoming",
+    attendees: 500,
+    url: "/partenaires"
   },
   /*{
     id: 4,
@@ -48,7 +48,7 @@ const upcomingEvents = [
   },*/
   {
     id: 5,
-    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
+    title: "Réunion mensuelle des parents",
     date: "30 Janvier 2026",
     time: "17h30 - 19h30",
     location: "Salle polyvalente",
@@ -59,7 +59,7 @@ const upcomingEvents = [
   },
   {
     id: 10,
-    title: "🥞 La crèpe party de l'école ! 🎉",
+    title: "La crèpe party de l'école !",
     date: "20 Février 2026",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école",
@@ -77,6 +77,14 @@ const colorClasses = {
   sky: "bg-sky text-sky-foreground",
   accent: "bg-accent text-accent-foreground",
   violet: "bg-violet text-violet-foreground",
+};
+
+const titleGradients = {
+  primary: "bg-gradient-to-r from-primary via-secondary to-pink bg-clip-text text-transparent font-extrabold",
+  secondary: "bg-gradient-to-r from-secondary via-primary to-orange-500 bg-clip-text text-transparent font-extrabold",
+  sky: "bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 bg-clip-text text-transparent font-extrabold",
+  accent: "bg-gradient-to-r from-accent via-green-600 to-yellow-400 bg-clip-text text-transparent font-extrabold",
+  violet: "bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-extrabold",
 };
 
 export function EventsPreview() {
@@ -115,7 +123,7 @@ export function EventsPreview() {
                 <CardContent className="p-0">
                   {/* Color Banner */}
                   <div className={`h-2 ${colorClasses[event.color as keyof typeof colorClasses]}`} />
-                  
+
                   <div className="p-6">
                     {/* Date Badge */}
                     <div className={`mb-6 flex w-fit items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colorClasses[event.color as keyof typeof colorClasses]}`}>
@@ -129,14 +137,14 @@ export function EventsPreview() {
                         href={event.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors inline-block no-underline"
+                        className={`mb-2 text-xl font-bold group-hover:opacity-80 transition-opacity inline-block no-underline ${titleGradients[event.color as keyof typeof titleGradients]}`}
                       >
                         {event.title}
                       </a>
                     ) : (
                       <Link
                         to="/evenements"
-                        className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors inline-block no-underline"
+                        className={`mb-2 text-xl font-bold group-hover:opacity-80 transition-opacity inline-block no-underline ${titleGradients[event.color as keyof typeof titleGradients]}`}
                       >
                         {event.title}
                       </Link>
@@ -147,8 +155,8 @@ export function EventsPreview() {
                     </p>
 
                     {/* Read More Button */}
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       size="sm"
                       className="rounded-full bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/10 transition-all mb-4"
                       asChild
