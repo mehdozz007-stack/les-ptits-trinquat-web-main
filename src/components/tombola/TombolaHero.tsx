@@ -8,7 +8,7 @@ export function TombolaHero() {
       <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
       <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-secondary/10 blur-3xl" />
       <div className="absolute left-1/2 top-1/4 h-32 w-32 -translate-x-1/2 rounded-full bg-sky/10 blur-2xl" />
-      
+
       {/* Floating emojis */}
       <motion.div
         className="absolute left-[10%] top-[20%] text-4xl"
@@ -18,7 +18,7 @@ export function TombolaHero() {
         🎁
       </motion.div>
       <motion.div
-        className="absolute right-[15%] top-[30%] text-3xl"
+        className="absolute right-[20%] top-[40%] text-3xl"
         animate={{ y: [0, -10, 0], rotate: [5, -5, 5] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       >
