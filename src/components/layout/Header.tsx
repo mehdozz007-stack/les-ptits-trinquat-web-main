@@ -10,8 +10,8 @@ const navItems = [
   { label: "Accueil", href: "/", icon: Home },
   { label: "À propos", href: "/a-propos", icon: Users },
   { label: "Notre école", href: "/notre-ecole", icon: School },
+  { label: "Actualités", href: "/actualites", icon: FileText },
   { label: "Événements", href: "/evenements", icon: Calendar },
-  { label: "Comptes-rendus", href: "/comptes-rendus", icon: FileText },
   { label: "Partenaires", href: "/partenaires", icon: Heart },
   { label: "Contact", href: "/contact", icon: Mail },
 ];
@@ -26,10 +26,10 @@ export function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
           <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-primary to-secondary shadow-soft transition-transform group-hover:scale-110 flex-shrink-0">
-            <img 
-            src={heroImage} 
-            alt="Logo enfants"
-            className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl object-cover"
+            <img
+              src={heroImage}
+              alt="Logo enfants"
+              className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl object-cover"
             />
           </div>
           <div>

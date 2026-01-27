@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Index from "./pages/Index";
 import Evenements from "./pages/Evenements";
+import { Actualites } from "./pages/Actualites";
 import ComptesRendus from "./pages/ComptesRendus";
 import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/a-propos" element={<APropos />} />
           <Route path="/notre-ecole" element={<NotreEcole />} />
           <Route path="/evenements" element={<Evenements />} />
+          <Route path="/actualites" element={<Actualites />} />
           <Route path="/comptes-rendus" element={<ComptesRendus />} />
           <Route path="/partenaires" element={<Partenaires />} />
           <Route path="/contact" element={<Contact />} />
