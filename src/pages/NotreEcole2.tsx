@@ -34,7 +34,7 @@ import salleClasse from "@/assets/Ecole/salle-classe.jpg";
 const schoolLevels = [
   {
     title: "Maternelle",
-    description: "Petite, Moyenne et Grande section, mélangée dans les classes - Un premier pas vers l'apprentissage dans un cadre bienveillant et responsable.",
+    description: "Petite, Moyenne et Grande section, mélangées dans les classes - Un premier pas vers l'apprentissage dans un cadre bienveillant et responsable.",
     icon: Sparkles,
     color: "bg-primary/10 text-primary",
   },
