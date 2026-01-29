@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-children.jpg";
-import logoAsso from "@/assets/logos/logoAsso2.svg";
+import logoAsso from "@/assets/logos/logoAsso.jpg";
 
 // Spark component for floating particles
 const Spark = ({ color }: { color: string }) => {
@@ -337,7 +337,7 @@ export function HeroSection() {
                       <img
                         src={logoAsso}
                         alt="Logo Les P'tits Trinquat"
-                        className="h-30 sm:h-40 lg:h-48 w-auto drop-shadow-md rounded-2xl"
+                        className="h-40 sm:h-52 lg:h-66 w-auto drop-shadow-md rounded-xl"
                       />
 
                       {/* Social Links on logo */}
