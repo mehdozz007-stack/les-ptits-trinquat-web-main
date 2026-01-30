@@ -37,12 +37,12 @@ import { useToast } from "@/hooks/use-toast";
 const reports = [
   {
     id: 1,
-    title: "Procès-Verbal Conseil d'école - 2025-2026",
+    title: "Conseil d'école - 2025-2026",
     date: "2025-2026",
     type: "Conseil d'école",
     category: "conseil",
     hasFile: true,
-    fileUrl: "/documents/Proces Verbale n°1 CONSEIL D'ECOLE FRANK DICKENS 2025-2026.pdf",
+    fileUrl: "https://www.ent-ecole.fr/cardboard/0193c594-bf68-798a-97b7-aedda95767a2",
   },
   /*{
     id: 2,
@@ -52,7 +52,7 @@ const reports = [
     category: "conseil",
     hasFile: true,
     fileUrl: "/documents/Compte Rendu Conseil d'école Asso Novembre 2025.pdf",
-  },*/
+  },
   {
     id: 3,
     title: "Procès-Verbal Assemblée Générale - 25 Septembre 2025",
@@ -62,7 +62,7 @@ const reports = [
     hasFile: true,
     fileUrl: "/documents/Proces VVerbale Assemblee Generale Ptits Trinquat - 25092025.pdf",
   },
-  /*{
+  {
     id: 4,
     title: "Compte Rendu Assemblée Générale - 2025-2026",
     date: "2025-2026",
@@ -70,7 +70,7 @@ const reports = [
     category: "assemblee",
     hasFile: true,
     fileUrl: "/documents/Compte Rendu  Assemblé Générale Asso 2025-2026.pdf",
-  },*/
+  },
   {
     id: 5,
     title: "Procès-Verbal Conseil d'Administration - 2025-2026",
@@ -80,7 +80,7 @@ const reports = [
     hasFile: true,
     fileUrl: "/documents/Proces Verbale CONSEIL ADMINISTRATION LES PTITS TRINQUAT 25_26.pdf",
   },
-  /*{
+  {
     id: 6,
     title: "Annexe - Présence Conseil d'École - 2025",
     date: "2025",
@@ -88,7 +88,7 @@ const reports = [
     category: "reunion",
     hasFile: true,
     fileUrl: "/documents/Annexe-0 presence.pdf",
-  },*/
+  },
   {
     id: 7,
     title: "Procès-Verbal Elections Parents - Annexe 1",
@@ -107,7 +107,7 @@ const reports = [
     hasFile: true,
     fileUrl: "/documents/Annexe-1-bis-pv-elections-parents-2025-2026.pdf",
   },
-  /*{
+  {
     id: 9,
     title: "Questions-Réponses Parents Conseil d'École - Annexe 3",
     date: "2025-2026",
@@ -115,7 +115,7 @@ const reports = [
     category: "reunion",
     hasFile: true,
     fileUrl: "/documents/annexe-3-reponses-parents-dickens-frank.pdf",
-  },*/
+  },
   {
     id: 10,
     title: "Compte de Résultat - 2024-2025",
@@ -125,7 +125,7 @@ const reports = [
     hasFile: true,
     fileUrl: "/documents/COMPTE DE RESULTAT 2024-2025 LES PTITS TRINQUAT.pdf",
   },
-  /*{
+  {
     id: 11,
     title: "Compte-rendu Installation Barrière",
     date: "2025",
@@ -133,7 +133,7 @@ const reports = [
     category: "reunion",
     hasFile: true,
     fileUrl: "/documents/Compte rendu _Barriere installation.pdf",
-  },*/
+  },
   {
     id: 12,
     title: "Rapport d'Activités - 2024-2025",
@@ -142,7 +142,7 @@ const reports = [
     category: "financier",
     hasFile: true,
     fileUrl: "/documents/Rapport activites 2024-2025.pdf",
-  },
+  },*/
   {
     id: 13,
     title: "Fiche RSST",

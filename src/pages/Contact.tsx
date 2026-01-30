@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 const faqs = [
   {
@@ -30,6 +31,7 @@ const faqs = [
 ];
 
 const Contact = () => {
+  useScrollToTop();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,7 +64,7 @@ const Contact = () => {
   } catch (err) {
     toast({
       title: "Erreur",
-      description: "Impossible d’envoyer le message. Merci de réessayer.",
+      description: "Impossible d'envoyer le message. Merci de réessayer.",
       variant: "destructive",
     });
     setIsSubmitting(false);
