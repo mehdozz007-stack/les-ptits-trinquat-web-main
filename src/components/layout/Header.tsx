@@ -27,10 +27,10 @@ export function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 sm:gap-3 group">
           <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg sm:rounded-xl bg-gradient-to-br from-primary to-secondary shadow-soft transition-transform group-hover:scale-110 flex-shrink-0">
-            <img 
-            src={heroImage} 
-            alt="Logo enfants"
-            className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl object-cover"
+            <img
+              src={heroImage}
+              alt="Logo enfants"
+              className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl object-cover"
             />
           </div>
           <div>
