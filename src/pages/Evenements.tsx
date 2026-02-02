@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { url } from "inspector";
 import crepesParty from "@/assets/Crepes_party_Affiche.jpg";
 const events = [
-    {
+  {
     id: 1,
     title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez avec nous de superbes lots ! 🎁",
     date: "8 Décembre 2025 - Lancement",
@@ -18,6 +18,17 @@ const events = [
     status: "upcoming",
     attendees: 500,
     url: "/partenaires"
+  },
+  {
+    id: 5,
+    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
+    date: "30 Janvier 2026",
+    time: "17h30 - 19h30",
+    location: "Salle polyvalente",
+    description: "Un temps d'échange pour construire ensemble les futurs temps forts de l'école.",
+    color: "secondary",
+    status: "past",
+    attendees: 30,
   },
   {
     id: 4,
@@ -41,17 +52,6 @@ const events = [
     status: "past",
     attendees: 300,
     url: "https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
-  },
-  {
-    id: 5,
-    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
-    date: "30 Janvier 2026",
-    time: "17h30 - 19h30",
-    location: "Salle polyvalente",
-    description: "Un temps d'échange pour construire ensemble les futurs temps forts de l'école.",
-    color: "secondary",
-    status: "upcoming",
-    attendees: 30,
   },
   {
     id: 10,
@@ -164,7 +164,7 @@ const Evenements = () => {
               const colors = colorClasses[event.color as keyof typeof colorClasses];
               return (
                 <motion.div
-                  key={event.id}                  id={`event-${event.id}`}                  initial={{ opacity: 0, y: 30 }}
+                  key={event.id} id={`event-${event.id}`} initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
