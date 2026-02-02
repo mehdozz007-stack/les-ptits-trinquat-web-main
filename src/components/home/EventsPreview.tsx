@@ -45,7 +45,7 @@ const upcomingEvents = [
     color: "sky",
     status: "past",
     attendees: 50,
-  },*/
+  },
   {
     id: 5,
     title: "Réunion mensuelle des parents",
@@ -56,7 +56,7 @@ const upcomingEvents = [
     color: "secondary",
     status: "upcoming",
     attendees: 30,
-  },
+  },*/
   {
     id: 10,
     title: "La crèpe party de l'école !",
@@ -68,6 +68,17 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 500,
     url: "/evenements#event-10"
+  },
+  {
+    id: 6,
+    title: "Carnaval à l'école",
+    date: "17 Avril 2026",
+    time: "08h30 - 16h30",
+    location: "Toute l'école",
+    description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré.\nLes enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps dans leurs classes 🌼🐝",
+    color: "sky",
+    status: "upcoming",
+    attendees: 380,
   },
 ];
 
