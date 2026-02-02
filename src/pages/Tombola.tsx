@@ -40,18 +40,35 @@ export default function Tombola() {
   });
 
   const emojis = ["😊", "😌", "🤗", "🙂", "☺️",
-  "🤍", "💛", "💚", "💙", "💜",
-  "🌿", "🍀", "🌸", "🌼", "🌻",
-  "🦋", "✨", "🌟", "⭐", "🌈",
-  "☀️", "🌙", "🍃", "🕊️"];
+    "�", "😍", "🤩", "😎", "🧡",
+    "🤍", "💛", "💚", "💙", "💜",
+    "🌿", "🍀", "🌸", "🌼", "🌻",
+    "🌺", "🌷", "🌹", "🦋", "🐝",
+    "✨", "🌟", "⭐", "🌈", "☀️",
+    "🌙", "🍃", "🕊️", "🦁", "🐼"];
   const emojiLots = ["🎁", "🎀", "📦", "💝",
-  "✨", "🌟", "⭐", "💎",
-  "🎉", "🎊",
-  "🏆", "🎯",
-  "🎨", "🎭",
-  "🎪", "🧸",
-  "📚", "🖍️"];
+    "✨", "🌟", "⭐", "💎",
+    "🎉", "🎊", "🎈", "🎂",
+    "🏆", "🎯", "🥇", "🥈",
+    "🎨", "🎭", "🎪", "🧸",
+    "📚", "🖍️", "📖", "🎵",
+    "🎸", "🎮", "🎲", "🧩",
+    "⚽", "🏀", "🎾", "👟"];
   // Load data from D1 API on mount
+  // Fonction pour recharger les données
+  const refreshData = async () => {
+    try {
+      const [parents, lots] = await Promise.all([
+        TombolaAPI.getParents(),
+        TombolaAPI.getLots(),
+      ]);
+      setParents(parents || []);
+      setLots(lots || []);
+    } catch (error) {
+      console.error("Error refreshing data:", error);
+    }
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -109,10 +126,10 @@ export default function Tombola() {
 
     if (!validation.valid) {
       setValidationErrors(
-        validation.errors.map((msg) => ({ 
-          field: "parent", 
+        validation.errors.map((msg) => ({
+          field: "parent",
           title: "Oups! 😊",
-          message: msg 
+          message: msg
         }))
       );
       return;
@@ -141,7 +158,7 @@ export default function Tombola() {
 
       if (savedParent) {
         setParents([...parents, savedParent]);
-        
+
         // Store auth token in localStorage
         TombolaAPI.setAuth({
           parentId: savedParent.id,
@@ -158,6 +175,9 @@ export default function Tombola() {
           emoji: savedParent.emoji,
         });
         setShowFormLot(true);
+
+        // Recharger tous les participants
+        await refreshData();
       }
     } catch (error) {
       setValidationErrors([
@@ -217,6 +237,9 @@ export default function Tombola() {
           message: `"${lotForm.nom}" est maintenant en tombola!`,
           emoji: "📦",
         });
+
+        // Recharger tous les lots
+        await refreshData();
       }
     } catch (error) {
       setValidationErrors([
@@ -261,13 +284,13 @@ export default function Tombola() {
 
     try {
       const updatedLot = await TombolaAPI.reserveLot(lotId);
-      
+
       if (updatedLot) {
         const updated = lots.map((l) =>
           l.id === lotId ? updatedLot : l
         );
         setLots(updated);
-        
+
         // Find parent name for message
         const owner = parents.find((p) => p.id === lot.parent_id);
         setSuccessMessage({
@@ -483,7 +506,7 @@ export default function Tombola() {
             <AnimatePresence>
               {!currentParentId && parents.length > 0 && (
                 <AnimatedReconnectionPrompt>
-                  <Card  className="border-2 border-sky-300/50 bg-sky-50/30 shadow-md">
+                  <Card className="border-2 border-sky-300/50 bg-sky-50/30 shadow-md">
                     <CardContent className="p-6">
                       <motion.p
                         className="text-sm font-semibold text-sky-700 mb-2 flex items-center gap-2"
@@ -509,7 +532,7 @@ export default function Tombola() {
             </AnimatePresence>
 
             {!showFormParent && !currentParentId && (
-              <Button  size="lg" onClick={() => setShowFormParent(true)} className="mb-8">
+              <Button size="lg" onClick={() => setShowFormParent(true)} className="mb-8">
                 <Plus className="mr-2 h-5 w-5" />
                 Je m'inscris
               </Button>
@@ -521,10 +544,10 @@ export default function Tombola() {
             <motion.div
               className="mb-12 max-w-2xl mx-auto"
             >
-              <Card  className="border-2 border-primary/30 shadow-lg">
+              <Card className="border-2 border-primary/30 shadow-lg">
                 <CardContent className="p-6 sm:p-8">
                   <div className="flex justify-between items-center mb-6">
-                    <motion.h3 
+                    <motion.h3
                       className="text-2xl font-bold"
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
@@ -567,11 +590,10 @@ export default function Tombola() {
                             key={emoji}
                             type="button"
                             onClick={() => setSelectedEmoji(emoji)}
-                            className={`h-12 w-12 inline-flex items-center justify-center text-3xl rounded-lg transition-all ${
-                              selectedEmoji === emoji
-                                ? "bg-primary/20"
-                                : "hover:bg-muted"
-                            }`}
+                            className={`h-12 w-12 inline-flex items-center justify-center text-3xl rounded-lg transition-all ${selectedEmoji === emoji
+                              ? "bg-primary/20"
+                              : "hover:bg-muted"
+                              }`}
                           >
                             {emoji}
                           </button>
@@ -617,7 +639,7 @@ export default function Tombola() {
                       </p>
                     </div>
 
-                    <Button type="submit"  className="w-full">
+                    <Button type="submit" className="w-full">
                       Valider mon inscription
                     </Button>
                   </form>
@@ -639,12 +661,11 @@ export default function Tombola() {
                 return (
                   <motion.div key={parent.id} variants={itemVariants}>
                     <Card
-                      
-                      className={`group h-full transition-all duration-300 ${
-                        isCurrentParent
-                          ? "border-2 border-green-500/50 bg-green-50/50 hover:shadow-lg hover:shadow-green-500/30"
-                          : "hover:shadow-lg hover:shadow-primary/20"
-                      }`}
+
+                      className={`group h-full transition-all duration-300 ${isCurrentParent
+                        ? "border-2 border-green-500/50 bg-green-50/50 hover:shadow-lg hover:shadow-green-500/30"
+                        : "hover:shadow-lg hover:shadow-primary/20"
+                        }`}
                     >
                       <CardContent className="p-4 sm:p-5 flex flex-col items-center text-center h-full justify-between">
                         {isCurrentParent && (
@@ -687,7 +708,7 @@ export default function Tombola() {
 
                         {!isCurrentParent && !currentParentId && (
                           <Button
-                            
+
                             size="sm"
                             className="w-full mt-3 text-xs"
                             onClick={() => {
@@ -745,7 +766,7 @@ export default function Tombola() {
             </p>
 
             {parents.length > 0 && !showFormLot && (
-              <Button  size="lg" onClick={() => setShowFormLot(true)} className="mb-8">
+              <Button size="lg" onClick={() => setShowFormLot(true)} className="mb-8">
                 <Gift className="mr-2 h-5 w-5" />
                 Ajouter un lot
               </Button>
@@ -757,10 +778,10 @@ export default function Tombola() {
             <motion.div
               className="mb-12 max-w-2xl mx-auto"
             >
-              <Card  className="border-2 border-primary/30 shadow-lg">
+              <Card className="border-2 border-primary/30 shadow-lg">
                 <CardContent className="p-6 sm:p-8">
                   <div className="flex justify-between items-center mb-6">
-                    <motion.h3 
+                    <motion.h3
                       className="text-2xl font-bold"
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
@@ -803,11 +824,10 @@ export default function Tombola() {
                             key={emoji}
                             type="button"
                             onClick={() => setLotForm({ ...lotForm, emoji })}
-                            className={`h-12 w-12 inline-flex items-center justify-center text-3xl rounded-lg transition-all ${
-                              lotForm.emoji === emoji
-                                ? "bg-primary/20"
-                                : "hover:bg-muted"
-                            }`}
+                            className={`h-12 w-12 inline-flex items-center justify-center text-3xl rounded-lg transition-all ${lotForm.emoji === emoji
+                              ? "bg-primary/20"
+                              : "hover:bg-muted"
+                              }`}
                           >
                             {emoji}
                           </button>
@@ -838,7 +858,7 @@ export default function Tombola() {
                       />
                     </div>
 
-                    <Button type="submit"  className="w-full">
+                    <Button type="submit" className="w-full">
                       Ajouter ce lot
                     </Button>
                   </form>
@@ -871,14 +891,13 @@ export default function Tombola() {
                 {lots.filter(lot => lot.parent_id === currentParentId).map((lot) => (
                   <motion.div key={lot.id} variants={itemVariants}>
                     <Card
-                      
-                      className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 border-2 border-blue-500/50 bg-blue-50/30 ${
-                        lot.status === "available"
-                          ? "border-2 border-green-500/50"
-                          : lot.status === "reserved"
+
+                      className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 border-2 border-blue-500/50 bg-blue-50/30 ${lot.status === "available"
+                        ? "border-2 border-green-500/50"
+                        : lot.status === "reserved"
                           ? "border-2 border-yellow-500/50"
                           : "border-2 border-red-500/50 opacity-75"
-                      }`}
+                        }`}
                     >
                       <CardContent className="p-6 flex flex-col h-full">
                         {/* Header avec emoji et statut */}
@@ -975,98 +994,97 @@ export default function Tombola() {
                 className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {lots.map((lot) => (
-              <motion.div key={lot.id} variants={itemVariants}>
-                <Card
-                  
-                  className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 ${
-                    lot.status === "available"
-                      ? "border-2 border-green-500/30"
-                      : lot.status === "reserved"
-                      ? "border-2 border-yellow-500/30"
-                      : "border-2 border-red-500/30 opacity-75"
-                  }`}
-                >
-                  <CardContent className="p-6 flex flex-col h-full">
-                    {/* Header avec emoji et statut */}
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="text-4xl">🎁</div>
-                      <div className="text-right">
-                        {lot.status === "available" && (
-                          <span className="inline-block bg-green-500/20 px-3 py-1 rounded-full text-xs font-semibold text-green-700">
-                            🟢 Disponible
-                          </span>
+                  <motion.div key={lot.id} variants={itemVariants}>
+                    <Card
+
+                      className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 ${lot.status === "available"
+                        ? "border-2 border-green-500/30"
+                        : lot.status === "reserved"
+                          ? "border-2 border-yellow-500/30"
+                          : "border-2 border-red-500/30 opacity-75"
+                        }`}
+                    >
+                      <CardContent className="p-6 flex flex-col h-full">
+                        {/* Header avec emoji et statut */}
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="text-4xl">🎁</div>
+                          <div className="text-right">
+                            {lot.status === "available" && (
+                              <span className="inline-block bg-green-500/20 px-3 py-1 rounded-full text-xs font-semibold text-green-700">
+                                🟢 Disponible
+                              </span>
+                            )}
+                            {lot.status === "reserved" && (
+                              <span className="inline-block bg-yellow-500/20 px-3 py-1 rounded-full text-xs font-semibold text-yellow-700">
+                                🟡 Réservé
+                              </span>
+                            )}
+                            {lot.status === "delivered" && (
+                              <span className="inline-block bg-red-500/20 px-3 py-1 rounded-full text-xs font-semibold text-red-700">
+                                🔴 Remis
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Contenu */}
+                        <h3 className="text-lg font-bold text-foreground mb-2">{lot.title}</h3>
+                        {lot.description && (
+                          <p className="text-sm text-muted-foreground mb-4 flex-1">{lot.description}</p>
                         )}
-                        {lot.status === "reserved" && (
-                          <span className="inline-block bg-yellow-500/20 px-3 py-1 rounded-full text-xs font-semibold text-yellow-700">
-                            🟡 Réservé
-                          </span>
-                        )}
-                        {lot.status === "delivered" && (
-                          <span className="inline-block bg-red-500/20 px-3 py-1 rounded-full text-xs font-semibold text-red-700">
-                            🔴 Remis
-                          </span>
-                        )}
-                      </div>
-                    </div>
 
-                    {/* Contenu */}
-                    <h3 className="text-lg font-bold text-foreground mb-2">{lot.title}</h3>
-                    {lot.description && (
-                      <p className="text-sm text-muted-foreground mb-4 flex-1">{lot.description}</p>
-                    )}
+                        {/* Info parent */}
+                        <div className="bg-muted/50 p-3 rounded-lg mb-4">
+                          <p className="text-xs text-muted-foreground mb-1">Proposé par</p>
+                          <p className="font-semibold">{parents.find(p => p.id === lot.parent_id)?.first_name}</p>
+                        </div>
 
-                    {/* Info parent */}
-                    <div className="bg-muted/50 p-3 rounded-lg mb-4">
-                      <p className="text-xs text-muted-foreground mb-1">Proposé par</p>
-                      <p className="font-semibold">{parents.find(p => p.id === lot.parent_id)?.first_name}</p>
-                    </div>
+                        {/* Actions */}
+                        <div className="flex gap-2">
+                          {lot.status === "available" && currentParentId !== lot.parent_id && (
+                            <Button
 
-                    {/* Actions */}
-                    <div className="flex gap-2">
-                      {lot.status === "available" && currentParentId !== lot.parent_id && (
-                        <Button
-                          
-                          size="sm"
-                          className="flex-1"
-                          onClick={() => currentParentId && handleReserveLot(lot.id, currentParentId)}
-                          disabled={!currentParentId}
-                        >
-                          Réserver
-                        </Button>
-                      )}
+                              size="sm"
+                              className="flex-1"
+                              onClick={() => currentParentId && handleReserveLot(lot.id, currentParentId)}
+                              disabled={!currentParentId}
+                            >
+                              Réserver
+                            </Button>
+                          )}
 
-                      {lot.status === "reserved" && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1"
-                          asChild
-                        >
-                          <a
-                            href={`mailto:${parents.find(p => p.id === lot.parent_id)?.email}?subject=Lot: ${lot.title}`}
-                            className="flex items-center justify-center gap-2"
+                          {lot.status === "reserved" && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1"
+                              asChild
+                            >
+                              <a
+                                href={`mailto:${parents.find(p => p.id === lot.parent_id)?.email}?subject=Lot: ${lot.title}`}
+                                className="flex items-center justify-center gap-2"
+                              >
+                                <MessageCircle className="h-4 w-4" />
+                                Contacter
+                              </a>
+                            </Button>
+                          )}
+
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="flex-1 text-red-600 hover:bg-red-100"
+                            onClick={() => handleDeleteLot(lot.id, lot.title)}
+                            disabled={lot.parent_id !== currentParentId}
+                            title={lot.parent_id !== currentParentId ? "Vous ne pouvez supprimer que vos propres lots" : ""}
                           >
-                            <MessageCircle className="h-4 w-4" />
-                            Contacter
-                          </a>
-                        </Button>
-                      )}
-
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="flex-1 text-red-600 hover:bg-red-100"
-                        onClick={() => handleDeleteLot(lot.id, lot.title)}
-                        disabled={lot.parent_id !== currentParentId}
-                        title={lot.parent_id !== currentParentId ? "Vous ne pouvez supprimer que vos propres lots" : ""}
-                      >
-                        Supprimer
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                            Supprimer
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
               </motion.div>
             </motion.div>
           )}
@@ -1093,98 +1111,97 @@ export default function Tombola() {
                 className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
               >
                 {lots.filter(lot => lot.parent_id !== currentParentId).map((lot) => (
-              <motion.div key={lot.id} variants={itemVariants}>
-                <Card
-                  
-                  className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 ${
-                    lot.status === "available"
-                      ? "border-2 border-green-500/30"
-                      : lot.status === "reserved"
-                      ? "border-2 border-yellow-500/30"
-                      : "border-2 border-red-500/30 opacity-75"
-                  }`}
-                >
-                  <CardContent className="p-6 flex flex-col h-full">
-                    {/* Header avec emoji et statut */}
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="text-4xl">🎁</div>
-                      <div className="text-right">
-                        {lot.status === "available" && (
-                          <span className="inline-block bg-green-500/20 px-3 py-1 rounded-full text-xs font-semibold text-green-700">
-                            🟢 Disponible
-                          </span>
+                  <motion.div key={lot.id} variants={itemVariants}>
+                    <Card
+
+                      className={`h-full overflow-hidden hover:shadow-lg transition-all duration-300 ${lot.status === "available"
+                        ? "border-2 border-green-500/30"
+                        : lot.status === "reserved"
+                          ? "border-2 border-yellow-500/30"
+                          : "border-2 border-red-500/30 opacity-75"
+                        }`}
+                    >
+                      <CardContent className="p-6 flex flex-col h-full">
+                        {/* Header avec emoji et statut */}
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="text-4xl">🎁</div>
+                          <div className="text-right">
+                            {lot.status === "available" && (
+                              <span className="inline-block bg-green-500/20 px-3 py-1 rounded-full text-xs font-semibold text-green-700">
+                                🟢 Disponible
+                              </span>
+                            )}
+                            {lot.status === "reserved" && (
+                              <span className="inline-block bg-yellow-500/20 px-3 py-1 rounded-full text-xs font-semibold text-yellow-700">
+                                🟡 Réservé
+                              </span>
+                            )}
+                            {lot.status === "delivered" && (
+                              <span className="inline-block bg-red-500/20 px-3 py-1 rounded-full text-xs font-semibold text-red-700">
+                                🔴 Remis
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Contenu */}
+                        <h3 className="text-lg font-bold text-foreground mb-2">{lot.title}</h3>
+                        {lot.description && (
+                          <p className="text-sm text-muted-foreground mb-4 flex-1">{lot.description}</p>
                         )}
-                        {lot.status === "reserved" && (
-                          <span className="inline-block bg-yellow-500/20 px-3 py-1 rounded-full text-xs font-semibold text-yellow-700">
-                            🟡 Réservé
-                          </span>
-                        )}
-                        {lot.status === "delivered" && (
-                          <span className="inline-block bg-red-500/20 px-3 py-1 rounded-full text-xs font-semibold text-red-700">
-                            🔴 Remis
-                          </span>
-                        )}
-                      </div>
-                    </div>
 
-                    {/* Contenu */}
-                    <h3 className="text-lg font-bold text-foreground mb-2">{lot.title}</h3>
-                    {lot.description && (
-                      <p className="text-sm text-muted-foreground mb-4 flex-1">{lot.description}</p>
-                    )}
+                        {/* Info parent */}
+                        <div className="bg-muted/50 p-3 rounded-lg mb-4">
+                          <p className="text-xs text-muted-foreground mb-1">Proposé par</p>
+                          <p className="font-semibold">{parents.find(p => p.id === lot.parent_id)?.first_name}</p>
+                        </div>
 
-                    {/* Info parent */}
-                    <div className="bg-muted/50 p-3 rounded-lg mb-4">
-                      <p className="text-xs text-muted-foreground mb-1">Proposé par</p>
-                      <p className="font-semibold">{parents.find(p => p.id === lot.parent_id)?.first_name}</p>
-                    </div>
+                        {/* Actions */}
+                        <div className="flex gap-2">
+                          {lot.status === "available" && (
+                            <Button
 
-                    {/* Actions */}
-                    <div className="flex gap-2">
-                      {lot.status === "available" && (
-                        <Button
-                          
-                          size="sm"
-                          className="flex-1"
-                          onClick={() => currentParentId && handleReserveLot(lot.id, currentParentId)}
-                          disabled={!currentParentId}
-                        >
-                          Réserver
-                        </Button>
-                      )}
+                              size="sm"
+                              className="flex-1"
+                              onClick={() => currentParentId && handleReserveLot(lot.id, currentParentId)}
+                              disabled={!currentParentId}
+                            >
+                              Réserver
+                            </Button>
+                          )}
 
-                      {lot.status === "reserved" && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1"
-                          asChild
-                        >
-                          <a
-                            href={`mailto:${parents.find(p => p.id === lot.parent_id)?.email}?subject=Lot: ${lot.title}`}
-                            className="flex items-center justify-center gap-2"
+                          {lot.status === "reserved" && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1"
+                              asChild
+                            >
+                              <a
+                                href={`mailto:${parents.find(p => p.id === lot.parent_id)?.email}?subject=Lot: ${lot.title}`}
+                                className="flex items-center justify-center gap-2"
+                              >
+                                <MessageCircle className="h-4 w-4" />
+                                Contacter
+                              </a>
+                            </Button>
+                          )}
+
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="flex-1 text-red-600 hover:bg-red-100"
+                            onClick={() => handleDeleteLot(lot.id, lot.title)}
+                            disabled={lot.parent_id !== currentParentId}
+                            title={lot.parent_id !== currentParentId ? "Vous ne pouvez supprimer que vos propres lots" : ""}
                           >
-                            <MessageCircle className="h-4 w-4" />
-                            Contacter
-                          </a>
-                        </Button>
-                      )}
-
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="flex-1 text-red-600 hover:bg-red-100"
-                        onClick={() => handleDeleteLot(lot.id, lot.title)}
-                        disabled={lot.parent_id !== currentParentId}
-                        title={lot.parent_id !== currentParentId ? "Vous ne pouvez supprimer que vos propres lots" : ""}
-                      >
-                        Supprimer
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                            Supprimer
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
               </motion.div>
             </motion.div>
           )}
@@ -1212,7 +1229,7 @@ export default function Tombola() {
             viewport={{ once: true }}
             className="max-w-2xl mx-auto text-center"
           >
-            <Card  className="border-2 border-secondary/30 bg-gradient-to-br from-secondary/10 to-accent/10">
+            <Card className="border-2 border-secondary/30 bg-gradient-to-br from-secondary/10 to-accent/10">
               <CardContent className="p-8 sm:p-12">
                 <Heart className="h-12 w-12 text-secondary mx-auto mb-4" />
                 <h2 className="text-3xl font-bold mb-4">L'esprit de notre tombola</h2>

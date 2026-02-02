@@ -7,20 +7,22 @@
 
 ### Étape 1: Déployer l'API mise à jour
 ```bash
-cd cloudflare
-wrangler deploy
+cd cloudflare && npm install
+npm install --save-dev wrangler@latest
+npm list wrangler
+npx wrangler deploy
 ```
 **Résultat attendu:** "Successfully published to https://les-ptits-trinquat-api.medhozz007.workers.dev"
 
 ### Étape 2: Créer les tables de base de données
 ```bash
-wrangler d1 execute tombola-dev --file=migrations/0001_tombola_schema.sql --remote
+npx wrangler d1 execute tombola-dev --file=migrations/0001_tombola_schema.sql --remote
 ```
 **Résultat attendu:** Aucune erreur, tables créées
 
 ### Étape 3: Initialiser l'utilisateur admin
 ```bash
-wrangler d1 execute tombola-dev --file=migrations/0002_seed_admin.sql --remote
+npx wrangler d1 execute tombola-dev --file=migrations/0002_seed_admin.sql --remote
 ```
 **Résultat attendu:** Admin créé avec succès
 

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { ChevronUp } from "lucide-react"
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
+  const location = useLocation()
 
   const toggleVisibility = () => {
     if (typeof window !== "undefined") {
@@ -31,6 +33,11 @@ export function ScrollToTop() {
       }
     }
   }, [])
+
+  // Ne pas afficher sur la page Tombola
+  if (location.pathname === "/tombola") {
+    return null
+  }
 
   return (
     <>

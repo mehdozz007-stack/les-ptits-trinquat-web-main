@@ -13,6 +13,7 @@ import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
 import Tombola2 from "./pages/Tombola2";
+import AdminTombola from "./pages/AdminTombola";
 import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
 
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/comptes-rendus" element={<ComptesRendus />} />
           <Route path="/partenaires" element={<Partenaires />} />
           <Route path="/tombola" element={<Tombola2 />} />
+          <Route path="/admin/tombola" element={<AdminTombola />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/message-envoye" element={<MessageEnvoye />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

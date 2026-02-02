@@ -37,19 +37,21 @@ export function AnimatedAuthStatus({
       initial="initial"
       animate="animate"
       exit="exit"
-      className="mb-6 flex justify-center items-center gap-3 flex-wrap"
+      className="fixed bottom-44 left-8 z-30 flex flex-col items-start gap-2 p-4 bg-white rounded-full shadow-lg border-2 border-emerald-500/30"
     >
-      <motion.div variants={emojiVariants} className="text-2xl">
-        {parentEmoji}
-      </motion.div>
-      <div className="text-sm font-semibold text-emerald-600">
-        ✅ Connecté en tant que {parentName}
+      <div className="flex items-center gap-3">
+        <motion.div variants={emojiVariants} className="text-2xl">
+          {parentEmoji}
+        </motion.div>
+        <div className="text-sm font-semibold text-emerald-600">
+          {parentName}
+        </div>
       </div>
       <motion.button
         onClick={onDisconnect}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="px-4 py-1.5 bg-rose-100 text-rose-700 rounded-full text-sm font-semibold hover:bg-rose-200 transition-colors"
+        className="w-full px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-semibold hover:bg-rose-200 transition-colors"
       >
         Déconnexion
       </motion.button>
