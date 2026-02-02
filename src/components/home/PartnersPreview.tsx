@@ -21,15 +21,16 @@ const partners = [
     logo: lesPetitsBilinguesLogo,
     website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
   },
-  { id: 76, 
-    name: "French Kiss", 
+  {
+    id: 2,
+    name: "French Kiss",
     category: "Restauration",
-    description: "Restaurant français proposant une cuisine savoureuse et authentique dans un cadre convivial.", 
-    logo: frenchKissLogo, 
+    description: "Restaurant français proposant une cuisine savoureuse et authentique dans un cadre convivial.",
+    logo: frenchKissLogo,
     website: "https://www.frenchkiss.fr/nos-adresses/montpellier",
   },
   {
-    id: 2,
+    id: 3,
     name: "Atelier Tuffery",
     category: "Shopping",
     description: "Jean français fabriqué artisanalement en Lozère depuis 1892.",
@@ -37,7 +38,7 @@ const partners = [
     website: "https://www.ateliertuffery.com/pages/boutique-jeans-francais-montpellier",
   },
   {
-    id: 3,
+    id: 4,
     name: "Enviform Sport Santé",
     category: "Bien être",
     description: "Coaching sportif et bien-être.",
@@ -45,15 +46,15 @@ const partners = [
     website: "https://www.enviform-sport-sante.fr/",
   },
   {
-    id: 4,
-    name: "Manu Créations Couture",
+    id: 5,
+    name: "Méla Wing",
     category: "Éducation",
-    description: "Ateliers créatifs de couture pour enfants et adultes.",
-    logo: manuCreation,
-    website: "https://www.manu-creations.com/",
+    description: "Coaching pour les wingfoileurs et wingfoileuses.",
+    logo: "🏄",
+    website: "https://www.facebook.com/melanie.garin.1/directory_work?locale=fr_FR",
   },
   {
-    id: 5,
+    id: 6,
     name: "Astroludik",
     category: "Éducation",
     description: "Animations ludiques autour de l'astronomie pour éveiller la curiosité des enfants.",
@@ -100,22 +101,26 @@ export function PartnersPreview() {
               className="group flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-1 text-center transition-all hover:border-primary/30 hover:shadow-soft hover:-translate-y-1 cursor-pointer aspect-square"
             >
               <div className="mt-5 mb-2 flex h-40 w-40 items-center justify-center overflow-hidden flex-shrink-0">
-                <img 
-                  src={partner.logo} 
-                  alt={partner.name}
-                  className="h-full w-full object-contain p-2 rounded-lg"
-                />
+                {typeof partner.logo === 'string' && (partner.logo.startsWith('http') || partner.logo.startsWith('/')) ? (
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-full w-full object-contain p-2 rounded-lg"
+                  />
+                ) : (
+                  <div className="text-6xl">{partner.logo}</div>
+                )}
               </div>
-                <span className="mb-2 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
-                  {partner.category}
-                </span>
-                <span className="mb-2 rounded-lg bg-amber-50 px-3 py-1.5 text-base font-bold text-foreground inline-block">
-                  {partner.name}
-                </span>
-                <p className="text-base text-muted-foreground text-center line-clamp-3 px-6 py-6">
-                  {partner.description}
-                </p>
-              
+              <span className="mb-2 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+                {partner.category}
+              </span>
+              <span className="mb-2 rounded-lg bg-amber-50 px-3 py-1.5 text-base font-bold text-foreground inline-block">
+                {partner.name}
+              </span>
+              <p className="text-base text-muted-foreground text-center line-clamp-3 px-6 py-6">
+                {partner.description}
+              </p>
+
             </motion.a>
           ))}
         </div>
