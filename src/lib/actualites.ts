@@ -44,10 +44,11 @@ export const actualitesData: Actualite[] = [
         id: "act-001",
         title: "TOMBOLA 2026 est lancée !",
         description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires. Bonne chance à tous !",
-        content: "Notre TOMBOLA annuelle est lancée pour soutenir les projets de l'école. Remise de tickets jusqu'au 20 janvier 2026. Tirage au sort le 16 février 2026 en présence des enfants.",
+        content: "La tombola de l'association est un moment convivial qui permet aux enfants de s'impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance. 🎟️\nGrâce au soutien de nos partenaires, de nombreux lots attendent les participants. Chaque ticket contribue directement aux projets ludiques de l'association. 🎁\nUn futur espace en ligne viendra également faciliter les échanges autour des lots, pour prolonger l'esprit de partage après le tirage. 💻\n\nConsultez la liste de nos partenaires et tentez votre chance ! ✨\n16 Février 2026 le tirage au sort. Bonne chance à tous ! 🍀",
         type: "evenement",
         date: "Lancement 8 Décembre 2025",
         link: "/partenaires",
+        location: "Groupe scolaire FRANK-DICKENS",
         color: "accent",
         status: "upcoming",
         attendees: 500,
@@ -61,12 +62,13 @@ export const actualitesData: Actualite[] = [
         date: "16 Février 2026",
         fileUrl: "/documents/Affiche_SI_écoles_260115_044150.pdf",
         color: "primary",
+        location: "Collège des Aiguerelles",
     },
     {
         id: "act-004",
         title: "La crèpe party de l'école !",
         description: "Participez à notre traditionnelle vente de crêpes, un moment gourmand et convivial pour soutenir les projets de l'école.",
-        content: "Une vente de crêpes est organisée sur le parvis de l'école. C'est un moment convivial et gourmand pour récolter des fonds.",
+        content: "Nous vous invitons chaleureusement à notre crèpe party, un moment gourmand et convivial organisé sur le parvis de l'école. 🥞 Au programme : délicieuses crêpes préparées avec soin, ambiance joyeuse et échanges en famille. 😊\n\nC'est une belle occasion de déguster ensemble tout en soutenant les projets ludiques de nos enfants. 🎈 Chaque achat contribue directement à enrichir leur expérience scolaire et à créer des souvenirs inoubliables. 💝\n\nNous vous attendons nombreux pour ce moment de convivialité et de gourmandise ! 🤗",
         type: "evenement",
         date: "20 Février 2026",
         time: "16h30 - 18h00",
@@ -79,7 +81,7 @@ export const actualitesData: Actualite[] = [
         id: "act-006",
         title: "Information : Conseil d'école SI du 20 Janvier",
         description: "Retrouvez les points clés abordés lors du dernier conseil d'école et les prochaines étapes pour l'école.",
-        content: "Le conseil d'école s'est réuni le 20 janvier pour discuter des projets pédagogiques, de l'organisation de l'année scolaire et des événements à venir.",
+        content: "Le conseil d'école s'est réuni le 20 janvier pour discuter des projets ludiques, de l'organisation de l'année scolaire et des événements à venir. 📚",
         type: "information",
         date: "20 Janvier 2026",
         link: "https://www.ent-ecole.fr/cardboard/0193c594-bf68-798a-97b7-aedda95767a2",
@@ -88,10 +90,23 @@ export const actualitesData: Actualite[] = [
         attendees: 30,
     },
     {
+        id: "act-010",
+        title: "Vide Grenier : La Récré des bonnes affaires !",
+        description: "Un vide grenier convivial avec animations, musique et bonne ambiance en famille. Venez dénicher de bonnes affaires tout en participant à la vie de l'école !",
+        content: "Nous vous accueillons avec grand plaisir pour un vide grenier festif et bienveillant, un moment magique où petits et grands peuvent vivre une belle expérience ensemble. ✨ Animations joyeuses, musique entraînante et bonne ambiance familiale créeront une atmosphère chaleureuse toute la journée. 🎵\n\nC'est l'occasion idéale de découvrir des trésors oubliés, 🎁 de donner une seconde vie à vos affaires, ♻️ et de soutenir les projets ludiques chers à nos enfants. Chaque achat, chaque échange contribue à construire ensemble une belle histoire pour notre école. 💚\n\nVenez partager ce moment de partage et de convivialité ! 🤝",
+        type: "evenement",
+        date: "12 Avril 2026",
+        time: "10h00 - 16h00",
+        location: "Cour de l'école",
+        color: "emerald",
+        status: "upcoming",
+        attendees: 400,
+    },
+    {
         id: "act-007",
         title: "Carnaval à l'école",
         description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps.",
-        content: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré.\nLes enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps dans leurs classes.",
+        content: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux, coloré et rempli de magie ! 🎭 C'est une belle occasion de célébrer ensemble l'arrivée du printemps et la joie de vivre. 🌸\n\nLes enfants sont invités à venir déguisés en insectes ou en fleurs dans leurs classes, créant ainsi une ambiance festive et poétique. 🦋🌺 Dans leurs déguisements enchanteurs, ils découvriront la beauté de la nature qui s'éveille et partageront des rires complices. 😄\n\nC'est un moment privilégié où la créativité, l'imaginaire et la bienveillance se rencontrent pour créer des souvenirs précieux et inspirer les enfants à s'exprimer librement. 🌈✨",
         type: "evenement",
         date: "17 Avril 2026",
         time: "08h30 - 16h30",
@@ -114,7 +129,7 @@ export const actualitesData: Actualite[] = [
         id: "act-009",
         title: "Fête d'école",
         description: "Rires, jeux, spectacles et douceurs gourmandes vous attendent pour partager ensemble un moment joyeux et festif et célébrer la fin de l'année scolaire 🌟🍭",
-        content: "La fête d'école est l'occasion de célébrer ensemble une belle année scolaire. Au programme : rires, jeux, spectacles des enfants, douceurs gourmandes et animations pour petits et grands. Un moment convivial et festif en famille !",
+        content: "La fête d'école est bien plus qu'une simple célébration : c'est un moment privilégié où l'école se transforme en lieu de partage et de bonheur. 🌟 Nous vous invitons chaleureusement à célébrer ensemble une belle année scolaire, riche d'apprentissages, de rires et de beaux souvenirs. 📚💕\n\nAu programme de ce jour festif : spectacles touchants des enfants qui vous montreront tout ce qu'ils ont appris, 🎪 jeux divertissants en famille, 🎮 animations pour petits et grands, 🎉 douceurs gourmandes à savourer ensemble, 🍰 et une atmosphère bienveillante qui réchauffe le cœur. ❤️\n\nC'est l'occasion rêvée de renforcer les liens entre familles et l'école, de valoriser les efforts de nos enfants, et de clore cette année avec la joie et la gratitude. ✨ Venez profiter de cette belle journée en famille, c'est un cadeau à ne pas manquer ! 🎁",
         type: "evenement",
         date: "19 Juin 2026",
         time: "14h00 - 19h00",
@@ -128,7 +143,7 @@ export const actualitesData: Actualite[] = [
         id: "evt-005",
         title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
         description: "Un temps d'échange pour construire ensemble les futurs temps forts de l'école.",
-        content: "Rejoignez-nous pour notre réunion mensuelle. C'est l'occasion de discuter des projets en cours et de partager vos idées.",
+        content: "Nous vous accueillons chaleureusement pour notre réunion mensuelle, un moment de partage et de collaboration bienveillante. 🤝 C'est l'occasion précieuse de discuter ensemble des projets en cours, 💬 de partager vos idées et vos envies, 💡 et de construire avec confiance les beaux moments qui enrichiront la vie scolaire de nos enfants. 🎈\n\nVotre présence et vos idées sont précieuses pour nous. ✨ Ensemble, nous créons une communauté solidaire et engagée au service du bien-être et du développement de nos enfants. 💚",
         type: "evenement",
         date: "30 Janvier 2026",
         time: "17h30 - 19h30",
@@ -141,7 +156,7 @@ export const actualitesData: Actualite[] = [
         id: "evt-004",
         title: "📝 Conseil d'école SI 🌍",
         description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir.",
-        content: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
+        content: "Nous vous invitons à ce moment privilégié de partage et de bienveillance, où nous célébrons ensemble les beaux moments de l'année écoulée et ses accomplissements. 🎉\n\nC'est l'occasion idéale de revenir sur les projets menés avec soin et enthousiasme, 📚 de découvrir les belles initiatives à venir, 🌟 et de connaître les résultats de l'élection des parents qui vous représenteront. 🗳️\n\nEnsemble, nous construisons une école plus forte, plus unie et plus épanouissante pour tous nos enfants. 💪💕",
         type: "evenement",
         date: "20 Janvier 2026",
         time: "17h45 - 19h15",
@@ -155,7 +170,7 @@ export const actualitesData: Actualite[] = [
         id: "evt-003",
         title: "🎄 Vente de gâteaux de Noël 🎅",
         description: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l'école.",
-        content: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l'école.\nSelon la météo, l'événement pourra se dérouler à la salle d'événement annexe de la Maison pour Tous Boris Vian.",
+        content: "Nous vous invitons avec joie à participer à notre traditionnelle vente de gâteaux de Noël, un moment gourmand et convivial rempli de la magie des fêtes. 🎄 Dégustez des gourmandises préparées avec amour 🍪 et partagez des instants chaleureux en famille. ❄️\n\nChaque achat, chaque sourire contribue à soutenir généreusement les beaux projets ludiques de notre école, pour le bien-être et l'épanouissement de nos enfants. 🎁💝\n\nSelon la météo, l'événement se déroulera soit sur le parvis enchanteur de l'école, soit à la chaleur de la salle d'événement annexe de la Maison pour Tous Boris Vian. ☃️ Dans les deux cas, ce sera un moment de partage bienveillant ! 🤗",
         type: "evenement",
         date: "19 Décembre 2025",
         time: "16h30 - 18h00",
@@ -169,7 +184,7 @@ export const actualitesData: Actualite[] = [
         id: "evt-008",
         title: "🧛 Vente de Toussaint 🎃",
         description: "Stands de créations, boissons chaudes et animations pour petits et grands.",
-        content: "Stands de créations, boissons chaudes et animations pour petits et grands.",
+        content: "Nous vous accueillons chaleureusement pour cette belle vente de Toussaint, un moment festif qui ravira petits et grands ! 🎃 Découvrez nos stands créatifs remplis d'idées originales et de créations, 🎨 savourez des boissons chaudes réconfortantes, ☕ et profitez des animations joyeuses organisées avec bienveillance. 🎉\n\nC'est une belle occasion de vivre ensemble l'esprit d'automne, 🍂 de soutenir les projets ludiques de l'école et de créer des souvenirs précieux en famille. 💛 Nous vous attendons nombreux ! 🤗",
         type: "evenement",
         date: "16 et 17 Octobre 2025",
         time: "16h30 - 19h00",
@@ -183,7 +198,7 @@ export const actualitesData: Actualite[] = [
         id: "evt-009",
         title: "🏮 Fête des Lanternes 🕯️",
         description: "Goûter d'automne et parcourir le parc de la Rauze à la tombée de la nuit en chantant des chansons célébrant Saint Martin.",
-        content: "Goûter d'automne et parcourir le parc de la Rauze à la tombée de la nuit en chantant des chansons célébrant Saint Martin.",
+        content: "Venez vivre un moment magique et poétique lors de notre Fête des Lanternes, une belle célébration de Saint Martin pleine de douceur et de lumière. 🏮✨\n\nAu cœur de l'automne, nous vous invitons à partager un goûter réconfortant en famille, 🧁 puis à parcourir ensemble le magnifique parc de la Rauze à la tombée de la nuit. 🌙 Les lanternes illumineront votre chemin tandis que les chansons célébrant Saint Martin résonnent doucement, 🎵 créant une atmosphère enchantée et bienveillante. ✨\n\nC'est un moment unique où la magie, la transmission et la solidarité se rencontrent pour toucher nos cœurs et illuminer nos âmes. 💫❤️",
         type: "evenement",
         date: "10 Novembre 2025",
         time: "14h00 - 17h00",
@@ -213,15 +228,31 @@ export function getLatestActualites(limit: number = 3): Actualite[] {
 /**
  * Récupère toutes les actualités (pour la page Actualités)
  * Exclut les événements passés qui sont affichés dans leur propre section
+ * Tri: événements à venir par date croissante (proches d'abord), autres par date décroissante (récentes d'abord)
  */
 export function getAllActualites(): Actualite[] {
-    return actualitesData
-        .filter((a) => !(a.type === "evenement" && a.status === "past"))
-        .sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-            return dateB - dateA;
-        });
+    const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past"));
+
+    return actualites.sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+
+        // Les événements à venir en premier, triés par date croissante (proches d'abord)
+        if (a.type === "evenement" && a.status === "upcoming" && (b.type !== "evenement" || b.status !== "upcoming")) {
+            return -1;
+        }
+        if (b.type === "evenement" && b.status === "upcoming" && (a.type !== "evenement" || a.status !== "upcoming")) {
+            return 1;
+        }
+
+        // Entre événements à venir: ordre croissant (proches d'abord)
+        if (a.type === "evenement" && a.status === "upcoming" && b.type === "evenement" && b.status === "upcoming") {
+            return dateA - dateB;
+        }
+
+        // Autres actualités: ordre décroissant (récentes d'abord)
+        return dateB - dateA;
+    });
 }
 
 /**

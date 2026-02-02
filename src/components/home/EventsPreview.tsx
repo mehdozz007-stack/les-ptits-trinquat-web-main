@@ -81,7 +81,7 @@ export function EventsPreview() {
           <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs sm:text-sm font-semibold text-primary">
             Événements
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
             Notre prochain <span className="text-gradient">rendez-vous</span>
           </h2>
           <p className="max-w-2xl text-sm sm:text-lg text-muted-foreground">

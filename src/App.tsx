@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Index from "./pages/Index";
 import { Actualites } from "./pages/Actualites";
+import ActualiteDetail from "./pages/ActualiteDetail";
 import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
@@ -35,6 +36,7 @@ const App = () => (
           {/* Redirection vers actualites */}
           <Route path="/evenements" element={<Navigate to="/actualites" replace />} />
           <Route path="/actualites" element={<Actualites />} />
+          <Route path="/actualites/:id" element={<ActualiteDetail />} />
           {/* Comptes rendus redirects to 404 */}
           <Route path="/comptes-rendus" element={<NotFound />} />
           <Route path="/partenaires" element={<Partenaires />} />

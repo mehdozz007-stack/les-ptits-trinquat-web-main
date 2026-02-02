@@ -237,21 +237,31 @@ export function Actualites() {
                                                 </p>
 
                                                 {/* Footer avec date, location et bouton */}
-                                                <div className="border-t border-current border-opacity-20 pt-4 mt-2 space-y-2">
-                                                    <div className="flex items-center justify-between gap-3">
-                                                        <span className="text-xs font-medium text-muted-foreground flex items-center gap-2">
-                                                            <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                            {actualite.date}
-                                                        </span>
-                                                        {renderActionButton(actualite)}
-                                                    </div>
-                                                    {/* Location pour les événements */}
-                                                    {actualite.type === "evenement" && actualite.location && (
-                                                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                                            <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
-                                                            <span>{actualite.location}</span>
+                                                <div className="border-t border-current border-opacity-20 pt-4 mt-2">
+                                                    <div className="flex items-start justify-between gap-3">
+                                                        <div className="flex flex-col gap-2">
+                                                            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                                <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                <span>{actualite.date}</span>
+                                                            </div>
+                                                            {/* Location pour les événements */}
+                                                            {actualite.type === "evenement" && actualite.location && (
+                                                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                                    <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                    <span>{actualite.location}</span>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                    )}
+                                                        {/* Boutons à droite */}
+                                                        <div className="flex flex-col items-end gap-2">
+                                                            <Button asChild variant="outline" size="sm" className="gap-2">
+                                                                <Link to={`/actualites/${actualite.id}`}>
+                                                                    <ArrowRight className="h-4 w-4" />
+                                                                    Lire la suite
+                                                                </Link>
+                                                            </Button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </CardContent>
                                         </Card>

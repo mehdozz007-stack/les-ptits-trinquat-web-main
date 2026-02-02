@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Download, Link as LinkIcon, Calendar, MapPin } from "lucide-react";
+import { ArrowRight, FileText, Link as LinkIcon, Calendar, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getLatestActualites, actualiteTypeLabels, actualiteColorClasses } from "@/lib/actualites";
-import { useToast } from "@/hooks/use-toast";
 
 const actualites = getLatestActualites(3);
 
@@ -34,41 +33,11 @@ const titleGradients: Record<string, string> = {
 };
 
 export function ActualitesPreview() {
-    const { toast } = useToast();
-
-    const handleDownload = (fileUrl: string, title: string) => {
-        const link = document.createElement("a");
-        link.href = fileUrl;
-        link.download = `${title.replace(/[^a-zA-Z0-9]/g, "-")}.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        toast({
-            title: "Téléchargement lancé",
-            description: `${title} a été téléchargé avec succès.`,
-        });
-    };
-
     const renderActionButton = (actualite: ReturnType<typeof getLatestActualites>[0]) => {
-        if (actualite.fileUrl) {
-            return (
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDownload(actualite.fileUrl!, actualite.title)}
-                    className="gap-2"
-                >
-                    <Download className="h-4 w-4" />
-                    Télécharger
-                </Button>
-            );
-        }
-
-        // Lien vers la page actualités avec ancrage vers l'actualité spécifique
+        // Tous les boutons mènent vers la page de détail
         return (
             <Button asChild variant="outline" size="sm" className="gap-2">
-                <Link to={`/actualites#${actualite.id}`}>
+                <Link to={`/actualites/${actualite.id}`}>
                     <ArrowRight className="h-4 w-4" />
                     Lire plus
                 </Link>
@@ -89,7 +58,7 @@ export function ActualitesPreview() {
                         <FileText className="h-4 w-4" />
                         Actualités
                     </span>
-                    <h2 className="mb-4 text-2xl font-extrabold md:text-4xl">
+                    <h2 className="mb-4 text-3xl font-extrabold md:text-4xl">
                         Actualités de l'école <br />
                         <span className="text-gradient">et de l'association</span>
                     </h2>
@@ -133,21 +102,25 @@ export function ActualitesPreview() {
                                             {actualite.description}
                                         </p>
 
-                                        {/* Location pour les événements */}
-                                        {actualite.type === "evenement" && actualite.location && (
-                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                                <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
-                                                <span>{actualite.location}</span>
+                                        {/* Footer avec date, location et bouton */}
+                                        <div className="border-t border-current border-opacity-20 pt-4 mt-2">
+                                            <div className="flex items-center justify-between gap-3">
+                                                <div className="flex flex-col gap-2">
+                                                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                        <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                                                        <span>{actualite.date}</span>
+                                                    </div>
+                                                    {/* Location */}
+                                                    {actualite.location && (
+                                                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                            <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+                                                            <span>{actualite.location}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                {/* Bouton */}
+                                                {renderActionButton(actualite)}
                                             </div>
-                                        )}
-
-                                        {/* Footer avec date et bouton */}
-                                        <div className="flex items-center justify-between gap-3 border-t border-current border-opacity-20 pt-4 mt-2">
-                                            <span className="text-xs font-medium text-muted-foreground flex items-center gap-2">
-                                                <Calendar className="h-3.5 w-3.5" />
-                                                {actualite.date}
-                                            </span>
-                                            {renderActionButton(actualite)}
                                         </div>
                                     </CardContent>
                                 </Card>
