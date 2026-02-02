@@ -19,10 +19,10 @@ export default function Tombola() {
   return (
     <Layout>
       {/* SEO Meta */}
-      <title>La Tombola des P'tits Trinquât | Association de Parents d'Élèves</title>
+      <title>La Tombola des P'tits Trinquat | Association de Parents d'Élèves</title>
       <meta
         name="description"
-        content="Participez à la tombola solidaire des P'tits Trinquât. Inscrivez-vous, proposez des lots et échangez entre familles dans un esprit convivial et bienveillant."
+        content="Participez à la tombola solidaire des P'tits Trinquat. Inscrivez-vous, proposez des lots et échangez entre familles dans un esprit convivial et bienveillant."
       />
 
       <TombolaHero />
@@ -31,7 +31,7 @@ export default function Tombola() {
       <LotForm currentParticipant={currentParticipant} />
       <LotGrid currentParticipant={currentParticipant} />
       <SolidaritySection />
-      
+
       <ParticipantSelector
         currentParticipant={currentParticipant}
         onSelect={handleSelectParticipant}
