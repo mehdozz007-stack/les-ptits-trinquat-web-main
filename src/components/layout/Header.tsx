@@ -11,6 +11,7 @@ const navItems = [
   { label: "À propos", href: "/a-propos", icon: Users },
   { label: "Notre école", href: "/notre-ecole", icon: School },
   { label: "Événements", href: "/evenements", icon: Calendar },
+  { label: "Actualités", href: "/actualites", icon: FileText },
   { label: "Comptes-rendus", href: "/comptes-rendus", icon: FileText },
   { label: "Tombola", href: "/tombola", icon: Gift },
   { label: "Partenaires", href: "/partenaires", icon: Heart },

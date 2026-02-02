@@ -2,12 +2,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { useInitializeDatabase } from "@/hooks/useInitializeDatabase";
 import Index from "./pages/Index";
-import Evenements from "./pages/Evenements";
-import ComptesRendus from "./pages/ComptesRendus";
+import { Actualites } from "./pages/Actualites";
+import ActualiteDetail from "./pages/ActualiteDetail";
 import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
@@ -37,8 +37,12 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/a-propos" element={<APropos />} />
           <Route path="/notre-ecole" element={<NotreEcole />} />
-          <Route path="/evenements" element={<Evenements />} />
-          <Route path="/comptes-rendus" element={<ComptesRendus />} />
+          {/* Redirection vers actualites */}
+          <Route path="/evenements" element={<Navigate to="/actualites" replace />} />
+          <Route path="/actualites" element={<Actualites />} />
+          <Route path="/actualites/:id" element={<ActualiteDetail />} />
+          {/* Comptes rendus redirects to 404 */}
+          <Route path="/comptes-rendus" element={<NotFound />} />
           <Route path="/partenaires" element={<Partenaires />} />
           <Route path="/tombola" element={<Tombola2 />} />
           <Route path="/admin/tombola" element={<AdminTombola />} />
