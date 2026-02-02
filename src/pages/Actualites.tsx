@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Download, Link as LinkIcon, Search } from "lucide-react";
+import { ArrowRight, FileText, Download, Link as LinkIcon, Search, Calendar, Clock, MapPin, Users, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType } from "@/lib/actualites";
+import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 
 const badgeColors: Record<string, string> = {
@@ -252,6 +252,127 @@ export function Actualites() {
                         )}
                     </div>
                 </section>
+
+                {/* Événements passés Section */}
+                {getPastEvents().length > 0 && (
+                    <section className="bg-muted/50 py-12 sm:py-16 md:py-20">
+                        <div className="container">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="mb-12"
+                            >
+                                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                                    <Calendar className="h-4 w-4" />
+                                    Événements passés
+                                </span>
+                                <h2 className="mb-4 text-3xl font-bold">
+                                    Nos <span className="text-gradient">événements précédents</span>
+                                </h2>
+                                <p className="text-lg text-muted-foreground max-w-2xl">
+                                    Revivez les moments forts et les belles rencontres que nous avons eu le plaisir de partager avec vous.
+                                </p>
+                            </motion.div>
+
+                            <div className="grid gap-4 sm:gap-6">
+                                {getPastEvents().map((event, index) => {
+                                    const colorMap = {
+                                        primary: { bg: "bg-primary", text: "text-primary", light: "bg-primary/10" },
+                                        secondary: { bg: "bg-secondary", text: "text-secondary", light: "bg-secondary/10" },
+                                        sky: { bg: "bg-sky", text: "text-sky", light: "bg-sky/10" },
+                                        accent: { bg: "bg-accent", text: "text-accent", light: "bg-accent/10" },
+                                        violet: { bg: "bg-violet", text: "text-violet", light: "bg-violet/10" },
+                                    };
+                                    const colors = colorMap[event.color as keyof typeof colorMap];
+
+                                    return (
+                                        <motion.div
+                                            key={event.id}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: index * 0.05 }}
+                                        >
+                                            <Card variant="elevated" className={`group h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-lg ${actualiteColorClasses[event.color]}`}>
+                                                <CardContent className="p-4 sm:p-6">
+                                                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                                                        {/* Icon */}
+                                                        <div className={`flex h-16 sm:h-20 w-16 sm:w-20 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
+                                                            <Calendar className={`h-6 sm:h-8 w-6 sm:w-8 ${colors.text}`} />
+                                                        </div>
+
+                                                        {/* Content */}
+                                                        <div className="flex-1 min-w-0">
+                                                            <div className="mb-2 flex flex-wrap items-center gap-2">
+                                                                <h3 className="font-bold text-lg sm:text-xl text-foreground line-clamp-2">
+                                                                    {event.title}
+                                                                </h3>
+                                                                <Badge
+                                                                    className="shrink-0"
+                                                                    variant="secondary"
+                                                                    style={{
+                                                                        background: "rgb(156 163 175 / 0.7)",
+                                                                        color: "rgb(31 41 55)"
+                                                                    }}
+                                                                >
+                                                                    Passé
+                                                                </Badge>
+                                                            </div>
+
+                                                            <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
+                                                                {event.description}
+                                                            </p>
+
+                                                            <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                                                                <div className="flex items-center gap-2">
+                                                                    <Calendar className={`h-4 w-4 ${colors.text}`} />
+                                                                    {event.date}
+                                                                </div>
+                                                                {event.time && (
+                                                                    <div className="flex items-center gap-2">
+                                                                        <Clock className={`h-4 w-4 ${colors.text}`} />
+                                                                        {event.time}
+                                                                    </div>
+                                                                )}
+                                                                {event.location && (
+                                                                    <div className="flex items-center gap-2">
+                                                                        <MapPin className={`h-4 w-4 ${colors.text}`} />
+                                                                        {event.location}
+                                                                    </div>
+                                                                )}
+                                                                {event.attendees && (
+                                                                    <div className="flex items-center gap-2">
+                                                                        <Users className={`h-4 w-4 ${colors.text}`} />
+                                                                        {event.attendees} participants
+                                                                    </div>
+                                                                )}
+                                                            </div>
+
+                                                            {event.link && (
+                                                                <Button
+                                                                    asChild
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    className="gap-2"
+                                                                >
+                                                                    <a href={event.link} target="_blank" rel="noopener noreferrer">
+                                                                        Voir la photo
+                                                                        <ChevronRight className="h-4 w-4" />
+                                                                    </a>
+                                                                </Button>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </section>
+                )}
 
                 {/* CTA Section */}
                 {filteredActualites.length > 0 && (

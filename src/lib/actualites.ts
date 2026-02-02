@@ -14,9 +14,14 @@
  * - link: lien vers la ressource (PDF, page, URL externe, etc.)
  * - fileUrl: URL du fichier si téléchargeable
  * - color: couleur de la carte ('primary' | 'secondary' | 'sky' | 'violet' | 'accent')
+ * - time: heure de l'événement (optionnel)
+ * - location: lieu de l'événement (optionnel)
+ * - attendees: nombre de participants attendus (optionnel)
+ * - status: 'upcoming' | 'past' (pour les événements)
  */
 
 export type ActualiteType = "evenement" | "document" | "annonce" | "information";
+export type EventStatus = "upcoming" | "past";
 
 export interface Actualite {
     id: string;
@@ -28,6 +33,10 @@ export interface Actualite {
     link?: string;
     fileUrl?: string;
     color: "primary" | "secondary" | "sky" | "violet" | "accent";
+    time?: string;
+    location?: string;
+    attendees?: number;
+    status?: EventStatus;
 }
 
 export const actualitesData: Actualite[] = [
@@ -40,6 +49,8 @@ export const actualitesData: Actualite[] = [
         date: "8 Décembre 2025",
         link: "/tombola",
         color: "accent",
+        status: "upcoming",
+        attendees: 500,
     },
     {
         id: "act-002",
@@ -52,16 +63,6 @@ export const actualitesData: Actualite[] = [
         color: "primary",
     },
     {
-        id: "act-003",
-        title: "Document : Charte d'utilisation des locaux",
-        description: "Consultez ou téléchargez la charte réglementant l'utilisation des espaces de l'école lors des événements familiaux.",
-        content: "Cette charte établit les règles de bon usage des locaux scolaires lors des événements organisés par l'association ou les familles.",
-        type: "document",
-        date: "Janvier 2026",
-        fileUrl: "/documents/charte-locaux.pdf",
-        color: "secondary",
-    },
-    {
         id: "act-004",
         title: "Information : Conseil d'école du 20 Janvier",
         description: "Retrouvez les points clés abordés lors du dernier conseil d'école et les prochaines étapes pour l'école.",
@@ -72,24 +73,86 @@ export const actualitesData: Actualite[] = [
         color: "violet",
     },
     {
-        id: "act-005",
-        title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
-        description: "Un temps d'échange pour construire ensemble les futurs temps forts de l'école.",
-        content: "Rejoignez-nous pour notre réunion mensuelle. C'est l'occasion de discuter des projets en cours et de partager vos idées.",
-        type: "evenement",
-        date: "30 Janvier 2026",
-        link: "/evenements",
-        color: "secondary",
-    },
-    {
         id: "act-006",
         title: "🥞 La crèpe party de l'école ! 🎉",
         description: "Participez à notre traditionnelle vente de crêpes, un moment gourmand et convivial pour soutenir les projets de l'école.",
         content: "Une vente de crêpes est organisée sur le parvis de l'école. C'est un moment convivial et gourmand pour récolter des fonds.",
         type: "evenement",
         date: "20 Février 2026",
-        link: "/evenements",
+        time: "16h30 - 18h00",
+        location: "Le parvis de l'école",
         color: "violet",
+        status: "upcoming",
+        attendees: 500,
+    },
+    // Événements passés
+    {
+        id: "evt-005",
+        title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
+        description: "Un temps d'échange pour construire ensemble les futurs temps forts de l'école.",
+        content: "Rejoignez-nous pour notre réunion mensuelle. C'est l'occasion de discuter des projets en cours et de partager vos idées.",
+        type: "evenement",
+        date: "30 Janvier 2026",
+        time: "17h30 - 19h30",
+        location: "Salle polyvalente",
+        color: "secondary",
+        status: "past",
+        attendees: 30,
+    },
+    {
+        id: "evt-004",
+        title: "📝 Conseil d'école SI 🌍",
+        description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir.",
+        content: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
+        type: "evenement",
+        date: "20 Janvier 2026",
+        time: "17h45 - 19h15",
+        location: "Salle polyvalente",
+        color: "sky",
+        status: "past",
+        attendees: 50,
+    },
+    {
+        id: "evt-003",
+        title: "🎄 Vente de gâteaux de Noël 🎅",
+        description: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l'école.",
+        content: "Participez à notre traditionnelle vente de gâteaux, un moment gourmand et convivial pour soutenir les projets de l'école.\nSelon la météo, l'événement pourra se dérouler à la salle d'événement annexe de la Maison pour Tous Boris Vian.",
+        type: "evenement",
+        date: "19 Décembre 2025",
+        time: "16h30 - 18h00",
+        location: "Le parvis de l'école ou salle annexe Boris Vian selon la météo",
+        link: "https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1",
+        color: "violet",
+        status: "past",
+        attendees: 300,
+    },
+    {
+        id: "evt-008",
+        title: "🧛 Vente de Toussaint 🎃",
+        description: "Stands de créations, boissons chaudes et animations pour petits et grands.",
+        content: "Stands de créations, boissons chaudes et animations pour petits et grands.",
+        type: "evenement",
+        date: "16 et 17 Octobre 2025",
+        time: "16h30 - 19h00",
+        location: "Préau de l'école",
+        link: "https://www.instagram.com/p/DPn9cLdiBTC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+        color: "violet",
+        status: "past",
+        attendees: 250,
+    },
+    {
+        id: "evt-009",
+        title: "🏮 Fête des Lanternes 🕯️",
+        description: "Goûter d'automne et parcourir le parc de la Rauze à la tombée de la nuit en chantant des chansons célébrant Saint Martin.",
+        content: "Goûter d'automne et parcourir le parc de la Rauze à la tombée de la nuit en chantant des chansons célébrant Saint Martin.",
+        type: "evenement",
+        date: "10 Novembre 2025",
+        time: "14h00 - 17h00",
+        location: "Cour de l'école",
+        link: "https://www.instagram.com/p/DQVIRmDiF5Q/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+        color: "accent",
+        status: "past",
+        attendees: 350,
     },
 ];
 
@@ -117,6 +180,32 @@ export function getAllActualites(): Actualite[] {
         const dateB = new Date(b.date).getTime();
         return dateB - dateA;
     });
+}
+
+/**
+ * Récupère les événements à venir
+ */
+export function getUpcomingEvents(): Actualite[] {
+    return actualitesData
+        .filter((a) => a.type === "evenement" && a.status === "upcoming")
+        .sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return dateA - dateB;
+        });
+}
+
+/**
+ * Récupère les événements passés
+ */
+export function getPastEvents(): Actualite[] {
+    return actualitesData
+        .filter((a) => a.type === "evenement" && a.status === "past")
+        .sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return dateB - dateA;
+        });
 }
 
 /**
