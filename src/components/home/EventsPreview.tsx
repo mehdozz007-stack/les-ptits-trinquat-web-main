@@ -5,24 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const upcomingEvents = [
-  /*{
-    id: 1,
-    title: "Fête de l'école",
-    date: "19 Juin 2026",
-    time: "14h00 - 19h00",
-    location: "Cour de l'école",
-    description: "Jeux, spectacles et goûter pour célébrer la fin d'année !",
-    color: "primary",
-  },
-  {
-    id: 2,
-    title: "Carnaval",
-    date: "17 Avril 2026",
-    time: "16h30 - 18h00",
-    location: "Hall d'entrée",
-    description: "Les enfants, participez avec des déguisements d'insectes et de fleurs pour célébrer le printemps.",
-    color: "secondary",
-  },*/
   {
     id: 1,
     title: " TOMBOLA de la rentrée 2025-2026 est lancée !",
@@ -35,28 +17,6 @@ const upcomingEvents = [
     attendees: 500,
     url: "/partenaires"
   },
-  /*{
-    id: 4,
-    title: "📝 Conseil d'école SI 🌍",
-    date: "20 Janvier 2026",
-    time: "17h45 - 19h15",
-    location: "Salle polyvalente",
-    description: "Bilan de l'année, présentation des projets et resultats élection des parents.",
-    color: "sky",
-    status: "past",
-    attendees: 50,
-  },
-  {
-    id: 5,
-    title: "Réunion mensuelle des parents",
-    date: "30 Janvier 2026",
-    time: "17h30 - 19h30",
-    location: "Salle polyvalente",
-    description: "Un temps d’échange pour construire ensemble les futurs temps forts de l’école.",
-    color: "secondary",
-    status: "upcoming",
-    attendees: 30,
-  },*/
   {
     id: 10,
     title: "La crèpe party de l'école !",
