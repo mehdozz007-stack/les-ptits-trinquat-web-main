@@ -50,7 +50,7 @@ const partners = [
     name: "Méla Wing",
     category: "Éducation",
     description: "Coaching pour les wingfoileurs et wingfoileuses.",
-    logo: "🏄",
+    logo: "🌊",
     website: "https://www.facebook.com/melanie.garin.1/directory_work?locale=fr_FR",
   },
   {

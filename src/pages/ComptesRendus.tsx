@@ -148,7 +148,7 @@ const reports = [
     title: "Fiche RSST",
     date: "2025",
     type: "Sécurité",
-    category: "reunion",
+    category: "document",
     hasFile: true,
     fileUrl: "/documents/RSST_FICHE.pdf",
   },

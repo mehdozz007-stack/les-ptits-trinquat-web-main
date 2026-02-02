@@ -39,7 +39,7 @@ const reports = [
 
 export function ReportsPreview() {
   return (
-    <section className="relative overflow-hidden bg-muted/50 py-8 sm:py-12 md:py-20">
+    <section className="py-8 sm:py-12 md:py-20 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-10 sm:top-20 right-5 sm:right-10 h-32 sm:h-40 w-32 sm:w-40 rounded-full bg-secondary/20 watercolor-blob" />

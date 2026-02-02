@@ -32,7 +32,7 @@ export interface Actualite {
     date: string;
     link?: string;
     fileUrl?: string;
-    color: "primary" | "secondary" | "sky" | "violet" | "accent";
+    color: "primary" | "secondary" | "sky" | "violet" | "accent" | "rose" | "emerald" | "amber" | "cyan" | "indigo" | "fuchsia";
     time?: string;
     location?: string;
     attendees?: number;
@@ -42,19 +42,19 @@ export interface Actualite {
 export const actualitesData: Actualite[] = [
     {
         id: "act-001",
-        title: "📣 TOMBOLA de la rentrée 2025-2026 est lancée ! 🎁",
-        description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires ! 16 Février 2026 le tirage au sort. Bonne chance à tous !",
+        title: "TOMBOLA 2026 est lancée !",
+        description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires. Bonne chance à tous !",
         content: "Notre TOMBOLA annuelle est lancée pour soutenir les projets de l'école. Remise de tickets jusqu'au 20 janvier 2026. Tirage au sort le 16 février 2026 en présence des enfants.",
         type: "evenement",
-        date: "8 Décembre 2025",
-        link: "/tombola",
+        date: "Lancement 8 Décembre 2025",
+        link: "/partenaires",
         color: "accent",
         status: "upcoming",
         attendees: 500,
     },
     {
         id: "act-002",
-        title: "📰 À l'attention des parents de CM2 Section Internationale",
+        title: "À l'attention des parents de CM2 Section Internationale",
         description: "Réunion d'information Lundi 16 février 2026 au collège des Aiguerelles.",
         content: "Une réunion d'information est organisée pour les familles intéressées par la section internationale. Consultez ou téléchargez l'affiche pour plus de détails.",
         type: "annonce",
@@ -64,26 +64,64 @@ export const actualitesData: Actualite[] = [
     },
     {
         id: "act-004",
-        title: "Information : Conseil d'école du 20 Janvier",
-        description: "Retrouvez les points clés abordés lors du dernier conseil d'école et les prochaines étapes pour l'école.",
-        content: "Le conseil d'école s'est réuni le 20 janvier pour discuter des projets pédagogiques, de l'organisation de l'année scolaire et des événements à venir.",
-        type: "information",
-        date: "20 Janvier 2026",
-        link: "/comptes-rendus",
-        color: "violet",
-    },
-    {
-        id: "act-006",
-        title: "🥞 La crèpe party de l'école ! 🎉",
+        title: "La crèpe party de l'école !",
         description: "Participez à notre traditionnelle vente de crêpes, un moment gourmand et convivial pour soutenir les projets de l'école.",
         content: "Une vente de crêpes est organisée sur le parvis de l'école. C'est un moment convivial et gourmand pour récolter des fonds.",
         type: "evenement",
         date: "20 Février 2026",
         time: "16h30 - 18h00",
         location: "Le parvis de l'école",
-        color: "violet",
+        color: "sky",
         status: "upcoming",
         attendees: 500,
+    },
+    {
+        id: "act-006",
+        title: "Information : Conseil d'école SI du 20 Janvier",
+        description: "Retrouvez les points clés abordés lors du dernier conseil d'école et les prochaines étapes pour l'école.",
+        content: "Le conseil d'école s'est réuni le 20 janvier pour discuter des projets pédagogiques, de l'organisation de l'année scolaire et des événements à venir.",
+        type: "information",
+        date: "20 Janvier 2026",
+        link: "https://www.ent-ecole.fr/cardboard/0193c594-bf68-798a-97b7-aedda95767a2",
+        location: "Salle polyvalente",
+        color: "violet",
+        attendees: 30,
+    },
+    {
+        id: "act-007",
+        title: "Carnaval à l'école",
+        description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps.",
+        content: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré.\nLes enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps dans leurs classes.",
+        type: "evenement",
+        date: "17 Avril 2026",
+        time: "08h30 - 16h30",
+        location: "Toute l'école",
+        color: "accent",
+        status: "upcoming",
+        attendees: 380,
+    },
+    {
+        id: "act-008",
+        title: "Fiche RSST",
+        description: "Document de sécurité relatif à l'organisation de la sécurité, de la santé et des conditions de travail à l'école.",
+        content: "Fiche RSST - Document de sécurité relatif à l'organisation de la sécurité, de la santé et des conditions de travail (RSST) à l'école.",
+        type: "document",
+        date: "2026",
+        fileUrl: "/documents/RSST_FICHE.pdf",
+        color: "primary",
+    },
+    {
+        id: "act-009",
+        title: "Fête d'école",
+        description: "Rires, jeux, spectacles et douceurs gourmandes vous attendent pour partager ensemble un moment joyeux et festif et célébrer la fin de l'année scolaire 🌟🍭",
+        content: "La fête d'école est l'occasion de célébrer ensemble une belle année scolaire. Au programme : rires, jeux, spectacles des enfants, douceurs gourmandes et animations pour petits et grands. Un moment convivial et festif en famille !",
+        type: "evenement",
+        date: "19 Juin 2026",
+        time: "14h00 - 19h00",
+        location: "Cour de l'école",
+        color: "primary",
+        status: "upcoming",
+        attendees: 800,
     },
     // Événements passés
     {
@@ -108,6 +146,7 @@ export const actualitesData: Actualite[] = [
         date: "20 Janvier 2026",
         time: "17h45 - 19h15",
         location: "Salle polyvalente",
+        link: "https://www.ent-ecole.fr/cardboard/0193c594-bf68-798a-97b7-aedda95767a2",
         color: "sky",
         status: "past",
         attendees: 50,
@@ -173,13 +212,16 @@ export function getLatestActualites(limit: number = 3): Actualite[] {
 
 /**
  * Récupère toutes les actualités (pour la page Actualités)
+ * Exclut les événements passés qui sont affichés dans leur propre section
  */
 export function getAllActualites(): Actualite[] {
-    return actualitesData.sort((a, b) => {
-        const dateA = new Date(a.date).getTime();
-        const dateB = new Date(b.date).getTime();
-        return dateB - dateA;
-    });
+    return actualitesData
+        .filter((a) => !(a.type === "evenement" && a.status === "past"))
+        .sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return dateB - dateA;
+        });
 }
 
 /**
@@ -243,4 +285,10 @@ export const actualiteColorClasses = {
     sky: "bg-gradient-to-br from-sky/15 via-blue/10 to-violet/10 border-sky/25",
     violet: "bg-gradient-to-br from-violet/15 via-purple/10 to-pink/10 border-violet/25",
     accent: "bg-gradient-to-br from-accent/15 via-green/10 to-yellow/10 border-accent/25",
+    rose: "bg-gradient-to-br from-rose-500/20 via-pink-500/15 to-red-500/10 border-rose-500/30",
+    emerald: "bg-gradient-to-br from-emerald-500/20 via-teal-500/15 to-cyan-500/10 border-emerald-500/30",
+    amber: "bg-gradient-to-br from-amber-500/20 via-orange-500/15 to-yellow-500/10 border-amber-500/30",
+    cyan: "bg-gradient-to-br from-cyan-500/20 via-blue-500/15 to-teal-500/10 border-cyan-500/30",
+    indigo: "bg-gradient-to-br from-indigo-500/20 via-purple-500/15 to-blue-500/10 border-indigo-500/30",
+    fuchsia: "bg-gradient-to-br from-fuchsia-500/20 via-pink-500/15 to-purple-500/10 border-fuchsia-500/30",
 };

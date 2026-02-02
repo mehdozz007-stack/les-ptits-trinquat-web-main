@@ -136,36 +136,6 @@ export function HeroSection() {
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
               <InfoBadge
-                icon="📰"
-                text="À l'attention des parents de CM2 SI"
-                href="/documents/Affiche_SI_écoles_260115_044150.pdf"
-                delay={0.2}
-                bgClass="bg-orange-200/30 text-blue-900"
-                textGradient="bg-gradient-to-r from-teal-500 via-indigo-600 to-lime-500"
-                pingOuter="bg-blue-500"
-                pingInner="bg-blue-400"
-                sparks={sparks}
-                sparksColors={[
-                  "bg-red-400",
-                  "bg-orange-400",
-                  "bg-yellow-300",
-                  "bg-lime-400",
-                  "bg-green-400",
-                  "bg-emerald-400",
-                  "bg-teal-400",
-                  "bg-cyan-400",
-                  "bg-sky-400",
-                  "bg-blue-400",
-                  "bg-indigo-400",
-                  "bg-violet-400",
-                  "bg-purple-400",
-                  "bg-pink-400",
-                  "bg-rose-400",
-                  "bg-amber-400",
-                  "bg-white",
-                ]}
-              />
-              <InfoBadge
                 icon="📣"
                 text="Tombola 2026 - Tirage au sort par les  enfants le 16 février !"
                 href="/evenements#event-1"

@@ -1,23 +1,38 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+// Bubble animation component
+const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: number; size: string }) => (
+  <motion.div
+    className={`absolute rounded-full ${size} bg-white/20 backdrop-blur-sm`}
+    animate={{
+      y: [0, -400, 0],
+      opacity: [0, 1, 0],
+    }}
+    transition={{
+      duration,
+      delay,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  />
+);
 
 const upcomingEvents = [
   {
     id: 1,
-    title: " TOMBOLA de la rentrée 2025-2026 est lancée !",
-    date: "8 Décembre 2025 - Lancée",
-    time: "Remise de tickets jusqu'au 20 janvier 2026",
+    title: " TOMBOLA 2026 : Tirage au sort par les enfants le 16 Février 2026 !",
+    time: "16 Février 2026",
     location: "Groupe scolaire FRANK-DICKENS",
-    description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires ! 16 Février 2026 le tirage au sort. Bonne chance à tous !",
+    description: "Bonne chance à tous !",
     color: "accent",
     status: "upcoming",
     attendees: 500,
     url: "/partenaires"
   },
-  {
+  /*{
     id: 10,
     title: "La crèpe party de l'école !",
     date: "20 Février 2026",
@@ -39,16 +54,8 @@ const upcomingEvents = [
     color: "sky",
     status: "upcoming",
     attendees: 380,
-  },
+  },*/
 ];
-
-const colorClasses = {
-  primary: "bg-primary text-primary-foreground",
-  secondary: "bg-secondary text-secondary-foreground",
-  sky: "bg-sky text-sky-foreground",
-  accent: "bg-accent text-accent-foreground",
-  violet: "bg-violet text-violet-foreground",
-};
 
 const titleGradients = {
   primary: "bg-gradient-to-r from-primary via-secondary to-pink bg-clip-text text-transparent font-extrabold",
@@ -59,6 +66,8 @@ const titleGradients = {
 };
 
 export function EventsPreview() {
+  const event = upcomingEvents[0];
+
   return (
     <section className="py-20 md:py-28">
       <div className="container">
@@ -67,108 +76,143 @@ export function EventsPreview() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 flex flex-col sm:text-center items-start sm:items-center gap-2 sm:gap-4"
+          className="mb-12 flex flex-col text-center items-center gap-2 sm:gap-4"
         >
           <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs sm:text-sm font-semibold text-primary">
             Événements
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            Prochains rendez-vous
+            Notre prochain <span className="text-gradient">rendez-vous</span>
           </h2>
           <p className="max-w-2xl text-sm sm:text-lg text-muted-foreground">
             Retrouvez-nous lors de nos prochains événements et partagez des moments conviviaux avec la communauté scolaire.
           </p>
         </motion.div>
 
-        {/* Events Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {upcomingEvents.map((event, index) => (
-            <motion.div
-              key={event.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Card variant="playful" className="group h-full overflow-hidden">
-                <CardContent className="p-0">
-                  {/* Color Banner */}
-                  <div className={`h-2 ${colorClasses[event.color as keyof typeof colorClasses]}`} />
-
-                  <div className="p-6">
-                    {/* Date Badge */}
-                    <div className={`mb-6 flex w-fit items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colorClasses[event.color as keyof typeof colorClasses]}`}>
-                      <Calendar className="h-4 w-4" />
-                      {event.date}
-                    </div>
-
-                    {/* Title */}
-                    {event.url ? (
-                      <a
-                        href={event.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`mb-2 text-xl font-bold group-hover:opacity-80 transition-opacity inline-block no-underline ${titleGradients[event.color as keyof typeof titleGradients]}`}
-                      >
-                        {event.title}
-                      </a>
-                    ) : (
-                      <Link
-                        to="/evenements"
-                        className={`mb-2 text-xl font-bold group-hover:opacity-80 transition-opacity inline-block no-underline ${titleGradients[event.color as keyof typeof titleGradients]}`}
-                      >
-                        {event.title}
-                      </Link>
-                    )}
-                    {/* Description */}
-                    <p className="mb-4 text-muted-foreground">
-                      {event.description}
-                    </p>
-
-                    {/* Read More Button */}
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="rounded-full bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20 hover:bg-gradient-to-br hover:from-primary/10 hover:to-secondary/10 transition-all mb-4"
-                      asChild
-                    >
-                      <Link to={`/evenements#event-${event.id}`}>
-                        Lire plus
-                        <ArrowRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </Button>
-
-                    {/* Meta */}
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-primary" />
-                        {event.time}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-primary" />
-                        {event.location}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* CTA */}
+        {/* Featured Event */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="relative mx-auto max-w-2xl"
         >
-          <Button variant="outline" size="lg" asChild>
-            <Link to="/evenements">
-              Voir tous les événements
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+          {/* Animated background glow */}
+          <motion.div
+            animate={{
+              boxShadow: [
+                "0 0 20px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.2)",
+                "0 0 40px rgba(255, 193, 7, 0.5), 0 0 80px rgba(255, 193, 7, 0.3)",
+                "0 0 20px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.2)",
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent via-yellow-300 to-accent opacity-75 blur-lg"
+          />
+
+          {/* Card with bubbles */}
+          <Card variant="playful" className="group relative overflow-hidden border-2 border-accent/50 bg-gradient-to-br from-accent/20 via-yellow-100/30 to-accent/20">
+            {/* Bubble columns */}
+            <div className="absolute inset-0 overflow-hidden">
+              {/* Column 1 */}
+              <div className="absolute left-1/4 top-0 h-full w-1/12">
+                <FloatingBubble delay={0} duration={4} size="w-3 h-3" />
+                <FloatingBubble delay={0.8} duration={5} size="w-2 h-2" />
+                <FloatingBubble delay={1.6} duration={4.5} size="w-4 h-4" />
+              </div>
+
+              {/* Column 2 */}
+              <div className="absolute left-1/2 top-0 h-full w-1/12">
+                <FloatingBubble delay={0.4} duration={4.5} size="w-2 h-2" />
+                <FloatingBubble delay={1.2} duration={5} size="w-3 h-3" />
+                <FloatingBubble delay={2} duration={4} size="w-2 h-2" />
+              </div>
+
+              {/* Column 3 */}
+              <div className="absolute right-1/4 top-0 h-full w-1/12">
+                <FloatingBubble delay={0.6} duration={5} size="w-4 h-4" />
+                <FloatingBubble delay={1.4} duration={4} size="w-2 h-2" />
+                <FloatingBubble delay={2.2} duration={4.5} size="w-3 h-3" />
+              </div>
+            </div>
+
+            <CardContent className="relative z-10 p-8 sm:p-12">
+              {/* Title */}
+              <motion.h3
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                className={`text-base sm:text-xl font-bold mb-6 text-center ${titleGradients[event.color as keyof typeof titleGradients]}`}
+              >
+                {event.title}
+              </motion.h3>
+
+              {/* Description */}
+              <motion.p
+                animate={{
+                  y: [0, -12, 0],
+                  textShadow: [
+                    "0 0 15px rgba(255, 193, 7, 0.2)",
+                    "0 0 35px rgba(255, 193, 7, 0.8)",
+                    "0 0 15px rgba(255, 193, 7, 0.2)",
+                  ],
+                }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                className="mb-6 text-muted-foreground text-base sm:text-lg text-center"
+              >
+                {event.description}
+              </motion.p>
+
+              {/* Meta Information */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="space-y-3 text-sm sm:text-base text-muted-foreground"
+              >
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex items-center gap-3"
+                >
+                  <motion.div
+                    animate={{
+                      textShadow: [
+                        "0 0 8px rgba(255, 193, 7, 0.2)",
+                        "0 0 20px rgba(255, 193, 7, 0.8)",
+                        "0 0 8px rgba(255, 193, 7, 0.2)",
+                      ],
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Clock className="h-5 w-5 text-accent flex-shrink-0" />
+                  </motion.div>
+                  <span>{event.time}</span>
+                </motion.div>
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex items-center gap-3"
+                >
+                  <motion.div
+                    animate={{
+                      textShadow: [
+                        "0 0 8px rgba(255, 193, 7, 0.2)",
+                        "0 0 20px rgba(255, 193, 7, 0.8)",
+                        "0 0 8px rgba(255, 193, 7, 0.2)",
+                      ],
+                    }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
+                  </motion.div>
+                  <span>{event.location}</span>
+                </motion.div>
+              </motion.div>
+            </CardContent>
+          </Card>
         </motion.div>
       </div>
     </section>
