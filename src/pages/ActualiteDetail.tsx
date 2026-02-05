@@ -196,12 +196,12 @@ export function ActualiteDetail() {
                                             initial={{ opacity: 0, scale: 0.95 }}
                                             whileInView={{ opacity: 1, scale: 1 }}
                                             viewport={{ once: true }}
-                                            className="mb-8"
+                                            className="mb-8 flex justify-center"
                                         >
                                             <img
                                                 src={actualite.affiche}
                                                 alt={`Affiche - ${actualite.title}`}
-                                                className="w-full rounded-xl object-cover shadow-md"
+                                                className="w-full sm:w-[70%] rounded-xl object-cover shadow-md"
                                             />
                                         </motion.div>
                                     )}
