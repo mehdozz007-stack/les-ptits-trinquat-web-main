@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Download, Link as LinkIcon, Search, Calendar, Clock, MapPin, Users, ChevronRight, Facebook, Instagram } from "lucide-react";
+import { ArrowRight, FileText, Download, Link as LinkIcon, Search, Calendar, Clock, MapPin, Users, ChevronRight, Facebook, Instagram, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -113,17 +113,15 @@ export function Actualites() {
         <Layout>
             <div className="min-h-[calc(100vh-200px)]">
                 {/* Header section */}
-                <section className="relative overflow-hidden py-20 sm:py-28 md:py-32">
+                <section className="relative overflow-hidden bg-sky-gradient py-20">
                     <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-secondary/25 watercolor-blob" />
-                        <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-primary/25 watercolor-blob" />
-                        <div className="absolute top-1/2 right-1/4 h-52 w-52 rounded-full bg-accent/15 watercolor-blob" />
+                        <div className="absolute -top-20 -left-20 h-60 w-60 rounded-full bg-sky/20 watercolor-blob" />
+                        <div className="absolute bottom-10 right-10 h-40 w-40 rounded-full bg-primary/20 watercolor-blob" />
                     </div>
                     <div className="container relative">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
                             className="max-w-3xl"
                         >
                             <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">
@@ -140,6 +138,16 @@ export function Actualites() {
                                 régulièrement informés.
                             </p>
                         </motion.div>
+                    </div>
+
+                    {/* Bottom wave decoration */}
+                    <div className="absolute bottom-0 left-0 right-0">
+                        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                            <path
+                                d="M0 120L48 105C96 90 192 70 288 65C384 60 480 75 576 85C672 95 768 100 864 85C960 70 1056 60 1152 60C1248 60 1344 70 1392 85L1440 95V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
+                                fill="hsl(var(--background))"
+                            />
+                        </svg>
                     </div>
                 </section>
 
@@ -197,8 +205,25 @@ export function Actualites() {
                 </section>
 
                 {/* Actualites grid */}
-                <section className="py-12 sm:py-16 md:py-20">
+                <section className="relative overflow-hidden bg-muted/50 sm:py-12 py-14 md:py-28">
                     <div className="container">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mb-12"
+                        >
+                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                                <FileText className="h-4 w-4" />
+                                Actualités
+                            </span>
+                            <h2 className="mb-4 text-3xl font-extrabold">
+                                Nos <span className="text-gradient">Actualités</span>
+                            </h2>
+                            <p className="text-base text-muted-foreground max-w-2xl">
+                                Retrouvez tous nos événements, informations et annonces par les parents élus et l'équipe de l'école.
+                            </p>
+                        </motion.div>
                         {filteredActualites.length > 0 ? (
                             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                                 {filteredActualites.map((actualite, index) => (
@@ -236,8 +261,8 @@ export function Actualites() {
                                                 </p>
 
                                                 {/* Footer avec date, location et bouton */}
-                                                <div className="border-t border-current border-opacity-20 pt-4 mt-2">
-                                                    <div className="flex items-start justify-between gap-3">
+                                                <div className="pt-4 mt-2">
+                                                    <div className="flex items-center justify-between gap-3">
                                                         <div className="flex flex-col gap-2">
                                                             <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                                                                 <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
@@ -256,7 +281,7 @@ export function Actualites() {
                                                             <Button asChild variant="outline" size="sm" className="gap-2">
                                                                 <Link to={`/actualites/${actualite.id}`}>
                                                                     <ArrowRight className="h-4 w-4" />
-                                                                    Lire la suite
+                                                                    Lire plus
                                                                 </Link>
                                                             </Button>
                                                         </div>
@@ -291,7 +316,7 @@ export function Actualites() {
 
                 {/* Événements passés Section */}
                 {getPastEvents().length > 0 && (
-                    <section className="bg-muted/50 py-12 sm:py-16 md:py-20">
+                    <section className="py-12 sm:py-16 md:py-20">
                         <div className="container">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
@@ -331,30 +356,32 @@ export function Actualites() {
                                             transition={{ delay: index * 0.05 }}
                                         >
                                             <Card variant="elevated" className={`group h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-lg ${actualiteColorClasses[event.color]}`}>
-                                                <CardContent className="p-4 sm:p-6">
-                                                    <div className="flex flex-row gap-3 sm:gap-6">
-                                                        {/* Icon */}
-                                                        <div className={`flex h-12 sm:h-20 w-12 sm:w-20 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
-                                                            <Calendar className={`h-6 sm:h-8 w-6 sm:w-8 ${colors.text}`} />
+                                                <CardContent className="p-6 sm:p-8">
+                                                    <div className="flex flex-col gap-3 sm:gap-4">
+                                                        {/* Top row: Icon + Title */}
+                                                        <div className="flex flex-row gap-3 sm:gap-6 items-center">
+                                                            {/* Icon */}
+                                                            <div className={`flex h-12 sm:h-20 w-12 sm:w-20 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
+                                                                <Calendar className={`h-6 sm:h-8 w-6 sm:w-8 ${colors.text}`} />
+                                                            </div>
+                                                            {/* Title */}
+                                                            <h3 className="font-bold text-lg sm:text-xl text-foreground">
+                                                                {event.title}
+                                                            </h3>
                                                         </div>
 
-                                                        {/* Content */}
-                                                        <div className="flex-1 min-w-0">
-                                                            <div className="mb-2 flex flex-wrap items-center gap-2">
-                                                                <h3 className="font-bold text-lg sm:text-xl text-foreground line-clamp-2">
-                                                                    {event.title}
-                                                                </h3>
-                                                                <Badge
-                                                                    className="shrink-0"
-                                                                    variant="secondary"
-                                                                    style={{
-                                                                        background: "rgb(156 163 175 / 0.7)",
-                                                                        color: "rgb(31 41 55)"
-                                                                    }}
-                                                                >
-                                                                    Passé
-                                                                </Badge>
-                                                            </div>
+                                                        {/* Rest Content */}
+                                                        <div className="flex-1 min-w-0 text-left">
+                                                            <Badge
+                                                                className="shrink-0 mb-2"//ml-auto block w-fit"
+                                                                variant="secondary"
+                                                                style={{
+                                                                    background: "rgb(156 163 175 / 0.7)",
+                                                                    color: "rgb(31 41 55)"
+                                                                }}
+                                                            >
+                                                                Passé
+                                                            </Badge>
 
                                                             <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
                                                                 {event.description}
@@ -386,17 +413,19 @@ export function Actualites() {
                                                             </div>
 
                                                             {event.link && (
-                                                                <Button
-                                                                    asChild
-                                                                    variant="ghost"
-                                                                    size="sm"
-                                                                    className="gap-2"
-                                                                >
-                                                                    <a href={event.link} target="_blank" rel="noopener noreferrer">
-                                                                        Voir la photo
-                                                                        <ChevronRight className="h-4 w-4" />
-                                                                    </a>
-                                                                </Button>
+                                                                <div className="flex justify-center mt-2">
+                                                                    <Button
+                                                                        asChild
+                                                                        variant="ghost"
+                                                                        size="sm"
+                                                                        className="gap-2"
+                                                                    >
+                                                                        <a href={event.link} target="_blank" rel="noopener noreferrer">
+                                                                            Consulter
+                                                                            <ChevronRight className="h-4 w-4" />
+                                                                        </a>
+                                                                    </Button>
+                                                                </div>
                                                             )}
                                                         </div>
                                                     </div>
@@ -412,13 +441,14 @@ export function Actualites() {
 
                 {/* CTA Section */}
                 {filteredActualites.length > 0 && (
-                    <section className="border-t border-border py-12 sm:py-16">
+                    <section className="relative overflow-hidden bg-muted/50 sm:py-12 py-20 md:py-28">
                         <div className="container text-center">
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                             >
+                                <Heart className="mx-auto mb-4 h-12 w-12 text-secondary" />
                                 <h2 className="mb-4 text-2xl font-bold">Rester connecté</h2>
                                 <p className="mb-8 max-w-2xl text-muted-foreground mx-auto">
                                     Suivez-nous sur les réseaux sociaux pour ne rien manquer de l'actualité de l'école.
@@ -433,7 +463,6 @@ export function Actualites() {
                                 </div>
                                 <Button variant="playful" size="lg" asChild>
                                     <Link to="/">
-                                        <ArrowRight className="mr-2 h-5 w-5" />
                                         Retour à l'accueil
                                     </Link>
                                 </Button>
