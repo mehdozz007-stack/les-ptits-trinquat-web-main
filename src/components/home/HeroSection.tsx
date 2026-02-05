@@ -136,36 +136,6 @@ export function HeroSection() {
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
               <InfoBadge
-                icon="📣"
-                text="Tombola 2026 - Tirage au sort par les  enfants le 16 février !"
-                href="/evenements#event-1"
-                delay={0.2}
-                bgClass="bg-red-100/80 text-purple-600"
-                textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
-                pingOuter="bg-purple-600"
-                pingInner="bg-purple-500"
-                sparks={sparks}
-                sparksColors={[
-                  "bg-red-400",
-                  "bg-orange-400",
-                  "bg-yellow-300",
-                  "bg-lime-400",
-                  "bg-green-400",
-                  "bg-emerald-400",
-                  "bg-teal-400",
-                  "bg-cyan-400",
-                  "bg-sky-400",
-                  "bg-blue-400",
-                  "bg-indigo-400",
-                  "bg-violet-400",
-                  "bg-purple-400",
-                  "bg-pink-400",
-                  "bg-rose-400",
-                  "bg-amber-400",
-                  "bg-white",
-                ]}
-              />
-              <InfoBadge
                 icon="🏆"
                 text="Profitez de nos offres de partenariats exclusifs !"
                 href="/partenaires#special-event-1"
