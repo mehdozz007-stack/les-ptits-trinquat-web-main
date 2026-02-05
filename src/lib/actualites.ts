@@ -13,6 +13,7 @@
  * - date: date au format 'DD Mois YYYY'
  * - link: lien vers la ressource (PDF, page, URL externe, etc.)
  * - fileUrl: URL du fichier si téléchargeable
+ * - affiche: chemin vers l'image de l'événement
  * - color: couleur de la carte ('primary' | 'secondary' | 'sky' | 'violet' | 'accent')
  * - time: heure de l'événement (optionnel)
  * - location: lieu de l'événement (optionnel)
@@ -20,9 +21,12 @@
  * - status: 'upcoming' | 'past' (pour les événements)
  */
 
-export type ActualiteType = "evenement" | "document" | "annonce" | "information";
+// Importer les images
+import tomola from '@/assets/tomola.jpg';
+import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
+import videGrenier from '@/assets/Vide-grenier.jpg';
 export type EventStatus = "upcoming" | "past";
-
+export type ActualiteType = "evenement" | "document" | "annonce" | "information";
 export interface Actualite {
     id: string;
     title: string;
@@ -49,7 +53,7 @@ export const actualitesData: Actualite[] = [
         type: "evenement",
         date: "Lancement 8 Décembre 2025",
         link: "/partenaires",
-        affiche: "/assets/tomola.jpg",
+        affiche: tomola,
         location: "Groupe scolaire FRANK-DICKENS",
         color: "accent",
         status: "upcoming",
@@ -75,7 +79,7 @@ export const actualitesData: Actualite[] = [
         date: "20 Février 2026",
         time: "16h30 - 18h00",
         location: "Le parvis de l'école",
-        affiche: "/assets/Crepes_party_Affiche.jpg",
+        affiche: crepesParty,
         color: "fuchsia",
         status: "upcoming",
         attendees: 500,
@@ -101,7 +105,7 @@ export const actualitesData: Actualite[] = [
         date: "12 Avril 2026",
         time: "10h00 - 16h00",
         location: "Cour de l'école",
-        affiche: "/assets/Vide-grenier.jpg",
+        affiche: videGrenier,
         color: "emerald",
         status: "upcoming",
         attendees: 400,
