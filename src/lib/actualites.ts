@@ -32,6 +32,7 @@ export interface Actualite {
     date: string;
     link?: string;
     fileUrl?: string;
+    affiche?: string;
     color: "primary" | "secondary" | "sky" | "violet" | "accent" | "rose" | "emerald" | "amber" | "cyan" | "indigo" | "fuchsia";
     time?: string;
     location?: string;
@@ -48,6 +49,7 @@ export const actualitesData: Actualite[] = [
         type: "evenement",
         date: "Lancement 8 Décembre 2025",
         link: "/partenaires",
+        affiche: "/src/assets/tomola.jpg",
         location: "Groupe scolaire FRANK-DICKENS",
         color: "accent",
         status: "upcoming",
@@ -73,13 +75,14 @@ export const actualitesData: Actualite[] = [
         date: "20 Février 2026",
         time: "16h30 - 18h00",
         location: "Le parvis de l'école",
-        color: "sky",
+        affiche: "/src/assets/Crepes_party_Affiche.jpg",
+        color: "fuchsia",
         status: "upcoming",
         attendees: 500,
     },
     {
         id: "act-006",
-        title: "Information : Conseil d'école SI du 20 Janvier",
+        title: "Conseil d'école SI du 20 Janvier",
         description: "Retrouvez les points clés abordés lors du dernier conseil d'école et les prochaines étapes pour l'école.",
         content: "Le conseil d'école s'est réuni le 20 janvier pour discuter des projets ludiques, de l'organisation de l'année scolaire et des événements à venir. 📚",
         type: "information",
@@ -98,6 +101,7 @@ export const actualitesData: Actualite[] = [
         date: "12 Avril 2026",
         time: "10h00 - 16h00",
         location: "Cour de l'école",
+        affiche: "/src/assets/Vide-grenier.jpg",
         color: "emerald",
         status: "upcoming",
         attendees: 400,
@@ -227,11 +231,11 @@ export function getLatestActualites(limit: number = 3): Actualite[] {
 
 /**
  * Récupère toutes les actualités (pour la page Actualités)
- * Exclut les événements passés qui sont affichés dans leur propre section
+ * Exclut les événements passés et les documents (qui ont leur propre page)
  * Tri: événements à venir par date croissante (proches d'abord), autres par date décroissante (récentes d'abord)
  */
 export function getAllActualites(): Actualite[] {
-    const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past"));
+    const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past") && a.type !== "document");
 
     return actualites.sort((a, b) => {
         const dateA = new Date(a.date).getTime();

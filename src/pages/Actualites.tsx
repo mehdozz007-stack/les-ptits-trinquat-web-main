@@ -39,7 +39,6 @@ const allActualites = getAllActualites();
 const filterOptions: { id: string; label: string; type?: ActualiteType }[] = [
     { id: "tous", label: "Tous" },
     { id: "evenement", label: "Événements", type: "evenement" },
-    { id: "document", label: "Documents", type: "document" },
     { id: "annonce", label: "Annonces", type: "annonce" },
     { id: "information", label: "Information", type: "information" },
 ];
@@ -127,7 +126,7 @@ export function Actualites() {
                             transition={{ duration: 0.6 }}
                             className="max-w-3xl"
                         >
-                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-extrabold text-primary">
+                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">
                                 <FileText className="h-4 w-4" />
                                 Actualités
                             </span>

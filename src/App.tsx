@@ -7,6 +7,7 @@ import { useScrollToTop } from "@/hooks/useScrollToTop";
 import Index from "./pages/Index";
 import { Actualites } from "./pages/Actualites";
 import ActualiteDetail from "./pages/ActualiteDetail";
+import DocumentsUtiles from "./pages/DocumentsUtiles";
 import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/evenements" element={<Navigate to="/actualites" replace />} />
           <Route path="/actualites" element={<Actualites />} />
           <Route path="/actualites/:id" element={<ActualiteDetail />} />
+          <Route path="/documents-utiles" element={<DocumentsUtiles />} />
           {/* Comptes rendus redirects to 404 */}
           <Route path="/comptes-rendus" element={<NotFound />} />
           <Route path="/partenaires" element={<Partenaires />} />

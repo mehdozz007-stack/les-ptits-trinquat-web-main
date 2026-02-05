@@ -23,7 +23,7 @@ const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: nu
 const upcomingEvents = [
   {
     id: 1,
-    title: " TOMBOLA 2026 : Tirage au sort par les enfants le 16 Février 2026 !",
+    title: " TOMBOLA 2026 - Tirage au sort par les enfants le 16 Février 2026 !",
     time: "16 Février 2026",
     location: "Groupe scolaire FRANK-DICKENS",
     description: "Bonne chance à tous !",
@@ -91,8 +91,14 @@ export function EventsPreview() {
 
         {/* Featured Event */}
         <motion.div
-          animate={{ y: [0, -12, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          animate={{
+            y: [0, -12, 0],
+            rotateX: [0, 5, 0],
+            rotateY: [0, 3, 0],
+            z: [0, 20, 0]
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ perspective: "1200px" }}
           className="relative mx-auto max-w-2xl"
         >
           {/* Animated background glow */}
