@@ -13,6 +13,7 @@
  * - date: date au format 'DD Mois YYYY'
  * - link: lien vers la ressource (PDF, page, URL externe, etc.)
  * - fileUrl: URL du fichier si téléchargeable
+ * - affiche: chemin vers l'image de l'événement
  * - color: couleur de la carte ('primary' | 'secondary' | 'sky' | 'violet' | 'accent')
  * - time: heure de l'événement (optionnel)
  * - location: lieu de l'événement (optionnel)
@@ -20,9 +21,12 @@
  * - status: 'upcoming' | 'past' (pour les événements)
  */
 
-export type ActualiteType = "evenement" | "document" | "annonce" | "information";
+// Importer les images
+import tomola from '@/assets/tomola.jpg';
+import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
+import videGrenier from '@/assets/Vide-grenier.jpg';
 export type EventStatus = "upcoming" | "past";
-
+export type ActualiteType = "evenement" | "document" | "annonce" | "information";
 export interface Actualite {
     id: string;
     title: string;
@@ -32,6 +36,7 @@ export interface Actualite {
     date: string;
     link?: string;
     fileUrl?: string;
+    affiche?: string;
     color: "primary" | "secondary" | "sky" | "violet" | "accent" | "rose" | "emerald" | "amber" | "cyan" | "indigo" | "fuchsia";
     time?: string;
     location?: string;
@@ -48,6 +53,7 @@ export const actualitesData: Actualite[] = [
         type: "evenement",
         date: "Lancement 8 Décembre 2025",
         link: "/partenaires",
+        affiche: tomola,
         location: "Groupe scolaire FRANK-DICKENS",
         color: "accent",
         status: "upcoming",
@@ -73,13 +79,14 @@ export const actualitesData: Actualite[] = [
         date: "20 Février 2026",
         time: "16h30 - 18h00",
         location: "Le parvis de l'école",
-        color: "sky",
+        affiche: crepesParty,
+        color: "fuchsia",
         status: "upcoming",
         attendees: 500,
     },
     {
         id: "act-006",
-        title: "Information : Conseil d'école SI du 20 Janvier",
+        title: "Conseil d'école SI du 20 Janvier",
         description: "Retrouvez les points clés abordés lors du dernier conseil d'école et les prochaines étapes pour l'école.",
         content: "Le conseil d'école s'est réuni le 20 janvier pour discuter des projets ludiques, de l'organisation de l'année scolaire et des événements à venir. 📚",
         type: "information",
@@ -98,6 +105,7 @@ export const actualitesData: Actualite[] = [
         date: "12 Avril 2026",
         time: "10h00 - 16h00",
         location: "Cour de l'école",
+        affiche: videGrenier,
         color: "emerald",
         status: "upcoming",
         attendees: 400,
@@ -106,7 +114,7 @@ export const actualitesData: Actualite[] = [
         id: "act-007",
         title: "Carnaval à l'école",
         description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps.",
-        content: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux, coloré et rempli de magie ! 🎭 C'est une belle occasion de célébrer ensemble l'arrivée du printemps et la joie de vivre. 🌸\n\nLes enfants sont invités à venir déguisés en insectes ou en fleurs dans leurs classes, créant ainsi une ambiance festive et poétique. 🦋🌺 Dans leurs déguisements enchanteurs, ils découvriront la beauté de la nature qui s'éveille et partageront des rires complices. 😄\n\nC'est un moment privilégié où la créativité, l'imaginaire et la bienveillance se rencontrent pour créer des souvenirs précieux et inspirer les enfants à s'exprimer librement. 🌈✨",
+        content: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux, coloré et rempli de magie ! 🎭 C'est une belle occasion de célébrer ensemble l'arrivée du printemps et la joie de vivre. 🌸\n\nLes enfants sont invités à venir déguisés en insectes ou en fleurs dans leurs classes, créant ainsi une ambiance festive et poétique. 🦋🌺 Dans leurs déguisements enchanteurs, ils découvriront la beauté de la nature qui s'éveille et partageront des rires complices. 😄\n\nC'est un moment privilégié où la créativité, l'imaginaire et la bienveillance se rencontrent pour créer des souvenirs précieux et inspirer les enfants à s'exprimer librement. 🐝🌿✨",
         type: "evenement",
         date: "17 Avril 2026",
         time: "08h30 - 16h30",
@@ -129,7 +137,7 @@ export const actualitesData: Actualite[] = [
         id: "act-009",
         title: "Fête d'école",
         description: "Rires, jeux, spectacles et douceurs gourmandes vous attendent pour partager ensemble un moment joyeux et festif et célébrer la fin de l'année scolaire 🌟🍭",
-        content: "La fête d'école est bien plus qu'une simple célébration : c'est un moment privilégié où l'école se transforme en lieu de partage et de bonheur. 🌟 Nous vous invitons chaleureusement à célébrer ensemble une belle année scolaire, riche d'apprentissages, de rires et de beaux souvenirs. 📚💕\n\nAu programme de ce jour festif : spectacles touchants des enfants qui vous montreront tout ce qu'ils ont appris, 🎪 jeux divertissants en famille, 🎮 animations pour petits et grands, 🎉 douceurs gourmandes à savourer ensemble, 🍰 et une atmosphère bienveillante qui réchauffe le cœur. ❤️\n\nC'est l'occasion rêvée de renforcer les liens entre familles et l'école, de valoriser les efforts de nos enfants, et de clore cette année avec la joie et la gratitude. ✨ Venez profiter de cette belle journée en famille, c'est un cadeau à ne pas manquer ! 🎁",
+        content: "La fête d'école est bien plus qu'une simple célébration : c'est un moment privilégié où l'école se transforme en lieu de partage et de bonheur. 🌟 Nous vous invitons chaleureusement à célébrer ensemble une belle année scolaire, riche d'apprentissages, de rires et de beaux souvenirs. 📚💕\n\nAu programme de ce jour festif : 🎪 jeux divertissants en famille, 🎮 animations pour petits et grands, 🎉 douceurs gourmandes à savourer ensemble, 🍰 et une atmosphère bienveillante qui réchauffe le cœur. ❤️\n\nC'est l'occasion rêvée de renforcer les liens entre familles et l'école, de valoriser les efforts de nos enfants, et de clore cette année avec la joie et la gratitude. ✨ Venez profiter de cette belle journée en famille, c'est un cadeau à ne pas manquer ! 🎁",
         type: "evenement",
         date: "19 Juin 2026",
         time: "14h00 - 19h00",
@@ -227,11 +235,11 @@ export function getLatestActualites(limit: number = 3): Actualite[] {
 
 /**
  * Récupère toutes les actualités (pour la page Actualités)
- * Exclut les événements passés qui sont affichés dans leur propre section
+ * Exclut les événements passés et les documents (qui ont leur propre page)
  * Tri: événements à venir par date croissante (proches d'abord), autres par date décroissante (récentes d'abord)
  */
 export function getAllActualites(): Actualite[] {
-    const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past"));
+    const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past") && a.type !== "document");
 
     return actualites.sort((a, b) => {
         const dateA = new Date(a.date).getTime();

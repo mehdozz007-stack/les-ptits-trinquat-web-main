@@ -103,7 +103,7 @@ export function ActualitesPreview() {
                                         </p>
 
                                         {/* Footer avec date, location et bouton */}
-                                        <div className="border-t border-current border-opacity-20 pt-4 mt-2">
+                                        <div className="pt-4 mt-2">
                                             <div className="flex items-center justify-between gap-3">
                                                 <div className="flex flex-col gap-2">
                                                     <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">

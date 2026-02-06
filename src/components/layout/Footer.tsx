@@ -5,11 +5,14 @@ import logoBorisVian from "@/assets/logos/logo-boris-vian.jpg";
 import logoMdh from "@/assets/logos/logo-mdh-new-web.jpg";
 import logoTrinquat from "@/assets/logos/trinquatcompagnie.jpg";
 import logoAssadia from "@/assets/logos/logoAssadia.svg";
+import ptitClub from "@/assets/logos/LPC.svg";
 
 const footerLinks = {
   navigation: [
     { label: "Accueil", href: "/" },
     { label: "Notre école", href: "/notre-ecole" },
+    { label: "Actualités", href: "/actualites" },
+    { label: "Documents", href: "/documents-utiles" },
     { label: "Événements", href: "/evenements" },
     { label: "Tombola", href: "/tombola" },
     { label: "Comptes-rendus", href: "/comptes-rendus" },
@@ -32,32 +35,39 @@ const socialLinks = [
 
 const officialPartners = [
   {
+    id: 5,
+    name: "Assadia Montpellier",
+    logo: logoAssadia,
+    alt: "Logo Assadia Montpellier",
+    website: "https://share.google/37woMOO85tI3B7MuX",
+  },
+  {
     id: 1,
+    name: "",
+    logo: ptitClub,
+    alt: "Logo Le Ptit Club",
+    website: "https://leptitclub.fr/nos-clubs/montpellier/",
+  },
+  {
+    id: 2,
     name: "Boris Vian",
     logo: logoBorisVian,
     alt: "Logo École Boris Vian",
     website: "https://www.montpellier.fr/territoire/lieux-equipements/maison-pour-tous-boris-vian#/search@43.5960982,3.8918619,15.00",
   },
   {
-    id: 2,
+    id: 3,
     name: "Maison de heidelberg",
     logo: logoMdh,
     alt: "Logo Maison de heidelberg",
     website: "https://maison-de-heidelberg.org/",
   },
   {
-    id: 3,
+    id: 4,
     name: "Trinquat Compagnie",
     logo: logoTrinquat,
     alt: "Logo Trinquat Compagnie",
     website: "https://www.helloasso.com/associations/trinquat-et-compagnie",
-  },
-  {
-    id: 4,
-    name: "Assadia Montpellier",
-    logo: logoAssadia,
-    alt: "Logo Assadia Montpellier",
-    website: "https://share.google/37woMOO85tI3B7MuX",
   },
 ];
 
@@ -78,9 +88,9 @@ export function Footer() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary">
                 <span className="text-xl font-bold text-primary-foreground">
                   <img
-                  src={heroImage}
-                  alt="Logo enfants"
-                  className="h-10 w-10 rounded-xl object-cover"
+                    src={heroImage}
+                    alt="Logo enfants"
+                    className="h-10 w-10 rounded-xl object-cover"
                   />
                 </span>
               </div>

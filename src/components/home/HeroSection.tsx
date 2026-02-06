@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-children.jpg";
-import logoAsso from "@/assets/logos/logoAsso.jpg";
+import logoAsso from "@/assets/logos/logoAsso.png";
 
 // Spark component for floating particles
 const Spark = ({ color }: { color: string }) => {
@@ -135,36 +135,6 @@ export function HeroSection() {
             className="max-w-xl w-full"
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
-              <InfoBadge
-                icon="📣"
-                text="Tombola 2026 - Tirage au sort par les  enfants le 16 février !"
-                href="/evenements#event-1"
-                delay={0.2}
-                bgClass="bg-red-100/80 text-purple-600"
-                textGradient="bg-gradient-to-r from-pink-500 via-purple-500 to-fuchsia-500"
-                pingOuter="bg-purple-600"
-                pingInner="bg-purple-500"
-                sparks={sparks}
-                sparksColors={[
-                  "bg-red-400",
-                  "bg-orange-400",
-                  "bg-yellow-300",
-                  "bg-lime-400",
-                  "bg-green-400",
-                  "bg-emerald-400",
-                  "bg-teal-400",
-                  "bg-cyan-400",
-                  "bg-sky-400",
-                  "bg-blue-400",
-                  "bg-indigo-400",
-                  "bg-violet-400",
-                  "bg-purple-400",
-                  "bg-pink-400",
-                  "bg-rose-400",
-                  "bg-amber-400",
-                  "bg-white",
-                ]}
-              />
               <InfoBadge
                 icon="🏆"
                 text="Profitez de nos offres de partenariats exclusifs !"
@@ -315,9 +285,9 @@ export function HeroSection() {
                         <a
                           href="https://www.instagram.com/Les_ptits_trinquat?fbclid=IwY2xjawOmlxFleHRuA2FlbQIxMABicmlkETFnZjNRdDdMVHp6cHdIM3pwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvXM-UMnkp69r5uScbYVykNF5ZVtr9MQa1_k2se0iqZ3IfRUEmOZXgHqWCes_aem_hUyrVdxiVyWFisTvxVlyRw&brid=boREg9T10BACz4NodPBJ3w"
                           target="_blank"
-                          className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
+                          className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none"
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                               d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Z" />
@@ -328,9 +298,9 @@ export function HeroSection() {
                         <a
                           href="https://www.facebook.com/LesPtitsTrinquats"
                           target="_blank"
-                          className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
+                          className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6"
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5"
                             fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13.5 8.5V6.75c0-.62.5-1.12 1.12-1.12H16V3h-2.25A3.75 3.75 0 0 0 10 6.75V8.5H8v3h2v9h3v-9h2.25l.25-3h-2.5z" />
                           </svg>
@@ -343,9 +313,9 @@ export function HeroSection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="mb-8 text-xs sm:text-sm text-muted-foreground text-center"
+                  className="mb-8 text-xs sm:text-sm text-muted-foreground text-center font-extrabold"
                 >
-                  Association Parents d'Elèves.
+                  Association Parents d'Élèves.
                 </motion.div>
               </div>
 

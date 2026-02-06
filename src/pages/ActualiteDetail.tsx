@@ -1,13 +1,12 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getActualiteById, actualiteTypeLabels, actualiteColorClasses } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
-
 const titleGradients: Record<string, string> = {
     primary: "bg-gradient-to-r from-primary via-secondary to-pink-600 bg-clip-text text-transparent font-extrabold",
     secondary: "bg-gradient-to-r from-secondary via-primary to-orange-600 bg-clip-text text-transparent font-extrabold",
@@ -44,6 +43,23 @@ const headerBlobColors: Record<string, { primary: string; secondary: string }> =
     cyan: { primary: "bg-cyan-500/50", secondary: "bg-blue-500/40" },
     indigo: { primary: "bg-indigo-500/50", secondary: "bg-purple-500/40" },
     fuchsia: { primary: "bg-fuchsia-500/50", secondary: "bg-pink-500/40" },
+};
+
+const shadowColors: Record<string, string> = {
+    primary: "shadow-lg shadow-primary/25 hover:shadow-primary/40",
+    secondary: "shadow-lg shadow-secondary/25 hover:shadow-secondary/40",
+    sky: "shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40",
+    violet: "shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40",
+    accent: "shadow-lg shadow-accent/25 hover:shadow-accent/40",
+    green: "shadow-lg shadow-green-500/25 hover:shadow-green-500/40",
+    orange: "shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40",
+    pink: "shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40",
+    rose: "shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40",
+    emerald: "shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40",
+    amber: "shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40",
+    cyan: "shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40",
+    indigo: "shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40",
+    fuchsia: "shadow-lg shadow-fuchsia-500/25 hover:shadow-fuchsia-500/40",
 };
 
 export function ActualiteDetail() {
@@ -90,16 +106,21 @@ export function ActualiteDetail() {
         <Layout>
             <div className="min-h-[calc(100vh-200px)]">
                 {/* Header */}
-                <section className="relative overflow-hidden py-12 sm:py-16 md:py-20">
+                <section className="relative overflow-hidden py-8 sm:py-12 md:py-20 bg-gradient-to-br from-slate-50/10 via-purple-50/5 to-pink-50/10">
                     <div className="absolute inset-0 overflow-hidden">
-                        <div className={`absolute -top-20 -right-20 h-60 w-60 rounded-full ${headerBlobColors[actualite.color]?.primary || "bg-primary/50"} watercolor-blob`} />
-                        <div className={`absolute -bottom-10 -left-10 h-40 w-40 rounded-full ${headerBlobColors[actualite.color]?.secondary || "bg-secondary/40"} watercolor-blob`} />
+                        {/* Blobs colorés animés avec gradients */}
+                        <div className={`absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob animate-pulse-soft opacity-25`} />
+                        <div className={`absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob animate-pulse-soft opacity-20`} style={{ animationDelay: "1s" }} />
+                        <div className="absolute top-1/3 right-1/4 h-60 w-60 rounded-full bg-gradient-to-br from-accent via-yellow-400 to-pink-300 watercolor-blob blur-3xl opacity-15" style={{ animationDelay: "0.5s" }} />
+                        <div className="absolute bottom-1/4 left-1/3 h-72 w-72 rounded-full bg-gradient-to-tr from-purple-300 via-pink-200 to-rose-300 watercolor-blob blur-3xl opacity-12" style={{ animationDelay: "1.5s" }} />
+                        <div className="absolute top-1/2 -right-20 h-80 w-80 rounded-full bg-gradient-to-bl from-blue-200 via-purple-200 to-pink-100 watercolor-blob blur-2xl opacity-15" />
+                        <div className="absolute top-1/4 left-1/2 h-64 w-64 rounded-full bg-gradient-to-br from-sky-300 via-cyan-200 to-blue-200 watercolor-blob blur-3xl opacity-10" />
                     </div>
-                    <div className="container relative">
+                    <div className="container relative z-10">
                         <Button
                             variant="ghost"
                             onClick={() => navigate(-1)}
-                            className="mb-6 gap-2"
+                            className="mb-2 sm:mb-6 gap-2"
                         >
                             <ArrowLeft className="h-4 w-4" />
                             Retour
@@ -107,50 +128,78 @@ export function ActualiteDetail() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.5 }}
                             className="max-w-4xl mx-auto text-center"
                         >
-                            {/* Badge en haut centré */}
-                            <div className="flex justify-center mb-8">
-                                <Badge
-                                    className={`shrink-0 ${badgeColors[actualite.type]}`}
-                                    variant="secondary"
-                                >
-                                    {actualiteTypeLabels[actualite.type]}
-                                </Badge>
-                            </div>
+                            {/* Badge en haut centré avec effect */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.2 }}
+                                className="flex justify-center mb-8"
+                            >
+                                <div className="relative inline-block">
+                                    <div className={`absolute inset-0 rounded-full blur-lg bg-gradient-to-r from-purple-300 to-pink-300 opacity-40`} />
+                                    <Badge
+                                        className={`shrink-0 relative ${badgeColors[actualite.type]}`}
+                                        variant="secondary"
+                                    >
+                                        {actualiteTypeLabels[actualite.type]}
+                                    </Badge>
+                                </div>
+                            </motion.div>
 
-                            {/* Titre centré */}
-                            <h1 className={`text-4xl font-extrabold md:text-5xl mb-8 leading-tight ${titleGradients[actualite.color]}`}>
+                            {/* Titre centré avec animation */}
+                            <motion.h1
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 }}
+                                className={`text-3xl font-extrabold md:text-5xl mb-8 leading-tight ${titleGradients[actualite.color]}`}
+                            >
                                 {actualite.title}
-                            </h1>
+                            </motion.h1>
 
-                            {/* Meta information centré */}
-                            <div className="space-y-3 text-sm text-muted-foreground mb-8 flex flex-col items-center">
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="h-4 w-4" />
+                            {/* Meta information centré avec animation */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 }}
+                                className="space-y-3 text-sm text-muted-foreground mb-8 flex flex-col items-center"
+                            >
+                                <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-purple-50/40 to-pink-50/40 px-4 py-2 rounded-lg border border-purple-200/20">
+                                    <Calendar className="h-4 w-4 text-purple-500" />
                                     <span>{actualite.date}</span>
                                 </div>
                                 {actualite.time && (
-                                    <div className="flex items-center gap-2">
-                                        <Clock className="h-4 w-4" />
+                                    <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-blue-50/40 to-purple-50/40 px-4 py-2 rounded-lg border border-blue-200/20">
+                                        <Clock className="h-4 w-4 text-blue-500" />
                                         <span>{actualite.time}</span>
                                     </div>
                                 )}
                                 {actualite.location && (
-                                    <div className="flex items-center gap-2">
-                                        <MapPin className="h-4 w-4" />
+                                    <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-emerald-50/40 to-cyan-50/40 px-4 py-2 rounded-lg border border-emerald-200/20">
+                                        <MapPin className="h-4 w-4 text-emerald-500" />
                                         <span>{actualite.location}</span>
                                     </div>
                                 )}
                                 {actualite.attendees && (
-                                    <div className="flex items-center gap-2">
-                                        <Users className="h-4 w-4" />
+                                    <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-rose-50/40 to-red-50/40 px-4 py-2 rounded-lg border border-rose-200/20">
+                                        <Users className="h-4 w-4 text-rose-500" />
                                         <span>{actualite.attendees} participants attendus</span>
                                     </div>
                                 )}
-                            </div>
+                            </motion.div>
                         </motion.div>
+                    </div>
+
+                    {/* Bottom wave decoration */}
+                    <div className="absolute bottom-0 left-0 right-0">
+                        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                            <path
+                                d="M0 120L48 105C96 90 192 70 288 65C384 60 480 75 576 85C672 95 768 100 864 85C960 70 1056 60 1152 60C1248 60 1344 70 1392 85L1440 95V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
+                                fill="hsl(var(--background))"
+                            />
+                        </svg>
                     </div>
                 </section>
 
@@ -163,59 +212,84 @@ export function ActualiteDetail() {
                             viewport={{ once: true }}
                             className="max-w-4xl mx-auto"
                         >
-                            <Card
-                                className={`overflow-hidden border-2 rounded-2xl ${actualiteColorClasses[actualite.color]}`}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                whileHover={{ y: -4, scale: 1.02 }}
+                                transition={{ duration: 0.4, ease: "easeOut" }}
+                                viewport={{ once: true }}
                             >
-                                <CardContent className="p-8 sm:p-12">
-                                    <div className="prose prose-invert max-w-none">
-                                        <div className="text-lg text-foreground leading-relaxed whitespace-pre-wrap text-center">
-                                            {actualite.content || actualite.description}
-                                        </div>
-                                    </div>
-
-                                    {/* Download section */}
-                                    {actualite.fileUrl && (
-                                        <div className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center">
-                                            <Button
-                                                variant="default"
-                                                size="lg"
-                                                onClick={() => handleDownload(actualite.fileUrl!, actualite.title)}
-                                                className="gap-2"
+                                <Card
+                                    className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-xl hover:scale-105 ${actualiteColorClasses[actualite.color]} ${shadowColors[actualite.color]} transition-shadow duration-300`}
+                                >
+                                    <CardContent className="p-6 sm:p-10">
+                                        {/* Affiche de l'événement */}
+                                        {actualite.affiche && (
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.95 }}
+                                                whileInView={{ opacity: 1, scale: 1 }}
+                                                viewport={{ once: true }}
+                                                className="mb-8 flex justify-center"
                                             >
-                                                <Download className="h-5 w-5" />
-                                                Télécharger le document
-                                            </Button>
-                                        </div>
-                                    )}
+                                                <img
+                                                    src={actualite.affiche}
+                                                    alt={`Affiche - ${actualite.title}`}
+                                                    className="w-full sm:w-[70%] rounded-xl object-cover shadow-md"
+                                                />
+                                            </motion.div>
+                                        )}
 
-                                    {/* External link section */}
-                                    {actualite.link && actualite.type !== "evenement" && (
-                                        <div className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center">
-                                            <Button
-                                                asChild
-                                                variant="default"
-                                                size="lg"
-                                            >
-                                                <a href={actualite.link} target="_blank" rel="noopener noreferrer">
-                                                    Consulter
-                                                </a>
-                                            </Button>
+                                        <div className="prose prose-invert max-w-none">
+                                            <div className="text-base text-foreground leading-relaxed whitespace-pre-wrap text-center">
+                                                {actualite.content || actualite.description}
+                                            </div>
                                         </div>
-                                    )}
-                                </CardContent>
-                            </Card>
+
+                                        {/* Download section */}
+                                        {actualite.fileUrl && (
+                                            <div className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center">
+                                                <Button
+                                                    variant="default"
+                                                    size="lg"
+                                                    onClick={() => handleDownload(actualite.fileUrl!, actualite.title)}
+                                                    className="gap-2"
+                                                >
+                                                    <Download className="h-5 w-5" />
+                                                    Télécharger le document
+                                                </Button>
+                                            </div>
+                                        )}
+
+                                        {/* External link section */}
+                                        {actualite.link && actualite.type !== "evenement" && (
+                                            <div className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center">
+                                                <Button
+                                                    asChild
+                                                    variant="default"
+                                                    size="lg"
+                                                >
+                                                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                                                        Consulter
+                                                    </a>
+                                                </Button>
+                                            </div>
+                                        )}
+                                    </CardContent>
+                                </Card>
+                            </motion.div>
                         </motion.div>
                     </div>
                 </section>
 
                 {/* CTA Section */}
-                <section className="border-t border-border py-12 sm:py-16">
+                <section className="relative overflow-hidden bg-muted/50 sm:py-12 py-20 md:py-28">
                     <div className="container text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                         >
+                            <Heart className="mx-auto mb-4 h-12 w-12 text-secondary" />
                             <h2 className="mb-4 text-2xl font-bold">Rester connecté</h2>
                             <p className="mb-8 max-w-2xl text-muted-foreground mx-auto">
                                 Suivez-nous sur les réseaux sociaux pour ne rien manquer de l'actualité de l'école.
