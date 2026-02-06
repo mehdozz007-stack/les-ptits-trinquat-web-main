@@ -220,7 +220,7 @@ export function ActualiteDetail() {
                                 viewport={{ once: true }}
                             >
                                 <Card
-                                    className={`overflow-hidden border-2 rounded-2xl ${actualiteColorClasses[actualite.color]} ${shadowColors[actualite.color]} transition-shadow duration-300`}
+                                    className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-xl hover:scale-105 ${actualiteColorClasses[actualite.color]} ${shadowColors[actualite.color]} transition-shadow duration-300`}
                                 >
                                     <CardContent className="p-6 sm:p-10">
                                         {/* Affiche de l'événement */}
