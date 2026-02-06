@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, FileText, Search } from "lucide-react";
+import { Download, FileText, Search, Heart, FileQuestion, LucideFileQuestion } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -174,13 +174,14 @@ export function DocumentsUtiles() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="border-t border-border py-12 sm:py-16">
+                <section className="relative overflow-hidden bg-muted/50 sm:py-12 py-20 md:py-28">
                     <div className="container text-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                         >
+                            <FileQuestion className="mx-auto mb-4 h-12 w-12 text-sky-700" />
                             <h2 className="mb-4 text-2xl font-bold">Des questions ?</h2>
                             <p className="mb-8 max-w-2xl text-muted-foreground mx-auto">
                                 Si vous ne trouvez pas le document que vous cherchez, n'hésitez pas à nous contacter.
