@@ -42,7 +42,7 @@ export function ParticipantSelector({ currentParticipant, onSelect }: Participan
   if (participants.length === 0) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
+    <div className="fixed bottom-4 left-4 z-50 md:bottom-6 md:left-6">
       <div className="relative">
         <AnimatePresence>
           {isOpen && (
@@ -50,7 +50,7 @@ export function ParticipantSelector({ currentParticipant, onSelect }: Participan
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              className="absolute bottom-full right-0 mb-2 w-72"
+              className="absolute bottom-full left-0 mb-2 w-72"
             >
               <Card className="overflow-hidden shadow-lg">
                 <CardContent className="max-h-64 overflow-y-auto p-2">
@@ -61,11 +61,10 @@ export function ParticipantSelector({ currentParticipant, onSelect }: Participan
                     <button
                       key={participant.id}
                       onClick={() => handleSelect(participant)}
-                      className={`flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors ${
-                        currentParticipant?.id === participant.id
-                          ? "bg-primary/10"
-                          : "hover:bg-muted"
-                      }`}
+                      className={`flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors ${currentParticipant?.id === participant.id
+                        ? "bg-primary/10"
+                        : "hover:bg-muted"
+                        }`}
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-xl">
                         {participant.emoji}
