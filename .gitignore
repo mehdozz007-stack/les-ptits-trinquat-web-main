@@ -43,3 +43,6 @@ generated/prisma/runtime/client.js
 generated/prisma/runtime/index-browser.d.ts
 generated/prisma/runtime/index-browser.js
 generated/prisma/runtime/wasm-compiler-edge.js
+# Wrangler and build artifacts
+.wrangler
+cloudflare/.wrangler/

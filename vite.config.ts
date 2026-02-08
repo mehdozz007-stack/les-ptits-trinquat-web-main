@@ -12,7 +12,10 @@ export default defineConfig(() => ({
       // Permet à Vite de servir les fichiers du dossier public
       allow: ["."],
     },
-    // Proxy pour les requêtes API vers le backend local
+    // Proxy désactivé - utilise l'API_BASE_URL dynamique de api-config.ts
+    // Pour utiliser le serveur local Cloudflare, lance: cd cloudflare && npx wrangler dev
+    // Puis décommente le proxy ci-dessous:
+    /*
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8787',
@@ -20,6 +23,7 @@ export default defineConfig(() => ({
         rewrite: (path) => path,
       }
     }
+    */
   },
   plugins: [react()],
   resolve: {

@@ -3,6 +3,7 @@
 # ============================================================
 
 name = "les-ptits-trinquat-api"
+workers_dev = true
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
@@ -20,19 +21,13 @@ database_id = "4f519cb2-40f8-433d-9da0-4c250a95b45c"
 # ============================================================
 [vars]
 ENVIRONMENT = "production"
-CORS_ORIGIN = "https://les-ptits-trinquat.pages.dev"
-# Durée de session en secondes (7 jours)
-SESSION_DURATION = "604800"
-# Limite de requêtes par minute
-RATE_LIMIT_MAX = "60"
-# Fenêtre de rate limiting en secondes
-RATE_LIMIT_WINDOW = "60"
+CORS_ORIGIN = "https://les-ptits-trinquat.pages.dev,http://localhost:8080,http://localhost:8081,http://127.0.0.1:8080,http://127.0.0.1:8081"
 
 # ============================================================
 # Environnement de développement
 # ============================================================
 [env.dev]
-vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173" }
+vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173,http://localhost:8080,http://localhost:8081,http://127.0.0.1:5173,http://127.0.0.1:8080,http://127.0.0.1:8081,http://192.168.1.229:8081,http://192.168.1.229:8787" }
 
 # ============================================================
 # Secrets à configurer avec: wrangler secret put <NAME>

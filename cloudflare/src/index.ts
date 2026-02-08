@@ -120,11 +120,11 @@ app.get('/init-db', async (c) => {
       -- Création de la table rate_limits
       CREATE TABLE IF NOT EXISTS rate_limits (
         id TEXT PRIMARY KEY,
-        ip_address TEXT NOT NULL,
+        identifier TEXT NOT NULL,
         endpoint TEXT NOT NULL,
         request_count INTEGER DEFAULT 1,
         window_start DATETIME DEFAULT CURRENT_TIMESTAMP,
-        UNIQUE(ip_address, endpoint)
+        UNIQUE(identifier, endpoint)
       );
 
       -- Créer les index
@@ -135,7 +135,7 @@ app.get('/init-db', async (c) => {
       CREATE INDEX IF NOT EXISTS idx_tombola_lots_parent_id ON tombola_lots(parent_id);
       CREATE INDEX IF NOT EXISTS idx_tombola_lots_status ON tombola_lots(statut);
       CREATE INDEX IF NOT EXISTS idx_audit_logs_user_id ON audit_logs(user_id);
-      CREATE INDEX IF NOT EXISTS idx_rate_limits_ip ON rate_limits(ip_address);
+      CREATE INDEX IF NOT EXISTS idx_rate_limits_identifier ON rate_limits(identifier);
     `;
 
     // Exécuter le SQL
@@ -177,11 +177,11 @@ app.route('/api/tombola', tombola);
 
 app.onError((err, c) => {
   console.error('Unhandled error:', err);
-  
+
   return c.json({
     success: false,
-    error: c.env.ENVIRONMENT === 'development' 
-      ? err.message 
+    error: c.env.ENVIRONMENT === 'development'
+      ? err.message
       : 'An internal error occurred'
   }, 500);
 });
