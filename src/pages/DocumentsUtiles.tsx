@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, FileText, Search, Heart, FileQuestion, LucideFileQuestion } from "lucide-react";
+import { Download, Files, Search, Heart, FileQuestion, LucideFileQuestion } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -73,7 +73,7 @@ export function DocumentsUtiles() {
                             className="max-w-3xl mx-auto text-center"
                         >
                             <span className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">
-                                <FileText className="h-4 w-4" />
+                                <Files className="h-4 w-4" />
                                 Documents
                             </span>
                             <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
@@ -163,7 +163,7 @@ export function DocumentsUtiles() {
                         ) : (
                             <Card className="bg-muted/50">
                                 <CardContent className="py-12 text-center">
-                                    <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                                    <Files className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                                     <p className="text-muted-foreground">
                                         Aucun document trouvé pour "{searchQuery}". Essayez une autre recherche.
                                     </p>

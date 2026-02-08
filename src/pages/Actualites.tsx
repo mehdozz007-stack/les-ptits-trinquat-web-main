@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Download, Link as LinkIcon, Search, Calendar, Clock, MapPin, Users, ChevronRight, Facebook, Instagram, Heart } from "lucide-react";
+import { ArrowRight, FileText, Download, Link as LinkIcon, Search, Calendar, Clock, MapPin, Users, ChevronRight, Facebook, Instagram, Heart, ArrowRightCircle, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ const badgeColors: Record<string, string> = {
     document: "bg-gradient-to-r from-violet/70 to-purple-400/70 text-white font-semibold shadow-sm",
     annonce: "bg-gradient-to-r from-primary/70 to-pink-400/70 text-white font-semibold shadow-sm",
     information: "bg-gradient-to-r from-emerald/70 to-teal-400/70 text-white font-semibold shadow-sm",
+    presse: "bg-gradient-to-r from-indigo/70 to-purple-400/70 text-white font-semibold shadow-sm",
 };
 
 const titleGradients: Record<string, string> = {
@@ -41,6 +42,7 @@ const filterOptions: { id: string; label: string; type?: ActualiteType }[] = [
     { id: "evenement", label: "Événements", type: "evenement" },
     { id: "annonce", label: "Annonces", type: "annonce" },
     { id: "information", label: "Information", type: "information" },
+    { id: "presse", label: "Articles de presse", type: "presse" },
 ];
 
 export function Actualites() {
@@ -122,6 +124,7 @@ export function Actualites() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
                             className="max-w-3xl"
                         >
                             <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">
@@ -280,7 +283,7 @@ export function Actualites() {
                                                         <div className="flex flex-col items-end gap-2">
                                                             <Button asChild variant="outline" size="sm" className="gap-2">
                                                                 <Link to={`/actualites/${actualite.id}`}>
-                                                                    <ArrowRight className="h-4 w-4" />
+                                                                    <ChevronRight className="h-4 w-4" />
                                                                     Lire plus
                                                                 </Link>
                                                             </Button>
@@ -422,7 +425,7 @@ export function Actualites() {
                                                                     >
                                                                         <a href={event.link} target="_blank" rel="noopener noreferrer">
                                                                             Consulter
-                                                                            <ChevronRight className="h-4 w-4" />
+                                                                            <Eye className="h-4 w-4" />
                                                                         </a>
                                                                     </Button>
                                                                 </div>
