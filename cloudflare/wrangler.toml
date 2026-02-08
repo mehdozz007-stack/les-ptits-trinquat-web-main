@@ -20,8 +20,8 @@ database_id = "4f519cb2-40f8-433d-9da0-4c250a95b45c"
 # Variables d'environnement (non sensibles)
 # ============================================================
 [vars]
-ENVIRONMENT = "production"
-CORS_ORIGIN = "https://les-ptits-trinquat.pages.dev,http://localhost:8080,http://localhost:8081,http://127.0.0.1:8080,http://127.0.0.1:8081"
+ENVIRONMENT = "development"
+CORS_ORIGIN = "https://les-ptits-trinquat.pages.dev,http://localhost:5173,http://localhost:8080,http://localhost:8081,http://127.0.0.1:5173,http://127.0.0.1:8080,http://127.0.0.1:8081,http://192.168.1.229:8080,http://192.168.1.229:8081,http://192.168.1.229:8787"
 
 # ============================================================
 # Environnement de développement

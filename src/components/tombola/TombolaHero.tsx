@@ -18,14 +18,14 @@ export function TombolaHero() {
         🎁
       </motion.div>
       <motion.div
-        className="absolute right-[20%] top-[40%] text-3xl"
+        className="absolute right-[20%] top-[10%] text-3xl"
         animate={{ y: [0, -10, 0], rotate: [5, -5, 5] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       >
         🎈
       </motion.div>
       <motion.div
-        className="absolute left-[20%] bottom-[25%] text-3xl"
+        className="absolute left-[10%] bottom-[25%] text-3xl"
         animate={{ y: [0, -12, 0] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
@@ -59,7 +59,7 @@ export function TombolaHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl"
+            className="mb-4 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl"
           >
             La Tombola des{" "}
             <span className="bg-gradient-to-r from-primary via-secondary to-sky bg-clip-text text-transparent">

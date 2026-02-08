@@ -107,6 +107,21 @@ export function useTombolaLots() {
     }
   };
 
+  const deleteLot = async (lotId: string, parentId: string) => {
+    try {
+      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ parent_id: parentId }),
+      });
+      if (!response.ok) throw new Error('Failed to delete lot');
+      await fetchLots();
+      return { error: null };
+    } catch (err: any) {
+      return { error: err.message };
+    }
+  };
+
   const getContactLink = async (lotId: string, senderName: string): Promise<string | null> => {
     try {
       const response = await fetch(apiUrl('/api/tombola/contact-link'), {
@@ -127,5 +142,5 @@ export function useTombolaLots() {
     fetchLots();
   }, []);
 
-  return { lots, loading, error, addLot, reserveLot, cancelReservation, markAsRemis, getContactLink, refetch: fetchLots };
+  return { lots, loading, error, addLot, reserveLot, cancelReservation, markAsRemis, deleteLot, getContactLink, refetch: fetchLots };
 }

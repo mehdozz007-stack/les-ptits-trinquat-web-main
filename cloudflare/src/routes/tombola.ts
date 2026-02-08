@@ -361,16 +361,40 @@ tombola.patch('/lots/:id/remis', requireAdmin, async (c) => {
 });
 
 // ============================================================
-// DELETE /tombola/lots/:id - Supprimer un lot (admin)
+// DELETE /tombola/lots/:id - Supprimer un lot (propriétaire)
 // ============================================================
-tombola.delete('/lots/:id', requireAdmin, async (c) => {
+tombola.delete('/lots/:id', async (c) => {
   try {
     const { id } = c.req.param();
-    const authContext = getAuthContext(c);
+    const body = await c.req.json<{ parent_id: string }>();
+
+    if (!body.parent_id) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Parent ID is required'
+      }, 400);
+    }
+
+    // Vérifier que le lot existe et récupérer son propriétaire
+    const lot = await c.env.DB.prepare(
+      'SELECT id, parent_id FROM tombola_lots WHERE id = ?'
+    ).bind(id).first<{ id: string; parent_id: string }>();
+
+    if (!lot) {
+      return c.json<ApiResponse>({ success: false, error: 'Lot not found' }, 404);
+    }
+
+    // Vérifier que l'utilisateur est le propriétaire du lot
+    if (lot.parent_id !== body.parent_id) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'You can only delete your own lots'
+      }, 403);
+    }
 
     await c.env.DB.prepare('DELETE FROM tombola_lots WHERE id = ?').bind(id).run();
 
-    await logAudit(c.env.DB, authContext?.user.id || null, 'LOT_DELETED', 'lot', id, c.req.raw);
+    await logAudit(c.env.DB, body.parent_id || null, 'LOT_DELETED', 'lot', id, c.req.raw);
 
     return c.json<ApiResponse>({
       success: true,
@@ -455,6 +479,40 @@ tombola.get('/admin/participants', requireAdmin, async (c) => {
   }
 });
 
+// ============================================================
+// DELETE /tombola/participants/:id - Supprimer son compte (supprime aussi les lots)
+// ============================================================
+tombola.delete('/participants/:id', async (c) => {
+  try {
+    const { id } = c.req.param();
+
+    // Vérifier que le participant existe
+    const participant = await c.env.DB.prepare(
+      'SELECT id FROM tombola_participants WHERE id = ?'
+    ).bind(id).first<{ id: string }>();
+
+    if (!participant) {
+      return c.json<ApiResponse>({ success: false, error: 'Participant not found' }, 404);
+    }
+
+    // Les lots seront supprimés automatiquement grâce à ON DELETE CASCADE sur parent_id
+    await c.env.DB.prepare('DELETE FROM tombola_participants WHERE id = ?').bind(id).run();
+
+    await logAudit(c.env.DB, null, 'PARTICIPANT_SELF_DELETED', 'participant', id, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      message: 'Participant account deleted successfully'
+    });
+  } catch (error) {
+    console.error('Delete participant error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred'
+    }, 500);
+  }
+});
+
 // DELETE /tombola/admin/participants/:id - Supprimer participant (admin)
 tombola.delete('/admin/participants/:id', requireAdmin, async (c) => {
   try {
@@ -471,6 +529,31 @@ tombola.delete('/admin/participants/:id', requireAdmin, async (c) => {
     });
   } catch (error) {
     console.error('Delete participant error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred'
+    }, 500);
+  }
+});
+
+// ============================================================
+// DELETE /tombola/admin/lots/:id - Supprimer lot (admin)
+// ============================================================
+tombola.delete('/admin/lots/:id', requireAdmin, async (c) => {
+  try {
+    const { id } = c.req.param();
+    const authContext = getAuthContext(c);
+
+    await c.env.DB.prepare('DELETE FROM tombola_lots WHERE id = ?').bind(id).run();
+
+    await logAudit(c.env.DB, authContext?.user.id || null, 'LOT_DELETED', 'lot', id, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      message: 'Lot deleted'
+    });
+  } catch (error) {
+    console.error('Delete lot error:', error);
     return c.json<ApiResponse>({
       success: false,
       error: 'An error occurred'

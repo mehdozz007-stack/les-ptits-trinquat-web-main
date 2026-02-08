@@ -4,6 +4,7 @@
  */
 
 import { Parent, Lot } from '@/lib/types';
+import { apiUrl } from '@/lib/api-config';
 
 interface AuthToken {
     parentId: string;
@@ -11,6 +12,13 @@ interface AuthToken {
 }
 
 const API_BASE = '/api/tombola';
+
+/**
+ * Utility to resolve API URLs with proper base
+ */
+function resolveApiUrl(endpoint: string): string {
+    return apiUrl(`${API_BASE}${endpoint}`);
+}
 
 /**
  * Utility to handle API responses
@@ -32,11 +40,11 @@ export const TombolaAPI = {
      * Get all parents (participants)
      */
     async getParents(): Promise<Parent[]> {
-        const response = await fetch(`${API_BASE}/participants`);
-        const data = await handleResponse<{ success: boolean; data: any[] }>(response);
+        const response = await fetch(resolveApiUrl('/participants'));
+        const data = await handleResponse<any[]>(response);
 
         // Map API response to Parent interface
-        return (data.data || []).map((p: any) => ({
+        return (Array.isArray(data) ? data : (data.data || [])).map((p: any) => ({
             id: p.id,
             first_name: p.prenom,
             email: p.email || '',
@@ -50,11 +58,11 @@ export const TombolaAPI = {
      * Get all lots
      */
     async getLots(): Promise<Lot[]> {
-        const response = await fetch(`${API_BASE}/lots`);
-        const data = await handleResponse<{ success: boolean; data: any[] }>(response);
+        const response = await fetch(resolveApiUrl('/lots'));
+        const data = await handleResponse<any[]>(response);
 
         // Map API response to Lot interface
-        return (data.data || []).map((l: any) => ({
+        return (Array.isArray(data) ? data : (data.data || [])).map((l: any) => ({
             id: l.id,
             parent_id: l.parent_id,
             title: l.nom,
@@ -255,17 +263,34 @@ export const TombolaAPI = {
     },
 
     /**
-     * Get all parents with emails (admin only)
+     * Get admin parents with emails (admin only)
      */
     async getAdminParents(): Promise<Parent[]> {
-        const auth = this.getAuth();
-        const response = await fetch(`${API_BASE}/admin/participants`, {
-            headers: auth ? { 'Authorization': `Bearer ${auth.email}` } : {},
-        });
+        const token = localStorage.getItem('admin_token');
+
+        console.log('📥 getAdminParents called, token exists:', !!token);
+
+        if (!token) {
+            throw new Error('Not authenticated - no token found');
+        }
 
         try {
-            const data = await handleResponse<{ success: boolean; data: any[] }>(response);
-            return (data.data || []).map((p: any) => ({
+            const url = resolveApiUrl('/admin/participants');
+            console.log('📤 Fetching from:', url);
+
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+
+            console.log('📥 Response status:', response.status, response.statusText);
+
+            const data = await handleResponse<any[]>(response);
+
+            console.log('✅ Data received:', data);
+
+            return (Array.isArray(data) ? data : (data.data || [])).map((p: any) => ({
                 id: p.id,
                 first_name: p.prenom,
                 email: p.email || '',
@@ -273,8 +298,9 @@ export const TombolaAPI = {
                 classes: p.classes,
                 created_at: p.created_at,
             }));
-        } catch {
-            return [];
+        } catch (error) {
+            console.error('❌ Error in getAdminParents:', error);
+            throw error;
         }
     },
 
@@ -282,9 +308,18 @@ export const TombolaAPI = {
      * Delete a participant (admin only)
      */
     async adminDeleteParticipant(participantId: string): Promise<void> {
-        const response = await fetch(`${API_BASE}/admin/participants/${participantId}`, {
+        const token = localStorage.getItem('admin_token');
+        if (!token) {
+            throw new Error('Not authenticated - no token found');
+        }
+
+        const url = resolveApiUrl(`/admin/participants/${participantId}`);
+        const response = await fetch(url, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
         });
 
         await handleResponse<{ success: boolean }>(response);
@@ -318,9 +353,18 @@ export const TombolaAPI = {
      * Delete a lot (admin only)
      */
     async adminDeleteLot(lotId: string): Promise<void> {
-        const response = await fetch(`${API_BASE}/lots/${lotId}`, {
+        const token = localStorage.getItem('admin_token');
+        if (!token) {
+            throw new Error('Not authenticated - no token found');
+        }
+
+        const url = resolveApiUrl(`/admin/lots/${lotId}`);
+        const response = await fetch(url, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
         });
 
         await handleResponse<{ success: boolean }>(response);

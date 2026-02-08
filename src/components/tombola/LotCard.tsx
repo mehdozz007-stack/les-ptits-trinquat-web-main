@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Check, Loader2, PartyPopper } from "lucide-react";
+import { Mail, Check, Loader2, PartyPopper, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TombolaLot, useTombolaLots } from "@/hooks/useTombolaLots";
@@ -32,10 +32,12 @@ const STATUS_CONFIG = {
 };
 
 export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
-  const { reserveLot, getContactLink } = useTombolaLots();
+  const { reserveLot, getContactLink, deleteLot } = useTombolaLots();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [contactLoading, setContactLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [justReserved, setJustReserved] = useState(false);
 
   const statusConfig = STATUS_CONFIG[lot.statut as keyof typeof STATUS_CONFIG] || STATUS_CONFIG.disponible;
@@ -45,7 +47,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
   const handleReserve = async () => {
     if (!currentParticipant) return;
-    
+
     setLoading(true);
     const { error } = await reserveLot(lot.id, currentParticipant.id);
     setLoading(false);
@@ -70,7 +72,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
   const handleContact = async () => {
     if (!currentParticipant) return;
-    
+
     setContactLoading(true);
     const mailtoLink = await getContactLink(lot.id, currentParticipant.prenom);
     setContactLoading(false);
@@ -86,6 +88,31 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
     }
   };
 
+  const handleDelete = async () => {
+    setDeleting(true);
+    const { error } = await deleteLot(lot.id, lot.parent_id);
+    setDeleting(false);
+
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer ce lot.",
+        variant: "destructive",
+      });
+      setDeleteConfirm(false);
+      return;
+    }
+
+    toast({
+      title: "Lot supprimé ✏️",
+      description: "Votre lot a été retiré de la tombola.",
+    });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -94,10 +121,9 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
       transition={{ duration: 0.4, delay: index * 0.05 }}
     >
       <Card
-       
-        className={`group relative h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-glow ${
-          lot.statut === "remis" ? "opacity-60" : ""
-        }`}
+
+        className={`group relative h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-glow ${lot.statut === "remis" ? "opacity-60" : ""
+          }`}
       >
         <AnimatePresence>
           {justReserved && (
@@ -169,47 +195,97 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           )}
 
           {/* Actions */}
-          <div className="flex gap-2">
-            {canReserve && (
-              <Button
-                variant="hero"
-                size="sm"
-                className="flex-1 gap-2"
-                onClick={handleReserve}
-                disabled={loading}
+          <AnimatePresence>
+            {deleteConfirm ? (
+              <motion.div
+                key="delete-confirm"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="rounded-lg border border-red-200 bg-red-50 p-3 space-y-2"
               >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Check className="h-4 w-4" />
-                )}
-                Réserver
-              </Button>
-            )}
-            
-            {lot.statut !== "remis" && currentParticipant && !isOwner && (
-              <Button
-                variant="outline"
-                size="sm"
-                className="gap-2"
-                onClick={handleContact}
-                disabled={contactLoading}
+                <p className="text-sm font-medium text-red-900">
+                  Êtes-vous sûr de vouloir supprimer ce lot? Cette action est irréversible.
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleDelete}
+                    disabled={deleting}
+                    className="flex-1 rounded px-2 py-1 text-sm font-medium bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+                  >
+                    {deleting ? "Suppression..." : "Confirmer"}
+                  </button>
+                  <button
+                    onClick={() => setDeleteConfirm(false)}
+                    disabled={deleting}
+                    className="flex-1 rounded px-2 py-1 text-sm font-medium border border-red-300 text-red-600 hover:bg-red-50 disabled:opacity-50"
+                  >
+                    Annuler
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="actions"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="flex gap-2"
               >
-                {contactLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Mail className="h-4 w-4" />
+                {canReserve && (
+                  <Button
+                    variant="hero"
+                    size="sm"
+                    className="flex-1 gap-2"
+                    onClick={handleReserve}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Check className="h-4 w-4" />
+                    )}
+                    Réserver
+                  </Button>
                 )}
-                Contacter
-              </Button>
-            )}
 
-            {isOwner && lot.statut === "disponible" && (
-              <p className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
-                En attente de réservation
-              </p>
+                {lot.statut !== "remis" && currentParticipant && !isOwner && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-2"
+                    onClick={handleContact}
+                    disabled={contactLoading}
+                  >
+                    {contactLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Mail className="h-4 w-4" />
+                    )}
+                    Contacter
+                  </Button>
+                )}
+
+                {isOwner && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+                    onClick={() => setDeleteConfirm(true)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    <span className="sr-only">Supprimer</span>
+                  </Button>
+                )}
+
+                {isOwner && lot.statut === "disponible" && !canReserve && (
+                  <p className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
+                    En attente de réservation
+                  </p>
+                )}
+              </motion.div>
             )}
-          </div>
+          </AnimatePresence>
         </CardContent>
       </Card>
     </motion.div>

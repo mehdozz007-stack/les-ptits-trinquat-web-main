@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { TombolaAPI } from "@/lib/db/tombolaAPI";
 import { Parent, Lot } from "@/lib/types";
 import { AnimatedSuccessMessage, AnimatedErrorMessage } from "@/components/AnimatedMessage";
+import { apiUrl } from "@/lib/api-config";
 
 interface AdminMessage {
     type: 'success' | 'error';
@@ -42,7 +43,7 @@ export default function AdminTombola() {
 
         try {
             // Tentative de connexion via l'API
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch(apiUrl('/api/auth/login'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -62,6 +63,7 @@ export default function AdminTombola() {
                 // Stocker le token si fourni
                 if (data.data?.token) {
                     localStorage.setItem('admin_token', data.data.token);
+                    localStorage.setItem('admin_email', data.data.user?.email || adminEmail);
                 }
                 setIsLoggedIn(true);
                 setAdminEmail("");
@@ -87,18 +89,25 @@ export default function AdminTombola() {
     const loadData = async () => {
         setLoading(true);
         try {
+            console.log('📥 Loading admin data...');
+            console.log('🔑 Token:', localStorage.getItem('admin_token'));
+
             const [parentsList, lotsList] = await Promise.all([
                 TombolaAPI.getAdminParents(),
                 TombolaAPI.getLots(),
             ]);
+
+            console.log('✅ Parents loaded:', parentsList);
+            console.log('✅ Lots loaded:', lotsList);
+
             setParents(parentsList || []);
             setLots(lotsList || []);
         } catch (error) {
-            console.error("Error loading data:", error);
+            console.error("❌ Error loading data:", error);
             setMessage({
                 type: 'error',
                 title: 'Erreur de chargement',
-                message: 'Impossible de charger les données',
+                message: `Impossible de charger les données: ${error instanceof Error ? error.message : 'Unknown error'}`,
                 emoji: '⚠️'
             });
         } finally {
@@ -211,6 +220,8 @@ export default function AdminTombola() {
         setLots([]);
         setAdminEmail("");
         setAdminPassword("");
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_email');
     };
 
     const handleRefresh = async () => {
@@ -272,14 +283,6 @@ export default function AdminTombola() {
                                             {loading ? "Connexion en cours..." : "Se connecter"}
                                         </Button>
                                     </form>
-
-                                    <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                                        <p className="text-xs text-blue-700 font-mono">
-                                            <strong>Identifiants admin:</strong><br />
-                                            Email: mehdozz007@gmail.com<br />
-                                            Mot de passe: poiuytreza4U!
-                                        </p>
-                                    </div>
                                 </CardContent>
                             </Card>
                         </motion.div>
@@ -449,10 +452,10 @@ export default function AdminTombola() {
                                                     animate={{ opacity: 1, y: 0 }}
                                                 >
                                                     <Card className={`hover:shadow-lg transition-shadow ${lot.status === 'available'
-                                                            ? 'border-l-4 border-l-green-500'
-                                                            : lot.status === 'reserved'
-                                                                ? 'border-l-4 border-l-yellow-500'
-                                                                : 'border-l-4 border-l-red-500'
+                                                        ? 'border-l-4 border-l-green-500'
+                                                        : lot.status === 'reserved'
+                                                            ? 'border-l-4 border-l-yellow-500'
+                                                            : 'border-l-4 border-l-red-500'
                                                         }`}>
                                                         <CardContent className="p-6">
                                                             <div className="flex justify-between items-start gap-4">
@@ -472,10 +475,10 @@ export default function AdminTombola() {
 
                                                                     <div className="flex gap-2 flex-wrap mb-3">
                                                                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${lot.status === 'available'
-                                                                                ? 'bg-green-500/20 text-green-700'
-                                                                                : lot.status === 'reserved'
-                                                                                    ? 'bg-yellow-500/20 text-yellow-700'
-                                                                                    : 'bg-red-500/20 text-red-700'
+                                                                            ? 'bg-green-500/20 text-green-700'
+                                                                            : lot.status === 'reserved'
+                                                                                ? 'bg-yellow-500/20 text-yellow-700'
+                                                                                : 'bg-red-500/20 text-red-700'
                                                                             }`}>
                                                                             {lot.status === 'available' && '🟢 Disponible'}
                                                                             {lot.status === 'reserved' && '🟡 Réservé'}

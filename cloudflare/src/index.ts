@@ -186,6 +186,57 @@ app.onError((err, c) => {
   }, 500);
 });
 
+// ============================================================
+// Endpoint Diagnostic (DEV ONLY)
+// ============================================================
+app.get('/diagnostic', async (c) => {
+  try {
+    if (c.env.ENVIRONMENT !== 'development') {
+      return c.json({ error: 'Only available in development' }, 403);
+    }
+
+    // Vérifier les users
+    const usersResult = await c.env.DB.prepare('SELECT COUNT(*) as count FROM users').first<{ count: number }>();
+
+    // Vérifier les participants
+    const participantsResult = await c.env.DB.prepare('SELECT COUNT(*) as count FROM tombola_participants').first<{ count: number }>();
+
+    // Vérifier les lots
+    const lotsResult = await c.env.DB.prepare('SELECT COUNT(*) as count FROM tombola_lots').first<{ count: number }>();
+
+    // Récupérer les users en détail
+    const users = await c.env.DB.prepare('SELECT id, email FROM users LIMIT 10').all<{ id: string; email: string }>();
+
+    // Récupérer les participants en détail
+    const participants = await c.env.DB.prepare('SELECT id, prenom, email, emoji FROM tombola_participants LIMIT 10').all<any>();
+
+    // Récupérer les lots en détail
+    const lots = await c.env.DB.prepare('SELECT id, nom, parent_id, statut FROM tombola_lots LIMIT 10').all<any>();
+
+    // Vérifier les sessions actives
+    const sessions = await c.env.DB.prepare('SELECT id, user_id, token, expires_at FROM sessions LIMIT 10').all<any>();
+
+    return c.json({
+      summary: {
+        total_users: usersResult?.count || 0,
+        total_participants: participantsResult?.count || 0,
+        total_lots: lotsResult?.count || 0
+      },
+      users: users.results || [],
+      participants: participants.results || [],
+      lots: lots.results || [],
+      sessions: sessions.results || [],
+      note: '✅ Les données SONT en base de données !'
+    });
+  } catch (error) {
+    console.error('Diagnostic error:', error);
+    return c.json({
+      error: error instanceof Error ? error.message : 'Unknown error',
+      details: String(error)
+    }, 500);
+  }
+});
+
 // 404 pour les routes non trouvées
 app.notFound((c) => {
   return c.json({

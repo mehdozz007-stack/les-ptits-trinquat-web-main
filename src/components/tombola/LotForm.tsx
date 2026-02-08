@@ -11,7 +11,8 @@ import { TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 
-const LOT_ICONS = ["🎁", "🧸", "📚", "🎨", "🎮", "⚽", "🎭", "🎵", "🍫", "🎂", "🌸", "🎈", "✨", "🌟", "💝", "🎀"];
+const LOT_ICONS = ["🎁", "🧸", "📚", "🎨", "🎮", "⚽", "🎭", "🎵", "🍫", "🎂", "🌸", "🎈", "✨", "🌟", "💝", "🎀", "🚀", "🎪", "🎯", "🎲", "🃏", "🎰", "🧩", "🎸", "🎹", "🎺", "🎷", "📷", "🎬", "📺", "🎤", "🎧", "📻", "🎥", "📡", "📞", "📱", "💻", "⌚", "📹", "🏆", "🥇", "🥈", "🥉", "🏅", "🎖️", "⛳", "🎣", "🎿", "🏂", "🛹", "🛼", "🏋️", "🤸", "🧘"];
+
 
 const lotSchema = z.object({
   nom: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères").max(100, "Le nom est trop long"),
@@ -26,12 +27,12 @@ interface LotFormProps {
 export function LotForm({ currentParticipant }: LotFormProps) {
   const { addLot } = useTombolaLots();
   const { toast } = useToast();
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  
+
   const [formData, setFormData] = useState({
     nom: "",
     description: "",
@@ -40,7 +41,7 @@ export function LotForm({ currentParticipant }: LotFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!currentParticipant) {
       toast({
         title: "Inscription requise",
@@ -51,7 +52,7 @@ export function LotForm({ currentParticipant }: LotFormProps) {
     }
 
     setErrors({});
-    
+
     const result = lotSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -65,7 +66,7 @@ export function LotForm({ currentParticipant }: LotFormProps) {
     }
 
     setLoading(true);
-    
+
     const { error } = await addLot({
       nom: formData.nom.trim(),
       description: formData.description.trim() || undefined,
@@ -90,15 +91,10 @@ export function LotForm({ currentParticipant }: LotFormProps) {
       description: "Votre lot est maintenant visible par tous les participants.",
     });
 
+    // Rafraîchir la page pour voir les changements
     setTimeout(() => {
-      setFormData({
-        nom: "",
-        description: "",
-        icone: "🎁",
-      });
-      setSuccess(false);
-      setIsOpen(false);
-    }, 2000);
+      window.location.reload();
+    }, 1000);
   };
 
   if (!currentParticipant) {
@@ -215,21 +211,22 @@ export function LotForm({ currentParticipant }: LotFormProps) {
                           {/* Icon selector */}
                           <div className="space-y-2">
                             <Label>Choisissez une icône</Label>
-                            <div className="flex flex-wrap gap-2">
-                              {LOT_ICONS.map((icon) => (
-                                <button
-                                  key={icon}
-                                  type="button"
-                                  onClick={() => setFormData({ ...formData, icone: icon })}
-                                  className={`flex h-10 w-10 items-center justify-center rounded-xl text-xl transition-all ${
-                                    formData.icone === icon
-                                      ? "bg-primary/20 ring-2 ring-primary ring-offset-2"
-                                      : "bg-muted hover:bg-muted/80"
-                                  }`}
-                                >
-                                  {icon}
-                                </button>
-                              ))}
+                            <div className="max-h-40 overflow-y-auto p-2 border rounded-lg bg-muted/30">
+                              <div className="grid grid-cols-8 gap-1">
+                                {LOT_ICONS.map((icon) => (
+                                  <button
+                                    key={icon}
+                                    type="button"
+                                    onClick={() => setFormData({ ...formData, icone: icon })}
+                                    className={`flex h-9 w-9 items-center justify-center rounded text-xl transition-all ${formData.icone === icon
+                                      ? "bg-primary/20 ring-2 ring-primary"
+                                      : "hover:bg-muted"
+                                      }`}
+                                  >
+                                    {icon}
+                                  </button>
+                                ))}
+                              </div>
                             </div>
                           </div>
 
