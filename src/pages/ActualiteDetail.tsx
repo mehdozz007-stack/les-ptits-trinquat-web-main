@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -298,7 +298,7 @@ export function ActualiteDetail() {
                                                     whileInView={{ opacity: 1 }}
                                                     viewport={{ once: true }}
                                                     transition={{ delay: 0.2, duration: 0.4 }}
-                                                    className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center"
+                                                    className="mt-8 pt-8 flex justify-center"
                                                 >
                                                     <motion.div
                                                         whileHover={{ scale: 1.08, y: -3 }}
@@ -325,7 +325,7 @@ export function ActualiteDetail() {
                                                     whileInView={{ opacity: 1 }}
                                                     viewport={{ once: true }}
                                                     transition={{ delay: 0.3, duration: 0.4 }}
-                                                    className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center"
+                                                    className="mt-8 pt-8 flex justify-center"
                                                 >
                                                     <motion.div
                                                         whileHover={{ scale: 1.08, y: -3 }}
