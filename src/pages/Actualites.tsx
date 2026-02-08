@@ -386,7 +386,7 @@ export function Actualites() {
                                                                 Passé
                                                             </Badge>
 
-                                                            <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
+                                                            <p className="mb-3 text-sm text-muted-foreground">
                                                                 {event.description}
                                                             </p>
 
