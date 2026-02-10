@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -46,20 +46,20 @@ const headerBlobColors: Record<string, { primary: string; secondary: string }> =
 };
 
 const shadowColors: Record<string, string> = {
-    primary: "shadow-lg shadow-primary/25 hover:shadow-primary/40",
-    secondary: "shadow-lg shadow-secondary/25 hover:shadow-secondary/40",
-    sky: "shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40",
-    violet: "shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40",
-    accent: "shadow-lg shadow-accent/25 hover:shadow-accent/40",
-    green: "shadow-lg shadow-green-500/25 hover:shadow-green-500/40",
-    orange: "shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40",
-    pink: "shadow-lg shadow-pink-500/25 hover:shadow-pink-500/40",
-    rose: "shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40",
-    emerald: "shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40",
-    amber: "shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40",
-    cyan: "shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40",
-    indigo: "shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40",
-    fuchsia: "shadow-lg shadow-fuchsia-500/25 hover:shadow-fuchsia-500/40",
+    primary: "shadow-2xl shadow-primary/40 hover:shadow-2xl hover:shadow-primary/60 transition-all duration-500",
+    secondary: "shadow-2xl shadow-secondary/40 hover:shadow-2xl hover:shadow-secondary/60 transition-all duration-500",
+    sky: "shadow-2xl shadow-sky-500/40 hover:shadow-2xl hover:shadow-sky-500/60 transition-all duration-500",
+    violet: "shadow-2xl shadow-violet-500/40 hover:shadow-2xl hover:shadow-violet-500/60 transition-all duration-500",
+    accent: "shadow-2xl shadow-accent/40 hover:shadow-2xl hover:shadow-accent/60 transition-all duration-500",
+    green: "shadow-2xl shadow-green-500/40 hover:shadow-2xl hover:shadow-green-500/60 transition-all duration-500",
+    orange: "shadow-2xl shadow-orange-500/40 hover:shadow-2xl hover:shadow-orange-500/60 transition-all duration-500",
+    pink: "shadow-2xl shadow-pink-500/40 hover:shadow-2xl hover:shadow-pink-500/60 transition-all duration-500",
+    rose: "shadow-2xl shadow-rose-500/40 hover:shadow-2xl hover:shadow-rose-500/60 transition-all duration-500",
+    emerald: "shadow-2xl shadow-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-500/60 transition-all duration-500",
+    amber: "shadow-2xl shadow-amber-500/40 hover:shadow-2xl hover:shadow-amber-500/60 transition-all duration-500",
+    cyan: "shadow-2xl shadow-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/60 transition-all duration-500",
+    indigo: "shadow-2xl shadow-indigo-500/40 hover:shadow-2xl hover:shadow-indigo-500/60 transition-all duration-500",
+    fuchsia: "shadow-2xl shadow-fuchsia-500/40 hover:shadow-2xl hover:shadow-fuchsia-500/60 transition-all duration-500",
 };
 
 export function ActualiteDetail() {
@@ -163,30 +163,46 @@ export function ActualiteDetail() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 }}
+                                transition={{ delay: 0.4, duration: 0.6 }}
                                 className="space-y-3 text-sm text-muted-foreground mb-8 flex flex-col items-center"
                             >
-                                <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-purple-50/40 to-pink-50/40 px-4 py-2 rounded-lg border border-purple-200/20">
+                                <motion.div
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-purple-50/40 to-pink-50/40 px-4 py-2 rounded-lg border border-purple-200/20 shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
+                                >
                                     <Calendar className="h-4 w-4 text-purple-500" />
                                     <span>{actualite.date}</span>
-                                </div>
+                                </motion.div>
                                 {actualite.time && (
-                                    <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-blue-50/40 to-purple-50/40 px-4 py-2 rounded-lg border border-blue-200/20">
+                                    <motion.div
+                                        whileHover={{ scale: 1.05, y: -2 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-blue-50/40 to-purple-50/40 px-4 py-2 rounded-lg border border-blue-200/20 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300"
+                                    >
                                         <Clock className="h-4 w-4 text-blue-500" />
                                         <span>{actualite.time}</span>
-                                    </div>
+                                    </motion.div>
                                 )}
                                 {actualite.location && (
-                                    <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-emerald-50/40 to-cyan-50/40 px-4 py-2 rounded-lg border border-emerald-200/20">
+                                    <motion.div
+                                        whileHover={{ scale: 1.05, y: -2 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-emerald-50/40 to-cyan-50/40 px-4 py-2 rounded-lg border border-emerald-200/20 shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/40 transition-all duration-300"
+                                    >
                                         <MapPin className="h-4 w-4 text-emerald-500" />
                                         <span>{actualite.location}</span>
-                                    </div>
+                                    </motion.div>
                                 )}
                                 {actualite.attendees && (
-                                    <div className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-rose-50/40 to-red-50/40 px-4 py-2 rounded-lg border border-rose-200/20">
+                                    <motion.div
+                                        whileHover={{ scale: 1.05, y: -2 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-rose-50/40 to-red-50/40 px-4 py-2 rounded-lg border border-rose-200/20 shadow-lg shadow-rose-500/20 hover:shadow-xl hover:shadow-rose-500/40 transition-all duration-300"
+                                    >
                                         <Users className="h-4 w-4 text-rose-500" />
                                         <span>{actualite.attendees} participants attendus</span>
-                                    </div>
+                                    </motion.div>
                                 )}
                             </motion.div>
                         </motion.div>
@@ -219,63 +235,119 @@ export function ActualiteDetail() {
                                 transition={{ duration: 0.4, ease: "easeOut" }}
                                 viewport={{ once: true }}
                             >
-                                <Card
-                                    className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-xl hover:scale-105 ${actualiteColorClasses[actualite.color]} ${shadowColors[actualite.color]} transition-shadow duration-300`}
-                                >
-                                    <CardContent className="p-6 sm:p-10">
-                                        {/* Affiche de l'événement */}
-                                        {actualite.affiche && (
-                                            <motion.div
-                                                initial={{ opacity: 0, scale: 0.95 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                viewport={{ once: true }}
-                                                className="mb-8 flex justify-center"
-                                            >
-                                                <img
-                                                    src={actualite.affiche}
-                                                    alt={`Affiche - ${actualite.title}`}
-                                                    className="w-full sm:w-[70%] rounded-xl object-cover shadow-md"
-                                                />
-                                            </motion.div>
-                                        )}
-
-                                        <div className="prose prose-invert max-w-none">
-                                            <div className="text-base text-foreground leading-relaxed whitespace-pre-wrap text-center">
-                                                {actualite.content || actualite.description}
-                                            </div>
+                                {/* Affiche de l'événement */}
+                                {actualite.affiche && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                        whileHover={{ scale: 1.03, y: -8 }}
+                                        transition={{
+                                            duration: 0.5,
+                                            ease: "easeOut",
+                                            scale: { type: "spring", stiffness: 300, damping: 30 }
+                                        }}
+                                        viewport={{ once: true, margin: "-100px" }}
+                                        className="mb-8 flex justify-center group"
+                                    >
+                                        <div className="relative w-full sm:w-[70%]">
+                                            <img
+                                                src={actualite.affiche}
+                                                alt={`Affiche - ${actualite.title}`}
+                                                className="w-full rounded-xl object-cover shadow-3xl shadow-black/40 group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-1000"
+                                            />
                                         </div>
-
-                                        {/* Download section */}
-                                        {actualite.fileUrl && (
-                                            <div className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center">
-                                                <Button
-                                                    variant="default"
-                                                    size="lg"
-                                                    onClick={() => handleDownload(actualite.fileUrl!, actualite.title)}
-                                                    className="gap-2"
-                                                >
-                                                    <Download className="h-5 w-5" />
-                                                    Télécharger le document
-                                                </Button>
+                                    </motion.div>
+                                )}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    whileHover={{
+                                        y: -12,
+                                        transition: { duration: 0.3 }
+                                    }}
+                                    transition={{
+                                        duration: 0.5,
+                                        ease: "easeOut",
+                                        scale: { duration: 0.4 }
+                                    }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    className="relative group"
+                                >
+                                    {/* Animated glow background */}
+                                    <motion.div
+                                        className="absolute inset-0 rounded-2xl blur-3xl opacity-0 group-hover:opacity-100 -z-10 transition-opacity duration-500"
+                                        whileHover={{ opacity: 1 }}
+                                        style={{
+                                            background: `linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.3))`
+                                        }}
+                                    />
+                                    <Card
+                                        className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-500 ${actualiteColorClasses[actualite.color]} ${shadowColors[actualite.color]}`}
+                                    >
+                                        <CardContent className="p-6 sm:p-10">
+                                            <div className="prose prose-invert max-w-none">
+                                                <div className="text-base text-foreground leading-relaxed whitespace-pre-wrap text-center">
+                                                    {actualite.content || actualite.description}
+                                                </div>
                                             </div>
-                                        )}
 
-                                        {/* External link section */}
-                                        {actualite.link && actualite.type !== "evenement" && (
-                                            <div className="mt-8 pt-8 border-t border-current border-opacity-20 flex justify-center">
-                                                <Button
-                                                    asChild
-                                                    variant="default"
-                                                    size="lg"
+                                            {/* Download section */}
+                                            {actualite.fileUrl && (
+                                                <motion.div
+                                                    initial={{ opacity: 0 }}
+                                                    whileInView={{ opacity: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: 0.2, duration: 0.4 }}
+                                                    className="mt-8 pt-8 flex justify-center"
                                                 >
-                                                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
-                                                        Consulter
-                                                    </a>
-                                                </Button>
-                                            </div>
-                                        )}
-                                    </CardContent>
-                                </Card>
+                                                    <motion.div
+                                                        whileHover={{ scale: 1.08, y: -3 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                        transition={{ duration: 0.2 }}
+                                                    >
+                                                        <Button
+                                                            variant="default"
+                                                            size="lg"
+                                                            onClick={() => handleDownload(actualite.fileUrl!, actualite.title)}
+                                                            className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                                                        >
+                                                            <Download className="h-5 w-5" />
+                                                            Télécharger le document
+                                                        </Button>
+                                                    </motion.div>
+                                                </motion.div>
+                                            )}
+
+                                            {/* External link section */}
+                                            {actualite.link && actualite.type !== "evenement" && (
+                                                <motion.div
+                                                    initial={{ opacity: 0 }}
+                                                    whileInView={{ opacity: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: 0.3, duration: 0.4 }}
+                                                    className="mt-8 pt-8 flex justify-center"
+                                                >
+                                                    <motion.div
+                                                        whileHover={{ scale: 1.08, y: -3 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                        transition={{ duration: 0.2 }}
+                                                    >
+                                                        <Button
+                                                            asChild
+                                                            variant="default"
+                                                            size="lg"
+                                                            className="shadow-lg hover:shadow-xl transition-all duration-300"
+                                                        >
+                                                            <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                                                                Consulter
+                                                            </a>
+                                                        </Button>
+                                                    </motion.div>
+                                                </motion.div>
+                                            )}
+                                        </CardContent>
+                                    </Card>
+                                </motion.div>
                             </motion.div>
                         </motion.div>
                     </div>

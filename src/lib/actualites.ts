@@ -26,7 +26,7 @@ import tomola from '@/assets/tomola.jpg';
 import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
 import videGrenier from '@/assets/Vide-grenier.jpg';
 export type EventStatus = "upcoming" | "past";
-export type ActualiteType = "evenement" | "document" | "annonce" | "information";
+export type ActualiteType = "evenement" | "document" | "annonce" | "information" | "presse";
 export interface Actualite {
     id: string;
     title: string;
@@ -216,6 +216,16 @@ export const actualitesData: Actualite[] = [
         status: "past",
         attendees: 350,
     },
+    {
+        id: "presse-001",
+        title: "Factures salées, froid en classe...",
+        description: "Article de presse France Bleu - Découvrez comment une nouvelle chaudière impacte trois établissements scolaires de Montpellier. Une situation qui préoccupe les parents et l'équipe pédagogique.",
+        content: "Une nouvelle chaudière a créé une situation problématique dans trois établissements scolaires de Montpellier, entraînant des factures énergétiques multipliées et des conditions d'enseignement difficiles avec des salles à classe à basse température. Consultez l'article complet sur France Bleu pour plus de détails sur cette situation.",
+        type: "presse",
+        date: "8 Février 2026",
+        link: "https://www.francebleu.fr/infos/societe/facture-multipliee-par-5-salles-de-classe-a-10-degres-une-chaudiere-plombe-le-budget-de-trois-ecoles-a-montpellier-7381973",
+        color: "indigo",
+    },
 ];
 
 /**
@@ -313,6 +323,7 @@ export const actualiteTypeLabels: Record<ActualiteType, string> = {
     document: "Document",
     annonce: "Annonce",
     information: "Information",
+    presse: "Article de presse",
 };
 
 /**

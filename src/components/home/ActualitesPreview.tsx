@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Link as LinkIcon, Calendar, MapPin } from "lucide-react";
+import { ArrowRight, FileText, Link as LinkIcon, Calendar, MapPin, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -38,7 +38,7 @@ export function ActualitesPreview() {
         return (
             <Button asChild variant="outline" size="sm" className="gap-2">
                 <Link to={`/actualites/${actualite.id}`}>
-                    <ArrowRight className="h-4 w-4" />
+                    <ChevronRight className="h-4 w-4" />
                     Lire plus
                 </Link>
             </Button>
@@ -146,7 +146,7 @@ export function ActualitesPreview() {
                 >
                     <Button asChild variant="playful" size="lg">
                         <Link to="/actualites">
-                            <ArrowRight className="mr-2 h-5 w-5" />
+                            <ChevronRight className="mr-2 h-5 w-5" />
                             Consulter toutes les actualités
                         </Link>
                     </Button>

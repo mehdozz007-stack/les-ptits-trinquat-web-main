@@ -37,39 +37,39 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  const form = e.target as HTMLFormElement;
-  const formData = new FormData(form);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-  // Required fields for FormSubmit
-  formData.append("_captcha", "false");
-  formData.append("_template", "box");
-  formData.append("_subject", "🔔 📩 lespetitstrinquat.fr - Nouveau message depuis le site Les P'tits Trinquat");
+    // Required fields for FormSubmit
+    formData.append("_captcha", "false");
+    formData.append("_template", "box");
+    formData.append("_subject", "🔔 📩 lespetitstrinquat.fr - Nouveau message depuis le site Les P'tits Trinquat");
 
-  try {
-    const response = await fetch("https://formsubmit.co/ajax/parents.frank.dickens@gmail.com", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/parents.frank.dickens@gmail.com", {
+        method: "POST",
+        body: formData,
+      });
 
-    if (!response.ok) {
-      throw new Error("Submission failed");
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      form.reset();
+      // Redirect to success page
+      navigate("/message-envoye");
+    } catch (err) {
+      toast({
+        title: "Erreur",
+        description: "Impossible d'envoyer le message. Merci de réessayer.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
     }
-
-    form.reset();
-    // Redirect to success page
-    navigate("/message-envoye");
-  } catch (err) {
-    toast({
-      title: "Erreur",
-      description: "Impossible d'envoyer le message. Merci de réessayer.",
-      variant: "destructive",
-    });
-    setIsSubmitting(false);
-  }
-};
+  };
 
   return (
     <Layout>
@@ -84,6 +84,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             className="max-w-2xl text-center mx-auto"
           >
             <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-sky/20 px-4 py-1.5 text-sm font-semibold text-sky-foreground">
@@ -94,7 +95,7 @@ const Contact = () => {
               Nous <span className="text-gradient">contacter</span>
             </h1>
             <p className="inline-flex text-lg text-muted-foreground">
-              Une question, une suggestion, envie de nous rejoindre ? N'hésitez pas à nous écrire. 
+              Une question, une suggestion, envie de nous rejoindre ? N'hésitez pas à nous écrire.
               Nous sommes là pour vous écouter et vous répondre dans les plus brefs délais.
             </p>
           </motion.div>
@@ -114,9 +115,9 @@ const Contact = () => {
               <Card variant="elevated">
                 <CardContent className="p-4 sm:p-6 md:p-8">
                   <h2 className="mb-4 sm:mb-6 text-xl sm:text-2xl font-bold">Envoyez-nous un message</h2>
-                  <form 
-                  onSubmit={handleSubmit}
-                  className="space-y-4 sm:space-y-6"
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4 sm:space-y-6"
                   >
                     {/* Anti-spam honeypot */}
                     <input type="hidden" name="_captcha" value="false" />
@@ -165,11 +166,11 @@ const Contact = () => {
                     <Button type="submit" variant="playful" size="lg" className="w-full" disabled={isSubmitting}>
                       {isSubmitting ?
                         "Envoi en cours..." : (
-                        <>
-                          Envoyer
-                          <Send className="ml-2 h-4 w-4" />
-                        </>
-                      )}
+                          <>
+                            Envoyer
+                            <Send className="ml-2 h-4 w-4" />
+                          </>
+                        )}
                     </Button>
                   </form>
                 </CardContent>
@@ -244,7 +245,7 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1"
-                    > 
+                    >
                       Voir sur DigiPad
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>

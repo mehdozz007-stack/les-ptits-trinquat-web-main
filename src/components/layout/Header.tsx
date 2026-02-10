@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, FileText, Users, Heart, Mail, Home, School, Gift } from "lucide-react";
+import { Menu, X, FileText, Files, Users, Heart, Mail, Home, School, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import heroImage from "@/assets/hero-children.jpg";
@@ -11,7 +11,7 @@ const navItems = [
   { label: "À propos", href: "/a-propos", icon: Users },
   { label: "Notre école", href: "/notre-ecole", icon: School },
   { label: "Actualités", href: "/actualites", icon: FileText },
-  { label: "Documents", href: "/documents-utiles", icon: FileText },
+  { label: "Documents", href: "/documents-utiles", icon: Files },
   { label: "Tombola", href: "/tombola", icon: Gift },
   { label: "Partenaires", href: "/partenaires", icon: Heart },
   { label: "Contact", href: "/contact", icon: Mail },

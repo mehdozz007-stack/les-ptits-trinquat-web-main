@@ -24,7 +24,7 @@ const upcomingEvents = [
   {
     id: 1,
     title: " TOMBOLA 2026 - Tirage au sort par les enfants le 16 Février 2026 !",
-    time: "16 Février 2026",
+    time: "16 Février 2026 dès 8h45",
     location: "Groupe scolaire FRANK-DICKENS",
     description: "Bonne chance à tous !",
     color: "accent",
@@ -175,7 +175,6 @@ export function EventsPreview() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
                 className="space-y-3 text-sm sm:text-base text-muted-foreground"
               >
                 <motion.div
