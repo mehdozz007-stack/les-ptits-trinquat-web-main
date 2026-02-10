@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page non trouvée</title>
+  </head>
+  <body>
+    <script>
+      // Redirect to index.html for SPA routing
+      const path = window.location.pathname;
+      const segments = path.split('/').filter(Boolean);
+      
+      // If path exists, redirect to root and let React Router handle it
+      if (segments.length > 0) {
+        // Remove the repo name if deploying to a project site
+        const newPath = '/' + segments.join('/');
+        window.location.replace(newPath);
+      } else {
+        window.location.replace('/');
+      }
+    </script>
+  </body>
+</html>
