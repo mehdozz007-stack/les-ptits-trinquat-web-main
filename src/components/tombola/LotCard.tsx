@@ -46,7 +46,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
   const handleReserve = async () => {
     if (!currentParticipant) return;
-    
+
     setLoading(true);
     const { error } = await reserveLot(lot.id, currentParticipant.id);
     setLoading(false);
@@ -71,7 +71,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
   const handleContact = async () => {
     if (!currentParticipant) return;
-    
+
     setContactLoading(true);
     const mailtoLink = await getContactLink(lot.id, currentParticipant.prenom);
     setContactLoading(false);
@@ -89,7 +89,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
   const handleDelete = async () => {
     if (!isOwner) return;
-    
+
     const confirmed = window.confirm(`Êtes-vous sûr de vouloir supprimer le lot "${lot.nom}" ?`);
     if (!confirmed) return;
 
@@ -120,10 +120,9 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
       transition={{ duration: 0.4, delay: index * 0.05 }}
     >
       <Card
-       
-        className={`group relative h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-glow ${
-          lot.statut === "remis" ? "opacity-60" : ""
-        }`}
+
+        className={`group relative h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-glow ${lot.statut === "remis" ? "opacity-60" : ""
+          }`}
       >
         <AnimatePresence>
           {justReserved && (
@@ -212,7 +211,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
                 Réserver
               </Button>
             )}
-            
+
             {lot.statut !== "remis" && currentParticipant && !isOwner && (
               <Button
                 variant="outline"

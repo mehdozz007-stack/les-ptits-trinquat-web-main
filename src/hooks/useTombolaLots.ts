@@ -26,10 +26,13 @@ export function useTombolaLots() {
   const [lots, setLots] = useState<TombolaLot[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [refetching, setRefetching] = useState(false);
 
-  const fetchLots = async () => {
+  const fetchLots = async (silent = false) => {
     try {
-      setLoading(true);
+      if (!silent) setLoading(true);
+      else setRefetching(true);
+      
       const response = await fetch(apiUrl('/api/tombola/lots'));
       if (!response.ok) throw new Error('Failed to fetch lots');
       const data = await response.json();
@@ -39,7 +42,8 @@ export function useTombolaLots() {
       setError(err.message);
       setLots([]);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
+      else setRefetching(false);
     }
   };
 
@@ -58,7 +62,7 @@ export function useTombolaLots() {
         console.error('❌ Add lot failed:', data);
         throw new Error(data?.error || 'Failed to add lot');
       }
-      await fetchLots();
+      await fetchLots(true);
       return { data, error: null };
     } catch (err: any) {
       console.error('❌ Add lot error:', err.message);
@@ -68,41 +72,71 @@ export function useTombolaLots() {
 
   const reserveLot = async (lotId: string, reserverId: string) => {
     try {
+      // Optimistic update
+      setLots(prev => 
+        prev.map(lot => 
+          lot.id === lotId ? { ...lot, statut: 'reserve', reserved_by: reserverId } : lot
+        )
+      );
+      
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reserver_id: reserverId }),
       });
       if (!response.ok) throw new Error('Failed to reserve lot');
-      await fetchLots();
+      
+      await fetchLots(true);
       return { error: null };
     } catch (err: any) {
+      // Revert optimistic update on error
+      await fetchLots(true);
       return { error: err.message };
     }
   };
 
   const cancelReservation = async (lotId: string) => {
     try {
+      // Optimistic update
+      setLots(prev => 
+        prev.map(lot => 
+          lot.id === lotId ? { ...lot, statut: 'disponible', reserved_by: null } : lot
+        )
+      );
+      
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel-reservation`), {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to cancel reservation');
-      await fetchLots();
+      
+      await fetchLots(true);
       return { error: null };
     } catch (err: any) {
+      // Revert optimistic update on error
+      await fetchLots(true);
       return { error: err.message };
     }
   };
 
   const markAsRemis = async (lotId: string) => {
     try {
+      // Optimistic update
+      setLots(prev => 
+        prev.map(lot => 
+          lot.id === lotId ? { ...lot, statut: 'remis' } : lot
+        )
+      );
+      
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/mark-remis`), {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to mark as remis');
-      await fetchLots();
+      
+      await fetchLots(true);
       return { error: null };
     } catch (err: any) {
+      // Revert optimistic update on error
+      await fetchLots(true);
       return { error: err.message };
     }
   };
@@ -124,15 +158,21 @@ export function useTombolaLots() {
 
   const deleteLot = async (lotId: string, parentId: string) => {
     try {
+      // Optimistic update
+      setLots(prev => prev.filter(lot => lot.id !== lotId));
+      
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ parent_id: parentId }),
       });
       if (!response.ok) throw new Error('Failed to delete lot');
-      await fetchLots();
+      
+      await fetchLots(true);
       return { error: null };
     } catch (err: any) {
+      // Revert optimistic update on error
+      await fetchLots(true);
       return { error: err.message };
     }
   };
@@ -141,5 +181,5 @@ export function useTombolaLots() {
     fetchLots();
   }, []);
 
-  return { lots, loading, error, addLot, reserveLot, cancelReservation, markAsRemis, getContactLink, deleteLot, refetch: fetchLots };
+  return { lots, loading, refetching, error, addLot, reserveLot, cancelReservation, markAsRemis, getContactLink, deleteLot, refetch: fetchLots };
 }

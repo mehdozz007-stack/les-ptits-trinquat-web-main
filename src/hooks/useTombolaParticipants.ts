@@ -23,14 +23,16 @@ export function useTombolaParticipants() {
   const [participants, setParticipants] = useState<TombolaParticipantPublic[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [refetching, setRefetching] = useState(false);
 
-  const fetchParticipants = async () => {
+  const fetchParticipants = async (silent = false) => {
     const url = apiUrl('/api/tombola/participants');
     console.log('📥 GET request to:', url);
     console.log('📍 Current origin:', window.location.origin);
     
     try {
-      setLoading(true);
+      if (!silent) setLoading(true);
+      else setRefetching(true);
       
       // Add a timeout to the fetch
       const controller = new AbortController();
@@ -84,7 +86,8 @@ export function useTombolaParticipants() {
       }
       setParticipants([]);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
+      else setRefetching(false);
     }
   };
 
@@ -124,7 +127,13 @@ export function useTombolaParticipants() {
       }
       
       console.log('✅ Participant created:', data);
-      setParticipants(prev => [data.data || data, ...prev]);
+      // Optimistic update
+      const newParticipant = data.data || data;
+      setParticipants(prev => [newParticipant, ...prev]);
+      
+      // Refetch silently to sync with server
+      await fetchParticipants(true);
+      
       return { data, error: null };
     } catch (err: any) {
       if (err.name === 'AbortError') {
@@ -144,6 +153,9 @@ export function useTombolaParticipants() {
     console.log('📤 DELETE request to:', url);
     
     try {
+      // Optimistic update
+      setParticipants(prev => prev.filter(p => p.id !== participantId));
+      
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
       
@@ -161,14 +173,21 @@ export function useTombolaParticipants() {
       }
       
       console.log('✅ Participant deleted');
-      setParticipants(prev => prev.filter(p => p.id !== participantId));
+      
+      // Refetch silently to sync with server
+      await fetchParticipants(true);
+      
       return { error: null };
     } catch (err: any) {
       if (err.name === 'AbortError') {
         console.error('❌ Request timeout');
+        // Revert optimistic update on timeout
+        await fetchParticipants(true);
         return { error: 'Timeout: L\'API ne répond pas.' };
       }
       console.error('❌ deleteParticipant error:', err.message);
+      // Revert optimistic update on error
+      await fetchParticipants(true);
       return { error: err.message };
     }
   };
@@ -177,5 +196,5 @@ export function useTombolaParticipants() {
     fetchParticipants();
   }, []);
 
-  return { participants, loading, error, addParticipant, deleteParticipant, refetch: fetchParticipants };
+  return { participants, loading, refetching, error, addParticipant, deleteParticipant, refetch: fetchParticipants };
 }
