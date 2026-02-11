@@ -8,10 +8,9 @@ import type { Env } from '../types';
 // ============================================================
 // Configuration CORS
 // ============================================================
-export function getCorsHeaders(origin: string, allowedOrigin: string): Record<string, string> {
-  // Liste des origines autorisées
-  const allowedOrigins = [
-    allowedOrigin,
+export function getCorsHeaders(origin: string, allowedOrigin: string, environment: string): Record<string, string> {
+  // Liste des origines autorisées (development)
+  const devOrigins = [
     'http://localhost:5173',
     'http://localhost:8080',
     'http://localhost:8081',
@@ -20,12 +19,18 @@ export function getCorsHeaders(origin: string, allowedOrigin: string): Record<st
     'http://127.0.0.1:8080',
     'http://127.0.0.1:8081'
   ];
-  
+
+  // En production: strictement CORS_ORIGIN et notre domain Cloudflare
+  const productionOrigins = [
+    allowedOrigin,
+    'https://les-ptits-trinquat.pages.dev'
+  ];
+
+  const allowedOrigins = environment === 'production' ? productionOrigins : [allowedOrigin, ...devOrigins];
+
   // Vérifier si l'origine est autorisée
-  const isAllowed = allowedOrigins.includes(origin) || 
-                    origin.endsWith('.pages.dev') ||
-                    origin.endsWith('.workers.dev');
-  
+  const isAllowed = allowedOrigins.includes(origin);
+
   return {
     'Access-Control-Allow-Origin': isAllowed ? origin : allowedOrigin,
     'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
@@ -40,8 +45,8 @@ export function getCorsHeaders(origin: string, allowedOrigin: string): Record<st
 // ============================================================
 export async function corsMiddleware(c: Context<{ Bindings: Env }>, next: Next) {
   const origin = c.req.header('Origin') || '';
-  const corsHeaders = getCorsHeaders(origin, c.env.CORS_ORIGIN);
-  
+  const corsHeaders = getCorsHeaders(origin, c.env.CORS_ORIGIN, c.env.ENVIRONMENT);
+
   // Répondre immédiatement aux requêtes OPTIONS (preflight)
   if (c.req.method === 'OPTIONS') {
     return new Response(null, {
@@ -49,10 +54,10 @@ export async function corsMiddleware(c: Context<{ Bindings: Env }>, next: Next) 
       headers: corsHeaders
     });
   }
-  
+
   // Continuer avec la requête
   await next();
-  
+
   // Ajouter les headers CORS à la réponse
   Object.entries(corsHeaders).forEach(([key, value]) => {
     c.res.headers.set(key, value);

@@ -11,11 +11,13 @@ Cela signifie que le navigateur n'a pas pu communiquer avec l'API.
 
 ### 1️⃣ Vérifier que l'API est déployée
 ```bash
-# Terminal 1 - Déployer l'API
+# Terminal 1 - Déployer l'API (environnement dev)
 cd cloudflare
-npm run deploy
-# Vous devriez voir: "✓ Uploaded les-ptits-trinquat-api"
+npm run deploy -- --env=dev
+# Vous devriez voir: "✓ Uploaded les-ptits-trinquat-api-dev"
 ```
+
+**Vérification**: Aller sur https://dash.cloudflare.com et chercher `les-ptits-trinquat-api-dev` dans Workers & Pages
 
 ### 2️⃣ Vérifier que la base de données est initialisée
 ```bash
@@ -28,14 +30,17 @@ npx wrangler d1 execute tombola-dev --file=migrations/0002_seed_admin.sql --remo
 
 ### 3️⃣ Tester l'API directement
 ```bash
-# Terminal 3 - Tester GET
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
-
-# Tester POST
-curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants \
-  -H "Content-Type: application/json" \
-  -d '{"prenom":"Test","email":"test@example.com","role":"Parent","emoji":"😊"}'
+# Terminal 3 - Tester avec le navigateur (plus fiable que curl)
+# Copie/colle dans le navigateur:
+https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/health
+https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants
 ```
+
+**Si DNS ne résout pas** (erreur curl #6):
+- Tester la connectivité Internet: `ping 8.8.8.8` (DNS Google)
+- Vérifier le DNS local: `nslookup google.com`
+- Essayer avec navigateur (Chrome/Firefox) - c'est plus fiable
+- Si navigateur marche aussi pas: problème de connectivité/firewall
 
 ### 4️⃣ Vérifier les logs du navigateur
 1. Ouvrir DevTools: `F12`
@@ -59,18 +64,18 @@ npm run dev
 
 ## 🔗 Endpoints importants
 
-- **GET participants**: `https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants`
-- **POST participants**: `https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants`
-- **Health check**: `https://les-ptits-trinquat-api.medhozz007.workers.dev/health`
+- **GET participants**: `https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants`
+- **POST participants**: `https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants`
+- **Health check**: `https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/health`
 
 ## 📋 Checklist
 
-- [ ] API déployée (`npm run deploy`)
+- [ ] API déployée (`npm run deploy -- --env=dev`)
 - [ ] Base de données initialisée (migrations exécutées)
 - [ ] Dev server relancé
 - [ ] Cache navigateur vidé
 - [ ] Console DevTools ouverte (voir les logs)
-- [ ] Test GET direct: `curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants`
+- [ ] Test GET direct: `curl https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants`
 
 ---
 

@@ -8,35 +8,41 @@ compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 # ============================================================
-# Base de données D1
+# Base de données D1 - PRODUCTION
 # ============================================================
-[[d1_databases]]
-binding = "DB"
-database_name = "tombola-dev"
-database_id = "4f519cb2-40f8-433d-9da0-4c250a95b45c"
+# Défini dans [env.production] ci-dessous
 
 # ============================================================
-# Variables d'environnement (non sensibles)
+# Variables d'environnement (non sensibles) - TOP LEVEL
 # ============================================================
-[vars]
-ENVIRONMENT = "production"
-CORS_ORIGIN = "https://les-ptits-trinquat.pages.dev"
-# Durée de session en secondes (7 jours)
-SESSION_DURATION = "604800"
-# Limite de requêtes par minute
-RATE_LIMIT_MAX = "60"
-# Fenêtre de rate limiting en secondes
-RATE_LIMIT_WINDOW = "60"
+# Note: Les variables par environment sont dans [env.dev] et [env.production]
+
+# ============================================================
+# Environnement de PRODUCTION
+# ============================================================
+[env.production]
+vars = { ENVIRONMENT = "production", CORS_ORIGIN = "https://les-ptits-trinquat.pages.dev", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "les-ptits-trinquat-prod"
+database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 
 # ============================================================
 # Environnement de développement
 # ============================================================
 [env.dev]
-vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173" }
+vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
+
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "tombola-dev"
+database_id = "4f519cb2-40f8-433d-9da0-4c250a95b45c"
 
 # ============================================================
 # Secrets à configurer avec: wrangler secret put <NAME>
+# Production: wrangler secret put <NAME> --env production
+# Dev: wrangler secret put <NAME> --env dev
 # ============================================================
-# - RESEND_API_KEY: Clé API Resend pour l'envoi d'emails
 # - JWT_SECRET: Clé secrète pour la signature des tokens (min 32 chars)
 # - BCRYPT_ROUNDS: Nombre de rounds bcrypt (default: 12)
