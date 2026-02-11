@@ -42,10 +42,14 @@ tombola.get('/participants', async (c) => {
       data: result.results
     });
   } catch (error) {
-    console.error('Get participants error:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : 'No stack trace';
+    console.error('Get participants error:', errorMessage);
+    console.error('Error stack:', errorStack);
+    console.error('Full error object:', JSON.stringify(error, null, 2));
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred'
+      error: `Database error: ${errorMessage}`
     }, 500);
   }
 });
@@ -80,10 +84,14 @@ tombola.get('/lots', async (c) => {
       data: result.results
     });
   } catch (error) {
-    console.error('Get lots error:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : 'No stack trace';
+    console.error('Get lots error:', errorMessage);
+    console.error('Error stack:', errorStack);
+    console.error('Full error object:', JSON.stringify(error, null, 2));
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred'
+      error: `Database error: ${errorMessage}`
     }, 500);
   }
 });
