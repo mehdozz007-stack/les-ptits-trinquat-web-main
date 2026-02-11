@@ -21,7 +21,7 @@ compatibility_flags = ["nodejs_compat"]
 # Environnement de PRODUCTION
 # ============================================================
 [env.production]
-vars = { ENVIRONMENT = "production", CORS_ORIGIN = "https://main.les-ptits-trinquat.pages.dev", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
+vars = { ENVIRONMENT = "production", CORS_ORIGIN = "https://www.lespetitstrinquat.fr", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
 
 [[env.production.d1_databases]]
 binding = "DB"
