@@ -361,12 +361,29 @@ tombola.patch('/lots/:id/remis', requireAdmin, async (c) => {
 });
 
 // ============================================================
-// DELETE /tombola/lots/:id - Supprimer un lot (admin)
+// DELETE /tombola/lots/:id - Supprimer un lot (propriétaire ou admin)
 // ============================================================
-tombola.delete('/lots/:id', requireAdmin, async (c) => {
+tombola.delete('/lots/:id', requireAuth, async (c) => {
   try {
     const { id } = c.req.param();
     const authContext = getAuthContext(c);
+
+    // Récupérer le lot pour vérifier la propriété
+    const lot = await c.env.DB.prepare(
+      'SELECT id, parent_id FROM tombola_lots WHERE id = ?'
+    ).bind(id).first<{ id: string; parent_id: string }>();
+
+    if (!lot) {
+      return c.json<ApiResponse>({ success: false, error: 'Lot not found' }, 404);
+    }
+
+    // Vérifier que c'est le propriétaire du lot ou un admin
+    if (authContext?.role !== 'admin' && lot.parent_id !== (authContext?.parentId || authContext?.user.id)) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'You can only delete your own lots'
+      }, 403);
+    }
 
     await c.env.DB.prepare('DELETE FROM tombola_lots WHERE id = ?').bind(id).run();
 
@@ -471,6 +488,41 @@ tombola.delete('/admin/participants/:id', requireAdmin, async (c) => {
     });
   } catch (error) {
     console.error('Delete participant error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred'
+    }, 500);
+  }
+});
+
+// ============================================================
+// DELETE /tombola/participants/:id - Supprimer sa propre participation
+// ============================================================
+tombola.delete('/participants/:id', requireAuth, async (c) => {
+  try {
+    const { id } = c.req.param();
+    const authContext = getAuthContext(c);
+
+    // Vérifier que le participant existe
+    const participant = await c.env.DB.prepare(
+      'SELECT id FROM tombola_participants WHERE id = ?'
+    ).bind(id).first<{ id: string }>();
+
+    if (!participant) {
+      return c.json<ApiResponse>({ success: false, error: 'Participant not found' }, 404);
+    }
+
+    // Supprimer la participation
+    await c.env.DB.prepare('DELETE FROM tombola_participants WHERE id = ?').bind(id).run();
+
+    await logAudit(c.env.DB, authContext?.user.id || null, 'OWN_PARTICIPATION_DELETED', 'participant', id, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      message: 'Participant deleted'
+    });
+  } catch (error) {
+    console.error('Delete own participation error:', error);
     return c.json<ApiResponse>({
       success: false,
       error: 'An error occurred'

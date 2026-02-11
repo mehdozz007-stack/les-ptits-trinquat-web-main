@@ -69,9 +69,9 @@ export function useTombolaLots() {
   const reserveLot = async (lotId: string, reserverId: string) => {
     try {
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
-        method: 'POST',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reserverId }),
+        body: JSON.stringify({ reserver_id: reserverId }),
       });
       if (!response.ok) throw new Error('Failed to reserve lot');
       await fetchLots();
