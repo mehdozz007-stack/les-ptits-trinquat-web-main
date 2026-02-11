@@ -193,14 +193,14 @@ npm run deploy
 
 # Vous devriez voir:
 # ✓ Uploaded les-ptits-trinquat-api
-# → https://les-ptits-trinquat-api.medhozz007.workers.dev
+# → https://les-ptits-trinquat-api.mehdozz007.workers.dev
 ```
 
 **Vérification du déploiement**:
 ```bash
 # Attendre 30 secondes après le déploiement
 # Puis tester:
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 
 # Vous devriez voir:
 # {"status":"ok","timestamp":"2024-02-11T..."}
@@ -251,7 +251,7 @@ npm run deploy
 ### Test 1: Health Check
 
 ```bash
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 ```
 
 **Réponse attendue**:
@@ -265,7 +265,7 @@ curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
 ### Test 2: GET Participants
 
 ```bash
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
 ```
 
 **Réponse attendue**:
@@ -298,7 +298,7 @@ cd cloudflare
 npx wrangler tail --env production
 
 # Dans une autre fenêtre, déclenchez des requêtes:
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
 ```
 
 **Action**:

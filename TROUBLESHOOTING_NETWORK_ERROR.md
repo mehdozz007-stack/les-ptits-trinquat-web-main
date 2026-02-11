@@ -32,8 +32,8 @@ npx wrangler d1 execute tombola-dev --file=migrations/0002_seed_admin.sql --remo
 ```bash
 # Terminal 3 - Tester avec le navigateur (plus fiable que curl)
 # Copie/colle dans le navigateur:
-https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/health
-https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants
+https://les-ptits-trinquat-api-dev.mehdozz007.workers.dev/health
+https://les-ptits-trinquat-api-dev.mehdozz007.workers.dev/api/tombola/participants
 ```
 
 **Si DNS ne résout pas** (erreur curl #6):
@@ -64,9 +64,9 @@ npm run dev
 
 ## 🔗 Endpoints importants
 
-- **GET participants**: `https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants`
-- **POST participants**: `https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants`
-- **Health check**: `https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/health`
+- **GET participants**: `https://les-ptits-trinquat-api-dev.mehdozz007.workers.dev/api/tombola/participants`
+- **POST participants**: `https://les-ptits-trinquat-api-dev.mehdozz007.workers.dev/api/tombola/participants`
+- **Health check**: `https://les-ptits-trinquat-api-dev.mehdozz007.workers.dev/health`
 
 ## 📋 Checklist
 
@@ -75,7 +75,7 @@ npm run dev
 - [ ] Dev server relancé
 - [ ] Cache navigateur vidé
 - [ ] Console DevTools ouverte (voir les logs)
-- [ ] Test GET direct: `curl https://les-ptits-trinquat-api-dev.medhozz007.workers.dev/api/tombola/participants`
+- [ ] Test GET direct: `curl https://les-ptits-trinquat-api-dev.mehdozz007.workers.dev/api/tombola/participants`
 
 ---
 

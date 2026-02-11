@@ -65,7 +65,7 @@ wrangler secret put BCRYPT_ROUNDS --env production
 
 Le CORS est maintenant strict en production:
 - ✅ Autorisé: `https://les-ptits-trinquat.pages.dev`
-- ✅ Autorisé: `https://les-ptits-trinquat-api.medhozz007.workers.dev`
+- ✅ Autorisé: `https://les-ptits-trinquat-api.mehdozz007.workers.dev`
 - ❌ Refusé: Toute autre origine
 
 **Si vous changez de domaine**: Modifier `CORS_ORIGIN` dans `wrangler.toml`
@@ -106,13 +106,13 @@ npm run deploy
 
 # Vous devriez voir:
 # ✓ Uploaded les-ptits-trinquat-api
-# → https://les-ptits-trinquat-api.medhozz007.workers.dev
+# → https://les-ptits-trinquat-api.mehdozz007.workers.dev
 ```
 
 **Vérifier le déploiement**:
 ```bash
 # Test du health check
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 
 # Vous devriez recevoir:
 # {"status":"ok","timestamp":"2024-02-11T..."}
@@ -139,13 +139,13 @@ npm run deploy
 
 ```bash
 # 1. Test de santé de l'API
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 
 # 2. Test GET participants (liste publique)
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants \
 
 # 3. Test POST participant (avec données)
-curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants \
+curl -X POST https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants \
   -H "Content-Type: application/json" \
   -d '{"prenom":"Test","email":"test@example.com","role":"Parent","emoji":"😊"}'
 

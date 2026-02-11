@@ -31,7 +31,7 @@
 
 ### 🔴 API Production
 ```
-https://les-ptits-trinquat-api-production.medhozz007.workers.dev
+https://les-ptits-trinquat-api-production.mehdozz007.workers.dev
 ```
 
 **Endpoints disponibles**:
@@ -43,12 +43,12 @@ https://les-ptits-trinquat-api-production.medhozz007.workers.dev
 
 ### 🟢 Site Web Production
 ```
-https://medhozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007.github.io/les-ptits-trinquat-web-main/
 ```
 
 **Section Tombola**:
 ```
-https://medhozz007.github.io/les-ptits-trinquat-web-main/tombola
+https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
 ```
 
 ---
@@ -85,7 +85,7 @@ Rien à commiter ✅
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                  CLIENT (Frontend)                       │
-│  https://medhozz007.github.io/les-ptits-trinquat...     │
+│  https://mehdozz007.github.io/les-ptits-trinquat...     │
 │  - React + Vite                                          │
 │  - Tombola Page Component                               │
 │  - API calls to Production Worker                       │
@@ -236,7 +236,7 @@ npx wrangler tail --env production
 
 ### Health Check
 ```bash
-curl https://les-ptits-trinquat-api-production.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api-production.mehdozz007.workers.dev/health
 ```
 
 ### Database Query
@@ -282,9 +282,9 @@ wrangler d1 execute les-ptits-trinquat-prod \
 - **Composants React**: 10+ pour Tombola
 
 ### Accessibilité
-- ✅ **API**: https://les-ptits-trinquat-api-production.medhozz007.workers.dev
-- ✅ **Site**: https://medhozz007.github.io/les-ptits-trinquat-web-main/
-- ✅ **Tombola**: https://medhozz007.github.io/les-ptits-trinquat-web-main/tombola
+- ✅ **API**: https://les-ptits-trinquat-api-production.mehdozz007.workers.dev
+- ✅ **Site**: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+- ✅ **Tombola**: https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
 
 ### Sécurité
 - ✅ HTTPS obligatoire

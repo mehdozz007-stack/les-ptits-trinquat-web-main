@@ -12,7 +12,7 @@ npm install --save-dev wrangler@latest
 npm list wrangler
 npx wrangler deploy
 ```
-**Résultat attendu:** "Successfully published to https://les-ptits-trinquat-api.medhozz007.workers.dev"
+**Résultat attendu:** "Successfully published to https://les-ptits-trinquat-api.mehdozz007.workers.dev"
 
 ### Étape 2: Créer les tables de base de données
 ```bash
@@ -32,7 +32,7 @@ npx wrangler d1 execute tombola-dev --file=migrations/0002_seed_admin.sql --remo
 
 ### Tester l'inscription (POST)
 ```bash
-curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants \
+curl -X POST https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants \
   -H "Content-Type: application/json" \
   -d '{
     "prenom": "Jean",
@@ -44,7 +44,7 @@ curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/p
 
 ### Consulter les participants (GET)
 ```bash
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
 ```
 
 ---

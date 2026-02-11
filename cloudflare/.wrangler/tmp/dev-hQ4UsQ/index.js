@@ -2099,51 +2099,91 @@ var Hono2 = class extends Hono {
   }
 };
 
-// src/middleware/cors.ts
-function getCorsHeaders(origin, allowedOrigin, environment) {
-  const devOrigins = [
-    "http://localhost:5173",
-    "http://localhost:8080",
-    "http://localhost:8081",
-    "http://localhost:3000",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:8080",
-    "http://127.0.0.1:8081"
-  ];
-  const productionOrigins = [
-    allowedOrigin,
-    "https://www.lespetitstrinquat.fr",
-    "https://lespetitstrinquat.fr",
-    "https://les-ptits-trinquat.pages.dev",
-    "https://main.les-ptits-trinquat.pages.dev",
-    "https://078fb4a5.les-ptits-trinquat.pages.dev"
-  ];
-  const allowedOrigins = environment === "production" ? productionOrigins : [allowedOrigin, ...devOrigins];
-  const isAllowed = allowedOrigins.includes(origin);
-  return {
-    "Access-Control-Allow-Origin": isAllowed ? origin : "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
-    "Access-Control-Max-Age": "86400",
-    "Access-Control-Allow-Credentials": "true"
+// node_modules/hono/dist/middleware/cors/index.js
+var cors = /* @__PURE__ */ __name((options) => {
+  const defaults = {
+    origin: "*",
+    allowMethods: ["GET", "HEAD", "PUT", "POST", "DELETE", "PATCH"],
+    allowHeaders: [],
+    exposeHeaders: []
   };
-}
-__name(getCorsHeaders, "getCorsHeaders");
-async function corsMiddleware(c, next) {
-  const origin = c.req.header("Origin") || "";
-  const corsHeaders = getCorsHeaders(origin, c.env.CORS_ORIGIN, c.env.ENVIRONMENT);
-  if (c.req.method === "OPTIONS") {
-    return new Response(null, {
-      status: 204,
-      headers: corsHeaders
-    });
-  }
-  await next();
-  Object.entries(corsHeaders).forEach(([key, value]) => {
-    c.res.headers.set(key, value);
-  });
-}
-__name(corsMiddleware, "corsMiddleware");
+  const opts = {
+    ...defaults,
+    ...options
+  };
+  const findAllowOrigin = ((optsOrigin) => {
+    if (typeof optsOrigin === "string") {
+      if (optsOrigin === "*") {
+        return () => optsOrigin;
+      } else {
+        return (origin) => optsOrigin === origin ? origin : null;
+      }
+    } else if (typeof optsOrigin === "function") {
+      return optsOrigin;
+    } else {
+      return (origin) => optsOrigin.includes(origin) ? origin : null;
+    }
+  })(opts.origin);
+  const findAllowMethods = ((optsAllowMethods) => {
+    if (typeof optsAllowMethods === "function") {
+      return optsAllowMethods;
+    } else if (Array.isArray(optsAllowMethods)) {
+      return () => optsAllowMethods;
+    } else {
+      return () => [];
+    }
+  })(opts.allowMethods);
+  return /* @__PURE__ */ __name(async function cors2(c, next) {
+    function set(key, value) {
+      c.res.headers.set(key, value);
+    }
+    __name(set, "set");
+    const allowOrigin = await findAllowOrigin(c.req.header("origin") || "", c);
+    if (allowOrigin) {
+      set("Access-Control-Allow-Origin", allowOrigin);
+    }
+    if (opts.credentials) {
+      set("Access-Control-Allow-Credentials", "true");
+    }
+    if (opts.exposeHeaders?.length) {
+      set("Access-Control-Expose-Headers", opts.exposeHeaders.join(","));
+    }
+    if (c.req.method === "OPTIONS") {
+      if (opts.origin !== "*") {
+        set("Vary", "Origin");
+      }
+      if (opts.maxAge != null) {
+        set("Access-Control-Max-Age", opts.maxAge.toString());
+      }
+      const allowMethods = await findAllowMethods(c.req.header("origin") || "", c);
+      if (allowMethods.length) {
+        set("Access-Control-Allow-Methods", allowMethods.join(","));
+      }
+      let headers = opts.allowHeaders;
+      if (!headers?.length) {
+        const requestHeaders = c.req.header("Access-Control-Request-Headers");
+        if (requestHeaders) {
+          headers = requestHeaders.split(/\s*,\s*/);
+        }
+      }
+      if (headers?.length) {
+        set("Access-Control-Allow-Headers", headers.join(","));
+        c.res.headers.append("Vary", "Access-Control-Request-Headers");
+      }
+      c.res.headers.delete("Content-Length");
+      c.res.headers.delete("Content-Type");
+      return new Response(null, {
+        headers: c.res.headers,
+        status: 204,
+        statusText: "No Content"
+      });
+    }
+    await next();
+    if (opts.origin !== "*") {
+      c.header("Vary", "Origin", { append: true });
+    }
+  }, "cors2");
+}, "cors");
 
 // src/utils/security.ts
 function escapeHtml(text) {
@@ -3399,7 +3439,12 @@ var tombola_default = tombola;
 
 // src/index.ts
 var app = new Hono2();
-app.use("*", corsMiddleware);
+app.use("*", cors({
+  origin: ["https://www.lespetitstrinquat.fr", "https://lespetitstrinquat.fr", "https://les-ptits-trinquat.pages.dev", "http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
+  allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  credentials: true,
+  maxAge: 86400
+}));
 app.get("/", (c) => {
   return c.json({
     name: "Les P'tits Trinquat API",

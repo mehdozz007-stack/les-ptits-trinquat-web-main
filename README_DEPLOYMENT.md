@@ -66,7 +66,7 @@ cd ..
 npm run deploy
 
 # 8. Tester
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 ```
 
 **⚠️ Voir [DEPLOY_STEP_BY_STEP.md](DEPLOY_STEP_BY_STEP.md) pour les détails.**

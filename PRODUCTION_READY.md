@@ -87,10 +87,10 @@ npm run deploy  # ou via Cloudflare Pages
 
 ```bash
 # Test santé
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 
 # Test API
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
 
 # Test front (navigateur)
 https://les-ptits-trinquat.pages.dev/tombola

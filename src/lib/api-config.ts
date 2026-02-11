@@ -7,7 +7,7 @@
 
 function getApiBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return 'https://les-ptits-trinquat-api-production.medhozz007.workers.dev';
+    return 'https://les-ptits-trinquat-api-production.mehdozz007.workers.dev';
   }
 
   const hostname = window.location.hostname;
@@ -26,7 +26,7 @@ function getApiBaseUrl(): string {
   }
 
   // Production environment
-  return 'https://les-ptits-trinquat-api-production.medhozz007.workers.dev';
+  return 'https://les-ptits-trinquat-api-production.mehdozz007.workers.dev';
 }
 
 export const API_BASE_URL = getApiBaseUrl();

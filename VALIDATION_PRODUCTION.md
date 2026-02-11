@@ -183,10 +183,10 @@ npm run deploy  # ou via Cloudflare Pages
 
 ```bash
 # Tester health check
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 
 # Tester les endpoints
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
 
 # Vérifier dans le navigateur
 # https://les-ptits-trinquat.pages.dev/tombola

@@ -22,7 +22,7 @@ Admin: admin@ptits-trinquat.fr (rôle: admin)
 #### API Production ✅
 ```
 Worker: les-ptits-trinquat-api-production
-URL: https://les-ptits-trinquat-api-production.medhozz007.workers.dev
+URL: https://les-ptits-trinquat-api-production.mehdozz007.workers.dev
 Status: ✅ Déployé
 Version ID: f157ce81-31b2-4efe-96a9-b78ae3678520
 Database: les-ptits-trinquat-prod (PRODUCTION)
@@ -47,7 +47,7 @@ RATE_LIMIT_WINDOW = "60"     # par minute
 
 #### API Config Mise à Jour ✅
 ```typescript
-API_BASE_URL = 'https://les-ptits-trinquat-api-production.medhozz007.workers.dev'
+API_BASE_URL = 'https://les-ptits-trinquat-api-production.mehdozz007.workers.dev'
 ```
 
 ---
@@ -70,10 +70,10 @@ API_BASE_URL = 'https://les-ptits-trinquat-api-production.medhozz007.workers.dev
 ## 🚀 URLs Production
 
 ### API
-- **Base**: https://les-ptits-trinquat-api-production.medhozz007.workers.dev
-- **Health**: https://les-ptits-trinquat-api-production.medhozz007.workers.dev/health
-- **Participants**: https://les-ptits-trinquat-api-production.medhozz007.workers.dev/api/tombola/participants
-- **Lots**: https://les-ptits-trinquat-api-production.medhozz007.workers.dev/api/tombola/lots
+- **Base**: https://les-ptits-trinquat-api-production.mehdozz007.workers.dev
+- **Health**: https://les-ptits-trinquat-api-production.mehdozz007.workers.dev/health
+- **Participants**: https://les-ptits-trinquat-api-production.mehdozz007.workers.dev/api/tombola/participants
+- **Lots**: https://les-ptits-trinquat-api-production.mehdozz007.workers.dev/api/tombola/lots
 
 ### Front-end
 - **À déployer**: `npm run deploy` (GitHub Pages ou Cloudflare Pages)
@@ -94,7 +94,7 @@ database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 
 ### `src/lib/api-config.ts`
 ```typescript
-API_BASE_URL = 'https://les-ptits-trinquat-api-production.medhozz007.workers.dev'
+API_BASE_URL = 'https://les-ptits-trinquat-api-production.mehdozz007.workers.dev'
 ```
 ✅ Mis à jour
 
@@ -117,7 +117,7 @@ npm run deploy
 ```
 
 ### 2. Tester la Production
-- Accéder au site: https://medhozz007.github.io/les-ptits-trinquat-web-main/
+- Accéder au site: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
 - Naviguer vers la page Tombola: `/tombola`
 - Tester l'inscription d'un participant
 - Vérifier les logs: `npx wrangler tail --env production`
@@ -185,13 +185,13 @@ npx wrangler d1 execute les-ptits-trinquat-prod \
 
 **Health Check**:
 ```
-GET https://les-ptits-trinquat-api-production.medhozz007.workers.dev/health
+GET https://les-ptits-trinquat-api-production.mehdozz007.workers.dev/health
 Response: {"status":"ok","timestamp":"2026-02-11T..."}
 ```
 
 **Participants List**:
 ```
-GET https://les-ptits-trinquat-api-production.medhozz007.workers.dev/api/tombola/participants
+GET https://les-ptits-trinquat-api-production.mehdozz007.workers.dev/api/tombola/participants
 Response: {"success":true,"data":[...]}
 ```
 
