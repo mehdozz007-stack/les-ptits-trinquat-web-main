@@ -94,7 +94,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
     if (!confirmed) return;
 
     setDeleteLoading(true);
-    const { error } = await deleteLot(lot.id);
+    const { error } = await deleteLot(lot.id, lot.parent_id);
     setDeleteLoading(false);
 
     if (error) {

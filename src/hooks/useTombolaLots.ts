@@ -123,11 +123,12 @@ export function useTombolaLots() {
     }
   };
 
-  const deleteLot = async (lotId: string) => {
+  const deleteLot = async (lotId: string, parentId: string) => {
     try {
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ parent_id: parentId }),
       });
       if (!response.ok) throw new Error('Failed to delete lot');
       await fetchLots();

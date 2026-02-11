@@ -231,13 +231,12 @@ tombola.post('/lots', rateLimitMiddleware, async (c) => {
 });
 
 // ============================================================
-// PATCH /tombola/lots/:id/reserve - Réserver un lot (auth requis)
+// PATCH /tombola/lots/:id/reserve - Réserver un lot (système public)
 // ============================================================
-tombola.patch('/lots/:id/reserve', requireAuth, async (c) => {
+tombola.patch('/lots/:id/reserve', optionalAuth, async (c) => {
   try {
     const { id } = c.req.param();
     const body = await c.req.json<{ reserver_id: string }>();
-    const authContext = getAuthContext(c);
 
     if (!body.reserver_id) {
       return c.json<ApiResponse>({
@@ -264,19 +263,11 @@ tombola.patch('/lots/:id/reserve', requireAuth, async (c) => {
 
     // Vérifier que le reserver existe
     const reserver = await c.env.DB.prepare(
-      'SELECT id, user_id FROM tombola_participants WHERE id = ?'
-    ).bind(body.reserver_id).first<{ id: string; user_id: string | null }>();
+      'SELECT id FROM tombola_participants WHERE id = ?'
+    ).bind(body.reserver_id).first<{ id: string }>();
 
     if (!reserver) {
       return c.json<ApiResponse>({ success: false, error: 'Reserver not found' }, 404);
-    }
-
-    // Vérifier que l'utilisateur est le propriétaire du profil reserver ou admin
-    if (authContext?.role !== 'admin' && reserver.user_id !== authContext?.user.id) {
-      return c.json<ApiResponse>({
-        success: false,
-        error: 'You can only reserve lots for your own participant profile'
-      }, 403);
     }
 
     // Ne peut pas réserver son propre lot
@@ -291,7 +282,7 @@ tombola.patch('/lots/:id/reserve', requireAuth, async (c) => {
       UPDATE tombola_lots SET statut = 'réservé', reserved_by = ? WHERE id = ?
     `).bind(body.reserver_id, id).run();
 
-    await logAudit(c.env.DB, authContext?.user.id || null, 'LOT_RESERVED', 'lot', id, c.req.raw, { reserver_id: body.reserver_id });
+    await logAudit(c.env.DB, null, 'LOT_RESERVED', 'lot', id, c.req.raw, { reserver_id: body.reserver_id });
 
     return c.json<ApiResponse>({
       success: true,
@@ -361,12 +352,19 @@ tombola.patch('/lots/:id/remis', requireAdmin, async (c) => {
 });
 
 // ============================================================
-// DELETE /tombola/lots/:id - Supprimer un lot (propriétaire ou admin)
+// DELETE /tombola/lots/:id - Supprimer un lot (propriétaire publiquement)
 // ============================================================
-tombola.delete('/lots/:id', requireAuth, async (c) => {
+tombola.delete('/lots/:id', optionalAuth, async (c) => {
   try {
     const { id } = c.req.param();
-    const authContext = getAuthContext(c);
+    const body = await c.req.json<{ parent_id: string }>();
+
+    if (!body.parent_id) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Parent ID is required'
+      }, 400);
+    }
 
     // Récupérer le lot pour vérifier la propriété
     const lot = await c.env.DB.prepare(
@@ -377,8 +375,8 @@ tombola.delete('/lots/:id', requireAuth, async (c) => {
       return c.json<ApiResponse>({ success: false, error: 'Lot not found' }, 404);
     }
 
-    // Vérifier que c'est le propriétaire du lot ou un admin
-    if (authContext?.role !== 'admin' && lot.parent_id !== (authContext?.parentId || authContext?.user.id)) {
+    // Vérifier que c'est le propriétaire du lot
+    if (lot.parent_id !== body.parent_id) {
       return c.json<ApiResponse>({
         success: false,
         error: 'You can only delete your own lots'
@@ -387,7 +385,7 @@ tombola.delete('/lots/:id', requireAuth, async (c) => {
 
     await c.env.DB.prepare('DELETE FROM tombola_lots WHERE id = ?').bind(id).run();
 
-    await logAudit(c.env.DB, authContext?.user.id || null, 'LOT_DELETED', 'lot', id, c.req.raw);
+    await logAudit(c.env.DB, null, 'LOT_DELETED', 'lot', id, c.req.raw);
 
     return c.json<ApiResponse>({
       success: true,
@@ -403,13 +401,12 @@ tombola.delete('/lots/:id', requireAuth, async (c) => {
 });
 
 // ============================================================
-// GET /tombola/contact-link/:lotId - Lien de contact sécurisé
+// GET /tombola/contact-link/:lotId - Lien de contact (public)
 // ============================================================
-tombola.get('/contact-link/:lotId', requireAuth, async (c) => {
+tombola.get('/contact-link/:lotId', optionalAuth, async (c) => {
   try {
     const { lotId } = c.req.param();
     const senderName = c.req.query('sender_name') || 'Un parent';
-    const authContext = getAuthContext(c);
 
     // Récupérer le lot avec l'email du propriétaire
     const lot = await c.env.DB.prepare(`
@@ -433,7 +430,7 @@ tombola.get('/contact-link/:lotId', requireAuth, async (c) => {
 
     const mailtoLink = `mailto:${lot.email}?subject=${subject}&body=${body}`;
 
-    await logAudit(c.env.DB, authContext?.user.id || null, 'CONTACT_LINK_GENERATED', 'lot', lotId, c.req.raw);
+    await logAudit(c.env.DB, null, 'CONTACT_LINK_GENERATED', 'lot', lotId, c.req.raw);
 
     return c.json<ApiResponse>({
       success: true,
@@ -496,12 +493,11 @@ tombola.delete('/admin/participants/:id', requireAdmin, async (c) => {
 });
 
 // ============================================================
-// DELETE /tombola/participants/:id - Supprimer sa propre participation
+// DELETE /tombola/participants/:id - Supprimer sa propre participation (public)
 // ============================================================
-tombola.delete('/participants/:id', requireAuth, async (c) => {
+tombola.delete('/participants/:id', optionalAuth, async (c) => {
   try {
     const { id } = c.req.param();
-    const authContext = getAuthContext(c);
 
     // Vérifier que le participant existe
     const participant = await c.env.DB.prepare(
@@ -515,7 +511,7 @@ tombola.delete('/participants/:id', requireAuth, async (c) => {
     // Supprimer la participation
     await c.env.DB.prepare('DELETE FROM tombola_participants WHERE id = ?').bind(id).run();
 
-    await logAudit(c.env.DB, authContext?.user.id || null, 'OWN_PARTICIPATION_DELETED', 'participant', id, c.req.raw);
+    await logAudit(c.env.DB, null, 'OWN_PARTICIPATION_DELETED', 'participant', id, c.req.raw);
 
     return c.json<ApiResponse>({
       success: true,
