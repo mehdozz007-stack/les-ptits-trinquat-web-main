@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Check, Loader2, PartyPopper, Trash2 } from "lucide-react";
+import { Mail, Check, Loader2, PartyPopper, Trash2, Gift } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TombolaLot, useTombolaLots } from "@/hooks/useTombolaLots";
@@ -32,11 +32,12 @@ const STATUS_CONFIG = {
 } as const;
 
 export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
-  const { reserveLot, getContactLink, deleteLot } = useTombolaLots();
+  const { reserveLot, getContactLink, deleteLot, markAsRemis } = useTombolaLots();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [contactLoading, setContactLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [remisLoading, setRemisLoading] = useState(false);
   const [justReserved, setJustReserved] = useState(false);
 
   const statusConfig = STATUS_CONFIG[lot.statut as keyof typeof STATUS_CONFIG] || STATUS_CONFIG.disponible;
@@ -109,6 +110,28 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
     toast({
       title: "Lot supprimé",
       description: "Le lot a été supprimé avec succès.",
+    });
+  };
+
+  const handleMarkAsRemis = async () => {
+    if (!isOwner) return;
+
+    setRemisLoading(true);
+    const { error } = await markAsRemis(lot.id);
+    setRemisLoading(false);
+
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de marquer le lot comme remis.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Lot remis ! 🎁",
+      description: "Le lot a été marqué comme remis.",
     });
   };
 
@@ -212,7 +235,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               </Button>
             )}
 
-            {lot.statut !== "remis" && currentParticipant && !isOwner && (
+            {lot.statut === "reserve" && currentParticipant && !isOwner && (
               <Button
                 variant="outline"
                 size="sm"
@@ -226,6 +249,23 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
                   <Mail className="h-4 w-4" />
                 )}
                 Contacter
+              </Button>
+            )}
+
+            {isOwner && lot.statut === "reserve" && (
+              <Button
+                variant="secondary"
+                size="sm"
+                className="gap-2"
+                onClick={handleMarkAsRemis}
+                disabled={remisLoading}
+              >
+                {remisLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Gift className="h-4 w-4" />
+                )}
+                Marquer remis
               </Button>
             )}
 
