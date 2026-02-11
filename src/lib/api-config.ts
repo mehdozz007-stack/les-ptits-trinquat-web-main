@@ -13,7 +13,7 @@ export const API_BASE_URL =
     window.location.hostname.includes('192.168') // Local network IP
   )
     ? '' // Use relative paths in development (proxied via Vite)
-    : 'https://c284e7f3-les-ptits-trinquat-api-production.medhozz007.workers.dev'; // Production API URL (versioned)
+    : 'https://les-ptits-trinquat-api-production.medhozz007.workers.dev'; // Production API URL
 
 export function apiUrl(endpoint: string): string {
   return `${API_BASE_URL}${endpoint}`;
