@@ -218,27 +218,27 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           {/* Actions */}
           <div className="flex gap-2">
             {canReserve && (
-              <Button
-                variant="hero"
-                size="sm"
-                className="flex-1 gap-2"
-                onClick={handleReserve}
-                disabled={loading}
-              >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Check className="h-4 w-4" />
-                )}
-                Réserver
-              </Button>
+              <motion.div className="flex-1">
+                <Button
+                  size="sm"
+                  className="w-full gap-2 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 hover:from-blue-600 hover:via-cyan-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-300 border-0"
+                  onClick={handleReserve}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Check className="h-4 w-4" />
+                  )}
+                  Réserver
+                </Button>
+              </motion.div>
             )}
 
             {lot.statut === "reserve" && currentParticipant && !isOwner && (
               <Button
-                variant="outline"
                 size="sm"
-                className="gap-2"
+                className="gap-2 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 border-0"
                 onClick={handleContact}
                 disabled={contactLoading}
               >
@@ -253,9 +253,8 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
             {isOwner && lot.statut === "reserve" && (
               <Button
-                variant="secondary"
                 size="sm"
-                className="gap-2"
+                className="gap-2 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 border-0"
                 onClick={handleMarkAsRemis}
                 disabled={remisLoading}
               >
@@ -270,9 +269,8 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
             {isOwner && (
               <Button
-                variant="destructive"
                 size="sm"
-                className="gap-2"
+                className="gap-2 bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 hover:from-red-600 hover:via-orange-600 hover:to-rose-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-red-500/50 transition-all duration-300 border-0"
                 onClick={handleDelete}
                 disabled={deleteLoading}
               >
