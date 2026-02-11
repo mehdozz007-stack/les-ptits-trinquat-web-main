@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// .wrangler/tmp/bundle-6SXbYW/checked-fetch.js
+// .wrangler/tmp/bundle-VG2VP5/checked-fetch.js
 var urls = /* @__PURE__ */ new Set();
 function checkURL(request, init) {
   const url = request instanceof URL ? request : new URL(
@@ -2997,10 +2997,14 @@ tombola.get("/participants", async (c) => {
       data: result.results
     });
   } catch (error) {
-    console.error("Get participants error:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : "No stack trace";
+    console.error("Get participants error:", errorMessage);
+    console.error("Error stack:", errorStack);
+    console.error("Full error object:", JSON.stringify(error, null, 2));
     return c.json({
       success: false,
-      error: "An error occurred"
+      error: `Database error: ${errorMessage}`
     }, 500);
   }
 });
@@ -3030,10 +3034,14 @@ tombola.get("/lots", async (c) => {
       data: result.results
     });
   } catch (error) {
-    console.error("Get lots error:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : "No stack trace";
+    console.error("Get lots error:", errorMessage);
+    console.error("Error stack:", errorStack);
+    console.error("Full error object:", JSON.stringify(error, null, 2));
     return c.json({
       success: false,
-      error: "An error occurred"
+      error: `Database error: ${errorMessage}`
     }, 500);
   }
 });
@@ -3619,7 +3627,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// .wrangler/tmp/bundle-6SXbYW/middleware-insertion-facade.js
+// .wrangler/tmp/bundle-VG2VP5/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -3651,7 +3659,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// .wrangler/tmp/bundle-6SXbYW/middleware-loader.entry.ts
+// .wrangler/tmp/bundle-VG2VP5/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;

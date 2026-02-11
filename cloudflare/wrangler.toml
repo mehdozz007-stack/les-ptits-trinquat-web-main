@@ -8,9 +8,13 @@ compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 # ============================================================
-# Base de données D1 - PRODUCTION
+# Base de données D1 - PRODUCTION (Top-level for default deployment)
 # ============================================================
-# Défini dans [env.production] ci-dessous
+
+[[d1_databases]]
+binding = "DB"
+database_name = "les-ptits-trinquat-prod"
+database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 
 # ============================================================
 # Variables d'environnement (non sensibles) - TOP LEVEL
@@ -22,11 +26,6 @@ compatibility_flags = ["nodejs_compat"]
 # ============================================================
 [env.production]
 vars = { ENVIRONMENT = "production", CORS_ORIGIN = "https://www.lespetitstrinquat.fr", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
-
-[[env.production.d1_databases]]
-binding = "DB"
-database_name = "les-ptits-trinquat-prod"
-database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 
 # ============================================================
 # Environnement de développement
