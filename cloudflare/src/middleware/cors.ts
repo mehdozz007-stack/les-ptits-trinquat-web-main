@@ -20,10 +20,12 @@ export function getCorsHeaders(origin: string, allowedOrigin: string, environmen
     'http://127.0.0.1:8081'
   ];
 
-  // En production: strictement CORS_ORIGIN et notre domain Cloudflare
+  // En production: strictement CORS_ORIGIN et nos domaines Cloudflare Pages
   const productionOrigins = [
     allowedOrigin,
-    'https://les-ptits-trinquat.pages.dev'
+    'https://les-ptits-trinquat.pages.dev',
+    'https://main.les-ptits-trinquat.pages.dev',
+    'https://078fb4a5.les-ptits-trinquat.pages.dev'
   ];
 
   const allowedOrigins = environment === 'production' ? productionOrigins : [allowedOrigin, ...devOrigins];
