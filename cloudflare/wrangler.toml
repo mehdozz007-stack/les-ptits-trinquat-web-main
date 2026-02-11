@@ -40,6 +40,24 @@ database_name = "tombola-dev"
 database_id = "4f519cb2-40f8-433d-9da0-4c250a95b45c"
 
 # ============================================================
+# Observabilité - Cloudflare Worker Logs
+# ============================================================
+[observability]
+enabled = false
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1
+
+# ============================================================
 # Secrets à configurer avec: wrangler secret put <NAME>
 # Production: wrangler secret put <NAME> --env production
 # Dev: wrangler secret put <NAME> --env dev
