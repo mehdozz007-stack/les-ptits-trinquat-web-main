@@ -1,4 +1,4 @@
-# 🔍 Troubleshooting: NetworkError lors de l'inscription
+npm# 🔍 Troubleshooting: NetworkError lors de l'inscription
 
 ## ⚠️ Le Problème
 ```

@@ -12,7 +12,7 @@ const navItems = [
   { label: "Notre école", href: "/notre-ecole", icon: School },
   { label: "Actualités", href: "/actualites", icon: FileText },
   { label: "Documents", href: "/documents-utiles", icon: Files },
-  { label: "Tombola", href: "/tombola", icon: Gift },
+  //{ label: "Tombola", href: "/tombola", icon: Gift },
   { label: "Partenaires", href: "/partenaires", icon: Heart },
   { label: "Contact", href: "/contact", icon: Mail },
 ];
