@@ -23,6 +23,8 @@ export function getCorsHeaders(origin: string, allowedOrigin: string, environmen
   // En production: strictement CORS_ORIGIN et nos domaines Cloudflare Pages
   const productionOrigins = [
     allowedOrigin,
+    'https://www.lespetitstrinquat.fr',
+    'https://lespetitstrinquat.fr',
     'https://les-ptits-trinquat.pages.dev',
     'https://main.les-ptits-trinquat.pages.dev',
     'https://078fb4a5.les-ptits-trinquat.pages.dev'
@@ -34,7 +36,7 @@ export function getCorsHeaders(origin: string, allowedOrigin: string, environmen
   const isAllowed = allowedOrigins.includes(origin);
 
   return {
-    'Access-Control-Allow-Origin': isAllowed ? origin : allowedOrigin,
+    'Access-Control-Allow-Origin': isAllowed ? origin : '*',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
     'Access-Control-Max-Age': '86400',

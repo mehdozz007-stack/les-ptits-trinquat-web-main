@@ -2112,6 +2112,8 @@ function getCorsHeaders(origin, allowedOrigin, environment) {
   ];
   const productionOrigins = [
     allowedOrigin,
+    "https://www.lespetitstrinquat.fr",
+    "https://lespetitstrinquat.fr",
     "https://les-ptits-trinquat.pages.dev",
     "https://main.les-ptits-trinquat.pages.dev",
     "https://078fb4a5.les-ptits-trinquat.pages.dev"
@@ -2119,7 +2121,7 @@ function getCorsHeaders(origin, allowedOrigin, environment) {
   const allowedOrigins = environment === "production" ? productionOrigins : [allowedOrigin, ...devOrigins];
   const isAllowed = allowedOrigins.includes(origin);
   return {
-    "Access-Control-Allow-Origin": isAllowed ? origin : allowedOrigin,
+    "Access-Control-Allow-Origin": isAllowed ? origin : "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
     "Access-Control-Max-Age": "86400",
