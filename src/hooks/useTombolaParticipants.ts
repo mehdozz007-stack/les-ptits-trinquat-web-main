@@ -139,9 +139,43 @@ export function useTombolaParticipants() {
     }
   };
 
+  const deleteParticipant = async (participantId: string) => {
+    const url = apiUrl(`/api/tombola/participants/${participantId}`);
+    console.log('📤 DELETE request to:', url);
+    
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+      
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data?.error || `Server error: ${response.status}`);
+      }
+      
+      console.log('✅ Participant deleted');
+      setParticipants(prev => prev.filter(p => p.id !== participantId));
+      return { error: null };
+    } catch (err: any) {
+      if (err.name === 'AbortError') {
+        console.error('❌ Request timeout');
+        return { error: 'Timeout: L\'API ne répond pas.' };
+      }
+      console.error('❌ deleteParticipant error:', err.message);
+      return { error: err.message };
+    }
+  };
+
   useEffect(() => {
     fetchParticipants();
   }, []);
 
-  return { participants, loading, error, addParticipant, refetch: fetchParticipants };
+  return { participants, loading, error, addParticipant, deleteParticipant, refetch: fetchParticipants };
 }

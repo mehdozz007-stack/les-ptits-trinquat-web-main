@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Check, Loader2, PartyPopper } from "lucide-react";
+import { Mail, Check, Loader2, PartyPopper, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TombolaLot, useTombolaLots } from "@/hooks/useTombolaLots";
@@ -32,10 +32,11 @@ const STATUS_CONFIG = {
 };
 
 export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
-  const { reserveLot, getContactLink } = useTombolaLots();
+  const { reserveLot, getContactLink, deleteLot } = useTombolaLots();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [contactLoading, setContactLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [justReserved, setJustReserved] = useState(false);
 
   const statusConfig = STATUS_CONFIG[lot.statut as keyof typeof STATUS_CONFIG] || STATUS_CONFIG.disponible;
@@ -84,6 +85,31 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
         variant: "destructive",
       });
     }
+  };
+
+  const handleDelete = async () => {
+    if (!isOwner) return;
+    
+    const confirmed = window.confirm(`Êtes-vous sûr de vouloir supprimer le lot "${lot.nom}" ?`);
+    if (!confirmed) return;
+
+    setDeleteLoading(true);
+    const { error } = await deleteLot(lot.id);
+    setDeleteLoading(false);
+
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer ce lot.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Lot supprimé",
+      description: "Le lot a été supprimé avec succès.",
+    });
   };
 
   return (
@@ -204,7 +230,24 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               </Button>
             )}
 
-            {isOwner && lot.statut === "disponible" && (
+            {isOwner && (
+              <Button
+                variant="destructive"
+                size="sm"
+                className="gap-2"
+                onClick={handleDelete}
+                disabled={deleteLoading}
+              >
+                {deleteLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Trash2 className="h-4 w-4" />
+                )}
+                Supprimer
+              </Button>
+            )}
+
+            {isOwner && lot.statut === "disponible" && !isOwner && !canReserve && (
               <p className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
                 En attente de réservation
               </p>

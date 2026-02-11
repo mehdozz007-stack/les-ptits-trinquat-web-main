@@ -26,7 +26,7 @@ export default function Tombola() {
       />
 
       <TombolaHero />
-      <ParticipantGrid />
+      <ParticipantGrid currentParticipant={currentParticipant} />
       <ParticipantForm />
       <LotForm currentParticipant={currentParticipant} />
       <LotGrid currentParticipant={currentParticipant} />

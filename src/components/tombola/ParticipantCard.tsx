@@ -1,13 +1,49 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { Trash2, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
+import { Button } from "@/components/ui/button";
+import { TombolaParticipantPublic, useTombolaParticipants } from "@/hooks/useTombolaParticipants";
+import { useToast } from "@/hooks/use-toast";
 
 interface ParticipantCardProps {
   participant: TombolaParticipantPublic;
   index: number;
+  currentParticipant?: TombolaParticipantPublic | null;
 }
 
-export function ParticipantCard({ participant, index }: ParticipantCardProps) {
+export function ParticipantCard({ participant, index, currentParticipant }: ParticipantCardProps) {
+  const { deleteParticipant } = useTombolaParticipants();
+  const { toast } = useToast();
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  
+  const isCurrentUser = currentParticipant?.id === participant.id;
+
+  const handleDelete = async () => {
+    if (!isCurrentUser) return;
+    
+    const confirmed = window.confirm(`Êtes-vous sûr de vouloir supprimer votre participation ? Cette action est irréversible.`);
+    if (!confirmed) return;
+
+    setDeleteLoading(true);
+    const { error } = await deleteParticipant(participant.id);
+    setDeleteLoading(false);
+
+    if (error) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer votre participation.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Participation supprimée",
+      description: "Vous avez été retiré de la tombola.",
+    });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -16,8 +52,7 @@ export function ParticipantCard({ participant, index }: ParticipantCardProps) {
       transition={{ duration: 0.4, delay: index * 0.05 }}
     >
       <Card 
-        
-        className="group h-full cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-glow"
+        className="group relative h-full cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-glow"
       >
         <CardContent className="flex flex-col items-center p-6 text-center">
           <motion.div
@@ -37,9 +72,26 @@ export function ParticipantCard({ participant, index }: ParticipantCardProps) {
           </span>
           
           {participant.classes && (
-            <p className="text-sm text-muted-foreground">
+            <p className="mb-4 text-sm text-muted-foreground">
               {participant.classes}
             </p>
+          )}
+
+          {isCurrentUser && (
+            <Button
+              variant="destructive"
+              size="sm"
+              className="gap-2 w-full"
+              onClick={handleDelete}
+              disabled={deleteLoading}
+            >
+              {deleteLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Trash2 className="h-4 w-4" />
+              )}
+              Supprimer
+            </Button>
           )}
         </CardContent>
       </Card>

@@ -123,9 +123,23 @@ export function useTombolaLots() {
     }
   };
 
+  const deleteLot = async (lotId: string) => {
+    try {
+      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) throw new Error('Failed to delete lot');
+      await fetchLots();
+      return { error: null };
+    } catch (err: any) {
+      return { error: err.message };
+    }
+  };
+
   useEffect(() => {
     fetchLots();
   }, []);
 
-  return { lots, loading, error, addLot, reserveLot, cancelReservation, markAsRemis, getContactLink, refetch: fetchLots };
+  return { lots, loading, error, addLot, reserveLot, cancelReservation, markAsRemis, getContactLink, deleteLot, refetch: fetchLots };
 }

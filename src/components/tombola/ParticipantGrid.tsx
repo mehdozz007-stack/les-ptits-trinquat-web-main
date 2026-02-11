@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
 import { Users, Loader2 } from "lucide-react";
 import { ParticipantCard } from "./ParticipantCard";
-import { useTombolaParticipants } from "@/hooks/useTombolaParticipants";
+import { useTombolaParticipants, TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 
-export function ParticipantGrid() {
+interface ParticipantGridProps {
+  currentParticipant?: TombolaParticipantPublic | null;
+}
+
+export function ParticipantGrid({ currentParticipant }: ParticipantGridProps) {
   const { participants, loading, error } = useTombolaParticipants();
 
   return (
@@ -55,6 +59,7 @@ export function ParticipantGrid() {
                 key={participant.id}
                 participant={participant}
                 index={index}
+                currentParticipant={currentParticipant}
               />
             ))}
           </div>
