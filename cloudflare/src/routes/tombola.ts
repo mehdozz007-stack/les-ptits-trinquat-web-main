@@ -292,9 +292,11 @@ tombola.patch('/lots/:id/reserve', optionalAuth, async (c) => {
     });
   } catch (error) {
     console.error('Reserve lot error:', error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error('Error details:', errorMsg);
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred'
+      error: `An error occurred: ${errorMsg}`
     }, 500);
   }
 });

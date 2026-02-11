@@ -59,11 +59,11 @@ export function TombolaHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl"
+            className="mb-4 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl"
           >
             La Tombola des{" "}
             <span className="bg-gradient-to-r from-primary via-secondary to-sky bg-clip-text text-transparent">
-              P'tits Trinquât
+              P'tits Trinquat
             </span>
           </motion.h1>
 
