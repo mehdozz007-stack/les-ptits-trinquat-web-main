@@ -9,7 +9,7 @@ import { useTombolaParticipants } from "@/hooks/useTombolaParticipants";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 
-const EMOJI_OPTIONS = ["😊", "😄", "🥳", "🌟", "🎉", "💫", "🌈", "🦋", "🌸", "🍀", "🎈", "🎁", "❤️", "💜", "💙", "🧡"];
+const EMOJI_OPTIONS = ["😊", "😄", "🌟", "🎉", "💫", "🌈", "🦋", "🌸", "🍀", "🎈", "🎁", "❤️", "💜", "💙", "🧡", "😎", "🤗", "🌺", "🌻", "🦅", "🐢", "🦊", "🐰", "🦚", "🌙", "⭐", "🎭", "🎨", "🎪", "🎯", "🎮", "💖"];
 
 const ROLE_OPTIONS = [
   "Parent participant",
@@ -29,12 +29,12 @@ const participantSchema = z.object({
 export function ParticipantForm() {
   const { addParticipant } = useTombolaParticipants();
   const { toast } = useToast();
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  
+
   const [formData, setFormData] = useState({
     prenom: "",
     email: "",
@@ -46,7 +46,7 @@ export function ParticipantForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
+
     const result = participantSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -60,9 +60,9 @@ export function ParticipantForm() {
     }
 
     setLoading(true);
-    
+
     console.log('📝 Submitting participant form with data:', formData);
-    
+
     const payload = {
       prenom: formData.prenom.trim(),
       email: formData.email.trim(),
@@ -70,9 +70,9 @@ export function ParticipantForm() {
       emoji: formData.emoji,
       ...(formData.classes.trim() && { classes: formData.classes.trim() }),
     };
-    
+
     console.log('📤 Payload to send:', payload);
-    
+
     const { error } = await addParticipant(payload as any);
 
     setLoading(false);
@@ -124,7 +124,7 @@ export function ParticipantForm() {
             Rejoignez l'aventure ! ✨
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Inscrivez-vous pour participer à la tombola, proposer des lots et faire partie 
+            Inscrivez-vous pour participer à la tombola, proposer des lots et faire partie
             de notre belle communauté de familles.
           </p>
         </motion.div>
@@ -198,11 +198,10 @@ export function ParticipantForm() {
                                   key={emoji}
                                   type="button"
                                   onClick={() => setFormData({ ...formData, emoji })}
-                                  className={`flex h-10 w-10 items-center justify-center rounded-xl text-xl transition-all ${
-                                    formData.emoji === emoji
+                                  className={`flex h-10 w-10 items-center justify-center rounded-xl text-xl transition-all ${formData.emoji === emoji
                                       ? "bg-primary/20 ring-2 ring-primary ring-offset-2"
                                       : "bg-muted hover:bg-muted/80"
-                                  }`}
+                                    }`}
                                 >
                                   {emoji}
                                 </button>
@@ -253,11 +252,10 @@ export function ParticipantForm() {
                                   key={role}
                                   type="button"
                                   onClick={() => setFormData({ ...formData, role })}
-                                  className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                                    formData.role === role
+                                  className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${formData.role === role
                                       ? "bg-primary text-primary-foreground"
                                       : "bg-muted hover:bg-muted/80"
-                                  }`}
+                                    }`}
                                 >
                                   {role}
                                 </button>

@@ -37,24 +37,24 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/a-propos" element={<APropos />} />
-          <Route path="/notre-ecole" element={<NotreEcole />} />
-          {/* Redirection vers actualites */}
-          <Route path="/evenements" element={<Navigate to="/actualites" replace />} />
-          <Route path="/actualites" element={<Actualites />} />
-          <Route path="/actualites/:id" element={<ActualiteDetail />} />
-          <Route path="/documents-utiles" element={<DocumentsUtiles />} />
-          {/* Comptes rendus redirects to 404 */}
-          <Route path="/comptes-rendus" element={<NotFound />} />
-          <Route path="/partenaires" element={<Partenaires />} />
-          <Route path="/tombola" element={<Tombola2 />} />
-          <Route path="/admin/tombola" element={<AdminTombola />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/message-envoye" element={<MessageEnvoye />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/a-propos" element={<APropos />} />
+            <Route path="/notre-ecole" element={<NotreEcole />} />
+            {/* Redirection vers actualites */}
+            <Route path="/evenements" element={<Navigate to="/actualites" replace />} />
+            <Route path="/actualites" element={<Actualites />} />
+            <Route path="/actualites/:id" element={<ActualiteDetail />} />
+            <Route path="/documents-utiles" element={<DocumentsUtiles />} />
+            {/* Comptes rendus redirects to 404 */}
+            <Route path="/comptes-rendus" element={<NotFound />} />
+            <Route path="/partenaires" element={<Partenaires />} />
+            <Route path="/tombola" element={<Tombola2 />} />
+            <Route path="/admin/tombola" element={<AdminTombola />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/message-envoye" element={<MessageEnvoye />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
       </TombolaRefreshProvider>
     </TooltipProvider>

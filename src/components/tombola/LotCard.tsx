@@ -78,7 +78,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
     setContactLoading(false);
 
     if (mailtoLink) {
-      window.location.href = mailtoLink;
+      window.open(mailtoLink, '_blank');
     } else {
       toast({
         title: "Erreur",
@@ -236,51 +236,70 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
             )}
 
             {lot.statut === "reserve" && currentParticipant && !isOwner && (
-              <Button
-                size="sm"
-                className="gap-2 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 border-0"
-                onClick={handleContact}
-                disabled={contactLoading}
-              >
-                {contactLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Mail className="h-4 w-4" />
-                )}
-                Contacter
-              </Button>
+              <div className="flex justify-center flex-1">
+                <Button
+                  size="sm"
+                  className="gap-2 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 border-0"
+                  onClick={handleContact}
+                  disabled={contactLoading}
+                >
+                  {contactLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Mail className="h-4 w-4" />
+                  )}
+                  Contacter
+                </Button>
+              </div>
             )}
 
             {isOwner && lot.statut === "reserve" && (
-              <Button
-                size="sm"
-                className="gap-2 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 border-0"
-                onClick={handleMarkAsRemis}
-                disabled={remisLoading}
-              >
-                {remisLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Gift className="h-4 w-4" />
-                )}
-                Marquer remis
-              </Button>
+              <div className="flex justify-center gap-2 flex-1">
+                <Button
+                  size="sm"
+                  className="gap-2 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 border-0"
+                  onClick={handleMarkAsRemis}
+                  disabled={remisLoading}
+                >
+                  {remisLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Gift className="h-4 w-4" />
+                  )}
+                  Marquer remis
+                </Button>
+                <Button
+                  size="sm"
+                  className="gap-2 bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 hover:from-red-600 hover:via-orange-600 hover:to-rose-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-red-500/50 transition-all duration-300 border-0"
+                  onClick={handleDelete}
+                  disabled={deleteLoading}
+                >
+                  {deleteLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
+                  Supprimer
+                </Button>
+              </div>
             )}
 
-            {isOwner && (
-              <Button
-                size="sm"
-                className="gap-2 bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 hover:from-red-600 hover:via-orange-600 hover:to-rose-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-red-500/50 transition-all duration-300 border-0"
-                onClick={handleDelete}
-                disabled={deleteLoading}
-              >
-                {deleteLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Trash2 className="h-4 w-4" />
-                )}
-                Supprimer
-              </Button>
+            {isOwner && lot.statut !== "reserve" && (
+              <div className="flex justify-center flex-1">
+                <Button
+                  size="sm"
+                  className="gap-2 bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 hover:from-red-600 hover:via-orange-600 hover:to-rose-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-red-500/50 transition-all duration-300 border-0"
+                  onClick={handleDelete}
+                  disabled={deleteLoading}
+                >
+                  {deleteLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
+                  Supprimer
+                </Button>
+              </div>
             )}
 
             {isOwner && lot.statut === "disponible" && !isOwner && !canReserve && (

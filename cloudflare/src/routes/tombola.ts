@@ -210,8 +210,8 @@ tombola.post('/lots', rateLimitMiddleware, async (c) => {
     const id = generateId();
 
     await c.env.DB.prepare(`
-      INSERT INTO tombola_lots (id, nom, description, icone, parent_id, statut)
-      VALUES (?, ?, ?, ?, ?, 'disponible')
+      INSERT INTO tombola_lots (id, nom, description, icone, parent_id, statut, created_at)
+      VALUES (?, ?, ?, ?, ?, 'disponible', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
     `).bind(id, sanitizeString(body.nom, 200), description, icone, body.parent_id).run();
 
     await logAudit(c.env.DB, body.parent_id || null, 'LOT_CREATED', 'lot', id, c.req.raw);
@@ -223,9 +223,11 @@ tombola.post('/lots', rateLimitMiddleware, async (c) => {
     }, 201);
   } catch (error) {
     console.error('Create lot error:', error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error('Error details:', errorMsg);
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred'
+      error: `An error occurred: ${errorMsg}`
     }, 500);
   }
 });
@@ -290,6 +292,50 @@ tombola.patch('/lots/:id/reserve', optionalAuth, async (c) => {
     });
   } catch (error) {
     console.error('Reserve lot error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred'
+    }, 500);
+  }
+});
+
+// ============================================================
+// POST /tombola/lots/:id/mark-remis - Marquer lot comme remis (propriétaire)
+// ============================================================
+tombola.post('/lots/:id/mark-remis', optionalAuth, async (c) => {
+  try {
+    const { id } = c.req.param();
+
+    // Récupérer le lot
+    const lot = await c.env.DB.prepare(
+      'SELECT id, statut, parent_id FROM tombola_lots WHERE id = ?'
+    ).bind(id).first<{ id: string; statut: string; parent_id: string }>();
+
+    if (!lot) {
+      return c.json<ApiResponse>({ success: false, error: 'Lot not found' }, 404);
+    }
+
+    // Vérifier que le lot est réservé
+    if (lot.statut !== 'reserve') {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Only reserved lots can be marked as delivered'
+      }, 400);
+    }
+
+    // Mettre à jour le statut à 'remis'
+    await c.env.DB.prepare(`
+      UPDATE tombola_lots SET statut = 'remis' WHERE id = ?
+    `).bind(id).run();
+
+    await logAudit(c.env.DB, null, 'LOT_MARKED_REMIS', 'lot', id, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      message: 'Lot marked as delivered'
+    });
+  } catch (error) {
+    console.error('Mark remis error:', error);
     return c.json<ApiResponse>({
       success: false,
       error: 'An error occurred'

@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// .wrangler/tmp/bundle-AiAYOT/checked-fetch.js
+// .wrangler/tmp/bundle-qIifT0/checked-fetch.js
 var urls = /* @__PURE__ */ new Set();
 function checkURL(request, init) {
   const url = request instanceof URL ? request : new URL(
@@ -3083,8 +3083,8 @@ tombola.post("/lots", rateLimitMiddleware, async (c) => {
     const icone = body.icone?.slice(0, 10) || "\u{1F381}";
     const id = generateId();
     await c.env.DB.prepare(`
-      INSERT INTO tombola_lots (id, nom, description, icone, parent_id, statut)
-      VALUES (?, ?, ?, ?, ?, 'disponible')
+      INSERT INTO tombola_lots (id, nom, description, icone, parent_id, statut, created_at)
+      VALUES (?, ?, ?, ?, ?, 'disponible', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
     `).bind(id, sanitizeString(body.nom, 200), description, icone, body.parent_id).run();
     await logAudit(c.env.DB, body.parent_id || null, "LOT_CREATED", "lot", id, c.req.raw);
     return c.json({
@@ -3094,9 +3094,11 @@ tombola.post("/lots", rateLimitMiddleware, async (c) => {
     }, 201);
   } catch (error) {
     console.error("Create lot error:", error);
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error("Error details:", errorMsg);
     return c.json({
       success: false,
-      error: "An error occurred"
+      error: `An error occurred: ${errorMsg}`
     }, 500);
   }
 });
@@ -3144,6 +3146,37 @@ tombola.patch("/lots/:id/reserve", optionalAuth, async (c) => {
     });
   } catch (error) {
     console.error("Reserve lot error:", error);
+    return c.json({
+      success: false,
+      error: "An error occurred"
+    }, 500);
+  }
+});
+tombola.post("/lots/:id/mark-remis", optionalAuth, async (c) => {
+  try {
+    const { id } = c.req.param();
+    const lot = await c.env.DB.prepare(
+      "SELECT id, statut, parent_id FROM tombola_lots WHERE id = ?"
+    ).bind(id).first();
+    if (!lot) {
+      return c.json({ success: false, error: "Lot not found" }, 404);
+    }
+    if (lot.statut !== "reserve") {
+      return c.json({
+        success: false,
+        error: "Only reserved lots can be marked as delivered"
+      }, 400);
+    }
+    await c.env.DB.prepare(`
+      UPDATE tombola_lots SET statut = 'remis' WHERE id = ?
+    `).bind(id).run();
+    await logAudit(c.env.DB, null, "LOT_MARKED_REMIS", "lot", id, c.req.raw);
+    return c.json({
+      success: true,
+      message: "Lot marked as delivered"
+    });
+  } catch (error) {
+    console.error("Mark remis error:", error);
     return c.json({
       success: false,
       error: "An error occurred"
@@ -3543,7 +3576,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// .wrangler/tmp/bundle-AiAYOT/middleware-insertion-facade.js
+// .wrangler/tmp/bundle-qIifT0/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -3575,7 +3608,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// .wrangler/tmp/bundle-AiAYOT/middleware-loader.entry.ts
+// .wrangler/tmp/bundle-qIifT0/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;

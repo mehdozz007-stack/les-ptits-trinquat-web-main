@@ -31,15 +31,15 @@ export function useTombolaParticipants() {
     const url = apiUrl('/api/tombola/participants');
     console.log('📥 GET request to:', url);
     console.log('📍 Current origin:', window.location.origin);
-    
+
     try {
       if (!silent) setLoading(true);
       else setRefetching(true);
-      
+
       // Add a timeout to the fetch
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-      
+
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -47,17 +47,17 @@ export function useTombolaParticipants() {
         },
         signal: controller.signal,
       });
-      
+
       clearTimeout(timeoutId);
-      
+
       console.log('📊 Response status:', response.status);
       console.log('📊 Response headers:', Array.from(response.headers.entries()));
-      
+
       // Handle non-OK responses
       if (!response.ok) {
         throw new Error(`API error: ${response.status} ${response.statusText}`);
       }
-      
+
       // Try to parse JSON
       let result;
       try {
@@ -66,9 +66,9 @@ export function useTombolaParticipants() {
         console.error('❌ JSON parse error:', parseError);
         throw new Error(`Server returned invalid JSON (Status: ${response.status})`);
       }
-      
+
       console.log('✅ Participants fetched:', result);
-      
+
       // Extract data from API response
       const data = result?.data || result || [];
       setParticipants(Array.isArray(data) ? data : []);
@@ -97,23 +97,23 @@ export function useTombolaParticipants() {
     const url = apiUrl('/api/tombola/participants');
     console.log('📤 POST request to:', url);
     console.log('📋 Payload:', participant);
-    
+
     try {
       // Add a timeout to the fetch
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-      
+
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(participant),
         signal: controller.signal,
       });
-      
+
       clearTimeout(timeoutId);
-      
+
       console.log('📊 Response status:', response.status);
-      
+
       let data;
       try {
         data = await response.json();
@@ -121,22 +121,22 @@ export function useTombolaParticipants() {
         console.error('❌ JSON parse error:', parseError);
         throw new Error(`Server returned invalid JSON (Status: ${response.status})`);
       }
-      
+
       if (!response.ok) {
         const errorMessage = data?.error || `Server error: ${response.status}`;
         console.error('❌ API error:', errorMessage);
         throw new Error(errorMessage);
       }
-      
+
       console.log('✅ Participant created:', data);
       // Optimistic update
       const newParticipant = data.data || data;
       setParticipants(prev => [newParticipant, ...prev]);
-      
+
       // Refetch silently to sync with server
       await fetchParticipants(true);
       triggerRefresh();
-      
+
       return { data, error: null };
     } catch (err: any) {
       if (err.name === 'AbortError') {
@@ -154,33 +154,33 @@ export function useTombolaParticipants() {
   const deleteParticipant = async (participantId: string) => {
     const url = apiUrl(`/api/tombola/participants/${participantId}`);
     console.log('📤 DELETE request to:', url);
-    
+
     try {
       // Optimistic update
       setParticipants(prev => prev.filter(p => p.id !== participantId));
-      
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
-      
+
       const response = await fetch(url, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
       });
-      
+
       clearTimeout(timeoutId);
-      
+
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
         throw new Error(data?.error || `Server error: ${response.status}`);
       }
-      
+
       console.log('✅ Participant deleted');
-      
+
       // Refetch silently to sync with server
       await fetchParticipants(true);
       triggerRefresh();
-      
+
       return { error: null };
     } catch (err: any) {
       if (err.name === 'AbortError') {

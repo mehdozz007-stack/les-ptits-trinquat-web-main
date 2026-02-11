@@ -17,12 +17,12 @@ interface ParticipantCardProps {
 export function ParticipantCard({ participant, index, currentParticipant, onDelete, onRefresh }: ParticipantCardProps) {
   const { toast } = useToast();
   const [deleteLoading, setDeleteLoading] = useState(false);
-  
+
   const isCurrentUser = currentParticipant?.id === participant.id;
 
   const handleDelete = async () => {
     if (!isCurrentUser || !onDelete) return;
-    
+
     const confirmed = window.confirm(`Êtes-vous sûr de vouloir supprimer votre participation ? Cette action est irréversible.`);
     if (!confirmed) return;
 
@@ -57,7 +57,7 @@ export function ParticipantCard({ participant, index, currentParticipant, onDele
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
     >
-      <Card 
+      <Card
         className="group relative h-full cursor-default transition-all duration-300 hover:-translate-y-2 hover:shadow-glow"
       >
         <CardContent className="flex flex-col items-center p-6 text-center">
@@ -68,15 +68,15 @@ export function ParticipantCard({ participant, index, currentParticipant, onDele
           >
             {participant.emoji}
           </motion.div>
-          
+
           <h3 className="mb-1 text-lg font-bold text-foreground">
             {participant.prenom}
           </h3>
-          
+
           <span className="mb-2 inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
             {participant.role}
           </span>
-          
+
           {participant.classes && (
             <p className="mb-4 text-sm text-muted-foreground">
               {participant.classes}
@@ -87,7 +87,7 @@ export function ParticipantCard({ participant, index, currentParticipant, onDele
             <Button
               variant="destructive"
               size="sm"
-              className="gap-2 w-full"
+              className="gap-2 bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 hover:from-red-600 hover:via-orange-600 hover:to-rose-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-red-500/50 transition-all duration-300 border-0"
               onClick={handleDelete}
               disabled={deleteLoading}
             >

@@ -99,7 +99,7 @@ export function ParticipantSelector({ currentParticipant, onSelect }: Participan
             variant={currentParticipant ? "default" : "outline"}
             size="lg"
             onClick={() => setIsOpen(!isOpen)}
-            className="gap-2 rounded-full shadow-lg"
+            className={`gap-2 rounded-full shadow-lg ${!currentParticipant ? 'bg-muted' : ''}`}
           >
             {currentParticipant ? (
               <>

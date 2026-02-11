@@ -34,7 +34,7 @@ export function useTombolaLots() {
     try {
       if (!silent) setLoading(true);
       else setRefetching(true);
-      
+
       const response = await fetch(apiUrl('/api/tombola/lots'));
       if (!response.ok) throw new Error('Failed to fetch lots');
       const data = await response.json();
@@ -76,19 +76,19 @@ export function useTombolaLots() {
   const reserveLot = async (lotId: string, reserverId: string) => {
     try {
       // Optimistic update
-      setLots(prev => 
-        prev.map(lot => 
+      setLots(prev =>
+        prev.map(lot =>
           lot.id === lotId ? { ...lot, statut: 'reserve', reserved_by: reserverId } : lot
         )
       );
-      
+
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reserver_id: reserverId }),
       });
       if (!response.ok) throw new Error('Failed to reserve lot');
-      
+
       await fetchLots(true);
       triggerRefresh();
       return { error: null };
@@ -102,17 +102,17 @@ export function useTombolaLots() {
   const cancelReservation = async (lotId: string) => {
     try {
       // Optimistic update
-      setLots(prev => 
-        prev.map(lot => 
+      setLots(prev =>
+        prev.map(lot =>
           lot.id === lotId ? { ...lot, statut: 'disponible', reserved_by: null } : lot
         )
       );
-      
+
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel-reservation`), {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to cancel reservation');
-      
+
       await fetchLots(true);
       triggerRefresh();
       return { error: null };
@@ -126,17 +126,17 @@ export function useTombolaLots() {
   const markAsRemis = async (lotId: string) => {
     try {
       // Optimistic update
-      setLots(prev => 
-        prev.map(lot => 
+      setLots(prev =>
+        prev.map(lot =>
           lot.id === lotId ? { ...lot, statut: 'remis' } : lot
         )
       );
-      
+
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/mark-remis`), {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to mark as remis');
-      
+
       await fetchLots(true);
       triggerRefresh();
       return { error: null };
@@ -166,14 +166,14 @@ export function useTombolaLots() {
     try {
       // Optimistic update
       setLots(prev => prev.filter(lot => lot.id !== lotId));
-      
+
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ parent_id: parentId }),
       });
       if (!response.ok) throw new Error('Failed to delete lot');
-      
+
       await fetchLots(true);
       triggerRefresh();
       return { error: null };
