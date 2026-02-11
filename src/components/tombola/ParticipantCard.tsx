@@ -3,30 +3,31 @@ import { motion } from "framer-motion";
 import { Trash2, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TombolaParticipantPublic, useTombolaParticipants } from "@/hooks/useTombolaParticipants";
+import { TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 import { useToast } from "@/hooks/use-toast";
 
 interface ParticipantCardProps {
   participant: TombolaParticipantPublic;
   index: number;
   currentParticipant?: TombolaParticipantPublic | null;
+  onDelete?: (participantId: string) => Promise<{ error: string | null }>;
+  onRefresh?: () => Promise<void>;
 }
 
-export function ParticipantCard({ participant, index, currentParticipant }: ParticipantCardProps) {
-  const { deleteParticipant } = useTombolaParticipants();
+export function ParticipantCard({ participant, index, currentParticipant, onDelete, onRefresh }: ParticipantCardProps) {
   const { toast } = useToast();
   const [deleteLoading, setDeleteLoading] = useState(false);
   
   const isCurrentUser = currentParticipant?.id === participant.id;
 
   const handleDelete = async () => {
-    if (!isCurrentUser) return;
+    if (!isCurrentUser || !onDelete) return;
     
     const confirmed = window.confirm(`Êtes-vous sûr de vouloir supprimer votre participation ? Cette action est irréversible.`);
     if (!confirmed) return;
 
     setDeleteLoading(true);
-    const { error } = await deleteParticipant(participant.id);
+    const { error } = await onDelete(participant.id);
     setDeleteLoading(false);
 
     if (error) {
@@ -36,6 +37,11 @@ export function ParticipantCard({ participant, index, currentParticipant }: Part
         variant: "destructive",
       });
       return;
+    }
+
+    // Refetch to ensure UI is in sync
+    if (onRefresh) {
+      await onRefresh();
     }
 
     toast({

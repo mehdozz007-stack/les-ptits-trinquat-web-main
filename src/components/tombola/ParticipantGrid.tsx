@@ -8,7 +8,7 @@ interface ParticipantGridProps {
 }
 
 export function ParticipantGrid({ currentParticipant }: ParticipantGridProps) {
-  const { participants, loading, error } = useTombolaParticipants();
+  const { participants, loading, error, deleteParticipant, refetch } = useTombolaParticipants();
 
   return (
     <section className="py-16 md:py-20">
@@ -60,6 +60,8 @@ export function ParticipantGrid({ currentParticipant }: ParticipantGridProps) {
                 participant={participant}
                 index={index}
                 currentParticipant={currentParticipant}
+                onDelete={deleteParticipant}
+                onRefresh={refetch}
               />
             ))}
           </div>

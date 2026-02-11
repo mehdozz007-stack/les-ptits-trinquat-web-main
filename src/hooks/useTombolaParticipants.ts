@@ -196,5 +196,10 @@ export function useTombolaParticipants() {
     fetchParticipants();
   }, []);
 
-  return { participants, loading, refetching, error, addParticipant, deleteParticipant, refetch: fetchParticipants };
+  // Wrapper pour fetchParticipants qui peut être passée aux composants enfants
+  const refetchAsync = async () => {
+    await fetchParticipants(true);
+  };
+
+  return { participants, loading, refetching, error, addParticipant, deleteParticipant, refetch: refetchAsync, _refetchSilently: fetchParticipants };
 }
