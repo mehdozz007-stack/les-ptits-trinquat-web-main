@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiUrl } from '@/lib/api-config';
+import { useGlobalRefresh } from '@/context/TombolaRefreshContext';
 
 export interface TombolaLot {
   id: string;
@@ -27,6 +28,7 @@ export function useTombolaLots() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refetching, setRefetching] = useState(false);
+  const { refreshKey, triggerRefresh } = useGlobalRefresh();
 
   const fetchLots = async (silent = false) => {
     try {
@@ -63,6 +65,7 @@ export function useTombolaLots() {
         throw new Error(data?.error || 'Failed to add lot');
       }
       await fetchLots(true);
+      triggerRefresh();
       return { data, error: null };
     } catch (err: any) {
       console.error('❌ Add lot error:', err.message);
@@ -87,6 +90,7 @@ export function useTombolaLots() {
       if (!response.ok) throw new Error('Failed to reserve lot');
       
       await fetchLots(true);
+      triggerRefresh();
       return { error: null };
     } catch (err: any) {
       // Revert optimistic update on error
@@ -110,6 +114,7 @@ export function useTombolaLots() {
       if (!response.ok) throw new Error('Failed to cancel reservation');
       
       await fetchLots(true);
+      triggerRefresh();
       return { error: null };
     } catch (err: any) {
       // Revert optimistic update on error
@@ -133,6 +138,7 @@ export function useTombolaLots() {
       if (!response.ok) throw new Error('Failed to mark as remis');
       
       await fetchLots(true);
+      triggerRefresh();
       return { error: null };
     } catch (err: any) {
       // Revert optimistic update on error
@@ -169,6 +175,7 @@ export function useTombolaLots() {
       if (!response.ok) throw new Error('Failed to delete lot');
       
       await fetchLots(true);
+      triggerRefresh();
       return { error: null };
     } catch (err: any) {
       // Revert optimistic update on error
@@ -179,7 +186,8 @@ export function useTombolaLots() {
 
   useEffect(() => {
     fetchLots();
-  }, []);
+    // Refetch when global refresh is triggered
+  }, [refreshKey]);
 
   return { lots, loading, refetching, error, addLot, reserveLot, cancelReservation, markAsRemis, getContactLink, deleteLot, refetch: fetchLots };
 }

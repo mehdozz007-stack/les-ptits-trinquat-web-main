@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiUrl } from '@/lib/api-config';
+import { useGlobalRefresh } from '@/context/TombolaRefreshContext';
 
 // Public participant data (without email for privacy)
 export interface TombolaParticipantPublic {
@@ -24,6 +25,7 @@ export function useTombolaParticipants() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refetching, setRefetching] = useState(false);
+  const { refreshKey, triggerRefresh } = useGlobalRefresh();
 
   const fetchParticipants = async (silent = false) => {
     const url = apiUrl('/api/tombola/participants');
@@ -133,6 +135,7 @@ export function useTombolaParticipants() {
       
       // Refetch silently to sync with server
       await fetchParticipants(true);
+      triggerRefresh();
       
       return { data, error: null };
     } catch (err: any) {
@@ -176,6 +179,7 @@ export function useTombolaParticipants() {
       
       // Refetch silently to sync with server
       await fetchParticipants(true);
+      triggerRefresh();
       
       return { error: null };
     } catch (err: any) {
@@ -194,7 +198,8 @@ export function useTombolaParticipants() {
 
   useEffect(() => {
     fetchParticipants();
-  }, []);
+    // Refetch when global refresh is triggered
+  }, [refreshKey]);
 
   // Wrapper pour fetchParticipants qui peut être passée aux composants enfants
   const refetchAsync = async () => {
