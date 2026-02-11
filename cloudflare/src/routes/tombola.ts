@@ -279,7 +279,7 @@ tombola.patch('/lots/:id/reserve', optionalAuth, async (c) => {
     }
 
     await c.env.DB.prepare(`
-      UPDATE tombola_lots SET statut = 'réservé', reserved_by = ? WHERE id = ?
+      UPDATE tombola_lots SET statut = 'reserve', reserved_by = ? WHERE id = ?
     `).bind(body.reserver_id, id).run();
 
     await logAudit(c.env.DB, null, 'LOT_RESERVED', 'lot', id, c.req.raw, { reserver_id: body.reserver_id });
@@ -290,6 +290,51 @@ tombola.patch('/lots/:id/reserve', optionalAuth, async (c) => {
     });
   } catch (error) {
     console.error('Reserve lot error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred'
+    }, 500);
+  }
+});
+
+// ============================================================
+// GET /tombola/contact-link/:lotId - Lien de contact (public)
+// ============================================================
+tombola.get('/contact-link/:lotId', optionalAuth, async (c) => {
+  try {
+    const { lotId } = c.req.param();
+    const senderName = c.req.query('sender_name') || 'Un parent';
+
+    // Récupérer le lot avec l'email du propriétaire
+    const lot = await c.env.DB.prepare(`
+      SELECT l.nom, p.email, p.prenom
+      FROM tombola_lots l
+      JOIN tombola_participants p ON l.parent_id = p.id
+      WHERE l.id = ?
+    `).bind(lotId).first<{ nom: string; email: string; prenom: string }>();
+
+    if (!lot) {
+      return c.json<ApiResponse>({ success: false, error: 'Lot not found' }, 404);
+    }
+
+    // Construire le lien mailto
+    const subject = encodeURIComponent(`Tombola - Intérêt pour "${escapeHtml(lot.nom)}"`);
+    const body = encodeURIComponent(
+      `Bonjour ${escapeHtml(lot.prenom)},\n\n` +
+      `Je suis ${escapeHtml(sanitizeString(senderName, 100))} et je suis intéressé(e) par votre lot "${escapeHtml(lot.nom)}" proposé pour la tombola.\n\n` +
+      `Pouvons-nous en discuter ?\n\nMerci !`
+    );
+
+    const mailtoLink = `mailto:${lot.email}?subject=${subject}&body=${body}`;
+
+    await logAudit(c.env.DB, null, 'CONTACT_LINK_GENERATED', 'lot', lotId, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      data: { mailto_link: mailtoLink }
+    });
+  } catch (error) {
+    console.error('Get contact link error:', error);
     return c.json<ApiResponse>({
       success: false,
       error: 'An error occurred'

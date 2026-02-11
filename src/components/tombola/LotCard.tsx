@@ -26,10 +26,10 @@ const STATUS_CONFIG = {
   },
   remis: {
     label: "Déjà remis",
-    color: "bg-muted text-muted-foreground",
-    dot: "bg-muted-foreground",
+    color: "bg-gray-100 text-gray-700",
+    dot: "bg-gray-500",
   },
-};
+} as const;
 
 export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
   const { reserveLot, getContactLink, deleteLot } = useTombolaLots();

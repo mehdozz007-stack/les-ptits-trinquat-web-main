@@ -109,14 +109,13 @@ export function useTombolaLots() {
 
   const getContactLink = async (lotId: string, senderName: string): Promise<string | null> => {
     try {
-      const response = await fetch(apiUrl('/api/tombola/contact-link'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lotId, senderName }),
+      const encodedName = encodeURIComponent(senderName);
+      const response = await fetch(apiUrl(`/api/tombola/contact-link/${lotId}?sender_name=${encodedName}`), {
+        method: 'GET',
       });
       if (!response.ok) throw new Error('Failed to get contact link');
       const data = await response.json();
-      return data?.mailtoLink || null;
+      return data?.data?.mailto_link || null;
     } catch (err: any) {
       console.error('Error getting contact link:', err);
       return null;
