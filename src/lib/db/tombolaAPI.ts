@@ -4,13 +4,12 @@
  */
 
 import { Parent, Lot } from '@/lib/types';
+import { apiUrl } from '@/lib/api-config';
 
 interface AuthToken {
     parentId: string;
     email: string;
 }
-
-const API_BASE = '/api/tombola';
 
 /**
  * Utility to handle API responses
@@ -32,7 +31,7 @@ export const TombolaAPI = {
      * Get all parents (participants)
      */
     async getParents(): Promise<Parent[]> {
-        const response = await fetch(`${API_BASE}/participants`);
+        const response = await fetch(apiUrl('/api/tombola/participants'));
         const data = await handleResponse<{ success: boolean; data: any[] }>(response);
 
         // Map API response to Parent interface
@@ -50,7 +49,7 @@ export const TombolaAPI = {
      * Get all lots
      */
     async getLots(): Promise<Lot[]> {
-        const response = await fetch(`${API_BASE}/lots`);
+        const response = await fetch(apiUrl('/api/tombola/lots'));
         const data = await handleResponse<{ success: boolean; data: any[] }>(response);
 
         // Map API response to Lot interface
@@ -74,7 +73,7 @@ export const TombolaAPI = {
         emoji: string;
         classes?: string;
     }): Promise<Parent> {
-        const response = await fetch(`${API_BASE}/participants`, {
+        const response = await fetch(apiUrl('/api/tombola/participants'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -110,7 +109,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(`${API_BASE}/lots`, {
+        const response = await fetch(apiUrl('/api/tombola/lots'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -142,7 +141,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(`${API_BASE}/lots/${lotId}/reserve`, {
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -171,7 +170,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(`${API_BASE}/lots/${lotId}`, {
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -188,7 +187,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(`${API_BASE}/admin/participants/${parentId}`, {
+        const response = await fetch(apiUrl(`/api/tombola/admin/participants/${parentId}`), {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -240,7 +239,7 @@ export const TombolaAPI = {
      * Login as admin (would need proper auth backend)
      */
     async adminLogin(email: string, password: string): Promise<{ token: string }> {
-        const response = await fetch(`${API_BASE}/auth/login`, {
+        const response = await fetch(apiUrl('/api/tombola/auth/login'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
@@ -259,7 +258,7 @@ export const TombolaAPI = {
      */
     async getAdminParents(): Promise<Parent[]> {
         const auth = this.getAuth();
-        const response = await fetch(`${API_BASE}/admin/participants`, {
+        const response = await fetch(apiUrl('/api/tombola/admin/participants'), {
             headers: auth ? { 'Authorization': `Bearer ${auth.email}` } : {},
         });
 
@@ -282,7 +281,7 @@ export const TombolaAPI = {
      * Delete a participant (admin only)
      */
     async adminDeleteParticipant(participantId: string): Promise<void> {
-        const response = await fetch(`${API_BASE}/admin/participants/${participantId}`, {
+        const response = await fetch(apiUrl(`/api/tombola/admin/participants/${participantId}`), {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -294,7 +293,7 @@ export const TombolaAPI = {
      * Cancel a lot reservation (admin only)
      */
     async adminCancelReservation(lotId: string): Promise<void> {
-        const response = await fetch(`${API_BASE}/lots/${lotId}/cancel`, {
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel`), {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -306,7 +305,7 @@ export const TombolaAPI = {
      * Mark a lot as delivered (admin only)
      */
     async adminMarkAsDelivered(lotId: string): Promise<void> {
-        const response = await fetch(`${API_BASE}/lots/${lotId}/remis`, {
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/remis`), {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -318,7 +317,7 @@ export const TombolaAPI = {
      * Delete a lot (admin only)
      */
     async adminDeleteLot(lotId: string): Promise<void> {
-        const response = await fetch(`${API_BASE}/lots/${lotId}`, {
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
