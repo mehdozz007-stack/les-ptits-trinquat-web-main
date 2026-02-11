@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS tombola_lots (
     nom TEXT NOT NULL,
     description TEXT,
     icone TEXT,
-    statut TEXT DEFAULT 'disponible' CHECK (statut IN ('disponible', 'réservé', 'remis')),
+    statut TEXT DEFAULT 'disponible' CHECK (statut IN ('disponible', 'reserve', 'remis')),
     parent_id TEXT NOT NULL,
     reserved_by TEXT,
     created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
