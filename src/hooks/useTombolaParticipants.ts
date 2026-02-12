@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { apiUrl } from '@/lib/api-config';
 import { useGlobalRefresh } from '@/context/TombolaRefreshContext';
 
@@ -6,6 +6,7 @@ import { useGlobalRefresh } from '@/context/TombolaRefreshContext';
 export interface TombolaParticipantPublic {
   id: string;
   prenom: string;
+  nom: string;
   role: string;
   classes?: string[];
   emoji: string;
@@ -19,9 +20,9 @@ export interface TombolaParticipant extends TombolaParticipantPublic {
   email: string;
 }
 
-export function useTombolaParticipants(loadPublicParticipants = true) {
+export function useTombolaParticipants() {
   const [participants, setParticipants] = useState<TombolaParticipantPublic[]>([]);
-  const [loading, setLoading] = useState(loadPublicParticipants);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refetching, setRefetching] = useState(false);
   const { refreshKey, triggerRefresh } = useGlobalRefresh();
@@ -95,8 +96,8 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
   /**
    * Récupère les participants créés par l'utilisateur courant (filtrés par user_id)
    */
-  const fetchMyParticipants = useCallback(async (token: string) => {
-    const url = apiUrl('/api/tombola/participants/my');
+  const fetchMyParticipants = async (userId: string) => {
+    const url = apiUrl(`/api/tombola/participants/my?user_id=${encodeURIComponent(userId)}`);
     console.log('📥 GET request to:', url);
 
     try {
@@ -107,7 +108,6 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`
         },
         signal: controller.signal,
       });
@@ -144,9 +144,9 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
       }
       setParticipants([]);
     }
-  }, []);
+  };
 
-  const addParticipant = useCallback(async (participant: Omit<TombolaParticipant, 'id' | 'created_at'> & { classes?: string | null; user_id?: string }, token?: string) => {
+  const addParticipant = async (participant: Omit<TombolaParticipant, 'id' | 'created_at'> & { classes?: string | null; user_id?: string }, token: string) => {
     const url = apiUrl('/api/tombola/participants');
     console.log('📤 POST request to:', url);
     console.log('📋 Payload:', participant);
@@ -156,16 +156,12 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-
-      // Si un token est fourni, l'ajouter au header
-      if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-      }
-
       const response = await fetch(url, {
         method: 'POST',
-        headers,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(participant),
         signal: controller.signal,
       });
@@ -193,10 +189,8 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
       const newParticipant = data.data || data;
       setParticipants(prev => [newParticipant, ...prev]);
 
-      // Refetch silently to sync with server (using token to get only current user's participants)
-      if (token) {
-        await fetchMyParticipants(token);
-      }
+      // Refetch silently to sync with server
+      await fetchParticipants(true);
       triggerRefresh();
 
       return { data, error: null };
@@ -211,9 +205,9 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
         : err.message;
       return { data: null, error: errorMsg };
     }
-  }, [triggerRefresh]);
+  };
 
-  const deleteParticipant = useCallback(async (participantId: string, token: string) => {
+  const deleteParticipant = async (participantId: string, token: string) => {
     const url = apiUrl(`/api/tombola/participants/${participantId}`);
     console.log('📤 DELETE request to:', url);
 
@@ -242,8 +236,8 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
 
       console.log('✅ Participant deleted');
 
-      // Refetch silently to sync with server (using token to get only current user's participants)
-      await fetchMyParticipants(token);
+      // Refetch silently to sync with server
+      await fetchParticipants(true);
       triggerRefresh();
 
       return { error: null };
@@ -251,23 +245,20 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
       if (err.name === 'AbortError') {
         console.error('❌ Request timeout');
         // Revert optimistic update on timeout
-        await fetchMyParticipants(token);
+        await fetchParticipants(true);
         return { error: 'Timeout: L\'API ne répond pas.' };
       }
       console.error('❌ deleteParticipant error:', err.message);
       // Revert optimistic update on error
-      await fetchMyParticipants(token);
+      await fetchParticipants(true);
       return { error: err.message };
     }
-  }, [triggerRefresh]);
+  };
 
   useEffect(() => {
-    // Charger tous les participants SEULEMENT si demandé (pour ParticipantGrid)
-    if (loadPublicParticipants) {
-      fetchParticipants();
-    }
+    fetchParticipants();
     // Refetch when global refresh is triggered
-  }, [refreshKey, loadPublicParticipants]);
+  }, [refreshKey]);
 
   // Wrapper pour fetchParticipants qui peut être passée aux composants enfants
   const refetchAsync = async () => {

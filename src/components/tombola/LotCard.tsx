@@ -192,14 +192,16 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           </div>
 
           {/* Owner info */}
-          <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2">
-            <span className="text-lg">{lot.parent?.emoji || "😊"}</span>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">
-                Proposé par {isOwner ? "vous" : lot.parent?.prenom}
-              </p>
+          {!isOwner && (
+            <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2">
+              <span className="text-lg">{lot.parent?.emoji || "😊"}</span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium">
+                  Proposé par {lot.parent?.prenom}
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Reserved by info */}
           {lot.statut === "reserve" && lot.reserver && (
@@ -236,7 +238,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
             {/* LOT AVAILABLE - Show message if no participant selected */}
             {lot.statut === "disponible" && !currentParticipant && (
               <p className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
-                Connectez vous pour réserver ce lot
+                Sélectionnez votre profil pour réserver
               </p>
             )}
 

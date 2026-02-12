@@ -1,20 +1,52 @@
-# 📦 Préparation Production - Tombola (Complétée)
+# 📦 Préparation Production - Tombola (En Production ✅)
+
+## ✅ Status Actuel
+
+### 🟢 Production (main branch)
+- **API**: ✅ LIVE et fonctionnelle
+- **URL**: `https://les-ptits-trinquat-api.mehdozz007.workers.dev`
+- **Database**: `les-ptits-trinquat-prod` (ID: 3f030e96-e28d-4acb-ba13-71c5b1f891b6)
+- **Admin**: mehdoz007@gmail.com / poiuytreza4U!
+- **Endpoints**: GET/POST participants, GET/POST lots ✅
+- **Frontend**: https://les-ptits-trinquat.pages.dev/tombola (auto-déployé)
+
+### 🔵 Development (dev branch)
+- **Database**: `tombola-dev` (ID: 4f519cb2-40f8-433d-9da0-4c250a95b45c)
+- **Local Backend**: `http://127.0.0.1:8787` (npm run dev)
+- **Local Frontend**: `http://localhost:8080` (npm run dev)
+- **Proxy**: Vite proxy `/api/*` → backend
+- **Prêt pour**: Tests et nouvelles features
+
+---
 
 ## ✅ Ce Qui a Été Fait
 
 ### 1. ✓ Configuration Cloudflare (wrangler.toml)
-- **Avant**: Database dev utilisée pour les deux environnements ❌
-- **Après**: Configuration séparée pour prod et dev ✅
-  - Production: `les-ptits-trinquat-prod` (à créer)
-  - Dev: `tombola-dev` (existante)
+- **Production**: Database binding au top-level (prod active par défaut) ✅
+  - `les-ptits-trinquat-prod` accès direct
+  - Pas besoin `--env production` (même URL de déploiement)
+- **Development**: `[env.dev]` avec `tombola-dev` ✅
+  - Déployer avec `npm run dev` dans cloudflare/
+- **URL de déploiement**: `https://les-ptits-trinquat-api.mehdozz007.workers.dev`
 - **Fichier**: [cloudflare/wrangler.toml](cloudflare/wrangler.toml)
 
-### 2. ✓ Sécurité CORS (cors.ts)
-- **Avant**: Acceptait tous les `.workers.dev` (trop permissif) ❌
-- **Après**: CORS contrôlé par environnement ✅
-  - Production: Strictement `https://les-ptits-trinquat.pages.dev`
-  - Dev: Localhost + local networks
-- **Fichier**: [cloudflare/src/middleware/cors.ts](cloudflare/src/middleware/cors.ts)
+### 2. ✓ Sécurité CORS and API (index.ts & tombola.ts)
+- **CORS**: Utilise le middleware natif de Hono ✅
+  ```typescript
+  app.use('*', cors({
+    origin: ['https://www.lespetitstrinquat.fr', 'https://les-ptits-trinquat.pages.dev', 'http://localhost:5173', ...],
+    credentials: true,
+    maxAge: 86400
+  }));
+  ```
+- **Logging d'erreurs**: Enhanced pour diagnostiquer les problèmes ✅
+  - Messages d'erreur détaillés (ex: "Database error: Cannot read properties...")
+  - Stack traces complètes en dev
+  - Production: Messages génériques pour sécurité
+- **Data Transformation**: Conversion SQL → nested structure ✅
+  - Backend retourne lot avec `parent` et `reserver` imbriqués
+  - Frontend reçoit structure correcte: `parent: { prenom, emoji }`
+- **Fichiers**: [cloudflare/src/index.ts](cloudflare/src/index.ts), [cloudflare/src/routes/tombola.ts](cloudflare/src/routes/tombola.ts)
 
 ### 3. ✓ Build du Projet
 - **Résultat**: ✅ Compilation réussie sans erreurs
@@ -27,42 +59,113 @@
   - `0002_seed_admin.sql` - Admin initial ✅
   - `0005_unique_email_tombola.sql` - Contraintes ✅
 
-### 5. ✓ Code Front-End Tombola
+### 5. ✓ Code Front-End Tombola & Corrections
 - **Composants**: Tous présents et validés ✅
   - `ParticipantForm.tsx` - Inscription
   - `ParticipantGrid.tsx` - Affichage
   - `LotForm.tsx` - Ajout de lots
   - `LotGrid.tsx` - Affichage des lots
+  - `LotCard.tsx` - Détail lot avec participant
 - **Hooks**: Gestion d'erreurs complète ✅
   - Timeout: 10 secondes
   - Messages d'erreur explicites
-  - Logs de debugging
+  - Logs de debugging en console
+- **Corrections effectuées**:
+  - ✅ Suppression fallback "Anonyme" → affiche le prénom du participant
+  - ✅ Transformation des données pour structure imbriquée
+  - ✅ Logging amélioré dans useTombolaLots et useTombolaParticipants
+- **Fichiers**: [src/components/tombola/](src/components/tombola/), [src/hooks/](src/hooks/)
 
 ---
 
-## 📋 Prochaines Étapes (À Faire)
+## � Workflow de Développement (dev branch)
 
-### **PHASE 1: Configuration Initiale (À faire UNE FOIS)**
+### Setup Local Development
+
+**Terminal 1 - Backend:**
+```bash
+cd cloudflare
+npm run dev  # Uses --env dev, uses tombola-dev database
+# Écoute sur http://127.0.0.1:8787
+```
+
+**Terminal 2 - Frontend:**
+```bash
+npm run dev  # Runs Vite on http://localhost:8080
+# Proxy /api/* → http://127.0.0.1:8787
+```
+
+**Accéder à**: http://localhost:8080/tombola
+
+### Effectuer des Changements
+
+1. Faire les modifications sur la branche `dev`
+2. Tester localement (logs en console F12)
+3. Vérifier endpoints API: `curl http://127.0.0.1:8787/api/tombola/participants`
+4. Commit et push sur `origin/dev`
+
+### Merger vers Production
+
+1. Tests complétés sur `dev` ✅
+2. `git checkout main && git pull origin main`
+3. `git merge dev --no-ff` (merge commit explicite)
+4. `git push origin main`
+5. Cloudflare Pages auto-déploie le front
+6. API déjà en production (même URL quelle que soit l'arbre)
+
+---
+
+## 📋 Production: Déjà Déployé ✅
+
+### État Actuel
+- ✅ **API Déployée**: https://les-ptits-trinquat-api.mehdozz007.workers.dev
+- ✅ **Database Production**: Les-ptits-trinquat-prod (8 tables, admin créé)
+- ✅ **Frontend Déployé**: https://les-ptits-trinquat.pages.dev/tombola
+- ✅ **CORS Activé**: Pour production domain + Pages
+- ✅ **Endpoints Validés**: GET/POST participants, GET/POST lots
+
+### Test Production
+
+```bash
+# Health check
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
+
+# Get participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
+
+# Create participant (test)
+curl -X POST https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants \
+  -H "Content-Type: application/json" \
+  -d '{"prenom":"Test","email":"test@example.com","role":"Parent","emoji":"🎉"}'
+```
+
+### Monitoring Production
+
+```bash
+# Voir les logs en temps réel
+cd cloudflare
+npx wrangler tail
+
+# Voir les secrets configurés
+wrangler secret list
+```
+
+---
+
+## 🚀 Déployer une Mise à Jour (depuis main vers Production)
 
 ```bash
 cd cloudflare
 
-# 1. Créer la database production
-wrangler d1 create les-ptits-trinquat-prod
-# → Vous recevrez: database_id = "xxx-xxx-xxx"
+# Database production déjà créée et configurée ✅
+# Migrations déjà exécutées ✅
+# JWT_SECRET déjà configuré ✅
 
-# 2. ÉDITER wrangler.toml
-# Remplacer: database_id = "REPLACE_WITH_PRODUCTION_DATABASE_ID"
-# Par: database_id = "xxx-xxx-xxx" (copié ci-dessus)
+# Pour redéployer l'API (utilise toujours la DB prod):
+npm run deploy
 
-# 3. Initialiser la database
-npx wrangler d1 execute les-ptits-trinquat-prod \
-  --file=migrations/0001_tombola_schema.sql
-
-# 4. Configurer JWT_SECRET
-wrangler secret put JWT_SECRET --env production
-# → Entrer une clé secrète sûre (min 32 caractères)
-# → Suggestion: Générer avec: openssl rand -base64 32
+# Voir les logs:
+npx wrangler tail
 ```
 
 ### **PHASE 2: Déploiement**
@@ -143,30 +246,28 @@ https://les-ptits-trinquat.pages.dev/tombola
 
 ---
 
-## 🚨 Points Critiques à Ne Pas Oublier
+## 🚨 Checklist de Développement (dev branch)
 
-### ⚠️ AVANT LE DÉPLOIEMENT
+### ✅ AVANT DE MERGER VERS MAIN
 
-- [ ] Database production créée (`wrangler d1 create les-ptits-trinquat-prod`)
-- [ ] ID de la database copié dans `wrangler.toml`
-- [ ] Migrations exécutées sur la DB prod
-- [ ] JWT_SECRET configuré (`wrangler secret put JWT_SECRET --env production`)
-- [ ] Build réussi (`npm run build`)
-- [ ] Vérification de `dist/index.html`
+- [ ] Tests locaux complétés (`npm run dev`)
+- [ ] API répond correctement (`curl http://127.0.0.1:8787/api/tombola/participants`)
+- [ ] Frontend affiche les données (`http://localhost:8080/tombola`)
+- [ ] Pas d'erreurs TypeScript
+- [ ] Pas d'erreurs en F12 Console
+- [ ] Changes committed sur dev: `git add -A && git commit -m "..."`
+- [ ] Push sur dev: `git push origin dev`
 
-### ⚠️ PENDANT LE DÉPLOIEMENT
+### ✅ AVANT DE MERGER VERS PRODUCTION (main)
 
-- [ ] Déployer API SANS `--env=dev`: `npm run deploy`
-- [ ] Vérifier le health check
-- [ ] Vérifier les endpoints API
-- [ ] Vérifier CORS dans DevTools
-
-### ⚠️ APRÈS LE DÉPLOIEMENT
-
-- [ ] Surveiller les logs: `npx wrangler tail --env production`
-- [ ] Tester les fonctionnalités principales
-- [ ] Vérifier qu'il n'y a pas d'erreurs en console
-- [ ] Documenter les URLs finales
+- [ ] `git checkout dev` - vérifier qu'on est sur dev
+- [ ] Tous les commits en ligne d'attente
+- [ ] `git checkout main && git pull origin main`
+- [ ] `git merge dev --no-ff`
+- [ ] `git push origin main`
+- [ ] Attendre le déploiement Pages (~5 min)
+- [ ] Tester en production: `curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants`
+- [ ] Tester frontend: https://les-ptits-trinquat.pages.dev/tombola
 
 ---
 
@@ -176,41 +277,50 @@ https://les-ptits-trinquat.pages.dev/tombola
 |-----------|------|--------|
 | **Build** |  ✅ | Compilation sans erreurs |
 | **TypeScript** | ✅ | Zéro erreur |
-| **CORS** | ✅ | Sécurisé pour production |
-| **API** | ✅ | Endpoints validés |
-| **DB** | ✅ | Migrations en place |
-| **Front-end** | ✅ | Tombola intégré |
-| **Secrets** | ⏳ | À configurer en prod |
-| **Déploiement** | ⏳ | Prêt, en attente d'exécution |
+| **CORS** | ✅ | Middleware Hono native (sécurisé) |
+| **API** | ✅ | Production LIVE et testée |
+| **DB** | ✅ | Production créée (8 tables, admin) |
+| **Front-end** | ✅ | Tombola en production |
+| **Error Logging** | ✅ | Enhanced (détection facile des bugs) |
+| **Data Transform** | ✅ | SQL → nested structure (parent, reserver) |
+| **Dev Setup** | ✅ | Workflow local complet (2 terminals) |
+| **Déploiement** | ✅ | Production ACTIVE, Pages auto-déploiement |
 
 ---
 
 ## 🎯 Résumé Exécutif
 
-Le projet **Tombola est prêt** pour la production. 
+Le projet **Tombola est EN PRODUCTION** et **FONCTIONNEL**. ✅
 
-**Ce qui reste à faire** (manuel, non technique):
-1. Créer la database D1 production sur Cloudflare (**5 min**)
-2. Configurer les secrets (**5 min**)
-3. Exécuter les migrations (**2 min**)
-4. Déployer l'API et le front (**10 min**)
-5. Valider que tout fonctionne (**5 min**)
+### Production Actuelle
+- ✅ **API Running**: https://les-ptits-trinquat-api.mehdozz007.workers.dev
+- ✅ **Frontend Running**: https://les-ptits-trinquat.pages.dev/tombola
+- ✅ **Database**: 8 tables, admin user créé, contraintes en place
+- ✅ **CRUD Operations**: Tous fonctionnels (GET/POST)
 
-**Temps total estimé**: ~30 minutes
+### Workflow de Développement Recommandé
 
-**Risque**: ⚠️ Très faible si les étapes sont suivies
-- ✓ Tout est documenté
-- ✓ Tout est testable
-- ✓ Configuration révisée
-- ✓ Pas d'erreurs de code
+1. **Travailler sur `dev` branch** avec database locale (`tombola-dev`)
+2. **Tester loalement** avec 2 terminals (`npm run dev` + vite)
+3. **Merger vers `main`** après validation
+4. **Production auto-update** via Pages + top-level bindings
+
+### Coûts/Maintenance Production
+
+- **Pas de configuration manuelle requise** - tout est automatisé
+- **Logs disponibles**: `npx wrangler tail`
+- **Monitoring**: Cloudflare Dashboard
+- **Rollback**: `git revert` + force redeploy
 
 ---
 
-## 📞 Pour Démarrer
+## 📞 Pour Commencer à Développer
 
-1. **Lire**: [PRODUCTION_DEPLOYMENT.md](PRODUCTION_DEPLOYMENT.md)
-2. **Valider**: [VALIDATION_PRODUCTION.md](VALIDATION_PRODUCTION.md)
-3. **Exécuter**: Les étapes dans l'ordre
-4. **Documenter**: Noter les IDs de database et secrets
+1. **Se mettre sur dev**: `git checkout dev`
+2. **Lancer le backend**: `cd cloudflare && npm run dev` (port 8787)
+3. **Lancer le frontend**: `npm run dev` (port 8080, dans autre terminal)
+4. **Ouvrir**: http://localhost:8080/tombola
+5. **Développer et tester**
+6. **Merger** et déployer quand prêt
 
-**Bonne chance! 🚀**
+**Production est LIVE et prête! 🚀**

@@ -104,7 +104,7 @@ npx wrangler d1 execute les-ptits-trinquat-prod \
 
 **Action**:
 - [ ] Exécuter les commandes ci-dessus
-- [ ] Vérifier que COUNT(*) = 7 (7 tables créées)
+- [ ] Vérifier que COUNT(*) = 8 (8 tables créées)
 
 ---
 
@@ -190,7 +190,7 @@ cd cloudflare
 
 # IMPORTANT: SANS --env=dev pour production!
 npm run deploy
-
+npx wrangler deploy --env=""  # Empty string = top-level
 # Vous devriez voir:
 # ✓ Uploaded les-ptits-trinquat-api
 # → https://les-ptits-trinquat-api.mehdozz007.workers.dev
