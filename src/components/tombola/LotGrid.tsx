@@ -64,7 +64,7 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
             Découvrez les lots à gagner 🎁
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Parcourez les lots proposés par les familles participantes. 
+            Parcourez les lots proposés par les familles participantes.
             Réservez ceux qui vous intéressent et organisez les échanges en toute simplicité.
           </p>
         </motion.div>
@@ -115,7 +115,7 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
               {filter === "all" ? "Aucun lot pour le moment" : "Aucun lot dans cette catégorie"}
             </h3>
             <p className="text-muted-foreground">
-              {filter === "all" 
+              {filter === "all"
                 ? "Soyez le premier à proposer un lot !"
                 : "Essayez un autre filtre pour voir plus de lots."}
             </p>
