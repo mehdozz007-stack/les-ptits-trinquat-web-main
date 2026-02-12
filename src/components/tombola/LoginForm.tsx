@@ -102,11 +102,11 @@ export function LoginForm({ onLoginSuccess, onLogin, onRegister, loading = false
             className="w-full max-w-xs md:max-w-md mx-auto"
         >
             <Card className="border border-primary/20 shadow-card bg-gradient-to-br from-background via-primary/5 to-background">
-                <CardHeader className="space-y-0 py-3 md:space-y-2 md:py-6 border-b border-primary/10">
+                <CardHeader className="space-y-0 pt-6 pb-3 md:pt-10 md:pb-6 border-b border-primary/10">
                     <div className="mb-3 inline-flex justify-center w-full">
                         <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
                             {isRegisterMode ? <UserPlus className="h-4 w-4" /> : <LogIn className="h-4 w-4" />}
-                            {isRegisterMode ? "Creer un compte" : "Connexion"}
+                            {isRegisterMode ? "Créer un compte" : "Connexion"}
                         </div>
                     </div>
                     <CardTitle className="text-center text-lg md:text-2xl font-bold text-foreground">
@@ -114,8 +114,8 @@ export function LoginForm({ onLoginSuccess, onLogin, onRegister, loading = false
                     </CardTitle>
                     <p className="hidden text-center text-xs md:block md:text-sm text-muted-foreground">
                         {isRegisterMode
-                            ? "Cree un compte pour participer et gerer tes participants"
-                            : "Connecte-toi pour acceder a la tombola"}
+                            ? "Créez un compte pour gérer vos participations"
+                            : "Connectez-vous pour accéder à la tombola !"}
                     </p>
                 </CardHeader>
 
@@ -144,7 +144,7 @@ export function LoginForm({ onLoginSuccess, onLogin, onRegister, loading = false
                                 <Input
                                     id="password"
                                     type={showPassword ? "text" : "password"}
-                                    placeholder={isRegisterMode ? "Minimum 8 caracteres" : "||||||||||"}
+                                    placeholder={isRegisterMode ? "Minimum 8 caracteres" : "******"}
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     disabled={isLoading || loading}
@@ -175,9 +175,8 @@ export function LoginForm({ onLoginSuccess, onLogin, onRegister, loading = false
                                             value={formData.passwordConfirm}
                                             onChange={(e) => setFormData({ ...formData, passwordConfirm: e.target.value })}
                                             disabled={isLoading || loading}
-                                            className={`border-2 bg-card placeholder-muted-foreground text-foreground focus:border-primary focus:ring-primary/20 focus:bg-card transition-all duration-200 pr-10 ${
-                                                errors.passwordConfirm ? "border-destructive" : "border-muted"
-                                            }`}
+                                            className={`border-2 bg-card placeholder-muted-foreground text-foreground focus:border-primary focus:ring-primary/20 focus:bg-card transition-all duration-200 pr-10 ${errors.passwordConfirm ? "border-destructive" : "border-muted"
+                                                }`}
                                         />
                                         <button
                                             type="button"
