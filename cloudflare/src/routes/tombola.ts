@@ -55,18 +55,48 @@ tombola.get('/participants', async (c) => {
 });
 
 // ============================================================
-// GET /tombola/participants/my - Mes participants (filtrés par user_id)
+// GET /tombola/participants/my - Mes participants (filtrés par user_id du token)
 // ============================================================
 tombola.get('/participants/my', async (c) => {
   try {
-    const userId = c.req.query('user_id');
-
-    if (!userId) {
+    // Récupérer le token des headers
+    const authHeader = c.req.header('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return c.json<ApiResponse>({
         success: false,
-        error: 'user_id query parameter is required'
-      }, 400);
+        error: 'Authentification requise'
+      }, 401);
     }
+
+    const token = authHeader.replace('Bearer ', '');
+
+    // Chercher la session et l'utilisateur
+    const session = await c.env.DB.prepare(`
+      SELECT s.user_id, s.expires_at
+      FROM sessions s
+      WHERE s.token = ?
+    `).bind(token).first<{
+      user_id: string;
+      expires_at: string;
+    }>();
+
+    if (!session) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Token invalide'
+      }, 401);
+    }
+
+    // Vérifier l'expiration
+    const expiresAt = new Date(session.expires_at);
+    if (expiresAt < new Date()) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Token expiré'
+      }, 401);
+    }
+
+    const userId = session.user_id;
 
     const result = await c.env.DB.prepare(`
       SELECT id, prenom, role, classes, emoji, created_at
@@ -245,12 +275,72 @@ tombola.get('/lots/my', async (c) => {
 });
 
 // ============================================================
-// POST /tombola/participants - Créer un participant (public)
+// POST /tombola/participants - Créer un participant (authentification requise)
 // ============================================================
-tombola.post('/participants', rateLimitMiddleware, optionalAuth, async (c) => {
+tombola.post('/participants', rateLimitMiddleware, async (c) => {
   try {
+    // Vérifier l'authentification via header
+    const authHeader = c.req.header('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Authentification requise'
+      }, 401);
+    }
+
+    const token = authHeader.replace('Bearer ', '');
+
+    // Chercher la session et l'utilisateur
+    const session = await c.env.DB.prepare(`
+      SELECT s.user_id, u.is_active, s.expires_at
+      FROM sessions s
+      JOIN users u ON s.user_id = u.id
+      WHERE s.token = ?
+    `).bind(token).first<{
+      user_id: string;
+      is_active: number;
+      expires_at: string;
+    }>();
+
+    if (!session) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Token invalide'
+      }, 401);
+    }
+
+    // Vérifier l'expiration
+    const expiresAt = new Date(session.expires_at);
+    if (expiresAt < new Date()) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Token expiré'
+      }, 401);
+    }
+
+    // Vérifier que l'utilisateur est actif
+    if (!session.is_active) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Utilisateur invalide ou désactivé'
+      }, 401);
+    }
+
+    const userId = session.user_id;
+
+    // ⏸️ VÉRIFIER QUE L'UTILISATEUR N'A PAS DÉJÀ UN PARTICIPANT
+    const existingParticipant = await c.env.DB.prepare(
+      'SELECT id FROM tombola_participants WHERE user_id = ?'
+    ).bind(userId).first<{ id: string }>();
+
+    if (existingParticipant) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Vous avez déjà un participant. Supprimez-le d\'abord si vous voulez en créer un nouveau.'
+      }, 400);
+    }
+
     const body = await c.req.json<TombolaParticipantCreateRequest>();
-    const authContext = getAuthContext(c);
 
     // Validation prénom
     const prenomValidation = validateInputLength(body.prenom, 'Prénom', 1, 100);
@@ -263,7 +353,7 @@ tombola.post('/participants', rateLimitMiddleware, optionalAuth, async (c) => {
     if (!isValidEmail(email)) {
       return c.json<ApiResponse>({
         success: false,
-        error: 'Invalid email address'
+        error: 'Adresse email invalide'
       }, 400);
     }
 
@@ -294,9 +384,8 @@ tombola.post('/participants', rateLimitMiddleware, optionalAuth, async (c) => {
     }
 
     const id = generateId();
-    // Utiliser user_id du body (client) ou du contexte auth (server)
-    const userId = body.user_id || authContext?.user.id || null;
 
+    // Insérer le participant associé à l'user_id authentifié
     await c.env.DB.prepare(`
       INSERT INTO tombola_participants (id, user_id, prenom, email, role, classes, emoji)
       VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -307,13 +396,13 @@ tombola.post('/participants', rateLimitMiddleware, optionalAuth, async (c) => {
     return c.json<ApiResponse>({
       success: true,
       data: { id },
-      message: 'Participant created'
+      message: 'Participant créé avec succès'
     }, 201);
   } catch (error) {
     console.error('Create participant error:', error);
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred'
+      error: 'Erreur lors de la création du participant'
     }, 500);
   }
 });
@@ -794,35 +883,96 @@ tombola.delete('/admin/participants/:id', requireAdmin, async (c) => {
 });
 
 // ============================================================
-// DELETE /tombola/participants/:id - Supprimer sa propre participation (public)
+// DELETE /tombola/participants/:id - Supprimer sa propre participation (authentification requise)
 // ============================================================
-tombola.delete('/participants/:id', optionalAuth, async (c) => {
+tombola.delete('/participants/:id', async (c) => {
   try {
+    // Vérifier l'authentification via header
+    const authHeader = c.req.header('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Authentification requise'
+      }, 401);
+    }
+
+    const token = authHeader.replace('Bearer ', '');
+
+    // Chercher la session et l'utilisateur
+    const session = await c.env.DB.prepare(`
+      SELECT s.user_id, u.is_active, s.expires_at
+      FROM sessions s
+      JOIN users u ON s.user_id = u.id
+      WHERE s.token = ?
+    `).bind(token).first<{
+      user_id: string;
+      is_active: number;
+      expires_at: string;
+    }>();
+
+    if (!session) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Token invalide'
+      }, 401);
+    }
+
+    // Vérifier l'expiration
+    const expiresAt = new Date(session.expires_at);
+    if (expiresAt < new Date()) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Token expiré'
+      }, 401);
+    }
+
+    const userId = session.user_id;
     const { id } = c.req.param();
 
-    // Vérifier que le participant existe
+    // Vérifier que le participant existe ET appartient à l'utilisateur courant
     const participant = await c.env.DB.prepare(
-      'SELECT id FROM tombola_participants WHERE id = ?'
-    ).bind(id).first<{ id: string }>();
+      'SELECT id, user_id FROM tombola_participants WHERE id = ?'
+    ).bind(id).first<{ id: string; user_id: string }>();
 
     if (!participant) {
       return c.json<ApiResponse>({ success: false, error: 'Participant not found' }, 404);
     }
 
+    // Vérifier que le participant appartient à l'utilisateur authentifié
+    if (participant.user_id !== userId) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Vous ne pouvez supprimer que votre propre participation'
+      }, 403);
+    }
+
+    // Supprimer les lots du participant d'abord (cascade)
+    await c.env.DB.prepare('DELETE FROM tombola_lots WHERE parent_id = ?').bind(id).run();
+
     // Supprimer la participation
     await c.env.DB.prepare('DELETE FROM tombola_participants WHERE id = ?').bind(id).run();
 
-    await logAudit(c.env.DB, null, 'OWN_PARTICIPATION_DELETED', 'participant', id, c.req.raw);
+    // Supprimer toutes les sessions de l'utilisateur
+    await c.env.DB.prepare('DELETE FROM sessions WHERE user_id = ?').bind(userId).run();
+
+    // Supprimer les rôles de l'utilisateur
+    await c.env.DB.prepare('DELETE FROM user_roles WHERE user_id = ?').bind(userId).run();
+
+    // Supprimer aussi les données d'audit
+    await c.env.DB.prepare('DELETE FROM audit_logs WHERE user_id = ?').bind(userId).run();
+
+    // Supprimer l'utilisateur lui-même (droit à l'oubli)
+    await c.env.DB.prepare('DELETE FROM users WHERE id = ?').bind(userId).run();
 
     return c.json<ApiResponse>({
       success: true,
-      message: 'Participant deleted'
+      message: 'Compte supprimé : toutes les données utilisateur ont été supprimées de la base de données'
     });
   } catch (error) {
     console.error('Delete own participation error:', error);
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred'
+      error: 'Une erreur est survenue'
     }, 500);
   }
 });
