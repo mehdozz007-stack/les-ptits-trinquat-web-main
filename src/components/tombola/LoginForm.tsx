@@ -226,7 +226,7 @@ export function LoginForm({ onLoginSuccess, onLogin, onRegister, loading = false
                                 }}
                                 className="text-xs md:text-sm text-muted-foreground hover:text-primary font-semibold transition-colors duration-200 underline underline-offset-2"
                             >
-                                {isRegisterMode ? "Déjà enregistré ? Me connecter" : "Créer un nouveau compte"}
+                                {isRegisterMode ? "Déjà enregistré ? Me connecter" : "Nouveau ? Créer votre compte"}
                             </button>
                         </div>
                     </form>
