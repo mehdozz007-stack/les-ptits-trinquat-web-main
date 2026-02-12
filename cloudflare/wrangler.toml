@@ -27,6 +27,12 @@ database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 [env.production]
 vars = { ENVIRONMENT = "production", CORS_ORIGIN = "https://www.lespetitstrinquat.fr", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
 
+# D1 Database for production
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "les-ptits-trinquat-prod"
+database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
+
 # ============================================================
 # Environnement de développement
 # ============================================================
