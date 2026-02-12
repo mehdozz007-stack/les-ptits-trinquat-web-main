@@ -95,8 +95,10 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
   /**
    * Récupère les participants créés par l'utilisateur courant (filtrés par user_id)
    */
-  const fetchMyParticipants = useCallback(async (token: string) => {
-    const url = apiUrl('/api/tombola/participants/my');
+  const fetchMyParticipants = useCallback(async (token: string, userId?: string) => {
+    const url = userId 
+      ? apiUrl(`/api/tombola/participants/my?user_id=${encodeURIComponent(userId)}`)
+      : apiUrl('/api/tombola/participants/my');
     console.log('📥 GET request to:', url);
 
     try {

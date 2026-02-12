@@ -38,10 +38,10 @@ export function ParticipantForm() {
 
   // Charger les participants quand on est authentifié
   useEffect(() => {
-    if (isAuthenticated && token) {
-      fetchMyParticipants(token);
+    if (isAuthenticated && token && user?.id) {
+      fetchMyParticipants(token, user.id);
     }
-  }, [isAuthenticated, token, fetchMyParticipants]);
+  }, [isAuthenticated, token, user?.id, fetchMyParticipants]);
 
   // Si non authentifié, afficher LoginForm dans la section
   if (!isAuthenticated || !token) {
