@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiUrl } from '@/lib/api-config';
 import { useGlobalRefresh } from '@/context/TombolaRefreshContext';
+import { useCurrentUser } from './useCurrentUser';
 
 export interface TombolaLot {
   id: string;
@@ -24,6 +25,7 @@ export interface TombolaLot {
 }
 
 export function useTombolaLots() {
+  const { userId } = useCurrentUser();
   const [lots, setLots] = useState<TombolaLot[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -134,6 +136,8 @@ export function useTombolaLots() {
 
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/mark-remis`), {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId }),
       });
       if (!response.ok) throw new Error('Failed to mark as remis');
 
@@ -170,7 +174,7 @@ export function useTombolaLots() {
       const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ parent_id: parentId }),
+        body: JSON.stringify({ parent_id: parentId, user_id: userId }),
       });
       if (!response.ok) throw new Error('Failed to delete lot');
 

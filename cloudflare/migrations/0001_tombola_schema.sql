@@ -57,8 +57,7 @@ CREATE TABLE IF NOT EXISTS tombola_participants (
     role TEXT NOT NULL DEFAULT 'Parent participant',
     classes TEXT,
     emoji TEXT NOT NULL DEFAULT '😊',
-    created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+    created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 
 CREATE INDEX IF NOT EXISTS idx_tombola_participants_user_id ON tombola_participants(user_id);

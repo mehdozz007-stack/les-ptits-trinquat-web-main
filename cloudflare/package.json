@@ -4,7 +4,7 @@
   "description": "API Cloudflare Workers pour Les P'tits Trinquat",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --env dev",
     "deploy": "wrangler deploy",
     "db:create": "wrangler d1 create les-ptits-trinquat-db",
     "db:migrate": "wrangler d1 execute les-ptits-trinquat-db --file=migrations/0001_initial_schema.sql",
@@ -19,6 +19,6 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.0.0",
     "typescript": "^5.0.0",
-    "wrangler": "^4.61.1"
+    "wrangler": "^4.64.0"
   }
 }

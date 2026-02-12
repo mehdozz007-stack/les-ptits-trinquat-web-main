@@ -7,7 +7,7 @@ export default defineConfig(() => ({
   base: "/",
   server: {
     host: "::",
-    port: 8080,
+    port: 8082,
     fs: {
       // Permet à Vite de servir les fichiers du dossier public
       allow: ["."],
@@ -15,7 +15,7 @@ export default defineConfig(() => ({
     // Proxy pour les requêtes API vers le backend local
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8787',
+        target: 'http://localhost:8787',
         changeOrigin: true,
         rewrite: (path) => path,
       }

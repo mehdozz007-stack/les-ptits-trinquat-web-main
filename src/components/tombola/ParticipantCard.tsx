@@ -4,30 +4,32 @@ import { Trash2, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useToast } from "@/hooks/use-toast";
 
 interface ParticipantCardProps {
   participant: TombolaParticipantPublic;
   index: number;
   currentParticipant?: TombolaParticipantPublic | null;
-  onDelete?: (participantId: string) => Promise<{ error: string | null }>;
+  onDelete?: (participantId: string, token: string) => Promise<{ error: string | null }>;
   onRefresh?: () => Promise<void>;
 }
 
 export function ParticipantCard({ participant, index, currentParticipant, onDelete, onRefresh }: ParticipantCardProps) {
   const { toast } = useToast();
+  const { token } = useCurrentUser();
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   const isCurrentUser = currentParticipant?.id === participant.id;
 
   const handleDelete = async () => {
-    if (!isCurrentUser || !onDelete) return;
+    if (!isCurrentUser || !onDelete || !token) return;
 
     const confirmed = window.confirm(`Êtes-vous sûr de vouloir supprimer votre participation ? Cette action est irréversible.`);
     if (!confirmed) return;
 
     setDeleteLoading(true);
-    const { error } = await onDelete(participant.id);
+    const { error } = await onDelete(participant.id, token);
     setDeleteLoading(false);
 
     if (error) {
@@ -46,8 +48,18 @@ export function ParticipantCard({ participant, index, currentParticipant, onDele
 
     toast({
       title: "Participation supprimée",
-      description: "Vous avez été retiré de la tombola.",
+      description: "Redirection en cours...",
     });
+
+    // Nettoyer complètement le localStorage avec les bonnes clés
+    setTimeout(() => {
+      localStorage.removeItem('tombola_auth_token');
+      localStorage.removeItem('tombola_current_user');
+      localStorage.removeItem('participantId');
+      localStorage.removeItem('token');
+      // Forcer un reload complet de la page pour réinitialiser l'état
+      window.location.reload();
+    }, 1000);
   };
 
   return (

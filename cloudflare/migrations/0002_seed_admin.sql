@@ -11,7 +11,7 @@ INSERT OR IGNORE INTO users (id, email, password_hash)
 VALUES (
     'admin-initial-001',
     'admin@ptits-trinquat.fr',
-    '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/X4.1gMgS8smOSG1v2'
+    'adminadmin'
 );
 
 INSERT OR IGNORE INTO user_roles (user_id, role)

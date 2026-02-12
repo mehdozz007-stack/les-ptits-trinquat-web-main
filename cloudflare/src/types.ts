@@ -86,7 +86,7 @@ export interface TombolaLot {
   nom: string;
   description: string | null;
   icone: string;
-  statut: 'disponible' | 'réservé' | 'remis';
+  statut: 'disponible' | 'reserve' | 'remis';
   parent_id: string;
   reserved_by: string | null;
   created_at: string;
@@ -143,6 +143,18 @@ export interface LoginResponse {
   expires_at: string;
 }
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  password_confirm: string;
+}
+
+export interface RegisterResponse {
+  id: string;
+  email: string;
+  message: string;
+}
+
 export interface NewsletterSubscribeRequest {
   email: string;
   first_name?: string;
@@ -160,6 +172,7 @@ export interface TombolaParticipantCreateRequest {
   role?: string;
   classes?: string;
   emoji?: string;
+  user_id?: string; // Optional user ID for client-side isolation
 }
 
 export interface TombolaLotCreateRequest {

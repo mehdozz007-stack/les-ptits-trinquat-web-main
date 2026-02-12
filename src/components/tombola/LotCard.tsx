@@ -143,7 +143,6 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
       transition={{ duration: 0.4, delay: index * 0.05 }}
     >
       <Card
-
         className={`group relative h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-glow ${lot.statut === "remis" ? "opacity-60" : ""
           }`}
       >
@@ -193,16 +192,14 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           </div>
 
           {/* Owner info */}
-          {!isOwner && (
-            <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2">
-              <span className="text-lg">{lot.parent?.emoji || "😊"}</span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">
-                  Proposé par {lot.parent?.prenom || "Anonyme"}
-                </p>
-              </div>
+          <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2">
+            <span className="text-lg">{lot.parent?.emoji || "😊"}</span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-medium">
+                Proposé par {isOwner ? "vous" : lot.parent?.prenom}
+              </p>
             </div>
-          )}
+          </div>
 
           {/* Reserved by info */}
           {lot.statut === "reserve" && lot.reserver && (
@@ -217,7 +214,8 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
           {/* Actions */}
           <div className="flex gap-2">
-            {canReserve && (
+            {/* LOT DISPONIBLE - Everyone (except owner) can reserve */}
+            {lot.statut === "disponible" && currentParticipant && !isOwner && (
               <motion.div className="flex-1">
                 <Button
                   size="sm"
@@ -235,11 +233,19 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               </motion.div>
             )}
 
-            {lot.statut === "reserve" && currentParticipant && !isOwner && (
+            {/* LOT AVAILABLE - Show message if no participant selected */}
+            {lot.statut === "disponible" && !currentParticipant && (
+              <p className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
+                Connectez vous pour réserver ce lot
+              </p>
+            )}
+
+            {/* LOT RESERVED - Reserver can contact owner */}
+            {lot.statut === "reserve" && isReserver && (
               <div className="flex justify-center flex-1">
                 <Button
                   size="sm"
-                  className="gap-2 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 border-0"
+                  className="w-full gap-2 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 border-0"
                   onClick={handleContact}
                   disabled={contactLoading}
                 >
@@ -253,11 +259,12 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               </div>
             )}
 
-            {isOwner && lot.statut === "reserve" && (
+            {/* LOT RESERVED - Owner can mark as delivered or delete */}
+            {lot.statut === "reserve" && isOwner && (
               <div className="flex justify-center gap-2 flex-1">
                 <Button
                   size="sm"
-                  className="gap-2 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 border-0"
+                  className="flex-1 gap-2 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 hover:from-emerald-600 hover:via-green-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 border-0"
                   onClick={handleMarkAsRemis}
                   disabled={remisLoading}
                 >
@@ -284,7 +291,15 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               </div>
             )}
 
-            {isOwner && lot.statut !== "reserve" && (
+            {/* LOT RESERVED - Other participants see nothing */}
+            {lot.statut === "reserve" && !isReserver && !isOwner && (
+              <p className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
+                Lot réservé
+              </p>
+            )}
+
+            {/* LOT AVAILABLE - Owner can only delete */}
+            {lot.statut === "disponible" && isOwner && (
               <div className="flex justify-center flex-1">
                 <Button
                   size="sm"
@@ -302,9 +317,10 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               </div>
             )}
 
-            {isOwner && lot.statut === "disponible" && !isOwner && !canReserve && (
+            {/* LOT DELIVERED - No actions, visible only for owner and reserver */}
+            {lot.statut === "remis" && !isOwner && !isReserver && (
               <p className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
-                En attente de réservation
+                Lot remis
               </p>
             )}
           </div>

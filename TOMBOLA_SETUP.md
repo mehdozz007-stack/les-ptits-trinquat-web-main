@@ -5,26 +5,25 @@
 
 ## ✅ Solution - 3 étapes
 
-### Étape 1: Déployer l'API mise à jour
+### Étape 1: Vérifier que les dépendances sont installées
 ```bash
 cd cloudflare && npm install
-npm install --save-dev wrangler@latest
-npm list wrangler
-npx wrangler deploy
 ```
-**Résultat attendu:** "Successfully published to https://les-ptits-trinquat-api.mehdozz007.workers.dev"
+**Résultat attendu:** Dépendances installées sans erreurs
 
-### Étape 2: Créer les tables de base de données
+### Étape 2: Démarrer le serveur backend (Terminal 1)
 ```bash
-npx wrangler d1 execute tombola-dev --file=migrations/0001_tombola_schema.sql --remote
+cd cloudflare
+npm run dev
 ```
-**Résultat attendu:** Aucune erreur, tables créées
+**Résultat attendu:** "Local mode enabled" et le serveur écoute sur `http://127.0.0.1:8787`
 
-### Étape 3: Initialiser l'utilisateur admin
+### Étape 3: Démarrer le serveur frontend (Terminal 2)
 ```bash
-npx wrangler d1 execute tombola-dev --file=migrations/0002_seed_admin.sql --remote
+cd ..
+npm run dev
 ```
-**Résultat attendu:** Admin créé avec succès
+**Résultat attendu:** Accédez à `http://localhost:8080/tombola`
 
 ---
 
@@ -49,45 +48,61 @@ curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participa
 
 ---
 
-## 🚀 Tester Localement
+## 🚀 Architecture Locale
 
-### Dev server frontend (terminal 1)
-```bash
-npm run dev
 ```
-Accédez à: http://localhost:8081/tombola
+Frontend (Port 8080) --[proxy /api]--> Backend (Port 8787)
+  ↓                                          ↓
+http://localhost:8080                 http://127.0.0.1:8787
+  vite.config.ts                        wrangler dev
+  proxy: /api -> 127.0.0.1:8787         uses local D1 database
+```
 
-### Voir les logs backend (terminal 2)
+### Vérifier le statut
 ```bash
-cd cloudflare
-wrangler tail
+# Frontend
+curl http://localhost:8080/
+
+# Backend
+curl http://127.0.0.1:8787/health
+
+# Tester l'API via le proxy
+curl http://localhost:8080/api/tombola/participants
 ```
 
 ---
 
-## 📝 Changements Effectués
+## � Statut Déploiement
 
-1. **Endpoint d'inscription rendu PUBLIC** (sans authentification requise)
-   - Fichier: `cloudflare/src/routes/tombola.ts` ligne 92
-   - Ancien: `POST /participants - Créer un participant (auth requis)`
-   - Nouveau: `POST /participants - Créer un participant (public)`
+### Production (main branch)
+✅ **API**: https://les-ptits-trinquat-api.mehdozz007.workers.dev
+✅ **Database**: Cloudflare D1 (les-ptits-trinquat-prod)
+✅ **Endpoints**: GET/POST participants, GET/POST lots fonctionnels
+✅ **Admin**: mehdoz007@gmail.com créé
 
-2. **Amélioration des messages d'erreur**
-   - Fichier: `src/components/tombola/ParticipantForm.tsx`
-   - Affichage du message d'erreur réel du serveur
+### Développement (dev branch)
+🔄 **Frontend**: http://localhost:8080 (wrangler dev)
+🔄 **Backend**: http://127.0.0.1:8787 (npm run dev)
+🔄 **Database**: Local D1 instance
 
-3. **Amélioration du hook API**
-   - Fichier: `src/hooks/useTombolaParticipants.ts`
-   - Meilleure gestion des réponses JSON
-   - Logging amélioré pour le débogage
+**⚠️ Important**: Développer sur la branche `dev` avant de merger vers `main`
 
 ---
 
-## ⚠️ Important
-Assurez-vous que:
-- ✅ Vous êtes connecté à Cloudflare CLI (`wrangler whoami`)
-- ✅ Le projet Cloudflare est configuré (`cloudflare/wrangler.toml`)
-- ✅ La base de données D1 "tombola-dev" existe
+## ⚠️ Important pour le Développement
+
+### Configuration Requise
+- ✅ Assurez-vous d'être sur la branche `dev`: `git checkout dev`
+- ✅ Dépendances installées: `cd cloudflare && npm install && cd ..`
+- ✅ Deux terminals séparés pour le développement local
+
+### Ordre de Démarrage
+1. **D'abord**: Terminal 1 → `cd cloudflare && npm run dev` (backend)
+2. **Ensuite**: Terminal 2 → `npm run dev` (frontend)
+3. **Puis**: Ouvrir http://localhost:8080/tombola
+
+### Arrêter le Développement
+- Appuyer sur `Ctrl+C` dans les deux terminals pour arrêter les serveurs
 
 ---
 
