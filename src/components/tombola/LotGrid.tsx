@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Gift, Loader2, Filter } from "lucide-react";
 import { LotCard } from "./LotCard";
@@ -18,8 +18,29 @@ const FILTER_OPTIONS = [
 ];
 
 export function LotGrid({ currentParticipant }: LotGridProps) {
-  const { lots, loading, error } = useTombolaLots();
+  const { lots, loading, error, refetch } = useTombolaLots();
   const [filter, setFilter] = useState("all");
+
+  // Rafraîchir les lots quand la fenêtre retrouve le focus
+  useEffect(() => {
+    const handleFocus = () => {
+      console.log('📱 Window focused - refreshing lots');
+      refetch();
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [refetch]);
+
+  // Rafraîchir périodiquement toutes les 10 secondes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('⏱️ Periodic refresh - syncing lots');
+      refetch();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [refetch]);
 
   const filteredLots = lots.filter((lot) => {
     if (filter === "all") return true;

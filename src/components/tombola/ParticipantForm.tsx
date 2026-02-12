@@ -43,6 +43,31 @@ export function ParticipantForm() {
     }
   }, [isAuthenticated, token, user?.id, fetchMyParticipants]);
 
+  // Rafraîchir les participants perso quand la fenêtre retrouve le focus
+  useEffect(() => {
+    if (!isAuthenticated || !token || !user?.id) return;
+
+    const handleFocus = () => {
+      console.log('📱 Window focused - refreshing my participants');
+      fetchMyParticipants(token, user.id);
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [isAuthenticated, token, user?.id, fetchMyParticipants]);
+
+  // Rafraîchir périodiquement toutes les 10 secondes
+  useEffect(() => {
+    if (!isAuthenticated || !token || !user?.id) return;
+
+    const interval = setInterval(() => {
+      console.log('⏱️ Periodic refresh - syncing my participants');
+      fetchMyParticipants(token, user.id);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [isAuthenticated, token, user?.id, fetchMyParticipants]);
+
   // Si non authentifié, afficher LoginForm dans la section
   if (!isAuthenticated || !token) {
     return (

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Users, Loader2 } from "lucide-react";
+import { useEffect } from "react";
 import { ParticipantCard } from "./ParticipantCard";
 import { useTombolaParticipants, TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 
@@ -9,6 +10,27 @@ interface ParticipantGridProps {
 
 export function ParticipantGrid({ currentParticipant }: ParticipantGridProps) {
   const { participants, loading, error, deleteParticipant, refetch } = useTombolaParticipants();
+
+  // Rafraîchir les participants quand la fenêtre retrouve le focus
+  useEffect(() => {
+    const handleFocus = () => {
+      console.log('📱 Window focused - refreshing participants');
+      refetch();
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, [refetch]);
+
+  // Rafraîchir périodiquement toutes les 10 secondes pour synchronisation multi-appareils
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('⏱️ Periodic refresh - syncing participants');
+      refetch();
+    }, 10000); // Rafraîchir toutes les 10 secondes
+
+    return () => clearInterval(interval);
+  }, [refetch]);
 
   return (
     <section className="py-16 md:py-20">
