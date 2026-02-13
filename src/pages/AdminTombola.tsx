@@ -259,7 +259,7 @@ export default function AdminTombola() {
                                             <label className="text-sm font-semibold mb-2 block">Email</label>
                                             <Input
                                                 type="email"
-                                                placeholder="mehdozz007@gmail.com"
+                                                placeholder="admin@email.com"
                                                 value={adminEmail}
                                                 onChange={(e) => setAdminEmail(e.target.value)}
                                                 required
@@ -291,8 +291,8 @@ export default function AdminTombola() {
                                     <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                                         <p className="text-xs text-blue-700 font-mono">
                                             <strong>Identifiants admin:</strong><br />
-                                            Email: mehdozz007@gmail.com<br />
-                                            Mot de passe: poiuytreza4U!
+                                            Email: admin@email.com<br />
+                                            Mot de passe: Entrez le mot de passe admin défini dans votre fichier .env.local (ADMIN_PASSWORD)
                                         </p>
                                     </div>
                                 </CardContent>
