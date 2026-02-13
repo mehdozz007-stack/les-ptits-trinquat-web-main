@@ -82,7 +82,7 @@ export default function Auth() {
 
             <section className="bg-gradient-to-b from-muted/30 via-background to-muted/20 py-16 md:py-20">
                 <div className="container">
-                    <h2 className="mb-6 text-3xl font-extrabold">
+                    <h2 className="mb-6 text-3xl font-extrabold text-center">
                         Votre <span className="text-gradient">Guide</span>
                     </h2>
                     <motion.div
