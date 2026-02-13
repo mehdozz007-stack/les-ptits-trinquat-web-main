@@ -97,7 +97,9 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
 
                     const authData = await authResponse.json();
                     if (!authData.success) {
-                        setErrors({ email: authData.error || "Erreur lors de la création du compte" });
+                        const errorMsg = authData.error || authData.message || "Erreur lors de la création du compte";
+                        console.error('Register error:', errorMsg);
+                        setErrors({ email: errorMsg });
                         return;
                     }
 
@@ -197,7 +199,9 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
 
                     const loginData = await loginResponse.json();
                     if (!loginData.success) {
-                        setErrors({ email: loginData.error || "Email ou mot de passe incorrect. Veuillez vérifier vos identifiants." });
+                        const errorMsg = loginData.error || loginData.message || "Email ou mot de passe incorrect. Veuillez vérifier vos identifiants.";
+                        console.error('Login error:', errorMsg);
+                        setErrors({ email: errorMsg });
                         return;
                     }
 

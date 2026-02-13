@@ -262,7 +262,9 @@ export const TombolaAPI = {
 
         if (!response.ok) {
             const error = await response.json().catch(() => ({ error: 'Identifiants invalides' }));
-            throw new Error(error.error || 'Invalid admin credentials');
+            const errorMessage = error.error || 'Identifiants invalides';
+            console.error('❌ adminLogin - Response error:', errorMessage);
+            throw new Error(errorMessage);
         }
 
         const data = await response.json();

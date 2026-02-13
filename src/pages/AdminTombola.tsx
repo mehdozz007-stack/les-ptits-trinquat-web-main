@@ -72,7 +72,8 @@ export default function AdminTombola() {
             }
         } catch (error) {
             console.error('Login error:', error);
-            setLoginError("Email ou mot de passe incorrect");
+            const errorMessage = error instanceof Error ? error.message : "Email ou mot de passe incorrect";
+            setLoginError(errorMessage);
         } finally {
             setLoading(false);
         }
