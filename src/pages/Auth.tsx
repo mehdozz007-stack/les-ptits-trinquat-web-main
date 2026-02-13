@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
+import { Heart, Users, Sparkles } from "lucide-react";
 import { Layout } from '@/components/layout/Layout';
 import { AuthTombolaForm } from '@/components/tombola/AuthTombolaForm';
 import { TombolaHero } from '@/components/tombola/TombolaHero';
+import { SolidaritySection } from '@/components/tombola/SolidaritySection';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 export default function Auth() {
@@ -90,8 +91,18 @@ export default function Auth() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="max-w-2xl mx-auto p-8 md:p-10 bg-gradient-to-br from-primary/5 via-amber/8 to-secondary/5 rounded-2xl border border-amber/20 shadow-lg shadow-amber/10 backdrop-blur-sm hover:shadow-amber/15 transition-all duration-500"
+                        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-secondary/10 to-sky/10 p-8 md:p-12 max-w-2xl mx-auto via-amber/8 border border-amber/20 shadow-lg shadow-amber/10 backdrop-blur-sm hover:shadow-amber/15 transition-all duration-500"
                     >
+                        <div className="mb-6 flex justify-center">
+                            <motion.div
+                                animate={{ scale: [1, 1.1, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-secondary/20"
+                            >
+                                <Heart className="h-8 w-8 text-primary" />
+                            </motion.div>
+                        </div>
+
                         {/* Sous-titre */}
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -100,7 +111,7 @@ export default function Auth() {
                             transition={{ duration: 0.5, delay: 0.3 }}
                             className="text-center mb-8"
                         >
-                            <h3 className="text-gradient text-xl font-semibold flex items-center justify-center gap-2">
+                            <h3 className="mb-4 text-center text-2xl font-bold md:text-3xl">
                                 Comment ça marche ?
                             </h3>
                         </motion.div>
@@ -148,18 +159,10 @@ export default function Auth() {
                                 </motion.li>
                             ))}
                         </motion.ul>
-
-                        {/* Ligne decorative en bas */}
-                        <motion.div
-                            initial={{ scaleX: 0 }}
-                            whileInView={{ scaleX: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.8, ease: "easeInOut" }}
-                            className="h-1 bg-gradient-to-r from-transparent via-amber-400/40 to-transparent mt-8 origin-left"
-                        />
                     </motion.div>
                 </div>
             </section>
+            <SolidaritySection />
         </Layout>
     );
 }
