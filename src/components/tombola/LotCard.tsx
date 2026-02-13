@@ -39,7 +39,7 @@ const STATUS_CONFIG = {
 } as const;
 
 export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
-  const { reserveLot, getContactLink, deleteLot, markAsRemis, markAsAvailable } = useTombolaLots();
+  const { reserveLot, getContactLink, deleteLot, markAsRemis, markAsAvailable, lots } = useTombolaLots();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [contactLoading, setContactLoading] = useState(false);
@@ -57,7 +57,11 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
   const statusConfig = STATUS_CONFIG[lot.statut as keyof typeof STATUS_CONFIG] || STATUS_CONFIG.disponible;
   const isOwner = currentParticipant?.id === lot.parent_id;
   const isReserver = currentParticipant?.id === lot.reserved_by;
-  const canReserve = lot.statut === "disponible" && currentParticipant && !isOwner;
+
+  // Compter les lots déjà réservés par l'utilisateur actuel
+  const userReservationCount = lots.filter(l => l.reserved_by === currentParticipant?.id).length;
+  const hasReachedReservationLimit = userReservationCount >= 2;
+  const canReserve = lot.statut === "disponible" && currentParticipant && !isOwner && !hasReachedReservationLimit;
 
   const handleReserve = async () => {
     if (!currentParticipant) return;
@@ -310,21 +314,27 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           <div className="flex gap-2">
             {/* LOT DISPONIBLE - Everyone (except owner) can reserve */}
             {lot.statut === "disponible" && currentParticipant && !isOwner && (
-              <motion.div className="flex-1">
-                <Button
-                  size="sm"
-                  className="w-full gap-2 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 hover:from-blue-600 hover:via-cyan-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-300 border-0"
-                  onClick={handleReserve}
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <Check className="h-4 w-4" />
-                  )}
-                  Réserver
-                </Button>
-              </motion.div>
+              hasReachedReservationLimit ? (
+                <p className="flex flex-1 items-center justify-center text-sm text-amber-700 bg-amber-50 p-3 rounded-lg font-medium">
+                  ⚠️ Limite atteinte (2 max)
+                </p>
+              ) : (
+                <motion.div className="flex-1">
+                  <Button
+                    size="sm"
+                    className="w-full gap-2 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 hover:from-blue-600 hover:via-cyan-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-300 border-0"
+                    onClick={handleReserve}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Check className="h-4 w-4" />
+                    )}
+                    Réserver
+                  </Button>
+                </motion.div>
+              )
             )}
 
             {/* LOT AVAILABLE - Show message if no participant selected */}
