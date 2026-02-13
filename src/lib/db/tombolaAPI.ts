@@ -50,10 +50,16 @@ export const TombolaAPI = {
      */
     async getLots(): Promise<Lot[]> {
         const response = await fetch(apiUrl('/api/tombola/lots'));
-        const data = await handleResponse<{ success: boolean; data: any[] }>(response);
+        const data = await handleResponse<any>(response);
+        
+        console.log('📦 getLots - Response data:', data);
+
+        // handleResponse returns either the array directly or { success, data }
+        const lots = Array.isArray(data) ? data : (data?.data || []);
+        console.log('📦 getLots - Lots received:', lots.length, 'lots');
 
         // Map API response to Lot interface
-        return (data.data || []).map((l: any) => ({
+        return lots.map((l: any) => ({
             id: l.id,
             parent_id: l.parent_id,
             title: l.nom,
@@ -207,6 +213,13 @@ export const TombolaAPI = {
     },
 
     /**
+     * Get admin JWT token from localStorage
+     */
+    getAdminToken(): string | null {
+        return localStorage.getItem('admin_token');
+    },
+
+    /**
      * Get auth token from localStorage
      */
     getAuth(): AuthToken | null {
@@ -257,14 +270,24 @@ export const TombolaAPI = {
      * Get all parents with emails (admin only)
      */
     async getAdminParents(): Promise<Parent[]> {
-        const auth = this.getAuth();
+        const token = this.getAdminToken();
+        console.log('🔐 getAdminParents - Token found:', !!token, token ? token.substring(0, 20) + '...' : 'MISSING');
+        
         const response = await fetch(apiUrl('/api/tombola/admin/participants'), {
-            headers: auth ? { 'Authorization': `Bearer ${auth.email}` } : {},
+            headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         });
 
+        console.log('📡 getAdminParents - Response status:', response.status);
+
         try {
-            const data = await handleResponse<{ success: boolean; data: any[] }>(response);
-            return (data.data || []).map((p: any) => ({
+            const data = await handleResponse<any>(response);
+            console.log('✅ getAdminParents - Data object:', data);
+            
+            // handleResponse returns either the array directly or { success, data }
+            const participants = Array.isArray(data) ? data : (data?.data || []);
+            console.log('✅ getAdminParents - Data received:', participants.length, 'participants');
+            
+            return participants.map((p: any) => ({
                 id: p.id,
                 first_name: p.prenom,
                 email: p.email || '',
@@ -272,7 +295,8 @@ export const TombolaAPI = {
                 classes: p.classes,
                 created_at: p.created_at,
             }));
-        } catch {
+        } catch (error) {
+            console.error('❌ getAdminParents - Error:', error);
             return [];
         }
     },
@@ -281,9 +305,13 @@ export const TombolaAPI = {
      * Delete a participant (admin only)
      */
     async adminDeleteParticipant(participantId: string): Promise<void> {
+        const token = this.getAdminToken();
         const response = await fetch(apiUrl(`/api/tombola/admin/participants/${participantId}`), {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
         });
 
         await handleResponse<{ success: boolean }>(response);
@@ -293,9 +321,13 @@ export const TombolaAPI = {
      * Cancel a lot reservation (admin only)
      */
     async adminCancelReservation(lotId: string): Promise<void> {
+        const token = this.getAdminToken();
         const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel`), {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
         });
 
         await handleResponse<{ success: boolean }>(response);
@@ -305,9 +337,13 @@ export const TombolaAPI = {
      * Mark a lot as delivered (admin only)
      */
     async adminMarkAsDelivered(lotId: string): Promise<void> {
+        const token = this.getAdminToken();
         const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/remis`), {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
         });
 
         await handleResponse<{ success: boolean }>(response);
@@ -317,9 +353,13 @@ export const TombolaAPI = {
      * Delete a lot (admin only)
      */
     async adminDeleteLot(lotId: string): Promise<void> {
+        const token = this.getAdminToken();
         const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
         });
 
         await handleResponse<{ success: boolean }>(response);

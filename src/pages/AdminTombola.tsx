@@ -59,14 +59,26 @@ export default function AdminTombola() {
 
             const data = await response.json();
             if (data.success) {
-                // Stocker le token si fourni
+                // Stocker le token correctement pour getAuth()
                 if (data.data?.token) {
+                    // Stocker en tant qu'objet JSON avec la structure attendue
+                    localStorage.setItem('tombola_auth', JSON.stringify({
+                        parentId: 'admin',
+                        email: adminEmail.toLowerCase(),
+                    }));
                     localStorage.setItem('admin_token', data.data.token);
+                    console.log('✅ Admin token stocké:', data.data.token.substring(0, 20) + '...');
                 }
                 setIsLoggedIn(true);
                 setAdminEmail("");
                 setAdminPassword("");
-                await loadData();
+                
+                // Attendre un peu que le stockage se synchronise
+                setTimeout(() => {
+                    console.log('📊 Chargement des données admin...');
+                    loadData();
+                }, 100);
+                
                 setMessage({
                     type: 'success',
                     title: 'Connecté',
@@ -211,6 +223,9 @@ export default function AdminTombola() {
         setLots([]);
         setAdminEmail("");
         setAdminPassword("");
+        // Nettoyer le localStorage
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('tombola_auth');
     };
 
     const handleRefresh = async () => {
@@ -449,10 +464,10 @@ export default function AdminTombola() {
                                                     animate={{ opacity: 1, y: 0 }}
                                                 >
                                                     <Card className={`hover:shadow-lg transition-shadow ${lot.status === 'available'
-                                                            ? 'border-l-4 border-l-green-500'
-                                                            : lot.status === 'reserved'
-                                                                ? 'border-l-4 border-l-yellow-500'
-                                                                : 'border-l-4 border-l-red-500'
+                                                        ? 'border-l-4 border-l-green-500'
+                                                        : lot.status === 'reserved'
+                                                            ? 'border-l-4 border-l-yellow-500'
+                                                            : 'border-l-4 border-l-red-500'
                                                         }`}>
                                                         <CardContent className="p-6">
                                                             <div className="flex justify-between items-start gap-4">
@@ -472,10 +487,10 @@ export default function AdminTombola() {
 
                                                                     <div className="flex gap-2 flex-wrap mb-3">
                                                                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${lot.status === 'available'
-                                                                                ? 'bg-green-500/20 text-green-700'
-                                                                                : lot.status === 'reserved'
-                                                                                    ? 'bg-yellow-500/20 text-yellow-700'
-                                                                                    : 'bg-red-500/20 text-red-700'
+                                                                            ? 'bg-green-500/20 text-green-700'
+                                                                            : lot.status === 'reserved'
+                                                                                ? 'bg-yellow-500/20 text-yellow-700'
+                                                                                : 'bg-red-500/20 text-red-700'
                                                                             }`}>
                                                                             {lot.status === 'available' && '🟢 Disponible'}
                                                                             {lot.status === 'reserved' && '🟡 Réservé'}
