@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Heart, Users, Sparkles } from "lucide-react";
+import { HelpCircle, Heart, Users, Sparkles } from "lucide-react";
 import { Layout } from '@/components/layout/Layout';
 import { AuthTombolaForm } from '@/components/tombola/AuthTombolaForm';
 import { TombolaHero } from '@/components/tombola/TombolaHero';
@@ -99,7 +99,7 @@ export default function Auth() {
                                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                                 className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-secondary/20"
                             >
-                                <Heart className="h-8 w-8 text-primary" />
+                                <HelpCircle className="h-8 w-8 text-primary" />
                             </motion.div>
                         </div>
 
