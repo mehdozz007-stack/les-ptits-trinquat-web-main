@@ -307,7 +307,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                             transition={{ duration: 0.5, delay: 0.15 }}
                             className="flex flex-col items-center justify-center w-full mb-6"
                         >
-                            <CardTitle className="text-gradient mb-4 text-2xl font-bold text-center w-full">
+                            <CardTitle className="text-gradient mb-4 text-2xl md:text-xl font-bold text-center w-full">
                                 {isRegisterMode ? "Inscrivez-vous" : "Connectez-vous"}
                             </CardTitle>
                             <motion.p
@@ -477,12 +477,12 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                             <motion.div
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="mt-6"
+                                className="mt-6 flex justify-center"
                             >
                                 <Button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+                                    className="text-sm md:text-base px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
                                 >
                                     <motion.div
                                         className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
