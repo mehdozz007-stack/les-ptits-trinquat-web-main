@@ -41,34 +41,18 @@ export default function AdminTombola() {
         setLoading(true);
 
         try {
-            // Tentative de connexion via l'API
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: adminEmail.toLowerCase(),
-                    password: adminPassword,
-                }),
-            });
-
-            if (!response.ok) {
-                const error = await response.json().catch(() => ({ error: 'Identifiants invalides' }));
-                setLoginError(error.error || "Email ou mot de passe incorrect");
-                return;
-            }
-
-            const data = await response.json();
-            if (data.success) {
+            // Utiliser TombolaAPI.adminLogin() qui utilise la bonne URL
+            const loginData = await TombolaAPI.adminLogin(adminEmail.toLowerCase(), adminPassword);
+            
+            if (loginData?.token) {
                 // Stocker le token correctement pour getAuth()
-                if (data.data?.token) {
-                    // Stocker en tant qu'objet JSON avec la structure attendue
-                    localStorage.setItem('tombola_auth', JSON.stringify({
-                        parentId: 'admin',
-                        email: adminEmail.toLowerCase(),
-                    }));
-                    localStorage.setItem('admin_token', data.data.token);
-                    console.log('✅ Admin token stocké:', data.data.token.substring(0, 20) + '...');
-                }
+                localStorage.setItem('tombola_auth', JSON.stringify({
+                    parentId: 'admin',
+                    email: adminEmail.toLowerCase(),
+                }));
+                localStorage.setItem('admin_token', loginData.token);
+                console.log('✅ Admin token stocké:', loginData.token.substring(0, 20) + '...');
+                
                 setIsLoggedIn(true);
                 setAdminEmail("");
                 setAdminPassword("");
@@ -85,12 +69,10 @@ export default function AdminTombola() {
                     message: 'Vous êtes connecté en tant qu\'administrateur',
                     emoji: '✅'
                 });
-            } else {
-                setLoginError(data.error || "Email ou mot de passe incorrect");
             }
         } catch (error) {
             console.error('Login error:', error);
-            setLoginError("Erreur de connexion au serveur");
+            setLoginError("Email ou mot de passe incorrect");
         } finally {
             setLoading(false);
         }

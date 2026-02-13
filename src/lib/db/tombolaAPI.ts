@@ -249,7 +249,7 @@ export const TombolaAPI = {
      */
 
     /**
-     * Login as admin (would need proper auth backend)
+     * Login as admin
      */
     async adminLogin(email: string, password: string): Promise<{ token: string }> {
         const response = await fetch(apiUrl('/api/tombola/auth/login'), {
@@ -258,12 +258,23 @@ export const TombolaAPI = {
             body: JSON.stringify({ email, password }),
         });
 
+        console.log('🔐 adminLogin - Response status:', response.status);
+
         if (!response.ok) {
-            throw new Error('Invalid admin credentials');
+            const error = await response.json().catch(() => ({ error: 'Identifiants invalides' }));
+            throw new Error(error.error || 'Invalid admin credentials');
         }
 
         const data = await response.json();
-        return data.data;
+        console.log('✅ adminLogin - Login successful');
+        
+        // La réponse peut être { data: { token } } ou { token } directement
+        const token = data.data?.token || data.token;
+        if (!token) {
+            throw new Error('No token in response');
+        }
+        
+        return { token };
     },
 
     /**
