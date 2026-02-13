@@ -14,7 +14,8 @@ import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
-import Tombola2 from "./pages/Tombola2";
+import TombolaProtected from "./pages/TombolaProtected";
+import Auth from "./pages/Auth";
 import AdminTombola from "./pages/AdminTombola";
 import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
@@ -48,7 +49,9 @@ const App = () => (
             {/* Comptes rendus redirects to 404 */}
             <Route path="/comptes-rendus" element={<NotFound />} />
             <Route path="/partenaires" element={<Partenaires />} />
-            <Route path="/tombola" element={<Tombola2 />} />
+            {/* Pages d'authentification et tombola */}
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/tombola" element={<TombolaProtected />} />
             <Route path="/admin/tombola" element={<AdminTombola />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/message-envoye" element={<MessageEnvoye />} />

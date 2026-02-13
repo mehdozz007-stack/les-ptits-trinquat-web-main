@@ -67,14 +67,17 @@ CREATE TABLE tombola_participants (
     id TEXT PRIMARY KEY,
     user_id TEXT NOT NULL,
     prenom TEXT NOT NULL,
+    email TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'Parent participant',
     classes TEXT,
-    emoji TEXT DEFAULT '😊',
+    emoji TEXT NOT NULL DEFAULT '😊',
     created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
-    updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE(user_id, email)
 );
 
 CREATE INDEX idx_tombola_participants_user_id ON tombola_participants(user_id);
+CREATE INDEX idx_tombola_participants_email ON tombola_participants(email);
 CREATE INDEX idx_tombola_participants_created_at ON tombola_participants(created_at);
 
 -- ============================================================
@@ -84,15 +87,18 @@ CREATE TABLE tombola_lots (
     id TEXT PRIMARY KEY,
     nom TEXT NOT NULL,
     description TEXT,
+    icone TEXT NOT NULL DEFAULT '🎁',
     statut TEXT NOT NULL DEFAULT 'disponible' CHECK (statut IN ('disponible', 'reserve', 'remis')),
-    participant_id TEXT,
+    parent_id TEXT NOT NULL,
+    reserved_by TEXT,
     created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
-    updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
-    FOREIGN KEY (participant_id) REFERENCES tombola_participants(id) ON DELETE SET NULL
+    FOREIGN KEY (parent_id) REFERENCES tombola_participants(id) ON DELETE CASCADE,
+    FOREIGN KEY (reserved_by) REFERENCES tombola_participants(id) ON DELETE SET NULL
 );
 
+CREATE INDEX idx_tombola_lots_parent_id ON tombola_lots(parent_id);
+CREATE INDEX idx_tombola_lots_reserved_by ON tombola_lots(reserved_by);
 CREATE INDEX idx_tombola_lots_statut ON tombola_lots(statut);
-CREATE INDEX idx_tombola_lots_participant_id ON tombola_lots(participant_id);
 CREATE INDEX idx_tombola_lots_created_at ON tombola_lots(created_at);
 
 -- ============================================================

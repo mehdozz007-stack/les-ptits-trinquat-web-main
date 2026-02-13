@@ -151,6 +151,32 @@ export function useTombolaLots() {
     }
   };
 
+  const markAsAvailable = async (lotId: string) => {
+    try {
+      // Optimistic update
+      setLots(prev =>
+        prev.map(lot =>
+          lot.id === lotId ? { ...lot, statut: 'disponible', reserved_by: null } : lot
+        )
+      );
+
+      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/mark-available`), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: userId }),
+      });
+      if (!response.ok) throw new Error('Failed to mark as available');
+
+      await fetchLots(true);
+      triggerRefresh();
+      return { error: null };
+    } catch (err: any) {
+      // Revert optimistic update on error
+      await fetchLots(true);
+      return { error: err.message };
+    }
+  };
+
   const getContactLink = async (lotId: string, senderName: string): Promise<string | null> => {
     try {
       const encodedName = encodeURIComponent(senderName);
@@ -193,5 +219,5 @@ export function useTombolaLots() {
     // Refetch when global refresh is triggered
   }, [refreshKey]);
 
-  return { lots, loading, refetching, error, addLot, reserveLot, cancelReservation, markAsRemis, getContactLink, deleteLot, refetch: fetchLots };
+  return { lots, loading, refetching, error, addLot, reserveLot, cancelReservation, markAsRemis, markAsAvailable, getContactLink, deleteLot, refetch: fetchLots };
 }

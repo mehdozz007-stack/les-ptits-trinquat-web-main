@@ -82,18 +82,6 @@ export function TombolaHero() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground"
           >
-            <div className="flex items-center gap-2 rounded-full bg-card px-4 py-2 shadow-soft">
-              <span className="text-xl">👨‍👩‍👧‍👦</span>
-              <span>Inscrivez-vous</span>
-            </div>
-            <div className="flex items-center gap-2 rounded-full bg-card px-4 py-2 shadow-soft">
-              <span className="text-xl">🎁</span>
-              <span>Proposez des lots</span>
-            </div>
-            <div className="flex items-center gap-2 rounded-full bg-card px-4 py-2 shadow-soft">
-              <span className="text-xl">🤝</span>
-              <span>Échangez entre familles</span>
-            </div>
           </motion.div>
         </motion.div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Check, Loader2, Gift } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useTombolaLots } from "@/hooks/useTombolaLots";
-import { TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
+import { useTombolaParticipants, TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 
@@ -20,12 +20,24 @@ const lotSchema = z.object({
 });
 
 interface LotFormProps {
-  currentParticipant: TombolaParticipantPublic | null;
+  currentParticipant?: TombolaParticipantPublic | null;
 }
 
-export function LotForm({ currentParticipant }: LotFormProps) {
-  const { addLot } = useTombolaLots();
+export function LotForm({ currentParticipant: propParticipant }: LotFormProps) {
+  const { addLot, lots } = useTombolaLots();
   const { toast } = useToast();
+  const { participants } = useTombolaParticipants(false);
+
+  // Utiliser le prop ou le premier participant disponible
+  const [participant, setParticipant] = useState<TombolaParticipantPublic | null>(propParticipant || null);
+
+  useEffect(() => {
+    if (propParticipant) {
+      setParticipant(propParticipant);
+    } else if (participants && participants.length > 0) {
+      setParticipant(participants[0]);
+    }
+  }, [propParticipant, participants]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,13 +50,28 @@ export function LotForm({ currentParticipant }: LotFormProps) {
     icone: "🎁",
   });
 
+  // Compter le nombre de lots proposés par l'utilisateur
+  const userLotsCount = participant ? lots.filter((lot) => lot.parent_id === participant.id).length : 0;
+  const hasReachedLimit = userLotsCount >= 2;
+  const lotsRemaining = 2 - userLotsCount;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!currentParticipant) {
+    if (!participant) {
       toast({
         title: "Inscription requise",
         description: "Veuillez d'abord vous inscrire pour proposer un lot.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Vérifier la limite de 2 lots
+    if (hasReachedLimit) {
+      toast({
+        title: "Limite atteinte",
+        description: "Vous avez atteint le maximum de 2 lots par utilisateur.",
         variant: "destructive",
       });
       return;
@@ -70,7 +97,7 @@ export function LotForm({ currentParticipant }: LotFormProps) {
       nom: formData.nom.trim(),
       description: formData.description.trim() || undefined,
       icone: formData.icone,
-      parent_id: currentParticipant.id,
+      parent_id: participant.id,
     });
 
     setLoading(false);
@@ -90,6 +117,9 @@ export function LotForm({ currentParticipant }: LotFormProps) {
       description: "Votre lot est maintenant visible par tous les participants.",
     });
 
+    // Dispatch event pour rafraîchir la liste des lots
+    window.dispatchEvent(new Event('lotActionCompleted'));
+
     setTimeout(() => {
       setFormData({
         nom: "",
@@ -101,7 +131,7 @@ export function LotForm({ currentParticipant }: LotFormProps) {
     }, 2000);
   };
 
-  if (!currentParticipant) {
+  if (!participant) {
     return (
       <section className="bg-gradient-to-br from-primary/5 via-secondary/5 to-sky/5 py-16 md:py-20">
         <div className="container">
@@ -140,10 +170,6 @@ export function LotForm({ currentParticipant }: LotFormProps) {
           viewport={{ once: true }}
           className="mb-8 text-center"
         >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-            <Plus className="h-4 w-4" />
-            Proposer un lot
-          </div>
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             Partagez vos trésors ! 🎁
           </h2>
@@ -160,17 +186,31 @@ export function LotForm({ currentParticipant }: LotFormProps) {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="text-center"
+                className="space-y-4 text-center"
               >
                 <Button
                   variant="hero"
                   size="xl"
                   onClick={() => setIsOpen(true)}
                   className="gap-2"
+                  disabled={hasReachedLimit}
                 >
                   <Gift className="h-5 w-5" />
                   Proposer un lot
                 </Button>
+                {hasReachedLimit ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="rounded-lg bg-amber-100 p-3 text-sm font-medium text-amber-800"
+                  >
+                    ⚠️ Vous avez atteint le maximum de 2 lots
+                  </motion.div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    {lotsRemaining === 2 ? "Proposez jusqu'à 2 lots" : `${lotsRemaining} lot${lotsRemaining > 1 ? "s" : ""} restant${lotsRemaining > 1 ? "s" : ""}`}
+                  </p>
+                )}
               </motion.div>
             ) : (
               <motion.div
@@ -222,8 +262,8 @@ export function LotForm({ currentParticipant }: LotFormProps) {
                                   type="button"
                                   onClick={() => setFormData({ ...formData, icone: icon })}
                                   className={`flex h-10 w-10 items-center justify-center rounded-xl text-xl transition-all ${formData.icone === icon
-                                      ? "bg-primary/20 ring-2 ring-primary ring-offset-2"
-                                      : "bg-muted hover:bg-muted/80"
+                                    ? "bg-primary/20 ring-2 ring-primary ring-offset-2"
+                                    : "bg-muted hover:bg-muted/80"
                                     }`}
                                 >
                                   {icon}

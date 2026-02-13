@@ -11,8 +11,17 @@ export function useInitializeDatabase() {
       try {
         const response = await fetch(apiUrl('/init-db'));
         if (response.ok) {
-          const data = await response.json();
-          console.log('✅ Database initialized:', data);
+          const text = await response.text();
+          if (text) {
+            try {
+              const data = JSON.parse(text);
+              console.log('✅ Database initialized:', data);
+            } catch {
+              console.log('✅ Database initialization completed');
+            }
+          } else {
+            console.log('✅ Database already initialized');
+          }
         }
       } catch (error) {
         console.log('ℹ️ Database initialization (may already be initialized):', error);

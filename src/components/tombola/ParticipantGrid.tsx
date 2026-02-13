@@ -76,16 +76,23 @@ export function ParticipantGrid({ currentParticipant }: ParticipantGridProps) {
           </motion.div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {participants.map((participant, index) => (
-              <ParticipantCard
-                key={participant.id}
-                participant={participant}
-                index={index}
-                currentParticipant={currentParticipant}
-                onDelete={deleteParticipant}
-                onRefresh={refetch}
-              />
-            ))}
+            {participants
+              .sort((a, b) => {
+                // Mettre le profil actuel en premier
+                if (currentParticipant && a.id === currentParticipant.id) return -1;
+                if (currentParticipant && b.id === currentParticipant.id) return 1;
+                return 0;
+              })
+              .map((participant, index) => (
+                <ParticipantCard
+                  key={participant.id}
+                  participant={participant}
+                  index={index}
+                  currentParticipant={currentParticipant}
+                  onDelete={deleteParticipant}
+                  onRefresh={refetch}
+                />
+              ))}
           </div>
         )}
       </div>

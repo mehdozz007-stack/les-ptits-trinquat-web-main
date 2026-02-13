@@ -620,6 +620,78 @@ tombola.post('/lots/:id/mark-remis', optionalAuth, async (c) => {
 });
 
 // ============================================================
+// POST /tombola/lots/:id/mark-available - Remettre lot disponible (propriétaire)
+// ============================================================
+tombola.post('/lots/:id/mark-available', optionalAuth, async (c) => {
+  try {
+    const { id } = c.req.param();
+    let body: { user_id?: string } = {};
+    try {
+      body = await c.req.json<{ user_id?: string }>();
+    } catch {
+      // Body is optional
+    }
+
+    // Récupérer le lot
+    const lot = await c.env.DB.prepare(
+      'SELECT id, statut, parent_id FROM tombola_lots WHERE id = ?'
+    ).bind(id).first<{ id: string; statut: string; parent_id: string }>();
+
+    if (!lot) {
+      return c.json<ApiResponse>({ success: false, error: 'Lot not found' }, 404);
+    }
+
+    // Vérifier que le lot est réservé
+    if (lot.statut !== 'reserve') {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Only reserved lots can be made available again'
+      }, 400);
+    }
+
+    // Vérifier que l'utilisateur est bien le propriétaire du lot
+    if (body.user_id) {
+      const participant = await c.env.DB.prepare(
+        'SELECT id, user_id FROM tombola_participants WHERE id = ?'
+      ).bind(lot.parent_id).first<{ id: string; user_id: string | null }>();
+
+      if (!participant) {
+        return c.json<ApiResponse>({
+          success: false,
+          error: 'Participant not found'
+        }, 404);
+      }
+
+      // Vérifier l'isolement par user_id
+      if (participant.user_id !== body.user_id) {
+        return c.json<ApiResponse>({
+          success: false,
+          error: 'Unauthorized: This lot does not belong to your account'
+        }, 403);
+      }
+    }
+
+    // Mettre à jour le statut à 'disponible' et annuler la réservation
+    await c.env.DB.prepare(`
+      UPDATE tombola_lots SET statut = 'disponible', reserved_by = NULL WHERE id = ?
+    `).bind(id).run();
+
+    await logAudit(c.env.DB, null, 'LOT_MARKED_AVAILABLE', 'lot', id, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      message: 'Lot made available again'
+    });
+  } catch (error) {
+    console.error('Mark available error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred'
+    }, 500);
+  }
+});
+
+// ============================================================
 // GET /tombola/contact-link/:lotId - Lien de contact (public)
 // ============================================================
 tombola.get('/contact-link/:lotId', optionalAuth, async (c) => {
