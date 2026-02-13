@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogIn, UserPlus, Eye, EyeOff, Gift } from "lucide-react";
+import { LogIn, UserPlus, Eye, EyeOff, Gift, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -311,11 +311,21 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                             transition={{ duration: 0.5, delay: 0.15 }}
                             className="flex flex-col items-center justify-center w-full mb-6"
                         >
-                            <CardTitle className="text-gradient mb-4 text-2xl md:text-xl font-bold text-center w-full">
+                            <div className="mb-6 flex justify-center">
+                                <motion.div
+                                    animate={{ scale: [1, 1.1, 1] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                    className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-secondary/20"
+                                >
+                                    <UserPlus className="h-8 w-8 text-primary" />
+                                </motion.div>
+                            </div>
+
+                            <CardTitle className="mb-4 text-3xl md:text-xl font-bold text-center w-full">
                                 {isRegisterMode ? "Inscrivez-vous" : "Connectez-vous"}
                             </CardTitle>
                             <motion.p
-                                className="hidden text-center text-xs md:block md:text-sm text-amber-600/70 w-full font-medium"
+                                className="hidden text-center text-xs md:block md:text-sm w-full font-medium"
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -456,16 +466,16 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
 
                                         {/* Emoji Selector */}
                                         <div className="space-y-2">
-                                            <Label className="text-sm md:text-base font-semibold text-foreground">Votre emoji avatar</Label>
-                                            <div className="grid grid-cols-8 gap-1">
+                                            <Label className="text-sm md:text-base font-semibold text-foreground">Choisissez votre avatar</Label>
+                                            <div className="flex flex-wrap gap-2">
                                                 {EMOJI_OPTIONS.map((emoji) => (
                                                     <button
                                                         key={emoji}
                                                         type="button"
                                                         onClick={() => setFormData({ ...formData, emoji })}
-                                                        className={`h-9 flex items-center justify-center rounded-lg text-xl transition-all duration-200 border-2 ${formData.emoji === emoji
-                                                            ? "border-primary bg-primary/20 scale-110"
-                                                            : "border-muted hover:border-primary/50 hover:bg-primary/5"
+                                                        className={`flex h-10 w-10 items-center justify-center rounded-xl text-xl transition-all ${formData.emoji === emoji
+                                                            ? "bg-primary/20 ring-2 ring-primary ring-offset-2"
+                                                            : "bg-muted hover:bg-muted/80"
                                                             }`}
                                                     >
                                                         {emoji}

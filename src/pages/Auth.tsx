@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { HelpCircle, Heart, Users, Sparkles } from "lucide-react";
+import { HelpCircle, Heart, Users, Sparkles, FileText } from "lucide-react";
 import { Layout } from '@/components/layout/Layout';
 import { AuthTombolaForm } from '@/components/tombola/AuthTombolaForm';
 import { TombolaHero } from '@/components/tombola/TombolaHero';
@@ -53,8 +53,12 @@ export default function Auth() {
                         viewport={{ once: true }}
                         className="mb-12 text-center"
                     >
+                        <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                            <Heart className="h-4 w-4" />
+                            Échanges Tombola
+                        </span>
 
-                        <h2 className="mb-6 text-3xl font-extrabold">
+                        <h2 className="mb-4 text-3xl font-extrabold md:text-4xl">
                             Bienvenue dans <br /><span className="text-gradient">la Tombola des P'tits Trinquat !</span>
                         </h2>
                         <p className="mx-auto max-w-2xl text-muted-foreground">
@@ -83,7 +87,13 @@ export default function Auth() {
 
             <section className="bg-gradient-to-b from-muted/30 via-background to-muted/20 py-16 md:py-20">
                 <div className="container">
-                    <h2 className="mb-6 text-3xl font-extrabold text-center">
+                    <div className="flex justify-center mb-4">
+                        <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                            <FileText className="h-4 w-4" />
+                            Démarches
+                        </span>
+                    </div>
+                    <h2 className="mb-10 text-3xl font-extrabold md:text-4xl text-center">
                         Votre <span className="text-gradient">Guide</span>
                     </h2>
                     <motion.div
