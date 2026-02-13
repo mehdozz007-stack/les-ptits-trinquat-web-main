@@ -100,8 +100,7 @@ export default function Auth() {
                             transition={{ duration: 0.5, delay: 0.3 }}
                             className="text-center mb-8"
                         >
-                            <h3 className="text-xl font-extrabold text-primary/90 flex items-center text-center gap-2">
-                                <span className="text-xl">💡</span>
+                            <h3 className="text-gradient text-xl font-semibold flex items-center justify-center gap-2">
                                 Comment ça marche ?
                             </h3>
                         </motion.div>

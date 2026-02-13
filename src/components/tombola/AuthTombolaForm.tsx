@@ -307,8 +307,8 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                             transition={{ duration: 0.5, delay: 0.15 }}
                             className="flex flex-col items-center justify-center w-full mb-6"
                         >
-                            <CardTitle className="text-gradient mb-4 text-2xl font-extrabold text-center w-full">
-                                {isRegisterMode ? "Inscrivez-vous !" : "Connectez-vous !"}
+                            <CardTitle className="text-gradient mb-4 text-2xl font-bold text-center w-full">
+                                {isRegisterMode ? "Inscrivez-vous" : "Connectez-vous"}
                             </CardTitle>
                             <motion.p
                                 className="hidden text-center text-xs md:block md:text-sm text-amber-600/70 w-full font-medium"

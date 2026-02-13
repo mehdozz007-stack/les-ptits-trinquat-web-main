@@ -42,6 +42,7 @@ export interface Actualite {
     location?: string;
     attendees?: number;
     status?: EventStatus;
+    reservationLink?: string;
 }
 
 export const actualitesData: Actualite[] = [
@@ -109,6 +110,7 @@ export const actualitesData: Actualite[] = [
         color: "emerald",
         status: "upcoming",
         attendees: 400,
+        reservationLink: "https://www.helloasso.com/associations/les-p-tits-trinquat/evenements/recre-des-bonnes-affaires",
     },
     {
         id: "act-007",

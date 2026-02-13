@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye, Tickets } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -340,6 +340,35 @@ export function ActualiteDetail() {
                                                         >
                                                             <a href={actualite.link} target="_blank" rel="noopener noreferrer">
                                                                 Consulter
+                                                            </a>
+                                                        </Button>
+                                                    </motion.div>
+                                                </motion.div>
+                                            )}
+
+                                            {/* Reservation link section */}
+                                            {actualite.reservationLink && (
+                                                <motion.div
+                                                    initial={{ opacity: 0 }}
+                                                    whileInView={{ opacity: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: 0.3, duration: 0.4 }}
+                                                    className="mt-8 pt-8 flex justify-center"
+                                                >
+                                                    <motion.div
+                                                        whileHover={{ scale: 1.08, y: -3 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                        transition={{ duration: 0.2 }}
+                                                    >
+                                                        <Button
+                                                            asChild
+                                                            variant="default"
+                                                            size="lg"
+                                                            className="gap-2 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-700 hover:via-teal-700 hover:to-cyan-700 shadow-lg shadow-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/60 transition-all duration-300"
+                                                        >
+                                                            <a href={actualite.reservationLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                                                                <Tickets className="h-5 w-5" />
+                                                                Réserver
                                                             </a>
                                                         </Button>
                                                     </motion.div>
