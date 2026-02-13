@@ -51,7 +51,7 @@ export const TombolaAPI = {
     async getLots(): Promise<Lot[]> {
         const response = await fetch(apiUrl('/api/tombola/lots'));
         const data = await handleResponse<any>(response);
-        
+
         console.log('📦 getLots - Response data:', data);
 
         // handleResponse returns either the array directly or { success, data }
@@ -272,7 +272,7 @@ export const TombolaAPI = {
     async getAdminParents(): Promise<Parent[]> {
         const token = this.getAdminToken();
         console.log('🔐 getAdminParents - Token found:', !!token, token ? token.substring(0, 20) + '...' : 'MISSING');
-        
+
         const response = await fetch(apiUrl('/api/tombola/admin/participants'), {
             headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         });
@@ -282,11 +282,11 @@ export const TombolaAPI = {
         try {
             const data = await handleResponse<any>(response);
             console.log('✅ getAdminParents - Data object:', data);
-            
+
             // handleResponse returns either the array directly or { success, data }
             const participants = Array.isArray(data) ? data : (data?.data || []);
             console.log('✅ getAdminParents - Data received:', participants.length, 'participants');
-            
+
             return participants.map((p: any) => ({
                 id: p.id,
                 first_name: p.prenom,

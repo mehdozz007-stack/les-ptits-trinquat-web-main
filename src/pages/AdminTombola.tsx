@@ -72,13 +72,13 @@ export default function AdminTombola() {
                 setIsLoggedIn(true);
                 setAdminEmail("");
                 setAdminPassword("");
-                
+
                 // Attendre un peu que le stockage se synchronise
                 setTimeout(() => {
                     console.log('📊 Chargement des données admin...');
                     loadData();
                 }, 100);
-                
+
                 setMessage({
                     type: 'success',
                     title: 'Connecté',
