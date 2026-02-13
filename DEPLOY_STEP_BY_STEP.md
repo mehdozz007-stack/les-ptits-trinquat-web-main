@@ -86,8 +86,7 @@ database_id = "YOUR_COPIED_ID_HERE"  ✅
 pwd  # Devrait afficher: .../cloudflare
 
 # Exécuter la migration principale
-npx wrangler d1 execute les-ptits-trinquat-prod \
-  --file=migrations/0001_tombola_schema.sql
+npx wrangler d1 execute les-ptits-trinquat-prod --remote --file=migrations/0013_reset_and_add_admin_mehdi.sql
 
 # Vous devriez voir:
 # [✓] Executed 1234 number of commands
