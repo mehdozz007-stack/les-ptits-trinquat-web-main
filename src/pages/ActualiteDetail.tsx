@@ -336,7 +336,7 @@ export function ActualiteDetail() {
                                                             asChild
                                                             variant="default"
                                                             size="lg"
-                                                            className="shadow-lg hover:shadow-xl transition-all duration-300"
+                                                            className="bg-gradient-to-r shadow-lg hover:shadow-xl transition-all duration-300"
                                                         >
                                                             <a href={actualite.link} target="_blank" rel="noopener noreferrer">
                                                                 Consulter

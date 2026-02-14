@@ -43,14 +43,14 @@ export function ParticipantGrid({ currentParticipant }: ParticipantGridProps) {
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary/20 px-4 py-1.5 text-sm font-semibold text-secondary-foreground">
             <Users className="h-4 w-4" />
-            Échanges Tombola
+            Échanges de lots de Tombola
           </div>
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             Les familles participantes 👨‍👩‍👧‍👦
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
             Découvrez les familles qui participent à notre grande tombola solidaire.
-            Rejoignez la communauté en vous inscrivant !
+            Rejoignez la communauté en partageant vos lots !
           </p>
         </motion.div>
 
@@ -75,25 +75,38 @@ export function ParticipantGrid({ currentParticipant }: ParticipantGridProps) {
             </p>
           </motion.div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {participants
-              .sort((a, b) => {
-                // Mettre le profil actuel en premier
-                if (currentParticipant && a.id === currentParticipant.id) return -1;
-                if (currentParticipant && b.id === currentParticipant.id) return 1;
-                return 0;
-              })
-              .map((participant, index) => (
-                <ParticipantCard
-                  key={participant.id}
-                  participant={participant}
-                  index={index}
-                  currentParticipant={currentParticipant}
-                  onDelete={deleteParticipant}
-                  onRefresh={refetch}
-                />
-              ))}
-          </div>
+          <>
+            {/* Current User Card - Full Width or Centered */}
+            {currentParticipant && (
+              <div className="mb-8 flex justify-center">
+                <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                  <ParticipantCard
+                    participant={currentParticipant}
+                    index={0}
+                    currentParticipant={currentParticipant}
+                    onDelete={deleteParticipant}
+                    onRefresh={refetch}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Other Participants - 4 columns on mobile */}
+            <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {participants
+                .filter(p => !currentParticipant || p.id !== currentParticipant.id)
+                .map((participant, index) => (
+                  <ParticipantCard
+                    key={participant.id}
+                    participant={participant}
+                    index={index}
+                    currentParticipant={currentParticipant}
+                    onDelete={deleteParticipant}
+                    onRefresh={refetch}
+                  />
+                ))}
+            </div>
+          </>
         )}
       </div>
     </section>

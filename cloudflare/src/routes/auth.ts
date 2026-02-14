@@ -63,7 +63,7 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
 
       return c.json<ApiResponse>({
         success: false,
-        error: 'Invalid credentials'
+        error: 'Email non trouvé. Inscrivez vous !'
       }, 401);
     }
 
@@ -75,7 +75,7 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
 
       return c.json<ApiResponse>({
         success: false,
-        error: 'Invalid credentials'
+        error: 'Mot de passe incorrect.'
       }, 401);
     }
 
