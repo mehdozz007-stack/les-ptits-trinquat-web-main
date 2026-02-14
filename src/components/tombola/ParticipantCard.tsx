@@ -83,8 +83,8 @@ export function ParticipantCard({ participant, index, currentParticipant, onDele
 
           <h3 className="mb-1 text-lg font-bold text-foreground">
             {participant.prenom}
+            {isCurrentUser && <span className="ml-2 text-sm text-primary"><br />(C'est vous !)</span>}
           </h3>
-
           <span className="mb-2 inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
             {participant.role}
           </span>
