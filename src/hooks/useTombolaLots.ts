@@ -192,6 +192,21 @@ export function useTombolaLots() {
     }
   };
 
+  const getReserverContactLink = async (lotId: string, senderName: string): Promise<string | null> => {
+    try {
+      const encodedName = encodeURIComponent(senderName);
+      const response = await fetch(apiUrl(`/api/tombola/contact-link/${lotId}/reserver?sender_name=${encodedName}`), {
+        method: 'GET',
+      });
+      if (!response.ok) throw new Error('Failed to get reserver contact link');
+      const data = await response.json();
+      return data?.data?.mailto_link || null;
+    } catch (err: any) {
+      console.error('Error getting reserver contact link:', err);
+      return null;
+    }
+  };
+
   const deleteLot = async (lotId: string, parentId: string) => {
     try {
       // Optimistic update
@@ -219,5 +234,5 @@ export function useTombolaLots() {
     // Refetch when global refresh is triggered
   }, [refreshKey]);
 
-  return { lots, loading, refetching, error, addLot, reserveLot, cancelReservation, markAsRemis, markAsAvailable, getContactLink, deleteLot, refetch: fetchLots };
+  return { lots, loading, refetching, error, addLot, reserveLot, cancelReservation, markAsRemis, markAsAvailable, getContactLink, getReserverContactLink, deleteLot, refetch: fetchLots };
 }

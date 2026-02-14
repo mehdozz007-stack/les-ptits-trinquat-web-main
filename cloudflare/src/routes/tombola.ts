@@ -737,6 +737,51 @@ tombola.get('/contact-link/:lotId', optionalAuth, async (c) => {
 });
 
 // ============================================================
+// GET /tombola/contact-link/:lotId/reserver - Lien de contact du reserver
+// ============================================================
+tombola.get('/contact-link/:lotId/reserver', optionalAuth, async (c) => {
+  try {
+    const { lotId } = c.req.param();
+    const senderName = c.req.query('sender_name') || 'Un parent';
+
+    // Récupérer le lot avec l'email du reserver
+    const lot = await c.env.DB.prepare(`
+      SELECT l.nom, r.email, r.prenom
+      FROM tombola_lots l
+      JOIN tombola_participants r ON l.reserved_by = r.id
+      WHERE l.id = ?
+    `).bind(lotId).first<{ nom: string; email: string; prenom: string }>();
+
+    if (!lot) {
+      return c.json<ApiResponse>({ success: false, error: 'Lot or reserver not found' }, 404);
+    }
+
+    // Construire le lien mailto au reserver
+    const subject = encodeURIComponent(`Tombola - À propos de la réservation "${escapeHtml(lot.nom)}"`);
+    const body = encodeURIComponent(
+      `Bonjour ${escapeHtml(lot.prenom)},\n\n` +
+      `Je suis ${escapeHtml(sanitizeString(senderName, 100))} et vous avez réservé mon lot "${escapeHtml(lot.nom)}" pour la tombola.\n\n` +
+      `Pouvons-nous convenir d'un moment pour échanger ?\n\nMerci !`
+    );
+
+    const mailtoLink = `mailto:${lot.email}?subject=${subject}&body=${body}`;
+
+    await logAudit(c.env.DB, null, 'CONTACT_RESERVER_LINK_GENERATED', 'lot', lotId, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      data: { mailto_link: mailtoLink }
+    });
+  } catch (error) {
+    console.error('Get reserver contact link error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred'
+    }, 500);
+  }
+});
+
+// ============================================================
 // PATCH /tombola/lots/:id/cancel - Annuler réservation (admin)
 // ============================================================
 tombola.patch('/lots/:id/cancel', requireAdmin, async (c) => {

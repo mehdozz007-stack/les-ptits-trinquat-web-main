@@ -105,7 +105,7 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-8 flex flex-wrap items-center justify-center gap-2"
+          className="mb-8  py-4 flex flex-wrap items-center justify-center gap-2"
         >
           <Filter className="mr-2 h-4 w-4 text-muted-foreground" />
           {FILTER_OPTIONS.map((option) => (

@@ -3609,6 +3609,43 @@ Merci !`
     }, 500);
   }
 });
+tombola.get("/contact-link/:lotId/reserver", optionalAuth, async (c) => {
+  try {
+    const { lotId } = c.req.param();
+    const senderName = c.req.query("sender_name") || "Un parent";
+    const lot = await c.env.DB.prepare(`
+      SELECT l.nom, r.email, r.prenom
+      FROM tombola_lots l
+      JOIN tombola_participants r ON l.reserved_by = r.id
+      WHERE l.id = ?
+    `).bind(lotId).first();
+    if (!lot) {
+      return c.json({ success: false, error: "Lot or reserver not found" }, 404);
+    }
+    const subject = encodeURIComponent(`Tombola - \xC0 propos de la r\xE9servation "${escapeHtml(lot.nom)}"`);
+    const body = encodeURIComponent(
+      `Bonjour ${escapeHtml(lot.prenom)},
+
+Je suis ${escapeHtml(sanitizeString(senderName, 100))} et vous avez r\xE9serv\xE9 mon lot "${escapeHtml(lot.nom)}" pour la tombola.
+
+Pouvons-nous convenir d'un moment pour \xE9changer ?
+
+Merci !`
+    );
+    const mailtoLink = `mailto:${lot.email}?subject=${subject}&body=${body}`;
+    await logAudit(c.env.DB, null, "CONTACT_RESERVER_LINK_GENERATED", "lot", lotId, c.req.raw);
+    return c.json({
+      success: true,
+      data: { mailto_link: mailtoLink }
+    });
+  } catch (error) {
+    console.error("Get reserver contact link error:", error);
+    return c.json({
+      success: false,
+      error: "An error occurred"
+    }, 500);
+  }
+});
 tombola.patch("/lots/:id/cancel", requireAdmin, async (c) => {
   try {
     const { id } = c.req.param();

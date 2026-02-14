@@ -39,7 +39,7 @@ const STATUS_CONFIG = {
 } as const;
 
 export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
-  const { reserveLot, getContactLink, deleteLot, markAsRemis, markAsAvailable, lots } = useTombolaLots();
+  const { reserveLot, getContactLink, getReserverContactLink, deleteLot, markAsRemis, markAsAvailable, lots } = useTombolaLots();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [contactLoading, setContactLoading] = useState(false);
@@ -124,6 +124,42 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
       setContactInfo({
         email,
         prenom: lot.parent?.prenom || 'au propriétaire',
+        message: body,
+      });
+      setContactModalOpen(true);
+    }, 100);
+  };
+
+  const handleContactReserver = async () => {
+    if (!currentParticipant || !lot.reserver) return;
+
+    setContactLoading(true);
+    const mailtoLink = await getReserverContactLink(lot.id, currentParticipant.prenom);
+    setContactLoading(false);
+
+    if (!mailtoLink) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de récupérer les informations de contact.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Extract email and name from mailto link
+    const urlParams = new URLSearchParams(mailtoLink.replace('mailto:', '').split('?')[1]);
+    const email = mailtoLink.split('?')[0].replace('mailto:', '');
+    const subject = urlParams.get('subject') || '';
+    const body = urlParams.get('body') || '';
+
+    // Try to open mailto first
+    const mailWindow = window.open(mailtoLink, '_blank');
+
+    // Show fallback modal as backup option
+    setTimeout(() => {
+      setContactInfo({
+        email,
+        prenom: lot.reserver?.prenom || 'au reserver',
         message: body,
       });
       setContactModalOpen(true);
@@ -258,7 +294,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           )}
         </AnimatePresence>
 
-        <CardContent className="p-5">
+        <CardContent className="p-5 flex flex-col h-full">
           {/* Status badge */}
           <div className="mb-4 flex items-center justify-between">
             <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${statusConfig.color}`}>
@@ -368,6 +404,20 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               <div className="flex justify-center gap-2 flex-1 flex-wrap">
                 <Button
                   size="sm"
+                  className="flex-1 min-w-[120px] gap-2 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-pink-500/50 transition-all duration-300 border-0"
+                  onClick={handleContactReserver}
+                  disabled={contactLoading}
+                  title="Contacter celui qui a réservé"
+                >
+                  {contactLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Mail className="h-4 w-4" />
+                  )}
+                  Contacter
+                </Button>
+                <Button
+                  size="sm"
                   className="flex-1 min-w-[120px] gap-2 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 hover:from-blue-600 hover:via-cyan-600 hover:to-teal-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-cyan-500/50 transition-all duration-300 border-0"
                   onClick={handleMarkAsAvailable}
                   disabled={availableLoading}
@@ -418,10 +468,10 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
             {/* LOT AVAILABLE - Owner can only delete */}
             {lot.statut === "disponible" && isOwner && (
-              <div className="flex justify-center flex-1">
+              <div className="flex w-full items-center justify-center md:mt-auto md:pt-4">
                 <Button
                   size="sm"
-                  className="gap-2 bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 hover:from-red-600 hover:via-orange-600 hover:to-rose-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-red-500/50 transition-all duration-300 border-0"
+                  className="w-full gap-2 bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 hover:from-red-600 hover:via-orange-600 hover:to-rose-600 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-red-500/50 transition-all duration-300 border-0"
                   onClick={handleDelete}
                   disabled={deleteLoading}
                 >
