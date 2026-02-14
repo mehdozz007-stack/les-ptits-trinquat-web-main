@@ -976,19 +976,48 @@ tombola.get('/admin/participants', requireAdmin, async (c) => {
   }
 });
 
-// DELETE /tombola/admin/participants/:id - Supprimer participant (admin)
+// DELETE /tombola/admin/participants/:id - Supprimer participant (admin) avec cascade complète
 tombola.delete('/admin/participants/:id', requireAdmin, async (c) => {
   try {
     const { id } = c.req.param();
     const authContext = getAuthContext(c);
 
+    // Récupérer le participant avec son user_id
+    const participant = await c.env.DB.prepare(
+      'SELECT id, user_id FROM tombola_participants WHERE id = ?'
+    ).bind(id).first<{ id: string; user_id: string | null }>();
+
+    if (!participant) {
+      return c.json<ApiResponse>({ success: false, error: 'Participant not found' }, 404);
+    }
+
+    // Suppression en cascade complète
+    // 1. Supprimer les lots du participant
+    await c.env.DB.prepare('DELETE FROM tombola_lots WHERE parent_id = ?').bind(id).run();
+
+    // 2. Supprimer la participation
     await c.env.DB.prepare('DELETE FROM tombola_participants WHERE id = ?').bind(id).run();
+
+    // 3. Si un user_id est associé, supprimer complètement l'utilisateur et ses données
+    if (participant.user_id) {
+      // Supprimer les sessions
+      await c.env.DB.prepare('DELETE FROM sessions WHERE user_id = ?').bind(participant.user_id).run();
+
+      // Supprimer les rôles
+      await c.env.DB.prepare('DELETE FROM user_roles WHERE user_id = ?').bind(participant.user_id).run();
+
+      // Supprimer les audit logs
+      await c.env.DB.prepare('DELETE FROM audit_logs WHERE user_id = ?').bind(participant.user_id).run();
+
+      // Supprimer l'utilisateur (droit à l'oubli)
+      await c.env.DB.prepare('DELETE FROM users WHERE id = ?').bind(participant.user_id).run();
+    }
 
     await logAudit(c.env.DB, authContext?.user.id || null, 'PARTICIPANT_DELETED', 'participant', id, c.req.raw);
 
     return c.json<ApiResponse>({
       success: true,
-      message: 'Participant deleted'
+      message: 'Participant et utilisateur supprimés complètement. Les données peuvent être réutilisées.'
     });
   } catch (error) {
     console.error('Delete participant error:', error);
