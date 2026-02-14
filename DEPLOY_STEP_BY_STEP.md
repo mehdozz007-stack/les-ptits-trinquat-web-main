@@ -349,7 +349,7 @@ Si tous les points sont cochés, votre application est **EN PRODUCTION** et **FO
    ```
 
 2. **Communiquer l'URL** aux participants:
-   - `https://les-ptits-trinquat.pages.dev/tombola`
+   - `https://les-ptits-trinquat.pages.dev/auth`
 
 3. **Tester en production** avec de vraies données
 

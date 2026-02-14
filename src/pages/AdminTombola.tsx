@@ -43,7 +43,7 @@ export default function AdminTombola() {
         try {
             // Utiliser TombolaAPI.adminLogin() qui utilise la bonne URL
             const loginData = await TombolaAPI.adminLogin(adminEmail.toLowerCase(), adminPassword);
-            
+
             if (loginData?.token) {
                 // Stocker le token correctement pour getAuth()
                 localStorage.setItem('tombola_auth', JSON.stringify({
@@ -52,7 +52,7 @@ export default function AdminTombola() {
                 }));
                 localStorage.setItem('admin_token', loginData.token);
                 console.log('✅ Admin token stocké:', loginData.token.substring(0, 20) + '...');
-                
+
                 setIsLoggedIn(true);
                 setAdminEmail("");
                 setAdminPassword("");
@@ -275,7 +275,7 @@ export default function AdminTombola() {
                                         <p className="text-xs text-blue-700 font-mono">
                                             <strong>Identifiants admin:</strong><br />
                                             Email: admin@email.com<br />
-                                            Mot de passe: Entrez le mot de passe admin défini dans votre fichier .env.local (ADMIN_PASSWORD)
+                                            Mot de passe: Entrez le mot de passe admin défini
                                         </p>
                                     </div>
                                 </CardContent>
@@ -317,7 +317,7 @@ export default function AdminTombola() {
                             animate={{ opacity: 1, x: 0 }}
                         >
                             <h1 className="text-2xl md:text-3xl font-bold">🎁 Administration Tombola</h1>
-                            <p className="text-xs md:text-sm text-muted-foreground mt-1">Gestion des participants et lots</p>
+                            <p className="text-center text-base md:text-sm text-muted-foreground mt-1">Gestion des participants et lots</p>
                         </motion.div>
 
                         <div className="flex flex-col sm:flex-row gap-2">
