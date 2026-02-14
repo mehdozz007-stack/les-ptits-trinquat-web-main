@@ -13,6 +13,7 @@ import {
   HandHeart,
   Mail,
   School,
+  MessageCircleQuestion,
   Music,
   Leaf,
 } from "lucide-react";
@@ -491,6 +492,7 @@ const NotreEcole = () => {
             viewport={{ once: true }}
             className="mx-auto max-w-3xl text-center"
           >
+            <MessageCircleQuestion className="mx-auto mb-4 h-12 w-12 text-sky-700" />
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">
               Pourquoi choisir notre école ?
             </h2>

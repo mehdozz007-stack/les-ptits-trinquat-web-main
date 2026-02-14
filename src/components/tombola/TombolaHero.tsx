@@ -46,14 +46,15 @@ export function TombolaHero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mx-auto max-w-3xl text-center"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2, type: "spring", bounce: 0.5 }}
-            className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 shadow-soft"
-          >
-            <Gift className="h-10 w-10 text-primary" />
-          </motion.div>
+          <div className="mb-6 flex justify-center">
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-secondary/20"
+            >
+              <Gift className="h-8 w-8 text-primary" />
+            </motion.div>
+          </div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

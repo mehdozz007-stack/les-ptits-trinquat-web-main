@@ -32,11 +32,28 @@ const titleGradients: Record<string, string> = {
     fuchsia: "bg-gradient-to-r from-fuchsia-600 via-pink-600 to-purple-600 bg-clip-text text-transparent font-extrabold",
 };
 
+const buttonGradients: Record<string, string> = {
+    primary: "bg-gradient-to-r from-primary via-secondary to-pink-600 hover:from-primary/90 hover:via-secondary/90 hover:to-pink-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    secondary: "bg-gradient-to-r from-secondary via-primary to-orange-600 hover:from-secondary/90 hover:via-primary/90 hover:to-orange-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    sky: "bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 hover:from-sky-600/90 hover:via-blue-600/90 hover:to-violet-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    violet: "bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 hover:from-violet-600/90 hover:via-purple-600/90 hover:to-pink-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    accent: "bg-gradient-to-r from-accent via-green-600 to-yellow-600 hover:from-accent/90 hover:via-green-600/90 hover:to-yellow-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    green: "bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 hover:from-green-600/90 hover:via-emerald-600/90 hover:to-teal-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    orange: "bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 hover:from-orange-600/90 hover:via-amber-600/90 hover:to-yellow-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    pink: "bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 hover:from-pink-600/90 hover:via-rose-600/90 hover:to-red-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    rose: "bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 hover:from-rose-600/90 hover:via-pink-600/90 hover:to-red-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    emerald: "bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-600/90 hover:via-teal-600/90 hover:to-cyan-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    amber: "bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 hover:from-amber-600/90 hover:via-orange-600/90 hover:to-yellow-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    cyan: "bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-600 hover:from-cyan-600/90 hover:via-blue-600/90 hover:to-teal-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    indigo: "bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 hover:from-indigo-600/90 hover:via-purple-600/90 hover:to-blue-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    fuchsia: "bg-gradient-to-r from-fuchsia-600 via-pink-600 to-purple-600 hover:from-fuchsia-600/90 hover:via-pink-600/90 hover:to-purple-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+};
+
 export function ActualitesPreview() {
     const renderActionButton = (actualite: ReturnType<typeof getLatestActualites>[0]) => {
         // Tous les boutons mènent vers la page de détail
         return (
-            <Button asChild variant="outline" size="sm" className="gap-2">
+            <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
                 <Link to={`/actualites/${actualite.id}`}>
                     <ChevronRight className="h-4 w-4" />
                     Lire plus

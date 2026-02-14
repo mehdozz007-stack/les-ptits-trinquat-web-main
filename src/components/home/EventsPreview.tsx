@@ -30,7 +30,7 @@ const upcomingEvents = [
     color: "accent",
     status: "upcoming",
     attendees: 500,
-    url: "/partenaires"
+    url: "/actualites/act-001"
   },
   /*{
     id: 10,
@@ -90,135 +90,137 @@ export function EventsPreview() {
         </motion.div>
 
         {/* Featured Event */}
-        <motion.div
-          animate={{
-            y: [0, -12, 0],
-            rotateX: [0, 5, 0],
-            rotateY: [0, 3, 0],
-            z: [0, 20, 0]
-          }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-          style={{ perspective: "1200px" }}
-          className="relative mx-auto max-w-2xl"
-        >
-          {/* Animated background glow */}
+        <a href={event.url} className="block">
           <motion.div
             animate={{
-              boxShadow: [
-                "0 0 20px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.2)",
-                "0 0 40px rgba(255, 193, 7, 0.5), 0 0 80px rgba(255, 193, 7, 0.3)",
-                "0 0 20px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.2)",
-              ],
+              y: [0, -12, 0],
+              rotateX: [0, 5, 0],
+              rotateY: [0, 3, 0],
+              z: [0, 20, 0]
             }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent via-yellow-300 to-accent opacity-75 blur-lg"
-          />
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ perspective: "1200px" }}
+            className="relative mx-auto max-w-2xl"
+          >
+            {/* Animated background glow */}
+            <motion.div
+              animate={{
+                boxShadow: [
+                  "0 0 20px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.2)",
+                  "0 0 40px rgba(255, 193, 7, 0.5), 0 0 80px rgba(255, 193, 7, 0.3)",
+                  "0 0 20px rgba(255, 193, 7, 0.3), 0 0 40px rgba(255, 193, 7, 0.2)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent via-yellow-300 to-accent opacity-75 blur-lg"
+            />
 
-          {/* Card with bubbles */}
-          <Card variant="playful" className="group relative overflow-hidden border-2 border-accent/50 bg-gradient-to-br from-accent/20 via-yellow-100/30 to-accent/20">
-            {/* Bubble columns */}
-            <div className="absolute inset-0 overflow-hidden">
-              {/* Column 1 */}
-              <div className="absolute left-1/4 top-0 h-full w-1/12">
-                <FloatingBubble delay={0} duration={4} size="w-3 h-3" />
-                <FloatingBubble delay={0.8} duration={5} size="w-2 h-2" />
-                <FloatingBubble delay={1.6} duration={4.5} size="w-4 h-4" />
+            {/* Card with bubbles */}
+            <Card variant="playful" className="group relative overflow-hidden border-2 border-accent/50 bg-gradient-to-br from-accent/20 via-yellow-100/30 to-accent/20">
+              {/* Bubble columns */}
+              <div className="absolute inset-0 overflow-hidden">
+                {/* Column 1 */}
+                <div className="absolute left-1/4 top-0 h-full w-1/12">
+                  <FloatingBubble delay={0} duration={4} size="w-3 h-3" />
+                  <FloatingBubble delay={0.8} duration={5} size="w-2 h-2" />
+                  <FloatingBubble delay={1.6} duration={4.5} size="w-4 h-4" />
+                </div>
+
+                {/* Column 2 */}
+                <div className="absolute left-1/2 top-0 h-full w-1/12">
+                  <FloatingBubble delay={0.4} duration={4.5} size="w-2 h-2" />
+                  <FloatingBubble delay={1.2} duration={5} size="w-3 h-3" />
+                  <FloatingBubble delay={2} duration={4} size="w-2 h-2" />
+                </div>
+
+                {/* Column 3 */}
+                <div className="absolute right-1/4 top-0 h-full w-1/12">
+                  <FloatingBubble delay={0.6} duration={5} size="w-4 h-4" />
+                  <FloatingBubble delay={1.4} duration={4} size="w-2 h-2" />
+                  <FloatingBubble delay={2.2} duration={4.5} size="w-3 h-3" />
+                </div>
               </div>
 
-              {/* Column 2 */}
-              <div className="absolute left-1/2 top-0 h-full w-1/12">
-                <FloatingBubble delay={0.4} duration={4.5} size="w-2 h-2" />
-                <FloatingBubble delay={1.2} duration={5} size="w-3 h-3" />
-                <FloatingBubble delay={2} duration={4} size="w-2 h-2" />
-              </div>
-
-              {/* Column 3 */}
-              <div className="absolute right-1/4 top-0 h-full w-1/12">
-                <FloatingBubble delay={0.6} duration={5} size="w-4 h-4" />
-                <FloatingBubble delay={1.4} duration={4} size="w-2 h-2" />
-                <FloatingBubble delay={2.2} duration={4.5} size="w-3 h-3" />
-              </div>
-            </div>
-
-            <CardContent className="relative z-10 p-8 sm:p-12">
-              {/* Title */}
-              <motion.h3
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`text-base sm:text-xl font-bold mb-6 text-center ${titleGradients[event.color as keyof typeof titleGradients]}`}
-              >
-                {event.title}
-              </motion.h3>
-
-              {/* Description */}
-              <motion.p
-                animate={{
-                  y: [0, -12, 0],
-                  textShadow: [
-                    "0 0 15px rgba(255, 193, 7, 0.2)",
-                    "0 0 35px rgba(255, 193, 7, 0.8)",
-                    "0 0 15px rgba(255, 193, 7, 0.2)",
-                  ],
-                }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                className="mb-6 text-muted-foreground text-base sm:text-lg text-center"
-              >
-                {event.description}
-              </motion.p>
-
-              {/* Meta Information */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="space-y-3 text-sm sm:text-base text-muted-foreground"
-              >
-                <motion.div
+              <CardContent className="relative z-10 p-8 sm:p-12">
+                {/* Title */}
+                <motion.h3
                   animate={{ y: [0, -12, 0] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex items-center gap-3"
+                  className={`text-base sm:text-xl font-bold mb-6 text-center ${titleGradients[event.color as keyof typeof titleGradients]}`}
                 >
-                  <motion.div
-                    animate={{
-                      textShadow: [
-                        "0 0 8px rgba(255, 193, 7, 0.2)",
-                        "0 0 20px rgba(255, 193, 7, 0.8)",
-                        "0 0 8px rgba(255, 193, 7, 0.2)",
-                      ],
-                    }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <Clock className="h-5 w-5 text-accent flex-shrink-0" />
-                  </motion.div>
-                  <span>{event.time}</span>
-                </motion.div>
-                <motion.div
-                  animate={{ y: [0, -12, 0] }}
+                  {event.title}
+                </motion.h3>
+
+                {/* Description */}
+                <motion.p
+                  animate={{
+                    y: [0, -12, 0],
+                    textShadow: [
+                      "0 0 15px rgba(255, 193, 7, 0.2)",
+                      "0 0 35px rgba(255, 193, 7, 0.8)",
+                      "0 0 15px rgba(255, 193, 7, 0.2)",
+                    ],
+                  }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex items-center gap-3"
+                  className="mb-6 text-muted-foreground text-base sm:text-lg text-center"
+                >
+                  {event.description}
+                </motion.p>
+
+                {/* Meta Information */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="space-y-3 text-sm sm:text-base text-muted-foreground"
                 >
                   <motion.div
-                    animate={{
-                      textShadow: [
-                        "0 0 8px rgba(255, 193, 7, 0.2)",
-                        "0 0 20px rgba(255, 193, 7, 0.8)",
-                        "0 0 8px rgba(255, 193, 7, 0.2)",
-                      ],
-                    }}
+                    animate={{ y: [0, -12, 0] }}
                     transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex items-center gap-3"
                   >
-                    <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
+                    <motion.div
+                      animate={{
+                        textShadow: [
+                          "0 0 8px rgba(255, 193, 7, 0.2)",
+                          "0 0 20px rgba(255, 193, 7, 0.8)",
+                          "0 0 8px rgba(255, 193, 7, 0.2)",
+                        ],
+                      }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <Clock className="h-5 w-5 text-accent flex-shrink-0" />
+                    </motion.div>
+                    <span>{event.time}</span>
                   </motion.div>
-                  <span>{event.location}</span>
+                  <motion.div
+                    animate={{ y: [0, -12, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex items-center gap-3"
+                  >
+                    <motion.div
+                      animate={{
+                        textShadow: [
+                          "0 0 8px rgba(255, 193, 7, 0.2)",
+                          "0 0 20px rgba(255, 193, 7, 0.8)",
+                          "0 0 8px rgba(255, 193, 7, 0.2)",
+                        ],
+                      }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
+                    </motion.div>
+                    <span>{event.location}</span>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </a>
       </div>
     </section>
   );

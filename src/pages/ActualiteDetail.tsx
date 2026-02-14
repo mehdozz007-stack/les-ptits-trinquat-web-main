@@ -210,9 +210,9 @@ export function ActualiteDetail() {
 
                     {/* Bottom wave decoration */}
                     <div className="absolute bottom-0 left-0 right-0">
-                        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                        <svg viewBox="0 0 1400 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
                             <path
-                                d="M0 120L48 105C96 90 192 70 288 65C384 60 480 75 576 85C672 95 768 100 864 85C960 70 1056 60 1152 60C1248 60 1344 70 1392 85L1440 95V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
+                                d="M0 120L48 110C96 100 192 80 288 75C384 70 480 80 576 85C672 90 768 90 864 85C960 80 1056 70 1152 70C1248 70 1344 80 1392 85L1440 90V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
                                 fill="hsl(var(--background))"
                             />
                         </svg>

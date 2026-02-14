@@ -35,6 +35,23 @@ const titleGradients: Record<string, string> = {
     fuchsia: "bg-gradient-to-r from-fuchsia-600 via-pink-600 to-purple-600 bg-clip-text text-transparent font-extrabold",
 };
 
+const buttonGradients: Record<string, string> = {
+    primary: "bg-gradient-to-r from-primary via-secondary to-pink-600 hover:from-primary/90 hover:via-secondary/90 hover:to-pink-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    secondary: "bg-gradient-to-r from-secondary via-primary to-orange-600 hover:from-secondary/90 hover:via-primary/90 hover:to-orange-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    sky: "bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 hover:from-sky-600/90 hover:via-blue-600/90 hover:to-violet-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    violet: "bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 hover:from-violet-600/90 hover:via-purple-600/90 hover:to-pink-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    accent: "bg-gradient-to-r from-accent via-green-600 to-yellow-600 hover:from-accent/90 hover:via-green-600/90 hover:to-yellow-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    green: "bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 hover:from-green-600/90 hover:via-emerald-600/90 hover:to-teal-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    orange: "bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 hover:from-orange-600/90 hover:via-amber-600/90 hover:to-yellow-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    pink: "bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 hover:from-pink-600/90 hover:via-rose-600/90 hover:to-red-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    rose: "bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 hover:from-rose-600/90 hover:via-pink-600/90 hover:to-red-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    emerald: "bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-600/90 hover:via-teal-600/90 hover:to-cyan-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    amber: "bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 hover:from-amber-600/90 hover:via-orange-600/90 hover:to-yellow-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    cyan: "bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-600 hover:from-cyan-600/90 hover:via-blue-600/90 hover:to-teal-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    indigo: "bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 hover:from-indigo-600/90 hover:via-purple-600/90 hover:to-blue-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+    fuchsia: "bg-gradient-to-r from-fuchsia-600 via-pink-600 to-purple-600 hover:from-fuchsia-600/90 hover:via-pink-600/90 hover:to-purple-600/90 text-white font-semibold shadow-lg hover:shadow-xl",
+};
+
 const allActualites = getAllActualites();
 
 const filterOptions: { id: string; label: string; type?: ActualiteType }[] = [
@@ -142,21 +159,30 @@ export function Actualites() {
                             </p>
                         </motion.div>
                     </div>
-
-                    {/* Bottom wave decoration */}
-                    <div className="absolute bottom-0 left-0 right-0">
-                        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-                            <path
-                                d="M0 120L48 105C96 90 192 70 288 65C384 60 480 75 576 85C672 95 768 100 864 85C960 70 1056 60 1152 60C1248 60 1344 70 1392 85L1440 95V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
-                                fill="hsl(var(--background))"
-                            />
-                        </svg>
-                    </div>
                 </section>
 
                 {/* Search and filters section */}
                 <section className="border-b border-border py-6 sm:py-8">
                     <div className="container space-y-6">
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mb-12"
+                        >
+                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                                <FileText className="h-4 w-4" />
+                                Actualités
+                            </span>
+                            <h2 className="mb-4 text-3xl font-extrabold">
+                                Nos <span className="text-gradient">Actualités</span>
+                            </h2>
+                            <p className="text-base text-muted-foreground max-w-2xl">
+                                Retrouvez tous nos événements, informations et annonces par les parents élus et l'équipe de l'école.
+                            </p>
+                        </motion.div>
+
                         {/* Search bar */}
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
@@ -210,23 +236,6 @@ export function Actualites() {
                 {/* Actualites grid */}
                 <section className="relative overflow-hidden bg-muted/50 sm:py-12 py-14 md:py-28">
                     <div className="container">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="mb-12"
-                        >
-                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-                                <FileText className="h-4 w-4" />
-                                Actualités
-                            </span>
-                            <h2 className="mb-4 text-3xl font-extrabold">
-                                Nos <span className="text-gradient">Actualités</span>
-                            </h2>
-                            <p className="text-base text-muted-foreground max-w-2xl">
-                                Retrouvez tous nos événements, informations et annonces par les parents élus et l'équipe de l'école.
-                            </p>
-                        </motion.div>
                         {filteredActualites.length > 0 ? (
                             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                                 {filteredActualites.map((actualite, index) => (
@@ -281,7 +290,7 @@ export function Actualites() {
                                                         </div>
                                                         {/* Boutons à droite */}
                                                         <div className="flex flex-col items-end gap-2">
-                                                            <Button asChild variant="outline" size="sm" className="gap-2">
+                                                            <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
                                                                 <Link to={`/actualites/${actualite.id}`}>
                                                                     <ChevronRight className="h-4 w-4" />
                                                                     Lire plus

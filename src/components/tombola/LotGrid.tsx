@@ -87,12 +87,12 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
           viewport={{ once: true }}
           className="mb-8 text-center"
         >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-sky/20 px-4 py-1.5 text-sm font-semibold text-sky-foreground">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-sky/50 px-4 py-1.5 text-sm font-semibold text-sky-foreground">
             <Gift className="h-4 w-4" />
             Les lots
           </div>
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            Découvrez les lots à gagner 🎁
+            Découvrez les lots à gagner
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
             Parcourez les lots proposés par les familles participantes.
@@ -149,7 +149,7 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
                     <span className="text-lg">⭐</span>
                     Vos lots
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">
+                  <h3 className="text-xl font-bold text-foreground">
                     Les lots que vous partagez
                   </h3>
                   <p className="text-muted-foreground mt-2">
@@ -200,7 +200,7 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
                     <span className="text-lg">👨‍👩‍👧‍👦</span>
                     Lots des familles
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">
+                  <h3 className="text-xl font-bold text-foreground">
                     Découvrez les autres lots
                   </h3>
                   <p className="text-muted-foreground mt-2">
