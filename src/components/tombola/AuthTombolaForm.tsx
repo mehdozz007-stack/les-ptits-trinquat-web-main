@@ -507,7 +507,25 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                                                     className="mt-1 h-4 w-4 rounded border-2 border-amber/30 accent-primary cursor-pointer transition-all focus:border-amber-500"
                                                 />
                                                 <label htmlFor="terms" className="text-xs md:text-sm text-muted-foreground cursor-pointer font-medium">
-                                                    J'accepte la charte du site et les mentions légales
+                                                    J'accepte{" "}
+                                                    <a
+                                                        href="/documents/confidentialite.pdf"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-primary hover:underline"
+                                                    >
+                                                        la charte du site
+                                                    </a>
+                                                    {" "}et{" "}
+                                                    <a
+                                                        href="/documents/mentions-legales.pdf"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-primary hover:underline"
+                                                    >
+                                                        les mentions légales
+                                                    </a>
+                                                    .
                                                 </label>
                                             </div>
                                             {errors.terms && <p className="text-xs md:text-sm text-destructive font-medium">{errors.terms}</p>}
