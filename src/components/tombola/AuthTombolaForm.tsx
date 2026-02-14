@@ -41,6 +41,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [acceptedTerms, setAcceptedTerms] = useState(false);
 
     const [formData, setFormData] = useState({
         email: "",
@@ -68,6 +69,12 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                         }
                     });
                     setErrors(fieldErrors);
+                    return;
+                }
+
+                // Vérifier l'acceptation des conditions
+                if (!acceptedTerms) {
+                    setErrors({ terms: "Vous devez accepter la charte et les mentions légales" });
                     return;
                 }
 
@@ -360,7 +367,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                                 <Label htmlFor="password" className="text-sm md:text-base font-semibold text-foreground">
                                     Mot de passe
                                 </Label>
-                                <div className="relative">
+                                <div className="relative mb-10">
                                     <Input
                                         id="password"
                                         type={showPassword ? "text" : "password"}
@@ -483,6 +490,28 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                                                 ))}
                                             </div>
                                         </div>
+
+                                        {/* Terms & Conditions Checkbox */}
+                                        <div className="space-y-2 pt-2">
+                                            <div className="flex items-start gap-3">
+                                                <input
+                                                    type="checkbox"
+                                                    id="terms"
+                                                    checked={acceptedTerms}
+                                                    onChange={(e) => {
+                                                        setAcceptedTerms(e.target.checked);
+                                                        if (e.target.checked) {
+                                                            setErrors({ ...errors, terms: "" });
+                                                        }
+                                                    }}
+                                                    className="mt-1 h-4 w-4 rounded border-2 border-amber/30 accent-primary cursor-pointer transition-all focus:border-amber-500"
+                                                />
+                                                <label htmlFor="terms" className="text-xs md:text-sm text-muted-foreground cursor-pointer font-medium">
+                                                    J'accepte la charte du site et les mentions légales
+                                                </label>
+                                            </div>
+                                            {errors.terms && <p className="text-xs md:text-sm text-destructive font-medium">{errors.terms}</p>}
+                                        </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -495,7 +524,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                             >
                                 <Button
                                     type="submit"
-                                    disabled={isLoading}
+                                    disabled={isLoading || (isRegisterMode && !acceptedTerms)}
                                     className="text-sm md:text-base px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
                                 >
                                     <motion.div
@@ -531,6 +560,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                                     onClick={() => {
                                         setIsRegisterMode(!isRegisterMode);
                                         setErrors({});
+                                        setAcceptedTerms(false);
                                         setFormData({
                                             email: formData.email,
                                             password: "",
