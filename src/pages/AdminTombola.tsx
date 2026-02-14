@@ -309,31 +309,32 @@ export default function AdminTombola() {
             </AnimatePresence>
 
             {/* Header */}
-            <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-8 border-b">
+            <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-6 md:py-8 border-b">
                 <div className="container">
-                    <div className="flex justify-between items-center">
+                    <div className="space-y-4 md:space-y-0 md:flex md:justify-between md:items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                         >
-                            <h1 className="text-3xl font-bold">🎁 Administration Tombola</h1>
-                            <p className="text-muted-foreground mt-1">Gestion des participants et lots</p>
+                            <h1 className="text-2xl md:text-3xl font-bold">🎁 Administration Tombola</h1>
+                            <p className="text-xs md:text-sm text-muted-foreground mt-1">Gestion des participants et lots</p>
                         </motion.div>
 
-                        <div className="flex gap-2">
+                        <div className="flex flex-col sm:flex-row gap-2">
                             <Button
                                 variant="outline"
                                 onClick={handleRefresh}
                                 disabled={loading}
-                                className="flex items-center gap-2"
+                                className="flex items-center justify-center gap-2 text-sm md:text-base"
                             >
                                 <RotateCcw className="h-4 w-4" />
-                                Actualiser
+                                <span className="hidden sm:inline">Actualiser</span>
+                                <span className="sm:hidden">Actualiser</span>
                             </Button>
                             <Button
                                 variant="destructive"
                                 onClick={handleLogout}
-                                className="flex items-center gap-2"
+                                className="flex items-center justify-center gap-2 text-sm md:text-base"
                             >
                                 <LogOut className="h-4 w-4" />
                                 Déconnexion
@@ -360,7 +361,7 @@ export default function AdminTombola() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
                             >
-                                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                                <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
                                     👥 Participants
                                     <span className="text-sm font-normal text-muted-foreground">({parents.length})</span>
                                 </h2>
@@ -380,14 +381,14 @@ export default function AdminTombola() {
                                                 animate={{ opacity: 1, y: 0 }}
                                             >
                                                 <Card className="hover:shadow-lg transition-shadow">
-                                                    <CardContent className="p-6">
-                                                        <div className="flex justify-between items-start gap-4">
+                                                    <CardContent className="p-4 md:p-6">
+                                                        <div className="space-y-3 md:space-y-0 md:flex md:justify-between md:items-start md:gap-4">
                                                             <div className="flex-1">
-                                                                <div className="flex items-center gap-3 mb-2">
-                                                                    <span className="text-3xl">{parent.emoji}</span>
-                                                                    <div>
-                                                                        <h3 className="font-bold text-lg">{parent.first_name}</h3>
-                                                                        <p className="text-sm text-muted-foreground">{parent.email}</p>
+                                                                <div className="flex items-center gap-2 md:gap-3 mb-2">
+                                                                    <span className="text-2xl md:text-3xl">{parent.emoji}</span>
+                                                                    <div className="min-w-0">
+                                                                        <h3 className="font-bold text-base md:text-lg truncate">{parent.first_name}</h3>
+                                                                        <p className="text-xs md:text-sm text-muted-foreground truncate">{parent.email}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div className="flex gap-2 flex-wrap">
@@ -405,10 +406,10 @@ export default function AdminTombola() {
                                                                 variant="destructive"
                                                                 size="sm"
                                                                 onClick={() => handleDeleteParticipant(parent.id, parent.first_name)}
-                                                                className="flex items-center gap-2"
+                                                                className="w-full md:w-auto flex items-center justify-center md:justify-start gap-2 text-xs md:text-sm"
                                                             >
                                                                 <Trash2 className="h-4 w-4" />
-                                                                Supprimer
+                                                                <span className="md:inline">Supprimer</span>
                                                             </Button>
                                                         </div>
                                                     </CardContent>
@@ -425,7 +426,7 @@ export default function AdminTombola() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
                             >
-                                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                                <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
                                     🎁 Lots
                                     <span className="text-sm font-normal text-muted-foreground">({lots.length})</span>
                                 </h2>
@@ -452,17 +453,17 @@ export default function AdminTombola() {
                                                             ? 'border-l-4 border-l-yellow-500'
                                                             : 'border-l-4 border-l-red-500'
                                                         }`}>
-                                                        <CardContent className="p-6">
-                                                            <div className="flex justify-between items-start gap-4">
+                                                        <CardContent className="p-4 md:p-6">
+                                                            <div className="space-y-3 md:space-y-0 md:flex md:justify-between md:items-start md:gap-4">
                                                                 <div className="flex-1">
-                                                                    <div className="flex items-start gap-3 mb-3">
-                                                                        <span className="text-2xl">🎁</span>
-                                                                        <div>
-                                                                            <h3 className="font-bold text-lg">{lot.title}</h3>
+                                                                    <div className="flex items-start gap-2 md:gap-3 mb-3">
+                                                                        <span className="text-xl md:text-2xl flex-shrink-0">🎁</span>
+                                                                        <div className="min-w-0">
+                                                                            <h3 className="font-bold text-base md:text-lg line-clamp-2">{lot.title}</h3>
                                                                             {lot.description && (
-                                                                                <p className="text-sm text-muted-foreground mb-2">{lot.description}</p>
+                                                                                <p className="text-xs md:text-sm text-muted-foreground mb-2 line-clamp-2">{lot.description}</p>
                                                                             )}
-                                                                            <p className="text-sm font-medium">
+                                                                            <p className="text-xs md:text-sm font-medium">
                                                                                 Proposé par: <span className="text-primary">{owner?.first_name || 'N/A'}</span>
                                                                             </p>
                                                                         </div>
@@ -487,26 +488,26 @@ export default function AdminTombola() {
                                                                     </div>
                                                                 </div>
 
-                                                                <div className="flex flex-col gap-2">
+                                                                <div className="flex flex-col gap-2 w-full md:w-auto">
                                                                     {lot.status === 'available' && (
                                                                         <>
                                                                             <Button
                                                                                 size="sm"
                                                                                 variant="outline"
                                                                                 onClick={() => handleMarkAsDelivered(lot.id, lot.title)}
-                                                                                className="flex items-center gap-2 whitespace-nowrap"
+                                                                                className="flex items-center justify-center gap-1 md:gap-2 text-xs md:text-sm"
                                                                             >
                                                                                 <Check className="h-4 w-4" />
-                                                                                Remis
+                                                                                <span>Remis</span>
                                                                             </Button>
                                                                             <Button
                                                                                 size="sm"
                                                                                 variant="destructive"
                                                                                 onClick={() => handleDeleteLot(lot.id, lot.title)}
-                                                                                className="flex items-center gap-2"
+                                                                                className="flex items-center justify-center gap-1 md:gap-2 text-xs md:text-sm"
                                                                             >
                                                                                 <Trash2 className="h-4 w-4" />
-                                                                                Supprimer
+                                                                                <span>Supprimer</span>
                                                                             </Button>
                                                                         </>
                                                                     )}
@@ -517,25 +518,26 @@ export default function AdminTombola() {
                                                                                 size="sm"
                                                                                 variant="outline"
                                                                                 onClick={() => handleCancelReservation(lot.id, lot.title)}
-                                                                                className="flex items-center gap-2 whitespace-nowrap"
+                                                                                className="flex items-center justify-center gap-1 md:gap-2 text-xs md:text-sm"
                                                                             >
                                                                                 <X className="h-4 w-4" />
-                                                                                Annuler résa
+                                                                                <span className="hidden md:inline">Annuler résa</span>
+                                                                                <span className="md:hidden">Annuler</span>
                                                                             </Button>
                                                                             <Button
                                                                                 size="sm"
                                                                                 variant="outline"
                                                                                 onClick={() => handleMarkAsDelivered(lot.id, lot.title)}
-                                                                                className="flex items-center gap-2 whitespace-nowrap"
+                                                                                className="flex items-center justify-center gap-1 md:gap-2 text-xs md:text-sm"
                                                                             >
                                                                                 <Check className="h-4 w-4" />
-                                                                                Remis
+                                                                                <span>Remis</span>
                                                                             </Button>
                                                                             <Button
                                                                                 size="sm"
                                                                                 variant="destructive"
                                                                                 onClick={() => handleDeleteLot(lot.id, lot.title)}
-                                                                                className="flex items-center gap-2"
+                                                                                className="flex items-center justify-center gap-1 text-xs md:text-sm px-2"
                                                                             >
                                                                                 <Trash2 className="h-4 w-4" />
                                                                             </Button>
@@ -547,10 +549,10 @@ export default function AdminTombola() {
                                                                             size="sm"
                                                                             variant="destructive"
                                                                             onClick={() => handleDeleteLot(lot.id, lot.title)}
-                                                                            className="flex items-center gap-2"
+                                                                            className="flex items-center justify-center gap-1 md:gap-2 text-xs md:text-sm"
                                                                         >
                                                                             <Trash2 className="h-4 w-4" />
-                                                                            Supprimer
+                                                                            <span>Supprimer</span>
                                                                         </Button>
                                                                     )}
                                                                 </div>
@@ -569,30 +571,30 @@ export default function AdminTombola() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+                                className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
                             >
                                 <Card>
-                                    <CardContent className="p-6 text-center">
-                                        <div className="text-3xl font-bold text-primary">{parents.length}</div>
-                                        <p className="text-sm text-muted-foreground mt-1">Participants</p>
+                                    <CardContent className="p-3 md:p-6 text-center">
+                                        <div className="text-2xl md:text-3xl font-bold text-primary">{parents.length}</div>
+                                        <p className="text-xs md:text-sm text-muted-foreground mt-1">Participants</p>
                                     </CardContent>
                                 </Card>
                                 <Card>
-                                    <CardContent className="p-6 text-center">
-                                        <div className="text-3xl font-bold text-green-600">{lots.filter(l => l.status === 'available').length}</div>
-                                        <p className="text-sm text-muted-foreground mt-1">Lots disponibles</p>
+                                    <CardContent className="p-3 md:p-6 text-center">
+                                        <div className="text-2xl md:text-3xl font-bold text-green-600">{lots.filter(l => l.status === 'available').length}</div>
+                                        <p className="text-xs md:text-sm text-muted-foreground mt-1">Lots dispo</p>
                                     </CardContent>
                                 </Card>
                                 <Card>
-                                    <CardContent className="p-6 text-center">
-                                        <div className="text-3xl font-bold text-yellow-600">{lots.filter(l => l.status === 'reserved').length}</div>
-                                        <p className="text-sm text-muted-foreground mt-1">Réservés</p>
+                                    <CardContent className="p-3 md:p-6 text-center">
+                                        <div className="text-2xl md:text-3xl font-bold text-yellow-600">{lots.filter(l => l.status === 'reserved').length}</div>
+                                        <p className="text-xs md:text-sm text-muted-foreground mt-1">Réservés</p>
                                     </CardContent>
                                 </Card>
                                 <Card>
-                                    <CardContent className="p-6 text-center">
-                                        <div className="text-3xl font-bold text-red-600">{lots.filter(l => l.status === 'delivered').length}</div>
-                                        <p className="text-sm text-muted-foreground mt-1">Remis</p>
+                                    <CardContent className="p-3 md:p-6 text-center">
+                                        <div className="text-2xl md:text-3xl font-bold text-red-600">{lots.filter(l => l.status === 'delivered').length}</div>
+                                        <p className="text-xs md:text-sm text-muted-foreground mt-1">Remis</p>
                                     </CardContent>
                                 </Card>
                             </motion.div>
