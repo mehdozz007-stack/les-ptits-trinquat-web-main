@@ -155,6 +155,15 @@ export interface RegisterResponse {
   message: string;
 }
 
+export interface SendCodeRequest {
+  email: string;
+}
+
+export interface VerifyCodeRequest {
+  email: string;
+  code: string;
+}
+
 export interface NewsletterSubscribeRequest {
   email: string;
   first_name?: string;
