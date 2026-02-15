@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { HelpCircle, Heart, Users, MessageCircleQuestionIcon, Sparkles, FileText } from "lucide-react";
+import { HelpCircle, Heart, Users, MessageCircleQuestionIcon, Sparkles, FileText, ArrowDown } from "lucide-react";
 import { Layout } from '@/components/layout/Layout';
 import { AuthTombolaForm } from '@/components/tombola/AuthTombolaForm';
 import { TombolaHero } from '@/components/tombola/TombolaHero';
@@ -89,8 +89,8 @@ export default function Auth() {
                 <div className="container">
                     <div className="flex justify-center mb-4">
                         <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/20 px-4 py-1.5 text-sm font-semibold text-accent-foreground">
-                            <FileText className="h-4 w-4 text-secondary" />
-                            Procédure
+                            <ArrowDown className="h-4 w-4 text-secondary" />
+                            Suivez les étapes !
                         </span>
                     </div>
                     <h2 className="mb-10 text-3xl font-extrabold md:text-4xl text-center">
@@ -101,7 +101,7 @@ export default function Auth() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-secondary/10 to-sky/10 p-8 md:p-12 max-w-2xl mx-auto via-amber/8 border border-amber/20 shadow-lg shadow-amber/10 backdrop-blur-sm hover:shadow-amber/15 transition-all duration-500"
+                        className="relative rounded-3xl bg-gradient-to-br from-primary/10 via-secondary/10 to-sky/10 p-8 md:p-12 max-w-2xl mx-auto via-amber/8 border border-amber/20 shadow-lg shadow-amber/10 backdrop-blur-sm hover:shadow-amber/15 transition-all duration-500"
                     >
                         <div className="mb-6 flex justify-center">
                             <motion.div
@@ -147,6 +147,7 @@ export default function Auth() {
                                 "Nouveau ? Inscrivez-vous",
                                 "Devenez participant automatiquement",
                                 "Proposez et échangez des lots",
+                                "Partagez et réservez jusqu'à deux lots par famille",
                                 "Rejoignez les familles participantes"
                             ].map((item, index) => (
                                 <motion.li

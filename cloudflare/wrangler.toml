@@ -37,7 +37,7 @@ database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 # Environnement de développement
 # ============================================================
 [env.dev]
-vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
+vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60", RESEND_API_KEY = "ta_clé_ici" }
 
 [[env.dev.d1_databases]]
 binding = "DB"

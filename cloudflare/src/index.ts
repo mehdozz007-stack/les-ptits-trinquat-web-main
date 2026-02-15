@@ -59,6 +59,7 @@ app.get('/init-db', async (c) => {
         id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
         email TEXT NOT NULL UNIQUE COLLATE NOCASE,
         password_hash TEXT NOT NULL,
+        is_active INTEGER NOT NULL DEFAULT 1,
         created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
         updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
       )`,
@@ -137,6 +138,35 @@ app.get('/init-db', async (c) => {
       `CREATE INDEX IF NOT EXISTS idx_audit_logs_action ON audit_logs(action)`,
       `CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON audit_logs(created_at)`,
 
+      `CREATE TABLE IF NOT EXISTS email_verifications (
+        id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+        user_id TEXT NOT NULL,
+        email TEXT NOT NULL,
+        code_hash TEXT NOT NULL,
+        expires_at INTEGER NOT NULL,
+        verified_at INTEGER,
+        created_at INTEGER NOT NULL DEFAULT (CAST(UNIXEPOCH() AS INTEGER)),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )`,
+
+      `CREATE INDEX IF NOT EXISTS idx_email_verifications_user_id ON email_verifications(user_id)`,
+      `CREATE INDEX IF NOT EXISTS idx_email_verifications_email ON email_verifications(email)`,
+      `CREATE INDEX IF NOT EXISTS idx_email_verifications_code_hash ON email_verifications(code_hash)`,
+
+      `CREATE TABLE IF NOT EXISTS password_reset_tokens (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        token_hash TEXT NOT NULL UNIQUE,
+        expires_at INTEGER NOT NULL,
+        used_at INTEGER,
+        created_at INTEGER NOT NULL DEFAULT (CAST(UNIXEPOCH() AS INTEGER)),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )`,
+
+      `CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_user_id ON password_reset_tokens(user_id)`,
+      `CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_token_hash ON password_reset_tokens(token_hash)`,
+      `CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_expires_at ON password_reset_tokens(expires_at)`,
+
       `CREATE TABLE IF NOT EXISTS rate_limits (
         id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
         identifier TEXT NOT NULL,
@@ -147,7 +177,21 @@ app.get('/init-db', async (c) => {
       )`,
 
       `CREATE INDEX IF NOT EXISTS idx_rate_limits_identifier ON rate_limits(identifier)`,
-      `CREATE INDEX IF NOT EXISTS idx_rate_limits_window ON rate_limits(window_start)`
+      `CREATE INDEX IF NOT EXISTS idx_rate_limits_window ON rate_limits(window_start)`,
+
+      `CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+        id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
+        email TEXT NOT NULL UNIQUE COLLATE NOCASE,
+        first_name TEXT,
+        consent INTEGER NOT NULL DEFAULT 0,
+        is_active INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+        updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
+      )`,
+
+      `CREATE INDEX IF NOT EXISTS idx_newsletter_subscribers_email ON newsletter_subscribers(email)`,
+      `CREATE INDEX IF NOT EXISTS idx_newsletter_subscribers_is_active ON newsletter_subscribers(is_active)`,
+      `CREATE INDEX IF NOT EXISTS idx_newsletter_subscribers_created_at ON newsletter_subscribers(created_at)`
     ];
 
     // Execute each statement individually

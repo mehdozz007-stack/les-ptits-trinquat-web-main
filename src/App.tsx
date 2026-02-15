@@ -19,6 +19,7 @@ import Auth from "./pages/Auth";
 import AdminTombola from "./pages/AdminTombola";
 import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/partenaires" element={<Partenaires />} />
             {/* Pages d'authentification et tombola */}
             <Route path="/auth" element={<Auth />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/tombola" element={<TombolaProtected />} />
             <Route path="/admin/tombola" element={<AdminTombola />} />
             <Route path="/contact" element={<Contact />} />
