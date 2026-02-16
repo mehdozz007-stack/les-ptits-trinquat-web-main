@@ -314,9 +314,9 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               {lot.icone}
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="mb-1 text-lg font-bold break-words line-clamp-3">{lot.nom}</h3>
+              <h3 className="mb-1 text-lg font-bold break-words">{lot.nom}</h3>
               {lot.description && (
-                <p className="line-clamp-2 text-sm text-muted-foreground break-words">
+                <p className="text-sm text-muted-foreground break-words">
                   {lot.description}
                 </p>
               )}
