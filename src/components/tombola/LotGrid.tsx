@@ -58,7 +58,7 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
   // Séléectionner les "mes lots" = lots créés par moi ou avec lesquels j'ai interagi
   const myLots = lots.filter((lot) => {
     const isMyLot = lot.parent_id === currentParticipant?.id;
-    const hasInteracted = lot.reserved_by === currentParticipant?.id || lot.statut === "remis";
+    const hasInteracted = lot.reserved_by === currentParticipant?.id;
     return isMyLot || hasInteracted;
   });
 

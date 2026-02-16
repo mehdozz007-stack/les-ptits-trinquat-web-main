@@ -9,7 +9,7 @@
 export async function hashPassword(password: string): Promise<string> {
     // Validation basique
     if (!password || password.length < 8) {
-        throw new Error('Password must be at least 8 characters');
+        throw new Error('Le mot de passe doit contenir au moins 8 caractères');
     }
 
     // Utiliser la crypto API Web pour créer un hash sécurisé
@@ -44,10 +44,10 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
  * Valider la force du mot de passe
  */
 export function validatePasswordStrength(password: string): { valid: boolean; error?: string } {
-    if (!password) return { valid: false, error: 'Password is required' };
-    if (password.length < 8) return { valid: false, error: 'Password must be at least 8 characters' };
-    if (!/[A-Z]/.test(password)) return { valid: false, error: 'Password must contain uppercase letter' };
-    if (!/[a-z]/.test(password)) return { valid: false, error: 'Password must contain lowercase letter' };
-    if (!/[0-9]/.test(password)) return { valid: false, error: 'Password must contain number' };
+    if (!password) return { valid: false, error: 'Le mot de passe est requis' };
+    if (password.length < 8) return { valid: false, error: 'Le mot de passe doit contenir au moins 8 caractères' };
+    if (!/[A-Z]/.test(password)) return { valid: false, error: 'Le mot de passe doit contenir une lettre majuscule' };
+    if (!/[a-z]/.test(password)) return { valid: false, error: 'Le mot de passe doit contenir une lettre minuscule' };
+    if (!/[0-9]/.test(password)) return { valid: false, error: 'Le mot de passe doit contenir un chiffre' };
     return { valid: true };
 }

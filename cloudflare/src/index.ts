@@ -201,6 +201,23 @@ app.get('/init-db', async (c) => {
       }
     }
 
+    // Grant admin role to mehdi@gmail.com if user exists
+    try {
+      await c.env.DB.prepare(`
+        INSERT OR IGNORE INTO user_roles (id, user_id, role, created_at)
+        SELECT 
+          'role_admin_mehdi_' || lower(hex(randomblob(8))),
+          u.id,
+          'admin',
+          datetime('now')
+        FROM users u
+        WHERE u.email = 'mehdi@gmail.com'
+      `).run();
+    } catch (err) {
+      // Role grant failed, but DB init succeeded
+      console.warn('Could not grant admin role to mehdi@gmail.com:', err);
+    }
+
     return c.json({
       success: true,
       message: 'Database initialized successfully'
