@@ -314,9 +314,9 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
               {lot.icone}
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="mb-1 truncate text-lg font-bold">{lot.nom}</h3>
+              <h3 className="mb-1 text-lg font-bold break-words line-clamp-3">{lot.nom}</h3>
               {lot.description && (
-                <p className="line-clamp-2 text-sm text-muted-foreground">
+                <p className="line-clamp-2 text-sm text-muted-foreground break-words">
                   {lot.description}
                 </p>
               )}
@@ -325,10 +325,10 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
           {/* Owner info */}
           {!isOwner && (
-            <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2">
-              <span className="text-lg">{lot.parent?.emoji || "😊"}</span>
+            <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2 min-w-0">
+              <span className="text-lg flex-shrink-0">{lot.parent?.emoji || "😊"}</span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">
+                <p className="text-sm font-medium break-words">
                   Proposé par {lot.parent?.prenom}
                 </p>
               </div>
@@ -337,9 +337,9 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
 
           {/* Reserved by info */}
           {lot.statut === "reserve" && lot.reserver && (
-            <div className="mb-4 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 p-2">
-              <span className="text-lg">{lot.reserver.emoji}</span>
-              <p className="text-sm">
+            <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-2 min-w-0">
+              <span className="text-lg flex-shrink-0">{lot.reserver.emoji}</span>
+              <p className="text-sm break-words">
                 Réservé par <span className="font-medium">{lot.reserver.prenom}</span>
                 {isReserver && <span className="text-amber-600"> (vous)</span>}
               </p>
