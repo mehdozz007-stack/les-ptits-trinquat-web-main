@@ -59,6 +59,7 @@ app.get('/init-db', async (c) => {
         id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
         email TEXT NOT NULL UNIQUE COLLATE NOCASE,
         password_hash TEXT NOT NULL,
+        is_active INTEGER NOT NULL DEFAULT 1,
         created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
         updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
       )`,
@@ -155,6 +156,23 @@ app.get('/init-db', async (c) => {
       if (statement.trim()) {
         await c.env.DB.prepare(statement).run();
       }
+    }
+
+    // Grant admin role to mehdi@gmail.com if user exists
+    try {
+      await c.env.DB.prepare(`
+        INSERT OR IGNORE INTO user_roles (id, user_id, role, created_at)
+        SELECT 
+          'role_admin_mehdi_' || lower(hex(randomblob(8))),
+          u.id,
+          'admin',
+          datetime('now')
+        FROM users u
+        WHERE u.email = 'mehdi@gmail.com'
+      `).run();
+    } catch (err) {
+      // Role grant failed, but DB init succeeded
+      console.warn('Could not grant admin role to mehdi@gmail.com:', err);
     }
 
     return c.json({

@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye, Tickets } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye, Tickets, Gift } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -60,6 +60,20 @@ const shadowColors: Record<string, string> = {
     cyan: "shadow-2xl shadow-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/60 transition-all duration-500",
     indigo: "shadow-2xl shadow-indigo-500/40 hover:shadow-2xl hover:shadow-indigo-500/60 transition-all duration-500",
     fuchsia: "shadow-2xl shadow-fuchsia-500/40 hover:shadow-2xl hover:shadow-fuchsia-500/60 transition-all duration-500",
+};
+
+const buttonGradients: Record<string, string> = {
+    primary: "bg-gradient-to-r from-primary via-secondary to-pink-600 hover:from-primary/90 hover:via-secondary/90 hover:to-pink-700 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/60",
+    secondary: "bg-gradient-to-r from-secondary via-primary to-orange-600 hover:from-secondary/90 hover:via-primary/90 hover:to-orange-700 shadow-lg shadow-secondary/40 hover:shadow-xl hover:shadow-secondary/60",
+    sky: "bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 hover:from-sky-700 hover:via-blue-700 hover:to-violet-700 shadow-lg shadow-sky-500/40 hover:shadow-xl hover:shadow-sky-500/60",
+    violet: "bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 hover:from-violet-700 hover:via-purple-700 hover:to-pink-700 shadow-lg shadow-violet-500/40 hover:shadow-xl hover:shadow-violet-500/60",
+    accent: "bg-gradient-to-r from-accent via-green-600 to-yellow-600 hover:from-accent/90 hover:via-green-700 hover:to-yellow-700 shadow-lg shadow-accent/40 hover:shadow-xl hover:shadow-accent/60",
+    rose: "bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 hover:from-rose-700 hover:via-pink-700 hover:to-red-700 shadow-lg shadow-rose-500/40 hover:shadow-xl hover:shadow-rose-500/60",
+    emerald: "bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-700 hover:via-teal-700 hover:to-cyan-700 shadow-lg shadow-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/60",
+    amber: "bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 hover:from-amber-700 hover:via-orange-700 hover:to-yellow-700 shadow-lg shadow-amber-500/40 hover:shadow-xl hover:shadow-amber-500/60",
+    cyan: "bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-600 hover:from-cyan-700 hover:via-blue-700 hover:to-teal-700 shadow-lg shadow-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/60",
+    indigo: "bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 hover:from-indigo-700 hover:via-purple-700 hover:to-blue-700 shadow-lg shadow-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/60",
+    fuchsia: "bg-gradient-to-r from-fuchsia-600 via-pink-600 to-purple-600 hover:from-fuchsia-700 hover:via-pink-700 hover:to-purple-700 shadow-lg shadow-fuchsia-500/40 hover:shadow-xl hover:shadow-fuchsia-500/60",
 };
 
 export function ActualiteDetail() {
@@ -370,6 +384,35 @@ export function ActualiteDetail() {
                                                                 <Tickets className="h-5 w-5" />
                                                                 Réserver
                                                             </a>
+                                                        </Button>
+                                                    </motion.div>
+                                                </motion.div>
+                                            )}
+
+                                            {/* Tombola exchange button section */}
+                                            {actualite.link && actualite.id === "act-001" && (
+                                                <motion.div
+                                                    initial={{ opacity: 0 }}
+                                                    whileInView={{ opacity: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: 0.4, duration: 0.4 }}
+                                                    className="mt-8 pt-8 flex justify-center"
+                                                >
+                                                    <motion.div
+                                                        whileHover={{ scale: 1.08, y: -3 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                        transition={{ duration: 0.2 }}
+                                                    >
+                                                        <Button
+                                                            asChild
+                                                            variant="default"
+                                                            size="lg"
+                                                            className={`gap-2 text-white font-semibold transition-all duration-300 ${buttonGradients[actualite.color]}`}
+                                                        >
+                                                            <Link to={actualite.link} className="flex items-center gap-2">
+                                                                <Gift className="h-5 w-5" />
+                                                                Echangez vos lots
+                                                            </Link>
                                                         </Button>
                                                     </motion.div>
                                                 </motion.div>

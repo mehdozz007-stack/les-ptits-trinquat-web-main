@@ -58,11 +58,11 @@ export function generateId(): string {
 export async function hashPassword(password: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(password);
-  
+
   // Générer un sel aléatoire
   const salt = new Uint8Array(16);
   crypto.getRandomValues(salt);
-  
+
   // Dériver la clé avec PBKDF2
   const keyMaterial = await crypto.subtle.importKey(
     'raw',
@@ -71,7 +71,7 @@ export async function hashPassword(password: string): Promise<string> {
     false,
     ['deriveBits']
   );
-  
+
   const derivedBits = await crypto.subtle.deriveBits(
     {
       name: 'PBKDF2',
@@ -82,13 +82,13 @@ export async function hashPassword(password: string): Promise<string> {
     keyMaterial,
     256
   );
-  
+
   // Combiner sel et hash
   const hashArray = new Uint8Array(derivedBits);
   const combined = new Uint8Array(salt.length + hashArray.length);
   combined.set(salt);
   combined.set(hashArray, salt.length);
-  
+
   // Encoder en base64
   return btoa(String.fromCharCode(...combined));
 }
@@ -100,12 +100,12 @@ export async function verifyPassword(password: string, storedHash: string): Prom
   try {
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
-    
+
     // Décoder le hash stocké
     const combined = Uint8Array.from(atob(storedHash), c => c.charCodeAt(0));
     const salt = combined.slice(0, 16);
     const storedHashBytes = combined.slice(16);
-    
+
     // Dériver la clé avec PBKDF2
     const keyMaterial = await crypto.subtle.importKey(
       'raw',
@@ -114,7 +114,7 @@ export async function verifyPassword(password: string, storedHash: string): Prom
       false,
       ['deriveBits']
     );
-    
+
     const derivedBits = await crypto.subtle.deriveBits(
       {
         name: 'PBKDF2',
@@ -125,9 +125,9 @@ export async function verifyPassword(password: string, storedHash: string): Prom
       keyMaterial,
       256
     );
-    
+
     const hashArray = new Uint8Array(derivedBits);
-    
+
     // Comparaison en temps constant
     if (hashArray.length !== storedHashBytes.length) return false;
     let result = 0;
@@ -152,33 +152,33 @@ export async function checkRateLimit(
 ): Promise<{ allowed: boolean; remaining: number; resetAt: Date }> {
   const now = new Date();
   const windowStart = new Date(now.getTime() - windowSeconds * 1000).toISOString();
-  
+
   // Nettoyer les anciennes entrées
   await db.prepare(
     'DELETE FROM rate_limits WHERE window_start < ?'
   ).bind(windowStart).run();
-  
+
   // Vérifier le compteur actuel
   const existing = await db.prepare(
     'SELECT request_count, window_start FROM rate_limits WHERE identifier = ? AND endpoint = ?'
   ).bind(identifier, endpoint).first<{ request_count: number; window_start: string }>();
-  
+
   if (!existing) {
     // Première requête dans la fenêtre
     await db.prepare(
       'INSERT INTO rate_limits (identifier, endpoint, request_count, window_start) VALUES (?, ?, 1, ?)'
     ).bind(identifier, endpoint, now.toISOString()).run();
-    
+
     return {
       allowed: true,
       remaining: maxRequests - 1,
       resetAt: new Date(now.getTime() + windowSeconds * 1000)
     };
   }
-  
+
   const windowStartDate = new Date(existing.window_start);
   const resetAt = new Date(windowStartDate.getTime() + windowSeconds * 1000);
-  
+
   if (existing.request_count >= maxRequests) {
     return {
       allowed: false,
@@ -186,12 +186,12 @@ export async function checkRateLimit(
       resetAt
     };
   }
-  
+
   // Incrémenter le compteur
   await db.prepare(
     'UPDATE rate_limits SET request_count = request_count + 1 WHERE identifier = ? AND endpoint = ?'
   ).bind(identifier, endpoint).run();
-  
+
   return {
     allowed: true,
     remaining: maxRequests - existing.request_count - 1,
@@ -212,11 +212,11 @@ export async function logAudit(
   details?: object
 ): Promise<void> {
   try {
-    const ipAddress = request.headers.get('CF-Connecting-IP') || 
-                      request.headers.get('X-Forwarded-For') || 
-                      'unknown';
+    const ipAddress = request.headers.get('CF-Connecting-IP') ||
+      request.headers.get('X-Forwarded-For') ||
+      'unknown';
     const userAgent = request.headers.get('User-Agent') || 'unknown';
-    
+
     await db.prepare(`
       INSERT INTO audit_logs (user_id, action, resource_type, resource_id, ip_address, user_agent, details)
       VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -246,16 +246,16 @@ export function validateInputLength(
   if (!input || typeof input !== 'string') {
     return { valid: false, error: `${fieldName} is required` };
   }
-  
+
   const trimmed = input.trim();
-  
+
   if (trimmed.length < minLength) {
     return { valid: false, error: `${fieldName} must be at least ${minLength} characters` };
   }
-  
+
   if (trimmed.length > maxLength) {
     return { valid: false, error: `${fieldName} must be less than ${maxLength} characters` };
   }
-  
+
   return { valid: true };
 }

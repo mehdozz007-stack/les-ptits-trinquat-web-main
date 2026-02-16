@@ -30,7 +30,7 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
     if (!body.email || !body.password) {
       return c.json<ApiResponse>({
         success: false,
-        error: 'Email and password are required'
+        error: 'Veuillez entrer votre email et votre mot de passe'
       }, 400);
     }
 
@@ -40,7 +40,7 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
     if (!isValidEmail(email)) {
       return c.json<ApiResponse>({
         success: false,
-        error: 'Invalid email format'
+        error: 'Veuillez entrer une adresse email valide'
       }, 400);
     }
 
@@ -75,7 +75,7 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
 
       return c.json<ApiResponse>({
         success: false,
-        error: 'Mot de passe incorrect.'
+        error: 'Mot de passe incorrect'
       }, 401);
     }
 
@@ -113,7 +113,7 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
     console.error('Login error:', error);
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred during login'
+      error: 'Une erreur s\'est produite lors de la connexion'
     }, 500);
   }
 });
@@ -135,13 +135,13 @@ auth.post('/logout', requireAuth, async (c) => {
 
     return c.json<ApiResponse>({
       success: true,
-      message: 'Logged out successfully'
+      message: 'Déconnexion réussie'
     });
   } catch (error) {
     console.error('Logout error:', error);
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred during logout'
+      error: 'Une erreur s\'est produite lors de la déconnexion'
     }, 500);
   }
 });
@@ -155,7 +155,7 @@ auth.get('/me', requireAuth, async (c) => {
   if (!authContext) {
     return c.json<ApiResponse>({
       success: false,
-      error: 'Not authenticated'
+      error: 'Vous n\'êtes pas authentifié'
     }, 401);
   }
 
@@ -276,7 +276,7 @@ auth.post('/change-password', requireAuth, async (c) => {
   try {
     const authContext = getAuthContext(c);
     if (!authContext) {
-      return c.json<ApiResponse>({ success: false, error: 'Not authenticated' }, 401);
+      return c.json<ApiResponse>({ success: false, error: 'Vous n\'êtes pas authentifié' }, 401);
     }
 
     const body = await c.req.json<{ current_password: string; new_password: string }>();
@@ -285,7 +285,7 @@ auth.post('/change-password', requireAuth, async (c) => {
     if (!body.current_password || !body.new_password) {
       return c.json<ApiResponse>({
         success: false,
-        error: 'Current and new password are required'
+        error: 'Veuillez entrer votre mot de passe actuel et le nouveau'
       }, 400);
     }
 
@@ -303,7 +303,7 @@ auth.post('/change-password', requireAuth, async (c) => {
       await logAudit(c.env.DB, authContext.user.id, 'PASSWORD_CHANGE_FAILED', 'user', authContext.user.id, c.req.raw);
       return c.json<ApiResponse>({
         success: false,
-        error: 'Current password is incorrect'
+        error: 'Le mot de passe actuel est incorrect'
       }, 401);
     }
 
@@ -325,13 +325,13 @@ auth.post('/change-password', requireAuth, async (c) => {
 
     return c.json<ApiResponse>({
       success: true,
-      message: 'Password changed successfully'
+      message: 'Votre mot de passe a été changé avec succès'
     });
   } catch (error) {
     console.error('Change password error:', error);
     return c.json<ApiResponse>({
       success: false,
-      error: 'An error occurred'
+      error: 'Une erreur s\'est produite'
     }, 500);
   }
 });
