@@ -75,6 +75,10 @@ const cardGradients: Record<string, string> = {
 };
 
 export function EventsPreview() {
+  // Déterminer si l'utilisateur préfère les animations réduites
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.innerWidth < 768;
+
   return (
     <section className="py-20 md:py-28">
       <div className="container">
@@ -104,73 +108,69 @@ export function EventsPreview() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                animate={{
-                  y: [0, -12, 0],
-                  rotateX: [0, 5, 0],
-                  rotateY: [0, 3, 0],
-                  z: [0, 20, 0],
+                animate={prefersReducedMotion ? {} : {
+                  y: [0, -6, 0],
                   opacity: 1
                 }}
-                transition={{
+                transition={prefersReducedMotion ? {} : {
                   duration: 3.5,
                   repeat: Infinity,
                   ease: "easeInOut",
                   opacity: { duration: 0.8, ease: "easeOut" }
                 }}
-                style={{ perspective: "1200px" }}
                 className="relative mx-auto max-w-2xl"
               >
-                {/* Animated background glow */}
-                <motion.div
-                  animate={{
-                    boxShadow: [
-                      `0 0 20px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.3)' : 'rgba(167, 139, 250, 0.3)'}, 0 0 40px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                      `0 0 40px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.5)' : 'rgba(167, 139, 250, 0.5)'}, 0 0 80px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.3)' : 'rgba(167, 139, 250, 0.3)'}`,
-                      `0 0 20px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.3)' : 'rgba(167, 139, 250, 0.3)'}, 0 0 40px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                    ],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className={`absolute -inset-1 rounded-2xl ${event.color === 'accent'
-                    ? 'bg-gradient-to-r from-accent via-yellow-300 to-accent'
-                    : 'bg-gradient-to-r from-violet-500 via-purple-400 to-pink-500'
-                    } opacity-75 blur-lg`}
-                />
+                {/* Animated background glow - simplifié sur mobile */}
+                {!prefersReducedMotion && (
+                  <motion.div
+                    animate={{
+                      opacity: isMobile ? [0.4, 0.5, 0.4] : [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className={`absolute -inset-1 rounded-2xl ${event.color === 'accent'
+                      ? 'bg-gradient-to-r from-accent via-yellow-300 to-accent'
+                      : 'bg-gradient-to-r from-violet-500 via-purple-400 to-pink-500'
+                      } ${isMobile ? 'blur-md' : 'blur-lg'}`}
+                  />
+                )}
 
-                {/* Card with bubbles */}
+                {/* Card - bubbles seulement sur desktop */}
                 <Card variant="playful" className={`group relative overflow-hidden border-2 ${cardGradients[event.color as keyof typeof cardGradients]}`}>
-                  {/* Bubble columns */}
-                  <div className="absolute inset-0 overflow-hidden">
-                    {/* Column 1 */}
-                    <div className="absolute left-1/4 top-0 h-full w-1/12">
-                      <FloatingBubble delay={0} duration={4} size="w-3 h-3" />
-                      <FloatingBubble delay={0.8} duration={5} size="w-2 h-2" />
-                      <FloatingBubble delay={1.6} duration={4.5} size="w-4 h-4" />
-                    </div>
+                  {/* Bubble columns - uniquement sur desktop */}
+                  {!isMobile && !prefersReducedMotion && (
+                    <div className="absolute inset-0 overflow-hidden">
+                      {/* Column 1 */}
+                      <div className="absolute left-1/4 top-0 h-full w-1/12">
+                        <FloatingBubble delay={0} duration={4} size="w-3 h-3" />
+                        <FloatingBubble delay={0.8} duration={5} size="w-2 h-2" />
+                        <FloatingBubble delay={1.6} duration={4.5} size="w-4 h-4" />
+                      </div>
 
-                    {/* Column 2 */}
-                    <div className="absolute left-1/2 top-0 h-full w-1/12">
-                      <FloatingBubble delay={0.4} duration={4.5} size="w-2 h-2" />
-                      <FloatingBubble delay={1.2} duration={5} size="w-3 h-3" />
-                      <FloatingBubble delay={2} duration={4} size="w-2 h-2" />
-                    </div>
+                      {/* Column 2 */}
+                      <div className="absolute left-1/2 top-0 h-full w-1/12">
+                        <FloatingBubble delay={0.4} duration={4.5} size="w-2 h-2" />
+                        <FloatingBubble delay={1.2} duration={5} size="w-3 h-3" />
+                        <FloatingBubble delay={2} duration={4} size="w-2 h-2" />
+                      </div>
 
-                    {/* Column 3 */}
-                    <div className="absolute right-1/4 top-0 h-full w-1/12">
-                      <FloatingBubble delay={0.6} duration={5} size="w-4 h-4" />
-                      <FloatingBubble delay={1.4} duration={4} size="w-2 h-2" />
-                      <FloatingBubble delay={2.2} duration={4.5} size="w-3 h-3" />
+                      {/* Column 3 */}
+                      <div className="absolute right-1/4 top-0 h-full w-1/12">
+                        <FloatingBubble delay={0.6} duration={5} size="w-4 h-4" />
+                        <FloatingBubble delay={1.4} duration={4} size="w-2 h-2" />
+                        <FloatingBubble delay={2.2} duration={4.5} size="w-3 h-3" />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <CardContent className="relative z-10 p-8 sm:p-12">
                     {/* Title */}
                     <motion.h3
-                      animate={{ y: [0, -12, 0] }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
+                      transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                       className={`text-base sm:text-xl font-bold mb-6 text-center ${titleGradients[event.color as keyof typeof titleGradients]}`}
                     >
                       {event.title}
@@ -178,15 +178,10 @@ export function EventsPreview() {
 
                     {/* Description */}
                     <motion.p
-                      animate={{
-                        y: [0, -12, 0],
-                        textShadow: [
-                          `0 0 15px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                          `0 0 35px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.8)' : 'rgba(167, 139, 250, 0.8)'}`,
-                          `0 0 15px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                        ],
+                      animate={prefersReducedMotion ? {} : {
+                        y: [0, -4, 0],
                       }}
-                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                       className="mb-6 text-muted-foreground text-base sm:text-lg text-center"
                     >
                       {event.description}
@@ -199,61 +194,28 @@ export function EventsPreview() {
                       {/* Date */}
                       {(event.date || event.time) && (
                         <motion.div
-                          animate={{ y: [0, -12, 0] }}
-                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                          animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
+                          transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                           className="flex items-center gap-3"
                         >
-                          <motion.div
-                            animate={{
-                              textShadow: [
-                                `0 0 8px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                                `0 0 20px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.8)' : 'rgba(167, 139, 250, 0.8)'}`,
-                                `0 0 8px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                              ],
-                            }}
-                            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                          >
-                            <Calendar className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
-                          </motion.div>
+                          <Calendar className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
                           <span>{event.date || event.time}</span>
                         </motion.div>
                       )}
                       <motion.div
-                        animate={{ y: [0, -12, 0] }}
-                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                        animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
+                        transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                         className="flex items-center gap-3"
                       >
-                        <motion.div
-                          animate={{
-                            textShadow: [
-                              `0 0 8px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                              `0 0 20px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.8)' : 'rgba(167, 139, 250, 0.8)'}`,
-                              `0 0 8px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                            ],
-                          }}
-                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                          <Clock className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
-                        </motion.div>
+                        <Clock className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
                         <span>{event.time}</span>
                       </motion.div>
                       <motion.div
-                        animate={{ y: [0, -12, 0] }}
-                        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                        animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
+                        transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                         className="flex items-center gap-3"
                       >
-                        <motion.div
-                          animate={{
-                            textShadow: [
-                              `0 0 8px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                              `0 0 20px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.8)' : 'rgba(167, 139, 250, 0.8)'}`,
-                              `0 0 8px ${event.color === 'accent' ? 'rgba(255, 193, 7, 0.2)' : 'rgba(167, 139, 250, 0.2)'}`,
-                            ],
-                          }}
-                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                        >
-                          <MapPin className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
-                        </motion.div>
+                        <MapPin className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
                         <span>{event.location}</span>
                       </motion.div>
                     </motion.div>
