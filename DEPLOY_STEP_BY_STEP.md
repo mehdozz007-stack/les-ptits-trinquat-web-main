@@ -147,6 +147,40 @@ wrangler secret put JWT_SECRET --env production
 
 ---
 
+## 🔐 ÉTAPE 4b: CONFIGURER RESEND_API_KEY EN PRODUCTION (2 min)
+
+**Lieu**: Terminal `cloudflare/`
+
+```bash
+# Configurer la clé Resend pour les emails de réinitialisation de mot de passe
+wrangler secret put RESEND_API_KEY --env production
+
+# Il vous demande d'entrer la clé:
+# ✓ Enter the secret text:
+# [Coller votre clé Resend ici et appuyer Entrée]
+
+# Vous devriez voir:
+# ✓ Uploaded secret RESEND_API_KEY
+```
+
+**Important:**
+- [ ] Aller sur https://resend.com/api-keys pour générer une clé API
+- [ ] Copier la clé complète (commence par `re_`)
+- [ ] `wrangler secret put RESEND_API_KEY --env production`
+- [ ] Coller la clé et appuyer Entrée
+- [ ] Vérifier: "Uploaded secret RESEND_API_KEY"
+
+**Vérifier que le domaine est configuré**:
+```bash
+# Pour envoyer des emails de production, vous devez:
+# 1. Aller sur https://resend.com/domains
+# 2. Ajouter votre domaine: lespetitstrinquat.fr
+# 3. Configurer les enregistrements DNS fournis par Resend
+# 4. Attendre la vérification (5-10 minutes)
+```
+
+---
+
 ## 🏗️ ÉTAPE 5: BUILD DU PROJET (5 min)
 
 **Lieu**: Terminal à la racine
@@ -247,6 +281,25 @@ npm run deploy
 
 ## ✅ ÉTAPE 8: VALIDATION FINALE (5 min)
 
+### Test 0: Vérifier les Secrets
+
+```bash
+cd cloudflare
+
+# Vérifier que les secrets sont configurés
+wrangler secret list --env production
+
+# Vous devriez voir:
+# [
+#   { "name": "JWT_SECRET", "type": "secret_text" },
+#   { "name": "RESEND_API_KEY", "type": "secret_text" }
+# ]
+```
+
+**Action**: 
+- [ ] Vérifier que JWT_SECRET est présent
+- [ ] Vérifier que RESEND_API_KEY est présent
+
 ### Test 1: Health Check
 
 ```bash
@@ -316,6 +369,8 @@ curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participa
 
 ### Secrets 🔐
 - [ ] JWT_SECRET configuré
+- [ ] RESEND_API_KEY configuré
+- [ ] Domaine Resend vérifié (lespetitstrinquat.fr)
 
 ### Build 🏗️
 - [ ] npm run build réussi
@@ -375,6 +430,13 @@ Si tous les points sont cochés, votre application est **EN PRODUCTION** et **FO
 ### Erreur: API retourne 500
 - Regarder les logs: `npx wrangler tail --env production`
 - Vérifier JWT_SECRET: `wrangler secret list --env production`
+- Vérifier RESEND_API_KEY: `wrangler secret list --env production`
+
+### Erreur: "403 validation_error" de Resend
+- Domaine non vérifié: aller sur https://resend.com/domains
+- Ajouter `lespetitstrinquat.fr` et configurer les enregistrements DNS
+- Vérifier que la clé API n'a pas expiré
+- En sandbox mode (DEV): les emails vont uniquement à `mehzit007@gmail.com`
 
 ### Erreur: Page blanche
 - F12 → Console → Chercher les erreurs
