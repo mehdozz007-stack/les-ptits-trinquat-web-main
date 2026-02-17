@@ -387,6 +387,14 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
                   </button>
                 </div>
                 {errors.password && <p className="text-xs md:text-sm text-destructive font-medium">{errors.password}</p>}
+                {!isRegisterMode && !errors.password && (
+                  <p className="text-center text-xs text-muted-foreground mt-2">
+                    Mot de passe oublié ?{" "}
+                    <a href="/contact" className="text-primary hover:underline font-medium">
+                      Contactez-nous
+                    </a>
+                  </p>
+                )}
               </div>
 
               {/* Confirm Password (Register only) */}

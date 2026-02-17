@@ -131,14 +131,16 @@ export function ActualiteDetail() {
                         <div className="absolute top-1/4 left-1/2 h-64 w-64 rounded-full bg-gradient-to-br from-sky-300 via-cyan-200 to-blue-200 watercolor-blob blur-3xl opacity-10" />
                     </div>
                     <div className="container relative z-10">
-                        <Button
-                            variant="ghost"
-                            onClick={() => navigate(-1)}
-                            className="mb-2 sm:mb-6 gap-2"
-                        >
-                            <ArrowLeft className="h-4 w-4" />
-                            Retour
-                        </Button>
+                        {actualite.status !== "past" && (
+                            <Button
+                                variant="ghost"
+                                onClick={() => navigate(-1)}
+                                className="mb-2 sm:mb-6 gap-2"
+                            >
+                                <ArrowLeft className="h-4 w-4" />
+                                Retour
+                            </Button>
+                        )}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}

@@ -22,18 +22,6 @@ const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: nu
 
 const upcomingEvents = [
   {
-    id: 1,
-    title: " TOMBOLA 2026 - Tirage au sort par les enfants le 16 Février 2026 !",
-    date: "16 Février 2026",
-    time: "dès 8h45",
-    location: "Groupe scolaire FRANK-DICKENS",
-    description: "Bonne chance à tous ! Partagez vos lots avec les familles ! 🎁 ✨",
-    color: "accent",
-    status: "upcoming",
-    attendees: 500,
-    url: "/actualites/act-001"
-  },
-  {
     id: 2,
     title: "La crèpe party de l'école - Participez à notre traditionnelle vente de crêpes !",
     date: "20 Février 2026",
@@ -44,6 +32,15 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 200,
     url: "/actualites/act-004"
+  },
+  {
+    id: 1,
+    title: " TOMBOLA 2026 - Merci pour votre participation !",
+    description: "Échangez vos lots avec les familles ! 🎁 ✨",
+    color: "accent",
+    status: "upcoming",
+    attendees: 500,
+    url: "/auth"
   },
   /*{
     id: 6,
@@ -202,22 +199,26 @@ export function EventsPreview() {
                           <span>{event.date || event.time}</span>
                         </motion.div>
                       )}
-                      <motion.div
-                        animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
-                        transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                        className="flex items-center gap-3"
-                      >
-                        <Clock className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
-                        <span>{event.time}</span>
-                      </motion.div>
-                      <motion.div
-                        animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
-                        transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                        className="flex items-center gap-3"
-                      >
-                        <MapPin className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
-                        <span>{event.location}</span>
-                      </motion.div>
+                      {event.time && (
+                        <motion.div
+                          animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
+                          transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                          className="flex items-center gap-3"
+                        >
+                          <Clock className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
+                          <span>{event.time}</span>
+                        </motion.div>
+                      )}
+                      {event.location && (
+                        <motion.div
+                          animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
+                          transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                          className="flex items-center gap-3"
+                        >
+                          <MapPin className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
+                          <span>{event.location}</span>
+                        </motion.div>
+                      )}
                     </motion.div>
                   </CardContent>
                 </Card>

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents } from "@/lib/actualites";
+import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents, getPastAnnouncements } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 
 const badgeColors: Record<string, string> = {
@@ -446,6 +446,91 @@ export function Actualites() {
                                         </motion.div>
                                     );
                                 })}
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {/* Annonces/Informations passées Section */}
+                {getPastAnnouncements().length > 0 && (
+                    <section className="py-12 sm:py-16 md:py-20 bg-muted/30">
+                        <div className="container">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="mb-12"
+                            >
+                                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                                    <FileText className="h-4 w-4" />
+                                    Archives
+                                </span>
+                                <h2 className="mb-4 text-2xl font-bold">
+                                    Annonces et informations archivées
+                                </h2>
+                                <p className="text-base text-muted-foreground max-w-2xl">
+                                    Retrouvez nos annonces, informations et articles passés pour vous tenir informés de l'historique de l'école.
+                                </p>
+                            </motion.div>
+
+                            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                {getPastAnnouncements().map((actualite, index) => (
+                                    <motion.div
+                                        key={actualite.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: (index % 6) * 0.05 }}
+                                        className="group h-full"
+                                    >
+                                        <Card
+                                            className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${actualiteColorClasses[actualite.color]}`}
+                                        >
+                                            <CardContent className="flex flex-col gap-4 p-6">
+                                                {/* Header avec badge */}
+                                                <div className="flex items-start justify-between gap-3">
+                                                    <div className="flex-1">
+                                                        <h3 className={`font-bold ${titleGradients[actualite.color]}`}>
+                                                            {actualite.title}
+                                                        </h3>
+                                                    </div>
+                                                    <Badge
+                                                        className={`shrink-0 ${badgeColors[actualite.type]}`}
+                                                        variant="secondary"
+                                                    >
+                                                        {actualiteTypeLabels[actualite.type]}
+                                                    </Badge>
+                                                </div>
+
+                                                {/* Description */}
+                                                <p className="text-sm text-muted-foreground flex-1">
+                                                    {actualite.description}
+                                                </p>
+
+                                                {/* Footer avec date, location et bouton */}
+                                                <div className="pt-4 mt-2">
+                                                    <div className="flex items-center justify-between gap-3">
+                                                        <div className="flex flex-col gap-2">
+                                                            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                                <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                <span>{actualite.date}</span>
+                                                            </div>
+                                                        </div>
+                                                        {/* Boutons à droite */}
+                                                        <div className="flex flex-col items-end gap-2">
+                                                            <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                                                                <Link to={`/actualites/${actualite.id}`}>
+                                                                    <ChevronRight className="h-4 w-4" />
+                                                                    Lire plus
+                                                                </Link>
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                ))}
                             </div>
                         </div>
                     </section>

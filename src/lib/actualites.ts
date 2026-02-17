@@ -48,16 +48,16 @@ export interface Actualite {
 export const actualitesData: Actualite[] = [
     {
         id: "act-001",
-        title: "TOMBOLA 2026 est lancée !",
-        description: "Gagnez des gros lots avec notre TOMBOLA. Regardez la liste de nos partenaires. Bonne chance à tous !",
-        content: "La tombola de l'association est un moment convivial qui permet aux enfants de s'impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance. 🎟️\nGrâce au soutien de nos partenaires, de nombreux lots attendent les participants. Chaque ticket contribue directement aux projets ludiques de l'association. 🎁\nVotre espace en ligne Tombola et désormais disponible, facilitant les échanges autour des lots, pour prolonger l'esprit de partage après le tirage. 💻\n\nConsultez la liste de nos partenaires et bonne navigation sur notre application ! ✨\n\n16 Février 2026 le tirage au sort et la mise en ligne de votre éspace Tombola. Bonne chance à tous ! 🍀",
+        title: "🎟️ TOMBOLA 2026 🎁",
+        description: "Partagez la joie et échangez vos superbes lots !",
+        content: "La tombola de l'association est un moment convivial qui permet aux enfants de s'impliquer dans la vie de leur école, en vendant des tickets avec fierté et confiance. 🎟️\n\nGrâce au soutien de nos partenaires, Près de 500 lots ont été distribués aux participants. Chaque ticket a contribué directement aux projets ludiques de l'association. 🎁\n\nVotre espace en ligne tombola est désormais disponible, facilitant les échanges autour des lots, pour prolonger l'esprit de partage après le tirage. 💻✨\n\nMerci infiniment pour votre participation ! Consultez la liste de nos partenaires et bonne navigation sur notre application ! 🍀",
         type: "evenement",
-        date: "Lancement 8 Décembre 2025",
-        link: "/auth",
+        date: "16 Fevrier 2026 tirage au sort",
+        link: "/actualites/act-001",
         affiche: tomola,
         location: "Groupe scolaire FRANK-DICKENS",
         color: "accent",
-        status: "upcoming",
+        status: "past",
         attendees: 500,
     },
     {
@@ -69,6 +69,7 @@ export const actualitesData: Actualite[] = [
         date: "16 Février 2026",
         fileUrl: "/documents/Affiche_SI_écoles_260115_044150.pdf",
         color: "primary",
+        status: "past",
         location: "Collège des Aiguerelles",
     },
     {
@@ -96,6 +97,7 @@ export const actualitesData: Actualite[] = [
         location: "Salle polyvalente",
         color: "violet",
         attendees: 30,
+        status: "past",
     },
     {
         id: "act-010",
@@ -134,6 +136,7 @@ export const actualitesData: Actualite[] = [
         date: "2026",
         fileUrl: "/documents/RSST_FICHE.pdf",
         color: "primary",
+        status: "upcoming",
     },
     {
         id: "act-009",
@@ -227,6 +230,7 @@ export const actualitesData: Actualite[] = [
         date: "8 Février 2026",
         link: "https://www.francebleu.fr/infos/societe/facture-multipliee-par-5-salles-de-classe-a-10-degres-une-chaudiere-plombe-le-budget-de-trois-ecoles-a-montpellier-7381973",
         color: "indigo",
+        status: "upcoming",
     },
 ];
 
@@ -251,7 +255,7 @@ export function getLatestActualites(limit: number = 3): Actualite[] {
  * Tri: événements à venir par date croissante (proches d'abord), autres par date décroissante (récentes d'abord)
  */
 export function getAllActualites(): Actualite[] {
-    const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past") && a.type !== "document");
+    const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past") && a.type !== "document" && !(a.status === "past" && (a.type === "annonce" || a.type === "information" || a.type === "presse")));
 
     return actualites.sort((a, b) => {
         const dateA = new Date(a.date).getTime();
@@ -294,6 +298,19 @@ export function getUpcomingEvents(): Actualite[] {
 export function getPastEvents(): Actualite[] {
     return actualitesData
         .filter((a) => a.type === "evenement" && a.status === "past")
+        .sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return dateB - dateA;
+        });
+}
+
+/**
+ * Récupère les annonces, informations et articles de presse passés
+ */
+export function getPastAnnouncements(): Actualite[] {
+    return actualitesData
+        .filter((a) => a.status === "past" && (a.type === "annonce" || a.type === "information" || a.type === "presse"))
         .sort((a, b) => {
             const dateA = new Date(a.date).getTime();
             const dateB = new Date(b.date).getTime();

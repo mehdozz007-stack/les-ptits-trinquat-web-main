@@ -148,7 +148,8 @@ export default function Auth() {
                                 "Devenez participant automatiquement",
                                 "Proposez et échangez des lots",
                                 "Partagez et réservez jusqu'à deux lots par famille",
-                                "Rejoignez les familles participantes"
+                                "Rejoignez les familles participantes",
+                                "Des soucis de connexion ? Contactez-nous !"
                             ].map((item, index) => (
                                 <motion.li
                                     key={index}
