@@ -419,6 +419,35 @@ export function ActualiteDetail() {
                                                     </motion.div>
                                                 </motion.div>
                                             )}
+
+                                            {/* Donation link section */}
+                                            {actualite.donationLink && (
+                                                <motion.div
+                                                    initial={{ opacity: 0 }}
+                                                    whileInView={{ opacity: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: 0.4, duration: 0.4 }}
+                                                    className="mt-8 pt-8 flex justify-center"
+                                                >
+                                                    <motion.div
+                                                        whileHover={{ scale: 1.08, y: -3 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                        transition={{ duration: 0.2 }}
+                                                    >
+                                                        <Button
+                                                            asChild
+                                                            variant="default"
+                                                            size="lg"
+                                                            className={`gap-2 text-white font-semibold transition-all duration-300 ${buttonGradients[actualite.color]}`}
+                                                        >
+                                                            <a href={actualite.donationLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                                                                <Heart className="h-5 w-5" />
+                                                                Faire un don
+                                                            </a>
+                                                        </Button>
+                                                    </motion.div>
+                                                </motion.div>
+                                            )}
                                         </CardContent>
                                     </Card>
                                 </motion.div>

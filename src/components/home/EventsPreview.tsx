@@ -27,7 +27,7 @@ const upcomingEvents = [
     date: "20 Février 2026",
     time: "16h30 - 18h00",
     location: "Le parvis de l'école",
-    description: "Un moment gourmand et convivial pour soutenir les projets de l'école. 🥞🍓",
+    description: "Nous faisons le choix de reverser l'intégralité des bénéfices à la maman durement touchée par l'incendie ! Venez nombreux pour soutenir cette cause et déguster de délicieuses crêpes préparées par nos bénévoles ! 🥞❤️",
     color: "violet",
     status: "upcoming",
     attendees: 200,

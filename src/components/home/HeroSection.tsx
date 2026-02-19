@@ -167,8 +167,8 @@ export function HeroSection() {
               />
               <InfoBadge
                 icon="❤️"
-                text="Un collecte de fonds. Votre aide est précieuse - Un toit Un Avenir !"
-                href="https://www.helloasso.com/associations/une-ecole-un-avenir/collectes/fonds-d-urgence-un-toit-un-avenir"
+                text="Collecte solidaire - Une famille de notre école a besoin de nous !"
+                href="https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing"
                 delay={0.2}
                 bgClass="bg-rose-100/80 text-red-600"
                 textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"

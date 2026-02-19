@@ -336,7 +336,7 @@ export function Actualites() {
                                 viewport={{ once: true }}
                                 className="mb-12"
                             >
-                                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-2 py-1.5 text-sm font-semibold text-primary">
                                     <Calendar className="h-4 w-4" />
                                     Événements passés
                                 </span>
@@ -348,7 +348,7 @@ export function Actualites() {
                                 </p>
                             </motion.div>
 
-                            <div className="grid gap-4 sm:gap-6">
+                            <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
                                 {getPastEvents().map((event, index) => {
                                     const colorMap = {
                                         primary: { bg: "bg-primary", text: "text-primary", light: "bg-primary/10" },
@@ -368,16 +368,16 @@ export function Actualites() {
                                             transition={{ delay: index * 0.05 }}
                                         >
                                             <Card variant="elevated" className={`group h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-lg ${actualiteColorClasses[event.color]}`}>
-                                                <CardContent className="p-6 sm:p-8">
-                                                    <div className="flex flex-col gap-3 sm:gap-4">
+                                                <CardContent className="p-5 sm:p-6 flex flex-col h-full">
+                                                    <div className="flex flex-col gap-2 sm:gap-2 flex-1">
                                                         {/* Top row: Icon + Title */}
-                                                        <div className="flex flex-row gap-3 sm:gap-6 items-center">
+                                                        <div className="flex flex-row gap-3 sm:gap-4 items-center">
                                                             {/* Icon */}
-                                                            <div className={`flex h-12 sm:h-20 w-12 sm:w-20 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
-                                                                <Calendar className={`h-6 sm:h-8 w-6 sm:w-8 ${colors.text}`} />
+                                                            <div className={`flex h-6 sm:h-14 w-6 sm:w-14 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
+                                                                <Calendar className={`h-3 sm:h-6 w-3 sm:w-6 ${colors.text}`} />
                                                             </div>
                                                             {/* Title */}
-                                                            <h3 className="font-bold text-lg sm:text-xl text-foreground">
+                                                            <h3 className="font-bold text-base sm:text-lg text-foreground">
                                                                 {event.title}
                                                             </h3>
                                                         </div>
@@ -385,7 +385,7 @@ export function Actualites() {
                                                         {/* Rest Content */}
                                                         <div className="flex-1 min-w-0 text-left">
                                                             <Badge
-                                                                className="shrink-0 mb-2"//ml-auto block w-fit"
+                                                                className="shrink-0 mb-3 text-xs items-center"//ml-auto block w-fit"
                                                                 variant="secondary"
                                                                 style={{
                                                                     background: "rgb(156 163 175 / 0.7)",
@@ -395,52 +395,52 @@ export function Actualites() {
                                                                 Passé
                                                             </Badge>
 
-                                                            <p className="mb-3 text-sm text-muted-foreground">
+                                                            <p className="mb-5 text-sm text-muted-foreground">
                                                                 {event.description}
                                                             </p>
 
-                                                            <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                                                            <div className="space-y-1 text-xs text-muted-foreground mb-2">
                                                                 <div className="flex items-center gap-2">
-                                                                    <Calendar className={`h-4 w-4 ${colors.text}`} />
+                                                                    <Calendar className={`h-3.5 w-3.5 ${colors.text}`} />
                                                                     {event.date}
                                                                 </div>
                                                                 {event.time && (
                                                                     <div className="flex items-center gap-2">
-                                                                        <Clock className={`h-4 w-4 ${colors.text}`} />
+                                                                        <Clock className={`h-3.5 w-3.5 ${colors.text}`} />
                                                                         {event.time}
                                                                     </div>
                                                                 )}
                                                                 {event.location && (
                                                                     <div className="flex items-center gap-2">
-                                                                        <MapPin className={`h-4 w-4 ${colors.text}`} />
+                                                                        <MapPin className={`h-3.5 w-3.5 ${colors.text}`} />
                                                                         {event.location}
                                                                     </div>
                                                                 )}
                                                                 {event.attendees && (
                                                                     <div className="flex items-center gap-2">
-                                                                        <Users className={`h-4 w-4 ${colors.text}`} />
+                                                                        <Users className={`h-3.5 w-3.5 ${colors.text}`} />
                                                                         {event.attendees} participants
                                                                     </div>
                                                                 )}
                                                             </div>
-
-                                                            {(event.link) && (
-                                                                <div className="flex justify-center mt-2">
-                                                                    <Button
-                                                                        asChild
-                                                                        variant="ghost"
-                                                                        size="sm"
-                                                                        className="gap-2"
-                                                                    >
-                                                                        <a href={event.link} target="_blank" rel="noopener noreferrer">
-                                                                            Consulter
-                                                                            <Eye className="h-4 w-4" />
-                                                                        </a>
-                                                                    </Button>
-                                                                </div>
-                                                            )}
                                                         </div>
                                                     </div>
+
+                                                    {(event.link) && (
+                                                        <div className="flex justify-center pt-3 mt-auto">
+                                                            <Button
+                                                                asChild
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                className="gap-2"
+                                                            >
+                                                                <a href={event.link} target="_blank" rel="noopener noreferrer">
+                                                                    Consulter
+                                                                    <Eye className="h-4 w-4" />
+                                                                </a>
+                                                            </Button>
+                                                        </div>
+                                                    )}
                                                 </CardContent>
                                             </Card>
                                         </motion.div>
@@ -451,7 +451,7 @@ export function Actualites() {
                     </section>
                 )}
 
-                {/* Annonces/Informations passées Section */}
+                {/* Annonces/Informations archives Section */}
                 {getPastAnnouncements().length > 0 && (
                     <section className="py-12 sm:py-16 md:py-20 bg-muted/30">
                         <div className="container">
