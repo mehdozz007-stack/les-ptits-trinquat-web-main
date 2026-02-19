@@ -136,22 +136,22 @@ export function HeroSection() {
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
               <InfoBadge
-                icon="❤️"
-                text="Collecte solidaire - Une famille de notre école a besoin de nous !"
+                icon="🤝"
+                text="Une famille de notre école détruite par l'incendie a besoin de nous !"
                 href="https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing"
                 delay={0.2}
-                bgClass="bg-rose-100/80 text-red-600"
-                textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"
-                pingOuter="bg-rose-600"
-                pingInner="bg-rose-500"
+                bgClass="bg-rose-100/50 text-indigo-600"
+                textGradient="bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600"
+                pingOuter="bg-indigo-600"
+                pingInner="bg-indigo-500"
                 sparks={sparks}
                 sparksColors={[
-                  "bg-red-400",
-                  "bg-orange-400",
-                  "bg-yellow-300",
-                  "bg-pink-400",
-                  "bg-rose-400",
-                  "bg-red-400",
+                  "bg-blue-400",
+                  "bg-indigo-400",
+                  "bg-purple-400",
+                  "bg-cyan-400",
+                  "bg-violet-400",
+                  "bg-blue-300",
                   "bg-white",
                 ]}
               />
@@ -160,8 +160,8 @@ export function HeroSection() {
                 text="Profitez de nos offres de partenariats exclusifs !"
                 href="/partenaires#special-event-1"
                 delay={0.2}
-                bgClass="bg-orange-100/40 text-green-600"
-                textGradient="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500"
+                bgClass="bg-orange-100/50 text-green-600"
+                textGradient="bg-gradient-to-r from-green-500 to-blue-500"
                 pingOuter="bg-green-500"
                 pingInner="bg-green-400"
                 sparks={sparks}
