@@ -136,6 +136,26 @@ export function HeroSection() {
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
               <InfoBadge
+                icon="❤️"
+                text="Collecte solidaire - Une famille de notre école a besoin de nous !"
+                href="https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing"
+                delay={0.2}
+                bgClass="bg-rose-100/80 text-red-600"
+                textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"
+                pingOuter="bg-rose-600"
+                pingInner="bg-rose-500"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-red-400",
+                  "bg-orange-400",
+                  "bg-yellow-300",
+                  "bg-pink-400",
+                  "bg-rose-400",
+                  "bg-red-400",
+                  "bg-white",
+                ]}
+              />
+              <InfoBadge
                 icon="🏆"
                 text="Profitez de nos offres de partenariats exclusifs !"
                 href="/partenaires#special-event-1"
@@ -162,26 +182,6 @@ export function HeroSection() {
                   "bg-pink-400",
                   "bg-rose-400",
                   "bg-amber-400",
-                  "bg-white",
-                ]}
-              />
-              <InfoBadge
-                icon="❤️"
-                text="Collecte solidaire - Une famille de notre école a besoin de nous !"
-                href="https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing"
-                delay={0.2}
-                bgClass="bg-rose-100/80 text-red-600"
-                textGradient="bg-gradient-to-r from-rose-400 via-red-700 to-orange-500"
-                pingOuter="bg-rose-600"
-                pingInner="bg-rose-500"
-                sparks={sparks}
-                sparksColors={[
-                  "bg-red-400",
-                  "bg-orange-400",
-                  "bg-yellow-300",
-                  "bg-pink-400",
-                  "bg-rose-400",
-                  "bg-red-400",
                   "bg-white",
                 ]}
               />
