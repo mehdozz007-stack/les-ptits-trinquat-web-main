@@ -347,7 +347,7 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           )}
 
           {/* Actions */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-auto pt-4">
             {/* LOT DISPONIBLE - Everyone (except owner) can reserve */}
             {lot.statut === "disponible" && currentParticipant && !isOwner && (
               hasReachedReservationLimit ? (
