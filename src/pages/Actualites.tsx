@@ -373,8 +373,8 @@ export function Actualites() {
                                                         {/* Top row: Icon + Title */}
                                                         <div className="flex flex-row gap-3 sm:gap-4 items-center">
                                                             {/* Icon */}
-                                                            <div className={`flex h-6 sm:h-14 w-6 sm:w-14 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
-                                                                <Calendar className={`h-3 sm:h-6 w-3 sm:w-6 ${colors.text}`} />
+                                                            <div className={`flex h-10 sm:h-14 w-10 sm:w-14 shrink-0 items-center justify-center rounded-xl ${colors.light}`}>
+                                                                <Calendar className={`h-5 sm:h-6 w-5 sm:w-6 ${colors.text}`} />
                                                             </div>
                                                             {/* Title */}
                                                             <h3 className="font-bold text-base sm:text-lg text-foreground">
