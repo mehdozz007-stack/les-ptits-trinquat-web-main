@@ -424,7 +424,7 @@ export function Actualites() {
                                                                 )}
                                                             </div>
 
-                                                            {event.link && (
+                                                            {(event.link) && (
                                                                 <div className="flex justify-center mt-2">
                                                                     <Button
                                                                         asChild

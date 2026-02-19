@@ -35,6 +35,7 @@ export interface Actualite {
     type: ActualiteType;
     date: string;
     link?: string;
+    authLink?: string;
     fileUrl?: string;
     affiche?: string;
     color: "primary" | "secondary" | "sky" | "violet" | "accent" | "rose" | "emerald" | "amber" | "cyan" | "indigo" | "fuchsia";
@@ -54,6 +55,7 @@ export const actualitesData: Actualite[] = [
         type: "evenement",
         date: "16 Fevrier 2026 tirage au sort",
         link: "/actualites/act-001",
+        authLink: "/tombola",
         affiche: tomola,
         location: "Groupe scolaire FRANK-DICKENS",
         color: "accent",

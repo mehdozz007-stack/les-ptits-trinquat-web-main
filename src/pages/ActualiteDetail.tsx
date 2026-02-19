@@ -392,7 +392,7 @@ export function ActualiteDetail() {
                                             )}
 
                                             {/* Tombola exchange button section */}
-                                            {actualite.link && actualite.id === "act-001" && (
+                                            {actualite.authLink && actualite.id === "act-001" && (
                                                 <motion.div
                                                     initial={{ opacity: 0 }}
                                                     whileInView={{ opacity: 1 }}
@@ -411,7 +411,7 @@ export function ActualiteDetail() {
                                                             size="lg"
                                                             className={`gap-2 text-white font-semibold transition-all duration-300 ${buttonGradients[actualite.color]}`}
                                                         >
-                                                            <Link to={actualite.link} className="flex items-center gap-2">
+                                                            <Link to={actualite.authLink} className="flex items-center gap-2">
                                                                 <Gift className="h-5 w-5" />
                                                                 Echangez vos lots
                                                             </Link>
