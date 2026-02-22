@@ -5,7 +5,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getActualiteById, actualiteTypeLabels, actualiteColorClasses } from "@/lib/actualites";
+import { getActualiteById, actualiteTypeLabels, actualiteColorClasses, formatDateFr } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 const titleGradients: Record<string, string> = {
     primary: "bg-gradient-to-r from-primary via-secondary to-pink-600 bg-clip-text text-transparent font-extrabold",
@@ -188,7 +188,7 @@ export function ActualiteDetail() {
                                     className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-purple-50/40 to-pink-50/40 px-4 py-2 rounded-lg border border-purple-200/20 shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
                                 >
                                     <Calendar className="h-4 w-4 text-purple-500" />
-                                    <span>{actualite.date}</span>
+                                    <span>{formatDateFr(actualite.date)}</span>
                                 </motion.div>
                                 {actualite.time && (
                                     <motion.div
@@ -446,6 +446,30 @@ export function ActualiteDetail() {
                                                             </a>
                                                         </Button>
                                                     </motion.div>
+                                                </motion.div>
+                                            )}
+
+                                            {/* Gallery image section */}
+                                            {actualite.galleryImage && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    whileHover={{ y: -8 }}
+                                                    transition={{
+                                                        duration: 0.5,
+                                                        ease: "easeOut",
+                                                        scale: { type: "spring", stiffness: 300, damping: 30 }
+                                                    }}
+                                                    viewport={{ once: true, margin: "-100px" }}
+                                                    className="mt-10 pt-10 flex justify-center group"
+                                                >
+                                                    <div className="relative w-full md:w-3/5">
+                                                        <img
+                                                            src={actualite.galleryImage}
+                                                            alt={`Galerie - ${actualite.title}`}
+                                                            className="w-full rounded-xl object-cover shadow-2xl shadow-black/40 group-hover:shadow-2xl group-hover:shadow-rose-500/50 transition-all duration-1000"
+                                                        />
+                                                    </div>
                                                 </motion.div>
                                             )}
                                         </CardContent>

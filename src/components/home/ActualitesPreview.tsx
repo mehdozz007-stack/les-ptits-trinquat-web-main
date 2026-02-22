@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getLatestActualites, actualiteTypeLabels, actualiteColorClasses } from "@/lib/actualites";
+import { getLatestActualites, actualiteTypeLabels, actualiteColorClasses, formatDateFr } from "@/lib/actualites";
 
 const actualites = getLatestActualites(3);
 
@@ -125,7 +125,7 @@ export function ActualitesPreview() {
                                                 <div className="flex flex-col gap-2">
                                                     <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                                                         <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                        <span>{actualite.date}</span>
+                                                        <span>{formatDateFr(actualite.date)}</span>
                                                     </div>
                                                     {/* Location */}
                                                     {actualite.location && (

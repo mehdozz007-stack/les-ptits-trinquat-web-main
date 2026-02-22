@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { formatDateFr } from "@/lib/actualites";
 
 // Bubble animation component
 const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: number; size: string }) => (
@@ -21,7 +22,7 @@ const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: nu
 );
 
 const upcomingEvents = [
-  {
+  /*{
     id: 2,
     title: "La crèpe party de l'école - Participez à notre traditionnelle vente de crêpes !",
     date: "20 Février 2026",
@@ -32,27 +33,28 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 200,
     url: "/actualites/act-004"
-  },
+  },*/
   {
     id: 1,
-    title: " TOMBOLA 2026 - Merci pour votre participation !",
-    description: "Échangez vos lots avec les familles ! 🎁 ✨",
-    color: "accent",
+    title: "Vide Grenier à l'école: La Récré des bonnes affaires !",
+    description: "Un vide grenier convivial avec animations, musique et bonne ambiance en famille. Venez dénicher de bonnes affaires tout en participant à la vie de l'école !",
+    date: "2026-04-12",
+    time: "10h00 - 16h00",
+    location: "Cour de l'école",
+    color: "emerald",
     status: "upcoming",
-    attendees: 500,
-    url: "/auth"
+    attendees: 400,
+    url: "/actualites/act-010",
   },
-  /*{
-    id: 6,
-    title: "Carnaval à l'école",
-    date: "17 Avril 2026",
-    time: "08h30 - 16h30",
-    location: "Toute l'école",
-    description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré.\nLes enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps dans leurs classes 🌼🐝",
-    color: "sky",
+  {
+    id: 2,
+    title: "💙 Collecte solidaire - Une famille de notre école a besoin de nous",
+    description: "Suite à un incendie, une famille a tout perdu. Nous organisons une collecte solidaire de vêtements, jeux sensoriels et dons.",
+    date: "2026-02-19",
+    color: "rose",
     status: "upcoming",
-    attendees: 380,
-  },*/
+    url: "/actualites/annonce-charity-001",
+  },
 ];
 
 const titleGradients = {
@@ -61,6 +63,12 @@ const titleGradients = {
   sky: "bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 bg-clip-text text-transparent font-extrabold",
   accent: "bg-gradient-to-r from-accent via-green-600 to-yellow-400 bg-clip-text text-transparent font-extrabold",
   violet: "bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-extrabold",
+  rose: "bg-gradient-to-r from-rose-600 via-pink-500 to-rose-400 bg-clip-text text-transparent font-extrabold",
+  emerald: "bg-gradient-to-r from-emerald-600 via-green-500 to-teal-500 bg-clip-text text-transparent font-extrabold",
+  amber: "bg-gradient-to-r from-amber-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent font-extrabold",
+  cyan: "bg-gradient-to-r from-cyan-600 via-blue-500 to-sky-500 bg-clip-text text-transparent font-extrabold",
+  indigo: "bg-gradient-to-r from-indigo-600 via-purple-500 to-violet-500 bg-clip-text text-transparent font-extrabold",
+  fuchsia: "bg-gradient-to-r from-fuchsia-600 via-purple-600 to-pink-500 bg-clip-text text-transparent font-extrabold",
 };
 
 const cardGradients: Record<string, string> = {
@@ -69,6 +77,12 @@ const cardGradients: Record<string, string> = {
   sky: "border-sky-500/30 bg-gradient-to-br from-sky-500/10 via-blue-500/5 to-violet-500/10",
   accent: "border-accent/30 bg-gradient-to-br from-accent/10 via-yellow-300/5 to-green-500/10",
   violet: "border-violet-500/30 bg-gradient-to-br from-violet-500/25 via-purple-300/15 to-pink-500/20",
+  rose: "border-rose-500/30 bg-gradient-to-br from-rose-500/10 via-pink-300/5 to-rose-200/10",
+  emerald: "border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 via-green-300/5 to-teal-200/10",
+  amber: "border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-orange-300/5 to-yellow-200/10",
+  cyan: "border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 via-blue-300/5 to-sky-200/10",
+  indigo: "border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 via-purple-300/5 to-violet-200/10",
+  fuchsia: "border-fuchsia-500/30 bg-gradient-to-br from-fuchsia-500/10 via-pink-300/5 to-purple-200/10",
 };
 
 export function EventsPreview() {
@@ -130,7 +144,19 @@ export function EventsPreview() {
                     }}
                     className={`absolute -inset-1 rounded-2xl ${event.color === 'accent'
                       ? 'bg-gradient-to-r from-accent via-yellow-300 to-accent'
-                      : 'bg-gradient-to-r from-violet-500 via-purple-400 to-pink-500'
+                      : event.color === 'rose'
+                        ? 'bg-gradient-to-r from-rose-500 via-pink-400 to-rose-500'
+                        : event.color === 'emerald'
+                          ? 'bg-gradient-to-r from-emerald-500 via-green-400 to-emerald-500'
+                          : event.color === 'amber'
+                            ? 'bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500'
+                            : event.color === 'cyan'
+                              ? 'bg-gradient-to-r from-cyan-500 via-blue-400 to-cyan-500'
+                              : event.color === 'indigo'
+                                ? 'bg-gradient-to-r from-indigo-500 via-purple-400 to-indigo-500'
+                                : event.color === 'fuchsia'
+                                  ? 'bg-gradient-to-r from-fuchsia-500 via-purple-400 to-fuchsia-500'
+                                  : 'bg-gradient-to-r from-violet-500 via-purple-400 to-pink-500'
                       } ${isMobile ? 'blur-md' : 'blur-lg'}`}
                   />
                 )}
@@ -195,8 +221,8 @@ export function EventsPreview() {
                           transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                           className="flex items-center gap-3"
                         >
-                          <Calendar className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
-                          <span>{event.date || event.time}</span>
+                          <Calendar className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : event.color === 'rose' ? 'text-rose-500' : event.color === 'emerald' ? 'text-emerald-500' : event.color === 'amber' ? 'text-amber-500' : event.color === 'cyan' ? 'text-cyan-500' : event.color === 'indigo' ? 'text-indigo-500' : event.color === 'fuchsia' ? 'text-fuchsia-500' : 'text-violet-500'} flex-shrink-0`} />
+                          <span>{event.date ? formatDateFr(event.date) : event.time}</span>
                         </motion.div>
                       )}
                       {event.time && (
@@ -205,7 +231,7 @@ export function EventsPreview() {
                           transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                           className="flex items-center gap-3"
                         >
-                          <Clock className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
+                          <Clock className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : event.color === 'rose' ? 'text-rose-500' : event.color === 'emerald' ? 'text-emerald-500' : event.color === 'amber' ? 'text-amber-500' : event.color === 'cyan' ? 'text-cyan-500' : event.color === 'indigo' ? 'text-indigo-500' : event.color === 'fuchsia' ? 'text-fuchsia-500' : 'text-violet-500'} flex-shrink-0`} />
                           <span>{event.time}</span>
                         </motion.div>
                       )}
@@ -215,7 +241,7 @@ export function EventsPreview() {
                           transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                           className="flex items-center gap-3"
                         >
-                          <MapPin className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : 'text-violet-500'} flex-shrink-0`} />
+                          <MapPin className={`h-5 w-5 ${event.color === 'accent' ? 'text-accent' : event.color === 'rose' ? 'text-rose-500' : event.color === 'emerald' ? 'text-emerald-500' : event.color === 'amber' ? 'text-amber-500' : event.color === 'cyan' ? 'text-cyan-500' : event.color === 'indigo' ? 'text-indigo-500' : event.color === 'fuchsia' ? 'text-fuchsia-500' : 'text-violet-500'} flex-shrink-0`} />
                           <span>{event.location}</span>
                         </motion.div>
                       )}

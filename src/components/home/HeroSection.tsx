@@ -141,9 +141,9 @@ export function HeroSection() {
                 href="https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing"
                 delay={0.2}
                 bgClass="bg-rose-100/50 text-indigo-600"
-                textGradient="bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-600"
-                pingOuter="bg-indigo-600"
-                pingInner="bg-indigo-500"
+                textGradient="bg-gradient-to-r from-rose-500 via-violet-600 to-purple-600"
+                pingOuter="bg-red-600"
+                pingInner="bg-red-500"
                 sparks={sparks}
                 sparksColors={[
                   "bg-blue-400",
@@ -152,6 +152,28 @@ export function HeroSection() {
                   "bg-cyan-400",
                   "bg-violet-400",
                   "bg-blue-300",
+                  "bg-white",
+                ]}
+              />
+              <InfoBadge
+                icon="🛍️"
+                text="Vide Grenier le 12 Avril : Dénicher de bonnes affaires !"
+                href="/actualites/act-010"
+                delay={0.2}
+                bgClass="bg-red-100/50 text-yellow-600"
+                textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-pink-500"
+                pingOuter="bg-amber-500"
+                pingInner="bg-amber-400"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-red-400",
+                  "bg-orange-400",
+                  "bg-yellow-300",
+                  "bg-lime-400",
+                  "bg-cyan-400",
+                  "bg-blue-400",
+                  "bg-purple-400",
+                  "bg-pink-400",
                   "bg-white",
                 ]}
               />

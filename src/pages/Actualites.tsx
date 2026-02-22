@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents, getPastAnnouncements } from "@/lib/actualites";
+import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents, getPastAnnouncements, formatDateFr } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 
 const badgeColors: Record<string, string> = {
@@ -171,10 +171,6 @@ export function Actualites() {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-                                <FileText className="h-4 w-4" />
-                                Actualités
-                            </span>
                             <h2 className="mb-4 text-3xl font-extrabold">
                                 Nos <span className="text-gradient">Actualités</span>
                             </h2>
@@ -278,7 +274,7 @@ export function Actualites() {
                                                         <div className="flex flex-col gap-2">
                                                             <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                                                                 <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                                <span>{actualite.date}</span>
+                                                                <span>{formatDateFr(actualite.date)}</span>
                                                             </div>
                                                             {/* Location pour les événements */}
                                                             {actualite.type === "evenement" && actualite.location && (
@@ -336,12 +332,8 @@ export function Actualites() {
                                 viewport={{ once: true }}
                                 className="mb-12"
                             >
-                                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-2 py-1.5 text-sm font-semibold text-primary">
-                                    <Calendar className="h-4 w-4" />
-                                    Événements passés
-                                </span>
                                 <h2 className="mb-4 text-3xl font-extrabold">
-                                    Nos <span className="text-gradient">événements précédents</span>
+                                    Nos événements précédents
                                 </h2>
                                 <p className="text-base text-muted-foreground max-w-2xl">
                                     Revivez les moments forts et les belles rencontres que nous avons eu le plaisir de partager avec vous.
@@ -350,14 +342,20 @@ export function Actualites() {
 
                             <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
                                 {getPastEvents().map((event, index) => {
-                                    const colorMap = {
+                                    const colorMap: Record<string, { bg: string; text: string; light: string }> = {
                                         primary: { bg: "bg-primary", text: "text-primary", light: "bg-primary/10" },
                                         secondary: { bg: "bg-secondary", text: "text-secondary", light: "bg-secondary/10" },
                                         sky: { bg: "bg-sky", text: "text-sky", light: "bg-sky/10" },
                                         accent: { bg: "bg-accent", text: "text-accent", light: "bg-accent/10" },
                                         violet: { bg: "bg-violet", text: "text-violet", light: "bg-violet/10" },
+                                        rose: { bg: "bg-rose-500", text: "text-rose-600", light: "bg-rose-100" },
+                                        emerald: { bg: "bg-emerald-500", text: "text-emerald-600", light: "bg-emerald-100" },
+                                        amber: { bg: "bg-amber-500", text: "text-amber-600", light: "bg-amber-100" },
+                                        cyan: { bg: "bg-cyan-500", text: "text-cyan-600", light: "bg-cyan-100" },
+                                        indigo: { bg: "bg-indigo-500", text: "text-indigo-600", light: "bg-indigo-100" },
+                                        fuchsia: { bg: "bg-fuchsia-500", text: "text-fuchsia-600", light: "bg-fuchsia-100" },
                                     };
-                                    const colors = colorMap[event.color as keyof typeof colorMap];
+                                    const colors = colorMap[event.color] || colorMap["primary"];
 
                                     return (
                                         <motion.div
@@ -402,7 +400,7 @@ export function Actualites() {
                                                             <div className="space-y-1 text-xs text-muted-foreground mb-2">
                                                                 <div className="flex items-center gap-2">
                                                                     <Calendar className={`h-3.5 w-3.5 ${colors.text}`} />
-                                                                    {event.date}
+                                                                    {formatDateFr(event.date)}
                                                                 </div>
                                                                 {event.time && (
                                                                     <div className="flex items-center gap-2">
@@ -461,11 +459,7 @@ export function Actualites() {
                                 viewport={{ once: true }}
                                 className="mb-12"
                             >
-                                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-                                    <FileText className="h-4 w-4" />
-                                    Archives
-                                </span>
-                                <h2 className="mb-4 text-2xl font-bold">
+                                <h2 className="mb-4 text-3xl font-extrabold">
                                     Annonces et informations archivées
                                 </h2>
                                 <p className="text-base text-muted-foreground max-w-2xl">
@@ -513,7 +507,7 @@ export function Actualites() {
                                                         <div className="flex flex-col gap-2">
                                                             <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                                                                 <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                                <span>{actualite.date}</span>
+                                                                <span>{formatDateFr(actualite.date)}</span>
                                                             </div>
                                                         </div>
                                                         {/* Boutons à droite */}

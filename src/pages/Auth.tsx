@@ -53,10 +53,6 @@ export default function Auth() {
                         viewport={{ once: true }}
                         className="mb-12 text-center"
                     >
-                        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary/20 px-4 py-1.5 text-sm font-semibold text-secondary-foreground">
-                            <Users className="h-4 w-4" />
-                            Échanges de lots de Tombola
-                        </div>
 
                         <h2 className="mb-4 text-3xl font-extrabold md:text-4xl">
                             Bienvenue dans <br /><span className="text-gradient">la Tombola des P'tits Trinquat !</span>
