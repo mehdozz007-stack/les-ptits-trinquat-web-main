@@ -171,7 +171,7 @@ export function Actualites() {
                             viewport={{ once: true }}
                             className="mb-12"
                         >
-                            <h2 className="mb-4 text-3xl font-extrabold">
+                            <h2 className="mb-4 text-3xl font-bold">
                                 Nos <span className="text-gradient">Actualités</span>
                             </h2>
                             <p className="text-base text-muted-foreground max-w-2xl">
@@ -332,7 +332,7 @@ export function Actualites() {
                                 viewport={{ once: true }}
                                 className="mb-12"
                             >
-                                <h2 className="mb-4 text-3xl font-extrabold">
+                                <h2 className="mb-4 text-3xl font-bold">
                                     Nos événements précédents
                                 </h2>
                                 <p className="text-base text-muted-foreground max-w-2xl">
@@ -459,7 +459,7 @@ export function Actualites() {
                                 viewport={{ once: true }}
                                 className="mb-12"
                             >
-                                <h2 className="mb-4 text-3xl font-extrabold">
+                                <h2 className="mb-4 text-3xl font-bold">
                                     Annonces et informations archivées
                                 </h2>
                                 <p className="text-base text-muted-foreground max-w-2xl">
