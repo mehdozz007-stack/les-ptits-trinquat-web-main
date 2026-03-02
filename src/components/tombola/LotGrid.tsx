@@ -87,10 +87,6 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
           viewport={{ once: true }}
           className="mb-8 text-center"
         >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-sky/50 px-4 py-1.5 text-sm font-semibold text-sky-foreground">
-            <Gift className="h-4 w-4" />
-            Les lots
-          </div>
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             Découvrez les lots à gagner
           </h2>

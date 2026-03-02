@@ -324,16 +324,14 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
           </div>
 
           {/* Owner info */}
-          {!isOwner && (
-            <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2 min-w-0">
-              <span className="text-lg flex-shrink-0">{lot.parent?.emoji || "😊"}</span>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium break-words">
-                  Proposé par {lot.parent?.prenom}
-                </p>
-              </div>
+          <div className="mb-4 flex items-center gap-2 rounded-lg bg-muted/50 p-2 min-w-0">
+            <span className="text-lg flex-shrink-0">{lot.parent?.emoji || "😊"}</span>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium break-words">
+                Proposé par {isOwner ? "vous" : lot.parent?.prenom}
+              </p>
             </div>
-          )}
+          </div>
 
           {/* Reserved by info */}
           {lot.statut === "reserve" && lot.reserver && (

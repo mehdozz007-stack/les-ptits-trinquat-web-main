@@ -130,6 +130,18 @@ export const actualitesData: Actualite[] = [
         status: "upcoming",
     },
     {
+        id: "act-011",
+        title: "Dossier Section Internationale Allemand 2026-2027",
+        description: "Découvrez le dossier complet pour la Section Internationale avec option Allemand. Toutes les informations pour préparer la candidature.",
+        content: "Dossier complet pour la Section Internationale Allemand 2026-2027",
+        type: "document",
+        date: "2026-02-19",
+        fileUrl: "/documents/dossier-de-section-internationale-allemand-2026-2027.pdf",
+        color: "sky",
+        status: "upcoming",
+    },
+
+    {
         id: "act-009",
         title: "Fête d'école",
         description: "Rires, jeux, spectacles et douceurs gourmandes vous attendent pour partager ensemble un moment joyeux et festif et célébrer la fin de l'année scolaire 🌟🍭",

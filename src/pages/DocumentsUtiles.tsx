@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, Files, Search, Heart, FileQuestion, LucideFileQuestion } from "lucide-react";
+import { Download, Files, Search, Heart, HelpCircle, LucideFileQuestion } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { actualitesData, actualiteTypeLabels, actualiteColorClasses } from "@/lib/actualites";
+import { actualitesData, actualiteTypeLabels, actualiteColorClasses, formatDateFr } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 
 // Récupérer uniquement les documents
@@ -31,6 +31,23 @@ const titleGradients: Record<string, string> = {
 
 const badgeColors: Record<string, string> = {
     document: "bg-gradient-to-r from-violet/70 to-purple-400/70 text-white font-semibold shadow-sm",
+};
+
+const buttonGradients: Record<string, string> = {
+    primary: "bg-gradient-to-r from-primary to-pink-600 hover:from-primary/90 hover:to-pink-700 text-white font-semibold transition-all duration-300",
+    secondary: "bg-gradient-to-r from-secondary to-orange-600 hover:from-secondary/90 hover:to-orange-700 text-white font-semibold transition-all duration-300",
+    sky: "bg-gradient-to-r from-sky-600 to-violet-600 hover:from-sky-700 hover:to-violet-700 text-white font-semibold transition-all duration-300",
+    violet: "bg-gradient-to-r from-violet-600 to-pink-600 hover:from-violet-700 hover:to-pink-700 text-white font-semibold transition-all duration-300",
+    accent: "bg-gradient-to-r from-accent to-yellow-600 hover:from-accent/90 hover:to-yellow-700 text-white font-semibold transition-all duration-300",
+    green: "bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold transition-all duration-300",
+    orange: "bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-semibold transition-all duration-300",
+    pink: "bg-gradient-to-r from-pink-600 to-red-600 hover:from-pink-700 hover:to-red-700 text-white font-semibold transition-all duration-300",
+    rose: "bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-semibold transition-all duration-300",
+    emerald: "bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white font-semibold transition-all duration-300",
+    amber: "bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-semibold transition-all duration-300",
+    cyan: "bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-semibold transition-all duration-300",
+    indigo: "bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold transition-all duration-300",
+    fuchsia: "bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-semibold transition-all duration-300",
 };
 
 export function DocumentsUtiles() {
@@ -124,7 +141,7 @@ export function DocumentsUtiles() {
                                         <Card
                                             className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-xl hover:scale-105 ${actualiteColorClasses[doc.color]}`}
                                         >
-                                            <CardContent className="flex flex-col gap-4 p-6">
+                                            <CardContent className="flex flex-col h-full p-6">
                                                 {/* Header */}
                                                 <div className="flex items-start justify-between gap-3">
                                                     <div className="flex-1">
@@ -141,23 +158,21 @@ export function DocumentsUtiles() {
                                                 </div>
 
                                                 {/* Description */}
-                                                <p className="text-sm text-muted-foreground flex-1">
+                                                <p className="text-sm text-muted-foreground flex-1 mt-4">
                                                     {doc.description}
                                                 </p>
 
                                                 {/* Date */}
-                                                <div className="border-t border-current border-opacity-20 pt-4">
+                                                <div className="border-opacity-20 pt-4 mt-6">
                                                     <p className="text-xs text-muted-foreground mb-4">
-                                                        {doc.date}
+                                                        {formatDateFr(doc.date)}
                                                     </p>
 
                                                     {/* Download Button */}
                                                     {doc.fileUrl && (
                                                         <Button
-                                                            variant="default"
-                                                            size="sm"
                                                             onClick={() => handleDownload(doc.fileUrl!, doc.title)}
-                                                            className="w-full gap-2"
+                                                            className={`w-full gap-2 ${buttonGradients[doc.color]}`}
                                                         >
                                                             <Download className="h-4 w-4" />
                                                             Télécharger
@@ -190,7 +205,7 @@ export function DocumentsUtiles() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                         >
-                            <FileQuestion className="mx-auto mb-4 h-12 w-12 text-sky-700" />
+                            <HelpCircle className="mx-auto mb-4 h-12 w-12 text-sky-700" />
                             <h2 className="mb-4 text-2xl font-bold">Des questions ?</h2>
                             <p className="mb-8 max-w-2xl text-muted-foreground mx-auto">
                                 Si vous ne trouvez pas le document que vous cherchez, n'hésitez pas à nous contacter.
