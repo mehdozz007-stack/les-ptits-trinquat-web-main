@@ -5,9 +5,9 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { url } from "inspector";
-
+import crepesParty from "@/assets/Crepes_party_Affiche.jpg";
 const events = [
-    {
+  {
     id: 1,
     title: "📣 Notre TOMBOLA de la rentrée est lancée ! Jouez et gagnez avec nous de superbes lots ! 🎁",
     date: "8 Décembre 2025 - Lancement",
@@ -18,6 +18,28 @@ const events = [
     status: "upcoming",
     attendees: 500,
     url: "/partenaires"
+  },
+  {
+    id: 5,
+    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
+    date: "30 Janvier 2026",
+    time: "17h30 - 19h30",
+    location: "Salle polyvalente",
+    description: "Un temps d'échange pour construire ensemble les futurs temps forts de l'école.",
+    color: "secondary",
+    status: "past",
+    attendees: 30,
+  },
+  {
+    id: 4,
+    title: "📝 Conseil d'école SI 🌍",
+    date: "20 Janvier 2026",
+    time: "17h45 - 19h15",
+    location: "Salle polyvalente",
+    description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
+    color: "sky",
+    status: "past",
+    attendees: 50,
   },
   {
     id: 3,
@@ -32,37 +54,16 @@ const events = [
     url: "https://www.instagram.com/p/DSdZRPHCL8J/?img_index=1"
   },
   {
-    id: 2,
-    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
-    date: "12 Décembre 2025",
-    time: "17h30 - 19h30",
-    location: "Salle polyvalente",
-    description: "Bilan du trimestre et préparation aux prochains événements.",
-    color: "secondary",
-    status: "past",
-    attendees: 30,
-  },
-  {
-    id: 4,
-    title: "📝 Conseil d'école SI 🌍",
-    date: "20 Janvier 2026",
-    time: "17h45 - 19h15",
-    location: "Salle polyvalente",
-    description: "Un temps de partage pour revenir ensemble sur l'année écoulée, découvrir les projets menés et ceux à venir, et connaître les résultats de l'élection des parents.",
-    color: "sky",
+    id: 10,
+    title: "La crèpe party de l'école ! 🥞🎉",
+    date: "20 Février 2026",
+    time: "16h30 - 18h00",
+    location: "Le parvis de l'école",
+    description: "Partagez un doux moment de gourmandise lors de notre vente de crêpes, une belle occasion de se retrouver et de soutenir ensemble les projets de l'école.",
+    color: "violet",
     status: "upcoming",
-    attendees: 50,
-  },
-  {
-    id: 5,
-    title: "💞 Réunion mensuelle des parents 👨‍👩‍👧‍👦",
-    date: "30 Janvier 2026",
-    time: "17h30 - 19h30",
-    location: "Salle polyvalente",
-    description: "Un temps d'échange pour construire ensemble les futurs temps forts de l'école.",
-    color: "secondary",
-    status: "upcoming",
-    attendees: 30,
+    attendees: 500,
+    url: crepesParty
   },
   {
     id: 6,
@@ -163,7 +164,7 @@ const Evenements = () => {
               const colors = colorClasses[event.color as keyof typeof colorClasses];
               return (
                 <motion.div
-                  key={event.id}                  id={`event-${event.id}`}                  initial={{ opacity: 0, y: 30 }}
+                  key={event.id} id={`event-${event.id}`} initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
@@ -173,7 +174,7 @@ const Evenements = () => {
                       <div className="p-6 flex-1 flex flex-col">
                         <div className={`mb-4 inline-flex items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colors.bg} text-primary-foreground w-fit`}>
                           <Calendar className="h-4 w-4" />
-                          {event.date}
+                          {formatDateFr(event.date)}
                         </div>
 
                         <h3 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -257,7 +258,7 @@ const Evenements = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="font-bold text-sm sm:text-base text-foreground line-clamp-2">{event.title}</h3>
-                            <p className="text-xs sm:text-sm text-muted-foreground">{event.date}</p>
+                            <p className="text-xs sm:text-sm text-muted-foreground">{formatDateFr(event.date)}</p>
                           </div>
                         </div>
                         {event.url ? (

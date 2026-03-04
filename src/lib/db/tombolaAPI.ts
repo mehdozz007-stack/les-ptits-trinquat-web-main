@@ -1,0 +1,380 @@
+/**
+ * TombolaAPI - Frontend API Client for Tombola Feature
+ * Handles all communication with Cloudflare Workers D1 backend
+ */
+
+import { Parent, Lot } from '@/lib/types';
+import { apiUrl } from '@/lib/api-config';
+
+interface AuthToken {
+    parentId: string;
+    email: string;
+}
+
+/**
+ * Utility to handle API responses
+ */
+async function handleResponse<T>(response: Response): Promise<T> {
+    if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(error.error || `API Error: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.data || data;
+}
+
+/**
+ * TombolaAPI - Static methods for Tombola operations
+ */
+export const TombolaAPI = {
+    /**
+     * Get all parents (participants)
+     */
+    async getParents(): Promise<Parent[]> {
+        const response = await fetch(apiUrl('/api/tombola/participants'));
+        const data = await handleResponse<{ success: boolean; data: any[] }>(response);
+
+        // Map API response to Parent interface
+        return (data.data || []).map((p: any) => ({
+            id: p.id,
+            first_name: p.prenom,
+            email: p.email || '',
+            emoji: p.emoji || '😊',
+            classes: p.classes,
+            created_at: p.created_at,
+        }));
+    },
+
+    /**
+     * Get all lots
+     */
+    async getLots(): Promise<Lot[]> {
+        const response = await fetch(apiUrl('/api/tombola/lots'));
+        const data = await handleResponse<any>(response);
+
+        console.log('📦 getLots - Response data:', data);
+
+        // handleResponse returns either the array directly or { success, data }
+        const lots = Array.isArray(data) ? data : (data?.data || []);
+        console.log('📦 getLots - Lots received:', lots.length, 'lots');
+
+        // Map API response to Lot interface
+        return lots.map((l: any) => ({
+            id: l.id,
+            parent_id: l.parent_id,
+            title: l.nom,
+            description: l.description,
+            status: this.mapStatus(l.statut),
+            reserved_by: l.reserved_by,
+            created_at: l.created_at,
+        }));
+    },
+
+    /**
+     * Create a new parent (participant)
+     */
+    async createParent(parent: {
+        first_name: string;
+        email: string;
+        emoji: string;
+        classes?: string;
+    }): Promise<Parent> {
+        const response = await fetch(apiUrl('/api/tombola/participants'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                prenom: parent.first_name,
+                email: parent.email,
+                emoji: parent.emoji,
+                classes: parent.classes,
+                role: 'Parent',
+            }),
+        });
+
+        const data = await handleResponse<{ success: boolean; data: { id: string } }>(response);
+
+        // Return the created parent
+        return {
+            id: data.data.id,
+            first_name: parent.first_name,
+            email: parent.email,
+            emoji: parent.emoji,
+            classes: parent.classes,
+        };
+    },
+
+    /**
+     * Create a new lot
+     */
+    async createLot(lot: {
+        title: string;
+        description?: string;
+    }): Promise<Lot> {
+        const auth = this.getAuth();
+        if (!auth) {
+            throw new Error('Parent not authenticated');
+        }
+
+        const response = await fetch(apiUrl('/api/tombola/lots'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nom: lot.title,
+                description: lot.description,
+                parent_id: auth.parentId,
+                icone: '🎁',
+            }),
+        });
+
+        const data = await handleResponse<{ success: boolean; data: { id: string } }>(response);
+
+        // Return the created lot
+        return {
+            id: data.data.id,
+            parent_id: auth.parentId,
+            title: lot.title,
+            description: lot.description,
+            status: 'available',
+        };
+    },
+
+    /**
+     * Reserve a lot
+     */
+    async reserveLot(lotId: string): Promise<Lot> {
+        const auth = this.getAuth();
+        if (!auth) {
+            throw new Error('Parent not authenticated');
+        }
+
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                reserver_id: auth.parentId,
+            }),
+        });
+
+        // Fetch updated lot
+        await handleResponse<{ success: boolean }>(response);
+        const allLots = await this.getLots();
+        const updatedLot = allLots.find(l => l.id === lotId);
+
+        if (!updatedLot) {
+            throw new Error('Lot not found');
+        }
+
+        return updatedLot;
+    },
+
+    /**
+     * Delete a lot
+     */
+    async deleteLot(lotId: string): Promise<void> {
+        const auth = this.getAuth();
+        if (!auth) {
+            throw new Error('Parent not authenticated');
+        }
+
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        await handleResponse<{ success: boolean }>(response);
+    },
+
+    /**
+     * Delete a parent (participant)
+     */
+    async deleteParent(parentId: string): Promise<void> {
+        const auth = this.getAuth();
+        if (!auth) {
+            throw new Error('Parent not authenticated');
+        }
+
+        const response = await fetch(apiUrl(`/api/tombola/admin/participants/${parentId}`), {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        await handleResponse<{ success: boolean }>(response);
+    },
+
+    /**
+     * Store auth token in localStorage
+     */
+    setAuth(auth: AuthToken | null): void {
+        if (auth) {
+            localStorage.setItem('tombola_auth', JSON.stringify(auth));
+        } else {
+            localStorage.removeItem('tombola_auth');
+        }
+    },
+
+    /**
+     * Get admin JWT token from localStorage
+     */
+    getAdminToken(): string | null {
+        return localStorage.getItem('admin_token');
+    },
+
+    /**
+     * Get auth token from localStorage
+     */
+    getAuth(): AuthToken | null {
+        const stored = localStorage.getItem('tombola_auth');
+        if (!stored) return null;
+        try {
+            return JSON.parse(stored);
+        } catch {
+            return null;
+        }
+    },
+
+    /**
+     * Map database status to component status
+     */
+    mapStatus(dbStatus: string): 'available' | 'reserved' | 'delivered' {
+        const statusMap: Record<string, 'available' | 'reserved' | 'delivered'> = {
+            'disponible': 'available',
+            'réservé': 'reserved',
+            'remis': 'delivered',
+        };
+        return statusMap[dbStatus] || 'available';
+    },
+
+    /**
+     * ADMIN OPERATIONS
+     */
+
+    /**
+     * Login as admin
+     */
+    async adminLogin(email: string, password: string): Promise<{ token: string }> {
+        const response = await fetch(apiUrl('/api/auth/login'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
+
+        console.log('🔐 adminLogin - Response status:', response.status);
+
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({ error: 'Identifiants invalides' }));
+            const errorMessage = error.error || 'Identifiants invalides';
+            console.error('❌ adminLogin - Response error:', errorMessage);
+            throw new Error(errorMessage);
+        }
+
+        const data = await response.json();
+        console.log('✅ adminLogin - Login successful');
+        
+        // La réponse peut être { data: { token } } ou { token } directement
+        const token = data.data?.token || data.token;
+        if (!token) {
+            throw new Error('No token in response');
+        }
+        
+        return { token };
+    },
+
+    /**
+     * Get all parents with emails (admin only)
+     */
+    async getAdminParents(): Promise<Parent[]> {
+        const token = this.getAdminToken();
+        console.log('🔐 getAdminParents - Token found:', !!token, token ? token.substring(0, 20) + '...' : 'MISSING');
+
+        const response = await fetch(apiUrl('/api/tombola/admin/participants'), {
+            headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+        });
+
+        console.log('📡 getAdminParents - Response status:', response.status);
+
+        try {
+            const data = await handleResponse<any>(response);
+            console.log('✅ getAdminParents - Data object:', data);
+
+            // handleResponse returns either the array directly or { success, data }
+            const participants = Array.isArray(data) ? data : (data?.data || []);
+            console.log('✅ getAdminParents - Data received:', participants.length, 'participants');
+
+            return participants.map((p: any) => ({
+                id: p.id,
+                first_name: p.prenom,
+                email: p.email || '',
+                emoji: p.emoji || '😊',
+                classes: p.classes,
+                created_at: p.created_at,
+            }));
+        } catch (error) {
+            console.error('❌ getAdminParents - Error:', error);
+            return [];
+        }
+    },
+
+    /**
+     * Delete a participant (admin only)
+     */
+    async adminDeleteParticipant(participantId: string): Promise<void> {
+        const token = this.getAdminToken();
+        const response = await fetch(apiUrl(`/api/tombola/admin/participants/${participantId}`), {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
+        });
+
+        await handleResponse<{ success: boolean }>(response);
+    },
+
+    /**
+     * Cancel a lot reservation (admin only)
+     */
+    async adminCancelReservation(lotId: string): Promise<void> {
+        const token = this.getAdminToken();
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel`), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
+        });
+
+        await handleResponse<{ success: boolean }>(response);
+    },
+
+    /**
+     * Mark a lot as delivered (admin only)
+     */
+    async adminMarkAsDelivered(lotId: string): Promise<void> {
+        const token = this.getAdminToken();
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/remis`), {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
+        });
+
+        await handleResponse<{ success: boolean }>(response);
+    },
+
+    /**
+     * Delete a lot (admin only)
+     */
+    async adminDeleteLot(lotId: string): Promise<void> {
+        const token = this.getAdminToken();
+        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` }),
+            },
+        });
+
+        await handleResponse<{ success: boolean }>(response);
+    },
+};
