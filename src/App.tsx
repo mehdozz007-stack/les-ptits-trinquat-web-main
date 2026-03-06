@@ -17,6 +17,7 @@ import MessageEnvoye from "./pages/MessageEnvoye";
 import TombolaProtected from "./pages/TombolaProtected";
 import Auth from "./pages/Auth";
 import AdminTombola from "./pages/AdminTombola";
+import AdminNewsletter from "./pages/AdminNewsletter";
 import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
 
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/tombola" element={<TombolaProtected />} />
             <Route path="/admin/tombola" element={<AdminTombola />} />
+            <Route path="/admin/newsletter" element={<AdminNewsletter />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/message-envoye" element={<MessageEnvoye />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

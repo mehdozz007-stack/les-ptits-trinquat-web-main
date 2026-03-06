@@ -19,11 +19,11 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
 interface NewsletterHistoryProps {
-  newsletters: Newsletter[];
-  onDelete: (id: string) => void;
+  newsletters?: Newsletter[];
+  onDelete?: (id: string) => void;
 }
 
-export function NewsletterHistory({ newsletters, onDelete }: NewsletterHistoryProps) {
+export function NewsletterHistory({ newsletters = [], onDelete }: NewsletterHistoryProps = {}) {
   const sentNewsletters = newsletters.filter((n) => n.status === "sent");
   const draftNewsletters = newsletters.filter((n) => n.status === "draft");
 
@@ -114,7 +114,7 @@ export function NewsletterHistory({ newsletters, onDelete }: NewsletterHistoryPr
                         <AlertDialogFooter>
                           <AlertDialogCancel>Annuler</AlertDialogCancel>
                           <AlertDialogAction
-                            onClick={() => onDelete(newsletter.id)}
+                            onClick={() => onDelete?.(newsletter.id)}
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                           >
                             Supprimer

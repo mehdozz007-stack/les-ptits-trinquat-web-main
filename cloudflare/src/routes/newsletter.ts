@@ -21,6 +21,7 @@ import {
 } from '../utils/security';
 import { rateLimitMiddleware } from '../middleware/rateLimit';
 import { requireAdmin, getAuthContext } from '../middleware/auth';
+import { renderNewsletterEmail, generateUnsubscribeUrl } from '../lib/emailTemplate';
 
 const newsletter = new Hono<{ Bindings: Env }>();
 
@@ -297,15 +298,22 @@ newsletter.post('/admin/newsletters', requireAdmin, async (c) => {
 // POST /newsletter/admin/send - Envoyer une newsletter
 newsletter.post('/admin/send', requireAdmin, async (c) => {
   try {
-    const body = await c.req.json<SendNewsletterRequest>();
+    const body = await c.req.json<SendNewsletterRequest & { title: string; preview_text?: string }>();
     const authContext = getAuthContext(c);
 
-    // Validation
+    // Validation du titre
+    const titleValidation = validateInputLength(body.title, 'Title', 1, 200);
+    if (!titleValidation.valid) {
+      return c.json<ApiResponse>({ success: false, error: titleValidation.error }, 400);
+    }
+
+    // Validation du sujet
     const subjectValidation = validateInputLength(body.subject, 'Subject', 1, 200);
     if (!subjectValidation.valid) {
       return c.json<ApiResponse>({ success: false, error: subjectValidation.error }, 400);
     }
 
+    // Validation du contenu
     const contentValidation = validateInputLength(body.content, 'Content', 1, 50000);
     if (!contentValidation.valid) {
       return c.json<ApiResponse>({ success: false, error: contentValidation.error }, 400);
@@ -325,19 +333,37 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
       }, 400);
     }
 
-    // Préparer le contenu sécurisé
+    // Préparer les contenus sécurisés
     const safeSubject = escapeHtml(body.subject);
+    const safeTitle = escapeHtml(body.title);
+    const previewText = body.preview_text ? sanitizeString(body.preview_text, 500) : body.content.substring(0, 100);
 
     // Envoyer les emails
     const results: { email: string; success: boolean; error?: string }[] = [];
+    const senderId = authContext?.user?.id || 'system';
 
     for (const subscriber of subscribers.results) {
       try {
-        const personalizedContent = body.content.replace(
-          /\{\{prenom\}\}/gi,
-          escapeHtml(subscriber.first_name || 'Cher parent')
-        );
+        // Générer l'URL de désinscription pour ce subscriber
+        const unsubscribeUrl = generateUnsubscribeUrl(subscriber.email, 'https://lespetitstrinquat.fr');
 
+    // Rendre l'email HTML avec le template
+    // En dev, utiliser le logo de production comme fallback (accessible publiquement)
+    const logoUrl = c.env.ENVIRONMENT === 'development'
+      ? 'https://lespetitstrinquat.fr/logoAsso.png'
+      : `${c.env.SITE_URL}/logoAsso.png`;
+    
+    const emailHtml = renderNewsletterEmail({
+      firstName: subscriber.first_name || 'Cher parent',
+      title: safeTitle,
+      previewText: previewText,
+      content: body.content,
+      unsubscribeUrl: unsubscribeUrl,
+      siteUrl: c.env.SITE_URL,
+      logoUrl: logoUrl
+    });
+
+        // Envoyer via Resend
         const response = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
@@ -345,41 +371,60 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            from: 'Les P\'tits Trinquat <newsletter@ptits-trinquat.fr>',
+            from: c.env.NEWSLETTER_FROM_EMAIL,
             to: subscriber.email,
             subject: safeSubject,
-            html: personalizedContent,
+            html: emailHtml,
           }),
         });
 
+        const sendSuccess = response.ok;
         results.push({
           email: subscriber.email,
-          success: response.ok,
-          error: response.ok ? undefined : `HTTP ${response.status}`
+          success: sendSuccess,
+          error: sendSuccess ? undefined : `HTTP ${response.status}`
         });
+
+        // Log l'événement d'envoi
+        if (sendSuccess) {
+          try {
+            await c.env.DB.prepare(`
+              INSERT INTO newsletter_email_events (newsletter_id, subscriber_id, event_type)
+              VALUES (?, ?, 'sent')
+            `).bind('pending-id', subscriber.id).run();
+          } catch (e) {
+            // Silently fail event logging - doesn't block sending
+            console.error('Failed to log email event:', e);
+          }
+        }
       } catch (error) {
+        console.error('Error sending to', subscriber.email, error);
         results.push({
           email: subscriber.email,
           success: false,
-          error: 'Send failed'
+          error: error instanceof Error ? error.message : 'Send failed'
         });
       }
     }
 
     const successCount = results.filter(r => r.success).length;
-
-    // Sauvegarder la newsletter
     const newsletterId = generateId();
+
+    // Sauvegarder la newsletter avec le template HTML
     await c.env.DB.prepare(`
-      INSERT INTO newsletters (id, title, subject, content, status, sent_at, recipients_count)
-      VALUES (?, ?, ?, ?, 'sent', ?, ?)
+      INSERT INTO newsletters 
+      (id, title, subject, content, preview_text, status, sent_at, recipients_count, sent_by, created_by)
+      VALUES (?, ?, ?, ?, ?, 'sent', ?, ?, ?, ?)
     `).bind(
       newsletterId,
-      safeSubject,
+      safeTitle,
       safeSubject,
       body.content,
+      previewText,
       new Date().toISOString(),
-      successCount
+      successCount,
+      senderId,
+      senderId
     ).run();
 
     await logAudit(c.env.DB, authContext?.user.id || null, 'NEWSLETTER_SENT', 'newsletter', newsletterId, c.req.raw, {
@@ -391,6 +436,7 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
     return c.json<ApiResponse>({
       success: true,
       data: {
+        id: newsletterId,
         sent: successCount,
         total: results.length,
         failed: results.filter(r => !r.success)
@@ -402,6 +448,151 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
     return c.json<ApiResponse>({
       success: false,
       error: 'An error occurred while sending newsletter'
+    }, 500);
+  }
+});
+
+// POST /newsletter/admin/test-email - Envoyer un email test
+newsletter.post('/admin/test-email', requireAdmin, async (c) => {
+  try {
+    const body = await c.req.json<{
+      title: string;
+      subject: string;
+      content: string;
+      preview_text?: string;
+      recipient_email?: string;
+    }>();
+    const authContext = getAuthContext(c);
+
+    // Validation du titre
+    const titleValidation = validateInputLength(body.title, 'Title', 1, 200);
+    if (!titleValidation.valid) {
+      return c.json<ApiResponse>({ success: false, error: titleValidation.error }, 400);
+    }
+
+    // Validation du sujet
+    const subjectValidation = validateInputLength(body.subject, 'Subject', 1, 200);
+    if (!subjectValidation.valid) {
+      return c.json<ApiResponse>({ success: false, error: subjectValidation.error }, 400);
+    }
+
+    // Validation du contenu
+    const contentValidation = validateInputLength(body.content, 'Content', 1, 50000);
+    if (!contentValidation.valid) {
+      return c.json<ApiResponse>({ success: false, error: contentValidation.error }, 400);
+    }
+
+    // Récupérer l'email du destinataire test
+    // Si pas fourni, envoyer à l'admin qui fait la demande
+    let testEmail = body.recipient_email;
+    if (!testEmail && authContext?.user?.email) {
+      testEmail = authContext.user.email;
+    }
+
+    if (!testEmail || !isValidEmail(testEmail)) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'No valid test email address provided'
+      }, 400);
+    }
+
+    // Préparer les contenus sécurisés
+    const safeSubject = escapeHtml(body.subject);
+    const safeTitle = escapeHtml(body.title);
+    const previewText = body.preview_text ? sanitizeString(body.preview_text, 500) : body.content.substring(0, 100);
+
+    // Générer l'URL de désinscription
+    const unsubscribeUrl = generateUnsubscribeUrl(testEmail, 'https://lespetitstrinquat.fr');
+
+    // Rendre l'email HTML avec le template
+    // En dev, utiliser le logo de production comme fallback (accessible publiquement)
+    const logoUrl = c.env.ENVIRONMENT === 'development'
+      ? 'https://lespetitstrinquat.fr/logoAsso.png'
+      : `${c.env.SITE_URL}/logoAsso.png`;
+    
+    const emailHtml = renderNewsletterEmail({
+      firstName: 'Test Admin',
+      title: safeTitle,
+      previewText: previewText,
+      content: body.content,
+      unsubscribeUrl: unsubscribeUrl,
+      siteUrl: c.env.SITE_URL,
+      logoUrl: logoUrl
+    });
+
+    // Envoyer via Resend avec mention que c'est un test
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${c.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: c.env.NEWSLETTER_FROM_EMAIL,
+        to: testEmail,
+        subject: `[TEST] ${safeSubject}`,
+        html: emailHtml,
+      }),
+    });
+
+    if (!response.ok) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: `Failed to send test email: HTTP ${response.status}`
+      }, 500);
+    }
+
+    await logAudit(c.env.DB, authContext?.user.id || null, 'NEWSLETTER_TEST_SENT', 'newsletter', null, c.req.raw, {
+      recipient: testEmail
+    });
+
+    return c.json<ApiResponse>({
+      success: true,
+      message: `Test email sent to ${testEmail}`,
+      data: { testEmail, subject: `[TEST] ${safeSubject}` }
+    });
+  } catch (error) {
+    console.error('Test email error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred while sending test email'
+    }, 500);
+  }
+});
+
+// DELETE /newsletter/admin/newsletters/:id - Supprimer une newsletter
+newsletter.delete('/admin/newsletters/:id', requireAdmin, async (c) => {
+  try {
+    const { id } = c.req.param();
+    const authContext = getAuthContext(c);
+
+    // Vérifier que la newsletter existe
+    const newsletter = await c.env.DB.prepare(
+      'SELECT id FROM newsletters WHERE id = ?'
+    ).bind(id).first<{ id: string }>();
+
+    if (!newsletter) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Newsletter not found'
+      }, 404);
+    }
+
+    // Supprimer la newsletter
+    await c.env.DB.prepare('DELETE FROM newsletters WHERE id = ?')
+      .bind(id).run();
+
+    await logAudit(c.env.DB, authContext?.user.id || null, 'NEWSLETTER_DELETED', 'newsletter', id, c.req.raw);
+
+    return c.json<ApiResponse>({
+      success: true,
+      message: 'Newsletter deleted'
+    });
+  } catch (error) {
+    console.error('Delete newsletter error:', error);
+    return c.json<ApiResponse>({
+      success: false,
+      error: 'An error occurred while deleting newsletter'
     }, 500);
   }
 });

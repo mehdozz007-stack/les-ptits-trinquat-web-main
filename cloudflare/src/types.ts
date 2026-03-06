@@ -11,6 +11,8 @@ export interface Env {
   SESSION_DURATION: string;
   RATE_LIMIT_MAX: string;
   RATE_LIMIT_WINDOW: string;
+  NEWSLETTER_FROM_EMAIL: string;
+  SITE_URL: string;
 }
 
 // ============================================================

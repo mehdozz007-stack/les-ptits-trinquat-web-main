@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNewsletterAdmin } from "@/hooks/admin/useNewsletterAdmin";
+import { useNewsletterAdmin } from "@/hooks/useNewsletterAdmin";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,25 +11,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
-  AlertCircle,
   Trash2,
   ToggleLeft,
   ToggleRight,
   Search,
+  Loader2,
 } from "lucide-react";
 
 export function SubscribersList() {
-  const { subscribers, isLoading, error, fetchSubscribers, deleteSubscriber, toggleSubscriberStatus } =
+  const { subscribers, isLoading, deleteSubscriber, toggleSubscriberStatus, fetchSubscribers } =
     useNewsletterAdmin();
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const [isTogglingStatus, setIsTogglingStatus] = useState<string | null>(null);
 
   useEffect(() => {
     fetchSubscribers();
-  }, [fetchSubscribers]);
+  }, []);
 
   const filteredSubscribers = subscribers.filter((sub) =>
     sub.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -43,8 +44,16 @@ export function SubscribersList() {
     setIsDeleting(id);
     try {
       await deleteSubscriber(id);
-    } catch (err) {
-      console.error("Error deleting subscriber:", err);
+      toast({
+        title: "Succès",
+        description: "Abonné supprimé avec succès",
+      });
+    } catch (err: any) {
+      toast({
+        title: "Erreur",
+        description: err.message || "Impossible de supprimer l'abonné",
+        variant: "destructive",
+      });
     } finally {
       setIsDeleting(null);
     }
@@ -54,8 +63,16 @@ export function SubscribersList() {
     setIsTogglingStatus(id);
     try {
       await toggleSubscriberStatus(id, !currentStatus);
-    } catch (err) {
-      console.error("Error toggling subscriber status:", err);
+      toast({
+        title: "Succès",
+        description: currentStatus ? "Abonné désactivé" : "Abonné activé",
+      });
+    } catch (err: any) {
+      toast({
+        title: "Erreur",
+        description: err.message || "Impossible de modifier le statut",
+        variant: "destructive",
+      });
     } finally {
       setIsTogglingStatus(null);
     }
@@ -70,13 +87,6 @@ export function SubscribersList() {
         </p>
       </div>
 
-      {error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error.message}</AlertDescription>
-        </Alert>
-      )}
-
       <div className="flex gap-2 mb-4">
         <Search className="w-4 h-4 mt-3 text-muted-foreground" />
         <Input
@@ -88,7 +98,10 @@ export function SubscribersList() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Chargement des abonnés...</div>
+        <div className="text-center py-8 flex items-center justify-center gap-2">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          Chargement des abonnés...
+        </div>
       ) : filteredSubscribers.length === 0 ? (
         <div className="text-center py-8 text-muted-foreground">
           Aucun abonné trouvé
@@ -120,7 +133,9 @@ export function SubscribersList() {
                         }
                         disabled={isTogglingStatus === sub.id}
                       >
-                        {sub.is_active ? (
+                        {isTogglingStatus === sub.id ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : sub.is_active ? (
                           <>
                             <ToggleRight className="w-4 h-4 text-green-600 mr-2" />
                             Actif
@@ -145,7 +160,11 @@ export function SubscribersList() {
                       disabled={isDeleting === sub.id}
                       className="text-red-600 hover:text-red-700"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      {isDeleting === sub.id ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="w-4 h-4" />
+                      )}
                     </Button>
                   </TableCell>
                 </TableRow>

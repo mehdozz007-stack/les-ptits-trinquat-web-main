@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { newsletterApi } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 
 interface SubscribeData {
@@ -27,31 +27,25 @@ export function useNewsletterSubscription() {
     setIsSuccess(false);
 
     try {
-      const { error } = await supabase
-        .from("newsletter_subscribers")
-        .insert({
-          email: data.email.toLowerCase().trim(),
-          first_name: data.firstName?.trim() || null,
-          consent: true,
-        });
+      const result = await newsletterApi.subscribe(
+        data.email.toLowerCase().trim(),
+        data.firstName?.trim(),
+        data.consent
+      );
 
-      if (error) {
-        if (error.code === "23505") {
-          toast({
-            title: "Déjà inscrit(e) !",
-            description: "Cette adresse email est déjà inscrite à notre newsletter.",
-            variant: "destructive",
-          });
-        } else {
-          throw error;
-        }
+      if (!result.success) {
+        toast({
+          title: "Déjà inscrit(e) !",
+          description: result.error || "Cette adresse email est déjà inscrite à notre newsletter.",
+          variant: "destructive",
+        });
         return false;
       }
 
       setIsSuccess(true);
       toast({
         title: "Bienvenue dans la famille ! 💌",
-        description: data.firstName 
+        description: data.firstName
           ? `Merci ${data.firstName}, vous recevrez bientôt de nos nouvelles !`
           : "Vous recevrez bientôt de nos nouvelles !",
       });

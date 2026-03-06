@@ -13,7 +13,6 @@ export default function AdminNewsletter() {
   const { user, signOut } = useAdminAuth();
   const {
     subscribers,
-    newsletters,
     isLoading,
     searchQuery,
     setSearchQuery,
@@ -21,8 +20,6 @@ export default function AdminNewsletter() {
     totalSubscribersCount,
     toggleSubscriberStatus,
     deleteSubscriber,
-    saveNewsletter,
-    deleteNewsletter,
     refreshData,
   } = useNewsletterAdmin();
 
@@ -98,15 +95,8 @@ export default function AdminNewsletter() {
 
               {/* Right Column */}
               <div className="space-y-8">
-                <NewsletterEditor
-                  activeSubscribersCount={activeSubscribersCount}
-                  onSave={saveNewsletter}
-                  onRefresh={refreshData}
-                />
-                <NewsletterHistory
-                  newsletters={newsletters}
-                  onDelete={deleteNewsletter}
-                />
+                <NewsletterEditor />
+                <NewsletterHistory />
               </div>
             </div>
           )}

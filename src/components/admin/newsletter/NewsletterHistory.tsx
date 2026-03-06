@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNewsletterAdmin } from "@/hooks/admin/useNewsletterAdmin";
+import { useNewsletterAdmin } from "@/hooks/useNewsletterAdmin";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -9,19 +10,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, Trash2, Send, Eye } from "lucide-react";
+import { Trash2, Send, Eye, Loader2 } from "lucide-react";
 
 export function NewsletterHistory() {
-  const { newsletters, isLoading, error, fetchNewsletters, deleteNewsletter, sendNewsletter } =
-    useNewsletterAdmin();
+  const { newsletters, isLoading, refreshData } = useNewsletterAdmin();
+  const { toast } = useToast();
   const [isSending, setIsSending] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
   const [selectedPreview, setSelectedPreview] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchNewsletters();
-  }, [fetchNewsletters]);
+    refreshData();
+  }, []);
 
   const handleSend = async (id: string) => {
     if (!window.confirm("Êtes-vous sûr de vouloir envoyer cette newsletter ?")) {
@@ -30,10 +30,33 @@ export function NewsletterHistory() {
 
     setIsSending(id);
     try {
-      await sendNewsletter(id);
-      alert("Newsletter envoyée avec succès !");
-    } catch (err) {
-      console.error("Error sending newsletter:", err);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          subject: newsletters.find(n => n.id === id)?.subject || '',
+          content: newsletters.find(n => n.id === id)?.content || '',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'envoi');
+      }
+
+      toast({
+        title: "Succès",
+        description: "Newsletter envoyée avec succès !",
+      });
+      refreshData();
+    } catch (err: any) {
+      toast({
+        title: "Erreur",
+        description: err.message || "Impossible d'envoyer la newsletter",
+        variant: "destructive",
+      });
     } finally {
       setIsSending(null);
     }
@@ -46,17 +69,32 @@ export function NewsletterHistory() {
 
     setIsDeleting(id);
     try {
-      await deleteNewsletter(id);
-    } catch (err) {
-      console.error("Error deleting newsletter:", err);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/newsletters/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de la suppression');
+      }
+
+      toast({
+        title: "Succès",
+        description: "Newsletter supprimée avec succès",
+      });
+      refreshData();
+    } catch (err: any) {
+      toast({
+        title: "Erreur",
+        description: err.message || "Impossible de supprimer la newsletter",
+        variant: "destructive",
+      });
     } finally {
       setIsDeleting(null);
     }
   };
-
-  const selectedNewsletter = selectedPreview
-    ? newsletters.find((n) => n.id === selectedPreview)
-    : null;
 
   return (
     <div className="space-y-4">
@@ -67,15 +105,11 @@ export function NewsletterHistory() {
         </p>
       </div>
 
-      {error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error.message}</AlertDescription>
-        </Alert>
-      )}
-
       {isLoading ? (
-        <div className="text-center py-8">Chargement des newsletters...</div>
+        <div className="text-center py-8 flex items-center justify-center gap-2">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          Chargement des newsletters...
+        </div>
       ) : newsletters.length === 0 ? (
         <div className="text-center py-8 text-muted-foreground">
           Aucune newsletter créée
@@ -103,11 +137,10 @@ export function NewsletterHistory() {
                     <TableCell className="text-sm">{newsletter.subject}</TableCell>
                     <TableCell>
                       <span
-                        className={`px-2 py-1 rounded text-xs font-semibold ${
-                          newsletter.status === "sent"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-yellow-100 text-yellow-800"
-                        }`}
+                        className={`px-2 py-1 rounded text-xs font-semibold ${newsletter.status === "sent"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-yellow-100 text-yellow-800"
+                          }`}
                       >
                         {newsletter.status === "sent" ? "Envoyée" : "Brouillon"}
                       </span>
@@ -144,7 +177,11 @@ export function NewsletterHistory() {
                             disabled={isSending === newsletter.id}
                             className="text-green-600 hover:text-green-700"
                           >
-                            <Send className="w-4 h-4" />
+                            {isSending === newsletter.id ? (
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                            ) : (
+                              <Send className="w-4 h-4" />
+                            )}
                           </Button>
                         )}
 
@@ -155,7 +192,11 @@ export function NewsletterHistory() {
                           disabled={isDeleting === newsletter.id}
                           className="text-red-600 hover:text-red-700"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          {isDeleting === newsletter.id ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : (
+                            <Trash2 className="w-4 h-4" />
+                          )}
                         </Button>
                       </div>
                     </TableCell>
@@ -165,11 +206,11 @@ export function NewsletterHistory() {
             </Table>
           </div>
 
-          {selectedNewsletter && (
+          {selectedPreview && newsletters.find((n) => n.id === selectedPreview) && (
             <div className="border rounded-lg p-6 bg-white space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">
-                  Aperçu: {selectedNewsletter.title}
+                  Aperçu: {newsletters.find((n) => n.id === selectedPreview)?.title}
                 </h3>
                 <Button
                   variant="outline"
@@ -183,7 +224,7 @@ export function NewsletterHistory() {
               <div>
                 <p className="text-sm font-semibold">Sujet:</p>
                 <p className="text-sm text-muted-foreground">
-                  {selectedNewsletter.subject}
+                  {newsletters.find((n) => n.id === selectedPreview)?.subject}
                 </p>
               </div>
 
@@ -191,7 +232,7 @@ export function NewsletterHistory() {
                 <p className="text-sm font-semibold mb-2">Contenu:</p>
                 <div
                   className="prose prose-sm max-w-none border rounded p-4 bg-gray-50"
-                  dangerouslySetInnerHTML={{ __html: selectedNewsletter.content }}
+                  dangerouslySetInnerHTML={{ __html: newsletters.find((n) => n.id === selectedPreview)?.content || '' }}
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Eye, Save, FileText, Loader2 } from "lucide-react";
+import { Send, Eye, Save, FileText, Loader2, Send as SendIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -26,20 +26,23 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabase";
+import { newsletterApi } from "@/lib/api";
+import { renderNewsletterEmail } from "@/lib/emailTemplate";
 
 interface NewsletterEditorProps {
-  activeSubscribersCount: number;
-  onSave: (newsletter: { title: string; subject: string; content: string }) => Promise<any>;
-  onRefresh: () => void;
+  activeSubscribersCount?: number;
+  onSave?: (newsletter: { title: string; subject: string; content: string }) => Promise<any>;
+  onRefresh?: () => void;
 }
 
-export function NewsletterEditor({ activeSubscribersCount, onSave, onRefresh }: NewsletterEditorProps) {
+export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh }: NewsletterEditorProps = {}) {
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
+  const [previewText, setPreviewText] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [isTestSending, setIsTestSending] = useState(false);
   const { toast } = useToast();
 
   const isValid = title.trim() && subject.trim() && content.trim();
@@ -47,8 +50,48 @@ export function NewsletterEditor({ activeSubscribersCount, onSave, onRefresh }: 
   const handleSave = async () => {
     if (!isValid) return;
     setIsSaving(true);
-    await onSave({ title, subject, content });
+    await onSave?.({ title, subject, content });
     setIsSaving(false);
+  };
+
+  const handleTestEmail = async () => {
+    if (!isValid) return;
+
+    setIsTestSending(true);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/test-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          title,
+          subject,
+          content,
+          preview_text: previewText || content.substring(0, 100),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Erreur lors de l\'envoi du test');
+      }
+
+      toast({
+        title: "Email de test envoyé",
+        description: `Le test a été envoyé à ${result.data?.testEmail || 'votre adresse email'}`,
+      });
+    } catch (error: any) {
+      toast({
+        title: "Erreur",
+        description: error.message || "Impossible d'envoyer l'email de test.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsTestSending(false);
+    }
   };
 
   const handleSend = async () => {
@@ -56,32 +99,37 @@ export function NewsletterEditor({ activeSubscribersCount, onSave, onRefresh }: 
 
     setIsSending(true);
     try {
-      const { data, error } = await supabase.functions.invoke("send-newsletter", {
-        body: { subject, content },
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          title,
+          subject,
+          content,
+          preview_text: previewText || content.substring(0, 100),
+        }),
       });
 
-      if (error) throw error;
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Erreur inconnue');
+      }
 
       toast({
         title: "Newsletter envoyée",
-        description: `Votre newsletter a été envoyée à ${data.sentCount} abonnés.`,
-      });
-
-      // Save newsletter with sent status
-      await supabase.from("newsletters").insert({
-        title,
-        subject,
-        content,
-        status: "sent",
-        sent_at: new Date().toISOString(),
-        recipients_count: data.sentCount,
+        description: `Votre newsletter a été envoyée à ${result.data?.sent || activeSubscribersCount} abonnés.`,
       });
 
       // Reset form
       setTitle("");
       setSubject("");
       setContent("");
-      onRefresh();
+      setPreviewText("");
+      onRefresh?.();
     } catch (error: any) {
       toast({
         title: "Erreur d'envoi",
@@ -131,6 +179,17 @@ export function NewsletterEditor({ activeSubscribersCount, onSave, onRefresh }: 
           </div>
 
           <div className="space-y-2">
+            <Label htmlFor="preview">Texte de prévisualisation (optionnel)</Label>
+            <Textarea
+              id="preview"
+              placeholder="Texte qui apparaît dans la prévisualisation de l'email (si vide, les 100 premiers caractères du contenu seront utilisés)"
+              value={previewText}
+              onChange={(e) => setPreviewText(e.target.value)}
+              className="h-[60px] resize-none"
+            />
+          </div>
+
+          <div className="space-y-2">
             <Label htmlFor="content">Contenu de la newsletter</Label>
             <Textarea
               id="content"
@@ -141,64 +200,78 @@ export function NewsletterEditor({ activeSubscribersCount, onSave, onRefresh }: 
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <Button
               variant="outline"
               onClick={handleSave}
               disabled={!isValid || isSaving}
-              className="flex-1"
+              size="sm"
             >
               {isSaving ? (
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
               ) : (
                 <Save className="h-4 w-4 mr-2" />
               )}
-              Enregistrer le brouillon
+              <span className="hidden sm:inline">Brouillon</span>
             </Button>
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" disabled={!isValid} className="flex-1">
+                <Button variant="outline" disabled={!isValid} size="sm">
                   <Eye className="h-4 w-4 mr-2" />
-                  Prévisualiser
+                  <span className="hidden sm:inline">Aperçu</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+              <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle>Prévisualisation de la newsletter</DialogTitle>
                   <DialogDescription>
-                    Voici comment apparaîtra votre newsletter
+                    Voici comment apparaîtra votre newsletter dans les clients email
                   </DialogDescription>
                 </DialogHeader>
-                <div className="mt-4 p-6 bg-muted/30 rounded-xl border">
-                  <div className="mb-4 pb-4 border-b">
-                    <p className="text-sm text-muted-foreground">Objet :</p>
-                    <p className="font-medium">{subject || "(Aucun objet)"}</p>
-                  </div>
-                  <div className="prose prose-sm max-w-none">
-                    <div className="whitespace-pre-wrap">{content || "(Aucun contenu)"}</div>
-                  </div>
-                  <div className="mt-6 pt-4 border-t text-center text-xs text-muted-foreground">
-                    <p>Les P'tits Trinquât - Association de parents d'élèves</p>
-                    <p className="mt-1">Pour vous désinscrire, cliquez ici</p>
-                  </div>
+                <div className="mt-4">
+                  <iframe
+                    srcDoc={renderNewsletterEmail({
+                      title,
+                      previewText: previewText || content.substring(0, 100),
+                      content,
+                      firstName: "Cher parent",
+                    })}
+                    className="w-full h-[600px] border border-gray-200 rounded-lg"
+                    title="Email preview"
+                    style={{ backgroundColor: "#f5f5f5" }}
+                  />
                 </div>
               </DialogContent>
             </Dialog>
+
+            <Button
+              variant="secondary"
+              onClick={handleTestEmail}
+              disabled={!isValid || isTestSending}
+              size="sm"
+            >
+              {isTestSending ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <SendIcon className="h-4 w-4 mr-2" />
+              )}
+              <span className="hidden sm:inline">Test</span>
+            </Button>
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button
                   variant="playful"
                   disabled={!isValid || activeSubscribersCount === 0 || isSending}
-                  className="flex-1"
+                  size="sm"
                 >
                   {isSending ? (
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                   ) : (
                     <Send className="h-4 w-4 mr-2" />
                   )}
-                  Envoyer la newsletter
+                  <span className="hidden sm:inline">Envoyer</span>
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>

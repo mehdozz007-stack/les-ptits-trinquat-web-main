@@ -1,74 +1,71 @@
-import { useState, useCallback } from "react";
-import { supabase } from "@/lib/supabase";
+import { useState } from "react";
+import { newsletterApi } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
 
-interface UseNewsletterSubscriptionReturn {
-  isSubscribing: boolean;
-  error: Error | null;
-  success: boolean;
-  subscribe: (email: string, firstName?: string) => Promise<void>;
+interface SubscribeData {
+  email: string;
+  firstName?: string;
+  consent: boolean;
 }
 
-export function useNewsletterSubscription(): UseNewsletterSubscriptionReturn {
-  const [isSubscribing, setIsSubscribing] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const [success, setSuccess] = useState(false);
+export function useNewsletterSubscription() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { toast } = useToast();
 
-  const subscribe = useCallback(async (email: string, firstName?: string) => {
-    setIsSubscribing(true);
-    setError(null);
-    setSuccess(false);
+  const subscribe = async (data: SubscribeData) => {
+    if (!data.consent) {
+      toast({
+        title: "Consentement requis",
+        description: "Veuillez accepter de recevoir la newsletter.",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    setIsLoading(true);
+    setIsSuccess(false);
 
     try {
-      // Vérifier si l'email existe déjà
-      const { data: existing, error: checkError } = await supabase
-        .from("newsletter_subscribers")
-        .select("id")
-        .eq("email", email)
-        .maybeSingle();
+      const result = await newsletterApi.subscribe(
+        data.email.toLowerCase().trim(),
+        data.firstName?.trim(),
+        data.consent
+      );
 
-      if (checkError && checkError.code !== "PGRST116") {
-        throw checkError;
+      if (!result.success) {
+        toast({
+          title: "Déjà inscrit(e) !",
+          description: result.error || "Cette adresse email est déjà inscrite à notre newsletter.",
+          variant: "destructive",
+        });
+        return false;
       }
 
-      if (existing) {
-        // Email déjà abonné, activer si désactivé
-        if (!existing.is_active) {
-          const { error: updateError } = await supabase
-            .from("newsletter_subscribers")
-            .update({ is_active: true })
-            .eq("id", existing.id);
-
-          if (updateError) throw updateError;
-        }
-      } else {
-        // Créer un nouvel abonné
-        const { error: insertError } = await supabase
-          .from("newsletter_subscribers")
-          .insert({
-            email,
-            first_name: firstName || null,
-            consent: true,
-            is_active: true,
-          });
-
-        if (insertError) throw insertError;
-      }
-
-      setSuccess(true);
-    } catch (err) {
-      const error = err as Error;
-      setError(error);
-      console.error("Error subscribing to newsletter:", error);
-      throw error;
+      setIsSuccess(true);
+      toast({
+        title: "Bienvenue dans la famille ! 💌",
+        description: data.firstName 
+          ? `Merci ${data.firstName}, vous recevrez bientôt de nos nouvelles !`
+          : "Vous recevrez bientôt de nos nouvelles !",
+      });
+      return true;
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      toast({
+        title: "Oups !",
+        description: "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive",
+      });
+      return false;
     } finally {
-      setIsSubscribing(false);
+      setIsLoading(false);
     }
-  }, []);
-
-  return {
-    isSubscribing,
-    error,
-    success,
-    subscribe,
   };
+
+  const reset = () => {
+    setIsSuccess(false);
+  };
+
+  return { subscribe, isLoading, isSuccess, reset };
 }

@@ -1,140 +1,176 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import type { User, AuthError } from "@supabase/supabase-js";
+import { authApi, authManager } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
 
-interface UseAdminAuthReturn {
-  user: User | null;
+interface AdminAuthState {
+  user: any | null;
+  email: string | null;
   isAdmin: boolean;
   isLoading: boolean;
-  error: AuthError | null;
-  signUp: (email: string, password: string) => Promise<void>;
-  signIn: (email: string, password: string) => Promise<void>;
-  signOut: () => Promise<void>;
 }
 
-export function useAdminAuth(): UseAdminAuthReturn {
-  const [user, setUser] = useState<User | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<AuthError | null>(null);
+export function useAdminAuth() {
+  const [authState, setAuthState] = useState<AdminAuthState>({
+    user: null,
+    email: null,
+    isAdmin: false,
+    isLoading: true,
+  });
+  const { toast } = useToast();
 
-  // Vérifier l'état d'authentification au montage
+  // Vérifier l'authentification au montage
   useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        // Récupérer l'utilisateur actuel
-        const {
-          data: { user: currentUser },
-          error: userError,
-        } = await supabase.auth.getUser();
-
-        if (userError) throw userError;
-
-        setUser(currentUser);
-
-        // Vérifier si l'utilisateur est admin
-        if (currentUser) {
-          const { data: roleData, error: roleError } = await supabase
-            .from("user_roles")
-            .select("role")
-            .eq("user_id", currentUser.id)
-            .eq("role", "admin")
-            .maybeSingle();
-
-          if (roleError) throw roleError;
-          setIsAdmin(!!roleData);
+    const checkAuth = async () => {
+      if (authManager.isAuthenticated()) {
+        try {
+          const result = await authApi.getMe();
+          if (result.success && result.data) {
+            setAuthState({
+              user: result.data,
+              email: result.data.email,
+              isAdmin: result.data.role === "admin",
+              isLoading: false,
+            });
+          } else {
+            authManager.clearToken();
+            setAuthState({
+              user: null,
+              email: null,
+              isAdmin: false,
+              isLoading: false,
+            });
+          }
+        } catch (error) {
+          console.error("Auth check error:", error);
+          authManager.clearToken();
+          setAuthState({
+            user: null,
+            email: null,
+            isAdmin: false,
+            isLoading: false,
+          });
         }
-      } catch (err) {
-        console.error("Error initializing auth:", err);
-        setError(err as AuthError);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    initializeAuth();
-
-    // S'abonner aux changements d'authentification
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null);
-
-      if (session?.user) {
-        // Vérifier le rôle admin après changement d'auth
-        const { data: roleData } = await supabase
-          .from("user_roles")
-          .select("role")
-          .eq("user_id", session.user.id)
-          .eq("role", "admin")
-          .maybeSingle();
-
-        setIsAdmin(!!roleData);
       } else {
-        setIsAdmin(false);
+        setAuthState({
+          user: null,
+          email: null,
+          isAdmin: false,
+          isLoading: false,
+        });
       }
-    });
-
-    return () => {
-      subscription?.unsubscribe();
     };
+
+    checkAuth();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
-    setError(null);
-    try {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+  const signIn = async (email: string, password: string) => {
+    setAuthState(prev => ({ ...prev, isLoading: true }));
 
-      if (signUpError) throw signUpError;
-    } catch (err) {
-      const authError = err as AuthError;
-      setError(authError);
-      throw authError;
+    try {
+      const result = await authApi.login(email, password);
+
+      if (!result.success) {
+        toast({
+          title: "Connexion échouée",
+          description: result.error || "Email ou mot de passe incorrect",
+          variant: "destructive",
+        });
+        return { error: new Error(result.error) };
+      }
+
+      if (result.data?.token) {
+        authManager.setToken(result.data.token);
+        setAuthState({
+          user: result.data.user,
+          email: result.data.user?.email,
+          isAdmin: result.data.user?.role === "admin",
+          isLoading: false,
+        });
+
+        toast({
+          title: "Connecté !",
+          description: "Bienvenue dans l'administration",
+        });
+      }
+
+      return { error: null };
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : "Erreur de connexion";
+      toast({
+        title: "Erreur",
+        description: errorMsg,
+        variant: "destructive",
+      });
+      return { error: new Error(errorMsg) };
+    } finally {
+      setAuthState(prev => ({ ...prev, isLoading: false }));
     }
   };
 
-  const signIn = async (email: string, password: string) => {
-    setError(null);
-    try {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+  const signUp = async (email: string, password: string) => {
+    setAuthState(prev => ({ ...prev, isLoading: true }));
 
-      if (signInError) throw signInError;
-    } catch (err) {
-      const authError = err as AuthError;
-      setError(authError);
-      throw authError;
+    try {
+      const result = await authApi.signup(email, password);
+
+      if (!result.success) {
+        toast({
+          title: "Inscription échouée",
+          description: result.error || "Erreur lors de l'inscription",
+          variant: "destructive",
+        });
+        return { error: new Error(result.error) };
+      }
+
+      if (result.data?.token) {
+        authManager.setToken(result.data.token);
+        setAuthState({
+          user: result.data.user,
+          email: result.data.user?.email,
+          isAdmin: result.data.user?.role === "admin",
+          isLoading: false,
+        });
+
+        toast({
+          title: "Compte créé !",
+          description: "Vous pouvez maintenant vous connecter",
+        });
+      }
+
+      return { error: null };
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : "Erreur d'inscription";
+      toast({
+        title: "Erreur",
+        description: errorMsg,
+        variant: "destructive",
+      });
+      return { error: new Error(errorMsg) };
+    } finally {
+      setAuthState(prev => ({ ...prev, isLoading: false }));
     }
   };
 
   const signOut = async () => {
-    setError(null);
     try {
-      const { error: signOutError } = await supabase.auth.signOut();
-
-      if (signOutError) throw signOutError;
-
-      setUser(null);
-      setIsAdmin(false);
-    } catch (err) {
-      const authError = err as AuthError;
-      setError(authError);
-      throw authError;
+      await authApi.logout();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      authManager.clearToken();
+      setAuthState({
+        user: null,
+        email: null,
+        isAdmin: false,
+        isLoading: false,
+      });
     }
   };
 
   return {
-    user,
-    isAdmin,
-    isLoading,
-    error,
-    signUp,
+    ...authState,
     signIn,
+    signUp,
     signOut,
   };
 }
