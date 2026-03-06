@@ -2842,8 +2842,8 @@ function renderNewsletterEmail(props) {
     
     .logo {
       display: inline-block;
-      height: 390px;
-      margin-bottom: 38px;
+      height: 260px;
+      margin-bottom: 25px;
       position: relative;
       z-index: 1;
     }
@@ -3064,8 +3064,8 @@ function renderNewsletterEmail(props) {
       }
       
       .logo {
-        height: 165px !important;
-        margin-bottom: 27px !important;
+        height: 110px !important;
+        margin-bottom: 18px !important;
       }
       
       .header-title {
