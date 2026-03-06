@@ -347,21 +347,21 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
         // Générer l'URL de désinscription pour ce subscriber
         const unsubscribeUrl = generateUnsubscribeUrl(subscriber.email, 'https://lespetitstrinquat.fr');
 
-    // Rendre l'email HTML avec le template
-    // En dev, utiliser le logo de production comme fallback (accessible publiquement)
-    const logoUrl = c.env.ENVIRONMENT === 'development'
-      ? 'https://lespetitstrinquat.fr/logoAsso.png'
-      : `${c.env.SITE_URL}/logoAsso.png`;
-    
-    const emailHtml = renderNewsletterEmail({
-      firstName: subscriber.first_name || 'Cher parent',
-      title: safeTitle,
-      previewText: previewText,
-      content: body.content,
-      unsubscribeUrl: unsubscribeUrl,
-      siteUrl: c.env.SITE_URL,
-      logoUrl: logoUrl
-    });
+        // Rendre l'email HTML avec le template
+        // En dev, utiliser le logo de production comme fallback (accessible publiquement)
+        const logoUrl = c.env.ENVIRONMENT === 'development'
+          ? 'https://lespetitstrinquat.fr/logoAsso.png'
+          : `${c.env.SITE_URL}/logoAsso.png`;
+
+        const emailHtml = renderNewsletterEmail({
+          firstName: subscriber.first_name || 'Cher parent',
+          title: safeTitle,
+          previewText: previewText,
+          content: body.content,
+          unsubscribeUrl: unsubscribeUrl,
+          siteUrl: c.env.SITE_URL,
+          logoUrl: logoUrl
+        });
 
         // Envoyer via Resend
         const response = await fetch('https://api.resend.com/emails', {
@@ -509,7 +509,7 @@ newsletter.post('/admin/test-email', requireAdmin, async (c) => {
     const logoUrl = c.env.ENVIRONMENT === 'development'
       ? 'https://lespetitstrinquat.fr/logoAsso.png'
       : `${c.env.SITE_URL}/logoAsso.png`;
-    
+
     const emailHtml = renderNewsletterEmail({
       firstName: 'Test Admin',
       title: safeTitle,

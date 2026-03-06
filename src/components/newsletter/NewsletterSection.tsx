@@ -58,7 +58,7 @@ export function NewsletterSection() {
             💌 La newsletter des P'tits Trinquât
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Recevez les actualités de l'école, les événements et les belles initiatives 
+            Recevez les actualités de l'école, les événements et les belles initiatives
             de l'association, directement dans votre boîte mail.
           </p>
         </motion.div>
@@ -92,7 +92,7 @@ export function NewsletterSection() {
                       Merci pour votre inscription ! 🎉
                     </h3>
                     <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                      Vous faites maintenant partie de la famille des P'tits Trinquât. 
+                      Vous faites maintenant partie de la famille des P'tits Trinquat.
                       À très bientôt dans votre boîte mail !
                     </p>
                     <Button variant="outline" onClick={handleNewSubscription}>
@@ -154,8 +154,8 @@ export function NewsletterSection() {
                         className="mt-0.5"
                       />
                       <Label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                        J'accepte de recevoir la newsletter des P'tits Trinquât et je consens au traitement 
-                        de mes données personnelles conformément à notre politique de confidentialité. 
+                        J'accepte de recevoir la newsletter des P'tits Trinquât et je consens au traitement
+                        de mes données personnelles conformément à notre politique de confidentialité.
                         Je peux me désinscrire à tout moment. <span className="text-destructive">*</span>
                       </Label>
                     </div>

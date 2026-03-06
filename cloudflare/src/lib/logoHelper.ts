@@ -5,19 +5,19 @@
  */
 
 export function getLogoUrl(siteUrl: string, environment: string): string {
-  if (environment === 'development') {
-    // En dev, utiliser le placeholder de Resend
-    return 'https://react-email-demo-bdj5 immigrant.vercel.app/static/vercel-logo.png';
-  }
-  
-  // En production, utiliser le vrai logo
-  return `${siteUrl}/logoAsso.png`;
+    if (environment === 'development') {
+        // En dev, utiliser le placeholder de Resend
+        return 'https://react-email-demo-bdj5 immigrant.vercel.app/static/vercel-logo.png';
+    }
+
+    // En production, utiliser le vrai logo
+    return `${siteUrl}/logoAsso.png`;
 }
 
 /**
  * Retourne le logo en tant qu'image HTML sûre
  */
 export function getLogoHtml(siteUrl: string, environment: string): string {
-  const logoUrl = getLogoUrl(siteUrl, environment);
-  return `<img src="${logoUrl}" alt="Les P'tits Trinquat" style="width: auto;">`;
+    const logoUrl = getLogoUrl(siteUrl, environment);
+    return `<img src="${logoUrl}" alt="Les P'tits Trinquat" style="width: auto;">`;
 }
