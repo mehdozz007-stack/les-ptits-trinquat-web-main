@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 export function NewsletterSubscription() {
-  const { isSubscribing, error, success, subscribe } =
+  const { isLoading, isSuccess, subscribe, reset } =
     useNewsletterSubscription();
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -21,7 +21,7 @@ export function NewsletterSubscription() {
     }
 
     try {
-      await subscribe(email, firstName);
+      await subscribe({ email, firstName, consent: agreedToConsent });
       setEmail("");
       setFirstName("");
       setAgreedToConsent(false);
@@ -40,16 +40,7 @@ export function NewsletterSubscription() {
           Recevez les actualités de l'école directement dans votre boîte mail.
         </p>
 
-        {error && (
-          <Alert variant="destructive" className="mb-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              {error.message || "Une erreur s'est produite"}
-            </AlertDescription>
-          </Alert>
-        )}
-
-        {success && (
+        {isSuccess && (
           <Alert className="mb-4 bg-green-50 text-green-800 border-green-200">
             <CheckCircle2 className="h-4 w-4" />
             <AlertDescription>
@@ -69,7 +60,7 @@ export function NewsletterSubscription() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="votre@email.com"
               required
-              disabled={isSubscribing}
+              disabled={isLoading}
             />
           </div>
 
@@ -82,7 +73,7 @@ export function NewsletterSubscription() {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="Jean"
-              disabled={isSubscribing}
+              disabled={isLoading}
             />
           </div>
 
@@ -93,7 +84,7 @@ export function NewsletterSubscription() {
               onCheckedChange={(checked) =>
                 setAgreedToConsent(checked as boolean)
               }
-              disabled={isSubscribing}
+              disabled={isLoading}
             />
             <label
               htmlFor="consent"
@@ -105,10 +96,10 @@ export function NewsletterSubscription() {
 
           <Button
             type="submit"
-            disabled={!agreedToConsent || isSubscribing || !email}
+            disabled={!agreedToConsent || isLoading || !email}
             className="w-full"
           >
-            {isSubscribing ? "Inscription..." : "S'abonner"}
+            {isLoading ? "Inscription..." : "S'abonner"}
           </Button>
         </form>
 

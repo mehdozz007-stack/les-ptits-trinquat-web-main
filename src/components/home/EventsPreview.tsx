@@ -100,9 +100,6 @@ export function EventsPreview() {
           viewport={{ once: true }}
           className="mb-12 flex flex-col text-center items-center gap-2 sm:gap-4"
         >
-          <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs sm:text-sm font-semibold text-primary">
-            Événements
-          </span>
           <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
             Nos prochains <span className="text-gradient">rendez-vous</span>
           </h2>

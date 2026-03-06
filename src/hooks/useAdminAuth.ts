@@ -21,10 +21,15 @@ export function useAdminAuth() {
   // Vérifier l'authentification au montage
   useEffect(() => {
     const checkAuth = async () => {
+      console.log('[useAdminAuth] Vérification de l\'authentification...');
+
       if (authManager.isAuthenticated()) {
         try {
           const result = await authApi.getMe();
+          console.log('[useAdminAuth] getMe result:', result);
+
           if (result.success && result.data) {
+            console.log('[useAdminAuth] Authentification OK:', result.data);
             setAuthState({
               user: result.data,
               email: result.data.email,
@@ -32,6 +37,7 @@ export function useAdminAuth() {
               isLoading: false,
             });
           } else {
+            console.log('[useAdminAuth] getMe failed:', result.error);
             authManager.clearToken();
             setAuthState({
               user: null,
@@ -41,7 +47,7 @@ export function useAdminAuth() {
             });
           }
         } catch (error) {
-          console.error("Auth check error:", error);
+          console.error("[useAdminAuth] Auth check error:", error);
           authManager.clearToken();
           setAuthState({
             user: null,
@@ -51,6 +57,7 @@ export function useAdminAuth() {
           });
         }
       } else {
+        console.log('[useAdminAuth] Non authentifié');
         setAuthState({
           user: null,
           email: null,
@@ -64,26 +71,37 @@ export function useAdminAuth() {
   }, []);
 
   const signIn = async (email: string, password: string) => {
+    console.log('[useAdminAuth] signIn appelé pour:', email);
     setAuthState(prev => ({ ...prev, isLoading: true }));
 
     try {
       const result = await authApi.login(email, password);
+      console.log('[useAdminAuth] login result:', { success: result.success, error: result.error });
 
       if (!result.success) {
+        const errorMsg = result.error || "Email ou mot de passe incorrect";
+        console.error('[useAdminAuth] Login failed:', errorMsg);
+
         toast({
           title: "Connexion échouée",
-          description: result.error || "Email ou mot de passe incorrect",
+          description: errorMsg,
           variant: "destructive",
         });
-        return { error: new Error(result.error) };
+
+        return { error: new Error(errorMsg) };
       }
 
       if (result.data?.token) {
+        console.log('[useAdminAuth] Token reçu, sauvegarde en cours...');
         authManager.setToken(result.data.token);
+
+        const userData = result.data.user;
+        console.log('[useAdminAuth] User data:', userData);
+
         setAuthState({
-          user: result.data.user,
-          email: result.data.user?.email,
-          isAdmin: result.data.user?.role === "admin",
+          user: userData,
+          email: userData?.email,
+          isAdmin: userData?.role === "admin",
           isLoading: false,
         });
 
@@ -91,16 +109,22 @@ export function useAdminAuth() {
           title: "Connecté !",
           description: "Bienvenue dans l'administration",
         });
+      } else {
+        console.error('[useAdminAuth] Pas de token dans la réponse:', result.data);
+        return { error: new Error("Pas de token reçu du serveur") };
       }
 
       return { error: null };
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : "Erreur de connexion";
+      console.error('[useAdminAuth] Exception:', errorMsg, error);
+
       toast({
         title: "Erreur",
         description: errorMsg,
         variant: "destructive",
       });
+
       return { error: new Error(errorMsg) };
     } finally {
       setAuthState(prev => ({ ...prev, isLoading: false }));

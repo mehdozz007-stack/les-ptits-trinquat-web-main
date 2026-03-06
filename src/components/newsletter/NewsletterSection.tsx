@@ -41,7 +41,7 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-background to-muted/30">
+    <section className="relative overflow-hidden bg-muted/50 sm:py-12 py-20 md:py-28">
       <div className="container max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -55,7 +55,7 @@ export function NewsletterSection() {
             <span className="text-sm font-medium">Newsletter</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            💌 La newsletter des P'tits Trinquât
+            La newsletter <span className="text-gradient">des P'tits Trinquat</span> 💌
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Recevez les actualités de l'école, les événements et les belles initiatives
@@ -82,20 +82,26 @@ export function NewsletterSection() {
                   >
                     <motion.div
                       initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", delay: 0.2 }}
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                       className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center"
                     >
                       <Check className="h-10 w-10 text-green-600" />
                     </motion.div>
                     <h3 className="text-2xl font-bold text-foreground mb-3">
-                      Merci pour votre inscription ! 🎉
+                      Merci pour votre inscription !
                     </h3>
                     <p className="text-muted-foreground mb-6 max-w-md mx-auto">
                       Vous faites maintenant partie de la famille des P'tits Trinquat.
                       À très bientôt dans votre boîte mail !
                     </p>
-                    <Button variant="outline" onClick={handleNewSubscription}>
+                    <Button
+                      onClick={handleNewSubscription}
+                      style={{
+                        background: 'linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%)'
+                      }}
+                      className="text-white hover:shadow-lg transition-shadow"
+                    >
                       Inscrire une autre adresse
                     </Button>
                   </motion.div>
@@ -160,7 +166,7 @@ export function NewsletterSection() {
                       </Label>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                       <Button
                         type="submit"
                         variant="playful"

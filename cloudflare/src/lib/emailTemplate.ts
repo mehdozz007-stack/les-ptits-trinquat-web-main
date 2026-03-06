@@ -4,36 +4,36 @@
  */
 
 interface NewsletterEmailProps {
-    firstName?: string;
-    title: string;
-    previewText: string;
-    content: string;
-    contentHtml?: string;
-    unsubscribeUrl?: string;
-    siteUrl?: string;
-    logoUrl?: string;
-    faviconUrl?: string;
-    year?: number;
+  firstName?: string;
+  title: string;
+  previewText: string;
+  content: string;
+  contentHtml?: string;
+  unsubscribeUrl?: string;
+  siteUrl?: string;
+  logoUrl?: string;
+  faviconUrl?: string;
+  year?: number;
 }
 
 export function renderNewsletterEmail(props: NewsletterEmailProps): string {
-    const {
-        firstName = "Cher parent",
-        title,
-        previewText,
-        content,
-        contentHtml,
-        unsubscribeUrl = "#",
-        siteUrl = "https://lespetitstrinquat.fr",
-        logoUrl = "https://lespetitstrinquat.fr/logoAsso.png",
-        faviconUrl = "https://lespetitstrinquat.fr/favicon.ico",
-        year = new Date().getFullYear()
-    } = props;
+  const {
+    firstName = "Cher parent",
+    title,
+    previewText,
+    content,
+    contentHtml,
+    unsubscribeUrl = "#",
+    siteUrl = "https://lespetitstrinquat.fr",
+    logoUrl = "https://lespetitstrinquat.fr/logoAsso.png",
+    faviconUrl = "https://lespetitstrinquat.fr/favicon.ico",
+    year = new Date().getFullYear()
+  } = props;
 
-    // Si du HTML custom est fourni, l'utiliser ; sinon, convertir le texte en HTML sécurisé
-    const bodyContent = contentHtml || sanitizeToHtml(content);
+  // Si du HTML custom est fourni, l'utiliser ; sinon, convertir le texte en HTML sécurisé
+  const bodyContent = contentHtml || sanitizeToHtml(content);
 
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -81,190 +81,219 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       max-width: 600px;
       margin: 0 auto;
       background-color: #ffffff;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 8px 24px rgba(255, 123, 66, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
     }
     
     /* Header */
     .header {
       background: linear-gradient(135deg, #FFF5F0 0%, #FFF0F7 50%, #E8F4FF 100%);
-      padding: 40px 20px;
+      padding: 50px 30px;
       text-align: center;
+      position: relative;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(255, 123, 66, 0.05) 0%, transparent 70%);
+      pointer-events: none;
     }
     
     .logo {
       display: inline-block;
-      height: 250px;
-      margin-bottom: 20px;
+      height: 260px;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
     }
     
     .logo img {
       height: 100%;
       width: auto;
-      border-radius: 16px;
+      border-radius: 20px;
+      box-shadow: 0 12px 32px rgba(255, 123, 66, 0.15), 0 0 60px rgba(197, 95, 168, 0.08);
+      filter: drop-shadow(0 8px 20px rgba(255, 123, 66, 0.12));
     }
     
     .header-title {
-      font-size: 36px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin: 10px 0 5px 0;
+      font-size: 38px;
+      font-weight: 800;
+      color: #FF7B42;
+      margin: 15px 0 8px 0;
       font-family: 'Nunito', sans-serif;
+      letter-spacing: -0.5px;
     }
     
     .header-subtitle {
-      font-size: 14px;
-      background: linear-gradient(135deg, #555555 0%, #1a1a1a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 15px;
+      color: #555555;
       font-weight: 700;
-      letter-spacing: 0.5px;
-      margin: -8px 0 0 0;
+      letter-spacing: 1px;
+      margin: 0;
       font-family: 'Nunito', sans-serif;
+      text-transform: uppercase;
     }
     
     /* Body */
     .body {
-      padding: 40px 30px;
-      background: linear-gradient(135deg, #FFFBF7 0%, #F8F5FF 50%, #F5F9FF 100%);
+      padding: 50px 35px;
+      background: linear-gradient(180deg, #FFFBF7 0%, #F8F5FF 45%, #F5F9FF 100%);
+      position: relative;
+    }
+    
+    .body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle 400px at 0% 0%, rgba(255, 251, 247, 0.8), transparent),
+        radial-gradient(circle 400px at 100% 100%, rgba(245, 249, 255, 0.8), transparent);
+      pointer-events: none;
     }
     
     .greeting {
       font-size: 18px;
       font-weight: 600;
-      color: #2C2C2C;
-      margin-bottom: 20px;
+      color: #3C3C3C;
+      margin-bottom: 25px;
       font-family: 'Nunito', sans-serif;
+      position: relative;
+      z-index: 1;
     }
     
     .newsletter-title {
-      font-size: 28px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin: 30px 0 20px;
+      font-size: 32px;
+      font-weight: 800;
+      color: #FF7B42;
+      margin: 30px 0 25px;
       font-family: 'Nunito', sans-serif;
+      position: relative;
+      z-index: 1;
     }
     
     .content {
       font-size: 16px;
-      color: #4A4A4A;
-      line-height: 1.8;
-      margin: 20px 0;
-      background: rgba(255, 255, 255, 0.6);
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 4px solid rgba(255, 123, 66, 0.3);
+      color: #555555;
+      line-height: 1.75;
+      margin: 25px 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.65) 100%);
+      padding: 28px;
+      border-radius: 16px;
+      border-left: 5px solid;
+      border-image: linear-gradient(180deg, #FF7B42 0%, #C55FA8 100%) 1;
+      box-shadow: 0 4px 16px rgba(255, 123, 66, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
       font-family: 'Nunito', sans-serif;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(10px);
     }
     
     .content p {
-      margin: 15px 0;
+      margin: 16px 0;
     }
     
     .content strong {
-      font-weight: 700;
-      background: linear-gradient(135deg, #2C2C2C 0%, #555555 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-weight: 800;
+      color: #333333;
     }
     
     .content em {
       font-style: italic;
-      background: linear-gradient(135deg, #C55FA8 0%, #E699D3 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #D65FA8;
+      font-weight: 600;
     }
     
     .content ul, .content ol {
-      margin: 15px 0 15px 30px;
+      margin: 18px 0 18px 30px;
     }
     
     .content li {
-      margin: 10px 0;
+      margin: 12px 0;
+      padding-left: 8px;
     }
     
     .content a {
-      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 2px solid rgba(255, 123, 66, 0.4);
+      color: #FF7B42;
+      text-decoration: underline;
+      font-weight: 700;
       transition: all 0.3s ease;
     }
     
     .content a:hover {
-      border-bottom: 2px solid rgba(197, 95, 168, 0.6);
+      color: #C55FA8;
     }
     
     /* CTA Button */
     .cta-button {
       display: inline-block;
-      background: linear-gradient(135deg, #FF7B42 0%, #C55FA8 100%);
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
       color: #ffffff;
-      padding: 14px 32px;
-      border-radius: 25px;
+      padding: 16px 40px;
+      border-radius: 30px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 16px;
-      margin: 25px 0;
-      box-shadow: 0 4px 15px rgba(255, 123, 66, 0.3);
+      margin: 28px 0;
+      box-shadow: 0 8px 24px rgba(255, 123, 66, 0.25), 0 4px 12px rgba(197, 95, 168, 0.15);
       transition: all 0.3s ease;
       display: inline-block;
       font-family: 'Nunito', sans-serif;
+      border: none;
+      cursor: pointer;
     }
     
     .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 123, 66, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(255, 123, 66, 0.35), 0 6px 16px rgba(197, 95, 168, 0.2);
+      text-decoration: none;
+      color: #ffffff;
     }
     
     /* Divider */
     .divider {
       border: 0;
-      height: 2px;
-      background: linear-gradient(to right, #FFD9A8, #FFB3DA, #B3E5FC, transparent);
-      margin: 40px 0;
+      height: 3px;
+      background: linear-gradient(to right, #FFD9A8 0%, #FFB3DA 40%, #D9C5FF 70%, transparent 100%);
+      margin: 45px 0;
+      border-radius: 2px;
     }
     
     /* Footer */
     .footer {
-      background-color: #F8F8F8;
-      padding: 30px;
+      background: linear-gradient(180deg, #F5F5F5 0%, #F9F9F9 100%);
+      padding: 35px 30px;
       text-align: center;
-      border-top: 1px solid #E8E8E8;
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, #FFD9A8 0%, #FFB3DA 50%, #D9C5FF 100%) 1;
       font-size: 13px;
       color: #666666;
     }
     
     .footer-text {
-      margin: 10px 0;
-      line-height: 1.7;
+      margin: 12px 0;
+      line-height: 1.8;
       font-family: 'Nunito', sans-serif;
     }
     
     .footer-text:first-child {
       font-size: 16px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-weight: 800;
+      color: #FF7B42;
     }
     
     .footer a {
       color: #FF7B42;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
     }
     
     .footer a:hover {
@@ -272,14 +301,15 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     }
     
     .unsubscribe {
-      margin-top: 20px;
-      padding-top: 20px;
+      margin-top: 25px;
+      padding-top: 25px;
       border-top: 1px solid #E0E0E0;
       font-family: 'Nunito', sans-serif;
     }
     
     .unsubscribe a {
-      color: #999999;
+      color: #FF7B42;
+      font-weight: 600;
       font-size: 12px;
     }
     
@@ -287,36 +317,70 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     @media only screen and (max-width: 600px) {
       .email-container {
         width: 100% !important;
+        border-radius: 0 !important;
       }
       
       .body {
-        padding: 20px 15px !important;
+        padding: 30px 20px !important;
       }
       
       .header {
-        padding: 30px 15px !important;
+        padding: 35px 20px !important;
       }
       
       .logo {
-        height: 105px !important;
+        height: 110px !important;
+        margin-bottom: 18px !important;
       }
       
       .header-title {
-        font-size: 20px !important;
+        font-size: 24px !important;
+        margin: 12px 0 6px 0 !important;
+      }
+      
+      .header-subtitle {
+        font-size: 12px !important;
+      }
+      
+      .greeting {
+        font-size: 16px !important;
+        margin-bottom: 18px !important;
       }
       
       .newsletter-title {
-        font-size: 24px !important;
+        font-size: 26px !important;
+        margin: 25px 0 18px !important;
       }
       
       .content {
         font-size: 15px !important;
-        padding: 15px !important;
+        padding: 18px !important;
+        margin: 18px 0 !important;
+        border-radius: 12px !important;
       }
       
       .cta-button {
-        padding: 12px 24px !important;
+        padding: 12px 28px !important;
         font-size: 14px !important;
+        margin: 20px 0 !important;
+      }
+      
+      .divider {
+        margin: 30px 0 !important;
+      }
+      
+      .footer {
+        padding: 25px 20px !important;
+      }
+      
+      .footer-text {
+        margin: 8px 0 !important;
+        font-size: 12px !important;
+      }
+      
+      .unsubscribe {
+        margin-top: 18px !important;
+        padding-top: 18px !important;
       }
     }
   </style>
@@ -376,48 +440,48 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
  * Échappe les caractères HTML dangereux
  */
 function escapeHtml(text: string): string {
-    const map: Record<string, string> = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, (m) => map[m]);
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
 /**
  * Convertit du texte plain en HTML sécurisé avec support basique du formatage
  */
 function sanitizeToHtml(text: string): string {
-    // Échappe d'abord le HTML
-    let html = escapeHtml(text);
+  // Échappe d'abord le HTML
+  let html = escapeHtml(text);
 
-    // Convertit les sauts de ligne en <br>
-    html = html.replace(/\n\n/g, '</p><p>');
-    html = html.replace(/\n/g, '<br>');
+  // Convertit les sauts de ligne en <br>
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = html.replace(/\n/g, '<br>');
 
-    // Supporte les **bold** et *italic*
-    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  // Supporte les **bold** et *italic*
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
 
-    // Wrap dans des paragraphes si nécessaire
-    if (!html.includes('<p>')) {
-        html = `<p>${html}</p>`;
-    }
+  // Wrap dans des paragraphes si nécessaire
+  if (!html.includes('<p>')) {
+    html = `<p>${html}</p>`;
+  }
 
-    return html;
+  return html;
 }
 
 /**
  * Génère une URL de désinscription tokenisée sécurisée
  */
 export function generateUnsubscribeUrl(
-    email: string,
-    baseUrl: string = "https://lespetitstrinquat.fr"
+  email: string,
+  baseUrl: string = "https://lespetitstrinquat.fr"
 ): string {
-    // En production, vous devriez générer un token JWT qui inclut l'email
-    // Pour l'instant, on encode l'email en base64url pour la sécurité
-    const encoded = btoa(email).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-    return `${baseUrl}/api/newsletter/unsubscribe?token=${encoded}`;
+  // En production, vous devriez générer un token JWT qui inclut l'email
+  // Pour l'instant, on encode l'email en base64url pour la sécurité
+  const encoded = btoa(email).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+  return `${baseUrl}/api/newsletter/unsubscribe?token=${encoded}`;
 }

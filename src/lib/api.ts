@@ -1,9 +1,12 @@
 /**
  * Configuration API REST - Cloudflare Workers D1
  * Remplace Supabase par une API REST optimisée
+ * 
+ * Note: Utilise des URLs relatives qui fonctionnent via le proxy Vite
+ * sur desktop ET sur mobile via l'adresse IP directe
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8082/api';
+const API_BASE_URL = '/api'; // URL relative - fonctionne partout!
 
 // Log les URLs pour debug
 if (import.meta.env.DEV) {
@@ -21,6 +24,16 @@ export async function apiCall<T = any>(
         const url = `${API_BASE_URL}${endpoint}`;
         const token = localStorage.getItem('auth_token');
 
+        if (import.meta.env.DEV) {
+            console.log('[API] Request:', {
+                url,
+                endpoint,
+                hasToken: !!token,
+                tokenValue: token ? `${token.substring(0, 10)}...` : 'NONE',
+                method: options.method || 'GET'
+            });
+        }
+
         const headers: HeadersInit = {
             'Content-Type': 'application/json',
             ...options.headers,
@@ -29,6 +42,13 @@ export async function apiCall<T = any>(
         // Ajouter le token si disponible
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
+            if (import.meta.env.DEV) {
+                console.log('[API] Token added to Authorization header');
+            }
+        } else {
+            if (import.meta.env.DEV) {
+                console.warn('[API] ⚠️ NO TOKEN AVAILABLE - Request may fail for auth endpoints');
+            }
         }
 
         const response = await fetch(url, {
@@ -37,17 +57,38 @@ export async function apiCall<T = any>(
             headers,
         });
 
-        const json = await response.json();
+        let json: any;
+        const contentType = response.headers.get('content-type');
+
+        if (contentType?.includes('application/json')) {
+            json = await response.json();
+        } else {
+            const text = await response.text();
+            json = { error: text || `HTTP ${response.status}` };
+        }
+
+        if (import.meta.env.DEV) {
+            console.log('[API] Response:', {
+                url,
+                status: response.status,
+                success: response.ok,
+                data: json
+            });
+        }
 
         if (!response.ok) {
+            const errorMsg = json.error || json.message || `Erreur ${response.status}`;
+            if (import.meta.env.DEV) {
+                console.error('[API] Request failed:', errorMsg);
+            }
             return {
                 success: false,
-                error: json.error || `Erreur ${response.status}`,
+                error: errorMsg,
             };
         }
 
         return {
-            success: json.success || true,
+            success: json.success !== false,
             data: json.data || json,
         };
     } catch (error) {

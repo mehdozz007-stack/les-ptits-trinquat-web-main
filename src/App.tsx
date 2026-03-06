@@ -18,6 +18,7 @@ import TombolaProtected from "./pages/TombolaProtected";
 import Auth from "./pages/Auth";
 import AdminTombola from "./pages/AdminTombola";
 import AdminNewsletter from "./pages/AdminNewsletter";
+import AdminNewsletterAuth from "./pages/AdminNewsletterAuth";
 import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
 
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/partenaires" element={<Partenaires />} />
             {/* Pages d'authentification et tombola */}
             <Route path="/auth" element={<Auth />} />
+            <Route path="/admin/newsletter/auth" element={<AdminNewsletterAuth />} />
             <Route path="/tombola" element={<TombolaProtected />} />
             <Route path="/admin/tombola" element={<AdminTombola />} />
             <Route path="/admin/newsletter" element={<AdminNewsletter />} />

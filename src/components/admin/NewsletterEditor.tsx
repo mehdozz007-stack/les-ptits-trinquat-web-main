@@ -40,6 +40,7 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
   const [previewText, setPreviewText] = useState("");
+  const [testEmail, setTestEmail] = useState("mehdozz007@gmail.com");
   const [isSaving, setIsSaving] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [isTestSending, setIsTestSending] = useState(false);
@@ -59,17 +60,23 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
 
     setIsTestSending(true);
     try {
+      const token = localStorage.getItem('auth_token');
+      if (!token) {
+        throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
+      }
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/test-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           title,
           subject,
           content,
           preview_text: previewText || content.substring(0, 100),
+          recipient_email: testEmail || 'mehdozz007@gmail.com',
         }),
       });
 
@@ -81,7 +88,7 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
 
       toast({
         title: "Email de test envoyé",
-        description: `Le test a été envoyé à ${result.data?.testEmail || 'votre adresse email'}`,
+        description: `Le test a été envoyé à ${result.data?.testEmail || testEmail}`,
       });
     } catch (error: any) {
       toast({
@@ -99,11 +106,16 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
 
     setIsSending(true);
     try {
+      const token = localStorage.getItem('auth_token');
+      if (!token) {
+        throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
+      }
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           title,
@@ -147,89 +159,106 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
     >
-      <Card className="shadow-soft">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-xl">
-            <FileText className="h-5 w-5 text-primary" />
-            Rédiger une newsletter
+      <Card className="shadow-sm border-orange-100/50 bg-white/60 backdrop-blur-sm hover:shadow-md transition-shadow" style={{ fontFamily: "'Nunito', sans-serif" }}>
+        <CardHeader className="pb-3 sm:pb-4">
+          <CardTitle className="flex items-center gap-2 sm:gap-3 text-xl sm:text-2xl bg-gradient-to-r from-[#FF7B42] via-[#FF9A6A] to-[#C55FA8] bg-clip-text text-transparent" style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700 }}>
+            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7B42] to-[#C55FA8] shadow-md flex-shrink-0">
+              <FileText className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+            </div>
+            <span className="truncate">Rédiger une newsletter</span>
           </CardTitle>
-          <CardDescription>
-            Créez et envoyez une newsletter à {activeSubscribersCount} abonnés actifs
+          <CardDescription style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm mt-2 truncate">
+            Créez et envoyez à <strong className="text-[#FF7B42]">{activeSubscribersCount} abonnés</strong> actifs
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 sm:space-y-6 px-3 sm:px-6">
           <div className="space-y-2">
-            <Label htmlFor="title">Titre interne (usage admin)</Label>
+            <Label htmlFor="title" style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm font-semibold text-gray-700">Titre interne (usage admin)</Label>
             <Input
               id="title"
               placeholder="Ex: Newsletter de janvier 2024"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              className="text-sm border-orange-100/50 focus:border-[#FF7B42] focus:ring-[#FF7B42]/20"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="subject">Objet de l'email</Label>
+            <Label htmlFor="subject" style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm font-semibold text-gray-700">Objet de l'email</Label>
             <Input
               id="subject"
               placeholder="Ex: Les actualités de l'école ce mois-ci"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
+              className="text-sm border-orange-100/50 focus:border-[#FF7B42] focus:ring-[#FF7B42]/20"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="preview">Texte de prévisualisation (optionnel)</Label>
+            <Label htmlFor="preview" style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm font-semibold text-gray-700">Texte de prévisualisation (optionnel)</Label>
             <Textarea
               id="preview"
-              placeholder="Texte qui apparaît dans la prévisualisation de l'email (si vide, les 100 premiers caractères du contenu seront utilisés)"
+              placeholder="Texte qui apparaît dans la prévisualisation de l'email"
               value={previewText}
               onChange={(e) => setPreviewText(e.target.value)}
-              className="h-[60px] resize-none"
+              className="h-[50px] sm:h-[60px] resize-none text-sm border-orange-100/50 focus:border-[#FF7B42] focus:ring-[#FF7B42]/20"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="content">Contenu de la newsletter</Label>
+            <Label htmlFor="testEmail" style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm font-semibold text-gray-700">Email de test</Label>
+            <Input
+              id="testEmail"
+              type="email"
+              placeholder="Email pour recevoir le test"
+              value={testEmail}
+              onChange={(e) => setTestEmail(e.target.value)}
+              className="text-sm border-orange-100/50 focus:border-[#FF7B42] focus:ring-[#FF7B42]/20"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="content" style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm font-semibold text-gray-700">Contenu de la newsletter</Label>
             <Textarea
               id="content"
               placeholder="Écrivez le contenu de votre newsletter ici..."
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="min-h-[200px] resize-y"
+              className="min-h-[150px] sm:min-h-[200px] resize-y text-sm border-orange-100/50 focus:border-[#FF7B42] focus:ring-[#FF7B42]/20"
             />
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 pt-2">
             <Button
               variant="outline"
               onClick={handleSave}
               disabled={!isValid || isSaving}
               size="sm"
+              className="text-xs sm:text-sm border-orange-200 text-[#FF7B42] hover:bg-orange-50/50 h-9 sm:h-10"
             >
               {isSaving ? (
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 animate-spin" />
               ) : (
-                <Save className="h-4 w-4 mr-2" />
+                <Save className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
               )}
-              <span className="hidden sm:inline">Brouillon</span>
+              <span>Brouillon</span>
             </Button>
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" disabled={!isValid} size="sm">
-                  <Eye className="h-4 w-4 mr-2" />
-                  <span className="hidden sm:inline">Aperçu</span>
+                <Button variant="outline" disabled={!isValid} size="sm" className="text-xs sm:text-sm border-rose-200 text-[#FF9A6A] hover:bg-rose-50/50 h-9 sm:h-10">
+                  <Eye className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span>Aperçu</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+              <DialogContent className="max-w-2xl sm:max-w-3xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-auto p-3 sm:p-6">
                 <DialogHeader>
-                  <DialogTitle>Prévisualisation de la newsletter</DialogTitle>
-                  <DialogDescription>
+                  <DialogTitle style={{ fontFamily: "'Nunito', sans-serif" }} className="text-base sm:text-lg">Prévisualisation de la newsletter</DialogTitle>
+                  <DialogDescription style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm">
                     Voici comment apparaîtra votre newsletter dans les clients email
                   </DialogDescription>
                 </DialogHeader>
-                <div className="mt-4">
+                <div className="mt-3 sm:mt-4 w-full">
                   <iframe
                     srcDoc={renderNewsletterEmail({
                       title,
@@ -237,7 +266,7 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
                       content,
                       firstName: "Cher parent",
                     })}
-                    className="w-full h-[600px] border border-gray-200 rounded-lg"
+                    className="w-full h-[550px] sm:h-[680px] border border-orange-200 rounded-lg"
                     title="Email preview"
                     style={{ backgroundColor: "#f5f5f5" }}
                   />
@@ -250,13 +279,14 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
               onClick={handleTestEmail}
               disabled={!isValid || isTestSending}
               size="sm"
+              className="text-xs sm:text-sm bg-gradient-to-r from-[#FF9A6A] to-[#C55FA8] text-white hover:shadow-md h-9 sm:h-10"
             >
               {isTestSending ? (
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 animate-spin" />
               ) : (
-                <SendIcon className="h-4 w-4 mr-2" />
+                <SendIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
               )}
-              <span className="hidden sm:inline">Test</span>
+              <span>Test</span>
             </Button>
 
             <AlertDialog>
@@ -265,26 +295,27 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
                   variant="playful"
                   disabled={!isValid || activeSubscribersCount === 0 || isSending}
                   size="sm"
+                  className="text-xs sm:text-sm bg-gradient-to-r from-[#FF7B42] via-[#FF9A6A] to-[#C55FA8] text-white hover:shadow-lg h-9 sm:h-10"
                 >
                   {isSending ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 animate-spin" />
                   ) : (
-                    <Send className="h-4 w-4 mr-2" />
+                    <Send className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   )}
-                  <span className="hidden sm:inline">Envoyer</span>
+                  <span>Envoyer</span>
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className="w-[95vw] sm:w-auto">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Confirmer l'envoi</AlertDialogTitle>
-                  <AlertDialogDescription>
+                  <AlertDialogTitle style={{ fontFamily: "'Nunito', sans-serif" }} className="text-base sm:text-lg">Confirmer l'envoi</AlertDialogTitle>
+                  <AlertDialogDescription style={{ fontFamily: "'Nunito', sans-serif" }} className="text-xs sm:text-sm">
                     Vous êtes sur le point d'envoyer cette newsletter à{" "}
                     <strong>{activeSubscribersCount} abonnés</strong>. Cette action ne peut pas être annulée.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Annuler</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleSend}>
+                <AlertDialogFooter className="flex-col-reverse sm:flex-row gap-2 sm:gap-0">
+                  <AlertDialogCancel className="text-xs sm:text-sm">Annuler</AlertDialogCancel>
+                  <AlertDialogAction onClick={handleSend} className="text-xs sm:text-sm">
                     Confirmer l'envoi
                   </AlertDialogAction>
                 </AlertDialogFooter>

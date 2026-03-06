@@ -157,6 +157,57 @@ newsletter.post('/unsubscribe', rateLimitMiddleware, async (c) => {
 // ROUTES ADMIN
 // ============================================================
 
+// DEBUG: GET /newsletter/admin/debug - Informations de debug
+newsletter.get('/admin/debug', async (c) => {
+  try {
+    const authHeader = c.req.header('Authorization');
+    const token = authHeader?.slice(7)?.trim();
+
+    // Vérifier la session si le token existe
+    let authInfo: any = null;
+    if (token) {
+      const session = await c.env.DB.prepare(`
+        SELECT 
+          s.token,
+          s.expires_at,
+          u.email,
+          ur.role
+        FROM sessions s
+        JOIN users u ON s.user_id = u.id
+        LEFT JOIN user_roles ur ON u.id = ur.user_id
+        WHERE s.token = ?
+      `).bind(token).first();
+      authInfo = session;
+    }
+
+    // Compteur d'abonnés
+    const subscribersCount = await c.env.DB.prepare(`
+      SELECT COUNT(*) as count FROM newsletter_subscribers
+    `).first<{ count: number }>();
+
+    // Utilisateurs admin
+    const adminUsers = await c.env.DB.prepare(`
+      SELECT u.email, ur.role FROM users u
+      LEFT JOIN user_roles ur ON u.id = ur.user_id
+      WHERE ur.role = 'admin' OR ur.role IS NULL
+    `).all<{ email: string; role: string | null }>();
+
+    return c.json({
+      debug: {
+        tokenProvided: !!token,
+        authInfo,
+        subscribersCount: subscribersCount?.count || 0,
+        adminUsers: adminUsers?.results || []
+      }
+    });
+  } catch (error) {
+    console.error('Debug error:', error);
+    return c.json({
+      debug: { error: String(error) }
+    });
+  }
+});
+
 // GET /newsletter/admin/subscribers - Liste des abonnés
 newsletter.get('/admin/subscribers', requireAdmin, async (c) => {
   try {

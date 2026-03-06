@@ -32,19 +32,25 @@ export function useNewsletterAdmin() {
 
   const fetchSubscribers = useCallback(async () => {
     try {
+      console.log('[useNewsletterAdmin] Fetching subscribers...');
       const result = await newsletterApi.getSubscribers();
+      console.log('[useNewsletterAdmin] API Result:', result);
+
       if (result.success && result.data) {
+        console.log('[useNewsletterAdmin] Subscribers loaded:', result.data.length, 'items');
         setSubscribers(result.data);
       } else {
+        console.warn('[useNewsletterAdmin] API returned false success or no data:', result);
         throw new Error(result.error || "Erreur lors du chargement des abonnés");
       }
     } catch (error: any) {
       console.error("Fetch subscribers error:", error);
       toast({
         title: "Erreur",
-        description: "Impossible de charger les abonnés.",
+        description: error.message || "Impossible de charger les abonnés.",
         variant: "destructive",
       });
+      setSubscribers([]);
     }
   }, [toast]);
 
@@ -63,18 +69,23 @@ export function useNewsletterAdmin() {
         description: "Impossible de charger les newsletters.",
         variant: "destructive",
       });
+      setNewsletters([]);
     }
   }, [toast]);
 
+  // Fonction pour charger les données - SANS dépendances circulaires
   const loadData = useCallback(async () => {
+    console.log('[useNewsletterAdmin] loadData called');
     setIsLoading(true);
     await Promise.all([fetchSubscribers(), fetchNewsletters()]);
     setIsLoading(false);
   }, [fetchSubscribers, fetchNewsletters]);
 
+  // Charger les données AU MONTAGE uniquement
   useEffect(() => {
+    console.log('[useNewsletterAdmin] Component mounted, loading initial data');
     loadData();
-  }, [loadData]);
+  }, []); // Dépendance vide pour ne s'exécuter qu'une fois
 
   const toggleSubscriberStatus = async (id: string, currentStatus: boolean) => {
     try {
