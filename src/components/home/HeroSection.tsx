@@ -138,7 +138,7 @@ export function HeroSection() {
               <InfoBadge
                 icon="🤝"
                 text="Une famille de notre école détruite par l'incendie a besoin de nous !"
-                href="https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing"
+                href="/actualites/annonce-charity-001"
                 delay={0.2}
                 bgClass="bg-rose-100/50 text-indigo-600"
                 textGradient="bg-gradient-to-r from-rose-500 via-violet-600 to-purple-600"

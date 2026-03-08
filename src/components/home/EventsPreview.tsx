@@ -35,6 +35,17 @@ const upcomingEvents = [
     url: "/actualites/act-004"
   },*/
   {
+    id: 2,
+    title: "Deuxième conseil d'école de l'année",
+    description: "Nous vous accueillons pour le deuxième conseil d'école de l'année. Un moment d'échange et de partage pour discuter de la vie de l'école et des projets pédagogiques.",
+    date: "2026-03-24",
+    time: "17h45 - 19h00",
+    location: "Salle polyvalente de l'école",
+    color: "sky",
+    status: "upcoming",
+    url: "/actualites/conseil-ecole-002",
+  },
+  {
     id: 1,
     title: "Vide Grenier à l'école: La Récré des bonnes affaires !",
     description: "Un vide grenier convivial avec animations, musique et bonne ambiance en famille. Venez dénicher de bonnes affaires tout en participant à la vie de l'école !",
@@ -45,15 +56,6 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 400,
     url: "/actualites/act-010",
-  },
-  {
-    id: 2,
-    title: "💙 Collecte solidaire - Une famille de notre école a besoin de nous",
-    description: "Suite à un incendie, une famille a tout perdu. Nous organisons une collecte solidaire de vêtements, jeux sensoriels et dons.",
-    date: "2026-02-19",
-    color: "rose",
-    status: "upcoming",
-    url: "/actualites/annonce-charity-001",
   },
 ];
 
@@ -94,15 +96,22 @@ export function EventsPreview() {
     <section className="py-20 md:py-28">
       <div className="container">
         {/* Section Header */}
+        <div className="mb-6 flex justify-center">
+          <motion.div
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7B42] to-[#C55FA8] shadow-md flex-shrink-0"
+          >
+
+            <Clock className="h-10 w-10 sm:h-8 sm:w-8 text-white" />
+          </motion.div>
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-12 flex flex-col text-center items-center gap-2 sm:gap-4"
         >
-          <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs sm:text-sm font-semibold text-primary">
-            Événements
-          </span>
           <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
             Nos prochains <span className="text-gradient">rendez-vous</span>
           </h2>

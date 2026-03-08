@@ -91,6 +91,18 @@ export const actualitesData: Actualite[] = [
         donationLink: "https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing",
     },
     {
+        id: "conseil-ecole-002",
+        title: "Deuxième conseil d'école de l'année",
+        description: "Nous vous accueillons pour le deuxième conseil d'école de l'année. Un moment d'échange et de partage pour discuter de la vie de l'école et des projets pédagogiques.",
+        content: "Nous vous invitons à ce moment privilégié de partage et d'échange, où nous discuterons ensemble de la vie de l'école et des projets pédagogiques menés. 📚\n\nC'est l'occasion idéale de revenir sur les beaux projets mis en place, 🌟 de partager vos préoccupations et vos idées, 💬 et de construire ensemble une école plus forte et plus épanouissante pour tous nos enfants. 💚\n\nVotre présence et vos retours sont précieux pour nous. Ensemble, nous créons une communauté bienveillante au service du bien-être de tous. 🤝",
+        type: "annonce",
+        date: "2026-03-24",
+        time: "17h45 - 19h00",
+        location: "Salle polyvalente de l'école",
+        color: "sky",
+        status: "upcoming",
+    },
+    {
         id: "act-010",
         title: "Vide Grenier : La Récré des bonnes affaires !",
         description: "Un vide grenier convivial avec animations, musique et bonne ambiance en famille. Venez dénicher de bonnes affaires tout en participant à la vie de l'école !",

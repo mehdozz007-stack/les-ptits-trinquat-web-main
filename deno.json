@@ -1,0 +1,6 @@
+{
+  "exclude": ["supabase/functions/**/*", "node_modules", "dist"],
+  "imports": {
+    "std/": "https://deno.land/std@0.208.0/"
+  }
+}

@@ -62,11 +62,18 @@ export function LotGrid({ currentParticipant }: LotGridProps) {
     return isMyLot || hasInteracted;
   });
 
-  // Les "lots des familles" = tous les autres
+  // Les "lots des familles" = tous les autres, y compris tous les lots remis
   const familyLots = lots.filter((lot) => {
     const isMyLot = lot.parent_id === currentParticipant?.id;
-    const hasInteracted = lot.reserved_by === currentParticipant?.id || lot.statut === "remis";
-    return !(isMyLot || hasInteracted);
+
+    // Afficher tous les lots remis, peu importe qui les gère (sauf les miens)
+    if (lot.statut === "remis") {
+      return !isMyLot;
+    }
+
+    // Pour les autres lots, exclure ceux avec lesquels j'ai interagi
+    const hasInteracted = lot.reserved_by === currentParticipant?.id;
+    return !isMyLot && !hasInteracted;
   });
 
   // Appliquer les filtres selon la sélection

@@ -25,7 +25,7 @@ database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 # Environnement de PRODUCTION
 # ============================================================
 [env.production]
-vars = { ENVIRONMENT = "production", CORS_ORIGIN = "https://www.lespetitstrinquat.fr", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
+vars = { ENVIRONMENT = "production", CORS_ORIGIN = "https://www.lespetitstrinquat.fr", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60", NEWSLETTER_FROM_EMAIL = "Les P'tits Trinquat <newsletter@lespetitstrinquat.fr>", SITE_URL = "https://lespetitstrinquat.fr" }
 
 # D1 Database for production
 [[env.production.d1_databases]]
@@ -37,7 +37,7 @@ database_id = "3f030e96-e28d-4acb-ba13-71c5b1f891b6"
 # Environnement de développement
 # ============================================================
 [env.dev]
-vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:5173", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60" }
+vars = { ENVIRONMENT = "development", CORS_ORIGIN = "http://localhost:8082", SESSION_DURATION = "604800", RATE_LIMIT_MAX = "60", RATE_LIMIT_WINDOW = "60", NEWSLETTER_FROM_EMAIL = "onboarding@resend.dev", SITE_URL = "http://localhost:8082" }
 
 [[env.dev.d1_databases]]
 binding = "DB"
