@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Heart, ArrowLeft, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -111,15 +111,15 @@ const MessageEnvoye = () => {
               </p>
               <div className="mt-4 flex gap-3 justify-center">
                 <Button variant="ghost" size="icon" asChild className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-pink-200 hover:bg-pink-300">
-                      <a href="https://www.instagram.com/Les_ptits_trinquat" target="_blank" rel="noopener noreferrer" title="Instagram">
-                        <Instagram className="h-6 w-6 sm:h-7 sm:w-7 text-pink-600" />
-                      </a>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-sky-200 hover:bg-sky-300">
-                      <a href="https://www.facebook.com/LesPtitsTrinquats" target="_blank" rel="noopener noreferrer" title="Facebook">
-                        <Facebook className="h-6 w-6 sm:h-7 sm:w-7 text-sky-600" />
-                      </a>
-                    </Button>
+                  <a href="https://www.instagram.com/Les_ptits_trinquat" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <Instagram className="h-6 w-6 sm:h-7 sm:w-7 text-pink-600" />
+                  </a>
+                </Button>
+                <Button variant="ghost" size="icon" asChild className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-sky-200 hover:bg-sky-300">
+                  <a href="https://www.facebook.com/LesPtitsTrinquats" target="_blank" rel="noopener noreferrer" title="Facebook">
+                    <Facebook className="h-6 w-6 sm:h-7 sm:w-7 text-sky-600" />
+                  </a>
+                </Button>
               </div>
             </motion.div>
           </motion.div>
