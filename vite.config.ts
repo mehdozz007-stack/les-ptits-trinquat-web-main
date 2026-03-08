@@ -2,44 +2,45 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-// https://vitejs.dev/config/
-export default defineConfig(() => ({
+export default defineConfig({
   base: "/",
-  server: {
-    host: "::",
-    port: 8082,
-    fs: {
-      // Permet à Vite de servir les fichiers du dossier public
-      allow: ["."],
-    },
-    // Proxy pour les requêtes API vers le backend local
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8787',
-        changeOrigin: true,
-        rewrite: (path) => path,
-      }
-    }
-  },
+
   plugins: [react()],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    chunkSizeWarningLimit: 600,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          "vendor-react": ["react", "react-dom", "framer-motion"],
-          "vendor-ui": ["lucide-react", "@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"],
-          "vendor-form": ["@tanstack/react-query"],
-          "page-index": ["./src/pages/Index.tsx"],
-          "page-events": ["./src/pages/Evenements.tsx"],
-          "page-partenaires": ["./src/pages/Partenaires.tsx"],
-        },
+
+  server: {
+    host: "::",
+    port: 8082,
+
+    fs: {
+      allow: ["."],
+    },
+
+    proxy: {
+      "/api": {
+        target: "http://localhost:8787",
+        changeOrigin: true,
+        rewrite: (path) => path,
       },
     },
-  }
-}));
+  },
+
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "framer-motion",
+      "@tanstack/react-query"
+    ],
+  },
+
+  build: {
+    chunkSizeWarningLimit: 600,
+    sourcemap: false
+  },
+});
