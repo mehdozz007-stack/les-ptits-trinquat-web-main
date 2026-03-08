@@ -261,9 +261,15 @@ curl -X POST http://127.0.0.1:8787/api/newsletter/subscribe \
 # 3. Vérifier dans la DB locale
 cd cloudflare
 npx wrangler d1 execute tombola-dev \
+  --env=dev \
   --command="SELECT COUNT(*) as count FROM newsletter_subscribers;"
 # Résultat: count=1 (ou plus si vous avez déjà des données)
 ```
+
+# 4. Vérifier dans la DB prod
+npx wrangler d1 execute les-ptits-trinquat-prod \
+  --remote \
+  --command="SELECT COUNT(*) as count FROM newsletter_subscribers;"
 
 ✅ **Si tous les tests réussissent**, continuez.  
 ❌ **Si une erreur**: Vérifiez les logs du terminal backend, consultez [Troubleshooting](#troubleshooting).
