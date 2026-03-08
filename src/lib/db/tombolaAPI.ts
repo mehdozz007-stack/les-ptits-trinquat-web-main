@@ -252,7 +252,7 @@ export const TombolaAPI = {
      * Login as admin
      */
     async adminLogin(email: string, password: string): Promise<{ token: string }> {
-        const response = await fetch(apiUrl('/api/auth/login'), {
+        const response = await fetch(apiUrl('/auth/login'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
