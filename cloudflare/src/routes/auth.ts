@@ -23,8 +23,19 @@ const auth = new Hono<{ Bindings: Env }>();
 // POST /auth/login - Connexion
 // ============================================================
 auth.post('/login', authRateLimitMiddleware, async (c) => {
+  console.log('[AUTH] POST /login - Requête reçue', {
+    method: c.req.method,
+    url: c.req.url,
+    headers: {
+      origin: c.req.header('origin'),
+      referer: c.req.header('referer'),
+      contentType: c.req.header('content-type'),
+    }
+  });
+  
   try {
     const body = await c.req.json<LoginRequest>();
+    console.log('[AUTH] Body reçu:', { email: body.email, hasPassword: !!body.password });
 
     // Validation des entrées
     if (!body.email || !body.password) {

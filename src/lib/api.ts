@@ -2,16 +2,15 @@
  * Configuration API REST - Cloudflare Workers D1
  * Remplace Supabase par une API REST optimisée
  * 
- * Note: Utilise des URLs relatives qui fonctionnent via le proxy Vite
- * sur desktop ET sur mobile via l'adresse IP directe
+ * Note: Utilise les URLs depuis api-config.ts qui gère dev vs production
  */
 
-const API_BASE_URL = '/api'; // URL relative - fonctionne partout!
+import { API_BASE_URL } from './api-config';
 
-// Log les URLs pour debug
-if (import.meta.env.DEV) {
-    console.log('[API] Base URL:', API_BASE_URL);
-}
+// Log les URLs pour debug - TOUJOURS afficher en production pour debug
+console.log('[API] Base URL configurée:', API_BASE_URL);
+console.log('[API] Environment:', import.meta.env.MODE);
+console.log('[API] DEV mode:', import.meta.env.DEV);
 
 /**
  * Effectue un appel API avec gestion d'erreur centralisée

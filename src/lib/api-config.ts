@@ -24,7 +24,7 @@ function getApiBaseUrl(): string {
     port === '3000' ||       // Common dev port
     hostname.includes('192.168')
   ) {
-    return ''; // Use relative paths (proxied via Vite)
+    return '/api'; // Use relative paths via Vite proxy
   }
 
   // Production environment
