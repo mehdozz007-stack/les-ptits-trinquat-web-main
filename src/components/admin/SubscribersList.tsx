@@ -270,8 +270,8 @@ export function SubscribersList({
                         </div>
                         <Badge
                           className={`whitespace-nowrap text-xs ${subscriber.is_active
-                              ? "bg-gradient-to-r from-[#FF7B42] to-[#FF9A6A] text-white"
-                              : "bg-rose-100 text-rose-700"
+                            ? "bg-gradient-to-r from-[#FF7B42] to-[#FF9A6A] text-white"
+                            : "bg-rose-100 text-rose-700"
                             }`}
                         >
                           {subscriber.is_active ? "Actif" : "Désinscrit"}

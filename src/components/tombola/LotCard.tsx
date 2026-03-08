@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Check, Loader2, PartyPopper, Trash2, Gift, RotateCcw, Copy } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";

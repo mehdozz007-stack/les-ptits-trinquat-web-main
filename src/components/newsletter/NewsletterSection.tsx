@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Heart, Sparkles, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
