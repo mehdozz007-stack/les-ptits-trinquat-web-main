@@ -32,7 +32,7 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
       contentType: c.req.header('content-type'),
     }
   });
-  
+
   try {
     const body = await c.req.json<LoginRequest>();
     console.log('[AUTH] Body reçu:', { email: body.email, hasPassword: !!body.password });

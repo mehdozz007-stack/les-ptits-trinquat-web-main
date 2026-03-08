@@ -31,7 +31,7 @@ export const TombolaAPI = {
      * Get all parents (participants)
      */
     async getParents(): Promise<Parent[]> {
-        const response = await fetch(apiUrl('/api/tombola/participants'));
+        const response = await fetch(apiUrl('/tombola/participants'));
         const data = await handleResponse<{ success: boolean; data: any[] }>(response);
 
         // Map API response to Parent interface
@@ -49,7 +49,7 @@ export const TombolaAPI = {
      * Get all lots
      */
     async getLots(): Promise<Lot[]> {
-        const response = await fetch(apiUrl('/api/tombola/lots'));
+        const response = await fetch(apiUrl('/tombola/lots'));
         const data = await handleResponse<any>(response);
 
         console.log('📦 getLots - Response data:', data);
@@ -79,7 +79,7 @@ export const TombolaAPI = {
         emoji: string;
         classes?: string;
     }): Promise<Parent> {
-        const response = await fetch(apiUrl('/api/tombola/participants'), {
+        const response = await fetch(apiUrl('/tombola/participants'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -115,7 +115,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(apiUrl('/api/tombola/lots'), {
+        const response = await fetch(apiUrl('/tombola/lots'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -147,7 +147,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
+        const response = await fetch(apiUrl(`/tombola/lots/${lotId}/reserve`), {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -176,7 +176,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
+        const response = await fetch(apiUrl(`/tombola/lots/${lotId}`), {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -193,7 +193,7 @@ export const TombolaAPI = {
             throw new Error('Parent not authenticated');
         }
 
-        const response = await fetch(apiUrl(`/api/tombola/admin/participants/${parentId}`), {
+        const response = await fetch(apiUrl(`/tombola/admin/participants/${parentId}`), {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -269,13 +269,13 @@ export const TombolaAPI = {
 
         const data = await response.json();
         console.log('✅ adminLogin - Login successful');
-        
+
         // La réponse peut être { data: { token } } ou { token } directement
         const token = data.data?.token || data.token;
         if (!token) {
             throw new Error('No token in response');
         }
-        
+
         return { token };
     },
 
@@ -286,7 +286,7 @@ export const TombolaAPI = {
         const token = this.getAdminToken();
         console.log('🔐 getAdminParents - Token found:', !!token, token ? token.substring(0, 20) + '...' : 'MISSING');
 
-        const response = await fetch(apiUrl('/api/tombola/admin/participants'), {
+        const response = await fetch(apiUrl('/tombola/admin/participants'), {
             headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         });
 
@@ -319,7 +319,7 @@ export const TombolaAPI = {
      */
     async adminDeleteParticipant(participantId: string): Promise<void> {
         const token = this.getAdminToken();
-        const response = await fetch(apiUrl(`/api/tombola/admin/participants/${participantId}`), {
+        const response = await fetch(apiUrl(`/tombola/admin/participants/${participantId}`), {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -335,7 +335,7 @@ export const TombolaAPI = {
      */
     async adminCancelReservation(lotId: string): Promise<void> {
         const token = this.getAdminToken();
-        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel`), {
+        const response = await fetch(apiUrl(`/tombola/lots/${lotId}/cancel`), {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -351,7 +351,7 @@ export const TombolaAPI = {
      */
     async adminMarkAsDelivered(lotId: string): Promise<void> {
         const token = this.getAdminToken();
-        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/remis`), {
+        const response = await fetch(apiUrl(`/tombola/lots/${lotId}/remis`), {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -367,7 +367,7 @@ export const TombolaAPI = {
      */
     async adminDeleteLot(lotId: string): Promise<void> {
         const token = this.getAdminToken();
-        const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
+        const response = await fetch(apiUrl(`/tombola/lots/${lotId}`), {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
