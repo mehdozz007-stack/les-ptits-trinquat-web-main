@@ -36,6 +36,7 @@ export async function apiCall<T = any>(
 
         const headers: HeadersInit = {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
             ...options.headers,
         };
 
