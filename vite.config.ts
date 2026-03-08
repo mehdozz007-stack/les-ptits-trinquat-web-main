@@ -32,16 +32,14 @@ export default defineConfig(() => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Séparer les dépendances de taille importante
+          "vendor-react": ["react", "react-dom", "framer-motion"],
           "vendor-ui": ["lucide-react", "@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"],
-          "vendor-motion": ["framer-motion"],
           "vendor-form": ["@tanstack/react-query"],
-          // Séparer les pages par route
           "page-index": ["./src/pages/Index.tsx"],
           "page-events": ["./src/pages/Evenements.tsx"],
           "page-partenaires": ["./src/pages/Partenaires.tsx"],
         },
       },
     },
-  },
+  }
 }));
