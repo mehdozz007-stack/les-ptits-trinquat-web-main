@@ -160,15 +160,18 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
         throw new Error('Brouillon non trouvé');
       }
 
-      // Envoyer la newsletter avec tous les détails du brouillon
-      const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
-      const apiBaseUrl = import.meta.env.VITE_API_URL || '/api';
+      // Vérifier que le brouillon a tous les champs requis
+      if (!draft.title || !draft.subject || !draft.content) {
+        throw new Error('Le brouillon est incomplet (titre, sujet ou contenu manquant)');
+      }
 
-      const response = await fetch(`${apiBaseUrl}/newsletter/admin/send`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+      console.log('📧 Sending newsletter draft:', {
+        draftId: draft.id,
+        title: draft.title,
+        subject: draft.subject,
+        contentLength: draft.content.length,
+      });
+
         },
         body: JSON.stringify({
           title: draft.title,
