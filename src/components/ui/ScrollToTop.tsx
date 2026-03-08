@@ -4,7 +4,7 @@ import { ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ScrollToTop() {
-  const { pathname , hash} = useLocation();
+  const { pathname, hash } = useLocation();
   const [showButton, setShowButton] = useState(false);
 
   // Scroll to top on route change

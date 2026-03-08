@@ -33,8 +33,8 @@ export function SolidaritySection() {
               </h2>
 
               <p className="mb-8 text-center text-muted-foreground">
-                Un lot ne correspond pas à vos besoins ? Échangez-le en toute simplicité 
-                entre familles. La tombola, c'est avant tout un moment de partage et de 
+                Un lot ne correspond pas à vos besoins ? Échangez-le en toute simplicité
+                entre familles. La tombola, c'est avant tout un moment de partage et de
                 convivialité au service des projets de notre école.
               </p>
 
