@@ -102,7 +102,7 @@ if (
   1. npm install ← **En cours**
   2. npm run build ← **En cours**
   3. wrangler pages deploy dist ← **À venir**
-- URL de destination: `https://mehdozz007.github.io/les-ptits-trinquat-web-main/`
+- URL de destination: `https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/`
 
 ### Backend API
 
@@ -155,7 +155,7 @@ if (
 
 ┌─────────────────────────────────────────────────┐
 │      FRONTEND (Production - GitHub Pages)       │
-│  https://mehdozz007.github.io/...               │
+│  https://mehdozz007-stack.github.io/...               │
 │  - Static files (HTML, JS, CSS, images)        │
 │  - api-config.ts: returns absolute URL         │
 └────────────────────┬────────────────────────────┘
@@ -201,13 +201,13 @@ if (
 
 1. **✅ (Automatique) GitHub Actions Build**
    - Le workflow `.github/workflows/deploy.yml` tourne automatiquement
-   - Status: Vérifiez sur https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
+   - Status: Vérifiez sur https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main/actions
    - Attendez le message: `✨ Deployment complete!`
 
 2. **🔍 Test Frontend Production**
    ```bash
    # Une fois déployé, tester:
-   https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+   https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
    
    F12 → Console
    Chercher: [API] URL: https://les-ptits-trinquat-api.mehdozz007.workers.dev
@@ -217,7 +217,7 @@ if (
 
 3. **🧪 Test Page Tombola**
    ```
-   URL: https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
+   URL: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/tombola
    
    ✅ Vérifications:
    - Page charge complètement (pas blanche)
@@ -229,7 +229,7 @@ if (
 
 4. **🧪 Test Newsletter**
    ```
-   URL: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+   URL: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
    
    ✅ Vérifications:
    - Formulaire d'inscription visible

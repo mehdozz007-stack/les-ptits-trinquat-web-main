@@ -56,7 +56,7 @@ Vérifiez que **`src/lib/api-config.ts`** est correct (voir phase 1).
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    CLIENT (Browser)                          │
-│  https://mehdozz007.github.io/les-ptits-trinquat-web-main   │
+│  https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main   │
 │  (ou https://les-ptits-trinquat.pages.dev)                  │
 │  - React 19 + Vite                                           │
 │  - Framer Motion animations                                  │
@@ -556,7 +556,7 @@ git push origin main
 ```
 
 **Vérifier le déploiement**:
-- Aller sur: https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
+- Aller sur: https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main/actions
 - Voir le job "Build Frontend"
 - Status: ✅ Completed
 
@@ -578,8 +578,8 @@ npm run deploy
 
 **GitHub Pages**:
 ```
-https://mehdozz007.github.io/les-ptits-trinquat-web-main/
-https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
+https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/tombola
 ```
 
 **Cloudflare Pages** (si configuré):
@@ -594,7 +594,7 @@ https://les-ptits-trinquat.pages.dev/tombola
 
 Ouvrir dans le navigateur:
 ```
-https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 ```
 
 **Vérifications** (F12 → Console):
@@ -677,7 +677,7 @@ curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/newsletter/subscr
 
 ## Étape 5.1: Test Frontend × API
 
-**Navigateur => https://mehdozz007.github.io/les-ptits-trinquat-web-main/**
+**Navigateur => https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/**
 
 ### Test Tombola
 1. Cliquer sur "Tombola"
@@ -807,7 +807,7 @@ wrangler tail
 ## ❌ Problem: Page Blanche en Production
 
 ### Symptôme
-- URL: `https://mehdozz007.github.io/les-ptits-trinquat-web-main/`
+- URL: `https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/`
 - Page complètement blanche
 - Console (F12): Erreurs rouges
 
@@ -893,7 +893,7 @@ CMD+SHIFT+R (Mac)
 ### Symptôme
 ```
 Console: "Access to XMLHttpRequest at 'https://les-ptits-trinquat-api...' 
-from origin 'https://mehdozz007.github.io' has been blocked by CORS policy"
+from origin 'https://mehdozz007-stack.github.io' has been blocked by CORS policy"
 ```
 
 ### Cause
@@ -908,7 +908,7 @@ cat wrangler.toml | grep -A5 "CORS_ORIGIN"
 
 # Mettre à jour si nécessaire
 # [env.production]
-# vars = { CORS_ORIGIN = "https://mehdozz007.github.io", ... }
+# vars = { CORS_ORIGIN = "https://mehdozz007-stack.github.io", ... }
 
 # Redéployer
 npm run deploy
@@ -998,7 +998,7 @@ cd ..
 npm run deploy
 
 # 3. Tester en production
-https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 ```
 
 ---
@@ -1072,7 +1072,7 @@ npm install
 ✅ Admin dashboard  
 
 ## URLs Production
-- **Frontend**: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+- **Frontend**: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 - **API**: https://les-ptits-trinquat-api.mehdozz007.workers.dev/
 - **Tombola**: /tombola
 - **Newsletter**: / (formulaire d'inscription)

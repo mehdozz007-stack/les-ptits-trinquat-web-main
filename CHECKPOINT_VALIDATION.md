@@ -45,7 +45,7 @@ GIT:
 | Environnement | Status | URL |
 |---------------|--------|-----|
 | **DEV Local** | ✅ Running | http://localhost:8082 |
-| **PROD (GitHub Actions)** | 🔄 Deploying | https://mehdozz007.github.io/les-ptits-trinquat-web-main/ |
+| **PROD (GitHub Actions)** | 🔄 Deploying | https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/ |
 
 **Temps estimé**: 5-10 minutes pour le déploiement GitHub Actions
 
@@ -71,7 +71,7 @@ GIT:
 
 ### ÉTAPE 1: ATTENDRE GITHUB ACTIONS (⏱️ 5-10 min)
 
-**URL**: https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
+**URL**: https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main/actions
 
 **Chercher le dernier job "Build Frontend"**:
 
@@ -95,7 +95,7 @@ Une fois que GitHub Actions affiche 🟢:
 
 **Ouvrir dans le navigateur**:
 ```
-https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 ```
 
 **Vérifications critiques** (F12 → Console):
@@ -122,7 +122,7 @@ Erreur probable dans console F12:
 
 ### ÉTAPE 3: TESTER TOMBOLA (⏱️ 2 min)
 
-**URL**: https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
+**URL**: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/tombola
 
 **Test simple**:
 1. Page charge
@@ -148,7 +148,7 @@ Erreur probable dans console F12:
 
 ### ÉTAPE 4: TESTER NEWSLETTER (⏱️ 1 min)
 
-**URL**: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+**URL**: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 
 **Test simple**:
 1. Scroller vers le bas
@@ -224,7 +224,7 @@ return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
 cat cloudflare/wrangler.toml | grep CORS_ORIGIN
 
 # Doit avoir domaine du frontend:
-# CORS_ORIGIN = "https://mehdozz007.github.io"
+# CORS_ORIGIN = "https://mehdozz007-stack.github.io"
 ```
 
 ### Erreur: API 500
@@ -261,8 +261,8 @@ cd cloudflare && wrangler tail
 - [RESUME_PHASE1_COMPLET.md](RESUME_PHASE1_COMPLET.md) - Vue d'ensemble
 
 **URLs importantes**:
-- GitHub Actions: https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
-- Frontend (PROD): https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+- GitHub Actions: https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main/actions
+- Frontend (PROD): https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 - API (PROD): https://les-ptits-trinquat-api.mehdozz007.workers.dev/
 - Tombola: /tombola (ajouter à frontend URL)
 
@@ -307,7 +307,7 @@ cd cloudflare && wrangler tail
 ### La Cause
 ```
 api-config.ts retournait URL relative en production:
-  return '/api/...';  ❌ (cherche sur mehdozz007.github.io)
+  return '/api/...';  ❌ (cherche sur mehdozz007-stack.github.io)
   
 Au lieu de:
   return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/...'  ✅

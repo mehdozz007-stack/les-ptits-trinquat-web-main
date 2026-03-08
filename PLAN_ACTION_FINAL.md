@@ -31,14 +31,14 @@
    └─ Étape 3: wrangler pages deploy dist
    
    Temps estimé: 5-10 minutes
-   Status: À vérifier sur https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
+   Status: À vérifier sur https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main/actions
 ```
 
 ### ⏳ À Faire (Phase 3-5)
 
 ```
 ⏳ Phase 3: Test Frontend en Production
-   └─ Accéder à https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+   └─ Accéder à https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
    └─ Vérifier que la page charge
    └─ Checker la console (F12): doit voir [API] logs
 
@@ -59,7 +59,7 @@
 
 ### Tâche 1: Vérifier le déploiement GitHub Actions
 
-**URL**: https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
+**URL**: https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main/actions
 
 **Étapes**:
 1. Ouvrir le lien ci-dessus
@@ -92,7 +92,7 @@
 
 **URL de test**: 
 ```
-https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 ```
 
 **Vérifications** (F12 → Console):
@@ -117,7 +117,7 @@ https://mehdozz007.github.io/les-ptits-trinquat-web-main/
 
 **URL**:
 ```
-https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
+https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/tombola
 ```
 
 **Tester**:
@@ -145,7 +145,7 @@ https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
 
 ### Tâche 4: Tester la Newsletter
 
-**URL**: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+**URL**: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 
 **Tester**:
 1. Scroller jusqu'au formulaire newsletter
@@ -239,7 +239,7 @@ cat cloudflare/wrangler.toml | grep CORS_ORIGIN
 
 # Doit avoir:
 # [env.production]
-# vars = { CORS_ORIGIN = "https://mehdozz007.github.io", ... }
+# vars = { CORS_ORIGIN = "https://mehdozz007-stack.github.io", ... }
 
 # Si incorrect, éditer et redéployer
 cd cloudflare
@@ -250,7 +250,7 @@ npm run deploy  # Sans --env pour production
 
 ### ❌ Problem 3: GitHub Actions Failed (🔴 Red)
 
-**Vérifier les logs** sur: https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
+**Vérifier les logs** sur: https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main/actions
 
 **Erreur commune**: 
 ```
@@ -279,7 +279,7 @@ npm run deploy  # Sans --env pour production
 Quand **TOUT FONCTIONNE**, vous devriez voir:
 
 ```
-✅ Frontend: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+✅ Frontend: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
    - Page charge complètement
    - Pas de contenu blanc ou cassé
    - Logo visible
@@ -339,7 +339,7 @@ Deployment:
 ### URLs de Référence
 
 **Production**:
-- Frontend: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+- Frontend: https://mehdozz007-stack.github.io/les-ptits-trinquat-web-main/
 - API: https://les-ptits-trinquat-api.mehdozz007.workers.dev/
 
 **Development**:
@@ -347,7 +347,7 @@ Deployment:
 - API: http://localhost:8787/
 
 **GitHub**:
-- Repo: https://github.com/mehdozz007/les-ptits-trinquat-web-main
+- Repo: https://github.com/mehdozz007-stack/les-ptits-trinquat-web-main
 - Actions: https://github.com/.../actions
 - Branches: main (production), dev (développement)
 
