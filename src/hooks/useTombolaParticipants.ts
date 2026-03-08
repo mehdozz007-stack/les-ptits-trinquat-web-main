@@ -27,7 +27,7 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
   const { refreshKey, triggerRefresh } = useGlobalRefresh();
 
   const fetchParticipants = async (silent = false) => {
-    const url = apiUrl('/api/tombola/participants');
+    const url = apiUrl('/tombola/participants');
     console.log('📥 GET request to:', url);
     console.log('📍 Current origin:', window.location.origin);
 
@@ -97,8 +97,8 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
    */
   const fetchMyParticipants = useCallback(async (token: string, userId?: string) => {
     const url = userId
-      ? apiUrl(`/api/tombola/participants/my?user_id=${encodeURIComponent(userId)}`)
-      : apiUrl('/api/tombola/participants/my');
+      ? apiUrl(`/tombola/participants/my?user_id=${encodeURIComponent(userId)}`)
+      : apiUrl('/tombola/participants/my');
     console.log('📥 GET request to:', url);
 
     try {
@@ -149,7 +149,7 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
   }, []);
 
   const addParticipant = useCallback(async (participant: Omit<TombolaParticipant, 'id' | 'created_at'> & { classes?: string | null; user_id?: string }, token?: string) => {
-    const url = apiUrl('/api/tombola/participants');
+    const url = apiUrl('/tombola/participants');
     console.log('📤 POST request to:', url);
     console.log('📋 Payload:', participant);
 

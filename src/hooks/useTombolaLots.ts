@@ -37,7 +37,7 @@ export function useTombolaLots() {
       if (!silent) setLoading(true);
       else setRefetching(true);
 
-      const response = await fetch(apiUrl('/api/tombola/lots'));
+      const response = await fetch(apiUrl('/tombola/lots'));
       if (!response.ok) throw new Error('Failed to fetch lots');
       const data = await response.json();
       setLots(Array.isArray(data?.data || data) ? (data?.data || data) : []);
@@ -54,7 +54,7 @@ export function useTombolaLots() {
   const addLot = async (lot: { nom: string; description?: string; icone: string; parent_id: string }) => {
     try {
       console.log('📤 Adding lot:', lot);
-      const response = await fetch(apiUrl('/api/tombola/lots'), {
+      const response = await fetch(apiUrl('/tombola/lots'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(lot),
