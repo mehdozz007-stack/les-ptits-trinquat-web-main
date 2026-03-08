@@ -107,11 +107,16 @@ export function NewsletterEditor() {
 
     setIsSending(true);
     try {
+      const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
+      if (!token) {
+        throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
+      }
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           title: formData.title,
