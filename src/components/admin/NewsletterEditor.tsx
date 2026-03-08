@@ -491,12 +491,12 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
                   >
                     <p className="font-semibold text-xs sm:text-sm text-gray-900 truncate mb-1">{draft.title}</p>
                     <p className="text-xs text-muted-foreground truncate mb-2 flex-1">{draft.subject}</p>
-                    <div className="flex flex-col sm:flex-row gap-1 w-full">
+                    <div className="flex flex-row gap-1 w-full">
                       <Button
                         size="sm"
                         variant="ghost"
                         onClick={() => handleLoadDraft(draft)}
-                        className="text-xs h-7 text-[#FF7B42] flex-1 px-2"
+                        className="text-xs h-7 text-[#FF7B42] flex-1 px-2 min-w-0"
                       >
                         <Edit2 className="h-3 w-3 mr-1" />
                         Éditer
@@ -506,7 +506,7 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
                         variant="ghost"
                         onClick={() => handleSendDraft(draft.id)}
                         disabled={isSending}
-                        className="text-xs h-7 text-green-600 flex-1 px-2"
+                        className="text-xs h-7 text-green-600 flex-1 px-2 min-w-0"
                       >
                         <Send className="h-3 w-3 mr-1" />
                         Envoyer
@@ -516,7 +516,7 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="text-xs h-7 text-red-600 flex-1 px-2"
+                            className="text-xs h-7 text-red-600 flex-1 px-2 min-w-0"
                           >
                             <Trash2 className="h-3 w-3 mr-1" />
                             Supprimer
