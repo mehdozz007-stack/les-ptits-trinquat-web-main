@@ -34,7 +34,7 @@ export function useCurrentUser() {
 
             try {
                 // Vérifier que le token est valide
-                const response = await fetch(apiUrl('/api/auth/me'), {
+                const response = await fetch(apiUrl('/auth/me'), {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Accept': 'application/json'
@@ -93,7 +93,7 @@ export function useCurrentUser() {
         setError(null);
 
         try {
-            const response = await fetch(apiUrl('/api/auth/login'), {
+            const response = await fetch(apiUrl('/auth/login'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -133,7 +133,7 @@ export function useCurrentUser() {
         setError(null);
 
         try {
-            const response = await fetch(apiUrl('/api/auth/register'), {
+            const response = await fetch(apiUrl('/auth/register'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, password_confirm: passwordConfirm })

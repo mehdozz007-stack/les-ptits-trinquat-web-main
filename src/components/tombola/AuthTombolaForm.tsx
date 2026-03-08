@@ -92,7 +92,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
           userId = authResult.data?.user.id || "";
         } else {
           // Fallback to direct API call
-          const authResponse = await fetch(apiUrl("/api/auth/register"), {
+          const authResponse = await fetch(apiUrl("/auth/register"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -115,7 +115,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
         }
 
         // 2. Créer le participant tombola automatiquement
-        const participantResponse = await fetch(apiUrl("/api/tombola/participants"), {
+        const participantResponse = await fetch(apiUrl("/tombola/participants"), {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -195,7 +195,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
           authToken = loginResult.data?.token || "";
           userId = loginResult.data?.user.id || "";
         } else {
-          const loginResponse = await fetch(apiUrl("/api/auth/login"), {
+          const loginResponse = await fetch(apiUrl("/auth/login"), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -217,7 +217,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
         }
 
         // Check if participant exists, if not create one
-        const participantCheckResponse = await fetch(apiUrl("/api/tombola/participants/my"), {
+        const participantCheckResponse = await fetch(apiUrl("/tombola/participants/my"), {
           headers: {
             "Authorization": `Bearer ${authToken}`,
           },
@@ -226,7 +226,7 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
         const participantCheckData = await participantCheckResponse.json();
         if (participantCheckData.data && participantCheckData.data.length === 0) {
           // No participant found, create a default one
-          await fetch(apiUrl("/api/tombola/participants"), {
+          await fetch(apiUrl("/tombola/participants"), {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
