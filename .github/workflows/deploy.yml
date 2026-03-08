@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Build Frontend
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     
     steps:
@@ -23,8 +23,9 @@ jobs:
       - name: Build frontend
         run: npm run build
       
-      - name: Deploy to Cloudflare Pages
-        run: npx wrangler pages deploy dist --project-name=les-ptits-trinquat
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      # Upload artifacts for Cloudflare Pages to deploy
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
