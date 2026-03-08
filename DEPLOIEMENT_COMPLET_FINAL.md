@@ -44,7 +44,7 @@ L'API config doit retourner l'URL absolue en production:
 ```typescript
 // ✅ CORRECT
 if (dev) return '';                    // Proxy Vite
-if (prod) return 'https://les-ptits-trinquat-api.medhozz007.workers.dev';
+if (prod) return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
 ```
 
 Vérifiez que **`src/lib/api-config.ts`** est correct (voir phase 1).
@@ -56,7 +56,7 @@ Vérifiez que **`src/lib/api-config.ts`** est correct (voir phase 1).
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    CLIENT (Browser)                          │
-│  https://medhozz007.github.io/les-ptits-trinquat-web-main   │
+│  https://mehdozz007.github.io/les-ptits-trinquat-web-main   │
 │  (ou https://les-ptits-trinquat.pages.dev)                  │
 │  - React 19 + Vite                                           │
 │  - Framer Motion animations                                  │
@@ -66,7 +66,7 @@ Vérifiez que **`src/lib/api-config.ts`** est correct (voir phase 1).
                      ↓
 ┌─────────────────────────────────────────────────────────────┐
 │          CLOUDFLARE WORKERS - API REST (Hono)               │
-│  https://les-ptits-trinquat-api.medhozz007.workers.dev      │
+│  https://les-ptits-trinquat-api.mehdozz007.workers.dev      │
 │  - Routes: /api/tombola/*, /api/newsletter/*, /api/auth/*   │
 │  - Middleware: CORS, Rate Limiting, Auth                    │
 │  - Database binding: D1 (SQLite)                            │
@@ -148,7 +148,7 @@ cat src/lib/api-config.ts | head -40
 
 function getApiBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return 'https://les-ptits-trinquat-api.medhozz007.workers.dev'; // ✅
+    return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev'; // ✅
   }
 
   const hostname = window.location.hostname;
@@ -160,7 +160,7 @@ function getApiBaseUrl(): string {
   }
   
   // ✅ EN PROD: retourner URL absolue
-  return 'https://les-ptits-trinquat-api.medhozz007.workers.dev';
+  return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
 }
 
 export const API_BASE_URL = getApiBaseUrl();
@@ -182,7 +182,7 @@ cat > src/lib/api-config.ts << 'EOF'
 function getApiBaseUrl(): string {
   // SSR or server-side (rare)
   if (typeof window === 'undefined') {
-    return 'https://les-ptits-trinquat-api.medhozz007.workers.dev';
+    return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
   }
 
   const hostname = window.location.hostname;
@@ -203,7 +203,7 @@ function getApiBaseUrl(): string {
   }
 
   // Environnement de PRODUCTION
-  return 'https://les-ptits-trinquat-api.medhozz007.workers.dev';
+  return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
 }
 
 export const API_BASE_URL = getApiBaseUrl();
@@ -485,7 +485,7 @@ npm run deploy
 # Attendez le message:
 # ✨ Uploaded les-ptits-trinquat-api (x.x KB)
 # ✨ Your Worker is published under:
-# ✨ https://les-ptits-trinquat-api.medhozz007.workers.dev
+# ✨ https://les-ptits-trinquat-api.mehdozz007.workers.dev
 ```
 
 ---
@@ -494,7 +494,7 @@ npm run deploy
 
 ```bash
 # Test health check
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 
 # Résultat attendu:
 # {"status":"ok","timestamp":"2026-03-08T...Z"}
@@ -505,7 +505,7 @@ Attendre 30-60 secondes (DNS propagation)
 
 ```bash
 # Réessayer après 60 secondes
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 ```
 
 ---
@@ -514,7 +514,7 @@ curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
 
 ```bash
 # Test GET participants
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
 
 # Résultat:
 # {"success":true,"data":[...]}
@@ -556,7 +556,7 @@ git push origin main
 ```
 
 **Vérifier le déploiement**:
-- Aller sur: https://github.com/medhozz007/les-ptits-trinquat-web-main/actions
+- Aller sur: https://github.com/mehdozz007/les-ptits-trinquat-web-main/actions
 - Voir le job "Build Frontend"
 - Status: ✅ Completed
 
@@ -578,8 +578,8 @@ npm run deploy
 
 **GitHub Pages**:
 ```
-https://medhozz007.github.io/les-ptits-trinquat-web-main/
-https://medhozz007.github.io/les-ptits-trinquat-web-main/tombola
+https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007.github.io/les-ptits-trinquat-web-main/tombola
 ```
 
 **Cloudflare Pages** (si configuré):
@@ -594,7 +594,7 @@ https://les-ptits-trinquat.pages.dev/tombola
 
 Ouvrir dans le navigateur:
 ```
-https://medhozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007.github.io/les-ptits-trinquat-web-main/
 ```
 
 **Vérifications** (F12 → Console):
@@ -602,7 +602,7 @@ https://medhozz007.github.io/les-ptits-trinquat-web-main/
 - ✅ Logo apparaît
 - ✅ Navigations fonctionnent
 - ✅ Pas d'erreurs rouges dans la console
-- ✅ Console log: `[API] URL: https://les-ptits-trinquat-api.medhozz007.workers.dev...`
+- ✅ Console log: `[API] URL: https://les-ptits-trinquat-api.mehdozz007.workers.dev...`
 
 ---
 
@@ -636,7 +636,7 @@ wrangler secret put RESEND_API_KEY --env production
 
 En production:
 ```bash
-curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/newsletter/subscribe \
+curl -X POST https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/newsletter/subscribe \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",
@@ -654,7 +654,7 @@ curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/newslette
 
 ```bash
 # Login
-curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/auth/login \
+curl -X POST https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "admin@ptits-trinquat.fr",
@@ -664,7 +664,7 @@ curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/auth/logi
 # Copier le token reçu: "token": "eyJ..."
 
 # Tester accès admin
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/newsletter/subscribers \
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/newsletter/subscribers \
   -H "Authorization: Bearer TOKEN_ICI"
 
 # Résultat:
@@ -677,7 +677,7 @@ curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/newsletter/subscr
 
 ## Étape 5.1: Test Frontend × API
 
-**Navigateur => https://medhozz007.github.io/les-ptits-trinquat-web-main/**
+**Navigateur => https://mehdozz007.github.io/les-ptits-trinquat-web-main/**
 
 ### Test Tombola
 1. Cliquer sur "Tombola"
@@ -692,7 +692,7 @@ curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/newsletter/subscr
 
 **F12 Console** doit afficher:
 ```
-[API] URL: https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants
+[API] URL: https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants
 [API] Request: { method: 'POST', ... }
 [API] Success: { id: '...', prenom: 'Jean', ... }
 ```
@@ -718,11 +718,11 @@ curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/newsletter/subscr
 
 ```bash
 # Test 1: GET Participants
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants \
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants \
   | jq '.'
 
 # Test 2: POST Participant
-curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/participants \
+curl -X POST https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/tombola/participants \
   -H "Content-Type: application/json" \
   -d '{
     "prenom": "Marie",
@@ -732,12 +732,12 @@ curl -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/tombola/p
   }' | jq '.'
 
 # Test 3: GET Newsletter subscribers (avec auth)
-TOKEN=$(curl -s -X POST https://les-ptits-trinquat-api.medhozz007.workers.dev/api/auth/login \
+TOKEN=$(curl -s -X POST https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@ptits-trinquat.fr","password":"password123"}' \
   | jq -r '.token')
 
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/api/newsletter/subscribers \
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/api/newsletter/subscribers \
   -H "Authorization: Bearer $TOKEN" \
   | jq '.'
 ```
@@ -807,7 +807,7 @@ wrangler tail
 ## ❌ Problem: Page Blanche en Production
 
 ### Symptôme
-- URL: `https://medhozz007.github.io/les-ptits-trinquat-web-main/`
+- URL: `https://mehdozz007.github.io/les-ptits-trinquat-web-main/`
 - Page complètement blanche
 - Console (F12): Erreurs rouges
 
@@ -828,12 +828,12 @@ Chercher les erreurs:
 cat src/lib/api-config.ts | grep "les-ptits-trinquat-api"
 
 # Devrait contenir:
-# return 'https://les-ptits-trinquat-api.medhozz007.workers.dev';
+# return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
 ```
 
 **Étape 3: Vérifier que l'API répond**
 ```bash
-curl https://les-ptits-trinquat-api.medhozz007.workers.dev/health
+curl https://les-ptits-trinquat-api.mehdozz007.workers.dev/health
 
 # Doit retourner: {"status":"ok",...}
 ```
@@ -854,7 +854,7 @@ grep -o 'src="[^"]*\.js"' dist/index.html | head -5
 cat > src/lib/api-config.ts << 'EOF'
 function getApiBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return 'https://les-ptits-trinquat-api.medhozz007.workers.dev';
+    return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
   }
 
   const hostname = window.location.hostname;
@@ -862,7 +862,7 @@ function getApiBaseUrl(): string {
     return '';
   }
   
-  return 'https://les-ptits-trinquat-api.medhozz007.workers.dev';
+  return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev';
 }
 
 export const API_BASE_URL = getApiBaseUrl();
@@ -893,7 +893,7 @@ CMD+SHIFT+R (Mac)
 ### Symptôme
 ```
 Console: "Access to XMLHttpRequest at 'https://les-ptits-trinquat-api...' 
-from origin 'https://medhozz007.github.io' has been blocked by CORS policy"
+from origin 'https://mehdozz007.github.io' has been blocked by CORS policy"
 ```
 
 ### Cause
@@ -908,7 +908,7 @@ cat wrangler.toml | grep -A5 "CORS_ORIGIN"
 
 # Mettre à jour si nécessaire
 # [env.production]
-# vars = { CORS_ORIGIN = "https://medhozz007.github.io", ... }
+# vars = { CORS_ORIGIN = "https://mehdozz007.github.io", ... }
 
 # Redéployer
 npm run deploy
@@ -998,7 +998,7 @@ cd ..
 npm run deploy
 
 # 3. Tester en production
-https://medhozz007.github.io/les-ptits-trinquat-web-main/
+https://mehdozz007.github.io/les-ptits-trinquat-web-main/
 ```
 
 ---
@@ -1072,8 +1072,8 @@ npm install
 ✅ Admin dashboard  
 
 ## URLs Production
-- **Frontend**: https://medhozz007.github.io/les-ptits-trinquat-web-main/
-- **API**: https://les-ptits-trinquat-api.medhozz007.workers.dev/
+- **Frontend**: https://mehdozz007.github.io/les-ptits-trinquat-web-main/
+- **API**: https://les-ptits-trinquat-api.mehdozz007.workers.dev/
 - **Tombola**: /tombola
 - **Newsletter**: / (formulaire d'inscription)
 - **Admin**: /admin/newsletter
