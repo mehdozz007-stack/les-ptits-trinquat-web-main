@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Heart, ArrowLeft, Instagram, Facebook } from "lucide-react";
 import { Link } from "react-router-dom";
