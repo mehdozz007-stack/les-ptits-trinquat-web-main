@@ -1,6 +1,6 @@
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, Loader2 } from "lucide-react";
-import { useEffect } from "react";
 import { ParticipantCard } from "./ParticipantCard";
 import { useTombolaParticipants, TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 
