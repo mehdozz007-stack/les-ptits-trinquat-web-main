@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from "framer-motion";
 import { Search, Users, UserCheck, UserX, Trash2, Mail, Download } from "lucide-react";
 import { toast } from "sonner";

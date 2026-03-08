@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Users } from "lucide-react";
 import { Link } from "react-router-dom";

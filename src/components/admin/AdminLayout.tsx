@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from 'react';
 import { motion } from "framer-motion";
 import { Shield, Lock, Mail, Loader2, AlertTriangle, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";

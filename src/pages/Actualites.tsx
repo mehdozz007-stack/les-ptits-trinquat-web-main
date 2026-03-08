@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from 'react';
 import { motion } from "framer-motion";
 import { ArrowRight, FileText, Download, Link as LinkIcon, Search, Calendar, Clock, MapPin, Users, ChevronRight, Facebook, Instagram, Heart, ArrowRightCircle, Eye } from "lucide-react";
 import { Link } from "react-router-dom";

@@ -12,6 +12,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import React from 'react';
 import { motion } from "framer-motion";
 
 export default function Tombola() {

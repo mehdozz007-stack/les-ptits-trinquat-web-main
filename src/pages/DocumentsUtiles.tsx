@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from 'react';
 import { motion } from "framer-motion";
 import { Download, Files, Search, Heart, HelpCircle, LucideFileQuestion } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";

@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from "framer-motion";
 import { History, Send, FileText, Trash2, Clock } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";

@@ -1,5 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import { useEffect } from "react";
+import React from 'react';
 import { motion } from "framer-motion";
 import { ArrowLeft, Mail, RefreshCw, Loader2, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";

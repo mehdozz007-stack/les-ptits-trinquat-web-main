@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import React from 'react';
 import { motion } from "framer-motion";
 import { Gift, Loader2, Filter } from "lucide-react";
 import { LotCard } from "./LotCard";

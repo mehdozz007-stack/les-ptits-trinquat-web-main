@@ -1,4 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
+import React from 'react';
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye, Tickets, Gift } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";

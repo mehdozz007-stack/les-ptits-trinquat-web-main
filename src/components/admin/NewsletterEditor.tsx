@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React from 'react';
 import { motion } from "framer-motion";
 import { Send, Eye, Save, FileText, Loader2, Send as SendIcon, Trash2, Edit2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
