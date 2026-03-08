@@ -82,7 +82,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       margin: 0 auto;
       background-color: #ffffff;
       box-shadow: 0 8px 24px rgba(255, 123, 66, 0.1);
-      border-radius: 8px;
+      border-radius: 28px;
       overflow: hidden;
     }
     
@@ -107,7 +107,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     
     .logo {
       display: inline-block;
-      height: 260px;
+      height: 364px;
       margin-bottom: 25px;
       position: relative;
       z-index: 1;
@@ -116,7 +116,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     .logo img {
       height: 100%;
       width: auto;
-      border-radius: 20px;
+      border-radius: 32px;
       box-shadow: 0 12px 32px rgba(255, 123, 66, 0.15), 0 0 60px rgba(197, 95, 168, 0.08);
       filter: drop-shadow(0 8px 20px rgba(255, 123, 66, 0.12));
     }
@@ -128,6 +128,10 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       margin: 15px 0 8px 0;
       font-family: 'Nunito', sans-serif;
       letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .header-subtitle {
@@ -163,7 +167,10 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     .greeting {
       font-size: 18px;
       font-weight: 600;
-      color: #3C3C3C;
+      background: linear-gradient(135deg, #FF7B42 0%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 25px;
       font-family: 'Nunito', sans-serif;
       position: relative;
@@ -178,6 +185,10 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       font-family: 'Nunito', sans-serif;
       position: relative;
       z-index: 1;
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 40%, #FFC107 70%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .content {
@@ -185,12 +196,12 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       color: #555555;
       line-height: 1.75;
       margin: 25px 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.65) 100%);
-      padding: 28px;
-      border-radius: 16px;
-      border-left: 5px solid;
-      border-image: linear-gradient(180deg, #FF7B42 0%, #C55FA8 100%) 1;
-      box-shadow: 0 4px 16px rgba(255, 123, 66, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      background: linear-gradient(135deg, rgba(255, 247, 240, 0.9) 0%, rgba(255, 240, 247, 0.9) 100%);
+      padding: 32px;
+      border-radius: 24px;
+      border: 2px solid transparent;
+      border-image: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 40%, #C55FA8 100%) 1;
+      box-shadow: 0 8px 28px rgba(255, 123, 66, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8);
       font-family: 'Nunito', sans-serif;
       position: relative;
       z-index: 1;
@@ -203,13 +214,19 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     
     .content strong {
       font-weight: 800;
-      color: #333333;
+      background: linear-gradient(135deg, #FF7B42 0%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .content em {
       font-style: italic;
-      color: #D65FA8;
-      font-weight: 600;
+      background: linear-gradient(135deg, #FF9A6A 0%, #D65FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
     }
     
     .content ul, .content ol {
@@ -219,6 +236,12 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     .content li {
       margin: 12px 0;
       padding-left: 8px;
+      color: #555555;
+    }
+    
+    .content li::marker {
+      color: #FF7B42;
+      font-weight: 700;
     }
     
     .content a {
@@ -235,15 +258,15 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     /* CTA Button */
     .cta-button {
       display: inline-block;
-      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 30%, #FFC107 50%, #FF9A6A 70%, #C55FA8 100%);
       color: #ffffff;
-      padding: 16px 40px;
-      border-radius: 30px;
+      padding: 18px 48px;
+      border-radius: 40px;
       text-decoration: none;
       font-weight: 800;
       font-size: 16px;
       margin: 28px 0;
-      box-shadow: 0 8px 24px rgba(255, 123, 66, 0.25), 0 4px 12px rgba(197, 95, 168, 0.15);
+      box-shadow: 0 10px 28px rgba(255, 123, 66, 0.3), 0 6px 16px rgba(197, 95, 168, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.2);
       transition: all 0.3s ease;
       display: inline-block;
       font-family: 'Nunito', sans-serif;
@@ -253,7 +276,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     
     .cta-button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(255, 123, 66, 0.35), 0 6px 16px rgba(197, 95, 168, 0.2);
+      box-shadow: 0 14px 36px rgba(255, 123, 66, 0.4), 0 8px 20px rgba(197, 95, 168, 0.25);
       text-decoration: none;
       color: #ffffff;
     }
@@ -261,21 +284,23 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     /* Divider */
     .divider {
       border: 0;
-      height: 3px;
-      background: linear-gradient(to right, #FFD9A8 0%, #FFB3DA 40%, #D9C5FF 70%, transparent 100%);
+      height: 4px;
+      background: linear-gradient(90deg, #FF7B42 0%, #FF9A6A 25%, #FFC107 50%, #C55FA8 75%, #FFB3DA 100%);
       margin: 45px 0;
-      border-radius: 2px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(255, 123, 66, 0.15);
     }
     
     /* Footer */
     .footer {
-      background: linear-gradient(180deg, #F5F5F5 0%, #F9F9F9 100%);
+      background: linear-gradient(180deg, #F9F9F9 0%, #F5F5F5 100%);
       padding: 35px 30px;
       text-align: center;
-      border-top: 2px solid;
-      border-image: linear-gradient(90deg, #FFD9A8 0%, #FFB3DA 50%, #D9C5FF 100%) 1;
+      border-top: 3px solid;
+      border-image: linear-gradient(90deg, #FF7B42 0%, #FF9A6A 25%, #FFC107 50%, #C55FA8 75%, #FFB3DA 100%) 1;
       font-size: 13px;
       color: #666666;
+      border-radius: 0 0 8px 8px;
     }
     
     .footer-text {
@@ -287,7 +312,10 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     .footer-text:first-child {
       font-size: 16px;
       font-weight: 800;
-      color: #FF7B42;
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .footer a {
@@ -302,22 +330,31 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     
     .unsubscribe {
       margin-top: 25px;
-      padding-top: 25px;
+      padding: 18px 20px;
       border-top: 1px solid #E0E0E0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 247, 240, 0.6) 0%, rgba(255, 240, 247, 0.4) 100%);
       font-family: 'Nunito', sans-serif;
     }
     
     .unsubscribe a {
       color: #FF7B42;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .unsubscribe a:hover {
+      color: #C55FA8;
+      text-decoration: underline;
     }
     
     /* Responsive */
     @media only screen and (max-width: 600px) {
       .email-container {
         width: 100% !important;
-        border-radius: 0 !important;
+        border-radius: 16px !important;
       }
       
       .body {
@@ -326,11 +363,16 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       
       .header {
         padding: 35px 20px !important;
+        border-radius: 16px 16px 0 0 !important;
       }
       
       .logo {
-        height: 110px !important;
+        height: 250px !important;
         margin-bottom: 18px !important;
+      }
+      
+      .logo img {
+        border-radius: 20px !important;
       }
       
       .header-title {
@@ -354,15 +396,16 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       
       .content {
         font-size: 15px !important;
-        padding: 18px !important;
+        padding: 20px !important;
         margin: 18px 0 !important;
-        border-radius: 12px !important;
+        border-radius: 20px !important;
       }
       
       .cta-button {
-        padding: 12px 28px !important;
+        padding: 14px 32px !important;
         font-size: 14px !important;
         margin: 20px 0 !important;
+        border-radius: 32px !important;
       }
       
       .divider {
@@ -371,6 +414,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       
       .footer {
         padding: 25px 20px !important;
+        border-radius: 0 0 16px 16px !important;
       }
       
       .footer-text {
@@ -380,7 +424,8 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
       
       .unsubscribe {
         margin-top: 18px !important;
-        padding-top: 18px !important;
+        padding: 14px 16px !important;
+        border-radius: 12px !important;
       }
     }
   </style>

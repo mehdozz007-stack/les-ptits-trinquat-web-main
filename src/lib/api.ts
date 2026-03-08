@@ -203,6 +203,25 @@ export const newsletterApi = {
             }),
         });
     },
+
+    /**
+     * Mettre à jour une newsletter (admin uniquement)
+     */
+    async updateNewsletter(newsletterId: string, newsletter: { title?: string; subject?: string; content?: string; preview_text?: string }) {
+        return apiCall(`/newsletter/admin/newsletters/${newsletterId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(newsletter),
+        });
+    },
+
+    /**
+     * Supprimer une newsletter (admin uniquement)
+     */
+    async deleteNewsletter(newsletterId: string) {
+        return apiCall(`/newsletter/admin/newsletters/${newsletterId}`, {
+            method: 'DELETE',
+        });
+    },
 };
 
 /**

@@ -144,9 +144,9 @@ export function Actualites() {
                             transition={{ duration: 0.6 }}
                             className="max-w-3xl"
                         >
-                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary">
-                                <FileText className="h-4 w-4" />
-                                Actualités
+                            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent/20 px-4 py-1.5 text-sm font-semibold text-accent-foreground">
+                                <FileText className="h-4 w-4 text-secondary" />
+                                Nos nouvelles fraîches
                             </span>
                             <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
                                 Actualités <br />

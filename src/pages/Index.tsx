@@ -2,7 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ActualitesPreview } from "@/components/home/ActualitesPreview";
 import { EventsPreview } from "@/components/home/EventsPreview";
-import { PartnersPreview } from "@/components/home/PartnersPreview";
+// import { PartnersPreview } from "@/components/home/PartnersPreview";
 import { NewsletterSection } from "@/components/newsletter/NewsletterSection";
 import { CTASection } from "@/components/home/CTASection";
 
@@ -12,7 +12,7 @@ const Index = () => {
       <HeroSection />
       <EventsPreview />
       <ActualitesPreview />
-      <PartnersPreview />
+      {/* <PartnersPreview /> */}
       <NewsletterSection />
       <CTASection />
     </Layout>

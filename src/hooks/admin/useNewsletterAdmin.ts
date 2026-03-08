@@ -102,13 +102,13 @@ export function useNewsletterAdmin() {
     }
   };
 
-  const sendNewsletter = async (subject: string, content: string, html?: string) => {
+  const sendNewsletter = async (newsletterId: string) => {
     try {
-      const result = await newsletterApi.sendNewsletter(subject, content, html);
+      const result = await newsletterApi.sendNewsletter(newsletterId);
       if (result.success) {
         toast({
           title: "Succès",
-          description: `Newsletter envoyée à ${result.data?.recipientCount || '?'} abonnés`,
+          description: "Newsletter envoyée avec succès",
         });
         return true;
       } else {
@@ -134,102 +134,5 @@ export function useNewsletterAdmin() {
     toggleSubscriberStatus,
     deleteSubscriber,
     sendNewsletter,
-  };
-}
-          content: newsletter.content,
-          status: "draft",
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      toast({
-        title: "Brouillon enregistré",
-        description: "Votre newsletter a été sauvegardée.",
-      });
-
-      await fetchNewsletters();
-      return data;
-    } catch (error: any) {
-      toast({
-        title: "Erreur",
-        description: "Impossible d'enregistrer la newsletter.",
-        variant: "destructive",
-      });
-      return null;
-    }
-  };
-
-  const updateNewsletter = async (id: string, newsletter: Partial<Newsletter>) => {
-    try {
-      const { error } = await supabase
-        .from("newsletters")
-        .update(newsletter)
-        .eq("id", id);
-
-      if (error) throw error;
-
-      toast({
-        title: "Newsletter mise à jour",
-        description: "Les modifications ont été enregistrées.",
-      });
-
-      await fetchNewsletters();
-    } catch (error: any) {
-      toast({
-        title: "Erreur",
-        description: "Impossible de mettre à jour la newsletter.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  const deleteNewsletter = async (id: string) => {
-    try {
-      const { error } = await supabase
-        .from("newsletters")
-        .delete()
-        .eq("id", id);
-
-      if (error) throw error;
-
-      toast({
-        title: "Newsletter supprimée",
-        description: "La newsletter a été supprimée.",
-      });
-
-      await fetchNewsletters();
-    } catch (error: any) {
-      toast({
-        title: "Erreur",
-        description: "Impossible de supprimer la newsletter.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  const filteredSubscribers = subscribers.filter(
-    (sub) =>
-      sub.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (sub.first_name?.toLowerCase() || "").includes(searchQuery.toLowerCase())
-  );
-
-  const activeSubscribersCount = subscribers.filter((s) => s.is_active).length;
-
-  return {
-    subscribers: filteredSubscribers,
-    newsletters,
-    isLoading,
-    searchQuery,
-    setSearchQuery,
-    activeSubscribersCount,
-    totalSubscribersCount: subscribers.length,
-    toggleSubscriberStatus,
-    deleteSubscriber,
-    saveNewsletter,
-    updateNewsletter,
-    deleteNewsletter,
-    refreshData: loadData,
   };
 }

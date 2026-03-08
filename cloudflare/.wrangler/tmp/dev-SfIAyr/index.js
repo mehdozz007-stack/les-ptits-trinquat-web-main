@@ -1,7 +1,7 @@
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-// .wrangler/tmp/bundle-NxJtM4/checked-fetch.js
+// .wrangler/tmp/bundle-X5GVas/checked-fetch.js
 var urls = /* @__PURE__ */ new Set();
 function checkURL(request, init) {
   const url = request instanceof URL ? request : new URL(
@@ -671,6 +671,7 @@ var setDefaultContentType = /* @__PURE__ */ __name((contentType, headers) => {
     ...headers
   };
 }, "setDefaultContentType");
+var createResponseInstance = /* @__PURE__ */ __name((body, init) => new Response(body, init), "createResponseInstance");
 var Context = class {
   static {
     __name(this, "Context");
@@ -772,7 +773,7 @@ var Context = class {
    * The Response object for the current request.
    */
   get res() {
-    return this.#res ||= new Response(null, {
+    return this.#res ||= createResponseInstance(null, {
       headers: this.#preparedHeaders ??= new Headers()
     });
   }
@@ -783,7 +784,7 @@ var Context = class {
    */
   set res(_res) {
     if (this.#res && _res) {
-      _res = new Response(_res.body, _res);
+      _res = createResponseInstance(_res.body, _res);
       for (const [k, v] of this.#res.headers.entries()) {
         if (k === "content-type") {
           continue;
@@ -873,7 +874,7 @@ var Context = class {
    */
   header = /* @__PURE__ */ __name((name, value, options) => {
     if (this.finalized) {
-      this.#res = new Response(this.#res.body, this.#res);
+      this.#res = createResponseInstance(this.#res.body, this.#res);
     }
     const headers = this.#res ? this.#res.headers : this.#preparedHeaders ??= new Headers();
     if (value === void 0) {
@@ -962,7 +963,7 @@ var Context = class {
       }
     }
     const status = typeof arg === "number" ? arg : arg?.status ?? this.#status;
-    return new Response(data, { status, headers: responseHeaders });
+    return createResponseInstance(data, { status, headers: responseHeaders });
   }
   newResponse = /* @__PURE__ */ __name((...args) => this.#newResponse(...args), "newResponse");
   /**
@@ -1067,7 +1068,7 @@ var Context = class {
    * ```
    */
   notFound = /* @__PURE__ */ __name(() => {
-    this.#notFoundHandler ??= () => new Response();
+    this.#notFoundHandler ??= () => createResponseInstance();
     return this.#notFoundHandler(this);
   }, "notFound");
 };
@@ -1899,6 +1900,12 @@ var SmartRouter = class {
 
 // node_modules/hono/dist/router/trie-router/node.js
 var emptyParams = /* @__PURE__ */ Object.create(null);
+var hasChildren = /* @__PURE__ */ __name((children) => {
+  for (const _ in children) {
+    return true;
+  }
+  return false;
+}, "hasChildren");
 var Node2 = class _Node2 {
   static {
     __name(this, "_Node");
@@ -1951,8 +1958,7 @@ var Node2 = class _Node2 {
     });
     return curNode;
   }
-  #getHandlerSets(node, method, nodeParams, params) {
-    const handlerSets = [];
+  #pushHandlerSets(handlerSets, node, method, nodeParams, params) {
     for (let i = 0, len = node.#methods.length; i < len; i++) {
       const m = node.#methods[i];
       const handlerSet = m[method] || m[METHOD_NAME_ALL];
@@ -1970,7 +1976,6 @@ var Node2 = class _Node2 {
         }
       }
     }
-    return handlerSets;
   }
   search(method, path) {
     const handlerSets = [];
@@ -1979,7 +1984,9 @@ var Node2 = class _Node2 {
     let curNodes = [curNode];
     const parts = splitPath(path);
     const curNodesQueue = [];
-    for (let i = 0, len = parts.length; i < len; i++) {
+    const len = parts.length;
+    let partOffsets = null;
+    for (let i = 0; i < len; i++) {
       const part = parts[i];
       const isLast = i === len - 1;
       const tempNodes = [];
@@ -1990,11 +1997,9 @@ var Node2 = class _Node2 {
           nextNode.#params = node.#params;
           if (isLast) {
             if (nextNode.#children["*"]) {
-              handlerSets.push(
-                ...this.#getHandlerSets(nextNode.#children["*"], method, node.#params)
-              );
+              this.#pushHandlerSets(handlerSets, nextNode.#children["*"], method, node.#params);
             }
-            handlerSets.push(...this.#getHandlerSets(nextNode, method, node.#params));
+            this.#pushHandlerSets(handlerSets, nextNode, method, node.#params);
           } else {
             tempNodes.push(nextNode);
           }
@@ -2005,7 +2010,7 @@ var Node2 = class _Node2 {
           if (pattern === "*") {
             const astNode = node.#children["*"];
             if (astNode) {
-              handlerSets.push(...this.#getHandlerSets(astNode, method, node.#params));
+              this.#pushHandlerSets(handlerSets, astNode, method, node.#params);
               astNode.#params = params;
               tempNodes.push(astNode);
             }
@@ -2016,13 +2021,21 @@ var Node2 = class _Node2 {
             continue;
           }
           const child = node.#children[key];
-          const restPathString = parts.slice(i).join("/");
           if (matcher instanceof RegExp) {
+            if (partOffsets === null) {
+              partOffsets = new Array(len);
+              let offset = path[0] === "/" ? 1 : 0;
+              for (let p = 0; p < len; p++) {
+                partOffsets[p] = offset;
+                offset += parts[p].length + 1;
+              }
+            }
+            const restPathString = path.substring(partOffsets[i]);
             const m = matcher.exec(restPathString);
             if (m) {
               params[name] = m[0];
-              handlerSets.push(...this.#getHandlerSets(child, method, node.#params, params));
-              if (Object.keys(child.#children).length) {
+              this.#pushHandlerSets(handlerSets, child, method, node.#params, params);
+              if (hasChildren(child.#children)) {
                 child.#params = params;
                 const componentCount = m[0].match(/\//)?.length ?? 0;
                 const targetCurNodes = curNodesQueue[componentCount] ||= [];
@@ -2034,10 +2047,14 @@ var Node2 = class _Node2 {
           if (matcher === true || matcher.test(part)) {
             params[name] = part;
             if (isLast) {
-              handlerSets.push(...this.#getHandlerSets(child, method, params, node.#params));
+              this.#pushHandlerSets(handlerSets, child, method, params, node.#params);
               if (child.#children["*"]) {
-                handlerSets.push(
-                  ...this.#getHandlerSets(child.#children["*"], method, params, node.#params)
+                this.#pushHandlerSets(
+                  handlerSets,
+                  child.#children["*"],
+                  method,
+                  params,
+                  node.#params
                 );
               }
             } else {
@@ -2047,7 +2064,8 @@ var Node2 = class _Node2 {
           }
         }
       }
-      curNodes = tempNodes.concat(curNodesQueue.shift() ?? []);
+      const shifted = curNodesQueue.shift();
+      curNodes = shifted ? tempNodes.concat(shifted) : tempNodes;
     }
     if (handlerSets.length > 1) {
       handlerSets.sort((a, b) => {
@@ -2817,7 +2835,7 @@ function renderNewsletterEmail(props) {
       margin: 0 auto;
       background-color: #ffffff;
       box-shadow: 0 8px 24px rgba(255, 123, 66, 0.1);
-      border-radius: 8px;
+      border-radius: 28px;
       overflow: hidden;
     }
     
@@ -2842,7 +2860,7 @@ function renderNewsletterEmail(props) {
     
     .logo {
       display: inline-block;
-      height: 260px;
+      height: 364px;
       margin-bottom: 25px;
       position: relative;
       z-index: 1;
@@ -2851,7 +2869,7 @@ function renderNewsletterEmail(props) {
     .logo img {
       height: 100%;
       width: auto;
-      border-radius: 20px;
+      border-radius: 32px;
       box-shadow: 0 12px 32px rgba(255, 123, 66, 0.15), 0 0 60px rgba(197, 95, 168, 0.08);
       filter: drop-shadow(0 8px 20px rgba(255, 123, 66, 0.12));
     }
@@ -2863,6 +2881,10 @@ function renderNewsletterEmail(props) {
       margin: 15px 0 8px 0;
       font-family: 'Nunito', sans-serif;
       letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .header-subtitle {
@@ -2898,7 +2920,10 @@ function renderNewsletterEmail(props) {
     .greeting {
       font-size: 18px;
       font-weight: 600;
-      color: #3C3C3C;
+      background: linear-gradient(135deg, #FF7B42 0%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 25px;
       font-family: 'Nunito', sans-serif;
       position: relative;
@@ -2913,6 +2938,10 @@ function renderNewsletterEmail(props) {
       font-family: 'Nunito', sans-serif;
       position: relative;
       z-index: 1;
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 40%, #FFC107 70%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .content {
@@ -2920,12 +2949,12 @@ function renderNewsletterEmail(props) {
       color: #555555;
       line-height: 1.75;
       margin: 25px 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.65) 100%);
-      padding: 28px;
-      border-radius: 16px;
-      border-left: 5px solid;
-      border-image: linear-gradient(180deg, #FF7B42 0%, #C55FA8 100%) 1;
-      box-shadow: 0 4px 16px rgba(255, 123, 66, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      background: linear-gradient(135deg, rgba(255, 247, 240, 0.9) 0%, rgba(255, 240, 247, 0.9) 100%);
+      padding: 32px;
+      border-radius: 24px;
+      border: 2px solid transparent;
+      border-image: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 40%, #C55FA8 100%) 1;
+      box-shadow: 0 8px 28px rgba(255, 123, 66, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8);
       font-family: 'Nunito', sans-serif;
       position: relative;
       z-index: 1;
@@ -2938,13 +2967,19 @@ function renderNewsletterEmail(props) {
     
     .content strong {
       font-weight: 800;
-      color: #333333;
+      background: linear-gradient(135deg, #FF7B42 0%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .content em {
       font-style: italic;
-      color: #D65FA8;
-      font-weight: 600;
+      background: linear-gradient(135deg, #FF9A6A 0%, #D65FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
     }
     
     .content ul, .content ol {
@@ -2954,6 +2989,12 @@ function renderNewsletterEmail(props) {
     .content li {
       margin: 12px 0;
       padding-left: 8px;
+      color: #555555;
+    }
+    
+    .content li::marker {
+      color: #FF7B42;
+      font-weight: 700;
     }
     
     .content a {
@@ -2970,15 +3011,15 @@ function renderNewsletterEmail(props) {
     /* CTA Button */
     .cta-button {
       display: inline-block;
-      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 30%, #FFC107 50%, #FF9A6A 70%, #C55FA8 100%);
       color: #ffffff;
-      padding: 16px 40px;
-      border-radius: 30px;
+      padding: 18px 48px;
+      border-radius: 40px;
       text-decoration: none;
       font-weight: 800;
       font-size: 16px;
       margin: 28px 0;
-      box-shadow: 0 8px 24px rgba(255, 123, 66, 0.25), 0 4px 12px rgba(197, 95, 168, 0.15);
+      box-shadow: 0 10px 28px rgba(255, 123, 66, 0.3), 0 6px 16px rgba(197, 95, 168, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.2);
       transition: all 0.3s ease;
       display: inline-block;
       font-family: 'Nunito', sans-serif;
@@ -2988,7 +3029,7 @@ function renderNewsletterEmail(props) {
     
     .cta-button:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(255, 123, 66, 0.35), 0 6px 16px rgba(197, 95, 168, 0.2);
+      box-shadow: 0 14px 36px rgba(255, 123, 66, 0.4), 0 8px 20px rgba(197, 95, 168, 0.25);
       text-decoration: none;
       color: #ffffff;
     }
@@ -2996,21 +3037,23 @@ function renderNewsletterEmail(props) {
     /* Divider */
     .divider {
       border: 0;
-      height: 3px;
-      background: linear-gradient(to right, #FFD9A8 0%, #FFB3DA 40%, #D9C5FF 70%, transparent 100%);
+      height: 4px;
+      background: linear-gradient(90deg, #FF7B42 0%, #FF9A6A 25%, #FFC107 50%, #C55FA8 75%, #FFB3DA 100%);
       margin: 45px 0;
-      border-radius: 2px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(255, 123, 66, 0.15);
     }
     
     /* Footer */
     .footer {
-      background: linear-gradient(180deg, #F5F5F5 0%, #F9F9F9 100%);
+      background: linear-gradient(180deg, #F9F9F9 0%, #F5F5F5 100%);
       padding: 35px 30px;
       text-align: center;
-      border-top: 2px solid;
-      border-image: linear-gradient(90deg, #FFD9A8 0%, #FFB3DA 50%, #D9C5FF 100%) 1;
+      border-top: 3px solid;
+      border-image: linear-gradient(90deg, #FF7B42 0%, #FF9A6A 25%, #FFC107 50%, #C55FA8 75%, #FFB3DA 100%) 1;
       font-size: 13px;
       color: #666666;
+      border-radius: 0 0 8px 8px;
     }
     
     .footer-text {
@@ -3022,7 +3065,10 @@ function renderNewsletterEmail(props) {
     .footer-text:first-child {
       font-size: 16px;
       font-weight: 800;
-      color: #FF7B42;
+      background: linear-gradient(135deg, #FF7B42 0%, #FF9A6A 50%, #C55FA8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .footer a {
@@ -3037,22 +3083,31 @@ function renderNewsletterEmail(props) {
     
     .unsubscribe {
       margin-top: 25px;
-      padding-top: 25px;
+      padding: 18px 20px;
       border-top: 1px solid #E0E0E0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255, 247, 240, 0.6) 0%, rgba(255, 240, 247, 0.4) 100%);
       font-family: 'Nunito', sans-serif;
     }
     
     .unsubscribe a {
       color: #FF7B42;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .unsubscribe a:hover {
+      color: #C55FA8;
+      text-decoration: underline;
     }
     
     /* Responsive */
     @media only screen and (max-width: 600px) {
       .email-container {
         width: 100% !important;
-        border-radius: 0 !important;
+        border-radius: 16px !important;
       }
       
       .body {
@@ -3061,11 +3116,16 @@ function renderNewsletterEmail(props) {
       
       .header {
         padding: 35px 20px !important;
+        border-radius: 16px 16px 0 0 !important;
       }
       
       .logo {
-        height: 110px !important;
+        height: 250px !important;
         margin-bottom: 18px !important;
+      }
+      
+      .logo img {
+        border-radius: 20px !important;
       }
       
       .header-title {
@@ -3089,15 +3149,16 @@ function renderNewsletterEmail(props) {
       
       .content {
         font-size: 15px !important;
-        padding: 18px !important;
+        padding: 20px !important;
         margin: 18px 0 !important;
-        border-radius: 12px !important;
+        border-radius: 20px !important;
       }
       
       .cta-button {
-        padding: 12px 28px !important;
+        padding: 14px 32px !important;
         font-size: 14px !important;
         margin: 20px 0 !important;
+        border-radius: 32px !important;
       }
       
       .divider {
@@ -3106,6 +3167,7 @@ function renderNewsletterEmail(props) {
       
       .footer {
         padding: 25px 20px !important;
+        border-radius: 0 0 16px 16px !important;
       }
       
       .footer-text {
@@ -3115,7 +3177,8 @@ function renderNewsletterEmail(props) {
       
       .unsubscribe {
         margin-top: 18px !important;
-        padding-top: 18px !important;
+        padding: 14px 16px !important;
+        border-radius: 12px !important;
       }
     }
   </style>
@@ -4665,7 +4728,7 @@ app.notFound((c) => {
 });
 var src_default = app;
 
-// ../../../Users/Mehdi/AppData/Roaming/npm/node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
+// node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
 var drainBody = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx) => {
   try {
     return await middlewareCtx.next(request, env);
@@ -4683,7 +4746,7 @@ var drainBody = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "drainBody");
 var middleware_ensure_req_body_drained_default = drainBody;
 
-// ../../../Users/Mehdi/AppData/Roaming/npm/node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
+// node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
 function reduceError(e) {
   return {
     name: e?.name,
@@ -4706,14 +4769,14 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// .wrangler/tmp/bundle-NxJtM4/middleware-insertion-facade.js
+// .wrangler/tmp/bundle-X5GVas/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
 ];
 var middleware_insertion_facade_default = src_default;
 
-// ../../../Users/Mehdi/AppData/Roaming/npm/node_modules/wrangler/templates/middleware/common.ts
+// node_modules/wrangler/templates/middleware/common.ts
 var __facade_middleware__ = [];
 function __facade_register__(...args) {
   __facade_middleware__.push(...args.flat());
@@ -4738,7 +4801,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// .wrangler/tmp/bundle-NxJtM4/middleware-loader.entry.ts
+// .wrangler/tmp/bundle-X5GVas/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;
