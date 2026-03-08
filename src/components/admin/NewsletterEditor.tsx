@@ -154,17 +154,43 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
   const handleSendDraft = async (draftId: string) => {
     setIsSending(true);
     try {
-      const result = await newsletterApi.sendNewsletter(draftId);
-      if (result.success) {
-        toast({
-          title: "Newsletter envoyée",
-          description: `Votre newsletter a été envoyée à ${activeSubscribersCount} abonnés.`,
-        });
-        await loadDrafts();
-        onRefresh?.();
-      } else {
-        throw new Error(result.error);
+      // Récupérer le brouillon depuis le state
+      const draft = drafts.find(d => d.id === draftId);
+      if (!draft) {
+        throw new Error('Brouillon non trouvé');
       }
+
+      // Envoyer la newsletter avec tous les détails du brouillon
+      const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
+      const apiBaseUrl = import.meta.env.VITE_API_URL || '/api';
+      
+      const response = await fetch(`${apiBaseUrl}/newsletter/admin/send`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: draft.title,
+          subject: draft.subject,
+          content: draft.content,
+          preview_text: draft.preview_text || draft.content.substring(0, 100),
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || `HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      
+      toast({
+        title: "Newsletter envoyée",
+        description: `Votre newsletter a été envoyée à ${result.data?.sent || activeSubscribersCount} abonnés.`,
+      });
+      await loadDrafts();
+      onRefresh?.();
     } catch (error: any) {
       toast({
         title: "Erreur d'envoi",
