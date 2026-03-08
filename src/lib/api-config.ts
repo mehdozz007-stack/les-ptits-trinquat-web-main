@@ -17,7 +17,9 @@ function getApiBaseUrl(): string {
   if (
     hostname === 'localhost' ||
     hostname === '127.0.0.1' ||
-    port === '8081' ||      // Vite dev port
+    port === '8080' ||       // Vite dev port
+    port === '8082' ||       // Vite dev port (primary)
+    port === '8081' ||       // Vite dev port
     port === '5173' ||       // Vite default port
     port === '3000' ||       // Common dev port
     hostname.includes('192.168')
