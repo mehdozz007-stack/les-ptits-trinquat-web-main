@@ -163,7 +163,7 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
       // Envoyer la newsletter avec tous les détails du brouillon
       const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
       const apiBaseUrl = import.meta.env.VITE_API_URL || '/api';
-      
+
       const response = await fetch(`${apiBaseUrl}/newsletter/admin/send`, {
         method: 'POST',
         headers: {
@@ -184,7 +184,7 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
       }
 
       const result = await response.json();
-      
+
       toast({
         title: "Newsletter envoyée",
         description: `Votre newsletter a été envoyée à ${result.data?.sent || activeSubscribersCount} abonnés.`,

@@ -120,7 +120,7 @@ export default function AdminNewsletter() {
 
               {/* Right Column - Editor & History (full width on mobile, half on desktop) */}
               <div className="space-y-6 sm:space-y-8">
-                <NewsletterEditor />
+                <NewsletterEditor activeSubscribersCount={activeSubscribersCount} onRefresh={refreshData} />
                 <NewsletterHistory />
               </div>
             </div>
