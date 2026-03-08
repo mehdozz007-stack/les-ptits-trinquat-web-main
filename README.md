@@ -395,3 +395,4 @@ npm run dev -- --port 3000
 Fait avec ❤️ pour les enfants du groupe scolaire Anne Frank – Charles Dickens
 # Déploiement
 // Rebuild trigger - Sun, Mar  8, 2026  5:44:51 AM
+# Force redeploy
