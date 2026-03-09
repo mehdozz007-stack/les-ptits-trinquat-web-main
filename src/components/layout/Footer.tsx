@@ -21,6 +21,8 @@ const footerLinks = {
     { label: "Le bureau", href: "/a-propos#bureau" },
     { label: "Adhérer", href: "/a-propos#adherer" },
     { label: "Contact", href: "/contact" },
+    { label: "Newsletter", href: "/#newsletter" },
+
   ],
 };
 

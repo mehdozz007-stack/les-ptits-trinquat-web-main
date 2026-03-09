@@ -41,7 +41,7 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="relative overflow-hidden sm:py-12 py-20 md:py-28"
+    <section id="newsletter" className="relative overflow-hidden sm:py-12 py-20 md:py-28"
       style={{
         background: 'linear-gradient(135deg, rgba(255,219,193,0.4) 0%, rgba(255,154,106,0.2) 25%, rgba(255,179,71,0.15) 50%, rgba(197,95,168,0.2) 75%, rgba(100,200,255,0.15) 100%)',
         boxShadow: 'inset 0 0 60px rgba(255,123,66,0.08)'
