@@ -81,10 +81,15 @@ export function NewsletterHistory() {
 
     setIsDeleting(id);
     try {
+      const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
+      if (!token) {
+        throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
+      }
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/newsletters/${id}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
 
