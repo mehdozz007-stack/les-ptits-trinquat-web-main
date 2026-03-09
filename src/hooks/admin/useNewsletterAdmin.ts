@@ -102,28 +102,6 @@ export function useNewsletterAdmin() {
     }
   };
 
-  const sendNewsletter = async (newsletterId: string) => {
-    try {
-      const result = await newsletterApi.sendNewsletter(newsletterId);
-      if (result.success) {
-        toast({
-          title: "Succès",
-          description: "Newsletter envoyée avec succès",
-        });
-        return true;
-      } else {
-        throw new Error(result.error);
-      }
-    } catch (error) {
-      toast({
-        title: "Erreur",
-        description: "Impossible d'envoyer la newsletter",
-        variant: "destructive",
-      });
-      return false;
-    }
-  };
-
   return {
     subscribers,
     newsletters,
@@ -133,6 +111,5 @@ export function useNewsletterAdmin() {
     fetchSubscribers,
     toggleSubscriberStatus,
     deleteSubscriber,
-    sendNewsletter,
   };
 }
