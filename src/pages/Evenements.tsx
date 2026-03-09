@@ -173,10 +173,12 @@ const Evenements = () => {
                     <CardContent className="p-0 flex flex-col h-full">
                       <div className={`h-2 ${colors.bg}`} />
                       <div className="p-6 flex-1 flex flex-col">
-                        <div className={`mb-4 inline-flex items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colors.bg} text-primary-foreground w-fit`}>
-                          <Calendar className="h-4 w-4" />
-                          {formatDateFr(event.date)}
-                        </div>
+                        {event.date && (
+                          <div className={`mb-4 inline-flex items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-semibold ${colors.bg} text-primary-foreground w-fit`}>
+                            <Calendar className="h-4 w-4" />
+                            {formatDateFr(event.date)}
+                          </div>
+                        )}
 
                         <h3 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                           {event.title}
@@ -259,7 +261,9 @@ const Evenements = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="font-bold text-sm sm:text-base text-foreground line-clamp-2">{event.title}</h3>
-                            <p className="text-xs sm:text-sm text-muted-foreground">{formatDateFr(event.date)}</p>
+                            {event.date && (
+                              <p className="text-xs sm:text-sm text-muted-foreground">{formatDateFr(event.date)}</p>
+                            )}
                           </div>
                         </div>
                         {event.url ? (

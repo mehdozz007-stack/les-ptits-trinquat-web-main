@@ -121,15 +121,24 @@ export function ActualiteDetail() {
         <Layout>
             <div className="min-h-[calc(100vh-200px)]">
                 {/* Header */}
-                <section className="relative overflow-hidden py-8 sm:py-12 md:py-20 bg-gradient-to-br from-slate-50/10 via-purple-50/5 to-pink-50/10">
+                <section className="relative overflow-hidden py-8 sm:py-12 md:py-20 bg-gradient-to-br from-slate-900/5 via-purple-900/10 to-pink-900/10">
                     <div className="absolute inset-0 overflow-hidden">
-                        {/* Blobs colorés animés avec gradients */}
-                        <div className={`absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob animate-pulse-soft opacity-25`} />
-                        <div className={`absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob animate-pulse-soft opacity-20`} style={{ animationDelay: "1s" }} />
-                        <div className="absolute top-1/3 right-1/4 h-60 w-60 rounded-full bg-gradient-to-br from-accent via-yellow-400 to-pink-300 watercolor-blob blur-3xl opacity-15" style={{ animationDelay: "0.5s" }} />
-                        <div className="absolute bottom-1/4 left-1/3 h-72 w-72 rounded-full bg-gradient-to-tr from-purple-300 via-pink-200 to-rose-300 watercolor-blob blur-3xl opacity-12" style={{ animationDelay: "1.5s" }} />
-                        <div className="absolute top-1/2 -right-20 h-80 w-80 rounded-full bg-gradient-to-bl from-blue-200 via-purple-200 to-pink-100 watercolor-blob blur-2xl opacity-15" />
-                        <div className="absolute top-1/4 left-1/2 h-64 w-64 rounded-full bg-gradient-to-br from-sky-300 via-cyan-200 to-blue-200 watercolor-blob blur-3xl opacity-10" />
+                        {/* Blobs colorés animés avec gradients - Très intensifiés */}
+                        <div className={`absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob animate-pulse-soft opacity-60`} />
+                        <div className={`absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob animate-pulse-soft opacity-50`} style={{ animationDelay: "1s" }} />
+                        <div className="absolute top-1/3 right-1/4 h-60 w-60 rounded-full bg-gradient-to-br from-accent via-yellow-400 to-pink-300 watercolor-blob blur-3xl opacity-40" style={{ animationDelay: "0.5s" }} />
+                        <div className="absolute bottom-1/4 left-1/3 h-72 w-72 rounded-full bg-gradient-to-tr from-purple-300 via-pink-200 to-rose-300 watercolor-blob blur-3xl opacity-45" style={{ animationDelay: "1.5s" }} />
+                        <div className="absolute top-1/2 -right-20 h-80 w-80 rounded-full bg-gradient-to-bl from-blue-200 via-purple-200 to-pink-100 watercolor-blob blur-2xl opacity-50" />
+                        <div className="absolute top-1/4 left-1/2 h-64 w-64 rounded-full bg-gradient-to-br from-sky-300 via-cyan-200 to-blue-200 watercolor-blob blur-3xl opacity-45" />
+                        {/* Blobs supplémentaires très intensifiés avec les couleurs de l'actualité */}
+                        <div className={`absolute top-0 right-1/3 h-80 w-80 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-3xl opacity-50`} style={{ animationDelay: "2s" }} />
+                        <div className={`absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-55`} style={{ animationDelay: "0.8s" }} />
+                        <div className={`absolute top-1/3 -left-20 h-72 w-72 rounded-full bg-gradient-to-r ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-50`} style={{ animationDelay: "1.2s" }} />
+                        {/* Blobs additionnels pour couvrir les espaces blancs */}
+                        <div className={`absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-45`} style={{ animationDelay: "1.8s" }} />
+                        <div className={`absolute bottom-1/3 right-1/3 h-80 w-80 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-48`} style={{ animationDelay: "0.6s" }} />
+                        <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-gradient-to-br from-violet-300/60 via-pink-300/50 to-rose-300/40 watercolor-blob blur-3xl opacity-50" style={{ animationDelay: "2.2s" }} />
+                        <div className="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-gradient-to-tr from-cyan-300/50 via-blue-300/40 to-indigo-300/30 watercolor-blob blur-2xl opacity-45" />
                     </div>
                     <div className="container relative z-10">
                         {actualite.status !== "past" && (
@@ -156,7 +165,15 @@ export function ActualiteDetail() {
                                 className="flex justify-center mb-8"
                             >
                                 <div className="relative inline-block">
-                                    <div className={`absolute inset-0 rounded-full blur-lg bg-gradient-to-r from-purple-300 to-pink-300 opacity-40`} />
+                                    <div className={`absolute inset-0 rounded-full blur-lg ${actualite.color === 'rose' ? 'bg-gradient-to-r from-rose-400 to-pink-400' :
+                                            actualite.color === 'sky' ? 'bg-gradient-to-r from-sky-400 to-blue-400' :
+                                                actualite.color === 'violet' ? 'bg-gradient-to-r from-violet-400 to-purple-400' :
+                                                    actualite.color === 'emerald' ? 'bg-gradient-to-r from-emerald-400 to-teal-400' :
+                                                        actualite.color === 'amber' ? 'bg-gradient-to-r from-amber-400 to-orange-400' :
+                                                            actualite.color === 'indigo' ? 'bg-gradient-to-r from-indigo-400 to-purple-400' :
+                                                                actualite.color === 'fuchsia' ? 'bg-gradient-to-r from-fuchsia-400 to-pink-400' :
+                                                                    'bg-gradient-to-r from-purple-400 to-pink-400'
+                                        } opacity-60`} />
                                     <Badge
                                         className={`shrink-0 relative ${badgeColors[actualite.type]}`}
                                         variant="secondary"
@@ -183,14 +200,16 @@ export function ActualiteDetail() {
                                 transition={{ delay: 0.4, duration: 0.6 }}
                                 className="space-y-3 text-sm text-muted-foreground mb-8 flex flex-col items-center"
                             >
-                                <motion.div
-                                    whileHover={{ scale: 1.05, y: -2 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-purple-50/40 to-pink-50/40 px-4 py-2 rounded-lg border border-purple-200/20 shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
-                                >
-                                    <Calendar className="h-4 w-4 text-purple-500" />
-                                    <span>{formatDateFr(actualite.date)}</span>
-                                </motion.div>
+                                {actualite.date && (
+                                    <motion.div
+                                        whileHover={{ scale: 1.05, y: -2 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-purple-50/40 to-pink-50/40 px-4 py-2 rounded-lg border border-purple-200/20 shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
+                                    >
+                                        <Calendar className="h-4 w-4 text-purple-500" />
+                                        <span>{formatDateFr(actualite.date)}</span>
+                                    </motion.div>
+                                )}
                                 {actualite.time && (
                                     <motion.div
                                         whileHover={{ scale: 1.05, y: -2 }}
@@ -295,7 +314,15 @@ export function ActualiteDetail() {
                                         className="absolute inset-0 rounded-2xl blur-3xl opacity-0 group-hover:opacity-100 -z-10 transition-opacity duration-500"
                                         whileHover={{ opacity: 1 }}
                                         style={{
-                                            background: `linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.3))`
+                                            background: `linear-gradient(135deg, ${actualite.color === 'rose' ? 'rgba(225, 29, 72, 0.5), rgba(236, 72, 153, 0.4)' :
+                                                    actualite.color === 'sky' ? 'rgba(14, 165, 233, 0.5), rgba(99, 102, 241, 0.4)' :
+                                                        actualite.color === 'violet' ? 'rgba(124, 58, 255, 0.5), rgba(236, 72, 153, 0.4)' :
+                                                            actualite.color === 'emerald' ? 'rgba(16, 185, 129, 0.5), rgba(34, 197, 94, 0.4)' :
+                                                                actualite.color === 'amber' ? 'rgba(217, 119, 6, 0.5), rgba(251, 146, 60, 0.4)' :
+                                                                    actualite.color === 'indigo' ? 'rgba(79, 70, 229, 0.5), rgba(139, 92, 246, 0.4)' :
+                                                                        actualite.color === 'fuchsia' ? 'rgba(217, 70, 239, 0.5), rgba(236, 72, 153, 0.4)' :
+                                                                            'rgba(168, 85, 247, 0.5), rgba(236, 72, 153, 0.4)'
+                                                })`
                                         }}
                                     />
                                     <Card

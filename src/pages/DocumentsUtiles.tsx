@@ -165,9 +165,11 @@ export function DocumentsUtiles() {
 
                                                 {/* Date */}
                                                 <div className="border-opacity-20 pt-4 mt-6">
-                                                    <p className="text-xs text-muted-foreground mb-4">
-                                                        {formatDateFr(doc.date)}
-                                                    </p>
+                                                    {doc.date && (
+                                                        <p className="text-xs text-muted-foreground mb-4">
+                                                            {formatDateFr(doc.date)}
+                                                        </p>
+                                                    )}
 
                                                     {/* Download Button */}
                                                     {doc.fileUrl && (

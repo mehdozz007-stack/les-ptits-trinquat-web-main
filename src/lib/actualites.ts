@@ -61,7 +61,7 @@ export interface Actualite {
     description: string;
     content?: string;
     type: ActualiteType;
-    date: string;
+    date?: string;
     link?: string;
     authLink?: string;
     fileUrl?: string;
@@ -77,19 +77,6 @@ export interface Actualite {
 }
 
 export const actualitesData: Actualite[] = [
-    {
-        id: "annonce-charity-001",
-        title: "💙 Collecte solidaire - Une famille de notre école a besoin de nous",
-        description: "Suite à un incendie, une famille a tout perdu. Nous organisons une collecte solidaire de vêtements, jeux sensoriels et dons.",
-        content: "Chères familles,\n\nL'une des nôtres a aujourd'hui besoin de nous.\n\nLe mercredi 18 Février, une famille de l'école a vu son domicile entièrement détruit par un violent incendie\nCette maman, ses deux adolescents et sa petite fille de 5 ans ont tout perdu.\nAfin de les aider à faire face à cette situation dramatique, nous organisons une collecte solidaire.\n\nBESOINS URGENTS : \nVêtements fille 6 ans et chaussures taille 26/27\nVêtements pour 2 adolescents (taille M) et chaussures taille 42,5\nVêtements femme taille M et chaussures taille 37/38\n\nLa petite fille étant autiste, elle apprécie particulièrement :\nLes jeux sensoriels\nLes fidgets\nLes dinettes et aliments factices\nLes squishies\n\nVous pouvez ramener vos dons directement à l'école auprès de votre enseignant.e, ou bien à notre stand lors de la vente de vendredi après-midi.\n\nUne cagnotte en ligne a également été mise en place pour celles et ceux qui souhaitent participer financièrement.\nChaque geste, petit ou grand, fera une réelle différence pour les aider à se reconstruire.",
-        type: "annonce",
-        date: "2026-02-19",
-        link: "https://www.lagazettedemontpellier.fr/justice/2026-02-17-montpellier-incendie-en-cours-dans-un-immeuble-pres-de-l-hotel-de-police/",
-        color: "rose",
-        status: "upcoming",
-        galleryImage: maman,
-        donationLink: "https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing",
-    },
     {
         id: "conseil-ecole-002",
         title: "Deuxième conseil d'école de l'année",
@@ -116,6 +103,18 @@ export const actualitesData: Actualite[] = [
         status: "upcoming",
         attendees: 400,
         reservationLink: "https://www.helloasso.com/associations/les-p-tits-trinquat/evenements/recre-des-bonnes-affaires",
+    },
+    {
+        id: "annonce-charity-001",
+        title: "💙 Collecte solidaire - Une famille de notre école a besoin de nous",
+        description: "Suite à un incendie, une famille a tout perdu. Nous organisons une collecte solidaire de vêtements, jeux sensoriels et dons.",
+        content: "Chères familles,\n\nL'une des nôtres a aujourd'hui besoin de nous.\n\nLe mercredi 18 Février, une famille de l'école a vu son domicile entièrement détruit par un violent incendie\nCette maman, ses deux adolescents et sa petite fille de 5 ans ont tout perdu.\nAfin de les aider à faire face à cette situation dramatique, nous organisons une collecte solidaire.\n\nBESOINS URGENTS : \nVêtements fille 6 ans et chaussures taille 26/27\nVêtements pour 2 adolescents (taille M) et chaussures taille 42,5\nVêtements femme taille M et chaussures taille 37/38\n\nLa petite fille étant autiste, elle apprécie particulièrement :\nLes jeux sensoriels\nLes fidgets\nLes dinettes et aliments factices\nLes squishies\n\nVous pouvez ramener vos dons directement à l'école auprès de votre enseignant.e, ou bien à notre stand lors de la vente de vendredi après-midi.\n\nUne cagnotte en ligne a également été mise en place pour celles et ceux qui souhaitent participer financièrement.\nChaque geste, petit ou grand, fera une réelle différence pour les aider à se reconstruire.",
+        type: "annonce",
+        link: "https://www.lagazettedemontpellier.fr/justice/2026-02-17-montpellier-incendie-en-cours-dans-un-immeuble-pres-de-l-hotel-de-police/",
+        color: "rose",
+        status: "upcoming",
+        galleryImage: maman,
+        donationLink: "https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing",
     },
     {
         id: "act-007",

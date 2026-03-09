@@ -273,10 +273,12 @@ export function Actualites() {
                                                 <div className="pt-4 mt-2">
                                                     <div className="flex items-center justify-between gap-3">
                                                         <div className="flex flex-col gap-2">
-                                                            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                                                                <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                                <span>{formatDateFr(actualite.date)}</span>
-                                                            </div>
+                                                            {actualite.date && (
+                                                                <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                                    <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                    <span>{formatDateFr(actualite.date)}</span>
+                                                                </div>
+                                                            )}
                                                             {/* Location pour les événements */}
                                                             {actualite.type === "evenement" && actualite.location && (
                                                                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -399,10 +401,12 @@ export function Actualites() {
                                                             </p>
 
                                                             <div className="space-y-1 text-xs text-muted-foreground mb-2">
-                                                                <div className="flex items-center gap-2">
-                                                                    <Calendar className={`h-3.5 w-3.5 ${colors.text}`} />
-                                                                    {formatDateFr(event.date)}
-                                                                </div>
+                                                                {event.date && (
+                                                                    <div className="flex items-center gap-2">
+                                                                        <Calendar className={`h-3.5 w-3.5 ${colors.text}`} />
+                                                                        {formatDateFr(event.date)}
+                                                                    </div>
+                                                                )}
                                                                 {event.time && (
                                                                     <div className="flex items-center gap-2">
                                                                         <Clock className={`h-3.5 w-3.5 ${colors.text}`} />
@@ -506,10 +510,12 @@ export function Actualites() {
                                                 <div className="pt-4 mt-2">
                                                     <div className="flex items-center justify-between gap-3">
                                                         <div className="flex flex-col gap-2">
-                                                            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                                                                <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                                <span>{formatDateFr(actualite.date)}</span>
-                                                            </div>
+                                                            {actualite.date && (
+                                                                <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                                    <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                    <span>{formatDateFr(actualite.date)}</span>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                         {/* Boutons à droite */}
                                                         <div className="flex flex-col items-end gap-2">
