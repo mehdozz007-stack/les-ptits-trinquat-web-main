@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useTombolaParticipants } from "@/hooks/useTombolaParticipants";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useToast } from "@/hooks/use-toast";
+import { useUmamiEvents } from "@/hooks/useUmamiEvents";
 import { AuthTombolaForm } from "./AuthTombolaForm";
 
 export function ParticipantForm() {

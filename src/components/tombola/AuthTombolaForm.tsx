@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useUmamiEvents } from "@/hooks/useUmamiEvents";
 import { z } from "zod";
 import { apiUrl } from "@/lib/api-config";
 
@@ -36,6 +37,7 @@ interface AuthTombolaFormProps {
 
 export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTombolaFormProps) {
   const { toast } = useToast();
+  const { trackEvent } = useUmamiEvents();
   const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -149,6 +151,13 @@ export function AuthTombolaForm({ onAuthSuccess, onLogin, onRegister }: AuthTomb
 
         // Dispatcher un event pour synchroniser les autres composants
         window.dispatchEvent(new Event('authStateChanged'));
+
+        // Track tombola registration event
+        trackEvent('tombola_participant_registration', {
+          name: formData.prenom,
+          email: formData.email,
+          emoji: formData.emoji
+        });
 
         toast({
           title: "Bienvenue ! 🎉",

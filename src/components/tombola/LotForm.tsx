@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useTombolaLots } from "@/hooks/useTombolaLots";
 import { useTombolaParticipants, TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 import { useToast } from "@/hooks/use-toast";
+import { useUmamiEvents } from "@/hooks/useUmamiEvents";
 import { z } from "zod";
 
 const LOT_ICONS = ["🎁", "🧸", "📚", "🎨", "🎮", "⚽", "🎭", "🎵", "🍫", "🎂", "🌸", "🎈", "✨", "🌟", "💝", "🎀", "🚀", "🎪", "🎯", "🏆", "🎲", "♟️", "🎸", "📷", "🧩", "🛴", "🏅", "🎳", "🌈", "💎", "🎗️", "🎊"];
@@ -26,6 +27,7 @@ interface LotFormProps {
 export function LotForm({ currentParticipant: propParticipant }: LotFormProps) {
   const { addLot, lots } = useTombolaLots();
   const { toast } = useToast();
+  const { trackEvent } = useUmamiEvents();
   const { participants } = useTombolaParticipants(false);
 
   // Utiliser le prop ou le premier participant disponible
@@ -115,6 +117,13 @@ export function LotForm({ currentParticipant: propParticipant }: LotFormProps) {
     toast({
       title: "Lot ajouté ! 🎉",
       description: "Votre lot est maintenant visible par tous les participants.",
+    });
+
+    // Track lot proposal event
+    trackEvent('tombola_lot_proposed', {
+      lotName: formData.nom,
+      emoji: formData.icone,
+      participantName: participant.prenom
     });
 
     // Dispatch event pour rafraîchir la liste des lots

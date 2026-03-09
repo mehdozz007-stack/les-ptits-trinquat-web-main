@@ -13,6 +13,7 @@ import {
 import { TombolaLot, useTombolaLots } from "@/hooks/useTombolaLots";
 import { TombolaParticipantPublic } from "@/hooks/useTombolaParticipants";
 import { useToast } from "@/hooks/use-toast";
+import { useUmamiEvents } from "@/hooks/useUmamiEvents";
 
 interface LotCardProps {
   lot: TombolaLot;
@@ -41,6 +42,7 @@ const STATUS_CONFIG = {
 export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
   const { reserveLot, getContactLink, getReserverContactLink, deleteLot, markAsRemis, markAsAvailable, lots } = useTombolaLots();
   const { toast } = useToast();
+  const { trackEvent } = useUmamiEvents();
   const [loading, setLoading] = useState(false);
   const [contactLoading, setContactLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
@@ -85,6 +87,13 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
       description: "Contactez le propriétaire pour organiser l'échange.",
     });
 
+    // Track lot reservation event
+    trackEvent('tombola_lot_reserved', {
+      lotName: lot.nom,
+      participantName: currentParticipant.prenom,
+      emoji: lot.icone
+    });
+
     // Dispatch event pour rafraîchir la liste des lots
     window.dispatchEvent(new Event('lotActionCompleted'));
 
@@ -113,6 +122,13 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
     const email = mailtoLink.split('?')[0].replace('mailto:', '');
     const subject = urlParams.get('subject') || '';
     const body = urlParams.get('body') || '';
+
+    // Track contact attempt event
+    trackEvent('tombola_lot_contact_clicked', {
+      lotName: lot.nom,
+      contactType: 'owner',
+      emoji: lot.icone
+    });
 
     // Try to open mailto first (for users with email clients configured)
     const mailWindow = window.open(mailtoLink, '_blank');
@@ -236,6 +252,12 @@ export function LotCard({ lot, currentParticipant, index }: LotCardProps) {
     toast({
       title: "Lot remis ! 🎁",
       description: "Le lot a été marqué comme remis.",
+    });
+
+    // Track lot delivered event
+    trackEvent('tombola_lot_delivered', {
+      lotName: lot.nom,
+      emoji: lot.icone
     });
 
     // Dispatch event pour rafraîchir la liste des lots

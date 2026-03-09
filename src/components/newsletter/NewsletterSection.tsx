@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNewsletterSubscription } from "@/hooks/useNewsletterSubscription";
+import { useUmamiEvents } from "@/hooks/useUmamiEvents";
 import { z } from "zod";
 
 const emailSchema = z.string().email("Adresse email invalide").max(255);
@@ -17,6 +18,7 @@ export function NewsletterSection() {
   const [consent, setConsent] = useState(false);
   const [emailError, setEmailError] = useState("");
   const { subscribe, isLoading, isSuccess, reset } = useNewsletterSubscription();
+  const { trackEvent } = useUmamiEvents();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +32,10 @@ export function NewsletterSection() {
 
     const success = await subscribe({ email, firstName, consent });
     if (success) {
+      trackEvent('newsletter_subscription_success', {
+        firstName: firstName || 'anonymous',
+        email: email
+      });
       setEmail("");
       setFirstName("");
       setConsent(false);
