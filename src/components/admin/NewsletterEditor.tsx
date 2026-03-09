@@ -265,34 +265,30 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
 
     setIsSending(true);
     try {
-      const result = await newsletterApi.createNewsletter(
+      // Send the newsletter directly with all content
+      const sendResult = await newsletterApi.sendNewsletter(
         title,
         subject,
         content,
         previewText || content.substring(0, 100)
       );
 
-      if (result.success && result.data?.id) {
-        const sendResult = await newsletterApi.sendNewsletter(result.data.id);
-        if (sendResult.success) {
-          toast({
-            title: "Newsletter envoyée",
-            description: `Votre newsletter a été envoyée à ${activeSubscribersCount} abonnés.`,
-          });
+      if (sendResult.success) {
+        toast({
+          title: "Newsletter envoyée",
+          description: `Votre newsletter a été envoyée à ${activeSubscribersCount} abonnés.`,
+        });
 
-          // Reset form
-          setTitle("");
-          setSubject("");
-          setContent("");
-          setPreviewText("");
-          setEditingDraftId(null);
-          await loadDrafts();
-          onRefresh?.();
-        } else {
-          throw new Error(sendResult.error);
-        }
+        // Reset form
+        setTitle("");
+        setSubject("");
+        setContent("");
+        setPreviewText("");
+        setEditingDraftId(null);
+        await loadDrafts();
+        onRefresh?.();
       } else {
-        throw new Error(result.error || 'Erreur lors de la création');
+        throw new Error(sendResult.error || 'Erreur lors de l\'envoi');
       }
     } catch (error: any) {
       toast({

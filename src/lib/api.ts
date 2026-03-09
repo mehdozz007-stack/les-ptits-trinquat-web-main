@@ -161,11 +161,14 @@ export const newsletterApi = {
     /**
      * Envoyer une newsletter (admin uniquement)
      */
-    async sendNewsletter(newsletterId: string) {
+    async sendNewsletter(title: string, subject: string, content: string, previewText?: string) {
         return apiCall('/newsletter/admin/send', {
             method: 'POST',
             body: JSON.stringify({
-                newsletter_id: newsletterId,
+                title,
+                subject,
+                content,
+                preview_text: previewText || content.substring(0, 100),
             }),
         });
     },
