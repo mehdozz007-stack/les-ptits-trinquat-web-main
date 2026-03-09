@@ -40,7 +40,7 @@ export function NewsletterHistory() {
         throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/send`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/newsletter/admin/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export function NewsletterHistory() {
         throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/newsletters/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/newsletter/admin/newsletters/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

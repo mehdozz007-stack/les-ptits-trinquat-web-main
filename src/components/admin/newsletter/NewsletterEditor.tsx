@@ -20,6 +20,7 @@ export function NewsletterEditor() {
     subject: "",
     content: "",
     previewText: "",
+    testEmail: "",
   });
   const [showPreview, setShowPreview] = useState(false);
 
@@ -40,7 +41,7 @@ export function NewsletterEditor() {
 
       if (result) {
         setSuccess(true);
-        setFormData({ title: "", subject: "", content: "", previewText: "" });
+        setFormData({ title: "", subject: "", content: "", previewText: "", testEmail: "" });
 
         toast({
           title: "Succès",
@@ -118,7 +119,7 @@ export function NewsletterEditor() {
         throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/send`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/newsletter/admin/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -144,7 +145,7 @@ export function NewsletterEditor() {
       });
 
       // Reset form
-      setFormData({ title: "", subject: "", content: "", previewText: "" });
+      setFormData({ title: "", subject: "", content: "", previewText: "", testEmail: "" });
       refreshData();
     } catch (error: any) {
       toast({
@@ -201,6 +202,20 @@ export function NewsletterEditor() {
               setFormData({ ...formData, previewText: e.target.value })
             }
             placeholder="Texte qui apparaît dans la prévisualisation (100 premiers caractères par défaut)"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Email de test (optionnel)
+          </label>
+          <Input
+            type="email"
+            value={formData.testEmail}
+            onChange={(e) =>
+              setFormData({ ...formData, testEmail: e.target.value })
+            }
+            placeholder="Email pour tester l'envoi (défaut: mehdozz007@gmail.com)"
           />
         </div>
 
