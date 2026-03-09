@@ -25,6 +25,7 @@ app.use('*', cors({
   origin: ['https://www.lespetitstrinquat.fr', 'https://lespetitstrinquat.fr', 'http://localhost:8082', 'http://localhost:5173', 'http://127.0.0.1:8082', 'http://127.0.0.1:5173'],
   allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
   allowHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  credentials: true,
   maxAge: 86400
 }));
 
