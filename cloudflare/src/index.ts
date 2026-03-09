@@ -20,9 +20,9 @@ const app = new Hono<{ Bindings: Env }>();
 // Middlewares Globaux
 // ============================================================
 
-// CORS Configuration - Allow all origins in production for cross-domain requests
+// CORS Configuration - Explicit origins for authentication support
 app.use('*', cors({
-  origin: '*',
+  origin: ['https://www.lespetitstrinquat.fr', 'https://lespetitstrinquat.fr', 'http://localhost:8082', 'http://localhost:5173', 'http://127.0.0.1:8082', 'http://127.0.0.1:5173'],
   allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
   allowHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   maxAge: 86400
