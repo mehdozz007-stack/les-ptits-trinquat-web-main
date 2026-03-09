@@ -30,15 +30,27 @@ export function NewsletterHistory() {
 
     setIsSending(id);
     try {
+      const newsletter = newsletters.find(n => n.id === id);
+      if (!newsletter) {
+        throw new Error('Newsletter not found');
+      }
+
+      const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
+      if (!token) {
+        throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
+      }
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-          subject: newsletters.find(n => n.id === id)?.subject || '',
-          content: newsletters.find(n => n.id === id)?.content || '',
+          title: newsletter.title || 'Newsletter',
+          subject: newsletter.subject || '',
+          content: newsletter.content || '',
+          preview_text: newsletter.preview_text || newsletter.content.substring(0, 100),
         }),
       });
 
