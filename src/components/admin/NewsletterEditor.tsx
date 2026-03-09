@@ -219,12 +219,12 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
 
     setIsTestSending(true);
     try {
-      const token = localStorage.getItem('auth_token');
+      const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
       if (!token) {
         throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/test-email`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/newsletter/admin/test-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

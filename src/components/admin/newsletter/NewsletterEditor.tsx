@@ -67,17 +67,23 @@ export function NewsletterEditor() {
 
     setIsTesting(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/newsletter/admin/test-email`, {
+      const token = localStorage.getItem('admin_token') || localStorage.getItem('auth_token');
+      if (!token) {
+        throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
+      }
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/newsletter/admin/test-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           title: formData.title,
           subject: formData.subject,
           content: formData.content,
           preview_text: formData.previewText || formData.content.substring(0, 100),
+          recipient_email: formData.testEmail || 'mehdozz007@gmail.com',
         }),
       });
 
@@ -89,7 +95,7 @@ export function NewsletterEditor() {
 
       toast({
         title: "Email de test envoyé",
-        description: `Le test a été envoyé à ${result.data?.testEmail || 'votre adresse email'}`,
+        description: `Le test a été envoyé à ${result.data?.testEmail || formData.testEmail}`,
       });
     } catch (error: any) {
       toast({
