@@ -16,6 +16,7 @@ export interface Newsletter {
   title: string;
   subject: string;
   content: string;
+  preview_text?: string;
   status: string;
   sent_at: string | null;
   recipients_count: number;
