@@ -415,6 +415,12 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
         });
 
         // Envoyer via Resend
+        console.log(`📧 Sending to ${subscriber.email}:`, {
+          hasApiKey: !!c.env.RESEND_API_KEY,
+          apiKeyLength: c.env.RESEND_API_KEY?.length || 0,
+          from: c.env.NEWSLETTER_FROM_EMAIL
+        });
+
         const response = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
@@ -429,11 +435,17 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
           }),
         });
 
+        const responseText = await response.text();
+        console.log(`📬 Response for ${subscriber.email}:`, {
+          status: response.status,
+          body: responseText
+        });
+
         const sendSuccess = response.ok;
         results.push({
           email: subscriber.email,
           success: sendSuccess,
-          error: sendSuccess ? undefined : `HTTP ${response.status}`
+          error: sendSuccess ? undefined : `HTTP ${response.status} - ${responseText}`
         });
 
         // Log l'événement d'envoi
@@ -572,24 +584,42 @@ newsletter.post('/admin/test-email', requireAdmin, async (c) => {
     });
 
     // Envoyer via Resend avec mention que c'est un test
+    const resendPayload = {
+      from: c.env.NEWSLETTER_FROM_EMAIL,
+      to: testEmail,
+      subject: `[TEST] ${safeSubject}`,
+      html: emailHtml,
+    };
+
+    console.log('📧 Sending to Resend with:', {
+      from: resendPayload.from,
+      to: resendPayload.to,
+      subject: resendPayload.subject,
+      hasApiKey: !!c.env.RESEND_API_KEY,
+      apiKeyLength: c.env.RESEND_API_KEY?.length || 0,
+      apiKeyStart: c.env.RESEND_API_KEY?.substring(0, 10) || 'MISSING'
+    });
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${c.env.RESEND_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from: c.env.NEWSLETTER_FROM_EMAIL,
-        to: testEmail,
-        subject: `[TEST] ${safeSubject}`,
-        html: emailHtml,
-      }),
+      body: JSON.stringify(resendPayload),
+    });
+
+    const resendText = await response.text();
+    console.log('📬 Resend response:', {
+      status: response.status,
+      statusText: response.statusText,
+      body: resendText
     });
 
     if (!response.ok) {
       return c.json<ApiResponse>({
         success: false,
-        error: `Failed to send test email: HTTP ${response.status}`
+        error: `Failed to send test email: HTTP ${response.status} - ${resendText}`
       }, 500);
     }
 
