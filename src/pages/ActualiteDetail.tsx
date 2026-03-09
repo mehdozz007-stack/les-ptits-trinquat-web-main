@@ -121,24 +121,24 @@ export function ActualiteDetail() {
         <Layout>
             <div className="min-h-[calc(100vh-200px)]">
                 {/* Header */}
-                <section className="relative overflow-hidden py-8 sm:py-12 md:py-20 bg-gradient-to-br from-slate-900/5 via-purple-900/10 to-pink-900/10">
+                <section className="relative overflow-hidden py-8 sm:py-12 md:py-20 bg-gradient-to-br from-slate-50/8 via-purple-50/8 to-pink-50/8">
                     <div className="absolute inset-0 overflow-hidden">
-                        {/* Blobs colorés animés avec gradients - Très intensifiés */}
-                        <div className={`absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob animate-pulse-soft opacity-60`} />
-                        <div className={`absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob animate-pulse-soft opacity-50`} style={{ animationDelay: "1s" }} />
-                        <div className="absolute top-1/3 right-1/4 h-60 w-60 rounded-full bg-gradient-to-br from-accent via-yellow-400 to-pink-300 watercolor-blob blur-3xl opacity-40" style={{ animationDelay: "0.5s" }} />
-                        <div className="absolute bottom-1/4 left-1/3 h-72 w-72 rounded-full bg-gradient-to-tr from-purple-300 via-pink-200 to-rose-300 watercolor-blob blur-3xl opacity-45" style={{ animationDelay: "1.5s" }} />
-                        <div className="absolute top-1/2 -right-20 h-80 w-80 rounded-full bg-gradient-to-bl from-blue-200 via-purple-200 to-pink-100 watercolor-blob blur-2xl opacity-50" />
-                        <div className="absolute top-1/4 left-1/2 h-64 w-64 rounded-full bg-gradient-to-br from-sky-300 via-cyan-200 to-blue-200 watercolor-blob blur-3xl opacity-45" />
-                        {/* Blobs supplémentaires très intensifiés avec les couleurs de l'actualité */}
-                        <div className={`absolute top-0 right-1/3 h-80 w-80 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-3xl opacity-50`} style={{ animationDelay: "2s" }} />
-                        <div className={`absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-55`} style={{ animationDelay: "0.8s" }} />
-                        <div className={`absolute top-1/3 -left-20 h-72 w-72 rounded-full bg-gradient-to-r ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-50`} style={{ animationDelay: "1.2s" }} />
-                        {/* Blobs additionnels pour couvrir les espaces blancs */}
-                        <div className={`absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-45`} style={{ animationDelay: "1.8s" }} />
-                        <div className={`absolute bottom-1/3 right-1/3 h-80 w-80 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-48`} style={{ animationDelay: "0.6s" }} />
-                        <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-gradient-to-br from-violet-300/60 via-pink-300/50 to-rose-300/40 watercolor-blob blur-3xl opacity-50" style={{ animationDelay: "2.2s" }} />
-                        <div className="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-gradient-to-tr from-cyan-300/50 via-blue-300/40 to-indigo-300/30 watercolor-blob blur-2xl opacity-45" />
+                        {/* Blobs colorés animés avec gradients - Intensité modérée et douce */}
+                        <div className={`absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob animate-pulse-soft opacity-35`} />
+                        <div className={`absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob animate-pulse-soft opacity-30`} style={{ animationDelay: "1s" }} />
+                        <div className="absolute top-1/3 right-1/4 h-60 w-60 rounded-full bg-gradient-to-br from-accent/70 via-yellow-400/60 to-pink-300/50 watercolor-blob blur-3xl opacity-25" style={{ animationDelay: "0.5s" }} />
+                        <div className="absolute bottom-1/4 left-1/3 h-72 w-72 rounded-full bg-gradient-to-tr from-purple-300/70 via-pink-200/60 to-rose-300/50 watercolor-blob blur-3xl opacity-30" style={{ animationDelay: "1.5s" }} />
+                        <div className="absolute top-1/2 -right-20 h-80 w-80 rounded-full bg-gradient-to-bl from-blue-200/70 via-purple-200/60 to-pink-100/50 watercolor-blob blur-2xl opacity-28" />
+                        <div className="absolute top-1/4 left-1/2 h-64 w-64 rounded-full bg-gradient-to-br from-sky-300/70 via-cyan-200/60 to-blue-200/50 watercolor-blob blur-3xl opacity-25" />
+                        {/* Blobs supplémentaires avec intensité douce */}
+                        <div className={`absolute top-0 right-1/3 h-80 w-80 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-3xl opacity-28`} style={{ animationDelay: "2s" }} />
+                        <div className={`absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-32`} style={{ animationDelay: "0.8s" }} />
+                        <div className={`absolute top-1/3 -left-20 h-72 w-72 rounded-full bg-gradient-to-r ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-28`} style={{ animationDelay: "1.2s" }} />
+                        {/* Blobs additionnels pour couvrir les espaces avec douceur */}
+                        <div className={`absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-25`} style={{ animationDelay: "1.8s" }} />
+                        <div className={`absolute bottom-1/3 right-1/3 h-80 w-80 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-26`} style={{ animationDelay: "0.6s" }} />
+                        <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-gradient-to-br from-violet-300/50 via-pink-300/40 to-rose-300/30 watercolor-blob blur-3xl opacity-28" style={{ animationDelay: "2.2s" }} />
+                        <div className="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-gradient-to-tr from-cyan-300/50 via-blue-300/40 to-indigo-300/30 watercolor-blob blur-2xl opacity-25" />
                     </div>
                     <div className="container relative z-10">
                         {actualite.status !== "past" && (
@@ -165,15 +165,15 @@ export function ActualiteDetail() {
                                 className="flex justify-center mb-8"
                             >
                                 <div className="relative inline-block">
-                                    <div className={`absolute inset-0 rounded-full blur-lg ${actualite.color === 'rose' ? 'bg-gradient-to-r from-rose-400 to-pink-400' :
-                                            actualite.color === 'sky' ? 'bg-gradient-to-r from-sky-400 to-blue-400' :
-                                                actualite.color === 'violet' ? 'bg-gradient-to-r from-violet-400 to-purple-400' :
-                                                    actualite.color === 'emerald' ? 'bg-gradient-to-r from-emerald-400 to-teal-400' :
-                                                        actualite.color === 'amber' ? 'bg-gradient-to-r from-amber-400 to-orange-400' :
-                                                            actualite.color === 'indigo' ? 'bg-gradient-to-r from-indigo-400 to-purple-400' :
-                                                                actualite.color === 'fuchsia' ? 'bg-gradient-to-r from-fuchsia-400 to-pink-400' :
-                                                                    'bg-gradient-to-r from-purple-400 to-pink-400'
-                                        } opacity-60`} />
+                                    <div className={`absolute inset-0 rounded-full blur-lg ${actualite.color === 'rose' ? 'bg-gradient-to-r from-rose-400/70 to-pink-400/70' :
+                                        actualite.color === 'sky' ? 'bg-gradient-to-r from-sky-400/70 to-blue-400/70' :
+                                            actualite.color === 'violet' ? 'bg-gradient-to-r from-violet-400/70 to-purple-400/70' :
+                                                actualite.color === 'emerald' ? 'bg-gradient-to-r from-emerald-400/70 to-teal-400/70' :
+                                                    actualite.color === 'amber' ? 'bg-gradient-to-r from-amber-400/70 to-orange-400/70' :
+                                                        actualite.color === 'indigo' ? 'bg-gradient-to-r from-indigo-400/70 to-purple-400/70' :
+                                                            actualite.color === 'fuchsia' ? 'bg-gradient-to-r from-fuchsia-400/70 to-pink-400/70' :
+                                                                'bg-gradient-to-r from-purple-400/70 to-pink-400/70'
+                                        } opacity-40`} />
                                     <Badge
                                         className={`shrink-0 relative ${badgeColors[actualite.type]}`}
                                         variant="secondary"
@@ -314,14 +314,14 @@ export function ActualiteDetail() {
                                         className="absolute inset-0 rounded-2xl blur-3xl opacity-0 group-hover:opacity-100 -z-10 transition-opacity duration-500"
                                         whileHover={{ opacity: 1 }}
                                         style={{
-                                            background: `linear-gradient(135deg, ${actualite.color === 'rose' ? 'rgba(225, 29, 72, 0.5), rgba(236, 72, 153, 0.4)' :
-                                                    actualite.color === 'sky' ? 'rgba(14, 165, 233, 0.5), rgba(99, 102, 241, 0.4)' :
-                                                        actualite.color === 'violet' ? 'rgba(124, 58, 255, 0.5), rgba(236, 72, 153, 0.4)' :
-                                                            actualite.color === 'emerald' ? 'rgba(16, 185, 129, 0.5), rgba(34, 197, 94, 0.4)' :
-                                                                actualite.color === 'amber' ? 'rgba(217, 119, 6, 0.5), rgba(251, 146, 60, 0.4)' :
-                                                                    actualite.color === 'indigo' ? 'rgba(79, 70, 229, 0.5), rgba(139, 92, 246, 0.4)' :
-                                                                        actualite.color === 'fuchsia' ? 'rgba(217, 70, 239, 0.5), rgba(236, 72, 153, 0.4)' :
-                                                                            'rgba(168, 85, 247, 0.5), rgba(236, 72, 153, 0.4)'
+                                            background: `linear-gradient(135deg, ${actualite.color === 'rose' ? 'rgba(225, 29, 72, 0.3), rgba(236, 72, 153, 0.25)' :
+                                                actualite.color === 'sky' ? 'rgba(14, 165, 233, 0.3), rgba(99, 102, 241, 0.25)' :
+                                                    actualite.color === 'violet' ? 'rgba(124, 58, 255, 0.3), rgba(236, 72, 153, 0.25)' :
+                                                        actualite.color === 'emerald' ? 'rgba(16, 185, 129, 0.3), rgba(34, 197, 94, 0.25)' :
+                                                            actualite.color === 'amber' ? 'rgba(217, 119, 6, 0.3), rgba(251, 146, 60, 0.25)' :
+                                                                actualite.color === 'indigo' ? 'rgba(79, 70, 229, 0.3), rgba(139, 92, 246, 0.25)' :
+                                                                    actualite.color === 'fuchsia' ? 'rgba(217, 70, 239, 0.3), rgba(236, 72, 153, 0.25)' :
+                                                                        'rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.25)'
                                                 })`
                                         }}
                                     />
