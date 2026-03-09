@@ -22,8 +22,7 @@ const app = new Hono<{ Bindings: Env }>();
 
 // CORS Configuration
 app.use('*', cors({
-  origin: ['https://www.lespetitstrinquat.fr', 'https://lespetitstrinquat.fr', 'https://les-ptits-trinquat.pages.dev', 'http://localhost:8082', 'http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:8082', 'http://127.0.0.1:5173'],
-  allowHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  origin: ['https://www.lespetitstrinquat.fr', 'https://lespetitstrinquat.fr', 'https://les-ptits-trinquat.pages.dev', 'http://localhost:8082', 'http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:8082', 'http://127.0.0.1:5173'],  allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],  allowHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   credentials: true,
   maxAge: 86400
 }));
