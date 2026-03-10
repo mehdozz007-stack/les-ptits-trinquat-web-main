@@ -28,7 +28,7 @@ import enviForm from "@/assets/logos/enviForm.png";
 
 // Les 6 partenaires principaux
 const mainPartners = [
-  
+
 ];
 
 // Partenaires par catégorie pour le carrousel
@@ -40,7 +40,7 @@ const carouselPartners = [
     name: "Les petits bilingues",
     category: "Éducation",
     description: "Cours d'anglais ludiques pour les enfants, méthode immersive et adaptée à chaque âge.",
-    logo: lesPetitsBilinguesLogo,
+    logo: "📚",
     website: "https://www.lespetitsbilingues.com/les-centres-lpb/montpellier/",
   },
   {
@@ -48,14 +48,15 @@ const carouselPartners = [
     name: "French Kiss",
     category: "Restauration",
     description: "Restaurant français proposant une cuisine savoureuse et authentique dans un cadre convivial.",
-    logo: frenchKissLogo, website: "https://www.frenchkiss.fr/nos-adresses/montpellier",
+    logo: "🍽️",
+    website: "https://www.frenchkiss.fr/nos-adresses/montpellier",
   },
   {
     id: 3,
     name: "Atelier Tuffery",
     category: "Shopping",
     description: "Jean français fabriqué artisanalement en Lozère depuis 1892.",
-    logo: atelierTufferyLogo,
+    logo: "👖",
     website: "https://www.ateliertuffery.com/pages/boutique-jeans-francais-montpellier",
   },
   {
@@ -63,7 +64,7 @@ const carouselPartners = [
     name: "Enviform Sport Santé",
     category: "Bien être",
     description: "Coaching sportif et bien-être.",
-    logo: enviForm,
+    logo: "💪",
     website: "https://www.enviform-sport-sante.fr/",
   },
   {
@@ -79,7 +80,7 @@ const carouselPartners = [
     name: "Astroludik",
     category: "Éducation",
     description: "Animations ludiques autour de l'astronomie pour éveiller la curiosité des enfants.",
-    logo: astroludik,
+    logo: "🔭",
     website: "https://www.astroludik.com/",
   },
   {
