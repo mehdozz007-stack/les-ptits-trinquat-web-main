@@ -28,6 +28,13 @@ import enviForm from "@/assets/logos/enviForm.png";
 
 // Les 6 partenaires principaux
 const mainPartners = [
+  
+];
+
+// Partenaires par catégorie pour le carrousel
+const carouselPartners = [
+  // Restauration
+  //FINAL ONE
   {
     id: 1,
     name: "Les petits bilingues",
@@ -75,12 +82,6 @@ const mainPartners = [
     logo: astroludik,
     website: "https://www.astroludik.com/",
   },
-];
-
-// Partenaires par catégorie pour le carrousel
-const carouselPartners = [
-  // Restauration
-  //FINAL ONE
   {
     id: 88,
     name: "Manu Créations Couture",
@@ -332,79 +333,6 @@ const Partenaires = () => {
                         </Button>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partners Grid - First 6 partners */}
-      <section className="bg-muted/50 py-12 sm:py-16 lg:py-20 relative overflow-hidden">
-        {/* Decorative blobs */}
-        <div className="absolute -left-20 top-1/2 h-72 w-72 rounded-full bg-secondary/10 watercolor-blob" />
-        <div className="absolute -right-20 -bottom-20 h-60 w-60 rounded-full bg-accent/10 watercolor-blob" />
-
-        <div className="container relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-8 text-center"
-          >
-            <h2 className="mb-2 text-2xl font-bold">Nos partenaires</h2>
-            <p className="text-muted-foreground">Découvrez les entreprises et organismes qui soutiennent nos actions</p>
-          </motion.div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {mainPartners.map((partner, index) => (
-              <motion.div
-                key={partner.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.05, duration: 0.6, ease: "easeOut" }}
-              >
-                <Card variant="playful" className="group h-full">
-                  <CardContent className="flex flex-col items-center p-6 text-center h-full">
-                    {/* Logo */}
-                    <motion.div
-                      className="mb-4 flex h-48 w-48 items-center justify-center overflow-hidden transition-all"
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {typeof partner.logo === 'string' && (partner.logo.startsWith('http') || partner.logo.startsWith('/')) ? (
-                        <img
-                          src={partner.logo}
-                          alt={partner.name}
-                          className="h-full w-full object-contain p-2 rounded-lg"
-                        />
-                      ) : (
-                        <div className="text-6xl">{partner.logo}</div>
-                      )}
-                    </motion.div>
-
-                    {/* Category Badge */}
-                    <span className="mb-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                      {partner.category}
-                    </span>
-
-                    {/* Name */}
-                    <h3 className="mb-2 text-lg font-bold text-foreground">
-                      {partner.name}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="mb-4 flex-1 text-sm text-muted-foreground">
-                      {partner.description}
-                    </p>
-
-                    {/* Link */}
-                    <Button variant="ghost" size="sm" className="mt-auto" asChild>
-                      <a href={partner.website} target="_blank" rel="noopener noreferrer">
-                        Visiter
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
-                    </Button>
                   </CardContent>
                 </Card>
               </motion.div>
