@@ -111,18 +111,18 @@ export function EventsPreview() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 flex flex-col text-center items-center gap-2 sm:gap-4"
+          className="mb-12 flex flex-col text-center items-center justify-center gap-2 sm:gap-4 mx-auto"
         >
-          <h2 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+          <h2 className="mb-4 text-3xl text-center font-extrabold md:text-4xl">
             Nos prochains <span className="text-gradient">rendez-vous</span>
           </h2>
-          <p className="max-w-2xl text-sm sm:text-lg text-muted-foreground">
+          <p className="max-w-2xl text-sm sm:text-lg text-muted-foreground text-center">
             Retrouvez-nous lors de nos prochains événements et partagez des moments conviviaux avec la communauté scolaire.
           </p>
         </motion.div>
 
         {/* Events Grid */}
-        <div className="space-y-8">
+        <div className="space-y-8 flex flex-col items-center">
           {upcomingEvents.map((event, index) => (
             <a key={event.id} href={event.url} className="block">
               <motion.div

@@ -269,7 +269,7 @@ export function Actualites() {
                                                     {actualite.description}
                                                 </p>
 
-                                                {/* Footer avec date, location et bouton */}
+                                                {/* Footer avec date, heure, location et bouton */}
                                                 <div className="pt-4 mt-2">
                                                     <div className="flex items-center justify-between gap-3">
                                                         <div className="flex flex-col gap-2">
@@ -279,8 +279,14 @@ export function Actualites() {
                                                                     <span>{formatDateFr(actualite.date)}</span>
                                                                 </div>
                                                             )}
-                                                            {/* Location pour les événements */}
-                                                            {actualite.type === "evenement" && actualite.location && (
+                                                            {actualite.time && (
+                                                                <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                                    <Clock className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                    <span>{actualite.time}</span>
+                                                                </div>
+                                                            )}
+                                                            {/* Location */}
+                                                            {actualite.location && (
                                                                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                                                     <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
                                                                     <span>{actualite.location}</span>

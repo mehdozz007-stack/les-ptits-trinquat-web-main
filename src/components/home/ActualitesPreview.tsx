@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Link as LinkIcon, Calendar, MapPin, ChevronRight } from "lucide-react";
+import { ArrowRight, FileText, Link as LinkIcon, Calendar, Clock, MapPin, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -70,17 +70,22 @@ export function ActualitesPreview() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-12 max-w-3xl"
+                    className="mb-12 max-w-3xl mx-auto flex flex-col items-center"
                 >
-                    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-                        <FileText className="h-4 w-4" />
-                        Actualités
-                    </span>
-                    <h2 className="mb-4 text-3xl font-extrabold md:text-4xl">
-                        Actualités de l'école <br />
-                        <span className="text-gradient">et de l'association</span>
+                    <div className="mb-6 flex justify-center">
+                        <motion.div
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7B42] to-[#C55FA8] shadow-md flex-shrink-0"
+                        >
+
+                            <FileText className="h-10 w-10 sm:h-8 sm:w-8 text-white" />
+                        </motion.div>
+                    </div>
+                    <h2 className="mb-4 text-3xl text-center font-extrabold md:text-4xl">
+                        Actualités de l'école <span className="text-gradient">et de l'association</span>
                     </h2>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-muted-foreground text-center">
                         Restez informés des derniers événements, annonces et documents partagés par les parents élus et l'équipe de l'école.
                     </p>
                 </motion.div>
@@ -120,7 +125,7 @@ export function ActualitesPreview() {
                                             {actualite.description}
                                         </p>
 
-                                        {/* Footer avec date, location et bouton */}
+                                        {/* Footer avec date, heure, location et bouton */}
                                         <div className="pt-4 mt-2">
                                             <div className="flex items-center justify-between gap-3">
                                                 <div className="flex flex-col gap-2">
@@ -128,6 +133,12 @@ export function ActualitesPreview() {
                                                         <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                                                             <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                                                             <span>{formatDateFr(actualite.date)}</span>
+                                                        </div>
+                                                    )}
+                                                    {actualite.time && (
+                                                        <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                            <Clock className="h-3.5 w-3.5 flex-shrink-0" />
+                                                            <span>{actualite.time}</span>
                                                         </div>
                                                     )}
                                                     {/* Location */}
