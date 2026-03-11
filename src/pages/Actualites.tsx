@@ -295,12 +295,21 @@ export function Actualites() {
                                                         </div>
                                                         {/* Boutons à droite */}
                                                         <div className="flex flex-col items-end gap-2">
-                                                            <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
-                                                                <Link to={`/actualites/${actualite.id}`}>
-                                                                    <ChevronRight className="h-4 w-4" />
-                                                                    Lire plus
-                                                                </Link>
-                                                            </Button>
+                                                            {actualite.type === "presse" && actualite.link ? (
+                                                                <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                                                                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                                                                        <ChevronRight className="h-4 w-4" />
+                                                                        Lire plus
+                                                                    </a>
+                                                                </Button>
+                                                            ) : (
+                                                                <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                                                                    <Link to={`/actualites/${actualite.id}`}>
+                                                                        <ChevronRight className="h-4 w-4" />
+                                                                        Lire plus
+                                                                    </Link>
+                                                                </Button>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -525,12 +534,21 @@ export function Actualites() {
                                                         </div>
                                                         {/* Boutons à droite */}
                                                         <div className="flex flex-col items-end gap-2">
-                                                            <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
-                                                                <Link to={`/actualites/${actualite.id}`}>
-                                                                    <ChevronRight className="h-4 w-4" />
-                                                                    Lire plus
-                                                                </Link>
-                                                            </Button>
+                                                            {actualite.type === "presse" && actualite.link ? (
+                                                                <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                                                                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                                                                        <ChevronRight className="h-4 w-4" />
+                                                                        Lire plus
+                                                                    </a>
+                                                                </Button>
+                                                            ) : (
+                                                                <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                                                                    <Link to={`/actualites/${actualite.id}`}>
+                                                                        <ChevronRight className="h-4 w-4" />
+                                                                        Lire plus
+                                                                    </Link>
+                                                                </Button>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>

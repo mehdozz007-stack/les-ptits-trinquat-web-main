@@ -141,16 +141,20 @@ export function ActualiteDetail() {
                         <div className="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-gradient-to-tr from-cyan-300/50 via-blue-300/40 to-indigo-300/30 watercolor-blob blur-2xl opacity-25" />
                     </div>
                     <div className="container relative z-10">
-                        {actualite.status !== "past" && (
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.2 }}
+                            className="mb-2 sm:mb-6 inline-block"
+                        >
                             <Button
                                 variant="ghost"
-                                onClick={() => navigate(-1)}
-                                className="mb-2 sm:mb-6 gap-2"
+                                onClick={() => navigate("/actualites")}
+                                className="gap-2"
                             >
                                 <ArrowLeft className="h-4 w-4" />
-                                Retour
+                                Retour aux actualités
                             </Button>
-                        )}
+                        </motion.div>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -183,15 +187,50 @@ export function ActualiteDetail() {
                                 </div>
                             </motion.div>
 
-                            {/* Titre centré avec animation */}
-                            <motion.h1
+                            {/* Titre centré avec animation et gradient doux remarquable */}
+                            <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className={`text-3xl font-extrabold md:text-5xl mb-8 leading-tight ${titleGradients[actualite.color]}`}
+                                className="relative mb-8 inline-block w-full"
                             >
-                                {actualite.title}
-                            </motion.h1>
+                                <motion.div
+                                    className={`absolute inset-0 rounded-2xl blur-2xl opacity-40 -z-10 ${actualite.color === 'primary' ? 'bg-gradient-to-r from-primary/60 via-secondary/50 to-pink-600/60' :
+                                        actualite.color === 'secondary' ? 'bg-gradient-to-r from-secondary/60 via-primary/50 to-orange-600/60' :
+                                            actualite.color === 'sky' ? 'bg-gradient-to-r from-sky-500/60 via-blue-500/50 to-violet-500/60' :
+                                                actualite.color === 'violet' ? 'bg-gradient-to-r from-violet-500/60 via-purple-500/50 to-pink-500/60' :
+                                                    actualite.color === 'rose' ? 'bg-gradient-to-r from-rose-500/60 via-pink-500/50 to-red-500/60' :
+                                                        actualite.color === 'emerald' ? 'bg-gradient-to-r from-emerald-500/60 via-teal-500/50 to-cyan-500/60' :
+                                                            actualite.color === 'amber' ? 'bg-gradient-to-r from-amber-500/60 via-orange-500/50 to-yellow-500/60' :
+                                                                actualite.color === 'indigo' ? 'bg-gradient-to-r from-indigo-500/60 via-purple-500/50 to-blue-500/60' :
+                                                                    actualite.color === 'fuchsia' ? 'bg-gradient-to-r from-fuchsia-500/60 via-pink-500/50 to-purple-500/60' :
+                                                                        'bg-gradient-to-r from-purple-500/60 via-pink-500/50 to-purple-500/60'
+                                        }`}
+                                    animate={{
+                                        opacity: [0.4, 0.6, 0.4],
+                                    }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "easeInOut",
+                                    }}
+                                />
+                                <h1
+                                    className={`text-3xl font-extrabold md:text-5xl leading-tight bg-clip-text text-transparent ${actualite.color === 'primary' ? 'bg-gradient-to-br from-primary via-secondary to-pink-600' :
+                                        actualite.color === 'secondary' ? 'bg-gradient-to-br from-secondary via-primary to-orange-600' :
+                                            actualite.color === 'sky' ? 'bg-gradient-to-br from-sky-500 via-blue-500 to-violet-600' :
+                                                actualite.color === 'violet' ? 'bg-gradient-to-br from-violet-500 via-purple-500 to-pink-600' :
+                                                    actualite.color === 'rose' ? 'bg-gradient-to-br from-rose-500 via-pink-500 to-red-600' :
+                                                        actualite.color === 'emerald' ? 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600' :
+                                                            actualite.color === 'amber' ? 'bg-gradient-to-br from-amber-500 via-orange-500 to-yellow-600' :
+                                                                actualite.color === 'indigo' ? 'bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-600' :
+                                                                    actualite.color === 'fuchsia' ? 'bg-gradient-to-br from-fuchsia-500 via-pink-500 to-purple-600' :
+                                                                        'bg-gradient-to-br from-purple-500 via-pink-500 to-rose-600'
+                                        }`}
+                                >
+                                    {actualite.title}
+                                </h1>
+                            </motion.div>
 
                             {/* Meta information centré avec animation */}
                             <motion.div
