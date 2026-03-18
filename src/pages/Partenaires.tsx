@@ -15,7 +15,7 @@ import { useRef } from "react";
 import quizzRoomImage from "@/assets/quizzroomtombola.jpg";
 
 // Import des logos
-import quizRoomLogo from "@/assets/logos/quizRoom.webp";
+import quizRoomLogo from "@/assets/logos/quizRoom.svg";
 import morpheeLogo from "@/assets/logos/Morphee_Logo2025.svg";
 import lesPetitsBilinguesLogo from "@/assets/logos/lesPetitsBilingues.jpeg";
 import atelierTufferyLogo from "@/assets/logos/atelier_tuffery_logo.svg";
