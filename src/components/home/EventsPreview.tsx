@@ -35,7 +35,7 @@ const upcomingEvents = [
     attendees: 200,
     url: "/actualites/act-004"
   },*/
-  {
+  /*{
     id: 2,
     title: "Deuxième conseil d'école de l'année",
     description: "Nous vous accueillons pour le deuxième conseil d'école de l'année. Un moment d'échange et de partage pour discuter de la vie de l'école et des projets pédagogiques.",
@@ -45,10 +45,10 @@ const upcomingEvents = [
     color: "sky",
     status: "upcoming",
     url: "/actualites/conseil-ecole-002",
-  },
+  },*/
   {
     id: 1,
-    title: "Vide Grenier à l'école: La Récré des bonnes affaires !",
+    title: "Vide Grenier à l'école : La Récré des bonnes affaires !",
     description: "Un vide grenier convivial avec animations, musique et bonne ambiance en famille. Venez dénicher de bonnes affaires tout en participant à la vie de l'école !",
     date: "2026-04-12",
     time: "10h00 - 16h00",
@@ -57,6 +57,18 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 400,
     url: "/actualites/act-010",
+  },
+  {
+    id: 2,
+    title: "Vente du Printemps : Gâteaux Gourmands de l'École",
+    description: "Vente de gâteaux faits maison avant les vacances de printemps. Invitez vos délices pour soutenir les projets de l'école!",
+    date: "2026-04-17",
+    time: "16h30 - 18h00",
+    location: "Le parvis de l'école",
+    color: "fuchsia",
+    status: "upcoming",
+    attendees: 400,
+    url: "/actualites/act-012",
   },
 ];
 

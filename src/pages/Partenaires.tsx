@@ -17,14 +17,6 @@ import quizzRoomImage from "@/assets/quizzroomtombola.jpg";
 // Import des logos
 import quizRoomLogo from "@/assets/logos/quizRoom.svg";
 import morpheeLogo from "@/assets/logos/Morphee_Logo2025.svg";
-import lesPetitsBilinguesLogo from "@/assets/logos/lesPetitsBilingues.jpeg";
-import atelierTufferyLogo from "@/assets/logos/atelier_tuffery_logo.svg";
-import brinDeTerre from "@/assets/logos/brindeterre.jpg";
-import manuCreation from "@/assets/logos/manucreation.jpg";
-import astroludik from "@/assets/logos/logo-astroludik.png";
-import massagesIsa from "@/assets/logos/isamassage.avif";
-import frenchKissLogo from "@/assets/logos/frenchkiss.png";
-import enviForm from "@/assets/logos/enviForm.png";
 
 // Les 6 partenaires principaux
 const mainPartners = [

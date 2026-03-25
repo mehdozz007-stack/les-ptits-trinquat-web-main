@@ -137,26 +137,6 @@ export function HeroSection() {
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
               <InfoBadge
-                icon="🤝"
-                text="Une famille de notre école détruite par l'incendie a besoin de nous !"
-                href="/actualites/annonce-charity-001"
-                delay={0.2}
-                bgClass="bg-rose-100/50 text-indigo-600"
-                textGradient="bg-gradient-to-r from-rose-500 via-violet-600 to-purple-600"
-                pingOuter="bg-red-600"
-                pingInner="bg-red-500"
-                sparks={sparks}
-                sparksColors={[
-                  "bg-blue-400",
-                  "bg-indigo-400",
-                  "bg-purple-400",
-                  "bg-cyan-400",
-                  "bg-violet-400",
-                  "bg-blue-300",
-                  "bg-white",
-                ]}
-              />
-              <InfoBadge
                 icon="🛍️"
                 text="Vide Grenier le 12 Avril : Dénicher de bonnes affaires !"
                 href="/actualites/act-010"
@@ -175,6 +155,30 @@ export function HeroSection() {
                   "bg-blue-400",
                   "bg-purple-400",
                   "bg-pink-400",
+                  "bg-white",
+                ]}
+              />
+              <InfoBadge
+                icon="🌸"
+                text="Vente du printemps le 17 Avril : Soyez nombreux !"
+                href="/actualites/act-012"
+                delay={0.2}
+                bgClass="bg-pink-100/50 text-emerald-600"
+                textGradient="bg-gradient-to-r from-pink-500 via-rose-500 to-green-500"
+                pingOuter="bg-pink-500"
+                pingInner="bg-pink-400"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-pink-400",
+                  "bg-rose-400",
+                  "bg-red-400",
+                  "bg-yellow-300",
+                  "bg-lime-400",
+                  "bg-green-400",
+                  "bg-emerald-400",
+                  "bg-teal-400",
+                  "bg-cyan-400",
+                  "bg-purple-400",
                   "bg-white",
                 ]}
               />
