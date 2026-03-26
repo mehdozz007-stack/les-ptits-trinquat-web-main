@@ -26,6 +26,7 @@ import tomola from '@/assets/tomola.jpg';
 import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
 import videGrenier from '@/assets/Vide-grenier.jpg';
 import maman from '@/assets/Retour-maman.jpg';
+import printemps from '@/assets/vente-printemps.png';
 /**
  * Formate une date ISO (YYYY-MM-DD) en format français lisible (DD Mois YYYY)
  */
@@ -148,6 +149,7 @@ export const actualitesData: Actualite[] = [
         date: "2026-04-17",
         time: "16h30 - 18h00",
         location: "Le parvis de l'école",
+        affiche: printemps,
         color: "fuchsia",
         status: "upcoming",
         attendees: 400,

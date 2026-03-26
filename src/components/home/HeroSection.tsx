@@ -163,7 +163,7 @@ export function HeroSection() {
                 text="Vente du printemps le 17 Avril : Soyez nombreux !"
                 href="/actualites/act-012"
                 delay={0.2}
-                bgClass="bg-pink-100/50 text-emerald-600"
+                bgClass="bg-pink-100/50 text-rose-600"
                 textGradient="bg-gradient-to-r from-pink-500 via-rose-500 to-green-500"
                 pingOuter="bg-pink-500"
                 pingInner="bg-pink-400"
