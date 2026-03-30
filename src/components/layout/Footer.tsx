@@ -13,7 +13,6 @@ const footerLinks = {
     { label: "Notre école", href: "/notre-ecole" },
     { label: "Actualités", href: "/actualites" },
     { label: "Documents", href: "/documents-utiles" },
-    { label: "Tombola", href: "/tombola" },
     { label: "Partenaires", href: "/partenaires" },
   ],
   association: [
@@ -21,8 +20,6 @@ const footerLinks = {
     { label: "Le bureau", href: "/a-propos#bureau" },
     { label: "Adhérer", href: "/a-propos#adherer" },
     { label: "Contact", href: "/contact" },
-    { label: "Newsletter", href: "/#newsletter" },
-
   ],
 };
 

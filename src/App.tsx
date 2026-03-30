@@ -1,28 +1,19 @@
-import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-
-// Build timestamp: 2026-03-08 03:50:00 UTC
-console.log("[APP] Build with React imports fixed for Framer Motion");
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { TombolaRefreshProvider } from "@/context/TombolaRefreshContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { useInitializeDatabase } from "@/hooks/useInitializeDatabase";
 import Index from "./pages/Index";
-import { Actualites } from "./pages/Actualites";
-import ActualiteDetail from "./pages/ActualiteDetail";
-import DocumentsUtiles from "./pages/DocumentsUtiles";
+import Evenements from "./pages/Evenements";
+import ComptesRendus from "./pages/ComptesRendus";
 import Partenaires from "./pages/Partenaires";
 import APropos from "./pages/APropos";
 import Contact from "./pages/Contact";
 import MessageEnvoye from "./pages/MessageEnvoye";
-import TombolaProtected from "./pages/TombolaProtected";
-import Auth from "./pages/Auth";
+import Tombola2 from "./pages/Auth";
 import AdminTombola from "./pages/AdminTombola";
-import AdminNewsletter from "./pages/AdminNewsletter";
-import AdminNewsletterAuth from "./pages/AdminNewsletterAuth";
 import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
 
@@ -38,36 +29,25 @@ const ScrollToTop = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <TombolaRefreshProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/a-propos" element={<APropos />} />
-            <Route path="/notre-ecole" element={<NotreEcole />} />
-            {/* Redirection vers actualites */}
-            <Route path="/evenements" element={<Navigate to="/actualites" replace />} />
-            <Route path="/actualites" element={<Actualites />} />
-            <Route path="/actualites/:id" element={<ActualiteDetail />} />
-            <Route path="/documents-utiles" element={<DocumentsUtiles />} />
-            {/* Comptes rendus redirects to 404 */}
-            <Route path="/comptes-rendus" element={<NotFound />} />
-            <Route path="/partenaires" element={<Partenaires />} />
-            {/* Pages d'authentification et tombola */}
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/admin/newsletter/auth" element={<AdminNewsletterAuth />} />
-            <Route path="/tombola" element={<TombolaProtected />} />
-            <Route path="/admin/tombola" element={<AdminTombola />} />
-            <Route path="/admin/newsletter" element={<AdminNewsletter />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/message-envoye" element={<MessageEnvoye />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TombolaRefreshProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/a-propos" element={<APropos />} />
+          <Route path="/notre-ecole" element={<NotreEcole />} />
+          <Route path="/evenements" element={<Evenements />} />
+          <Route path="/comptes-rendus" element={<ComptesRendus />} />
+          <Route path="/partenaires" element={<Partenaires />} />
+          <Route path="/tombola" element={<Tombola2 />} />
+          <Route path="/admin/tombola" element={<AdminTombola />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/message-envoye" element={<MessageEnvoye />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
