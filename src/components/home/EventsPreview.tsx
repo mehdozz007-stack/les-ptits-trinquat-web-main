@@ -70,6 +70,18 @@ const upcomingEvents = [
     attendees: 400,
     url: "/actualites/act-012",
   },
+  /*{
+    id: 3,
+    title: "Carnaval à l'école",
+    description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les maternelles construisent leurs déguisements et les élémentaires feront des accessoires, afin de célébrer ensemble l'arrivée du printemps.",
+    date: "2026-04-17",
+    time: "08h30 - 16h30",
+    location: "Toute l'école",
+    color: "accent",
+    status: "upcoming",
+    attendees: 380,
+    url: "/actualites/act-007",
+  },*/
 ];
 
 const titleGradients = {

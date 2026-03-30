@@ -108,8 +108,8 @@ export const actualitesData: Actualite[] = [
     {
         id: "act-007",
         title: "Carnaval à l'école",
-        description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les enfants pourront venir déguisés en insectes ou en fleurs afin de célébrer ensemble l'arrivée du printemps.",
-        content: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux, coloré et rempli de magie ! 🎭 C'est une belle occasion de célébrer ensemble l'arrivée du printemps et la joie de vivre. 🌸\n\nLes enfants sont invités à venir déguisés en insectes ou en fleurs dans leurs classes, créant ainsi une ambiance festive et poétique. 🦋🌺 Dans leurs déguisements enchanteurs, ils découvriront la beauté de la nature qui s'éveille et partageront des rires complices. 😄\n\nC'est un moment privilégié où la créativité, l'imaginaire et la bienveillance se rencontrent pour créer des souvenirs précieux et inspirer les enfants à s'exprimer librement. 🐝🌿✨",
+        description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les maternelles construisent leurs déguisements et les élémentaires feront des accessoires, afin de célébrer ensemble l'arrivée du printemps.",
+        content: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux, coloré et rempli de magie ! 🎭 C'est une belle occasion de célébrer ensemble l'arrivée du printemps et la joie de vivre. 🌸\n\nLes maternelles construiront leurs déguisements et les élémentaires feront des accessoires, créant ainsi une ambiance festive et poétique. 🦋🌺 Dans leurs déguisements enchanteurs, ils découvriront la beauté de la nature qui s'éveille et partageront des rires complices. 😄\n\nC'est un moment privilégié où la créativité, l'imaginaire et la bienveillance se rencontrent pour créer des souvenirs précieux et inspirer les enfants à s'exprimer librement. 🐝🌿✨",
         type: "evenement",
         date: "2026-04-17",
         time: "08h30 - 16h30",
