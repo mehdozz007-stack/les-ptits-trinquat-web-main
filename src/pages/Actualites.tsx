@@ -596,3 +596,5 @@ export function Actualites() {
         </Layout>
     );
 }
+
+export default Actualites;

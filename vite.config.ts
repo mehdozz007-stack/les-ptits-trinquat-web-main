@@ -40,7 +40,34 @@ export default defineConfig({
   },
 
   build: {
-    chunkSizeWarningLimit: 600,
-    sourcemap: false
+    chunkSizeWarningLimit: 800,
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunk séparé
+          vendor: [
+            'react',
+            'react-dom',
+            'react-router-dom',
+          ],
+          // UI components séparé
+          ui: [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-slot',
+            '@radix-ui/react-tooltip',
+          ],
+          // Animations séparé
+          animations: [
+            'framer-motion',
+          ],
+          // Query client séparé
+          query: [
+            '@tanstack/react-query',
+          ],
+        },
+      },
+    },
   },
 });
