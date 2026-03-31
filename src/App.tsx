@@ -28,6 +28,7 @@ const Auth = React.lazy(() => import("./pages/Auth"));
 const AdminTombola = React.lazy(() => import("./pages/AdminTombola"));
 const AdminNewsletter = React.lazy(() => import("./pages/AdminNewsletter"));
 const AdminNewsletterAuth = React.lazy(() => import("./pages/AdminNewsletterAuth"));
+const AdminNews = React.lazy(() => import("./pages/AdminNews"));
 const NotreEcole = React.lazy(() => import("./pages/NotreEcole2"));
 
 const queryClient = new QueryClient();
@@ -154,6 +155,14 @@ const App = () => (
               element={
                 <Suspense fallback={<PageLoader />}>
                   <AdminNewsletter />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/admin/news"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <AdminNews />
                 </Suspense>
               }
             />
