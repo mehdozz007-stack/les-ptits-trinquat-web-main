@@ -43,14 +43,14 @@ export function NewsList({
   // Filtrer les actualités
   const filteredNews = news?.filter((item) => {
     const matchesType = typeFilter === 'all' || item.type === typeFilter;
-    const matchesStatus = statusFilter === 'all' || 
+    const matchesStatus = statusFilter === 'all' ||
       (statusFilter === 'published' && item.is_published === 1) ||
       (statusFilter === 'draft' && item.is_published === 0) ||
       (statusFilter === 'archived' && item.is_archived === 1) ||
       (statusFilter === 'active' && item.is_archived === 0);
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.content.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return matchesType && matchesStatus && matchesSearch;
   }) || [];
 
@@ -80,7 +80,7 @@ export function NewsList({
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full sm:w-64"
         />
-        
+
         <div className="flex gap-3">
           <Select value={typeFilter} onValueChange={setTypeFilter}>
             <SelectTrigger className="w-40">

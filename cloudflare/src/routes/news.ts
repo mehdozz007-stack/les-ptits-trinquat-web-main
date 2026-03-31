@@ -59,7 +59,7 @@ news.get('/', async (c) => {
     `;
 
     const result = await c.env.DB.prepare(query).all();
-    
+
     return c.json({
       success: true,
       data: result.results || []
@@ -89,7 +89,7 @@ news.get('/all', async (c) => {
     `;
 
     const result = await c.env.DB.prepare(query).all();
-    
+
     return c.json({
       success: true,
       data: result.results || []
@@ -110,7 +110,7 @@ news.get('/all', async (c) => {
 news.get('/:id', async (c) => {
   try {
     const id = c.req.param('id');
-    
+
     if (!id) {
       return c.json({
         success: false,

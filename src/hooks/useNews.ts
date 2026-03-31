@@ -33,7 +33,7 @@ export interface CreateNewsRequest {
   is_published?: boolean;
 }
 
-const API_URL = import.meta.env.DEV 
+const API_URL = import.meta.env.DEV
   ? '/api'  // Use Vite proxy in development
   : (import.meta.env.VITE_API_URL || '/api');
 
