@@ -216,7 +216,7 @@ export function useTombolaParticipants(loadPublicParticipants = true) {
   }, [triggerRefresh]);
 
   const deleteParticipant = useCallback(async (participantId: string, token: string) => {
-    const url = apiUrl(`/api/tombola/participants/${participantId}`);
+    const url = apiUrl(`/tombola/participants/${participantId}`);
     console.log('📤 DELETE request to:', url);
 
     try {
