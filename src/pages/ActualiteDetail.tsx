@@ -1,5 +1,4 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import React from 'react';
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, MapPin, Clock, Users, Download, Facebook, Instagram, Heart, Eye, Tickets, Gift } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
@@ -9,20 +8,20 @@ import { Badge } from "@/components/ui/badge";
 import { getActualiteById, actualiteTypeLabels, actualiteColorClasses, formatDateFr } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 const titleGradients: Record<string, string> = {
-    primary: "bg-gradient-to-r from-primary via-secondary to-pink-600 bg-clip-text text-transparent font-extrabold",
-    secondary: "bg-gradient-to-r from-secondary via-primary to-orange-600 bg-clip-text text-transparent font-extrabold",
-    sky: "bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 bg-clip-text text-transparent font-extrabold",
-    violet: "bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-extrabold",
-    accent: "bg-gradient-to-r from-accent via-green-600 to-yellow-600 bg-clip-text text-transparent font-extrabold",
-    green: "bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent font-extrabold",
-    orange: "bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent font-extrabold",
-    pink: "bg-gradient-to-r from-pink-600 via-rose-600 to-red-600 bg-clip-text text-transparent font-extrabold",
-    rose: "bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 bg-clip-text text-transparent font-extrabold",
-    emerald: "bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent font-extrabold",
-    amber: "bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent font-extrabold",
-    cyan: "bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-600 bg-clip-text text-transparent font-extrabold",
-    indigo: "bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent font-extrabold",
-    fuchsia: "bg-gradient-to-r from-fuchsia-600 via-pink-600 to-purple-600 bg-clip-text text-transparent font-extrabold",
+    primary: "bg-gradient-to-r from-primary/90 via-secondary/90 to-pink-500 bg-clip-text text-transparent font-extrabold",
+    secondary: "bg-gradient-to-r from-secondary/90 via-primary/90 to-orange-500 bg-clip-text text-transparent font-extrabold",
+    sky: "bg-gradient-to-r from-sky-500 via-blue-500 to-violet-500 bg-clip-text text-transparent font-extrabold",
+    violet: "bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-extrabold",
+    accent: "bg-gradient-to-r from-accent/90 via-green-500 to-yellow-500 bg-clip-text text-transparent font-extrabold",
+    green: "bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent font-extrabold",
+    orange: "bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent font-extrabold",
+    pink: "bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 bg-clip-text text-transparent font-extrabold",
+    rose: "bg-gradient-to-r from-rose-500 via-pink-500 to-red-500 bg-clip-text text-transparent font-extrabold",
+    emerald: "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent font-extrabold",
+    amber: "bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent font-extrabold",
+    cyan: "bg-gradient-to-r from-cyan-500 via-blue-500 to-teal-500 bg-clip-text text-transparent font-extrabold",
+    indigo: "bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 bg-clip-text text-transparent font-extrabold",
+    fuchsia: "bg-gradient-to-r from-fuchsia-500 via-pink-500 to-purple-500 bg-clip-text text-transparent font-extrabold",
 };
 
 const badgeColors: Record<string, string> = {
@@ -121,35 +120,22 @@ export function ActualiteDetail() {
         <Layout>
             <div className="min-h-[calc(100vh-200px)]">
                 {/* Header */}
-                <section className="relative overflow-hidden py-8 sm:py-12 md:py-20 bg-gradient-to-br from-slate-50/8 via-purple-50/8 to-pink-50/8">
+                <section className="relative overflow-hidden bg-gradient-to-b from-primary/16 via-secondary/12 to-background py-14 sm:py-16 md:py-20">
                     <div className="absolute inset-0 overflow-hidden">
-                        {/* Blobs colorés animés avec gradients - Intensité modérée et douce */}
-                        <div className={`absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob animate-pulse-soft opacity-5 sm:opacity-35`} />
-                        <div className={`absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob animate-pulse-soft opacity-3 sm:opacity-30`} style={{ animationDelay: "1s" }} />
-                        <div className="absolute top-1/3 right-1/4 h-60 w-60 rounded-full bg-gradient-to-br from-accent/70 via-yellow-400/60 to-pink-300/50 watercolor-blob blur-3xl opacity-2 sm:opacity-25" style={{ animationDelay: "0.5s" }} />
-                        <div className="absolute bottom-1/4 left-1/3 h-72 w-72 rounded-full bg-gradient-to-tr from-purple-300/70 via-pink-200/60 to-rose-300/50 watercolor-blob blur-3xl opacity-3 sm:opacity-30" style={{ animationDelay: "1.5s" }} />
-                        <div className="absolute top-1/2 -right-20 h-80 w-80 rounded-full bg-gradient-to-bl from-blue-200/70 via-purple-200/60 to-pink-100/50 watercolor-blob blur-2xl opacity-3 sm:opacity-28" />
-                        <div className="absolute top-1/4 left-1/2 h-64 w-64 rounded-full bg-gradient-to-br from-sky-300/70 via-cyan-200/60 to-blue-200/50 watercolor-blob blur-3xl opacity-2 sm:opacity-25" />
-                        {/* Blobs supplémentaires avec intensité douce */}
-                        <div className={`absolute top-0 right-1/3 h-80 w-80 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-3xl opacity-3 sm:opacity-28`} style={{ animationDelay: "2s" }} />
-                        <div className={`absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-4 sm:opacity-32`} style={{ animationDelay: "0.8s" }} />
-                        <div className={`absolute top-1/3 -left-20 h-72 w-72 rounded-full bg-gradient-to-r ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-3 sm:opacity-28`} style={{ animationDelay: "1.2s" }} />
-                        {/* Blobs additionnels pour couvrir les espaces avec douceur */}
-                        <div className={`absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gradient-to-br ${headerBlobColors[actualite.color]?.secondary || "from-secondary to-primary"} watercolor-blob blur-3xl opacity-2 sm:opacity-25`} style={{ animationDelay: "1.8s" }} />
-                        <div className={`absolute bottom-1/3 right-1/3 h-80 w-80 rounded-full bg-gradient-to-tl ${headerBlobColors[actualite.color]?.primary || "from-primary to-secondary"} watercolor-blob blur-2xl opacity-2 sm:opacity-26`} style={{ animationDelay: "0.6s" }} />
-                        <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-gradient-to-br from-violet-300/50 via-pink-300/40 to-rose-300/30 watercolor-blob blur-3xl opacity-3 sm:opacity-28" style={{ animationDelay: "2.2s" }} />
-                        <div className="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-gradient-to-tr from-cyan-300/50 via-blue-300/40 to-indigo-300/30 watercolor-blob blur-2xl opacity-2 sm:opacity-25" />
+                        <div className={`absolute -top-24 -right-20 h-72 w-72 rounded-full ${headerBlobColors[actualite.color]?.primary || "bg-primary/35"} watercolor-blob blur-2xl opacity-36`} />
+                        <div className={`absolute bottom-0 -left-16 h-56 w-56 rounded-full ${headerBlobColors[actualite.color]?.secondary || "bg-secondary/30"} watercolor-blob blur-2xl opacity-32`} />
+                        <div className="absolute top-1/3 right-1/4 h-44 w-44 rounded-full bg-gradient-to-br from-white/75 to-primary/30 blur-2xl opacity-85" />
                     </div>
                     <div className="container relative z-10">
                         <motion.div
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ x: -2 }}
                             transition={{ duration: 0.2 }}
-                            className="mb-2 sm:mb-6 inline-block"
+                            className="mb-6 inline-block"
                         >
                             <Button
                                 variant="ghost"
                                 onClick={() => navigate("/actualites")}
-                                className="gap-2"
+                                className="gap-2 rounded-full bg-background/70 backdrop-blur-sm"
                             >
                                 <ArrowLeft className="h-4 w-4" />
                                 Retour aux actualités
@@ -159,91 +145,46 @@ export function ActualiteDetail() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="max-w-4xl mx-auto text-center"
+                            className="max-w-3xl"
                         >
-                            {/* Badge en haut centré avec effect */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.2 }}
-                                className="flex justify-center mb-8"
+                                className="mb-5 flex justify-center md:justify-start"
                             >
-                                <div className="relative inline-block">
-                                    <div className={`absolute inset-0 rounded-full blur-lg ${actualite.color === 'rose' ? 'bg-gradient-to-r from-rose-400/70 to-pink-400/70' :
-                                        actualite.color === 'sky' ? 'bg-gradient-to-r from-sky-400/70 to-blue-400/70' :
-                                            actualite.color === 'violet' ? 'bg-gradient-to-r from-violet-400/70 to-purple-400/70' :
-                                                actualite.color === 'emerald' ? 'bg-gradient-to-r from-emerald-400/70 to-teal-400/70' :
-                                                    actualite.color === 'amber' ? 'bg-gradient-to-r from-amber-400/70 to-orange-400/70' :
-                                                        actualite.color === 'indigo' ? 'bg-gradient-to-r from-indigo-400/70 to-purple-400/70' :
-                                                            actualite.color === 'fuchsia' ? 'bg-gradient-to-r from-fuchsia-400/70 to-pink-400/70' :
-                                                                'bg-gradient-to-r from-purple-400/70 to-pink-400/70'
-                                        } opacity-40`} />
-                                    <Badge
-                                        className={`shrink-0 relative ${badgeColors[actualite.type]}`}
-                                        variant="secondary"
-                                    >
-                                        {actualiteTypeLabels[actualite.type]}
-                                    </Badge>
-                                </div>
+                                <Badge className={`shrink-0 ${badgeColors[actualite.type]}`} variant="secondary">
+                                    {actualiteTypeLabels[actualite.type]}
+                                </Badge>
                             </motion.div>
 
-                            {/* Titre centré avec animation et gradient doux remarquable */}
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="relative mb-8 inline-block w-full"
+                                className="mb-6"
                             >
-                                <motion.div
-                                    className={`absolute inset-0 rounded-2xl blur-2xl opacity-40 -z-10 ${actualite.color === 'primary' ? 'bg-gradient-to-r from-primary/60 via-secondary/50 to-pink-600/60' :
-                                        actualite.color === 'secondary' ? 'bg-gradient-to-r from-secondary/60 via-primary/50 to-orange-600/60' :
-                                            actualite.color === 'sky' ? 'bg-gradient-to-r from-sky-500/60 via-blue-500/50 to-violet-500/60' :
-                                                actualite.color === 'violet' ? 'bg-gradient-to-r from-violet-500/60 via-purple-500/50 to-pink-500/60' :
-                                                    actualite.color === 'rose' ? 'bg-gradient-to-r from-rose-500/60 via-pink-500/50 to-red-500/60' :
-                                                        actualite.color === 'emerald' ? 'bg-gradient-to-r from-emerald-500/60 via-teal-500/50 to-cyan-500/60' :
-                                                            actualite.color === 'amber' ? 'bg-gradient-to-r from-amber-500/60 via-orange-500/50 to-yellow-500/60' :
-                                                                actualite.color === 'indigo' ? 'bg-gradient-to-r from-indigo-500/60 via-purple-500/50 to-blue-500/60' :
-                                                                    actualite.color === 'fuchsia' ? 'bg-gradient-to-r from-fuchsia-500/60 via-pink-500/50 to-purple-500/60' :
-                                                                        'bg-gradient-to-r from-purple-500/60 via-pink-500/50 to-purple-500/60'
-                                        }`}
-                                    animate={{
-                                        opacity: [0.4, 0.6, 0.4],
-                                    }}
-                                    transition={{
-                                        duration: 4,
-                                        repeat: Infinity,
-                                        ease: "easeInOut",
-                                    }}
-                                />
                                 <h1
-                                    className={`text-3xl font-extrabold md:text-5xl leading-tight bg-clip-text text-transparent ${actualite.color === 'primary' ? 'bg-gradient-to-br from-primary via-secondary to-pink-600' :
-                                        actualite.color === 'secondary' ? 'bg-gradient-to-br from-secondary via-primary to-orange-600' :
-                                            actualite.color === 'sky' ? 'bg-gradient-to-br from-sky-500 via-blue-500 to-violet-600' :
-                                                actualite.color === 'violet' ? 'bg-gradient-to-br from-violet-500 via-purple-500 to-pink-600' :
-                                                    actualite.color === 'rose' ? 'bg-gradient-to-br from-rose-500 via-pink-500 to-red-600' :
-                                                        actualite.color === 'emerald' ? 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600' :
-                                                            actualite.color === 'amber' ? 'bg-gradient-to-br from-amber-500 via-orange-500 to-yellow-600' :
-                                                                actualite.color === 'indigo' ? 'bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-600' :
-                                                                    actualite.color === 'fuchsia' ? 'bg-gradient-to-br from-fuchsia-500 via-pink-500 to-purple-600' :
-                                                                        'bg-gradient-to-br from-purple-500 via-pink-500 to-rose-600'
-                                        }`}
+                                    className={`text-3xl leading-tight sm:text-4xl md:text-5xl ${titleGradients[actualite.color] || titleGradients.primary}`}
                                 >
                                     {actualite.title}
                                 </h1>
+                                <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+                                    Retrouvez les informations essentielles de cette actualite dans un format clair et lisible.
+                                </p>
                             </motion.div>
 
-                            {/* Meta information centré avec animation */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4, duration: 0.6 }}
-                                className="space-y-3 text-sm text-muted-foreground mb-8 flex flex-col items-center"
+                                className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground"
                             >
                                 {actualite.date && (
                                     <motion.div
-                                        whileHover={{ scale: 1.05, y: -2 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-purple-50/40 to-pink-50/40 px-4 py-2 rounded-lg border border-purple-200/20 shadow-lg shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
+                                        whileHover={{ y: -2 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-4 py-2 backdrop-blur-sm"
                                     >
                                         <Calendar className="h-4 w-4 text-purple-500" />
                                         <span>{formatDateFr(actualite.date)}</span>
@@ -251,9 +192,9 @@ export function ActualiteDetail() {
                                 )}
                                 {actualite.time && (
                                     <motion.div
-                                        whileHover={{ scale: 1.05, y: -2 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-blue-50/40 to-purple-50/40 px-4 py-2 rounded-lg border border-blue-200/20 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300"
+                                        whileHover={{ y: -2 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-4 py-2 backdrop-blur-sm"
                                     >
                                         <Clock className="h-4 w-4 text-blue-500" />
                                         <span>{actualite.time}</span>
@@ -261,9 +202,9 @@ export function ActualiteDetail() {
                                 )}
                                 {actualite.location && (
                                     <motion.div
-                                        whileHover={{ scale: 1.05, y: -2 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-emerald-50/40 to-cyan-50/40 px-4 py-2 rounded-lg border border-emerald-200/20 shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/40 transition-all duration-300"
+                                        whileHover={{ y: -2 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-4 py-2 backdrop-blur-sm"
                                     >
                                         <MapPin className="h-4 w-4 text-emerald-500" />
                                         <span>{actualite.location}</span>
@@ -271,9 +212,9 @@ export function ActualiteDetail() {
                                 )}
                                 {actualite.attendees && (
                                     <motion.div
-                                        whileHover={{ scale: 1.05, y: -2 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-rose-50/40 to-red-50/40 px-4 py-2 rounded-lg border border-rose-200/20 shadow-lg shadow-rose-500/20 hover:shadow-xl hover:shadow-rose-500/40 transition-all duration-300"
+                                        whileHover={{ y: -2 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-4 py-2 backdrop-blur-sm"
                                     >
                                         <Users className="h-4 w-4 text-rose-500" />
                                         <span>{actualite.attendees} participants attendus</span>
