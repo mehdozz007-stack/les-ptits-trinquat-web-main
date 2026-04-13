@@ -57,62 +57,58 @@ export function HeroSection() {
     sparks,
   }: InfoBadgeProps) => {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay }}
-        className={`relative inline-flex items-center gap-1 sm:gap-3 
-        rounded-2xl sm:rounded-full px-2 sm:px-4 py-2 
-        text-xs sm:text-lg font-bold overflow-visible ${bgClass}`}
+      <Link
+        to={href}
+        className="block transition-transform hover:scale-105 active:scale-95"
       >
-        {/* Sparks */}
-        {sparks.map((_, i) => (
-          <Spark
-            key={i}
-            color={sparksColors[i % sparksColors.length]}
-          />
-        ))}
-
-        {/* Icon */}
-        <span className="text-base sm:text-xl flex-shrink-0">{icon}</span>
-
-        {/* Text */}
-        <div
-          className={`flex items-center gap-1 sm:gap-2 font-kid 
-        text-transparent bg-clip-text ${textGradient} 
-        text-xs sm:text-base font-bold leading-tight drop-shadow-lg`}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay }}
+          className={`relative inline-flex flex-1 w-full items-center gap-1 sm:gap-3 
+          rounded-2xl sm:rounded-full px-2 sm:px-4 py-2 
+          text-xs sm:text-lg font-bold overflow-visible ${bgClass} cursor-pointer`}
         >
-          {/* Ping */}
-          <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
-            <span
-              className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${pingOuter}`}
+          {/* Sparks */}
+          {sparks.map((_, i) => (
+            <Spark
+              key={i}
+              color={sparksColors[i % sparksColors.length]}
             />
-            <span
-              className={`relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full ${pingInner}`}
-            />
-          </span>
+          ))}
 
-          {/* Message */}
-          <span className="leading-tight text-xs sm:text-sm whitespace-normal">
-            {text}
-          </span>
-        </div>
+          {/* Icon */}
+          <span className="text-base sm:text-xl flex-shrink-0">{icon}</span>
 
-        {/* Link */}
-        {href && (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="flex-shrink-0 h-7 sm:h-auto px-2 sm:px-3 text-xs sm:text-sm ml-auto"
-            asChild
+          {/* Text */}
+          <div
+            className={`flex items-center gap-1 sm:gap-2 font-kid 
+          text-transparent bg-clip-text ${textGradient} 
+          text-xs sm:text-base font-bold leading-tight drop-shadow-lg flex-1 w-full`}
           >
-            <a href={href} target="_blank" rel="noopener noreferrer">
-              Voir
-              <ExternalLink className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
-            </a>
-          </Button>
-        )}
-      </motion.div>
+            {/* Ping */}
+            <span className="relative flex h-1.5 w-1.5 sm:h-3 sm:w-3 flex-shrink-0">
+              <span
+                className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${pingOuter}`}
+              />
+              <span
+                className={`relative inline-flex h-1.5 w-1.5 sm:h-3 sm:w-3 rounded-full ${pingInner}`}
+              />
+            </span>
+
+            {/* Message */}
+            <span className="leading-tight text-xs sm:text-sm whitespace-normal flex-1">
+              {text}
+            </span>
+          </div>
+
+          {/* Voir button */}
+          <span className="flex items-center gap-1 text-xs sm:text-sm flex-shrink-0 ml-auto font-semibold">
+            Voir
+            <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+          </span>
+        </motion.div>
+      </Link>
     )
   }
 
@@ -136,7 +132,7 @@ export function HeroSection() {
             className="max-w-xl w-full"
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
-              <InfoBadge
+              {/*} <InfoBadge
                 icon="🛍️"
                 text="Vide Grenier le 12 Avril : Dénicher de bonnes affaires !"
                 href="/actualites/act-010"
@@ -157,14 +153,14 @@ export function HeroSection() {
                   "bg-pink-400",
                   "bg-white",
                 ]}
-              />
+              />*/}
               <InfoBadge
                 icon="🌸"
                 text="Vente du printemps le 17 Avril : Soyez nombreux !"
                 href="/actualites/act-012"
                 delay={0.2}
                 bgClass="bg-pink-100/50 text-rose-600"
-                textGradient="bg-gradient-to-r from-pink-500 via-rose-500 to-green-500"
+                textGradient="bg-gradient-to-r from-pink-500 via-rose-600 to-green-500"
                 pingOuter="bg-pink-500"
                 pingInner="bg-pink-400"
                 sparks={sparks}

@@ -47,18 +47,6 @@ const upcomingEvents = [
     url: "/actualites/conseil-ecole-002",
   },*/
   {
-    id: 1,
-    title: "Vide Grenier à l'école : La Récré des bonnes affaires !",
-    description: "Un vide grenier convivial avec animations, musique et bonne ambiance en famille. Venez dénicher de bonnes affaires tout en participant à la vie de l'école !",
-    date: "2026-04-12",
-    time: "10h00 - 16h00",
-    location: "Cour de l'école",
-    color: "emerald",
-    status: "upcoming",
-    attendees: 400,
-    url: "/actualites/act-010",
-  },
-  {
     id: 2,
     title: "Vente du Printemps : Gâteaux Gourmands de l'École",
     description: "Vente de gâteaux faits maison avant les vacances de printemps. Invitez vos délices pour soutenir les projets de l'école!",
@@ -69,6 +57,18 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 400,
     url: "/actualites/act-012",
+  },
+  {
+    id: 1,
+    title: "Vide Grenier à l'école : La Récré des bonnes affaires !",
+    description: "Merci pour votre participation !",
+    date: "2026-04-12",
+    time: "10h00 - 16h00",
+    location: "Cour de l'école",
+    color: "emerald",
+    status: "upcoming",
+    attendees: 400,
+    url: "/actualites/act-010",
   },
   /*{
     id: 3,
