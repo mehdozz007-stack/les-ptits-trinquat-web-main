@@ -84,7 +84,7 @@ export function useTombolaLots() {
         )
       );
 
-      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/reserve`), {
+      const response = await fetch(apiUrl(`/tombola/lots/${lotId}/reserve`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reserver_id: reserverId }),
@@ -110,7 +110,7 @@ export function useTombolaLots() {
         )
       );
 
-      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/cancel-reservation`), {
+      const response = await fetch(apiUrl(`/tombola/lots/${lotId}/cancel-reservation`), {
         method: 'POST',
       });
       if (!response.ok) throw new Error('Failed to cancel reservation');
@@ -134,7 +134,7 @@ export function useTombolaLots() {
         )
       );
 
-      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/mark-remis`), {
+      const response = await fetch(apiUrl(`/tombola/lots/${lotId}/mark-remis`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId }),
@@ -160,7 +160,7 @@ export function useTombolaLots() {
         )
       );
 
-      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}/mark-available`), {
+      const response = await fetch(apiUrl(`/tombola/lots/${lotId}/mark-available`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId }),
@@ -180,7 +180,7 @@ export function useTombolaLots() {
   const getContactLink = async (lotId: string, senderName: string): Promise<string | null> => {
     try {
       const encodedName = encodeURIComponent(senderName);
-      const response = await fetch(apiUrl(`/api/tombola/contact-link/${lotId}?sender_name=${encodedName}`), {
+      const response = await fetch(apiUrl(`/tombola/contact-link/${lotId}?sender_name=${encodedName}`), {
         method: 'GET',
       });
       if (!response.ok) throw new Error('Failed to get contact link');
@@ -195,7 +195,7 @@ export function useTombolaLots() {
   const getReserverContactLink = async (lotId: string, senderName: string): Promise<string | null> => {
     try {
       const encodedName = encodeURIComponent(senderName);
-      const response = await fetch(apiUrl(`/api/tombola/contact-link/${lotId}/reserver?sender_name=${encodedName}`), {
+      const response = await fetch(apiUrl(`/tombola/contact-link/${lotId}/reserver?sender_name=${encodedName}`), {
         method: 'GET',
       });
       if (!response.ok) throw new Error('Failed to get reserver contact link');
@@ -212,7 +212,7 @@ export function useTombolaLots() {
       // Optimistic update
       setLots(prev => prev.filter(lot => lot.id !== lotId));
 
-      const response = await fetch(apiUrl(`/api/tombola/lots/${lotId}`), {
+      const response = await fetch(apiUrl(`/tombola/lots/${lotId}`), {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ parent_id: parentId, user_id: userId }),
