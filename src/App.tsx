@@ -25,6 +25,8 @@ import AdminNewsletter from "./pages/AdminNewsletter";
 import AdminNewsletterAuth from "./pages/AdminNewsletterAuth";
 import NotreEcole from "./pages/NotreEcole2";
 import NotFound from "./pages/NotFound";
+import TombolaSecret from "./pages/TombolaSecret";
+import AdminTombolaSecret from "./pages/AdminTombolaSecret";
 
 const queryClient = new QueryClient();
 
@@ -58,8 +60,10 @@ const App = () => (
             {/* Pages d'authentification et tombola */}
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin/newsletter/auth" element={<AdminNewsletterAuth />} />
-            <Route path="/tombola" element={<TombolaProtected />} />
-            <Route path="/admin/tombola" element={<AdminTombola />} />
+            <Route path="/tombola" element={<NotFound />} />
+            <Route path="/tombola/:token" element={<TombolaSecret />} />
+            <Route path="/admin/tombola" element={<NotFound />} />
+            <Route path="/admin/tombola/:token" element={<AdminTombolaSecret />} />
             <Route path="/admin/newsletter" element={<AdminNewsletter />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/message-envoye" element={<MessageEnvoye />} />
