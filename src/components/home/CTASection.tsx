@@ -42,14 +42,14 @@ export function CTASection() {
           viewport={{ once: true }}
           className="mx-auto max-w-3xl text-center"
         >
-          <h2 className="mb-6 text-3xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl md:text-5xl">
+          <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-primary-foreground sm:text-3xl md:text-4xl lg:text-5xl">
             Rejoignez l'aventure des<br />
             P'tits Trinquat !
           </h2>
-          <p className="mb-8 text-lg text-primary-foreground/80 leading-relaxed">
+          <p className="mb-8 text-sm sm:text-base md:text-lg text-primary-foreground/80 leading-relaxed">
             Que vous souhaitiez participer activement au bureau, donner un coup de main ponctuel lors des événements, ou simplement adhérer pour soutenir nos actions, votre engagement compte !
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center scale-75 sm:scale-90 md:scale-100 origin-center">
             <Button
               size="xl"
               className="bg-background text-primary hover:bg-background/90 shadow-lg hover:shadow-xl hover:-translate-y-1 rounded-2xl font-bold"

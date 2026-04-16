@@ -65,9 +65,9 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay }}
-          className={`relative inline-flex flex-1 w-full items-center gap-1 sm:gap-3 
-          rounded-2xl sm:rounded-full px-2 sm:px-4 py-2 
-          text-xs sm:text-lg font-bold overflow-visible ${bgClass} cursor-pointer`}
+          className={`relative inline-flex flex-1 w-full items-center gap-1 sm:gap-2 md:gap-3 
+          rounded-2xl sm:rounded-full px-1.5 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 
+          text-xs sm:text-base md:text-lg font-bold overflow-visible ${bgClass} cursor-pointer`}
         >
           {/* Sparks */}
           {sparks.map((_, i) => (
@@ -215,7 +215,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-6 text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
+              className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
             >
               <span className="text-gradient">Tous unis</span>
               <br />
@@ -226,7 +226,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="mb-8 text-base sm:text-lg text-muted-foreground leading-relaxed"
+              className="mb-8 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed"
             >
               L'association Les P'tits Trinquat rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong>,
               pour accompagner et enrichir la vie scolaire de nos enfants à travers des événements, des projets
@@ -261,18 +261,18 @@ export function HeroSection() {
               className="mt-10 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 sm:flex place-items-center sm:place-items-stretch"
             >
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#A8D479]">100+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground">Familles</div>
+                <div className="text-lg sm:text-2xl md:text-3xl font-bold text-[#A8D479]">100+</div>
+                <div className="text-xs sm:text-xs md:text-sm text-muted-foreground">Familles</div>
               </div>
               <div className="h-8 sm:h-12 w-px bg-border hidden sm:block" />
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#E89AB1]">10+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground">Événements</div>
+                <div className="text-lg sm:text-2xl md:text-3xl font-bold text-[#E89AB1]">10+</div>
+                <div className="text-xs sm:text-xs md:text-sm text-muted-foreground">Événements</div>
               </div>
               <div className="h-8 sm:h-12 w-px bg-border hidden sm:block" />
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#87CEEB]">4+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground">Ans</div>
+                <div className="text-lg sm:text-2xl md:text-3xl font-bold text-[#87CEEB]">4+</div>
+                <div className="text-xs sm:text-xs md:text-sm text-muted-foreground">Ans</div>
               </div>
             </motion.div>
           </motion.div>

@@ -82,10 +82,10 @@ export function ActualitesPreview() {
                             <FileText className="h-10 w-10 sm:h-8 sm:w-8 text-white" />
                         </motion.div>
                     </div>
-                    <h2 className="mb-4 text-3xl text-center font-extrabold md:text-4xl">
+                    <h2 className="mb-4 text-2xl sm:text-3xl text-center font-extrabold md:text-4xl">
                         Actualités de l'école <span className="text-gradient">et de l'association</span>
                     </h2>
-                    <p className="text-sm text-muted-foreground text-center">
+                    <p className="text-xs sm:text-sm md:text-base text-muted-foreground text-center">
                         Restez informés des derniers événements, annonces et documents partagés par les parents élus et l'équipe de l'école.
                     </p>
                 </motion.div>
@@ -173,7 +173,7 @@ export function ActualitesPreview() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-12 text-center"
+                    className="mt-12 text-center flex justify-center scale-75 sm:scale-90 md:scale-100 origin-center"
                 >
                     <Button asChild variant="playful" size="lg">
                         <Link to="/actualites">
