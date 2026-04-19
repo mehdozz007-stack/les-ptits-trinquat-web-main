@@ -154,7 +154,7 @@ export function HeroSection() {
                   "bg-white",
                 ]}
               />*/}
-              <InfoBadge
+              {/*<InfoBadge
                 icon="🌸"
                 text="Vente du printemps le 17 Avril : Soyez nombreux !"
                 href="/actualites/act-012"
@@ -175,6 +175,29 @@ export function HeroSection() {
                   "bg-teal-400",
                   "bg-cyan-400",
                   "bg-purple-400",
+                  "bg-white",
+                ]}
+              />*/}
+              <InfoBadge
+                icon="🎊"
+                text="Fête d'école le 19 Juin : Festivités et partage !"
+                href="/actualites/act-009"
+                delay={0.35}
+                bgClass="bg-yellow-100/50 text-orange-600"
+                textGradient="bg-gradient-to-r from-yellow-500 via-orange-600 to-red-500"
+                pingOuter="bg-yellow-500"
+                pingInner="bg-yellow-400"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-yellow-300",
+                  "bg-orange-400",
+                  "bg-red-400",
+                  "bg-pink-400",
+                  "bg-purple-400",
+                  "bg-blue-400",
+                  "bg-green-400",
+                  "bg-lime-400",
+                  "bg-cyan-400",
                   "bg-white",
                 ]}
               />

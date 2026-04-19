@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -45,7 +45,7 @@ const upcomingEvents = [
     color: "sky",
     status: "upcoming",
     url: "/actualites/conseil-ecole-002",
-  },*/
+  },
   {
     id: 2,
     title: "Vente du Printemps : Gâteaux Gourmands de l'École",
@@ -66,6 +66,18 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 400,
     url: "/actualites/act-010",
+  },*/
+  {
+    id: 1,
+    title: "Fête d'école",
+    description: "Rires, jeux, spectacles et douceurs gourmandes vous attendent pour partager ensemble un moment joyeux et festif et célébrer la fin de l'année scolaire 🌟🍭",
+    type: "evenement",
+    date: "2026-06-19",
+    time: "14h00 - 19h00",
+    location: "Cour de l'école",
+    color: "primary",
+    status: "upcoming",
+    url: "/actualites/act-009",
   },
   /*{
     id: 3,
@@ -112,7 +124,18 @@ const cardGradients: Record<string, string> = {
 export function EventsPreview() {
   // Déterminer si l'utilisateur préfère les animations réduites
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isMobile = window.innerWidth < 768;
+
+  // État pour tracker le redimensionnement
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <section className="py-20 md:py-28">

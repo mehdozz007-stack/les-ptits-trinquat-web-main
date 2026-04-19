@@ -411,54 +411,57 @@ export function Actualites() {
                                                                 Passé
                                                             </Badge>
 
-                                                            <p className="mb-5 text-sm text-muted-foreground">
+                                                            {/*<p className="mb-5 text-sm text-muted-foreground">
                                                                 {event.description}
-                                                            </p>
+                                                            </p>*/}
 
-                                                            <div className="space-y-1 text-xs text-muted-foreground mb-2">
-                                                                {event.date && (
-                                                                    <div className="flex items-center gap-2">
-                                                                        <Calendar className={`h-3.5 w-3.5 ${colors.text}`} />
-                                                                        {formatDateFr(event.date)}
+                                                            <div className="pt-4 mt-2">
+                                                                <div className="flex items-center justify-between gap-3">
+                                                                    <div className="flex flex-col gap-2">
+                                                                        {event.date && (
+                                                                            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                                                <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                                <span>{formatDateFr(event.date)}</span>
+                                                                            </div>
+                                                                        )}
+                                                                        {event.time && (
+                                                                            <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                                                                                <Clock className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                                <span>{event.time}</span>
+                                                                            </div>
+                                                                        )}
+                                                                        {event.location && (
+                                                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                                                <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                                <span>{event.location}</span>
+                                                                            </div>
+                                                                        )}
+                                                                        {event.attendees && (
+                                                                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                                                <Users className="h-3.5 w-3.5 flex-shrink-0" />
+                                                                                <span>{event.attendees} participants</span>
+                                                                            </div>
+                                                                        )}
                                                                     </div>
-                                                                )}
-                                                                {event.time && (
-                                                                    <div className="flex items-center gap-2">
-                                                                        <Clock className={`h-3.5 w-3.5 ${colors.text}`} />
-                                                                        {event.time}
-                                                                    </div>
-                                                                )}
-                                                                {event.location && (
-                                                                    <div className="flex items-center gap-2">
-                                                                        <MapPin className={`h-3.5 w-3.5 ${colors.text}`} />
-                                                                        {event.location}
-                                                                    </div>
-                                                                )}
-                                                                {event.attendees && (
-                                                                    <div className="flex items-center gap-2">
-                                                                        <Users className={`h-3.5 w-3.5 ${colors.text}`} />
-                                                                        {event.attendees} participants
-                                                                    </div>
-                                                                )}
+                                                                    {(event.link) && (
+                                                                        <div className="flex flex-col items-end gap-2">
+                                                                            <Button
+                                                                                asChild
+                                                                                variant="ghost"
+                                                                                size="sm"
+                                                                                className="gap-2"
+                                                                            >
+                                                                                <a href={event.link} target="_blank" rel="noopener noreferrer">
+                                                                                    Consulter
+                                                                                    <Eye className="h-4 w-4" />
+                                                                                </a>
+                                                                            </Button>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    {(event.link) && (
-                                                        <div className="flex justify-center pt-3 mt-auto">
-                                                            <Button
-                                                                asChild
-                                                                variant="ghost"
-                                                                size="sm"
-                                                                className="gap-2"
-                                                            >
-                                                                <a href={event.link} target="_blank" rel="noopener noreferrer">
-                                                                    Consulter
-                                                                    <Eye className="h-4 w-4" />
-                                                                </a>
-                                                            </Button>
-                                                        </div>
-                                                    )}
                                                 </CardContent>
                                             </Card>
                                         </motion.div>
