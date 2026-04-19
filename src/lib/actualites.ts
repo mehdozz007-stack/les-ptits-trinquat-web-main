@@ -27,6 +27,7 @@ import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
 import videGrenier from '@/assets/Vide-grenier.jpg';
 import maman from '@/assets/Retour-maman.jpg';
 import printemps from '@/assets/vente-printemps.png';
+import feteecole from '@/assets/fete_ecole.png';
 /**
  * Formate une date ISO (YYYY-MM-DD) en format français lisible (DD Mois YYYY)
  */
@@ -86,6 +87,7 @@ export const actualitesData: Actualite[] = [
         type: "evenement",
         date: "2026-06-19",
         time: "14h00 - 19h00",
+        affiche: feteecole,
         location: "Cour de l'école",
         color: "primary",
         status: "upcoming",
