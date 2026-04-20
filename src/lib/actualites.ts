@@ -128,6 +128,17 @@ export const actualitesData: Actualite[] = [
         status: "upcoming",
     },
     {
+        id: "act-013",
+        title: "Guide Parents : Comment aborder les violences sexuelles avec nos enfants ?",
+        description: "Guide pratique pour les parents : comprendre et accompagner nos enfants dans la prévention des violences sexuelles.",
+        content: "Guide à destination des parents pour discuter de manière bienveillante et efficace de la prévention des violences sexuelles avec nos enfants.",
+        type: "document",
+        date: "2026-04-20",
+        fileUrl: "/documents/Guide_parents_violences_sexuelles.pdf",
+        color: "violet",
+        status: "upcoming",
+    },
+    {
         id: "annonce-charity-001",
         title: "💙 Collecte solidaire : Une famille de notre école a besoin de nous",
         description: "Suite à un incendie, une famille a tout perdu. Nous organisons une collecte solidaire de vêtements, jeux sensoriels et dons.",
