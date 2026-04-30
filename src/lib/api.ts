@@ -162,7 +162,7 @@ export const newsletterApi = {
      * Envoyer une newsletter (admin uniquement)
      */
     async sendNewsletter(title: string, subject: string, content: string, previewText?: string) {
-        return apiCall('/newsletter/admin/send', {
+        return apiCall('/api/newsletter/admin/send', {
             method: 'POST',
             body: JSON.stringify({
                 title,
@@ -177,7 +177,7 @@ export const newsletterApi = {
      * Envoyer un email de test (admin uniquement)
      */
     async sendTestEmail(newsletterId: string, testEmail: string) {
-        return apiCall('/newsletter/admin/test-email', {
+        return apiCall('/api/newsletter/admin/test-email', {
             method: 'POST',
             body: JSON.stringify({
                 newsletter_id: newsletterId,

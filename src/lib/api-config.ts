@@ -7,7 +7,7 @@
 
 function getApiBaseUrl(): string {
   if (typeof window === 'undefined') {
-    return 'https://les-ptits-trinquat-api.medhozz007.workers.dev/api';
+    return 'https://les-ptits-trinquat-api.mehdozz007.workers.dev/api';
   }
 
   const hostname = window.location.hostname;
