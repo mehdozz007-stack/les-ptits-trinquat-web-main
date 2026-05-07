@@ -138,6 +138,8 @@ export const actualitesData: Actualite[] = [
         color: "violet",
         status: "upcoming",
     },
+
+    // Événements passés
     {
         id: "annonce-charity-001",
         title: "💙 Collecte solidaire : Une famille de notre école a besoin de nous",
@@ -146,11 +148,10 @@ export const actualitesData: Actualite[] = [
         type: "annonce",
         link: "https://www.lagazettedemontpellier.fr/justice/2026-02-17-montpellier-incendie-en-cours-dans-un-immeuble-pres-de-l-hotel-de-police/",
         color: "rose",
-        status: "upcoming",
+        status: "past",
         galleryImage: maman,
         donationLink: "https://www.leetchi.com/fr/c/soutien-a-aliyah-et-sa-famille-victime-dun-incendie-1430829?utm_source=copylink&utm_medium=social_sharing",
     },
-    // Événements passés
     {
         id: "act-012",
         title: "Vente du Printemps : Gâteaux Gourmands de l'École",

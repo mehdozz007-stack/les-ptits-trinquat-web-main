@@ -131,19 +131,20 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     }
     
     .logo {
-      display: inline-block;
-      height: 260px;
+      display: block;
       margin-bottom: 25px;
       position: relative;
       z-index: 1;
+      text-align: center;
     }
     
     .logo img {
-      height: 100%;
-      width: auto;
-      border-radius: 20px;
-      box-shadow: 0 12px 32px rgba(255, 123, 66, 0.15), 0 0 60px rgba(197, 95, 168, 0.08);
-      filter: drop-shadow(0 8px 20px rgba(255, 123, 66, 0.12));
+      max-width: 100%;
+      width: 280px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 16px;
     }
     
     .header-title {
@@ -415,7 +416,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     <!-- Header -->
     <div class="header">
       <div class="logo">
-        <img src="${logoUrl}" alt="Les P'tits Trinquat" style="width: auto;">
+        <img src="${logoUrl}" alt="Les P'tits Trinquat" style="max-width: 280px; width: 100%; height: auto; display: block; border-radius: 16px; margin: 0 auto;">
       </div>
       <div class="header-title">Les P'tits Trinquat</div>
       <div class="header-subtitle">Association des Parents d'Élèves</div>

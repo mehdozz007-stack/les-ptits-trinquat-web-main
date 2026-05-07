@@ -224,7 +224,8 @@ export function NewsletterEditor({ activeSubscribersCount = 0, onSave, onRefresh
         throw new Error('Token d\'authentification non trouvé. Veuillez vous reconnecter.');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/newsletter/admin/test-email`, {
+      const apiBaseUrl = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiBaseUrl}/newsletter/admin/test-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
