@@ -401,8 +401,8 @@ newsletter.post('/admin/send', requireAdmin, async (c) => {
         // Rendre l'email HTML avec le template
         // En dev, utiliser le logo de production comme fallback (accessible publiquement)
         const logoUrl = c.env.ENVIRONMENT === 'development'
-          ? 'https://lespetitstrinquat.fr/logoAsso.png'
-          : `${c.env.SITE_URL}/logoAsso.png`;
+          ? 'https://lespetitstrinquat.fr/logoAsso-og.jpg'
+          : `${c.env.SITE_URL}/logoAsso-og.jpg`;
 
         const emailHtml = renderNewsletterEmail({
           firstName: subscriber.first_name || 'Cher parent',
@@ -570,8 +570,8 @@ newsletter.post('/admin/test-email', requireAdmin, async (c) => {
     // Rendre l'email HTML avec le template
     // En dev, utiliser le logo de production comme fallback (accessible publiquement)
     const logoUrl = c.env.ENVIRONMENT === 'development'
-      ? 'https://lespetitstrinquat.fr/logoAsso.png'
-      : `${c.env.SITE_URL}/logoAsso.png`;
+      ? 'https://lespetitstrinquat.fr/logoAsso-og.jpg'
+      : `${c.env.SITE_URL}/logoAsso-og.jpg`;
 
     const emailHtml = renderNewsletterEmail({
       firstName: 'Test Admin',

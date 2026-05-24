@@ -25,7 +25,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     contentHtml,
     unsubscribeUrl = "#",
     siteUrl = "https://lespetitstrinquat.fr",
-    logoUrl = "https://lespetitstrinquat.fr/logoAsso.png",
+    logoUrl = "https://lespetitstrinquat.fr/logoAsso-og.jpg",
     faviconUrl = "https://lespetitstrinquat.fr/favicon.ico",
     year = new Date().getFullYear()
   } = props;

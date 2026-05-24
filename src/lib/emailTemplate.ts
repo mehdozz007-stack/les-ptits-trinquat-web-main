@@ -50,7 +50,7 @@ export function renderNewsletterEmail(props: NewsletterEmailProps): string {
     contentHtml,
     unsubscribeUrl = "#",
     siteUrl = baseUrl,
-    logoUrl = `${baseUrl}/logoAsso.png`,
+    logoUrl = `${baseUrl}/logoAsso-og.jpg`,
     faviconUrl = `${baseUrl}/favicon.ico`,
     year = new Date().getFullYear()
   } = props;
