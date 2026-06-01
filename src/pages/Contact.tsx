@@ -192,7 +192,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">Ecrivez-nous depuis le formulaire. Votre message arrivera directement entre les mains de notre équipe.</p>
+                    <p className="text-muted-foreground">parents.frank.dickens@gmail.com</p>
                   </div>
                 </CardContent>
               </Card>

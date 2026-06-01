@@ -482,7 +482,7 @@ const APropos = () => {
                 <img
                   src={coupurePresse}
                   alt="Coupure de presse du 7 février 1995, souvenir partagé par une maman de l'association"
-                  className="w-full rounded-xl object-contain"
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 rounded-2xl shadow-lg"
                 />
 
 
