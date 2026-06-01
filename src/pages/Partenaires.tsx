@@ -16,12 +16,8 @@ import quizzRoomImage from "@/assets/quizzroomtombola.jpg";
 
 // Import des logos
 import quizRoomLogo from "@/assets/logos/quizRoom.svg";
+import ptitClubLogo from "@/assets/logos/LPC.svg";
 import morpheeLogo from "@/assets/logos/Morphee_Logo2025.svg";
-
-// Les 6 partenaires principaux
-const mainPartners = [
-
-];
 
 // Partenaires par catégorie pour le carrousel
 const carouselPartners = [
@@ -208,18 +204,41 @@ const specialEventCards = [
     url: "https://www.morphee.co/products/mon-petit-morphee?utm_source=GoogleAds&utm_medium=cpc&utm_campaign=elio",
     type: "link"
   },
-  /*{
+];
+
+// Partenaires pour la Fête d'école
+const feteDEcolePartners = [
+  // À remplir avec vos partenaires pour la fête d'école
+  {
+    id: 1,
+    name: "P'tit Club Sud",
+    logo: ptitClubLogo,
+    website: "https://...",
+  },
+  {
+    id: 2,
+    name: "Nom du partenaire",
+    category: "Catégorie",
+    description: "Description",
+    logo: "🎉",
+    website: "https://...",
+  },
+  {
     id: 3,
-    title: "Animations astronomie",
-    description: "Éveillez la curiosité des enfants avec les animations ludiques autour des étoiles et de l'espace.",
-    partner: "Astroludik",
-    gradientFrom: "from-sky-200/40",
-    gradientTo: "to-blue-200/40",
-    borderColor: "border-sky-200/60",
-    emoji: "🔭",
-    url: "https://www.astroludik.com",
-    type: "link"
-  }*/
+    name: "Nom du partenaire",
+    category: "Catégorie",
+    description: "Description",
+    logo: "🎉",
+    website: "https://...",
+  },
+  {
+    id: 4,
+    name: "Nom du partenaire",
+    category: "Catégorie",
+    description: "Description",
+    logo: "🎉",
+    website: "https://...",
+  },
 ];
 
 const Partenaires = () => {
@@ -262,7 +281,7 @@ const Partenaires = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="mb-12  text-center"
+            className="mb-12"
           >
             <h2 className="mb-2 text-2xl font-bold">
               Événements spéciaux <span className="text-gradient">& Partenariats exclusifs</span>
@@ -333,6 +352,76 @@ const Partenaires = () => {
           </div>
         </div>
       </section>
+
+      {/* Partenaires Fête d'école */}
+      {feteDEcolePartners.length > 0 && (
+        <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20">
+          <div className="container">
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="mb-12"
+            >
+              <h2 className="mb-2 text-2xl font-bold">
+                Partenaires <span className="text-gradient">Fête d'école</span>
+              </h2>
+              <p className="text-muted-foreground">
+                Découvrez nos partenaires engagés pour faire de la fête d'école un événement inoubliable.
+              </p>
+            </motion.div>
+
+            {/* Grid de logos cliquables */}
+            <div className="grid gap-8 sm:gap-6 md:gap-8 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 max-w-4xl mx-auto">
+              {feteDEcolePartners.map((partner) => (
+                <motion.div
+                  key={partner.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {partner.website ? (
+                    <a
+                      href={partner.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex flex-col items-center p-4 cursor-pointer group"
+                      title={partner.name}
+                    >
+                      <div className="mb-3 flex h-28 w-28 items-center justify-center rounded-xl bg-orange-100 shadow-md transition-all duration-300 group-hover:shadow-lg group-hover:scale-110 group-hover:bg-orange-200">
+                        {typeof partner.logo === 'string' && partner.logo.length <= 2 ? (
+                          <span className="text-5xl">{partner.logo}</span>
+                        ) : (
+                          <img src={partner.logo} alt={partner.name} className="h-full w-full object-contain p-2" />
+                        )}
+                      </div>
+                      <span className="text-xs font-medium text-foreground text-center line-clamp-2">
+                        {partner.name}
+                      </span>
+                    </a>
+                  ) : (
+                    <div className="flex flex-col items-center p-4">
+                      <div className="mb-3 flex h-28 w-28 items-center justify-center rounded-xl bg-orange-100 shadow-md">
+                        {typeof partner.logo === 'string' && partner.logo.length <= 2 ? (
+                          <span className="text-5xl">{partner.logo}</span>
+                        ) : (
+                          <img src={partner.logo} alt={partner.name} className="h-full w-full object-contain p-2" />
+                        )}
+                      </div>
+                      <span className="text-xs font-medium text-foreground text-center line-clamp-2">
+                        {partner.name}
+                      </span>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Logo Carousel - Remaining partners */}
       {carouselPartners.length > 0 && (

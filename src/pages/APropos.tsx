@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import coupurePresse from "@/assets/coupurePresse1995.jpg";
 
 const bureauMembers = [
   { name: "Cindy", role: "Co-Présidente", emoji: "👩‍💼", classe: [12, 14, 18] },
@@ -452,8 +453,8 @@ const APropos = () => {
 
         <div className="container relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 10, y: 60 }}
+            whileInView={{ opacity: 1, y: 15 }}
             viewport={{ once: true }}
             className="mx-auto max-w-3xl"
           >
@@ -474,6 +475,26 @@ const APropos = () => {
               <p>
                 Aujourd'hui, nous sommes fiers de rassembler plus de 100 familles et de compter sur une équipe de bénévoles engagés qui font vivre l'association au quotidien.
               </p>
+
+            </div>
+            <div className="container">
+              <div className="py-16 mx-auto max-w-lg items-center">
+                <img
+                  src={coupurePresse}
+                  alt="Coupure de presse du 7 février 1995, souvenir partagé par une maman de l'association"
+                  className="w-full rounded-xl object-contain"
+                />
+
+
+                <p className="py-4 text-xs leading-relaxed text-muted-foreground">
+                  Coupure de presse du 7 février 1995, souvenir partagé par une maman
+                  de l'association, qui témoigne de l'importance historique de
+                  l'engagement des parents d'élèves de notre école dans la vie scolaire. Ce document
+                  illustre les racines profondes de notre association et notre volonté
+                  de perpétuer cette tradition d'implication pour le bien-être de nos
+                  enfants.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -516,7 +537,7 @@ const APropos = () => {
           </motion.div>
         </div>
       </section>
-    </Layout>
+    </Layout >
   );
 };
 
