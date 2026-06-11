@@ -170,7 +170,7 @@ export function ActualiteDetail() {
                                     {actualite.title}
                                 </h1>
                                 <p className="mt-4 text-base text-muted-foreground sm:text-lg">
-                                    Retrouvez les informations essentielles de cette actualite dans un format clair et lisible.
+                                    Retrouvez les informations essentielles de cette actualité dans un format clair et lisible.
                                 </p>
                             </motion.div>
 
