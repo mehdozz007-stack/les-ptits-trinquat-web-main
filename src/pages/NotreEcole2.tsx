@@ -155,6 +155,15 @@ const NotreEcole = () => {
             </p>
           </motion.div>
         </div>
+        {/* Bottom wave decoration */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1200 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+            <path
+              d="M0 120L48 110C96 100 192 80 288 75C384 70 480 80 576 85C672 90 768 90 864 85C960 80 1056 70 1152 70C1248 70 1344 80 1392 85L1440 90V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
+              fill="hsl(var(--background))"
+            />
+          </svg>
+        </div>
       </section>
 
       {/* Présentation générale */}
@@ -253,7 +262,7 @@ const NotreEcole = () => {
               <Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">
                 <a href="https://digipad.app/p/1394770/39b6b0ff88979" target="_blank" rel="noopener noreferrer">
                   <BookOpen className="mr-2 h-5 w-5" />
-                  Consulter le DigiPad
+                  Consulter le DigiPad (code 34000)
                 </a>
               </Button>
               <Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">

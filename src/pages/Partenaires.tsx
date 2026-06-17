@@ -353,11 +353,10 @@ const Partenaires = () => {
         </div>
       </section>
 
-      {/* Partenaires Fête d'école */}
+      {/* Partenaires Fête d'école
       {feteDEcolePartners.length > 0 && (
         <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20">
           <div className="container">
-            {/* Section Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -373,7 +372,6 @@ const Partenaires = () => {
               </p>
             </motion.div>
 
-            {/* Grid de logos cliquables */}
             <div className="grid gap-8 sm:gap-6 md:gap-8 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 max-w-4xl mx-auto">
               {feteDEcolePartners.map((partner) => (
                 <motion.div
@@ -421,7 +419,7 @@ const Partenaires = () => {
             </div>
           </div>
         </section>
-      )}
+      )}*/}
 
       {/* Logo Carousel - Remaining partners */}
       {carouselPartners.length > 0 && (
