@@ -90,8 +90,9 @@ export const actualitesData: Actualite[] = [
         affiche: feteecole,
         location: "Cour de l'école",
         color: "primary",
-        status: "upcoming",
+        status: "past",
         attendees: 800,
+        link: "/actualites/act-009",
     },
     {
         id: "conseil-ecole-002",
@@ -316,7 +317,7 @@ export const actualitesData: Actualite[] = [
         date: "2026-02-08",
         link: "https://www.francebleu.fr/infos/societe/facture-multipliee-par-5-salles-de-classe-a-10-degres-une-chaudiere-plombe-le-budget-de-trois-ecoles-a-montpellier-7381973",
         color: "indigo",
-        status: "upcoming",
+        status: "past",
     },
 ];
 

@@ -66,7 +66,7 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 400,
     url: "/actualites/act-010",
-  },*/
+  },
   {
     id: 1,
     title: "Fête d'école",
@@ -78,6 +78,17 @@ const upcomingEvents = [
     color: "primary",
     status: "upcoming",
     url: "/actualites/act-009",
+  },*/
+  {
+    id: 3,
+    title: "Bonnes vacances !",
+    description: "Nous vous souhaitons de très bonnes vacances d'été ! Profitez de ce temps pour vous reposer, vous amuser et passer du temps en famille. Rendez-vous à la rentrée pour de nouvelles aventures scolaires !",
+    color: "sky",
+    date: "",
+    time: "",
+    location: "",
+    url: "/actualites/",
+
   },
   /*{
     id: 3,

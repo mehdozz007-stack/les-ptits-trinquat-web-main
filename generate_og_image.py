@@ -30,8 +30,8 @@ except:
     subtitle_font = ImageFont.load_default()
 
 # Texte
-title = "Les P'tits Trinquat"
-subtitle = "Association de Parents d'Élèves"
+title = "Trinquat & Compagnie"
+subtitle = "Association d'habitants du quartier des Aiguerelles à Montpellier"
 
 # Ajouter le titre (blanc)
 title_bbox = draw.textbbox((0, 0), title, font=title_font)
