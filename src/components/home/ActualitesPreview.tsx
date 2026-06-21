@@ -161,6 +161,7 @@ export function ActualitesPreview() {
                 ) : (
                     <Card className="bg-muted/50">
                         <CardContent className="py-12 text-center">
+                            <FileText className="mx-auto mb-4 h-12 w-12 text-muted-foreground opacity-50" />
                             <p className="text-muted-foreground">
                                 Aucune actualité pour le moment. Revenez bientôt !
                             </p>
