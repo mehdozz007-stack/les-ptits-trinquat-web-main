@@ -225,8 +225,7 @@ export function NewsletterSection() {
                           className="mt-0.5"
                         />
                         <Label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                          J'accepte de recevoir la newsletter des P'tits Trinquat et je consens au traitement
-                          de mes données personnelles conformément à notre politique de confidentialité.
+                          J'accepte de recevoir la newsletter des P'tits Trinquat.
                           Je peux me désinscrire à tout moment. <span className="text-destructive">*</span>
                         </Label>
                       </div>
@@ -276,7 +275,7 @@ export function NewsletterSection() {
                         </motion.div>
                         <p className="text-sm text-muted-foreground flex items-center gap-1">
                           <Heart className="h-4 w-4 text-primary" />
-                          Rejoignez notre communauté bienveillante
+                          Rejoignez notre communauté
                         </p>
                       </div>
                     </motion.form>
