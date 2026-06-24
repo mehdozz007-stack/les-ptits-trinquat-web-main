@@ -438,12 +438,9 @@ const APropos = () => {
       )}
 
       {/* History */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/50 via-pink-50/50 to-orange-50/30 py-16">
+      <section className="bg-muted/70 py-16">
         {/* Blobs doux en arrière-plan */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 left-1/4 h-80 w-80 rounded-full bg-orange-400/20 watercolor-blob" />
-          <div className="absolute top-1/3 -right-32 h-72 w-72 rounded-full bg-pink-200/15 watercolor-blob" />
-          <div className="absolute -bottom-40 right-1/4 h-96 w-96 rounded-full bg-orange-600/15 watercolor-blob" />
           <motion.div
             className="absolute top-1/2 left-1/3 h-60 w-60 rounded-full bg-pink-100/10 watercolor-blob"
             animate={{ y: [0, 30, 0] }}
