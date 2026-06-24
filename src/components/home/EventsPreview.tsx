@@ -168,10 +168,10 @@ export function EventsPreview() {
           viewport={{ once: true }}
           className="mb-12 flex flex-col text-center items-center justify-center gap-2 sm:gap-4 mx-auto"
         >
-          <h2 className="mb-4 text-2xl sm:text-3xl text-center font-extrabold md:text-4xl">
+          <h2 className="mb-4 text-3xl sm:text-3xl text-center font-extrabold md:text-4xl">
             Nos prochains <span className="text-gradient">rendez-vous</span>
           </h2>
-          <p className="max-w-2xl text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground text-center">
+          <p className="max-w-2xl text-base sm:text-base md:text-base lg:text-lg text-muted-foreground text-center">
             Retrouvez-nous lors de nos prochains événements et partagez des moments conviviaux avec la communauté scolaire.
           </p>
         </motion.div>
@@ -270,14 +270,14 @@ export function EventsPreview() {
                         y: [0, -4, 0],
                       }}
                       transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="mb-4 sm:mb-6 text-muted-foreground text-xs sm:text-sm md:text-base text-center"
+                      className="mb-4 sm:mb-6 text-muted-foreground text-sm sm:text-sm md:text-base text-center"
                     >
                       {event.description}
                     </motion.p>
 
                     {/* Meta Information */}
                     <motion.div
-                      className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-muted-foreground"
+                      className="space-y-2 sm:space-y-3 text-base sm:text-base md:text-base text-muted-foreground"
                     >
                       {/* Date */}
                       {(event.date || event.time) && (

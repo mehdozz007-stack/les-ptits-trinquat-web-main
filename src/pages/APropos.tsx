@@ -215,7 +215,7 @@ const APropos = () => {
       </section>
 
       {/* Bureau */}
-      <section id="bureau" className="bg-muted/50 py-16">
+      <section id="bureau" className="bg-muted/70 py-16">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -438,7 +438,7 @@ const APropos = () => {
       )}
 
       {/* History */}
-      <section className="relative overflow-hidden py-16 bg-gradient-to-b from-pink-30/30 via-orange-50/20 to-pink-30/30">
+      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/50 via-pink-50/50 to-orange-50/30 py-16">
         {/* Blobs doux en arrière-plan */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 left-1/4 h-80 w-80 rounded-full bg-orange-400/20 watercolor-blob" />
@@ -453,7 +453,7 @@ const APropos = () => {
 
         <div className="container relative z-10">
           <motion.div
-            initial={{ opacity: 10, y: 60 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 15 }}
             viewport={{ once: true }}
             className="mx-auto max-w-3xl"

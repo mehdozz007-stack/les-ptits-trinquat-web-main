@@ -90,7 +90,7 @@ export function NewsletterSection() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
             La newsletter <span className="text-gradient">des P'tits Trinquat</span> 💌
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-base md:text-base lg:text-lg text-muted-foreground text-center">
             Recevez les actualités de l'école, les événements et les belles initiatives
             de l'association, directement dans votre boîte mail.
           </p>
@@ -224,7 +224,7 @@ export function NewsletterSection() {
                           onCheckedChange={(checked) => setConsent(checked === true)}
                           className="mt-0.5"
                         />
-                        <Label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                        <Label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
                           J'accepte de recevoir la newsletter des P'tits Trinquat.
                           Je peux me désinscrire à tout moment. <span className="text-destructive">*</span>
                         </Label>

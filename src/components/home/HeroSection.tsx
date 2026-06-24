@@ -241,7 +241,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="mb-8 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed"
+              className="mb-8 text-base sm:text-base md:text-lg text-muted-foreground leading-relaxed"
             >
               L'association Les P'tits Trinquat rassemble les parents d'élèves du groupe scolaire <strong className="font-bold text-foreground">Anne FRANK - Charles DICKENS</strong>,
               pour accompagner et enrichir la vie scolaire de nos enfants à travers des événements, des projets
