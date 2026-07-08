@@ -67,7 +67,7 @@ const officialPartners = [
     name: "Trinquat Compagnie",
     logo: logoTrinquat,
     alt: "Logo Trinquat Compagnie",
-    website: "https://www.helloasso.com/associations/trinquat-et-compagnie",
+    website: "https://www.trinquatetcompagnie.fr/",
   },
 ];
 
@@ -211,12 +211,12 @@ export function Footer() {
               © {new Date().getFullYear()} Les P'tits Trinquat. Tous droits réservés.
             </p>
             <div className="flex gap-4">
-              <a href="/documents/mentions-legales.pdf" target="_blank" rel="noopener noreferrer" className="text-sm text-background/50 hover:text-primary">
+              <Link to="/mentions-legales" className="text-sm text-background/50 hover:text-primary">
                 Mentions légales
-              </a>
-              <a href="/documents/confidentialite.pdf" target="_blank" rel="noopener noreferrer" className="text-sm text-background/50 hover:text-primary">
-                Confidentialité
-              </a>
+              </Link>
+              <Link to="/politique-confidentialite" className="text-sm text-background/50 hover:text-primary">
+                Politique de confidentialité
+              </Link>
             </div>
           </div>
         </div>

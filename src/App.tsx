@@ -27,6 +27,8 @@ const AdminNewsletterAuth = React.lazy(() => import("./pages/AdminNewsletterAuth
 const NotreEcole = React.lazy(() => import("./pages/NotreEcole2"));
 const TombolaSecret = React.lazy(() => import("./pages/TombolaSecret"));
 const AdminTombolaSecret = React.lazy(() => import("./pages/AdminTombolaSecret"));
+const MentionsLegales = React.lazy(() => import("./pages/MentionsLegales"));
+const PolitiqueConfidentialite = React.lazy(() => import("./pages/PolitiqueConfidentialite"));
 
 const queryClient = new QueryClient();
 
@@ -78,6 +80,8 @@ const App = () => (
               <Route path="/admin/newsletter" element={<AdminNewsletter />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/message-envoye" element={<MessageEnvoye />} />
+              <Route path="/mentions-legales" element={<MentionsLegales />} />
+              <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
