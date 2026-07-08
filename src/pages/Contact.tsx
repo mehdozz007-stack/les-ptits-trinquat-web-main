@@ -234,7 +234,7 @@ const Contact = () => {
                     </div>
                   </div>
                   {/* Link */}
-                  <Button
+                  {/*<Button
                     variant="ghost"
                     size="sm"
                     className="w-auto h-fit ml-auto text-xs sm:text-sm"
@@ -246,10 +246,10 @@ const Contact = () => {
                       rel="noopener noreferrer"
                       className="flex items-center gap-1"
                     >
-                      Voir sur DigiPad
+                      Voir sur DigiPad code 34000
                       <ExternalLink className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                     </a>
-                  </Button>
+                  </Button>*/}
                 </CardContent>
               </Card>
 

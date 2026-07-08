@@ -250,12 +250,12 @@ const NotreEcole = () => {
                   Accéder à l'ENT
                 </a>
               </Button>
-              <Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">
+              {/*<Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">
                 <a href="https://digipad.app/p/1394770/39b6b0ff88979" target="_blank" rel="noopener noreferrer">
                   <BookOpen className="mr-2 h-5 w-5" />
                   Consulter le DigiPad (code 34000)
                 </a>
-              </Button>
+              </Button>*/}
               <Button asChild size="lg" className="text-sm md:text-lg px-3 md:px-4 py-1.5 md:py-2 w-full sm:w-auto bg-gradient-to-r from-primary via-secondary text-primary-foreground hover:shadow-glow transition-shadow">
                 <a href="https://alsh34.wixsite.com/centre" target="_blank" rel="noopener noreferrer">
                   <Music className="mr-2 h-5 w-5" />
