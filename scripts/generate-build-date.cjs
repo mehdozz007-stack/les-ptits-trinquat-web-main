@@ -8,10 +8,10 @@ const path = require('path');
 
 // Formatter la date en français (DD/MM/YYYY)
 function formatDateFR(date) {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
 }
 
 // Générer la date du build
@@ -32,7 +32,7 @@ export const LAST_UPDATE_DATE = '${buildDate}';
 // Créer le répertoire s'il n'existe pas
 const dir = path.dirname(buildInfoPath);
 if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir, { recursive: true });
+    fs.mkdirSync(dir, { recursive: true });
 }
 
 // Écrire le fichier
