@@ -70,10 +70,10 @@ export default function Auth() {
                         >
                             <AuthTombolaForm
                                 onAuthSuccess={() => {
-                                    // Redirection automatique après succès
+                                    // Redirection automatique après succès avec délai pour que useCurrentUser traite le token
                                     setTimeout(() => {
                                         navigate('/tombola', { replace: true });
-                                    }, 500);
+                                    }, 1000);
                                 }}
                             />
                         </motion.div>

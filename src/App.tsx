@@ -26,7 +26,9 @@ const AdminNewsletter = React.lazy(() => import("./pages/AdminNewsletter"));
 const AdminNewsletterAuth = React.lazy(() => import("./pages/AdminNewsletterAuth"));
 const NotreEcole = React.lazy(() => import("./pages/NotreEcole2"));
 const TombolaSecret = React.lazy(() => import("./pages/TombolaSecret"));
+const TombolaProtected = React.lazy(() => import("./pages/TombolaProtected"));
 const AdminTombolaSecret = React.lazy(() => import("./pages/AdminTombolaSecret"));
+const AdminTombola = React.lazy(() => import("./pages/AdminTombola"));
 const MentionsLegales = React.lazy(() => import("./pages/MentionsLegales"));
 const PolitiqueConfidentialite = React.lazy(() => import("./pages/PolitiqueConfidentialite"));
 
@@ -73,9 +75,9 @@ const App = () => (
               {/* Pages d'authentification et tombola */}
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin/newsletter/auth" element={<AdminNewsletterAuth />} />
-              <Route path="/tombola" element={<NotFound />} />
+              <Route path="/tombola" element={<TombolaProtected />} />
               <Route path="/tombola/:token" element={<TombolaSecret />} />
-              <Route path="/admin/tombola" element={<NotFound />} />
+              <Route path="/admin/tombola" element={<AdminTombola />} />
               <Route path="/admin/tombola/:token" element={<AdminTombolaSecret />} />
               <Route path="/admin/newsletter" element={<AdminNewsletter />} />
               <Route path="/contact" element={<Contact />} />

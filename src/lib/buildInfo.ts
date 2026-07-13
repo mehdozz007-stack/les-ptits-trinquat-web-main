@@ -3,5 +3,5 @@
  * Generated at build time with the deployment date
  */
 
-export const BUILD_DATE = '08/07/2026';
-export const LAST_UPDATE_DATE = '08/07/2026';
+export const BUILD_DATE = '13/07/2026';
+export const LAST_UPDATE_DATE = '13/07/2026';

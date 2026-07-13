@@ -4,6 +4,12 @@ import { apiUrl } from '@/lib/api-config';
 const TOKEN_STORAGE_KEY = 'tombola_auth_token';
 const USER_STORAGE_KEY = 'tombola_current_user';
 
+// Tokens secrets pour accès développeur
+const SECRET_TOKENS = {
+    'dev-mehdi-tombola-2026-secret': { id: 'dev-user', email: 'dev@tombola.local' },
+    'dev-mehdi-admin-tombola-2026-secret': { id: 'dev-admin', email: 'admin@tombola.local' }
+};
+
 export interface CurrentUser {
     id: string;
     email: string;
@@ -14,6 +20,7 @@ export interface CurrentUser {
  * Hook pour gérer l'authentification utilisateur
  * Stocke le token et les infos utilisateur dans localStorage
  * Vérifie la validité du token au chargement
+ * Accepte les tokens secrets pour accès développeur
  */
 export function useCurrentUser() {
     const [user, setUser] = useState<CurrentUser | null>(null);
@@ -33,7 +40,20 @@ export function useCurrentUser() {
             }
 
             try {
-                // Vérifier que le token est valide
+                // Vérifier si c'est un token secret valide
+                const secretUser = SECRET_TOKENS[token as keyof typeof SECRET_TOKENS];
+                if (secretUser) {
+                    const currentUser: CurrentUser = {
+                        id: secretUser.id,
+                        email: secretUser.email,
+                        token
+                    };
+                    setUser(currentUser);
+                    setLoading(false);
+                    return;
+                }
+
+                // Sinon, vérifier via l'API
                 const response = await fetch(apiUrl('/auth/me'), {
                     headers: {
                         'Authorization': `Bearer ${token}`,
