@@ -113,7 +113,7 @@ export const actualitesData: Actualite[] = [
         content: "Guide à destination des parents pour préparer les fournitures scolaires de leurs enfants pour l'année 2026-2027.",
         type: "document",
         date: "2026-06-30",
-        fileUrl: "/documents/fournitures-rentree-2026-2027.pdf",
+        fileUrl: "/documents/fouritures-rentree-2026-2027.PDF",
         color: "accent",
         status: "upcoming",
     },
