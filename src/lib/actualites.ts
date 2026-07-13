@@ -108,7 +108,7 @@ export const actualitesData: Actualite[] = [
     },
     {
         id: "act-014",
-        title: "Fournitures scolaires 2026-2027 : Liste et recommandations",
+        title: "Fournitures scolaires 2026-2027",
         description: "Liste des fournitures scolaires pour l'année 2026-2027 avec recommandations pour chaque niveau.",
         content: "Guide à destination des parents pour préparer les fournitures scolaires de leurs enfants pour l'année 2026-2027.",
         type: "document",
