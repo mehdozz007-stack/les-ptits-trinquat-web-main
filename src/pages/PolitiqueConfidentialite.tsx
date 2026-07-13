@@ -18,8 +18,10 @@ const PolitiqueConfidentialite = () => {
                     <ul className="space-y-2 list-disc list-inside">
                         <li><strong>Association Les P'tits Trinquat</strong></li>
                         <li>Association de parents d'élèves (loi 1901)</li>
-                        <li>Contact : <a href="mailto:parents.frank.dickens@gmail.com" className="text-primary hover:underline">parents.frank.dickens@gmail.com</a></li>
+                        <li><strong>Adresse :</strong> École Frank Dickens, 686 avenue Pont Trinquat, 34070 Montpellier</li>
+                        <li><strong>Contact :</strong> <a href="mailto:parents.frank.dickens@gmail.com" className="text-primary hover:underline">parents.frank.dickens@gmail.com</a></li>
                     </ul>
+                    <p className="text-sm text-muted-foreground italic mt-3">En cas de question concernant vos données, n'hésitez pas à nous contacter directement.</p>
                 </div>
             ),
         },
@@ -30,14 +32,14 @@ const PolitiqueConfidentialite = () => {
                 <div className="space-y-3">
                     <p>Dans le cadre de ses activités et via les formulaires présents sur le site, l'association peut être amenée à collecter les données personnelles suivantes :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Nom et prénom</li>
-                        <li>Adresse e-mail</li>
-                        <li>Numéro de téléphone</li>
-                        <li>Nom de l'enfant et sa classe (le cas échéant)</li>
-                        <li>Données transmises via les formulaires de contact ou d'adhésion</li>
-                        <li>Données de navigation (cookies, adresse IP, statistiques anonymisées)</li>
-                        <li><strong>Aucune donnée dite « sensible » n'est collectée</strong> (origine, opinions, santé, etc.)</li>
+                        <li><strong>Données d'identité :</strong> Nom et prénom</li>
+                        <li><strong>Données de contact :</strong> Adresse e-mail, numéro de téléphone</li>
+                        <li><strong>Données scolaires :</strong> Nom de l'enfant et sa classe (le cas échéant)</li>
+                        <li><strong>Données de participation :</strong> Informations transmises via les formulaires de contact, d'adhésion ou d'inscription à des événements</li>
+                        <li><strong>Données de navigation :</strong> Cookies, adresse IP, statistiques anonymisées de fréquentation</li>
+                        <li><strong>Données liées aux événements :</strong> Préférences, commentaires et contributions aux activités de l'association</li>
                     </ul>
+                    <p className="mt-3"><strong>Important :</strong> Aucune donnée dite « sensible » n'est collectée (origine, opinions politiques, croyances religieuses, données de santé, etc.)</p>
                 </div>
             ),
         },
@@ -48,27 +50,30 @@ const PolitiqueConfidentialite = () => {
                 <div className="space-y-3">
                     <p>Les données personnelles sont collectées uniquement afin de permettre à l'association de fonctionner et de rester en contact avec les familles :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Gestion des adhésions à l'association</li>
-                        <li>Communication avec les parents d'élèves</li>
-                        <li>Organisation d'événements scolaires et associatifs</li>
-                        <li>Envoi d'informations, actualités ou convocations</li>
-                        <li>Réponse aux demandes effectuées via le site</li>
-                        <li>Amélioration du fonctionnement et du contenu du site</li>
+                        <li>Gestion des adhésions à l'association et suivi des cotisations</li>
+                        <li>Communication avec les parents d'élèves concernant les activités et les événements</li>
+                        <li>Organisation d'événements scolaires et associatifs (sorties, tombola, réunions, ateliers)</li>
+                        <li>Envoi d'informations, actualités, convocations et newsletters</li>
+                        <li>Réponse aux demandes effectuées via les formulaires de contact</li>
+                        <li>Amélioration du fonctionnement et du contenu du site web</li>
+                        <li>Conformité avec les obligations légales et administratives</li>
+                        <li>Gestion administrative et comptable de l'association</li>
                     </ul>
-                    <p className="text-sm italic text-muted-foreground mt-4">Les données ne sont jamais utilisées à des fins commerciales et ne servent qu'à la vie de l'association.</p>
+                    <p className="text-sm italic text-muted-foreground mt-4"><strong>Important :</strong> Les données ne sont jamais utilisées à des fins commerciales ou de marketing externe. Elles servent exclusivement à la vie de l'association.</p>
                 </div>
             ),
         },
         {
             icon: Shield,
-            title: "4. Sur quelle base utilisons-nous vos données ?",
+            title: "4. Sur quelle base légale utilisons-nous vos données ?",
             content: (
                 <div className="space-y-3">
-                    <p>Le traitement des données repose sur :</p>
+                    <p>Le traitement des données repose sur les fondements légaux suivants :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Le consentement de l'utilisateur</li>
-                        <li>L'intérêt légitime de l'association dans le cadre de ses activités</li>
-                        <li>Les obligations légales liées à la gestion associative</li>
+                        <li><strong>Consentement :</strong> Le consentement explicite que vous donnez en remplissant nos formulaires</li>
+                        <li><strong>Intérêt légitime :</strong> L'intérêt légitime de l'association dans le cadre de ses activités de communication et d'organisation d'événements</li>
+                        <li><strong>Obligations légales :</strong> Les obligations légales liées à la gestion associative, comptable et administrative</li>
+                        <li><strong>Exécution d'un contrat :</strong> Les données nécessaires au traitement de votre adhésion ou participation à des événements</li>
                     </ul>
                 </div>
             ),
@@ -78,12 +83,13 @@ const PolitiqueConfidentialite = () => {
             title: "5. Qui peut accéder aux données ?",
             content: (
                 <div className="space-y-3">
-                    <p>Les données personnelles sont destinées exclusivement :</p>
+                    <p>Les données personnelles sont destinées exclusivement à :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Aux membres du bureau de l'association habilités</li>
-                        <li>Aux prestataires techniques strictement nécessaires (hébergement du site, outils de messagerie)</li>
+                        <li><strong>Membres du bureau :</strong> Les membres du bureau de l'association habilités et autorisés à accéder aux données pour les besoins de gestion</li>
+                        <li><strong>Prestataires techniques :</strong> Les prestataires techniques strictement nécessaires au fonctionnement du site (hébergement, outils d'email, services de formulaires)</li>
                     </ul>
-                    <p className="mt-3"><strong>Les données ne sont ni vendues, ni louées, ni cédées à des tiers.</strong></p>
+                    <p className="mt-3"><strong>Garantie importante :</strong> Les données ne sont ni vendues, ni louées, ni cédées à des tiers sans votre consentement explicite.</p>
+                    <p className="text-sm text-muted-foreground italic mt-2">Tous les prestataires ont signé des clauses de confidentialité appropriées.</p>
                 </div>
             ),
         },
@@ -92,13 +98,15 @@ const PolitiqueConfidentialite = () => {
             title: "6. Combien de temps conservons-nous les données ?",
             content: (
                 <div className="space-y-3">
-                    <p>Les données personnelles sont conservées :</p>
+                    <p>Les données personnelles sont conservées selon les durées suivantes :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Pendant la durée de l'adhésion à l'association</li>
-                        <li>Jusqu'à 3 ans après le dernier contact pour les non-adhérents</li>
-                        <li>Conformément aux obligations légales pour les documents comptables ou administratifs</li>
-                        <li>Au-delà, les données sont supprimées ou anonymisées.</li>
+                        <li><strong>Adhésions actives :</strong> Pendant la durée de l'adhésion à l'association</li>
+                        <li><strong>Anciens adhérents :</strong> Jusqu'à 3 ans après le dernier contact (sauf droit à l'oubli exprimé)</li>
+                        <li><strong>Contacts de formulaire :</strong> Pendant 2 ans pour assurer le suivi des demandes</li>
+                        <li><strong>Documents comptables :</strong> Conformément aux obligations légales (généralement 6 ans pour les documents comptables)</li>
+                        <li><strong>Données de navigation :</strong> Les logs techniques sont conservés pendant 90 jours maximum</li>
                     </ul>
+                    <p className="mt-3">Au-delà de ces périodes, les données sont supprimées ou anonymisées de manière irréversible.</p>
                 </div>
             ),
         },
@@ -107,26 +115,32 @@ const PolitiqueConfidentialite = () => {
             title: "7. Comment protégeons-nous vos données ?",
             content: (
                 <div className="space-y-3">
-                    <p>L'association met en œuvre toutes les mesures techniques et organisationnelles appropriées pour assurer la sécurité et la confidentialité des données personnelles, notamment :</p>
+                    <p>L'association met en œuvre toutes les mesures techniques et organisationnelles appropriées pour assurer la sécurité et la confidentialité des données personnelles :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Accès restreint aux données</li>
-                        <li>Hébergement sécurisé</li>
-                        <li>Mots de passe protégés</li>
+                        <li><strong>Accès restreint :</strong> Les données ne sont accessibles qu'aux personnes autorisées</li>
+                        <li><strong>Hébergement sécurisé :</strong> Utilisation de Cloudflare pour une infrastructure sécurisée et protégée</li>
+                        <li><strong>Mots de passe :</strong> Tous les accès sont protégés par des mots de passe forts</li>
+                        <li><strong>Chiffrement :</strong> Les données en transit sont chiffrées (HTTPS)</li>
+                        <li><strong>Confidentialité :</strong> Seul le personnel autorisé a accès aux données sensibles</li>
+                        <li><strong>Mises à jour :</strong> Les systèmes sont régulièrement mis à jour pour corriger les vulnérabilités</li>
                     </ul>
+                    <p className="text-sm text-muted-foreground italic mt-3">Malgré toutes nos précautions, aucune sécurité n'est garantie à 100%.</p>
                 </div>
             ),
         },
         {
             icon: Info,
-            title: "8. Cookies et navigation sur le site",
+            title: "8. Cookies et technologies de suivi",
             content: (
                 <div className="space-y-3">
                     <p>Le site peut utiliser des cookies pour :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Assurer le bon fonctionnement du site</li>
-                        <li>Réaliser des statistiques de fréquentation anonymes</li>
+                        <li>Assurer le bon fonctionnement du site et de ses fonctionnalités</li>
+                        <li>Mémoriser vos préférences de navigation</li>
+                        <li>Réaliser des statistiques de fréquentation anonymes et améliorer l'expérience utilisateur</li>
                     </ul>
-                    <p className="mt-3">L'utilisateur peut configurer son navigateur pour refuser tout ou partie des cookies.</p>
+                    <p className="mt-3"><strong>Aucun cookie publicitaire ou de suivi intrusif n'est utilisé.</strong></p>
+                    <p className="text-sm text-muted-foreground mt-2">L'utilisateur peut configurer son navigateur pour refuser tout ou partie des cookies. Cependant, cela pourrait affecter le bon fonctionnement du site et certaines de ses fonctionnalités.</p>
                 </div>
             ),
         },
@@ -135,37 +149,44 @@ const PolitiqueConfidentialite = () => {
             title: "9. Vos droits",
             content: (
                 <div className="space-y-3">
-                    <p>Conformément à la réglementation en vigueur, chaque utilisateur dispose des droits suivants :</p>
+                    <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, chaque personne dispose des droits fondamentaux suivants :</p>
                     <ul className="space-y-2 list-disc list-inside">
-                        <li>Droit d'accès à ses données</li>
-                        <li>Droit de rectification</li>
-                        <li>Droit d'effacement (droit à l'oubli)</li>
-                        <li>Droit à la limitation du traitement</li>
-                        <li>Droit d'opposition</li>
-                        <li>Droit à la portabilité des données</li>
+                        <li><strong>Droit d'accès :</strong> Accès à l'ensemble de vos données personnelles traitées</li>
+                        <li><strong>Droit de rectification :</strong> Correction de données inexactes ou incomplètes</li>
+                        <li><strong>Droit à l'effacement (droit à l'oubli) :</strong> Suppression de vos données dans certaines conditions</li>
+                        <li><strong>Droit à la limitation :</strong> Limitation du traitement de vos données</li>
+                        <li><strong>Droit d'opposition :</strong> Opposition au traitement de vos données</li>
+                        <li><strong>Droit à la portabilité :</strong> Récupération de vos données dans un format structuré et exploitable</li>
+                        <li><strong>Droit de retirer le consentement :</strong> Retrait du consentement à tout moment</li>
                     </ul>
                     <p className="mt-4">Toute demande peut être adressée simplement par e-mail à :</p>
                     <p className="font-semibold"><a href="mailto:parents.frank.dickens@gmail.com" className="text-primary hover:underline">parents.frank.dickens@gmail.com</a></p>
-                    <p className="text-sm italic text-muted-foreground mt-2">L'association s'engage à répondre dans les meilleurs délais.</p>
+                    <p className="text-sm italic text-muted-foreground mt-2">L'association s'engage à répondre à votre demande dans les meilleurs délais, dans un délai maximum d'un mois.</p>
                 </div>
             ),
         },
         {
             icon: AlertCircle,
-            title: "10. Réclamation",
+            title: "10. Réclamation auprès de l'autorité compétente",
             content: (
                 <div className="space-y-3">
-                    <p>En cas de litige non résolu, l'utilisateur peut déposer une réclamation auprès de la <strong>CNIL</strong></p>
-                    <p><a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">www.cnil.fr</a></p>
+                    <p>En cas de litige non résolu ou si vous considérez que vos droits ne sont pas respectés, vous avez le droit de déposer une réclamation auprès de l'autorité compétente :</p>
+                    <p className="mt-3"><strong>Commission Nationale de l'Informatique et des Libertés (CNIL)</strong></p>
+                    <ul className="space-y-2 list-disc list-inside">
+                        <li>Site web : <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">www.cnil.fr</a></li>
+                        <li>Adresse : 3 Place de Fontenoy, 75007 Paris, France</li>
+                    </ul>
+                    <p className="text-sm text-muted-foreground italic mt-3">Nous vous recommandons de nous contacter en premier lieu pour résoudre tout litige.</p>
                 </div>
             ),
         },
         {
             icon: Info,
-            title: "11. Modification de la charte",
+            title: "11. Modification de la charte de confidentialité",
             content: (
                 <div className="space-y-3">
-                    <p>La présente charte peut être modifiée à tout moment afin de se conformer aux évolutions légales ou techniques. La version en vigueur est celle publiée sur le site.</p>
+                    <p>La présente charte peut être modifiée à tout moment afin de se conformer aux évolutions légales, réglementaires ou techniques. La version en vigueur est celle publiée sur le site.</p>
+                    <p className="mt-3">En cas de modifications importantes, nous nous engageons à vous informer par email ou via une notification sur le site.</p>
                     <p className="text-sm italic text-muted-foreground mt-4"><strong>Dernière mise à jour :</strong> {LAST_UPDATE_DATE}</p>
                 </div>
             ),

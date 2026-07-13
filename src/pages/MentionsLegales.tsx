@@ -14,20 +14,20 @@ const MentionsLegales = () => {
             title: "Qui sommes-nous ?",
             content: (
                 <div className="space-y-3">
-                    <p>Ce site est édité par l'association de parents d'élèves <strong>Les P'tits Trinquat</strong>. Association loi 1901 à but non lucratif.</p>
+                    <p>Ce site est édité par l'association de parents d'élèves <strong>Les P'tits Trinquat</strong>. Association loi 1901 à but non lucratif regroupant les parents et les familles de l'école Frank Dickens à Montpellier.</p>
                     <div className="space-y-2">
                         <div className="flex items-start gap-3">
                             <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <div>
                                 <strong>Adresse :</strong>
-                                <p>École Frank Dickens, 686 avenue pont trinquat, 34070, Montpellier</p>
+                                <p>École Frank Dickens<br/>686 avenue Pont Trinquat<br/>34070 Montpellier</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-3">
                             <Mail className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <div>
                                 <strong>Contact :</strong>
-                                <p>parents.frank.dickens@gmail.com</p>
+                                <p><a href="mailto:parents.frank.dickens@gmail.com" className="text-primary hover:underline">parents.frank.dickens@gmail.com</a></p>
                             </div>
                         </div>
                     </div>
@@ -38,21 +38,25 @@ const MentionsLegales = () => {
             icon: FileText,
             title: "Responsable du site",
             content: (
-                <p>Le site est géré bénévolement par les membres du bureau de l'association.</p>
+                <div className="space-y-3">
+                    <p>Le site est géré bénévolement par les membres du bureau de l'association. L'ensemble de l'équipe s'engage à maintenir le site en bon état de fonctionnement et à assurer la qualité des informations publiées.</p>
+                    <p className="text-sm italic text-muted-foreground">Pour toute question ou réclamation concernant le contenu du site, veuillez nous contacter par e-mail.</p>
+                </div>
             ),
         },
         {
             icon: Globe,
-            title: "Hébergement",
+            title: "Hébergement et infrastructure technique",
             content: (
                 <div className="space-y-3">
-                    <p>Le site est hébergé par : <strong>CloudFlare Pages</strong></p>
+                    <p>Le site est hébergé par : <strong>Cloudflare Pages</strong></p>
+                    <p className="text-sm text-muted-foreground">Cloudflare fournit l'infrastructure de distribution de contenu (CDN) et d'hébergement du site pour assurer sa disponibilité et sa performance.</p>
                     <div className="space-y-2">
                         <div className="flex items-start gap-3">
                             <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <div>
-                                <strong>Adresse :</strong>
-                                <p>Cloudflare, Inc. Att Legal Department 101 Townsend St, San Francisco, CA 94107</p>
+                                <strong>Siège social :</strong>
+                                <p>Cloudflare, Inc.<br/>Att Legal Department<br/>101 Townsend St<br/>San Francisco, CA 94107<br/>États-Unis</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-3">
@@ -68,42 +72,104 @@ const MentionsLegales = () => {
         },
         {
             icon: FileText,
-            title: "Utilisation du site",
+            title: "Propriété intellectuelle et utilisation du contenu",
             content: (
                 <div className="space-y-3">
-                    <p>Le contenu de ce site (textes, images, logos, documents) est destiné à informer les familles sur la vie de l'association et les événements liés à l'école.</p>
-                    <p>Sauf mention contraire, les contenus sont la propriété de l'association. Merci de ne pas les utiliser sans autorisation 😊</p>
+                    <p>Le contenu de ce site (textes, images, logos, documents, vidéos) est destiné à informer les familles sur la vie de l'association et les événements liés à l'école.</p>
+                    <p><strong>Droits d'auteur :</strong> Sauf mention contraire, l'ensemble des contenus publiés sur ce site sont la propriété de l'association ou de leurs auteurs respectifs. Toute reproduction, adaptation ou représentation, totale ou partielle, du contenu de ce site est interdite sans l'autorisation préalable écrite de l'association.</p>
+                    <p className="text-sm italic text-muted-foreground">Les logos, marques et éléments graphiques utilisés sur le site sont protégés par les lois en vigueur sur la propriété intellectuelle.</p>
                 </div>
             ),
         },
         {
             icon: Lock,
-            title: "Données personnelles",
+            title: "Données personnelles et formulaires",
             content: (
                 <div className="space-y-3">
                     <p>Nous respectons votre vie privée ❤️</p>
                     <ul className="space-y-2 list-disc list-inside">
                         <li>Le site ne collecte que les informations nécessaires (par exemple via le formulaire de contact).</li>
                         <li>Ces données servent uniquement à répondre à vos messages ou à la vie de l'association.</li>
-                        <li>Aucune donnée n'est vendue ou transmise à des tiers.</li>
+                        <li>Aucune donnée n'est vendue, louée ou transmise à des tiers sans votre consentement.</li>
+                        <li>Les données peuvent être partagées avec des prestataires techniques strictement nécessaires (hébergement, email).</li>
                     </ul>
-                    <p className="text-sm text-muted-foreground italic mt-4">Conformément à la loi, vous pouvez demander :</p>
-                    <ul className="space-y-2 list-disc list-inside">
-                        <li>L'accès à vos données</li>
-                        <li>Leur modification</li>
-                        <li>Leur suppression</li>
+                    <p className="text-sm text-muted-foreground italic mt-4"><strong>Conformément aux lois sur la protection des données (RGPD), vous avez le droit de :</strong></p>
+                    <ul className="space-y-2 list-disc list-inside mt-2">
+                        <li>Accéder à vos données</li>
+                        <li>Demander leur modification</li>
+                        <li>Demander leur suppression</li>
+                        <li>Vous opposer à leur traitement</li>
                     </ul>
-                    <p>📮 Il suffit de nous contacter via le formulaire du site</p>
+                    <p className="mt-4">📮 <strong>Pour exercer ces droits :</strong> Veuillez nous contacter via le formulaire du site ou par email à <a href="mailto:parents.frank.dickens@gmail.com" className="text-primary hover:underline">parents.frank.dickens@gmail.com</a></p>
                 </div>
             ),
         },
         {
             icon: FileText,
-            title: "Cookies",
+            title: "Cookies et technologies de suivi",
             content: (
                 <div className="space-y-3">
-                    <p>Ce site peut utiliser des cookies techniques pour fonctionner correctement.</p>
-                    <p>Aucun cookie publicitaire ou de suivi intrusif n'est utilisé.</p>
+                    <p>Ce site peut utiliser des cookies techniques pour fonctionner correctement, notamment pour :</p>
+                    <ul className="space-y-2 list-disc list-inside">
+                        <li>Assurer le bon fonctionnement du site et de ses fonctionnalités</li>
+                        <li>Maintenir votre session utilisateur</li>
+                        <li>Réaliser des statistiques de fréquentation anonymes</li>
+                    </ul>
+                    <p className="mt-3"><strong>Aucun cookie publicitaire ou de suivi intrusif n'est utilisé.</strong></p>
+                    <p className="text-sm text-muted-foreground">L'utilisateur peut configurer son navigateur pour refuser tout ou partie des cookies. Cependant, cela peut affecter le bon fonctionnement du site.</p>
+                </div>
+            ),
+        },
+        {
+            icon: Globe,
+            title: "Liens externes et sites tiers",
+            content: (
+                <div className="space-y-3">
+                    <p>Ce site peut contenir des liens vers d'autres sites externes. L'association ne peut pas être responsable du contenu, des pratiques de confidentialité ou de la disponibilité de ces sites externes.</p>
+                    <p className="text-sm italic text-muted-foreground">En cliquant sur un lien externe, vous acceptez de quitter notre site et de consulter le site tiers à vos propres risques.</p>
+                </div>
+            ),
+        },
+        {
+            icon: Lock,
+            title: "Limitation de responsabilité",
+            content: (
+                <div className="space-y-3">
+                    <p>L'association met tous les efforts raisonnables pour assurer l'exactitude et l'actualité des informations publiées sur ce site. Cependant :</p>
+                    <ul className="space-y-2 list-disc list-inside">
+                        <li>Les informations sont fournies « telles quelles » sans garantie d'aucune sorte</li>
+                        <li>L'association ne peut être tenue responsable des erreurs ou omissions</li>
+                        <li>L'association décline toute responsabilité en cas d'indisponibilité du site ou de dysfonctionnement technique</li>
+                        <li>L'association ne peut être responsable des dommages directs ou indirects résultant de l'utilisation du site</li>
+                    </ul>
+                </div>
+            ),
+        },
+        {
+            icon: FileText,
+            title: "Modifications et mise à jour",
+            content: (
+                <div className="space-y-3">
+                    <p>L'association se réserve le droit de modifier le contenu de ce site, ses services et ces mentions légales à tout moment et sans préavis.</p>
+                    <p>Les utilisateurs sont invités à consulter régulièrement cette page pour connaître les éventuelles modifications.</p>
+                    <p className="text-sm italic text-muted-foreground"><strong>Dernière mise à jour :</strong> {LAST_UPDATE_DATE}</p>
+                </div>
+            ),
+        },
+        {
+            icon: FileText,
+            title: "Conditions d'accès et d'utilisation",
+            content: (
+                <div className="space-y-3">
+                    <p>En accédant et en utilisant ce site, vous acceptez :</p>
+                    <ul className="space-y-2 list-disc list-inside">
+                        <li>Les présentes mentions légales</li>
+                        <li>Notre politique de confidentialité</li>
+                        <li>D'utiliser le site à des fins légales et conformément à la loi</li>
+                        <li>De ne pas transmettre de contenus offensants, diffamatoires ou illégaux</li>
+                        <li>De respecter les droits d'auteur et la propriété intellectuelle</li>
+                    </ul>
+                    <p className="mt-3">L'association se réserve le droit de suspendre ou d'interdire l'accès au site en cas de non-respect de ces conditions.</p>
                 </div>
             ),
         },
