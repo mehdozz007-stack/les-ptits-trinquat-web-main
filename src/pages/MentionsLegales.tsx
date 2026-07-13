@@ -20,7 +20,7 @@ const MentionsLegales = () => {
                             <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <div>
                                 <strong>Adresse :</strong>
-                                <p>École Frank Dickens<br/>686 avenue Pont Trinquat<br/>34070 Montpellier</p>
+                                <p>École Frank Dickens<br />686 avenue Pont Trinquat<br />34070 Montpellier</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-3">
@@ -56,7 +56,7 @@ const MentionsLegales = () => {
                             <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                             <div>
                                 <strong>Siège social :</strong>
-                                <p>Cloudflare, Inc.<br/>Att Legal Department<br/>101 Townsend St<br/>San Francisco, CA 94107<br/>États-Unis</p>
+                                <p>Cloudflare, Inc.<br />Att Legal Department<br />101 Townsend St<br />San Francisco, CA 94107<br />États-Unis</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-3">
