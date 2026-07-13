@@ -107,6 +107,17 @@ export const actualitesData: Actualite[] = [
         status: "past",
     },
     {
+        id: "act-014",
+        title: "Fournitures scolaires 2026-2027 : Liste et recommandations",
+        description: "Liste des fournitures scolaires pour l'année 2026-2027 avec recommandations pour chaque niveau.",
+        content: "Guide à destination des parents pour préparer les fournitures scolaires de leurs enfants pour l'année 2026-2027.",
+        type: "document",
+        date: "2026-06-30",
+        fileUrl: "/documents/fournitures-rentree-2026-2027.pdf",
+        color: "accent",
+        status: "upcoming",
+    },
+    {
         id: "act-008",
         title: "Fiche RSST",
         description: "Document de sécurité relatif à l'organisation de la sécurité, de la santé et des conditions de travail à l'école.",
