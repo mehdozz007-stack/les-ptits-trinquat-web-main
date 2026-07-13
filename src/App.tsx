@@ -71,7 +71,7 @@ const App = () => (
               <Route path="/comptes-rendus" element={<NotFound />} />
               <Route path="/partenaires" element={<Partenaires />} />
               {/* Pages d'authentification et tombola */}
-              <Route path="/auth" element={<NotFound />} />
+              <Route path="/auth" element={<Auth />} />
               <Route path="/admin/newsletter/auth" element={<AdminNewsletterAuth />} />
               <Route path="/tombola" element={<NotFound />} />
               <Route path="/tombola/:token" element={<TombolaSecret />} />
