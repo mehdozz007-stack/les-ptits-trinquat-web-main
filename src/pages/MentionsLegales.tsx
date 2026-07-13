@@ -217,8 +217,8 @@ const MentionsLegales = () => {
                                     className="space-y-4"
                                 >
                                     <div className="flex items-center gap-3">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                                            <Icon className="h-6 w-6 text-primary" />
+                                        <div className="flex h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                                            <Icon className="h-6 w-6 sm:h-7 sm:w-7 flex-shrink-0 text-primary" />
                                         </div>
                                         <h2 className="text-2xl font-bold text-foreground">{section.title}</h2>
                                     </div>
