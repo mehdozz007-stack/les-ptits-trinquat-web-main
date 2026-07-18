@@ -76,10 +76,10 @@ export function ActualitesPreview() {
                         <motion.div
                             animate={{ scale: [1, 1.1, 1] }}
                             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                            className="flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7B42] to-[#C55FA8] shadow-md flex-shrink-0"
+                            className="flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7B42] to-[#C55FA8] shadow-md flex-shrink-0"
                         >
 
-                            <FileText className="h-10 w-10 sm:h-8 sm:w-8 text-white" />
+                            <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                         </motion.div>
                     </div>
                     <h2 className="mb-4 text-3xl sm:text-3xl text-center font-extrabold md:text-4xl">
