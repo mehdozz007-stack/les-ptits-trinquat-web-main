@@ -11,14 +11,8 @@ if os.path.exists(favicon_path):
     # Convertir en RGB si nécessaire
     if favicon.mode != 'RGB':
         favicon = favicon.convert('RGB')
-    # Redimensionner le favicon pour tenir dans 1200x630
-    favicon.thumbnail((width, height), Image.Resampling.LANCZOS)
-    # Créer image de fond blanc
-    image = Image.new('RGB', (width, height), color=(255, 255, 255))
-    # Centrer le favicon
-    x = (width - favicon.width) // 2
-    y = (height - favicon.height) // 2
-    image.paste(favicon, (x, y))
+    # Redimensionner le favicon exactement à 1200x630
+    image = favicon.resize((width, height), Image.Resampling.LANCZOS)
 else:
     print(f"❌ Fichier non trouvé: {favicon_path}")
     exit(1)
