@@ -8,7 +8,7 @@ width, height = 1200, 630
 image = Image.new('RGB', (width, height), color=(255, 255, 255))
 
 # Charger le logo OG existant
-logo_path = 'public/logoAsso-og.jpg'
+logo_path = 'public/favicon.ico'  # public
 if os.path.exists(logo_path):
     logo = Image.open(logo_path)
     # Redimensionner le logo pour qu'il tienne dans 1000x500 max (avec marges)
@@ -26,7 +26,7 @@ if os.path.exists(logo_path):
         image.paste(logo, (logo_x, logo_y))
 
 # Sauvegarder l'image
-output_path = 'public/logoAsso-og-favicon.jpg'
+output_path = 'public/favicon.jpg'
 image.save(output_path, quality=95)
 print(f"✅ Image OpenGraph générée: {output_path}")
 print(f"Dimensions: {width}x{height}px")

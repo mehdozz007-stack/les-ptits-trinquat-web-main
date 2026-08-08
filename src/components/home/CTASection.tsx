@@ -42,17 +42,16 @@ export function CTASection() {
           viewport={{ once: true }}
           className="mx-auto max-w-3xl text-center"
         >
-          <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-primary-foreground sm:text-3xl md:text-4xl lg:text-5xl">
-            Rejoignez l'aventure des<br />
-            P'tits Trinquat !
+          <h2 className="mb-6 text-3xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl md:text-4xl lg:text-5xl">
+            Rejoignez l'aventure des P'tits Trinquat !
           </h2>
-          <p className="mb-8 text-sm sm:text-base md:text-lg text-primary-foreground/80 leading-relaxed">
+          <p className="mb-8 text-base sm:text-lg md:text-lg text-primary-foreground/80 leading-relaxed">
             Que vous souhaitiez participer activement au bureau, donner un coup de main ponctuel lors des événements, ou simplement adhérer pour soutenir nos actions, votre engagement compte !
           </p>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center scale-75 sm:scale-90 md:scale-100 origin-center">
             <Button
               size="xl"
-              className="bg-background text-primary hover:bg-background/90 shadow-lg hover:shadow-xl hover:-translate-y-1 rounded-2xl font-bold"
+              className="bg-background text-primary hover:bg-background/90 shadow-lg hover:shadow-xl hover:-translate-y-1 rounded-2xl font-bold h-16 px-12 text-lg"
               asChild
             >
               <Link to="https://www.helloasso.com/associations/les-p-tits-trinquat/adhesions/nous-soutenir" target="_blank">
@@ -63,7 +62,7 @@ export function CTASection() {
             <Button
               size="xl"
               variant="ghost"
-              className="text-primary-foreground border-2 border-primary-foreground/30 hover:bg-primary-foreground/10 rounded-2xl font-bold"
+              className="text-primary-foreground border-2 border-primary-foreground/30 hover:bg-primary-foreground/10 rounded-2xl font-bold h-16 px-12 text-lg"
               asChild
             >
               <Link to="/contact">

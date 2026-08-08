@@ -192,8 +192,8 @@ const Contact = () => {
                     <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm sm:text-base text-foreground">Email</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">parents.frank.dickens@gmail.com</p>
+                    <h3 className="font-bold text-base sm:text-lg text-foreground">Email</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground">parents.frank.dickens@gmail.com</p>
                   </div>
                 </CardContent>
               </Card>
@@ -204,7 +204,7 @@ const Contact = () => {
                     <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-secondary/20">
                       <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-secondary" />
                     </div>
-                    <h3 className="font-bold text-sm sm:text-base text-foreground">Suivez-nous</h3>
+                    <h3 className="font-bold text-base sm:text-lg text-foreground">Suivez-nous</h3>
                   </div>
                   <div className="flex gap-2 sm:gap-3">
                     <Button variant="ghost" size="icon" asChild className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full bg-pink-200 hover:bg-pink-300">
@@ -228,8 +228,8 @@ const Contact = () => {
                       <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-sky" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-sm sm:text-base text-foreground">Adresse</h3>
-                      <p className="text-xs sm:text-sm text-muted-foreground">
+                      <h3 className="font-bold text-base sm:text-lg text-foreground">Adresse</h3>
+                      <p className="text-sm sm:text-base text-muted-foreground">
                         Ecole Anne Frank-Charles Dickens, 686 Avenue du Pont Trinquat <br /> 34070 Montpellier
                       </p>
                     </div>
@@ -260,8 +260,8 @@ const Contact = () => {
                     <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm sm:text-base text-foreground">Permanences</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">
+                    <h3 className="font-bold text-base sm:text-lg text-foreground">Permanences</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground">
                       Des parents bénévoles sont présents chaque matin devant l'école.<br />Venez discuter librement avec l'association.
                     </p>
                   </div>
