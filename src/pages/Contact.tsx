@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, MessageSquare, HelpCircle, Clock, Heart, ExternalLink, Instagram, Facebook, FileText, Download } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, HelpCircle, Clock, Heart, ExternalLink, Instagram, Facebook, FileText, Download, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -35,6 +35,7 @@ const Contact = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -284,7 +285,7 @@ const Contact = () => {
               <HelpCircle className="h-4 w-4" />
               FAQ
             </div>
-            <h2 className="mb-4 text-2xl sm:text-3xl font-bold">Questions fréquentes</h2>
+            <h2 className="mb-4 text-3xl sm:text-4xl font-bold">Questions fréquentes</h2>
           </motion.div>
 
           <div className="mx-auto max-w-3xl space-y-3 sm:space-y-4">
@@ -296,10 +297,36 @@ const Contact = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card variant="elevated">
-                  <CardContent className="p-4 sm:p-6">
-                    <h3 className="mb-2 font-bold text-sm sm:text-base text-foreground">{faq.question}</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">{faq.answer}</p>
+                <Card variant="elevated" className="cursor-pointer hover:shadow-md transition-shadow">
+                  <CardContent className="p-0">
+                    <button
+                      onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+                      className="w-full flex items-center justify-between gap-3 sm:gap-4 p-5 sm:p-8 text-left"
+                    >
+                      <h3 className="font-bold text-sm sm:text-base text-foreground">{faq.question}</h3>
+                      <motion.div
+                        animate={{ rotate: openFaqIndex === index ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="flex-shrink-0"
+                      >
+                        <ChevronDown className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground" />
+                      </motion.div>
+                    </button>
+
+                    {/* Answer */}
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{
+                        height: openFaqIndex === index ? "auto" : 0,
+                        opacity: openFaqIndex === index ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 sm:px-8 pb-5 sm:pb-8">
+                        <p className="text-sm sm:text-base text-muted-foreground">{faq.answer}</p>
+                      </div>
+                    </motion.div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -313,14 +340,14 @@ const Contact = () => {
               transition={{ delay: faqs.length * 0.1 }}
             >
               <Card variant="elevated" className="bg-gradient-to-br from-primary/5 to-secondary/5">
-                <CardContent className="flex flex-col gap-4 p-4 sm:p-6">
+                <CardContent className="flex flex-col gap-4 p-6 sm:p-8">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
                       <HelpCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                     </div>
-                    <h3 className="font-bold text-sm sm:text-base text-foreground">Besoin de réponses plus détaillées ?</h3>
+                    <h3 className="font-bold text-base sm:text-lg text-foreground">Besoin de réponses plus détaillées ?</h3>
                   </div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Un petit guide pensé pour les familles, à lire tranquillement à la maison, qui rassemble toutes les questions essentielles sur la vie de l'école et de l'association.
                   </p>
                   <Button

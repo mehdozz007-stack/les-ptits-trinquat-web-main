@@ -142,7 +142,7 @@ const NotreEcole = () => {
             transition={{ duration: 0.6 }}
             className="max-w-3xl text-center mx-auto"
           >
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-violet/20 px-4 py-1.5 text-sm font-semibold text-violet-foreground">
               <School className="h-4 w-4" />
               Notre école
             </span>
