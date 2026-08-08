@@ -6,6 +6,7 @@ import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-children.jpg";
 import logoAsso from "@/assets/logos/logoAsso.png";
+import logoAssoOgFavicon from "@/assets/logos/logoAsso-og-favicon.jpg";
 
 // Spark component for floating particles
 const Spark = ({ color }: { color: string }) => {
@@ -254,7 +255,7 @@ export function HeroSection() {
               transition={{ delay: 0.5 }}
               className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
             >
-              <Button variant="hero" size="lg" asChild>
+              <Button variant="gradient" size="lg" asChild>
                 <Link to="/evenements">
                   <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   <span className="text-sm sm:text-base">Découvrir nos événements</span>
@@ -341,6 +342,17 @@ export function HeroSection() {
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5"
                             fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13.5 8.5V6.75c0-.62.5-1.12 1.12-1.12H16V3h-2.25A3.75 3.75 0 0 0 10 6.75V8.5H8v3h2v9h3v-9h2.25l.25-3h-2.5z" />
+                          </svg>
+                        </a>
+                        <a
+                          href="mailto:parents.frank.dickens@gmail.com"
+                          className="flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl bg-primary text-primary-foreground shadow-md hover:scale-105 transition flex-shrink-0"
+                          title="Nous envoyer un email"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
                         </a>
                       </div>

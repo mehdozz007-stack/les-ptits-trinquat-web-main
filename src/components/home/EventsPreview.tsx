@@ -159,7 +159,7 @@ export function EventsPreview() {
             className="flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7B42] to-[#C55FA8] shadow-md flex-shrink-0"
           >
 
-            <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+            <Clock className="h-8 w-8 sm:h-8 sm:w-8 text-white" />
           </motion.div>
         </div>
         <motion.div
