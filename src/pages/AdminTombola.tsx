@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { Trash2, Check, X, LogOut, RotateCcw } from "lucide-react";
+import { Link, Navigate } from 'react-router-dom';
+import { Trash2, Check, X, LogOut, RotateCcw, ArrowLeft, Gift, Loader2 } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
+import { AdminLayout } from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { TombolaAPI } from "@/lib/db/tombolaAPI";
 import { Parent, Lot } from "@/lib/types";
 import { AnimatedSuccessMessage, AnimatedErrorMessage } from "@/components/AnimatedMessage";
+import { useUnifiedAdminAuth } from "@/hooks/useUnifiedAdminAuth";
 
 interface AdminMessage {
     type: 'success' | 'error';
@@ -17,10 +20,7 @@ interface AdminMessage {
 }
 
 export default function AdminTombola() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [adminEmail, setAdminEmail] = useState("");
-    const [adminPassword, setAdminPassword] = useState("");
-    const [loginError, setLoginError] = useState("");
+    const { user, isLoading, isAuthenticated, signOut } = useUnifiedAdminAuth();
 
     const [parents, setParents] = useState<Parent[]>([]);
     const [lots, setLots] = useState<Lot[]>([]);
@@ -35,49 +35,17 @@ export default function AdminTombola() {
         }
     }, [message]);
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoginError("");
-        setLoading(true);
+    // Rediriger vers le login si pas authentifié
+    if (!isLoading && !isAuthenticated) {
+        return <Navigate to="/admin/login" replace />;
+    }
 
-        try {
-            // Utiliser TombolaAPI.adminLogin() qui utilise la bonne URL
-            const loginData = await TombolaAPI.adminLogin(adminEmail.toLowerCase(), adminPassword);
-
-            if (loginData?.token) {
-                // Stocker le token correctement pour getAuth()
-                localStorage.setItem('tombola_auth', JSON.stringify({
-                    parentId: 'admin',
-                    email: adminEmail.toLowerCase(),
-                }));
-                localStorage.setItem('admin_token', loginData.token);
-                console.log('✅ Admin token stocké:', loginData.token.substring(0, 20) + '...');
-
-                setIsLoggedIn(true);
-                setAdminEmail("");
-                setAdminPassword("");
-
-                // Attendre un peu que le stockage se synchronise
-                setTimeout(() => {
-                    console.log('📊 Chargement des données admin...');
-                    loadData();
-                }, 100);
-
-                setMessage({
-                    type: 'success',
-                    title: 'Connecté',
-                    message: 'Vous êtes connecté en tant qu\'administrateur',
-                    emoji: '✅'
-                });
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            const errorMessage = error instanceof Error ? error.message : "Email ou mot de passe incorrect";
-            setLoginError(errorMessage);
-        } finally {
-            setLoading(false);
+    // Charger les données au montage
+    useEffect(() => {
+        if (isAuthenticated && !loading && parents.length === 0) {
+            loadData();
         }
-    };
+    }, [isAuthenticated, isLoading]);
 
     const loadData = async () => {
         setLoading(true);
@@ -201,14 +169,7 @@ export default function AdminTombola() {
     };
 
     const handleLogout = () => {
-        setIsLoggedIn(false);
-        setParents([]);
-        setLots([]);
-        setAdminEmail("");
-        setAdminPassword("");
-        // Nettoyer le localStorage
-        localStorage.removeItem('admin_token');
-        localStorage.removeItem('tombola_auth');
+        signOut();
     };
 
     const handleRefresh = async () => {
@@ -221,139 +182,88 @@ export default function AdminTombola() {
         });
     };
 
-    if (!isLoggedIn) {
+    // Page de chargement
+    if (isLoading) {
         return (
-            <Layout>
-                <section className="relative overflow-hidden bg-gradient-to-b from-primary/10 via-secondary/5 to-accent/10 py-20">
-                    <div className="container">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className="max-w-md mx-auto"
-                        >
-                            <Card className="border-2 border-primary/30 shadow-lg">
-                                <CardContent className="p-8">
-                                    <h1 className="text-2xl font-bold mb-2 text-center">🔐 Admin Tombola</h1>
-                                    <p className="text-muted-foreground text-center mb-6">Connectez-vous pour accéder à l'administration</p>
-
-                                    <form onSubmit={handleLogin} className="space-y-4">
-                                        <div>
-                                            <label className="text-sm font-semibold mb-2 block">Email</label>
-                                            <Input
-                                                type="email"
-                                                placeholder="admin@email.com"
-                                                value={adminEmail}
-                                                onChange={(e) => setAdminEmail(e.target.value)}
-                                                required
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <label className="text-sm font-semibold mb-2 block">Mot de passe</label>
-                                            <Input
-                                                type="password"
-                                                placeholder="••••••••"
-                                                value={adminPassword}
-                                                onChange={(e) => setAdminPassword(e.target.value)}
-                                                required
-                                            />
-                                        </div>
-
-                                        {loginError && (
-                                            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                                                <p className="text-red-700 text-sm font-semibold">⚠️ {loginError}</p>
-                                            </div>
-                                        )}
-
-                                        <Button type="submit" className="w-full" disabled={loading}>
-                                            {loading ? "Connexion en cours..." : "Se connecter"}
-                                        </Button>
-                                    </form>
-
-                                    <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                                        <p className="text-xs text-blue-700 font-mono">
-                                            <strong>Identifiants admin:</strong><br />
-                                            Email: admin@email.com<br />
-                                            Mot de passe: Entrez le mot de passe admin défini
-                                        </p>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
+            <AdminLayout>
+                <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-center">
+                        <p className="text-muted-foreground">Chargement...</p>
                     </div>
-                </section>
-            </Layout>
+                </div>
+            </AdminLayout>
         );
     }
 
+    // Les références non-authentifiées sont déjà gérées par le Navigate plus haut
+    if (!isAuthenticated) {
+        return <Navigate to="/admin/login" replace />;
+    }
+
     return (
-        <Layout>
-            {/* Messages */}
-            <AnimatePresence>
-                {message && (
-                    message.type === 'success' ? (
-                        <AnimatedSuccessMessage
-                            title={message.title}
-                            message={message.message}
-                            emoji={message.emoji}
-                        />
-                    ) : (
-                        <AnimatedErrorMessage
-                            title={message.title}
-                            message={message.message}
-                            emoji={message.emoji || "⚠️"}
-                        />
-                    )
-                )}
-            </AnimatePresence>
-
-            {/* Header */}
-            <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-6 md:py-8 border-b">
-                <div className="container">
-                    <div className="space-y-4 md:space-y-0 md:flex md:justify-between md:items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                        >
-                            <h1 className="text-2xl md:text-3xl font-bold">🎁 Administration Tombola</h1>
-                            <p className="text-center text-base md:text-sm text-muted-foreground mt-1">Gestion des participants et lots</p>
-                        </motion.div>
-
-                        <div className="flex flex-col sm:flex-row gap-2">
+        <AdminLayout>
+            <div className="min-h-screen bg-gradient-to-br from-[#FFFBF7] via-[#F8F5FF] to-[#F5F9FF]" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                {/* Header */}
+                <header className="sticky top-0 z-50 border-b border-orange-100/50 bg-gradient-to-r from-[#FFF5F0] to-[#FFF0F7] backdrop-blur-lg shadow-sm">
+                    <div className="container flex h-14 sm:h-16 items-center justify-between px-2 sm:px-4 gap-2">
+                        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+                            <Link to="/admin/dashboard">
+                                <Button variant="ghost" size="sm" className="hover:bg-orange-50/50 h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm">
+                                    <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                                    <span className="hidden sm:inline">Tableau de bord</span>
+                                </Button>
+                            </Link>
+                            <div className="hidden sm:block h-6 w-px bg-gradient-to-b from-orange-200 to-rose-200" />
+                            <div className="hidden sm:flex items-center gap-2 min-w-0">
+                                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF7B42] to-[#C55FA8] shadow-md flex-shrink-0">
+                                    <Gift className="h-3.5 w-3.5 text-white" />
+                                </div>
+                                <span className="font-semibold text-sm bg-gradient-to-r from-[#FF7B42] to-[#C55FA8] bg-clip-text text-transparent truncate">Administration Tombola</span>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-1 sm:gap-2">
                             <Button
                                 variant="outline"
+                                size="sm"
                                 onClick={handleRefresh}
                                 disabled={loading}
-                                className="flex items-center justify-center gap-2 text-sm md:text-base"
+                                className="border-orange-200 hover:bg-orange-50/50 h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm"
                             >
-                                <RotateCcw className="h-4 w-4" />
-                                <span className="hidden sm:inline">Actualiser</span>
-                                <span className="sm:hidden">Actualiser</span>
+                                {loading ? (
+                                    <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
+                                ) : (
+                                    <RotateCcw className="h-3 w-3 sm:h-4 sm:w-4" />
+                                )}
+                                <span className="hidden sm:inline ml-1 sm:ml-2">Actualiser</span>
                             </Button>
-                            <Button
-                                variant="destructive"
-                                onClick={handleLogout}
-                                className="flex items-center justify-center gap-2 text-sm md:text-base"
-                            >
-                                <LogOut className="h-4 w-4" />
-                                Déconnexion
+                            <Button variant="ghost" size="sm" onClick={handleLogout} title={`Déconnexion (${user?.email})`} className="hover:bg-rose-50/50 h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm">
+                                <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />
+                                <span className="hidden sm:inline ml-1 sm:ml-2">Déconnexion</span>
                             </Button>
                         </div>
                     </div>
-                </div>
-            </section>
+                </header>
 
-            {/* Main Content */}
-            <section className="py-12">
-                <div className="container">
-                    {loading && (
-                        <div className="text-center py-12">
-                            <p className="text-muted-foreground">Chargement des données...</p>
+                {/* Main Content */}
+                <main className="container py-4 sm:py-8 px-2 sm:px-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-6 sm:mb-8"
+                    >
+                        <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#FF7B42] via-[#FF9A6A] to-[#C55FA8] bg-clip-text text-transparent" style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700 }}>
+                            Gestion de la Tombola
+                        </h1>
+                        <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                            Gérez les participants et les lots
+                        </p>
+                    </motion.div>
+
+                    {isLoading ? (
+                        <div className="flex items-center justify-center py-20">
+                            <Loader2 className="h-8 w-8 animate-spin text-primary" />
                         </div>
-                    )}
-
-                    {!loading && (
+                    ) : (
                         <div className="space-y-12">
                             {/* Participants Section */}
                             <motion.div
@@ -600,8 +510,27 @@ export default function AdminTombola() {
                             </motion.div>
                         </div>
                     )}
-                </div>
-            </section>
-        </Layout>
+                </main>
+            </div>
+
+            {/* Messages */}
+            <AnimatePresence>
+                {message && (
+                    message.type === 'success' ? (
+                        <AnimatedSuccessMessage
+                            title={message.title}
+                            message={message.message}
+                            emoji={message.emoji}
+                        />
+                    ) : (
+                        <AnimatedErrorMessage
+                            title={message.title}
+                            message={message.message}
+                            emoji={message.emoji || "⚠️"}
+                        />
+                    )
+                )}
+            </AnimatePresence>
+        </AdminLayout>
     );
 }

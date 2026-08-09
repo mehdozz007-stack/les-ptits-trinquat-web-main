@@ -23,6 +23,8 @@ const Contact = React.lazy(() => import("./pages/Contact"));
 const MessageEnvoye = React.lazy(() => import("./pages/MessageEnvoye"));
 const Auth = React.lazy(() => import("./pages/Auth"));
 const AdminNewsletter = React.lazy(() => import("./pages/AdminNewsletter"));
+const AdminLogin = React.lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = React.lazy(() => import("./pages/AdminDashboard"));
 const AdminNewsletterAuth = React.lazy(() => import("./pages/AdminNewsletterAuth"));
 const NotreEcole = React.lazy(() => import("./pages/NotreEcole2"));
 const TombolaSecret = React.lazy(() => import("./pages/TombolaSecret"));
@@ -74,7 +76,9 @@ const App = () => (
               <Route path="/partenaires" element={<Partenaires />} />
               {/* Pages d'authentification et tombola */}
               <Route path="/auth" element={<Auth />} />
-              <Route path="/admin/newsletter/auth" element={<AdminNewsletterAuth />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/newsletter/auth" element={<Navigate to="/admin/login" replace />} />
               <Route path="/tombola" element={<TombolaProtected />} />
               <Route path="/tombola/:token" element={<TombolaSecret />} />
               <Route path="/admin/tombola" element={<AdminTombola />} />

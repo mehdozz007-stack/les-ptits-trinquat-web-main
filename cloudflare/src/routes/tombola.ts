@@ -837,18 +837,21 @@ tombola.patch('/lots/:id/remis', requireAdmin, async (c) => {
 
 // ============================================================
 // ============================================================
-// DELETE /tombola/lots/:id - Supprimer un lot (propriétaire publiquement)
+// DELETE /tombola/lots/:id - Supprimer un lot (propriétaire publiquement ou admin)
 // ============================================================
 tombola.delete('/lots/:id', optionalAuth, async (c) => {
   try {
     const { id } = c.req.param();
-    const body = await c.req.json<{ parent_id: string; user_id?: string }>();
+    const authContext = (c as any).get('auth');
 
-    if (!body.parent_id) {
-      return c.json<ApiResponse>({
-        success: false,
-        error: 'Parent ID is required'
-      }, 400);
+    // Parser le body s'il existe, sinon utiliser un objet vide
+    let body: { parent_id?: string; user_id?: string } = {};
+    const contentType = c.req.header('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      const text = await c.req.text();
+      if (text) {
+        body = JSON.parse(text);
+      }
     }
 
     // Récupérer le lot pour vérifier la propriété
@@ -858,6 +861,23 @@ tombola.delete('/lots/:id', optionalAuth, async (c) => {
 
     if (!lot) {
       return c.json<ApiResponse>({ success: false, error: 'Lot not found' }, 404);
+    }
+
+    // Si admin, permettre la suppression sans validation supplémentaire
+    if (authContext?.role === 'admin') {
+      await c.env.DB.prepare('DELETE FROM tombola_lots WHERE id = ?').bind(id).run();
+      await logAudit(c.env.DB, authContext.user.id, 'LOT_DELETED_ADMIN', 'lot', id, c.req.raw);
+      return c.json<ApiResponse>({
+        success: true,
+        message: 'Lot deleted'
+      });
+    }
+
+    if (!body.parent_id) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Parent ID is required'
+      }, 400);
     }
 
     // Vérifier que c'est le propriétaire du lot

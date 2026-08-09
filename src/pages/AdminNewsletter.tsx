@@ -9,10 +9,10 @@ import { SubscribersList } from "@/components/admin/SubscribersList";
 import { NewsletterEditor } from "@/components/admin/NewsletterEditor";
 import { NewsletterHistory } from "@/components/admin/NewsletterHistory";
 import { useNewsletterAdmin } from "@/hooks/useNewsletterAdmin";
-import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { useUnifiedAdminAuth } from "@/hooks/useUnifiedAdminAuth";
 
 export default function AdminNewsletter() {
-  const { user, isLoading, signOut } = useAdminAuth();
+  const { user, isLoading, signOut, isAuthenticated } = useUnifiedAdminAuth();
   const {
     subscribers,
     isLoading: isLoadingData,
@@ -33,8 +33,8 @@ export default function AdminNewsletter() {
   }, [subscribers.length, isLoadingData]);
 
   // Rediriger vers le login si pas authentifié
-  if (!isLoading && !user) {
-    return <Navigate to="/admin/newsletter/auth" replace />;
+  if (!isLoading && !isAuthenticated) {
+    return <Navigate to="/admin/login" replace />;
   }
 
   return (
@@ -44,10 +44,10 @@ export default function AdminNewsletter() {
         <header className="sticky top-0 z-50 border-b border-orange-100/50 bg-gradient-to-r from-[#FFF5F0] to-[#FFF0F7] backdrop-blur-lg shadow-sm">
           <div className="container flex h-14 sm:h-16 items-center justify-between px-2 sm:px-4 gap-2">
             <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-              <Link to="/">
+              <Link to="/admin/dashboard">
                 <Button variant="ghost" size="sm" className="hover:bg-orange-50/50 h-8 sm:h-9 px-2 sm:px-3 text-xs sm:text-sm">
                   <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Retour</span>
+                  <span className="hidden sm:inline">Tableau de bord</span>
                 </Button>
               </Link>
               <div className="hidden sm:block h-6 w-px bg-gradient-to-b from-orange-200 to-rose-200" />

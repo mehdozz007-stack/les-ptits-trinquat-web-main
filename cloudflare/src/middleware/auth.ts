@@ -123,19 +123,28 @@ export async function requireAdmin(c: Context<{ Bindings: Env }>, next: Next) {
   const authContext = await extractAndValidateToken(c);
 
   if (!authContext) {
+    console.error('[requireAdmin] ❌ No auth context - token not found or invalid');
+    console.error('[requireAdmin] Auth header:', c.req.header('Authorization')?.substring(0, 30));
     return c.json({
       success: false,
       error: 'Authentication required'
     }, 401);
   }
 
+  console.log('[requireAdmin] ✓ Auth context found:', {
+    user: authContext.user.email,
+    role: authContext.role,
+  });
+
   if (authContext.role !== 'admin') {
+    console.error('[requireAdmin] ❌ Not admin - user role is:', authContext.role);
     return c.json({
       success: false,
-      error: 'Admin access required'
+      error: 'Admin access required (current role: ' + authContext.role + ')'
     }, 403);
   }
 
+  console.log('[requireAdmin] ✓ Admin access granted for', authContext.user.email);
   (c as any).set('auth', authContext);
   await next();
 }

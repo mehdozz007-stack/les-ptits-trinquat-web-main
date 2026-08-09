@@ -285,12 +285,21 @@ export const TombolaAPI = {
     async getAdminParents(): Promise<Parent[]> {
         const token = this.getAdminToken();
         console.log('🔐 getAdminParents - Token found:', !!token, token ? token.substring(0, 20) + '...' : 'MISSING');
+        console.log('🔐 getAdminParents - All tokens:', {
+            admin_token: !!localStorage.getItem('admin_token'),
+            auth_token: !!localStorage.getItem('auth_token'),
+            tombola_auth: !!localStorage.getItem('tombola_auth'),
+        });
 
         const response = await fetch(apiUrl('/tombola/admin/participants'), {
+            method: 'GET',
             headers: token ? { 'Authorization': `Bearer ${token}` } : {},
         });
 
         console.log('📡 getAdminParents - Response status:', response.status);
+        console.log('📡 getAdminParents - Response headers:', {
+            contentType: response.headers.get('content-type'),
+        });
 
         try {
             const data = await handleResponse<any>(response);
@@ -310,6 +319,16 @@ export const TombolaAPI = {
             }));
         } catch (error) {
             console.error('❌ getAdminParents - Error:', error);
+            console.error('❌ getAdminParents - Error message:', error instanceof Error ? error.message : String(error));
+            // Essayer d'obtenir la réponse JSON pour plus de détails
+            if (!response.ok) {
+                try {
+                    const errorData = await response.clone().json();
+                    console.error('❌ getAdminParents - Server error response:', errorData);
+                } catch (e) {
+                    console.error('❌ getAdminParents - Could not parse error response');
+                }
+            }
             return [];
         }
     },

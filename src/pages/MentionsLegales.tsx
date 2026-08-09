@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FileText, MapPin, Mail, Globe, Lock } from "lucide-react";
+import { Building, Briefcase, Server, Copyright, Shield, MapPin, Mail, Cookie, ExternalLink, AlertTriangle, RefreshCw, FileText, Globe } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { LAST_UPDATE_DATE } from "@/lib/buildInfo";
@@ -10,7 +10,7 @@ const MentionsLegales = () => {
 
     const sections = [
         {
-            icon: FileText,
+            icon: Building,
             title: "Qui sommes-nous ?",
             content: (
                 <div className="space-y-3">
@@ -35,7 +35,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: FileText,
+            icon: Briefcase,
             title: "Responsable du site",
             content: (
                 <div className="space-y-3">
@@ -45,7 +45,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: Globe,
+            icon: Server,
             title: "Hébergement et infrastructure technique",
             content: (
                 <div className="space-y-3">
@@ -71,7 +71,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: FileText,
+            icon: Copyright,
             title: "Propriété intellectuelle et utilisation du contenu",
             content: (
                 <div className="space-y-3">
@@ -82,7 +82,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: Lock,
+            icon: Shield,
             title: "Données personnelles et formulaires",
             content: (
                 <div className="space-y-3">
@@ -105,7 +105,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: FileText,
+            icon: Cookie,
             title: "Cookies et technologies de suivi",
             content: (
                 <div className="space-y-3">
@@ -121,7 +121,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: Globe,
+            icon: ExternalLink,
             title: "Liens externes et sites tiers",
             content: (
                 <div className="space-y-3">
@@ -131,7 +131,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: Lock,
+            icon: AlertTriangle,
             title: "Limitation de responsabilité",
             content: (
                 <div className="space-y-3">
@@ -146,7 +146,7 @@ const MentionsLegales = () => {
             ),
         },
         {
-            icon: FileText,
+            icon: RefreshCw,
             title: "Modifications et mise à jour",
             content: (
                 <div className="space-y-3">
@@ -177,81 +177,78 @@ const MentionsLegales = () => {
 
     return (
         <Layout>
-            {/* Hero */}
-            <section className="relative overflow-hidden bg-hero py-12 sm:py-16 md:py-20">
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute -top-20 right-1/4 h-60 w-60 rounded-full bg-sky/20 watercolor-blob" />
-                    <div className="absolute bottom-10 left-10 h-40 w-40 rounded-full bg-primary/20 watercolor-blob" />
-                </div>
-
-                <div className="container relative">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-2xl text-center mx-auto"
-                    >
-                        <h1 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-                            Mentions <span className="text-gradient">légales</span>
-                        </h1>
-                        <p className="text-base sm:text-lg text-muted-foreground">
-                            Informations légales et conditions d'utilisation du site.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Content */}
-            <section className="py-12 sm:py-16 md:py-20">
-                <div className="container">
-                    <div className="mx-auto max-w-3xl space-y-8">
-                        {sections.map((section, index) => {
-                            const Icon = section.icon;
-                            return (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="space-y-4"
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                                            <Icon className="h-6 w-6 sm:h-7 sm:w-7 flex-shrink-0 text-primary" />
-                                        </div>
-                                        <h2 className="text-2xl font-bold text-foreground">{section.title}</h2>
-                                    </div>
-                                    <div className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                                        {section.content}
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-
-                        {/* Thank You Section */}
+            <div className="min-h-screen bg-gradient-to-br from-[#FFFBF7] via-[#F8F5FF] to-[#F5F9FF]" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                {/* Hero */}
+                <section className="relative overflow-hidden py-12 sm:py-16 md:py-20">
+                    <div className="container relative">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="rounded-lg bg-gradient-to-br from-primary/5 to-secondary/5 p-6 sm:p-8 space-y-4 border border-primary/10"
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="max-w-2xl text-center mx-auto"
                         >
-                            <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
-                                💛 Merci !
-                            </h3>
-                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                                Ce site est animé par des parents bénévoles, avec l'envie de créer du lien entre les familles et l'école.
-                            </p>
-                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                                Merci de votre confiance et de votre participation à la vie de l'association 💛
-                            </p>
-                            <p className="text-xs text-muted-foreground italic mt-6 pt-4 border-t border-primary/10">
-                                <strong>Dernière mise à jour :</strong> {LAST_UPDATE_DATE}
+                            <h1 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-r from-[#FF7B42] via-[#FF9A6A] to-[#C55FA8] bg-clip-text text-transparent" style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700 }}>
+                                Mentions légales
+                            </h1>
+                            <p className="text-base sm:text-lg text-muted-foreground">
+                                Informations légales et conditions d'utilisation du site.
                             </p>
                         </motion.div>
                     </div>
-                </div>
-            </section>
+                </section>
+
+                {/* Content */}
+                <section className="py-12 sm:py-16 md:py-20">
+                    <div className="container">
+                        <div className="mx-auto max-w-3xl space-y-8">
+                            {sections.map((section, index) => {
+                                const Icon = section.icon;
+                                return (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="space-y-4"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#FF7B42]/20 to-[#C55FA8]/20">
+                                                <Icon className="h-6 w-6 sm:h-7 sm:w-7 flex-shrink-0 text-[#FF7B42]" />
+                                            </div>
+                                            <h2 className="text-2xl font-bold text-foreground" style={{ fontFamily: "'Nunito', sans-serif" }}>{section.title}</h2>
+                                        </div>
+                                        <div className="text-sm sm:text-base text-muted-foreground leading-relaxed" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                            {section.content}
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+
+                            {/* Thank You Section */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="rounded-lg bg-gradient-to-br from-orange-50/50 to-pink-50/50 p-6 sm:p-8 space-y-4 border border-orange-200/50"
+                            >
+                                <h3 className="text-xl font-bold text-foreground flex items-center gap-2" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                    💛 Merci !
+                                </h3>
+                                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                    Ce site est animé par des parents bénévoles, avec l'envie de créer du lien entre les familles et l'école.
+                                </p>
+                                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                    Merci de votre confiance et de votre participation à la vie de l'association 💛
+                                </p>
+                                <p className="text-xs text-muted-foreground italic mt-6 pt-4 border-t border-orange-200/50" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                    <strong>Dernière mise à jour :</strong> {LAST_UPDATE_DATE}
+                                </p>
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </Layout>
     );
 };

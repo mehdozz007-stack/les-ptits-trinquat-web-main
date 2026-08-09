@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Lock, Mail, Shield, Clock, AlertCircle, CheckCircle, Info } from "lucide-react";
+import { User, Database, Target, Scale, Users, Calendar, Shield, Cookie, CheckCircle, AlertTriangle, FileText } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import { LAST_UPDATE_DATE } from "@/lib/buildInfo";
@@ -10,7 +10,7 @@ const PolitiqueConfidentialite = () => {
 
     const sections = [
         {
-            icon: Info,
+            icon: User,
             title: "1. Responsable du traitement",
             content: (
                 <div className="space-y-3">
@@ -26,7 +26,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: Lock,
+            icon: Database,
             title: "2. Quelles données sont collectées ?",
             content: (
                 <div className="space-y-3">
@@ -44,7 +44,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: CheckCircle,
+            icon: Target,
             title: "3. Pourquoi collectons-nous ces données ?",
             content: (
                 <div className="space-y-3">
@@ -64,7 +64,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: Shield,
+            icon: Scale,
             title: "4. Sur quelle base légale utilisons-nous vos données ?",
             content: (
                 <div className="space-y-3">
@@ -79,7 +79,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: Lock,
+            icon: Users,
             title: "5. Qui peut accéder aux données ?",
             content: (
                 <div className="space-y-3">
@@ -94,7 +94,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: Clock,
+            icon: Calendar,
             title: "6. Combien de temps conservons-nous les données ?",
             content: (
                 <div className="space-y-3">
@@ -129,7 +129,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: Info,
+            icon: Cookie,
             title: "8. Cookies et technologies de suivi",
             content: (
                 <div className="space-y-3">
@@ -166,7 +166,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: AlertCircle,
+            icon: AlertTriangle,
             title: "10. Réclamation auprès de l'autorité compétente",
             content: (
                 <div className="space-y-3">
@@ -181,7 +181,7 @@ const PolitiqueConfidentialite = () => {
             ),
         },
         {
-            icon: Info,
+            icon: FileText,
             title: "11. Modification de la charte de confidentialité",
             content: (
                 <div className="space-y-3">
@@ -195,73 +195,70 @@ const PolitiqueConfidentialite = () => {
 
     return (
         <Layout>
-            {/* Hero */}
-            <section className="relative overflow-hidden bg-hero py-12 sm:py-16 md:py-20">
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute -top-20 right-1/4 h-60 w-60 rounded-full bg-sky/20 watercolor-blob" />
-                    <div className="absolute bottom-10 left-10 h-40 w-40 rounded-full bg-primary/20 watercolor-blob" />
-                </div>
-
-                <div className="container relative">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-2xl text-center mx-auto"
-                    >
-                        <h1 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-                            Politique de <span className="text-gradient">confidentialité</span>
-                        </h1>
-                        <p className="text-base sm:text-lg text-muted-foreground">
-                            Comprendre comment nous protégeons vos données personnelles.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Content */}
-            <section className="py-12 sm:py-16 md:py-20">
-                <div className="container">
-                    <div className="mx-auto max-w-3xl space-y-8">
-                        {/* Introduction */}
+            <div className="min-h-screen bg-gradient-to-br from-[#FFFBF7] via-[#F8F5FF] to-[#F5F9FF]" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                {/* Hero */}
+                <section className="relative overflow-hidden py-12 sm:py-16 md:py-20">
+                    <div className="container relative">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="rounded-lg bg-gradient-to-br from-primary/5 to-secondary/5 p-6 sm:p-8 border border-primary/10"
+                            className="max-w-2xl text-center mx-auto"
                         >
-                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                                La présente charte de confidentialité a pour objectif d'expliquer, de manière simple et transparente, comment l'association Les P'tits Trinquat collecte, utilise et protège les données personnelles des parents et des familles qui visitent son site internet, conformément au Règlement Général sur la Protection des Données (RGPD – UE 2016/679) et à la loi Informatique et Libertés.
+                            <h1 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-r from-[#FF7B42] via-[#FF9A6A] to-[#C55FA8] bg-clip-text text-transparent" style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700 }}>
+                                Politique de confidentialité
+                            </h1>
+                            <p className="text-base sm:text-lg text-muted-foreground">
+                                Comprendre comment nous protégeons vos données personnelles.
                             </p>
                         </motion.div>
-
-                        {/* Sections */}
-                        {sections.map((section, index) => {
-                            const Icon = section.icon;
-                            return (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.05 }}
-                                    className="space-y-4"
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 shrink-0">
-                                            <Icon className="h-6 w-6 text-primary" />
-                                        </div>
-                                        <h2 className="text-xl sm:text-2xl font-bold text-foreground">{section.title}</h2>
-                                    </div>
-                                    <div className="text-sm sm:text-base text-muted-foreground leading-relaxed pl-0">
-                                        {section.content}
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
                     </div>
-                </div>
-            </section>
+                </section>
+
+                {/* Content */}
+                <section className="py-12 sm:py-16 md:py-20">
+                    <div className="container">
+                        <div className="mx-auto max-w-3xl space-y-8">
+                            {/* Introduction */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6 }}
+                                className="rounded-lg bg-gradient-to-br from-orange-50/50 to-pink-50/50 p-6 sm:p-8 border border-orange-200/50"
+                            >
+                                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed" style={{ fontFamily: "'Nunito', sans-serif" }}>
+                                    La présente charte de confidentialité a pour objectif d'expliquer, de manière simple et transparente, comment l'association Les P'tits Trinquat collecte, utilise et protège les données personnelles des parents et des familles qui visitent son site internet, conformément au Règlement Général sur la Protection des Données (RGPD – UE 2016/679) et à la loi Informatique et Libertés.
+                                </p>
+                            </motion.div>
+
+                            {/* Sections */}
+                            {sections.map((section, index) => {
+                                const Icon = section.icon;
+                                return (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.05 }}
+                                        className="space-y-4"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 shrink-0">
+                                                <Icon className="h-6 w-6 text-primary" />
+                                            </div>
+                                            <h2 className="text-xl sm:text-2xl font-bold text-foreground">{section.title}</h2>
+                                        </div>
+                                        <div className="text-sm sm:text-base text-muted-foreground leading-relaxed pl-0">
+                                            {section.content}
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </section>
+            </div>
         </Layout>
     );
 };
