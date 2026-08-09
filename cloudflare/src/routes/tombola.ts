@@ -27,14 +27,17 @@ import { requireAuth, requireAdmin, getAuthContext, optionalAuth } from '../midd
 const tombola = new Hono<{ Bindings: Env }>();
 
 // ============================================================
-// GET /tombola/participants - Liste publique (sans emails)
+// GET /tombola/participants - Liste publique (sans emails, sans admins)
 // ============================================================
 tombola.get('/participants', async (c) => {
   try {
     const result = await c.env.DB.prepare(`
-      SELECT id, prenom, role, classes, emoji, created_at
-      FROM tombola_participants
-      ORDER BY created_at DESC
+      SELECT tp.id, tp.prenom, tp.role, tp.classes, tp.emoji, tp.created_at
+      FROM tombola_participants tp
+      LEFT JOIN users u ON tp.user_id = u.id
+      LEFT JOIN user_roles ur ON u.id = ur.user_id AND ur.role = 'admin'
+      WHERE ur.id IS NULL
+      ORDER BY tp.created_at DESC
     `).all<TombolaParticipantPublic>();
 
     return c.json<ApiResponse>({
@@ -56,6 +59,7 @@ tombola.get('/participants', async (c) => {
 
 // ============================================================
 // GET /tombola/participants/my - Mes participants (filtrés par user_id du token)
+// Note: Les administrateurs n'ont pas de participants
 // ============================================================
 tombola.get('/participants/my', async (c) => {
   try {
@@ -97,6 +101,21 @@ tombola.get('/participants/my', async (c) => {
     }
 
     const userId = session.user_id;
+
+    // Vérifier si l'utilisateur est un administrateur
+    const adminCheck = await c.env.DB.prepare(`
+      SELECT id FROM user_roles
+      WHERE user_id = ? AND role = 'admin'
+    `).bind(userId).first<{ id: string }>();
+
+    if (adminCheck) {
+      // Les administrateurs n'ont pas de participants
+      console.log('[participants/my] User is admin - returning empty list');
+      return c.json<ApiResponse>({
+        success: true,
+        data: []
+      });
+    }
 
     const result = await c.env.DB.prepare(`
       SELECT id, prenom, role, classes, emoji, created_at
@@ -276,6 +295,7 @@ tombola.get('/lots/my', async (c) => {
 
 // ============================================================
 // POST /tombola/participants - Créer un participant (authentification requise)
+// Note: Les administrateurs ne peuvent pas créer de participants
 // ============================================================
 tombola.post('/participants', rateLimitMiddleware, async (c) => {
   try {
@@ -327,6 +347,19 @@ tombola.post('/participants', rateLimitMiddleware, async (c) => {
     }
 
     const userId = session.user_id;
+
+    // Vérifier que l'utilisateur n'est pas un administrateur
+    const adminCheck = await c.env.DB.prepare(`
+      SELECT id FROM user_roles
+      WHERE user_id = ? AND role = 'admin'
+    `).bind(userId).first<{ id: string }>();
+
+    if (adminCheck) {
+      return c.json<ApiResponse>({
+        success: false,
+        error: 'Les administrateurs ne peuvent pas créer de participants'
+      }, 403);
+    }
 
     // ⏸️ VÉRIFIER QUE L'UTILISATEUR N'A PAS DÉJÀ UN PARTICIPANT
     const existingParticipant = await c.env.DB.prepare(
@@ -979,9 +1012,20 @@ tombola.get('/contact-link/:lotId', optionalAuth, async (c) => {
 // GET /tombola/admin/participants - Liste complète (avec emails)
 tombola.get('/admin/participants', requireAdmin, async (c) => {
   try {
+    const authContext = getAuthContext(c);
+    
+    // Récupérer les participants SAUF les administrateurs
+    // (exclure les participants qui ont un user_id avec rôle admin)
     const result = await c.env.DB.prepare(`
-      SELECT * FROM tombola_participants ORDER BY created_at DESC
+      SELECT tp.* FROM tombola_participants tp
+      LEFT JOIN users u ON tp.user_id = u.id
+      LEFT JOIN user_roles ur ON u.id = ur.user_id AND ur.role = 'admin'
+      WHERE ur.id IS NULL
+      ORDER BY tp.created_at DESC
     `).all<TombolaParticipant>();
+
+    console.log('[admin/participants] User:', authContext?.user?.email, 'Admin role:', authContext?.role);
+    console.log('[admin/participants] Returning', result.results?.length || 0, 'participants (excluding admins)');
 
     return c.json<ApiResponse>({
       success: true,

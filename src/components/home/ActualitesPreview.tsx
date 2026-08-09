@@ -82,7 +82,7 @@ export function ActualitesPreview() {
                             <FileText className="h-8 w-8 sm:h-8 sm:w-8 text-white" />
                         </motion.div>
                     </div>
-                    <h2 className="mb-4 text-3xl sm:text-3xl text-center font-extrabold md:text-4xl">
+                    <h2 className="mb-4 text-3xl sm:text-3xl text-center font-bold md:text-4xl">
                         Actualités de l'école <span className="text-gradient">et de l'association</span>
                     </h2>
                     <p className="max-w-2xl text-base sm:text-base md:text-base lg:text-lg text-muted-foreground text-center">

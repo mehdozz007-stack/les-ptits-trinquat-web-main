@@ -168,7 +168,7 @@ export function EventsPreview() {
           viewport={{ once: true }}
           className="mb-12 flex flex-col text-center items-center justify-center gap-2 sm:gap-4 mx-auto"
         >
-          <h2 className="mb-4 text-3xl sm:text-3xl text-center font-extrabold md:text-4xl">
+          <h2 className="mb-4 text-3xl sm:text-3xl text-center font-bold md:text-4xl">
             Nos prochains <span className="text-gradient">rendez-vous</span>
           </h2>
           <p className="max-w-2xl text-base sm:text-base md:text-base lg:text-lg text-muted-foreground text-center">

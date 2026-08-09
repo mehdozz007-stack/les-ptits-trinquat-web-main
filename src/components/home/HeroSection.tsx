@@ -231,7 +231,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
+              className="mb-6 text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
             >
               <span className="text-gradient">Tous unis</span>
               <br />
@@ -363,9 +363,9 @@ export function HeroSection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="mb-8 text-xs sm:text-sm text-muted-foreground text-center font-extrabold"
+                  className="mb-8 text-xs sm:text-sm text-muted-foreground text-center font-bold"
                 >
-                  Association Parents d'Élèves.
+                  Association Parents d'Élèves
                 </motion.div>
               </div>
 

@@ -87,7 +87,7 @@ export function NewsletterSection() {
               <Mail className="h-8 w-8 sm:h-8 sm:w-8 text-white" />
             </motion.div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             La newsletter <span className="text-gradient">des P'tits Trinquat</span> 💌
           </h2>
           <p className="text-base sm:text-base md:text-base lg:text-lg text-muted-foreground text-center">
