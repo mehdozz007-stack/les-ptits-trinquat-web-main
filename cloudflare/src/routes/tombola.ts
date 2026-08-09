@@ -1013,7 +1013,7 @@ tombola.get('/contact-link/:lotId', optionalAuth, async (c) => {
 tombola.get('/admin/participants', requireAdmin, async (c) => {
   try {
     const authContext = getAuthContext(c);
-    
+
     // Récupérer les participants SAUF les administrateurs
     // (exclure les participants qui ont un user_id avec rôle admin)
     const result = await c.env.DB.prepare(`
