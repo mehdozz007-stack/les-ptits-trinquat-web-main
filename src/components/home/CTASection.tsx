@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { ArrowRight, Heart, Users } from "lucide-react";
+import { ArrowRight, Heart, Users, UserCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -36,41 +36,41 @@ export function CTASection() {
       </motion.div>
 
       <div className="container relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <h2 className="mb-6 text-3xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl md:text-4xl lg:text-5xl">
-            Rejoignez l'aventure des P'tits Trinquat !
-          </h2>
-          <p className="mb-8 text-base sm:text-lg md:text-lg text-primary-foreground/80 leading-relaxed">
-            Que vous souhaitiez participer activement au bureau, donner un coup de main ponctuel lors des événements, ou simplement adhérer pour soutenir nos actions, votre engagement compte !
-          </p>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center scale-75 sm:scale-90 md:scale-100 origin-center">
-            <Button
-              size="xl"
-              className="bg-background text-primary hover:bg-background/90 shadow-lg hover:shadow-xl hover:-translate-y-1 rounded-2xl font-bold h-16 px-12 text-lg"
-              asChild
-            >
-              <Link to="https://www.helloasso.com/associations/les-p-tits-trinquat/adhesions/nous-soutenir" target="_blank">
-                Adhérer à l'association
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button
-              size="xl"
-              variant="ghost"
-              className="text-primary-foreground border-2 border-primary-foreground/30 hover:bg-primary-foreground/10 rounded-2xl font-bold h-16 px-12 text-lg"
-              asChild
-            >
-              <Link to="/contact">
-                Nous contacter
-              </Link>
-            </Button>
-          </div>
-        </motion.div>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <UserCheck className="mx-auto mb-6 h-16 w-16 text-primary-foreground/80" />
+            <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground sm:text-4xl">
+              Rejoignez l'aventure !
+            </h2>
+
+            <p className="mb-8 text-base sm:text-lg md:text-lg text-primary-foreground/80 leading-relaxed">
+              Que vous souhaitiez participer activement au bureau, donner un coup de main ponctuel lors des événements, ou simplement adhérer pour soutenir nos actions, votre engagement compte !
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="xl"
+                className="bg-background text-primary hover:bg-background/90 shadow-lg rounded-2xl font-bold"
+              >
+                <Link to="https://www.helloasso.com/associations/les-p-tits-trinquat/adhesions/nous-soutenir" target="_blank">
+                  Adhérer maintenant
+                </Link>
+              </Button>
+              <Button
+                size="xl"
+                variant="ghost"
+                className="text-primary-foreground border-2 border-primary-foreground/30 hover:bg-primary-foreground/10 rounded-2xl font-bold"
+                asChild
+              >
+                <Link to="/contact">Nous contacter</Link>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
