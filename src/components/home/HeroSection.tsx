@@ -314,11 +314,31 @@ export function HeroSection() {
                   <div className="relative p-3 sm:p-4 lg:p-6 rounded-2xl">
                     <div className="relative inline-block">
                       <img
-                        src={logoAsso}
+                        src={logoAssoOgFavicon}
                         alt="Logo Les P'tits Trinquat"
-                        className="h-40 sm:h-52 lg:h-66 w-auto drop-shadow-md rounded-xl"
+                        className="relative rounded-2xl shadow-2xl w-full h-auto"
+                        style={{ maxHeight: "1000px", objectFit: "cover" }}
                       />
-
+                      {/* Floating badge */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8 }}
+                        className="absolute -bottom-12 -left-7 sm:-bottom-10 sm:-left-6"
+                      >
+                        <Link
+                          to="/a-propos#bureau"
+                          className="flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-card p-3 sm:p-4 shadow-card text-xs sm:text-sm"
+                        >
+                          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-accent flex-shrink-0">
+                            <Users className="h-5 w-5 sm:h-6 sm:w-6 text-accent-foreground" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-foreground">Communauté active</div>
+                            <div className="text-xs text-muted-foreground">Parents engagés</div>
+                          </div>
+                        </Link>
+                      </motion.div>
                       {/* Social Links on logo */}
                       <div className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 sm:gap-3">
                         <a
@@ -359,44 +379,15 @@ export function HeroSection() {
                     </div>
                   </div>
                 </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="mb-8 text-xs sm:text-sm text-muted-foreground text-center font-bold"
-                >
-                  Association Parents d'Élèves
-                </motion.div>
               </div>
 
-              {/* Main image */}
+              {/* Main image 
               <img
                 src={heroImage}
                 alt="Enfants joyeux - Les P'tits Trinquat"
                 className="relative rounded-3xl shadow-2xl w-full h-auto"
                 style={{ maxHeight: "400px", objectFit: "cover" }}
-              />
-
-              {/* Floating badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6"
-              >
-                <Link
-                  to="/a-propos#bureau"
-                  className="flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl bg-card p-3 sm:p-4 shadow-card text-xs sm:text-sm"
-                >
-                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg sm:rounded-xl bg-accent flex-shrink-0">
-                    <Users className="h-5 w-5 sm:h-6 sm:w-6 text-accent-foreground" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-foreground">Communauté active</div>
-                    <div className="text-xs text-muted-foreground">Parents engagés</div>
-                  </div>
-                </Link>
-              </motion.div>
+              />*/}
             </div>
           </motion.div>
         </div>
