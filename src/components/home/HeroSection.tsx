@@ -314,7 +314,7 @@ export function HeroSection() {
                   <div className="relative p-3 sm:p-4 lg:p-6 rounded-2xl">
                     <div className="relative inline-block">
                       <img
-                        src={logoAssoOgFavicon}
+                        src={logoAsso}
                         alt="Logo Les P'tits Trinquat"
                         className="relative rounded-2xl shadow-2xl w-full h-auto"
                         style={{ maxHeight: "1000px", objectFit: "cover" }}
