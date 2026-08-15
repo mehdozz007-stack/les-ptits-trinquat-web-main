@@ -3,7 +3,7 @@ import { Facebook, Instagram, Mail, MapPin, Phone, PhoneCallIcon } from "lucide-
 import heroImage from "@/assets/hero-children.jpg";
 import logoBorisVian from "@/assets/logos/logo-boris-vian.jpg";
 import logoMdh from "@/assets/logos/logo-mdh-new-web.jpg";
-import logoTrinquat from "@/assets/logos/trinquatcompagnie.jpg";
+import logoTrinquatcompagnie from "@/assets/logos/trinquatcompagnie.jpg";
 import logoAssadia from "@/assets/logos/logoAssadia.svg";
 import ptitClub from "@/assets/logos/LPC.svg";
 
@@ -65,7 +65,7 @@ const officialPartners = [
   {
     id: 4,
     name: "Trinquat Compagnie",
-    logo: logoTrinquat,
+    logo: logoTrinquatcompagnie,
     alt: "Logo Trinquat Compagnie",
     website: "https://www.trinquatetcompagnie.fr/",
   },
