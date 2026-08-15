@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Users } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Calendar, Users, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,7 @@ const Spark = ({ color }: { color: string }) => {
 
 export function HeroSection() {
   const sparks = Array.from({ length: 150 }); // total sparks around the TOMBOLA
+  const [isLightboxOpen, setIsLightboxOpen] = React.useState(false);
   type InfoBadgeProps = {
     icon: string
     text: string
@@ -316,8 +317,9 @@ export function HeroSection() {
                       <img
                         src={logoAssoOgFavicon}
                         alt="Logo Les P'tits Trinquat"
-                        className="relative rounded-2xl shadow-2xl w-full h-auto"
+                        className="relative rounded-2xl shadow-2xl w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
                         style={{ maxHeight: "1000px", objectFit: "cover" }}
+                        onClick={() => setIsLightboxOpen(true)}
                       />
                       {/* Floating badge */}
                       <motion.div
@@ -402,6 +404,40 @@ export function HeroSection() {
           />
         </svg>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {isLightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsLightboxOpen(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl max-h-[90vh] w-full mx-4"
+            >
+              <img
+                src={logoAssoOgFavicon}
+                alt="Logo Les P'tits Trinquat - Plein écran"
+                className="w-full h-full object-contain rounded-xl"
+              />
+              <button
+                onClick={() => setIsLightboxOpen(false)}
+                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
+                aria-label="Fermer"
+              >
+                <X className="h-8 w-8" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
