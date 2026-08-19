@@ -196,8 +196,7 @@ const NotreEcole = () => {
                 élèves avec bienveillance et engagement.
               </p>
               <p>
-                Plus qu'un lieu d'apprentissage, le groupe scolaire <strong>Anne Frank - Charles Dickens</strong>
-                est un véritable lieu de vie, où se construisent des liens durables et où les valeurs de respect,
+                Plus qu'un lieu d'apprentissage, le groupe scolaire <strong>Anne Frank - Charles Dickens</strong> est un véritable lieu de vie, où se construisent des liens durables et où les valeurs de respect,
                 de partage et d'entraide grandissent au quotidien.
               </p>
 
