@@ -8,11 +8,11 @@ SELECT COUNT(*) as user_exists FROM users WHERE email = 'mehdi@gmail.com';
 
 -- Étape 2: Créer l'utilisateur s'il n'existe pas
 INSERT OR IGNORE INTO users (email, password_hash)
-VALUES ('mehdi@gmail.com', 'RyCMR6WIOsLbFe/bgJ1/gtTn107r0OY1ut56y5b4BEIKxDxswQYTIppAf5Ld1+b2');
+VALUES ('mehdi@gmail.com', 'sha256:9a6d68a809df4b84817ef274dceb0afb854843e507c15f836f3833b5cae58630');
 
 -- Étape 3: Mettre à jour le mot de passe si l'utilisateur existait déjà
 UPDATE users 
-SET password_hash = 'RyCMR6WIOsLbFe/bgJ1/gtTn107r0OY1ut56y5b4BEIKxDxswQYTIppAf5Ld1+b2',
+SET password_hash = 'sha256:9a6d68a809df4b84817ef274dceb0afb854843e507c15f836f3833b5cae58630',
     updated_at = strftime('%Y-%m-%dT%H:%M:%SZ', 'now')
 WHERE email = 'mehdi@gmail.com';
 

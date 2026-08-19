@@ -1,6 +1,7 @@
-import React from 'react';
-import { motion } from "framer-motion";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
 import {
   Globe,
@@ -124,6 +125,7 @@ const galleryImages = [
 
 const NotreEcole = () => {
   useScrollToTop();
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   return (
     <Layout>
@@ -147,7 +149,7 @@ const NotreEcole = () => {
               Notre école
             </span>
             <h1 className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              Un lieu où grandir <span className="bg-gradient-to-r from-primary via-secondary to-sky bg-clip-text text-transparent">avec bonheur</span>
+              Un lieu où grandir <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">avec bonheur</span>
             </h1>
             <p className="text-lg text-muted-foreground md:text-xl leading-relaxed">
               Un lieu où chaque enfant trouve sa place dans un environnement chaleureux,
@@ -188,15 +190,15 @@ const NotreEcole = () => {
               className="space-y-4 text-muted-foreground leading-relaxed"
             >
               <p>
-                Le groupe scolaire <strong>Anne Frank - Charles Dickens</strong> accueille les enfants de la maternelle au CM2 dans un environnement doux et rassurant, pensé pour favoriser leur épanouissement. Chaque jour, nos équipes pédagogiques attentives accompagnent les élèves avec bienveillance et engagement.
+                Le groupe scolaire <strong>Anne Frank - Charles Dickens</strong> accueille les enfants
+                de la maternelle au CM2 dans un environnement doux et rassurant, pensé pour favoriser
+                leur épanouissement. Chaque jour, nos équipes pédagogiques attentives accompagnent les
+                élèves avec bienveillance et engagement.
               </p>
-
               <p>
-                Ici, apprendre rime avec plaisir et confiance. Enseignants et familles avancent main dans la main pour offrir à chaque enfant un parcours scolaire respectueux de son rythme, de sa curiosité et de ses talents.
-              </p>
-
-              <p>
-                Plus qu'un lieu d'apprentissage, le groupe scolaire <strong>Anne Frank - Charles Dickens</strong> est un véritable lieu de vie, où se construisent des liens durables et où les valeurs de respect, de partage et d'entraide grandissent au quotidien.
+                Plus qu'un lieu d'apprentissage, le groupe scolaire <strong>Anne Frank - Charles Dickens</strong>
+                est un véritable lieu de vie, où se construisent des liens durables et où les valeurs de respect,
+                de partage et d'entraide grandissent au quotidien.
               </p>
 
             </motion.div>
@@ -461,7 +463,8 @@ const NotreEcole = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-card shadow-card"
+                className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-card shadow-card cursor-pointer"
+                onClick={() => setSelectedImageIndex(index)}
               >
                 <img
                   src={image.src}
@@ -475,6 +478,71 @@ const NotreEcole = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Lightbox */}
+          <AnimatePresence>
+            {selectedImageIndex !== null && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedImageIndex(null)}
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+              >
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative max-w-4xl max-h-[90vh] w-full mx-4 flex flex-col"
+                >
+                  {/* Image */}
+                  <img
+                    src={galleryImages[selectedImageIndex].src}
+                    alt={galleryImages[selectedImageIndex].alt}
+                    className="w-full h-full object-contain rounded-xl"
+                  />
+
+                  {/* Image description */}
+                  <div className="text-center mt-4 text-white/90">
+                    <p className="text-sm md:text-base font-medium">{galleryImages[selectedImageIndex].alt}</p>
+                    <p className="text-xs md:text-sm text-white/60 mt-1">{selectedImageIndex + 1} / {galleryImages.length}</p>
+                  </div>
+
+                  {/* Close button */}
+                  <button
+                    onClick={() => setSelectedImageIndex(null)}
+                    className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
+                    aria-label="Fermer"
+                  >
+                    <X className="h-8 w-8" />
+                  </button>
+
+                  {/* Previous button */}
+                  {selectedImageIndex > 0 && (
+                    <button
+                      onClick={() => setSelectedImageIndex(selectedImageIndex - 1)}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+                      aria-label="Image précédente"
+                    >
+                      <ChevronLeft className="h-8 w-8" />
+                    </button>
+                  )}
+
+                  {/* Next button */}
+                  {selectedImageIndex < galleryImages.length - 1 && (
+                    <button
+                      onClick={() => setSelectedImageIndex(selectedImageIndex + 1)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+                      aria-label="Image suivante"
+                    >
+                      <ChevronRight className="h-8 w-8" />
+                    </button>
+                  )}
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
