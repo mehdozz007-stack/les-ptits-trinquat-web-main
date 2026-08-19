@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-children.jpg";
-import logoAsso from "@/assets/logos/logoAsso.png";
-import logoAssoOgFavicon from "@/assets/logos/logoAsso-og-favicon.jpg";
+import logoAsso from "/logoAsso.png";
+import logoAssoOg from "/logoAsso-og.jpg";
+import logoAssoOgFavicon from "/logoAsso-og-favicon.jpg";
 
 // Spark component for floating particles
 const Spark = ({ color }: { color: string }) => {
@@ -315,7 +316,7 @@ export function HeroSection() {
                   <div className="relative p-3 sm:p-4 lg:p-6 rounded-2xl">
                     <div className="relative inline-block">
                       <img
-                        src={logoAssoOgFavicon}
+                        src={logoAssoOg}
                         alt="Logo Les P'tits Trinquat"
                         className="relative rounded-2xl shadow-2xl w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
                         style={{ maxHeight: "1000px", objectFit: "cover" }}

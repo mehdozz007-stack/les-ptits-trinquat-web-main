@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Mail, MapPin, Phone, PhoneCallIcon } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone, PhoneCallIcon, ExternalLink } from "lucide-react";
 import heroImage from "@/assets/hero-children.jpg";
 import logoBorisVian from "@/assets/logos/logo-boris-vian.jpg";
 import logoMdh from "@/assets/logos/logo-mdh-new-web.jpg";
@@ -30,7 +30,7 @@ const socialLinks = [
   { icon: Facebook, href: "https://www.facebook.com/LesPtitsTrinquats", label: "Facebook" },
   { icon: Instagram, href: "https://www.instagram.com/Les_ptits_trinquat?fbclid=IwY2xjawOmlxFleHRuA2FlbQIxMABicmlkETFnZjNRdDdMVHp6cHdIM3pwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvXM-UMnkp69r5uScbYVykNF5ZVtr9MQa1_k2se0iqZ3IfRUEmOZXgHqWCes_aem_hUyrVdxiVyWFisTvxVlyRw&brid=boREg9T10BACz4NodPBJ3w", label: "Instagram" },
   { icon: Mail, href: "mailto:parents.frank.dickens@gmail.com", label: "Email" },
-  { icon: PhoneCallIcon, href: "https://www.helloasso.com/associations/les-p-tits-trinquat", label: "HelloAsso" },
+  { icon: ExternalLink, href: "https://www.helloasso.com/associations/les-p-tits-trinquat", label: "HelloAsso" },
 ];
 
 const officialPartners = [
