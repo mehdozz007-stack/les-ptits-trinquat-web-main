@@ -6,7 +6,7 @@ import { Heart, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-children.jpg";
 import logoAsso from "/logoAsso.png";
-import logoAssoOg from "/logoAsso-og.jpg";
+import logoAssoOg from "/logoAsso.png";
 import logoAssoOgFavicon from "/logoAsso-og-favicon.jpg";
 
 // Spark component for floating particles
