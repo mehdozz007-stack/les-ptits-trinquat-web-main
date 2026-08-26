@@ -81,7 +81,7 @@ const upcomingEvents = [
   },*/
   {
     id: 3,
-    title: "Bonnes rentrée scolaire !",
+    title: "Bonne rentrée scolaire !",
     description: "Nous vous souhaitons une excellente rentrée scolaire pleine de succès et de bonheur !",
     color: "emerald",
     date: "",
