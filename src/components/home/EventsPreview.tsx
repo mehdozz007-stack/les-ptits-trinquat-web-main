@@ -87,7 +87,7 @@ const upcomingEvents = [
     date: "",
     time: "",
     location: "",
-    url: "/actualites/",
+    url: "/documents/fouritures-rentree-2026-2027.PDF",
 
   },
   /*{
