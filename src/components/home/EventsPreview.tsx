@@ -81,9 +81,9 @@ const upcomingEvents = [
   },*/
   {
     id: 3,
-    title: "Bonnes vacances !",
-    description: "Nous vous souhaitons de très bonnes vacances d'été ! Rendez-vous à la rentrée pour de nouvelles aventures scolaires !",
-    color: "sky",
+    title: "Bonnes rentrée scolaire !",
+    description: "Nous vous souhaitons une excellente rentrée scolaire pleine de succès et de bonheur !",
+    color: "emerald",
     date: "",
     time: "",
     location: "",
