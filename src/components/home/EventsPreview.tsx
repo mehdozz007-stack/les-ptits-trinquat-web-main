@@ -97,6 +97,7 @@ const upcomingEvents = [
     description: "On vous souhaite une excellente rentrée pleine de succès et de bonheur !",
     color: "emerald",
     date: "",
+    url: "/documents/fouritures-rentree-2026-2027.PDF",
 
   },
   /*{
