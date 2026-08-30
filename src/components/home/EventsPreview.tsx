@@ -94,7 +94,7 @@ const upcomingEvents = [
   {
     id: 3,
     title: "Bonne rentrée !",
-    description: "On vous souhaite une excellente rentrée pleine de succès et de bonheur !",
+    description: "Découvrez la liste de fournitures pour la rentrée 2026-2027. On vous souhaite une excellente rentrée pleine de succès et de bonheur !",
     color: "emerald",
     date: "",
     url: "/documents/fouritures-rentree-2026-2027.PDF",
