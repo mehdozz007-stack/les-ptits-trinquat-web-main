@@ -91,18 +91,15 @@ const upcomingEvents = [
     status: "upcoming",
     url: "https://www.ent-ecole.fr/cardboard/0197dbb8-a944-7dd7-9bf4-7043f0678482",
   },
-  /*{
+  {
     id: 3,
-    title: "Bonnes vacances !",
-    description: "Nous vous souhaitons de très bonnes vacances d'été ! Rendez-vous à la rentrée pour de nouvelles aventures scolaires !",
-    color: "sky",
+    title: "Bonne rentrée !",
+    description: "On vous souhaite une excellente rentrée pleine de succès et de bonheur !",
+    color: "emerald",
     date: "",
-    time: "",
-    location: "",
-    url: "/actualites/",
 
   },
-  {
+  /*{
     id: 3,
     title: "Carnaval à l'école",
     description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les maternelles construisent leurs déguisements et les élémentaires feront des accessoires, afin de célébrer ensemble l'arrivée du printemps.",
