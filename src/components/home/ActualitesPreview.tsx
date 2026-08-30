@@ -52,7 +52,19 @@ const buttonGradients: Record<string, string> = {
 
 export function ActualitesPreview() {
     const renderActionButton = (actualite: ReturnType<typeof getLatestActualites>[0]) => {
-        // Tous les boutons mènent vers la page de détail
+        // Si directLink est true, rediriger vers le lien externe
+        if (actualite.directLink && actualite.link) {
+            return (
+                <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                        <LinkIcon className="h-4 w-4" />
+                        Accéder
+                    </a>
+                </Button>
+            );
+        }
+
+        // Sinon, aller à la page de détail
         return (
             <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
                 <Link to={`/actualites/${actualite.id}`}>

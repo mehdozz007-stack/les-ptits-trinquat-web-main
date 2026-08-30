@@ -110,10 +110,22 @@ export function Actualites() {
             );
         }
 
-        if (actualite.link) {
+        // Si directLink est true, ouvrir le lien externe
+        if (actualite.directLink && actualite.link) {
             return (
                 <Button asChild variant="outline" size="sm" className="gap-2">
-                    <Link to={actualite.link}>
+                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                        <LinkIcon className="h-4 w-4" />
+                        Accéder
+                    </a>
+                </Button>
+            );
+        }
+
+        if (actualite.link && !actualite.directLink) {
+            return (
+                <Button asChild variant="outline" size="sm" className="gap-2">
+                    <Link to={`/actualites/${actualite.id}`}>
                         <LinkIcon className="h-4 w-4" />
                         Lire plus
                     </Link>
@@ -233,6 +245,16 @@ export function Actualites() {
                 {/* Actualites grid */}
                 <section className="relative overflow-hidden bg-muted/50 sm:py-12 py-14 md:py-28">
                     <div className="container">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="mb-12"
+                        >
+                            <h2 className="mb-4 text-3xl font-bold">
+                                À venir
+                            </h2>
+                        </motion.div>
                         {filteredActualites.length > 0 ? (
                             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                                 {filteredActualites.map((actualite, index) => (
