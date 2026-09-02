@@ -2,10 +2,8 @@ import React from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Calendar, Users, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Heart, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-children.jpg";
-import logoAsso from "/logoAsso.png";
 import logoAssoOg from "/logoAsso.png";
 import logoAssoOgFavicon from "/logoAsso-og-favicon.jpg";
 
@@ -180,30 +178,30 @@ export function HeroSection() {
                   "bg-purple-400",
                   "bg-white",
                 ]}
-              />
-              <InfoBadge
-                icon="🎊"
-                text="Fête d'école le 19 Juin : Festivités et partage !"
-                href="/actualites/act-009"
-                delay={0.35}
-                bgClass="bg-yellow-100/50 text-orange-600"
-                textGradient="bg-gradient-to-r from-yellow-500 via-orange-600 to-red-500"
-                pingOuter="bg-yellow-500"
-                pingInner="bg-yellow-400"
-                sparks={sparks}
-                sparksColors={[
-                  "bg-yellow-300",
-                  "bg-orange-400",
-                  "bg-red-400",
-                  "bg-pink-400",
-                  "bg-purple-400",
-                  "bg-blue-400",
-                  "bg-green-400",
-                  "bg-lime-400",
-                  "bg-cyan-400",
-                  "bg-white",
-                ]}
-              />*/}
+              />*/
+                <InfoBadge
+                  icon="🎊"
+                  text="Fête de la rentrée à la MPT Boris Vian"
+                  href="/actualites/act-0002"
+                  delay={0.35}
+                  bgClass="bg-green-100/50 text-orange-600"
+                  textGradient="bg-gradient-to-r from-yellow-500 via-orange-600 to-red-500"
+                  pingOuter="bg-yellow-500"
+                  pingInner="bg-yellow-400"
+                  sparks={sparks}
+                  sparksColors={[
+                    "bg-yellow-300",
+                    "bg-orange-400",
+                    "bg-red-400",
+                    "bg-pink-400",
+                    "bg-purple-400",
+                    "bg-blue-400",
+                    "bg-green-400",
+                    "bg-lime-400",
+                    "bg-cyan-400",
+                    "bg-white",
+                  ]}
+                />}
               <InfoBadge
                 icon="🏆"
                 text="Profitez de nos offres de partenariats exclusifs !"

@@ -27,7 +27,7 @@ import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
 import videGrenier from '@/assets/Vide-grenier.jpg';
 import maman from '@/assets/Retour-maman.jpg';
 import printemps from '@/assets/vente-printemps.png';
-import feteecole from '@/assets/fete_ecole.png';
+import feterentree from '@/assets/fete-rentree2026-2027.jpg';
 /**
  * Formate une date ISO (YYYY-MM-DD) en format français lisible (DD Mois YYYY)
  */
@@ -94,15 +94,17 @@ export const actualitesData: Actualite[] = [
         directLink: true,
     },
     {
-        id: "act-014",
-        title: "Fournitures scolaires 2026-2027",
-        description: "Liste des fournitures scolaires pour l'année 2026-2027 avec recommandations pour chaque niveau.",
-        content: "Guide à destination des parents pour préparer les fournitures scolaires de leurs enfants pour l'année 2026-2027.",
-        type: "document",
-        date: "2026-06-30",
-        fileUrl: "/documents/fouritures-rentree-2026-2027.PDF",
-        color: "accent",
+        id: "act-0002",
+        title: "Fête de la rentrée à la MPT Boris Vian",
+        description: "Fêter la rentrée scolaire à la MPT avec toutes les familles.",
+        content: "Venez nombreux pour célébrer la rentrée scolaire avec des activités ludiques, des jeux et des moments conviviaux pour toute la famille.",
+        type: "evenement",
+        date: "2026-09-29",
+        time: "16h30 - 19h30",
+        location: "Maison pour tous Boris Vian",
+        color: "primary",
         status: "upcoming",
+        affiche: feterentree,
     },
     {
         id: "act-008",

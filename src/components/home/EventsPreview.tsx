@@ -66,19 +66,19 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 400,
     url: "/actualites/act-010",
-  },
+  },*/
   {
     id: 1,
-    title: "Fête d'école",
-    description: "Rires, jeux, spectacles et douceurs gourmandes vous attendent pour partager ensemble un moment joyeux et festif et célébrer la fin de l'année scolaire 🌟🍭",
+    title: "Fête de la rentrée à la MPT Boris Vian",
+    description: "Grands et petits sont invités à célébrer la rentrée scolaire avec des activités ludiques et conviviales.",
     type: "evenement",
-    date: "2026-06-19",
-    time: "14h00 - 19h00",
-    location: "Cour de l'école",
+    date: "2026-09-29",
+    time: "16h30 - 19h30",
+    location: "Maison pour tous Boris Vian",
     color: "primary",
     status: "upcoming",
-    url: "/actualites/act-009",
-  },*/
+    url: "/actualites/act-0002",
+  },
   {
     id: "act-0001",
     title: "Liste des classes pour la rentrée 2026-2027",
@@ -87,12 +87,12 @@ const upcomingEvents = [
     date: "1 Septembre 2026",
     time: "08h20 - 09h20",
     location: "Toute l'école",
-    color: "amber",
+    color: "accent",
     status: "upcoming",
     url: "https://www.ent-ecole.fr/cardboard/0197dbb8-a944-7dd7-9bf4-7043f0678482",
   },
-  {
-    id: 3,
+
+  /*{  id: 3,
     title: "Bonne rentrée !",
     description: "Découvrez la liste de fournitures pour la rentrée 2026-2027. On vous souhaite une excellente rentrée pleine de succès et de bonheur !",
     color: "emerald",
@@ -100,7 +100,7 @@ const upcomingEvents = [
     url: "/documents/fouritures-rentree-2026-2027.PDF",
 
   },
-  /*{
+  {
     id: 3,
     title: "Carnaval à l'école",
     description: "Le carnaval s'invite à l'école pendant le temps de classe pour un moment joyeux et coloré. Les maternelles construisent leurs déguisements et les élémentaires feront des accessoires, afin de célébrer ensemble l'arrivée du printemps.",
