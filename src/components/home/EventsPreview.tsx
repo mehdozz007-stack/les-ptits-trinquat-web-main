@@ -269,7 +269,7 @@ export function EventsPreview() {
                     <motion.h3
                       animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
                       transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                      className={`text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-4 sm:mb-6 text-center ${titleGradients[event.color as keyof typeof titleGradients]}`}
+                      className={`text-lg sm:text-base md:text-lg lg:text-xl font-bold mb-4 sm:mb-6 text-center ${titleGradients[event.color as keyof typeof titleGradients]}`}
                     >
                       {event.title}
                     </motion.h3>

@@ -184,8 +184,8 @@ export function HeroSection() {
                   text="Fête de la rentrée à la MPT Boris Vian"
                   href="/actualites/act-0002"
                   delay={0.35}
-                  bgClass="bg-green-100/50 text-orange-600"
-                  textGradient="bg-gradient-to-r from-yellow-500 via-orange-600 to-red-500"
+                  bgClass="bg-pink-100/50 text-orange-600"
+                  textGradient="bg-gradient-to-r from-orange-500 via-orange-600 to-red-500"
                   pingOuter="bg-yellow-500"
                   pingInner="bg-yellow-400"
                   sparks={sparks}
