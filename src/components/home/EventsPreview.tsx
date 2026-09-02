@@ -70,7 +70,7 @@ const upcomingEvents = [
   {
     id: 1,
     title: "Fête de la rentrée à la MPT Boris Vian",
-    description: "Grands et petits sont invités à célébrer la rentrée scolaire avec des activités ludiques et conviviales.",
+    description: "Grands et petits retrouvez-nous pour célébrer la rentrée scolaire avec des activités ludiques et conviviales.",
     type: "evenement",
     date: "2026-09-29",
     time: "16h30 - 19h30",

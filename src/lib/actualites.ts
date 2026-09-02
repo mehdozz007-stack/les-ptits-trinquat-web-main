@@ -81,6 +81,19 @@ export interface Actualite {
 
 export const actualitesData: Actualite[] = [
     {
+        id: "act-0002",
+        title: "Fête de la rentrée à la MPT Boris Vian",
+        description: "Fêter la rentrée scolaire à la MPT avec toutes les familles.",
+        content: "Venez nombreux pour nous retrouver à la fête de la rentrée scolaire, organisée par la MPT Boris Vian, avec des activités ludiques, des jeux et des moments conviviaux pour toute la famille.",
+        type: "evenement",
+        date: "2026-09-29",
+        time: "16h30 - 19h30",
+        location: "Maison pour tous Boris Vian",
+        color: "primary",
+        status: "upcoming",
+        affiche: feterentree,
+    },
+    {
         id: "act-0001",
         title: "Liste des classes pour la rentrée 2026-2027",
         type: "information",
@@ -93,19 +106,7 @@ export const actualitesData: Actualite[] = [
         link: "https://www.ent-ecole.fr/cardboard/0197dbb8-a944-7dd7-9bf4-7043f0678482",
         directLink: true,
     },
-    {
-        id: "act-0002",
-        title: "Fête de la rentrée à la MPT Boris Vian",
-        description: "Fêter la rentrée scolaire à la MPT avec toutes les familles.",
-        content: "Venez nombreux pour célébrer la rentrée scolaire avec des activités ludiques, des jeux et des moments conviviaux pour toute la famille.",
-        type: "evenement",
-        date: "2026-09-29",
-        time: "16h30 - 19h30",
-        location: "Maison pour tous Boris Vian",
-        color: "primary",
-        status: "upcoming",
-        affiche: feterentree,
-    },
+
     {
         id: "act-008",
         title: "Fiche RSST",
