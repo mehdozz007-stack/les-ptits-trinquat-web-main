@@ -102,7 +102,7 @@ export const actualitesData: Actualite[] = [
         time: "",
         location: "Toute l'école",
         color: "amber",
-        status: "upcoming",
+        status: "past",
         link: "https://www.ent-ecole.fr/cardboard/0197dbb8-a944-7dd7-9bf4-7043f0678482",
         directLink: true,
     },

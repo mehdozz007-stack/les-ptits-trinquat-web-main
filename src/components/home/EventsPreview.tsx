@@ -79,7 +79,7 @@ const upcomingEvents = [
     status: "upcoming",
     url: "/actualites/act-0002",
   },
-  {
+  /*{
     id: "act-0001",
     title: "Liste des classes pour la rentrée 2026-2027",
     type: "information",
@@ -92,7 +92,7 @@ const upcomingEvents = [
     url: "https://www.ent-ecole.fr/cardboard/0197dbb8-a944-7dd7-9bf4-7043f0678482",
   },
 
-  /*{  id: 3,
+  {  id: 3,
     title: "Bonne rentrée !",
     description: "Découvrez la liste de fournitures pour la rentrée 2026-2027. On vous souhaite une excellente rentrée pleine de succès et de bonheur !",
     color: "emerald",
@@ -115,7 +115,7 @@ const upcomingEvents = [
 ];
 
 const titleGradients = {
-  primary: "bg-gradient-to-r from-primary via-secondary to-pink bg-clip-text text-transparent font-extrabold",
+  primary: "bg-gradient-to-r from-primary via-secondary to-pink-400 bg-clip-text text-transparent font-extrabold",
   secondary: "bg-gradient-to-r from-secondary via-primary to-orange-500 bg-clip-text text-transparent font-extrabold",
   sky: "bg-gradient-to-r from-sky-600 via-blue-600 to-violet-600 bg-clip-text text-transparent font-extrabold",
   accent: "bg-gradient-to-r from-accent via-green-600 to-yellow-400 bg-clip-text text-transparent font-extrabold",
@@ -264,7 +264,7 @@ export function EventsPreview() {
                     </div>
                   )}
 
-                  <CardContent className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-12">
+                  <CardContent className="relative z-10 p-8 sm:p-6 md:p-8 lg:p-12">
                     {/* Title */}
                     <motion.h3
                       animate={prefersReducedMotion ? {} : { y: [0, -4, 0] }}
