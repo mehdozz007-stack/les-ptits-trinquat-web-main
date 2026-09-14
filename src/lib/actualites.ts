@@ -26,7 +26,7 @@ import tomola from '@/assets/tomola.jpg';
 import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
 import videGrenier from '@/assets/Vide-grenier.jpg';
 import maman from '@/assets/Retour-maman.jpg';
-import printemps from '@/assets/vente-printemps.png';
+import reunionALP from '@/assets/reunion_ALP.jpeg';
 import feterentree from '@/assets/fete-rentree2026-2027.jpg';
 /**
  * Formate une date ISO (YYYY-MM-DD) en format français lisible (DD Mois YYYY)
@@ -94,16 +94,16 @@ export const actualitesData: Actualite[] = [
         affiche: feterentree,
     },
     {
-        id: "act-0001",
-        title: "Liste des classes pour la rentrée 2026-2027",
+        id: "act-0003",
+        title: "Réunion d'information des ALP FRANK-DICKENS 2026-2027",
         type: "information",
-        description: "Découvrez la répartition des classes pour la rentrée 2026-2027 par prénom des élèves. Les noms sont anonymisés.",
-        date: "1 Septembre 2026",
-        time: "",
-        location: "Toute l'école",
-        color: "amber",
-        status: "past",
-        link: "https://www.ent-ecole.fr/cardboard/0197dbb8-a944-7dd7-9bf4-7043f0678482",
+        description: "Venez échanger, poser vos questions et surtout montrer votre intérêt pour la vie de vos enfants au périscolaire.",
+        date: "28 Septembre 2026",
+        time: "18h",
+        location: "Cours de l'école",
+        color: "sky",
+        status: "upcoming",
+        link: reunionALP,
         directLink: true,
     },
 

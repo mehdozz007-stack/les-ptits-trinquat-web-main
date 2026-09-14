@@ -133,15 +133,15 @@ export function HeroSection() {
             className="max-w-xl w-full"
           >
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
-              {/*} <InfoBadge
-                icon="🛍️"
-                text="Vide Grenier le 12 Avril : Dénicher de bonnes affaires !"
-                href="/actualites/act-010"
+              <InfoBadge
+                icon="🏫"
+                text="Réunion ALP périscolaire Frank-Dickens : soyons nombreux !"
+                href="/actualites/act-0003"
                 delay={0.2}
-                bgClass="bg-red-100/50 text-yellow-600"
-                textGradient="bg-gradient-to-r from-red-500 via-yellow-600 to-pink-500"
-                pingOuter="bg-amber-500"
-                pingInner="bg-amber-400"
+                bgClass="bg-orange-100/50 text-green-600"
+                textGradient="bg-gradient-to-r from-green-500 to-blue-500"
+                pingOuter="bg-green-500"
+                pingInner="bg-green-400"
                 sparks={sparks}
                 sparksColors={[
                   "bg-red-400",
@@ -154,7 +154,7 @@ export function HeroSection() {
                   "bg-pink-400",
                   "bg-white",
                 ]}
-              />*/}
+              />
               {/*<InfoBadge
                 icon="🌸"
                 text="Vente du printemps le 17 Avril : Soyez nombreux !"
@@ -176,6 +176,28 @@ export function HeroSection() {
                   "bg-teal-400",
                   "bg-cyan-400",
                   "bg-purple-400",
+                  "bg-white",
+                ]}
+              />
+              <InfoBadge
+                icon="🏆"
+                text="Profitez de nos offres de partenariats exclusifs !"
+                href="/partenaires#special-event-1"
+                delay={0.2}
+                bgClass="bg-red-100/50 text-yellow-600"
+                textGradient="bg-gradient-to-r from-pink-500 via-rose-600 to-yellow-500"
+                pingOuter="bg-pink-500"
+                pingInner="bg-pink-400"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-green-400",
+                  "bg-emerald-400",
+                  "bg-teal-400",
+                  "bg-cyan-400",
+                  "bg-sky-400",
+                  "bg-blue-400",
+                  "bg-indigo-400",
+                  "bg-amber-400",
                   "bg-white",
                 ]}
               />*/
@@ -202,28 +224,6 @@ export function HeroSection() {
                     "bg-white",
                   ]}
                 />}
-              <InfoBadge
-                icon="🏆"
-                text="Profitez de nos offres de partenariats exclusifs !"
-                href="/partenaires#special-event-1"
-                delay={0.2}
-                bgClass="bg-orange-100/50 text-green-600"
-                textGradient="bg-gradient-to-r from-green-500 to-blue-500"
-                pingOuter="bg-green-500"
-                pingInner="bg-green-400"
-                sparks={sparks}
-                sparksColors={[
-                  "bg-green-400",
-                  "bg-emerald-400",
-                  "bg-teal-400",
-                  "bg-cyan-400",
-                  "bg-sky-400",
-                  "bg-blue-400",
-                  "bg-indigo-400",
-                  "bg-amber-400",
-                  "bg-white",
-                ]}
-              />
             </div>
 
 

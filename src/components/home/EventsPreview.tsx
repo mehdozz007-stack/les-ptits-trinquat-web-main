@@ -4,7 +4,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatDateFr } from "@/lib/actualites";
-
+import reunionALP from '@/assets/reunion_ALP.jpeg';
 // Bubble animation component
 const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: number; size: string }) => (
   <motion.div
@@ -66,6 +66,18 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 400,
     url: "/actualites/act-010",
+  },
+  {
+    id: 2,
+    title: "Réunion d'information des ALP FRANK-DICKENS 2026-2027",
+    type: "information",
+    description: "Venez échanger, poser vos questions et surtout montrer votre intérêt pour la vie de vos enfants au périscolaire.",
+    date: "28 Septembre 2026",
+    time: "18h",
+    location: "Cours de l'école",
+    color: "sky",
+    status: "upcoming",
+    url: reunionALP,
   },*/
   {
     id: 1,
@@ -77,22 +89,9 @@ const upcomingEvents = [
     location: "Maison pour tous Boris Vian",
     color: "primary",
     status: "upcoming",
-    url: "/actualites/act-0002",
+    url: reunionALP,
   },
-  /*{
-    id: "act-0001",
-    title: "Liste des classes pour la rentrée 2026-2027",
-    type: "information",
-    description: "Découvrez la répartition des classes pour la rentrée 2026-2027 par prénom des élèves. Les noms sont anonymisés.",
-    date: "1 Septembre 2026",
-    time: "08h20 - 09h20",
-    location: "Toute l'école",
-    color: "accent",
-    status: "upcoming",
-    url: "https://www.ent-ecole.fr/cardboard/0197dbb8-a944-7dd7-9bf4-7043f0678482",
-  },
-
-  {  id: 3,
+  /*{  id: 3,
     title: "Bonne rentrée !",
     description: "Découvrez la liste de fournitures pour la rentrée 2026-2027. On vous souhaite une excellente rentrée pleine de succès et de bonheur !",
     color: "emerald",
