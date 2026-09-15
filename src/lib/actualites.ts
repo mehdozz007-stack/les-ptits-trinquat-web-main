@@ -103,8 +103,9 @@ export const actualitesData: Actualite[] = [
         location: "Cours de l'école",
         color: "sky",
         status: "upcoming",
-        link: reunionALP,
-        directLink: true,
+        affiche: reunionALP,
+        //link: reunionALP,
+        //directLink: true,
     },
 
     {
