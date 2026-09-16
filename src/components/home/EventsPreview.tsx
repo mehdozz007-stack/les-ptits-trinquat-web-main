@@ -44,7 +44,7 @@ const upcomingEvents = [
     location: "Salle polyvalente de l'école",
     color: "sky",
     status: "upcoming",
-    url: "/actualites/conseil-ecole-002",
+    url: "/actualites/act-0001",
   },
   /*{
     id: 2,
