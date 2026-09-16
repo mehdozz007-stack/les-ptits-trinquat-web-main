@@ -140,7 +140,7 @@ export function HeroSection() {
                 href="/actualites/act-0001"
                 delay={0.2}
                 bgClass="bg-pink-100/50 text-rose-600"
-                textGradient="bg-gradient-to-r from-pink-500 via-rose-600 to-green-500"
+                textGradient="bg-gradient-to-r from-pink-500 via-rose-600 to-violet-500"
                 pingOuter="bg-pink-500"
                 pingInner="bg-pink-400"
                 sparks={sparks}
