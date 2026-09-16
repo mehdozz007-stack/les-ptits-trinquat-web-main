@@ -42,7 +42,7 @@ const upcomingEvents = [
     date: "2026-09-22",
     time: "17h30 - 19h00",
     location: "Salle polyvalente de l'école",
-    color: "sky",
+    color: "accent",
     status: "upcoming",
     url: "/actualites/act-0001",
   },
