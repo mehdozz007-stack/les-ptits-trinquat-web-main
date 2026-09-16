@@ -81,6 +81,18 @@ export interface Actualite {
 
 export const actualitesData: Actualite[] = [
     {
+        id: "act-0001",
+        title: "Assemblée générale",
+        description: "Réunir les parents délégués pour échanger, voter et préparer les actions de l'année scolaire.",
+        content: "Participez à notre Assemblée générale, un moment clé pour faire le point sur l'année écoulée, présenter les projets à venir, échanger entre parents délégués et prendre ensemble les décisions importantes pour la vie de l'école.",
+        type: "evenement",
+        date: "2026-09-22",
+        time: "17h30 - 19h",
+        location: "Maison pour tous Boris Vian",
+        color: "accent",
+        status: "upcoming",
+    },
+    {
         id: "act-0002",
         title: "Fête de la rentrée à la MPT Boris Vian",
         description: "Fêter la rentrée scolaire à la MPT avec toutes les familles.",

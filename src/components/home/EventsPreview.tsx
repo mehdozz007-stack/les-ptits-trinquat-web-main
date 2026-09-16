@@ -35,18 +35,18 @@ const upcomingEvents = [
     attendees: 200,
     url: "/actualites/act-004"
   },*/
-  /*{
+  {
     id: 2,
-    title: "Deuxième conseil d'école de l'année",
-    description: "Nous vous accueillons pour le deuxième conseil d'école de l'année. Un moment d'échange et de partage pour discuter de la vie de l'école et des projets pédagogiques.",
-    date: "2026-03-24",
-    time: "17h45 - 19h00",
+    title: "Assemblée générale",
+    description: "Réunir les parents délégués pour échanger, voter et préparer les actions de l'année scolaire.",
+    date: "2026-09-22",
+    time: "17h30 - 19h00",
     location: "Salle polyvalente de l'école",
     color: "sky",
     status: "upcoming",
     url: "/actualites/conseil-ecole-002",
   },
-  {
+  /*{
     id: 2,
     title: "Vente du Printemps : Gâteaux Gourmands de l'École",
     description: "Vente de gâteaux faits maison avant les vacances de printemps. Invitez vos délices pour soutenir les projets de l'école!",

@@ -132,7 +132,32 @@ export function HeroSection() {
             transition={{ duration: 0.6 }}
             className="max-w-xl w-full"
           >
+
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
+              <InfoBadge
+                icon="🗳️"
+                text="Assemblée générale des parents délégués"
+                href="/actualites/act-0001"
+                delay={0.2}
+                bgClass="bg-pink-100/50 text-rose-600"
+                textGradient="bg-gradient-to-r from-pink-500 via-rose-600 to-green-500"
+                pingOuter="bg-pink-500"
+                pingInner="bg-pink-400"
+                sparks={sparks}
+                sparksColors={[
+                  "bg-pink-400",
+                  "bg-rose-400",
+                  "bg-red-400",
+                  "bg-yellow-300",
+                  "bg-lime-400",
+                  "bg-green-400",
+                  "bg-emerald-400",
+                  "bg-teal-400",
+                  "bg-cyan-400",
+                  "bg-purple-400",
+                  "bg-white",
+                ]}
+              />
               <InfoBadge
                 icon="🏫"
                 text="Réunion ALP périscolaire Frank-Dickens : soyons nombreux !"
