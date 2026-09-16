@@ -78,7 +78,7 @@ const upcomingEvents = [
     color: "sky",
     status: "upcoming",
     url: reunionALP,
-  },*/
+  },
   {
     id: 1,
     title: "Fête de la rentrée à la MPT Boris Vian",

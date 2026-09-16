@@ -134,7 +134,7 @@ export function HeroSection() {
           >
 
             <div className="mb-8 flex flex-col gap-2 sm:gap-3">
-              <InfoBadge
+              {/*<InfoBadge
                 icon="🗳️"
                 text="Assemblée générale des parents délégués"
                 href="/actualites/act-0001"
@@ -180,7 +180,7 @@ export function HeroSection() {
                   "bg-white",
                 ]}
               />
-              {/*<InfoBadge
+              <InfoBadge
                 icon="🌸"
                 text="Vente du printemps le 17 Avril : Soyez nombreux !"
                 href="/actualites/act-012"
@@ -225,7 +225,7 @@ export function HeroSection() {
                   "bg-amber-400",
                   "bg-white",
                 ]}
-              />*/
+              />
                 <InfoBadge
                   icon="🎊"
                   text="Fête de la rentrée à la MPT Boris Vian"
@@ -248,7 +248,7 @@ export function HeroSection() {
                     "bg-cyan-400",
                     "bg-white",
                   ]}
-                />}
+                />}*/}
             </div>
 
 
