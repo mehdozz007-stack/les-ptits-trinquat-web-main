@@ -133,8 +133,8 @@ export function HeroSection() {
             className="max-w-xl w-full"
           >
 
-            <div className="mb-8 flex flex-col gap-2 sm:gap-3">
-              {/*<InfoBadge
+            {/*<div className="mb-8 flex flex-col gap-2 sm:gap-3">
+              <InfoBadge
                 icon="🗳️"
                 text="Assemblée générale des parents délégués"
                 href="/actualites/act-0001"
@@ -248,9 +248,20 @@ export function HeroSection() {
                     "bg-cyan-400",
                     "bg-white",
                   ]}
-                />}*/}
-            </div>
-
+                />}
+            </div>*/}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              Association Parents d'Élèves
+            </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
