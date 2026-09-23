@@ -90,7 +90,7 @@ export const actualitesData: Actualite[] = [
         time: "17h30 - 19h",
         location: "Maison pour tous Boris Vian",
         color: "accent",
-        status: "upcoming",
+        status: "past",
     },
     {
         id: "act-0002",

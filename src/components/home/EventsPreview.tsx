@@ -34,7 +34,7 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 200,
     url: "/actualites/act-004"
-  },*/
+  },
   {
     id: 2,
     title: "Assemblée générale",
@@ -46,7 +46,7 @@ const upcomingEvents = [
     status: "upcoming",
     url: "/actualites/act-0001",
   },
-  /*{
+  {
     id: 2,
     title: "Vente du Printemps : Gâteaux Gourmands de l'École",
     description: "Vente de gâteaux faits maison avant les vacances de printemps. Invitez vos délices pour soutenir les projets de l'école!",
@@ -78,7 +78,7 @@ const upcomingEvents = [
     color: "sky",
     status: "upcoming",
     url: reunionALP,
-  },
+  },*/
   {
     id: 1,
     title: "Fête de la rentrée à la MPT Boris Vian",
