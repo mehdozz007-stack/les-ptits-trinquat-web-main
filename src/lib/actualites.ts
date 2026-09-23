@@ -88,7 +88,7 @@ export const actualitesData: Actualite[] = [
         type: "evenement",
         date: "2026-09-22",
         time: "17h30 - 19h",
-        location: "Maison pour tous Boris Vian",
+        location: "Cours de l'école",
         color: "accent",
         status: "past",
     },
