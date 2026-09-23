@@ -89,7 +89,7 @@ const upcomingEvents = [
     location: "Maison pour tous Boris Vian",
     color: "primary",
     status: "upcoming",
-    url: reunionALP,
+    url: "/actualites/act-0002",
   },
   /*{  id: 3,
     title: "Bonne rentrée !",
