@@ -39,7 +39,7 @@ const bureauMembers = [
   { name: "Loraine", emoji: "🌷", classe: [13] },
   { name: "Shainese", emoji: "✨", classe: [9] },
   { name: "Aurélie", emoji: "🎊", classe: [15] },
-  { name: "Fabian", emoji: "🎯", classe: [10] },
+  { name: "Fabien", emoji: "🎯", classe: [10] },
   { name: "Juliette", emoji: "🎤", classe: [16] },
   { name: "Akila", emoji: "🧩", classe: [9, 15] },
   { name: "Guilhem", emoji: "🚲", classe: [13] },
