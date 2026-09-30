@@ -138,14 +138,14 @@ export const actualitesData: Actualite[] = [
         id: "act-0005",
         title: "Le Défilé des Lanternes",
         description: "Un défilé de lanternes féerique au parc de la Rauze à Montpellier.",
-        content: "Venez nombreux participer à notre défilé de lanternes au parc de la Rauze à Montpellier ! 🏮✨ En famille, petits et grands pourront profiter d'un moment chaleureux et magique, illuminé par les lanternes et la bonne humeur. Une belle occasion de se retrouver, de partager et de faire briller la soirée tous ensemble ! 🌟👨‍👩‍👧‍👦",
+        content: "Venez nombreux participer à notre défilé de lanternes au parc de la Rauze à Montpellier (sous reserve de l'autorisation de l'occupation par la mairie) ! 🏮✨ En famille, petits et grands pourront profiter d'un moment chaleureux et magique, illuminé par les lanternes et la bonne humeur. Une belle occasion de se retrouver, de partager et de faire briller la soirée tous ensemble ! 🌟👨‍👩‍👧‍👦",
         type: "evenement",
         date: "2026-11-10",
         time: "18h - 19h30",
-        location: "Parc de la Rauze",
+        location: "Parc de la Rauze (sous reserve de l'autorisation de l'occupation)",
         color: "indigo",
         status: "upcoming",
-        affiche: lanterne,
+        //affiche: lanterne,
     },
 
     {
