@@ -28,6 +28,7 @@ import videGrenier from '@/assets/Vide-grenier.jpg';
 import maman from '@/assets/Retour-maman.jpg';
 import reunionALP from '@/assets/reunion_ALP.jpeg';
 import feterentree from '@/assets/fete-rentree2026-2027.jpg';
+import halloween from '@/assets/halloween.jpeg'
 /**
  * Formate une date ISO (YYYY-MM-DD) en format français lisible (DD Mois YYYY)
  */
@@ -101,7 +102,7 @@ export const actualitesData: Actualite[] = [
         time: "18h",
         location: "Cours de l'école",
         color: "sky",
-        status: "upcoming",
+        status: "past",
         affiche: reunionALP,
         //link: reunionALP,
         //directLink: true,
@@ -116,8 +117,21 @@ export const actualitesData: Actualite[] = [
         time: "16h30 - 19h30",
         location: "Maison pour tous Boris Vian",
         color: "primary",
-        status: "upcoming",
+        status: "past",
         affiche: feterentree,
+    },
+    {
+        id: "act-0004",
+        title: "Vente de gâteaux d'Halloween",
+        description: "Vente de délicieux gâteaux d'Halloween sur le parvis de l'école pour se régaler et partager un moment convivial en famille.",
+        content: "Venez nous retrouver pour une vente de gâteaux préparés avec soin par les familles ! 🎃👻 Une belle occasion de se faire plaisir, de partager un moment chaleureux entre parents et enfants et de soutenir les projets de l'association. Venez nombreux, petits et grands gourmands !",
+        type: "evenement",
+        date: "2026-10-16",
+        time: "16h30 - 18h30",
+        location: "le parvis de l'école",
+        color: "amber",
+        status: "upcoming",
+        affiche: halloween,
     },
 
     {
