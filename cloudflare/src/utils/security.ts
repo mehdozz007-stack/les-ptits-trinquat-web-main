@@ -98,6 +98,26 @@ export async function hashPassword(password: string): Promise<string> {
 // ============================================================
 export async function verifyPassword(password: string, storedHash: string): Promise<boolean> {
   try {
+    if (storedHash.startsWith('sha256:')) {
+      const legacyHash = storedHash.slice('sha256:'.length);
+      if (!/^[a-f0-9]{64}$/i.test(legacyHash)) return false;
+
+      const legacyDigest = await crypto.subtle.digest(
+        'SHA-256',
+        new TextEncoder().encode(password)
+      );
+      const computedHash = Array.from(new Uint8Array(legacyDigest))
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('');
+
+      if (computedHash.length !== legacyHash.length) return false;
+      let result = 0;
+      for (let index = 0; index < computedHash.length; index++) {
+        result |= computedHash.charCodeAt(index) ^ legacyHash.charCodeAt(index);
+      }
+      return result === 0;
+    }
+
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
 

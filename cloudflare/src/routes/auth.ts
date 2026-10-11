@@ -90,6 +90,15 @@ auth.post('/login', authRateLimitMiddleware, async (c) => {
       }, 401);
     }
 
+    if (user.password_hash.startsWith('sha256:')) {
+      const upgradedHash = await hashPassword(password);
+      await c.env.DB.prepare(`
+        UPDATE users
+        SET password_hash = ?, updated_at = ?
+        WHERE id = ? AND password_hash = ?
+      `).bind(upgradedHash, new Date().toISOString(), user.id, user.password_hash).run();
+    }
+
     // Récupérer le rôle
     const roleResult = await c.env.DB.prepare(
       'SELECT role FROM user_roles WHERE user_id = ?'

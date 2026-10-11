@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Users, Heart, Target, History, UserCheck, ArrowRight } from "lucide-react";
+import { Users, Heart, Target, History, UserCheck, ArrowRight, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -131,6 +131,7 @@ const APropos = () => {
   });
 
   const [selectedClasse, setSelectedClasse] = useState<string>("");
+  const [isPressLightboxOpen, setIsPressLightboxOpen] = useState(false);
 
   // Afficher tous les parents (bureau + parents élus) si une classe est sélectionnée
   const parentsFiltrés = selectedClasse && classeParentMap[selectedClasse]
@@ -489,11 +490,41 @@ const APropos = () => {
             </div>
             <div className="container">
               <div className="py-16 mx-auto max-w-lg items-center">
-                <img
-                  src={coupurePresse}
-                  alt="Coupure de presse du 7 février 1995, souvenir partagé par une maman de l'association"
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 rounded-2xl shadow-lg"
-                />
+                <button
+                  type="button"
+                  onClick={() => setIsPressLightboxOpen(true)}
+                  aria-label="Agrandir la coupure de presse"
+                  className="block w-full cursor-zoom-in"
+                >
+                  <img
+                    src={coupurePresse}
+                    alt="Coupure de presse du 7 février 1995, souvenir partagé par une maman de l'association"
+                    className="h-full w-full rounded-2xl object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
+                  />
+                </button>
+
+                {isPressLightboxOpen && (
+                  <div
+                    role="presentation"
+                    onClick={() => setIsPressLightboxOpen(false)}
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setIsPressLightboxOpen(false)}
+                      aria-label="Fermer l'image agrandie"
+                      className="absolute right-4 top-4 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20"
+                    >
+                      <X className="h-6 w-6" />
+                    </button>
+                    <img
+                      src={coupurePresse}
+                      alt="Coupure de presse du 7 février 1995, agrandie"
+                      onClick={(event) => event.stopPropagation()}
+                      className="max-h-[90vh] max-w-full rounded-lg object-contain"
+                    />
+                  </div>
+                )}
 
 
                 <p className="py-4 text-xs leading-relaxed text-muted-foreground">
