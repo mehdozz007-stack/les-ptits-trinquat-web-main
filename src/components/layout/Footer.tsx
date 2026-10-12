@@ -4,7 +4,7 @@ import heroImage from "@/assets/hero-children.jpg";
 import logoBorisVian from "@/assets/logos/logo-boris-vian.jpg";
 import logoMdh from "@/assets/logos/logo-mdh-new-web.jpg";
 import logoTrinquatcompagnie from "@/assets/logos/trinquatcompagnie.jpg";
-import logoAssadia from "@/assets/logos/logoAssadia.svg";
+import logoptitesmains from "@/assets/logos/ptitesmains.png";
 import ptitClub from "@/assets/logos/LPC.svg";
 
 const footerLinks = {
@@ -35,18 +35,18 @@ const socialLinks = [
 
 const officialPartners = [
   {
-    id: 5,
-    name: "Assadia Montpellier",
-    logo: logoAssadia,
-    alt: "Logo Assadia Montpellier",
-    website: "https://share.google/37woMOO85tI3B7MuX",
-  },
-  {
     id: 1,
     name: "",
     logo: ptitClub,
     alt: "Logo Le Ptit Club",
     website: "https://leptitclub.fr/nos-clubs/montpellier/",
+  },
+  {
+    id: 5,
+    name: "Les P'tites mains Montpellier",
+    logo: logoptitesmains,
+    alt: "Logo Les P'tites mains Montpellier",
+    website: "https://lesptites-mains.fr/",
   },
   {
     id: 2,
@@ -198,7 +198,7 @@ export function Footer() {
                   <img
                     src={partner.logo}
                     alt={partner.alt}
-                    className="h-24 w-auto object-contain md:h-32 rounded-lg"
+                    className="h-24 w-auto object-contain md:h-36 rounded-lg"
                   />
                 </a>
               ))}
