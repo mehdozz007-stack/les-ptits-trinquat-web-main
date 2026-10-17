@@ -34,19 +34,19 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 200,
     url: "/actualites/act-004"
-  },
+  },*/
   {
-    id: 2,
-    title: "Assemblée générale",
-    description: "Réunir les parents délégués pour échanger, voter et préparer les actions de l'année scolaire.",
-    date: "2026-09-22",
-    time: "17h30 - 19h00",
-    location: "Salle polyvalente de l'école",
-    color: "accent",
+    id: 1,
+    title: "Le Défilé des Lanternes",
+    description: "Un défilé de lanternes féerique au parc de la Rauze à Montpellier.",
+    date: "2026-11-10",
+    time: "18h - 19h30",
+    location: "Parc de la Rauze",
+    color: "indigo",
     status: "upcoming",
-    url: "/actualites/act-0001",
+    url: "/actualites/act-0005",
   },
-  {
+  /*{
     id: 2,
     title: "Vente du Printemps : Gâteaux Gourmands de l'École",
     description: "Vente de gâteaux faits maison avant les vacances de printemps. Invitez vos délices pour soutenir les projets de l'école!",
@@ -78,7 +78,7 @@ const upcomingEvents = [
     color: "sky",
     status: "upcoming",
     url: reunionALP,
-  },*/
+  },
   {
     id: 1,
     title: "Vente de gâteaux d'Halloween",
@@ -91,7 +91,7 @@ const upcomingEvents = [
     color: "amber",
     status: "upcoming",
     url: "/actualites/act-0004",
-  },
+  },*/
   /*{  id: 3,
     title: "Bonne rentrée !",
     description: "Découvrez la liste de fournitures pour la rentrée 2026-2027. On vous souhaite une excellente rentrée pleine de succès et de bonheur !",

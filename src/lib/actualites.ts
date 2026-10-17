@@ -131,7 +131,7 @@ export const actualitesData: Actualite[] = [
         time: "16h30 - 18h30",
         location: "le parvis de l'école",
         color: "amber",
-        status: "upcoming",
+        status: "past",
         affiche: halloween,
     },
     {
