@@ -268,8 +268,31 @@ export function Actualites() {
                                         className="group h-full"
                                     >
                                         <Card
-                                            className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${actualiteColorClasses[actualite.color]}`}
+                                            className={`relative h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${actualiteColorClasses[actualite.color]}`}
                                         >
+                                            {actualite.directLink && actualite.link ? (
+                                                <a
+                                                    href={actualite.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    aria-label={`Accéder à ${actualite.title}`}
+                                                    className="absolute inset-0 z-10 rounded-2xl"
+                                                />
+                                            ) : actualite.type === "presse" && actualite.link ? (
+                                                <a
+                                                    href={actualite.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    aria-label={`Lire l'article ${actualite.title}`}
+                                                    className="absolute inset-0 z-10 rounded-2xl"
+                                                />
+                                            ) : (
+                                                <Link
+                                                    to={`/actualites/${actualite.id}`}
+                                                    aria-label={`Lire ${actualite.title}`}
+                                                    className="absolute inset-0 z-10 rounded-2xl"
+                                                />
+                                            )}
                                             <CardContent className="flex flex-col gap-4 p-6">
                                                 {/* Header avec badge */}
                                                 <div className="flex items-start justify-between gap-3">
@@ -316,7 +339,7 @@ export function Actualites() {
                                                             )}
                                                         </div>
                                                         {/* Boutons à droite */}
-                                                        <div className="flex flex-col items-end gap-2">
+                                                        <div className="relative z-20 flex flex-col items-end gap-2">
                                                             {actualite.directLink && actualite.link ? (
                                                                 <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
                                                                     <a href={actualite.link} target="_blank" rel="noopener noreferrer">
@@ -412,7 +435,22 @@ export function Actualites() {
                                             viewport={{ once: true }}
                                             transition={{ delay: index * 0.05 }}
                                         >
-                                            <Card variant="elevated" className={`group h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-lg ${actualiteColorClasses[event.color]}`}>
+                                            <Card variant="elevated" className={`group relative h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-lg ${actualiteColorClasses[event.color]}`}>
+                                                {event.link ? (
+                                                    <a
+                                                        href={event.link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        aria-label={`Consulter ${event.title}`}
+                                                        className="absolute inset-0 z-10 rounded-2xl"
+                                                    />
+                                                ) : (
+                                                    <Link
+                                                        to={`/actualites/${event.id}`}
+                                                        aria-label={`Lire ${event.title}`}
+                                                        className="absolute inset-0 z-10 rounded-2xl"
+                                                    />
+                                                )}
                                                 <CardContent className="p-5 sm:p-6 flex flex-col h-full">
                                                     <div className="flex flex-col gap-2 sm:gap-2 flex-1">
                                                         {/* Top row: Icon + Title */}
@@ -473,7 +511,7 @@ export function Actualites() {
                                                                         )}
                                                                     </div>
                                                                     {(event.link) && (
-                                                                        <div className="flex flex-col items-end gap-2">
+                                                                        <div className="relative z-20 flex flex-col items-end gap-2">
                                                                             <Button
                                                                                 asChild
                                                                                 variant="ghost"
@@ -530,8 +568,31 @@ export function Actualites() {
                                         className="group h-full"
                                     >
                                         <Card
-                                            className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${actualiteColorClasses[actualite.color]}`}
+                                            className={`relative h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${actualiteColorClasses[actualite.color]}`}
                                         >
+                                            {actualite.directLink && actualite.link ? (
+                                                <a
+                                                    href={actualite.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    aria-label={`Accéder à ${actualite.title}`}
+                                                    className="absolute inset-0 z-10 rounded-2xl"
+                                                />
+                                            ) : actualite.type === "presse" && actualite.link ? (
+                                                <a
+                                                    href={actualite.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    aria-label={`Lire l'article ${actualite.title}`}
+                                                    className="absolute inset-0 z-10 rounded-2xl"
+                                                />
+                                            ) : (
+                                                <Link
+                                                    to={`/actualites/${actualite.id}`}
+                                                    aria-label={`Lire ${actualite.title}`}
+                                                    className="absolute inset-0 z-10 rounded-2xl"
+                                                />
+                                            )}
                                             <CardContent className="flex flex-col gap-4 p-6">
                                                 {/* Header avec badge */}
                                                 <div className="flex items-start justify-between gap-3">
@@ -565,7 +626,7 @@ export function Actualites() {
                                                             )}
                                                         </div>
                                                         {/* Boutons à droite */}
-                                                        <div className="flex flex-col items-end gap-2">
+                                                        <div className="relative z-20 flex flex-col items-end gap-2">
                                                             {actualite.directLink && actualite.link ? (
                                                                 <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
                                                                     <a href={actualite.link} target="_blank" rel="noopener noreferrer">

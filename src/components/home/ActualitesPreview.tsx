@@ -114,8 +114,23 @@ export function ActualitesPreview() {
                                 className="group h-full"
                             >
                                 <Card
-                                    className={`h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${actualiteColorClasses[actualite.color]}`}
+                                    className={`relative h-full overflow-hidden border-2 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${actualiteColorClasses[actualite.color]}`}
                                 >
+                                    {actualite.directLink && actualite.link ? (
+                                        <a
+                                            href={actualite.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`Accéder à ${actualite.title}`}
+                                            className="absolute inset-0 z-10 rounded-2xl"
+                                        />
+                                    ) : (
+                                        <Link
+                                            to={`/actualites/${actualite.id}`}
+                                            aria-label={`Lire ${actualite.title}`}
+                                            className="absolute inset-0 z-10 rounded-2xl"
+                                        />
+                                    )}
                                     <CardContent className="flex flex-col gap-4 p-6">
                                         {/* Header avec badge */}
                                         <div className="flex items-start justify-between gap-3">
@@ -162,7 +177,9 @@ export function ActualitesPreview() {
                                                     )}
                                                 </div>
                                                 {/* Bouton */}
-                                                {renderActionButton(actualite)}
+                                                <div className="relative z-20">
+                                                    {renderActionButton(actualite)}
+                                                </div>
                                             </div>
                                         </div>
                                     </CardContent>
