@@ -57,6 +57,35 @@ export function formatDateFr(dateIso: string): string {
     return `${day} ${month} ${year}`;
 }
 
+function getDateTimestamp(dateValue?: string): number {
+    if (!dateValue) return Number.POSITIVE_INFINITY;
+
+    const parsedDate = new Date(dateValue);
+    if (!Number.isNaN(parsedDate.getTime())) return parsedDate.getTime();
+
+    const match = dateValue.match(/^(\d{1,2})\s+([a-zéû]+)\s+(\d{4})$/i);
+    if (!match) return Number.POSITIVE_INFINITY;
+
+    const monthIndexes: Record<string, number> = {
+        janvier: 0,
+        février: 1,
+        mars: 2,
+        avril: 3,
+        mai: 4,
+        juin: 5,
+        juillet: 6,
+        août: 7,
+        septembre: 8,
+        octobre: 9,
+        novembre: 10,
+        décembre: 11,
+    };
+    const monthIndex = monthIndexes[match[2].toLocaleLowerCase("fr")];
+    if (monthIndex === undefined) return Number.POSITIVE_INFINITY;
+
+    return Date.UTC(Number(match[3]), monthIndex, Number(match[1]));
+}
+
 export type EventStatus = "upcoming" | "past";
 export type ActualiteType = "evenement" | "document" | "annonce" | "information" | "presse";
 export interface Actualite {
@@ -135,7 +164,7 @@ export const actualitesData: Actualite[] = [
         affiche: halloween,
     },
     {
-        id: "act-0006",
+        id: "act-0005",
         title: "Premier conseil d'école de l'année 2026-2027",
         description: "Venez assister au premier conseil d'école de l'année pour discuter des projets et des décisions importantes concernant la vie scolaire.",
         type: "information",
@@ -148,7 +177,7 @@ export const actualitesData: Actualite[] = [
         directLink: true,
     },
     {
-        id: "act-0005",
+        id: "act-0006",
         title: "Le Défilé des Lanternes",
         description: "Un défilé de lanternes féerique au parc de la Rauze à Montpellier.",
         content: "Venez nombreux participer à notre défilé de lanternes au parc de la Rauze à Montpellier ! 🏮✨ En famille, petits et grands pourront profiter d'un moment chaleureux et magique, illuminé par les lanternes et la bonne humeur. Une belle occasion de se retrouver, de partager et de faire briller la soirée tous ensemble !",
@@ -229,30 +258,13 @@ export function getLatestActualites(limit: number = 3): Actualite[] {
 /**
  * Récupère toutes les actualités (pour la page Actualités)
  * Exclut les événements passés et les documents (qui ont leur propre page)
- * Tri: événements à venir par date croissante (proches d'abord), autres par date décroissante (récentes d'abord)
+ * Tri: toutes les actualités par date croissante (les plus proches d'abord)
  */
 export function getAllActualites(): Actualite[] {
     const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past") && a.type !== "document" && !(a.status === "past" && (a.type === "annonce" || a.type === "information" || a.type === "presse")));
 
     return actualites.sort((a, b) => {
-        const dateA = new Date(a.date).getTime();
-        const dateB = new Date(b.date).getTime();
-
-        // Les événements à venir en premier, triés par date croissante (proches d'abord)
-        if (a.type === "evenement" && a.status === "upcoming" && (b.type !== "evenement" || b.status !== "upcoming")) {
-            return -1;
-        }
-        if (b.type === "evenement" && b.status === "upcoming" && (a.type !== "evenement" || a.status !== "upcoming")) {
-            return 1;
-        }
-
-        // Entre événements à venir: ordre croissant (proches d'abord)
-        if (a.type === "evenement" && a.status === "upcoming" && b.type === "evenement" && b.status === "upcoming") {
-            return dateA - dateB;
-        }
-
-        // Autres actualités: ordre décroissant (récentes d'abord)
-        return dateB - dateA;
+        return getDateTimestamp(a.date) - getDateTimestamp(b.date);
     });
 }
 

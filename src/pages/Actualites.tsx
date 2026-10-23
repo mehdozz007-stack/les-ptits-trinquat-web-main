@@ -317,7 +317,14 @@ export function Actualites() {
                                                         </div>
                                                         {/* Boutons à droite */}
                                                         <div className="flex flex-col items-end gap-2">
-                                                            {actualite.type === "presse" && actualite.link ? (
+                                                            {actualite.directLink && actualite.link ? (
+                                                                <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                                                                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                                                                        <LinkIcon className="h-4 w-4" />
+                                                                        Accéder
+                                                                    </a>
+                                                                </Button>
+                                                            ) : actualite.type === "presse" && actualite.link ? (
                                                                 <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
                                                                     <a href={actualite.link} target="_blank" rel="noopener noreferrer">
                                                                         <ChevronRight className="h-4 w-4" />
@@ -559,7 +566,14 @@ export function Actualites() {
                                                         </div>
                                                         {/* Boutons à droite */}
                                                         <div className="flex flex-col items-end gap-2">
-                                                            {actualite.type === "presse" && actualite.link ? (
+                                                            {actualite.directLink && actualite.link ? (
+                                                                <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
+                                                                    <a href={actualite.link} target="_blank" rel="noopener noreferrer">
+                                                                        <LinkIcon className="h-4 w-4" />
+                                                                        Accéder
+                                                                    </a>
+                                                                </Button>
+                                                            ) : actualite.type === "presse" && actualite.link ? (
                                                                 <Button asChild size="sm" className={`gap-2 border-0 ${buttonGradients[actualite.color]}`}>
                                                                     <a href={actualite.link} target="_blank" rel="noopener noreferrer">
                                                                         <ChevronRight className="h-4 w-4" />

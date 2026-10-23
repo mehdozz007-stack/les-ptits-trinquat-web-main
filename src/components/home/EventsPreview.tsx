@@ -44,7 +44,7 @@ const upcomingEvents = [
     location: "Parc de la Rauze",
     color: "indigo",
     status: "upcoming",
-    url: "/actualites/act-0005",
+    url: "/actualites/act-0006",
   },
   /*{
     id: 2,
