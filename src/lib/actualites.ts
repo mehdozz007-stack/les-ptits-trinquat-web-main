@@ -172,7 +172,7 @@ export const actualitesData: Actualite[] = [
         time: "18h - 19h30",
         location: "Salle polyvalente de l'école",
         color: "emerald",
-        status: "upcoming",
+        status: "past",
         link: "/documents/invitation_premier_conseil_d_ecole_Frank_Dickens_2026-2027.pdf",
         directLink: true,
     },
