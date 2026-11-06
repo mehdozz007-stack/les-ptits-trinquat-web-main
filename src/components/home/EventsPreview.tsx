@@ -37,8 +37,8 @@ const upcomingEvents = [
   },*/
   {
     id: 1,
-    title: "Le Défilé des Lanternes",
-    description: "Un défilé de lanternes féerique au parc de la Rauze à Montpellier.",
+    title: "Le Défilé des Lanternes ",
+    description: "Un défilé de lanternes féerique au parc de la Rauze à Montpellier. (Reportée à une date ultérieure)",
     date: "2026-11-10",
     time: "18h - 19h30",
     location: "Parc de la Rauze",

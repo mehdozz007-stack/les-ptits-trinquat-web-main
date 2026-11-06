@@ -27,9 +27,9 @@ import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
 import videGrenier from '@/assets/Vide-grenier.jpg';
 import maman from '@/assets/Retour-maman.jpg';
 import reunionALP from '@/assets/reunion_ALP.jpeg';
-import feterentree from '@/assets/lanterne_report.jpeg';
+import feterentree from '@/assets/fete-rentree2026-2027.jpg';
 import halloween from '@/assets/halloween.jpeg'
-import lanterne from '@/assets/lanternes2026.jpg'
+import lanterne from '@/assets/lanterne_report.jpeg'
 /**
  * Formate une date ISO (YYYY-MM-DD) en format français lisible (DD Mois YYYY)
  */
@@ -178,11 +178,11 @@ export const actualitesData: Actualite[] = [
     },
     {
         id: "act-0006",
-        title: "Le Défilé des Lanternes",
+        title: "Le Défilé des Lanternes (Reportée à une date ultérieure)",
         description: "Un défilé de lanternes féerique au parc de la Rauze à Montpellier. (Reporté à une date ultérieure)",
         content: "Venez nombreux participer à notre défilé de lanternes au parc de la Rauze à Montpellier ! 🏮✨ En famille, petits et grands pourront profiter d'un moment chaleureux et magique, illuminé par les lanternes et la bonne humeur. Une belle occasion de se retrouver, de partager et de faire briller la soirée tous ensemble !",
         type: "evenement",
-        date: "à préciser bientôt",
+        date: "2026-11-10",
         time: "18h - 19h30",
         location: "Parc de la Rauze",
         color: "indigo",
