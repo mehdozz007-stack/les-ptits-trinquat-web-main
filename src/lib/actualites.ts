@@ -27,7 +27,7 @@ import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
 import videGrenier from '@/assets/Vide-grenier.jpg';
 import maman from '@/assets/Retour-maman.jpg';
 import reunionALP from '@/assets/reunion_ALP.jpeg';
-import feterentree from '@/assets/fete-rentree2026-2027.jpg';
+import feterentree from '@/assets/lanterne_report.jpeg';
 import halloween from '@/assets/halloween.jpeg'
 import lanterne from '@/assets/lanternes2026.jpg'
 /**
