@@ -124,7 +124,7 @@ export function HeroSection() {
       </div>
 
       <div className="container relative flex min-h-[90vh] items-center py-8 sm:py-16 lg:py-20 px-4 sm:px-6 pb-16">
-        <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-8 items-center w-full lg:scale-[1.05]">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-8 items-center w-full">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -267,7 +267,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-6 text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight"
+              className="mb-6 text-4xl sm:text-4xl md:text-5xl lg:text-[4rem] font-extrabold leading-tight tracking-tight"
             >
               <span className="text-gradient">Tous unis</span>
               <br />
@@ -352,7 +352,7 @@ export function HeroSection() {
                       <img
                         src={logoAssoOg}
                         alt="Logo Les P'tits Trinquat"
-                        className="relative rounded-2xl shadow-2xl w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+                        className="relative rounded-2xl shadow-2xl w-full h-auto cursor-pointer hover:opacity-90 transition-opacity lg:scale-[1.05]"
                         style={{ maxHeight: "1000px", objectFit: "cover" }}
                         onClick={() => setIsLightboxOpen(true)}
                       />
