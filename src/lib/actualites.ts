@@ -29,7 +29,7 @@ import maman from '@/assets/Retour-maman.jpg';
 import reunionALP from '@/assets/reunion_ALP.jpeg';
 import feterentree from '@/assets/fete-rentree2026-2027.jpg';
 import halloween from '@/assets/halloween.jpeg'
-import lanterne from '@/assets/lanterne_report.jpeg'
+import lanterne from '@/assets/lanterne2.png'
 /**
  * Formate une date ISO (YYYY-MM-DD) en format français lisible (DD Mois YYYY)
  */
