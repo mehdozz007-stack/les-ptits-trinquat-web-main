@@ -124,7 +124,7 @@ export function HeroSection() {
       </div>
 
       <div className="container relative flex min-h-[90vh] items-center py-8 sm:py-16 lg:py-20 px-4 sm:px-6 pb-16">
-        <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-8 items-center w-full lg:scale-[1.1]">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-8 items-center w-full lg:scale-[1.05]">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
