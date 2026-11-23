@@ -10,7 +10,8 @@
  * - description: description courte
  * - content: contenu complet (pour la page détail si nécessaire)
  * - type: 'evenement' | 'document' | 'annonce' | 'information'
- * - date: date au format 'DD Mois YYYY'
+ * - date: date unique (compatibilité avec les anciennes actualités)
+ * - startDate / endDate: plage de dates au format ISO (YYYY-MM-DD)
  * - link: lien vers la ressource (PDF, page, URL externe, etc.)
  * - fileUrl: URL du fichier si téléchargeable
  * - affiche: chemin vers l'image de l'événement
@@ -24,7 +25,7 @@
 // Importer les images
 import tomola from '@/assets/tomola.jpg';
 import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
-import videGrenier from '@/assets/Vide-grenier.jpg';
+import collecte from '@/assets/invitation-collecte-solidaire.jpeg';
 import maman from '@/assets/Retour-maman.jpg';
 import reunionALP from '@/assets/reunion_ALP.jpeg';
 import feterentree from '@/assets/fete-rentree2026-2027.jpg';
@@ -95,6 +96,8 @@ export interface Actualite {
     content?: string;
     type: ActualiteType;
     date?: string;
+    startDate?: string;
+    endDate?: string;
     link?: string;
     authLink?: string;
     fileUrl?: string;
@@ -108,6 +111,19 @@ export interface Actualite {
     reservationLink?: string;
     donationLink?: string;
     directLink?: boolean; // Si true, redirige directement vers link au lieu d'aller à la page description
+}
+
+export function formatActualiteDate(actualite: Pick<Actualite, "date" | "startDate" | "endDate">): string | undefined {
+    const startDate = actualite.startDate ?? actualite.date;
+    if (!startDate) {
+        return actualite.endDate ? `Jusqu'au ${formatDateFr(actualite.endDate)}` : undefined;
+    }
+
+    if (!actualite.endDate) return formatDateFr(startDate);
+
+    const formattedStartDate = formatDateFr(startDate).replace(/^1 /, "1er ");
+    const formattedEndDate = formatDateFr(actualite.endDate).replace(/^1 /, "1er ");
+    return `Du ${formattedStartDate} au ${formattedEndDate}`;
 }
 
 export const actualitesData: Actualite[] = [
@@ -189,7 +205,20 @@ export const actualitesData: Actualite[] = [
         status: "past",
         affiche: lanterne,
     },
-
+    {
+        id: "act-0007",
+        title: "Noel solidaire - Collecte de jouets",
+        description: "Participez à notre collecte de jouets solidaire pour soutenir les enfants défavorisés de notre communauté, en collaboration avec le gang des lutins.",
+        type: "information",
+        startDate: "2026-12-01",
+        endDate: "2026-12-18",
+        time: "",
+        location: "Auprès des profs",
+        color: "rose",
+        status: "upcoming",
+        link: collecte,
+        directLink: true,
+    },
     {
         id: "act-008",
         title: "Fiche RSST",
@@ -247,11 +276,7 @@ export const actualitesData: Actualite[] = [
 export function getLatestActualites(limit: number = 3): Actualite[] {
     return actualitesData
         .filter((a) => a.status !== "past" && a.type !== "presse" && a.type !== "document")
-        .sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-            return dateA - dateB;
-        })
+        .sort((a, b) => getDateTimestamp(a.startDate ?? a.date) - getDateTimestamp(b.startDate ?? b.date))
         .slice(0, limit);
 }
 
@@ -264,7 +289,7 @@ export function getAllActualites(): Actualite[] {
     const actualites = actualitesData.filter((a) => !(a.type === "evenement" && a.status === "past") && a.type !== "document" && !(a.status === "past" && (a.type === "annonce" || a.type === "information" || a.type === "presse")));
 
     return actualites.sort((a, b) => {
-        return getDateTimestamp(a.date) - getDateTimestamp(b.date);
+        return getDateTimestamp(a.startDate ?? a.date) - getDateTimestamp(b.startDate ?? b.date);
     });
 }
 
@@ -274,11 +299,7 @@ export function getAllActualites(): Actualite[] {
 export function getUpcomingEvents(): Actualite[] {
     return actualitesData
         .filter((a) => a.type === "evenement" && a.status === "upcoming")
-        .sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-            return dateA - dateB;
-        });
+        .sort((a, b) => getDateTimestamp(a.startDate ?? a.date) - getDateTimestamp(b.startDate ?? b.date));
 }
 
 /**
@@ -287,11 +308,7 @@ export function getUpcomingEvents(): Actualite[] {
 export function getPastEvents(): Actualite[] {
     return actualitesData
         .filter((a) => a.type === "evenement" && a.status === "past")
-        .sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-            return dateB - dateA;
-        });
+        .sort((a, b) => getDateTimestamp(b.startDate ?? b.date) - getDateTimestamp(a.startDate ?? a.date));
 }
 
 /**
@@ -300,11 +317,7 @@ export function getPastEvents(): Actualite[] {
 export function getPastAnnouncements(): Actualite[] {
     return actualitesData
         .filter((a) => a.status === "past" && (a.type === "annonce" || a.type === "information" || a.type === "presse"))
-        .sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-            return dateB - dateA;
-        });
+        .sort((a, b) => getDateTimestamp(b.startDate ?? b.date) - getDateTimestamp(a.startDate ?? a.date));
 }
 
 /**

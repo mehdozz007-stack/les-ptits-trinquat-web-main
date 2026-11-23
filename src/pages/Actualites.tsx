@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents, getPastAnnouncements, formatDateFr } from "@/lib/actualites";
+import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents, getPastAnnouncements, formatActualiteDate } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 
 const badgeColors: Record<string, string> = {
@@ -318,10 +318,10 @@ export function Actualites() {
                                                 <div className="pt-4 mt-2">
                                                     <div className="flex items-center justify-between gap-3">
                                                         <div className="flex flex-col gap-2">
-                                                            {actualite.date && (
+                                                            {formatActualiteDate(actualite) && (
                                                                 <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                                                                     <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                                    <span>{formatDateFr(actualite.date)}</span>
+                                                                    <span>{formatActualiteDate(actualite)}</span>
                                                                 </div>
                                                             )}
                                                             {actualite.time && (
@@ -485,10 +485,10 @@ export function Actualites() {
                                                             <div className="pt-4 mt-2">
                                                                 <div className="flex items-center justify-between gap-3">
                                                                     <div className="flex flex-col gap-2">
-                                                                        {event.date && (
+                                                                        {formatActualiteDate(event) && (
                                                                             <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                                                                                 <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
-                                                                                <span>{formatDateFr(event.date)}</span>
+                                                                                <span>{formatActualiteDate(event)}</span>
                                                                             </div>
                                                                         )}
                                                                         {event.time && (

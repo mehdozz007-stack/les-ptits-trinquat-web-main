@@ -5,7 +5,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getActualiteById, actualiteTypeLabels, actualiteColorClasses, formatDateFr } from "@/lib/actualites";
+import { getActualiteById, actualiteTypeLabels, actualiteColorClasses, formatActualiteDate } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 const titleGradients: Record<string, string> = {
     primary: "bg-gradient-to-r from-primary/90 via-secondary/90 to-pink-500 bg-clip-text text-transparent font-extrabold",
@@ -180,14 +180,14 @@ export function ActualiteDetail() {
                                 transition={{ delay: 0.4, duration: 0.6 }}
                                 className="mb-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground"
                             >
-                                {actualite.date && (
+                                {formatActualiteDate(actualite) && (
                                     <motion.div
                                         whileHover={{ y: -2 }}
                                         transition={{ duration: 0.2 }}
                                         className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-4 py-2 backdrop-blur-sm"
                                     >
                                         <Calendar className="h-4 w-4 text-purple-500" />
-                                        <span>{formatDateFr(actualite.date)}</span>
+                                        <span>{formatActualiteDate(actualite)}</span>
                                     </motion.div>
                                 )}
                                 {actualite.time && (
