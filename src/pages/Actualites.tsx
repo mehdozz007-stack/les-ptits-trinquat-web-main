@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents, getPastAnnouncements, formatActualiteDate } from "@/lib/actualites";
+import { getAllActualites, actualiteTypeLabels, actualiteColorClasses, ActualiteType, getPastEvents, getPastAnnouncements, formatActualiteDate, formatDateFr } from "@/lib/actualites";
 import { useToast } from "@/hooks/use-toast";
 
 const badgeColors: Record<string, string> = {
