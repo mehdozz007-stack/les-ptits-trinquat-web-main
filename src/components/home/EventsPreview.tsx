@@ -25,8 +25,8 @@ const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: nu
 const upcomingEvents = [
   {
     id: "act-0008",
-    title: "Vente de Noel",
-    description: "Vente de gateaux de Noel pour soutenir les projets de l'association et partager un moment convivial en famille.",
+    title: "Vente de Noël",
+    description: "Vente de gateaux de Noël pour soutenir les projets de l'association et partager un moment convivial en famille.",
     content: "Venez nous retrouver pour une vente de gâteaux de Noël préparés avec soin par les familles ! 🎄🍰 Une belle occasion de se faire plaisir, de partager un moment chaleureux entre parents et enfants et de soutenir les projets de l'association. Venez nombreux, petits et grands gourmands !",
     type: "evenement",
     date: "2026-12-18",
