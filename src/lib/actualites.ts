@@ -186,7 +186,7 @@ export const actualitesData: Actualite[] = [
         time: "18h - 19h30",
         location: "Parc de la Rauze",
         color: "indigo",
-        status: "upcoming",
+        status: "past",
         affiche: lanterne,
     },
 

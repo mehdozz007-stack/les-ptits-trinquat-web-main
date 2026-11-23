@@ -34,7 +34,7 @@ const upcomingEvents = [
     status: "upcoming",
     attendees: 200,
     url: "/actualites/act-004"
-  },*/
+  },
   {
     id: 1,
     title: "Le Défilé des Lanternes ",
@@ -43,9 +43,9 @@ const upcomingEvents = [
     time: "18h - 19h30",
     location: "Parc de la Rauze",
     color: "indigo",
-    status: "upcoming",
+    status: "past",
     url: "/actualites/act-0006",
-  },
+  },*/
   /*{
     id: 2,
     title: "Premier conseil d'école de l'année 2026-2027",
@@ -188,7 +188,7 @@ export function EventsPreview() {
 
         {/* Events Grid */}
         <div className="space-y-8 flex flex-col items-center">
-          {upcomingEvents.map((event, index) => (
+          {upcomingEvents.length > 0 ? upcomingEvents.map((event, index) => (
             <a key={event.id} href={event.url} className="block">
               <motion.div
                 initial={{ opacity: 0 }}
@@ -325,7 +325,16 @@ export function EventsPreview() {
                 </Card>
               </motion.div>
             </a>
-          ))}
+          )) : (
+            <Card className="bg-muted/50">
+              <CardContent className="py-12 text-center">
+                <Calendar className="mx-auto mb-4 h-12 w-12 text-muted-foreground opacity-50" />
+                <p className="text-muted-foreground">
+                  Aucun événement pour le moment. Revenez bientôt !
+                </p>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </section>
