@@ -4,7 +4,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatDateFr } from "@/lib/actualites";
-import reunionALP from '@/assets/reunion_ALP.jpeg';
+import venteNoel from '@/assets/venteNoel.jpeg';
 // Bubble animation component
 const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: number; size: string }) => (
   <motion.div
@@ -23,6 +23,20 @@ const FloatingBubble = ({ delay, duration, size }: { delay: number; duration: nu
 );
 
 const upcomingEvents = [
+  {
+    id: "act-0008",
+    title: "Vente de Noel",
+    description: "Vente de gateaux de Noel pour soutenir les projets de l'association et partager un moment convivial en famille.",
+    content: "Venez nous retrouver pour une vente de gâteaux de Noël préparés avec soin par les familles ! 🎄🍰 Une belle occasion de se faire plaisir, de partager un moment chaleureux entre parents et enfants et de soutenir les projets de l'association. Venez nombreux, petits et grands gourmands !",
+    type: "evenement",
+    date: "2026-12-18",
+    time: "16h30-18h30",
+    location: "Parvis de l'école",
+    color: "rose",
+    status: "upcoming",
+    affiche: venteNoel,
+    url: "/actualites/act-0008",
+  },
   /*{
     id: 2,
     title: "La crèpe party de l'école - Participez à notre traditionnelle vente de crêpes !",

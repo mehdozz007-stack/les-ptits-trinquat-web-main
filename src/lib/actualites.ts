@@ -24,7 +24,7 @@
 
 // Importer les images
 import tomola from '@/assets/tomola.jpg';
-import crepesParty from '@/assets/Crepes_party_Affiche.jpg';
+import venteNoel from '@/assets/venteNoel.jpeg';
 import collecte from '@/assets/invitation-collecte-solidaire.jpeg';
 import maman from '@/assets/Retour-maman.jpg';
 import reunionALP from '@/assets/reunion_ALP.jpeg';
@@ -214,10 +214,23 @@ export const actualitesData: Actualite[] = [
         endDate: "2026-12-18",
         time: "",
         location: "Auprès des profs",
-        color: "rose",
+        color: "primary",
         status: "upcoming",
         link: collecte,
         directLink: true,
+    },
+    {
+        id: "act-0008",
+        title: "Vente de Noel",
+        description: "Vente de gateaux de Noel pour soutenir les projets de l'association et partager un moment convivial en famille.",
+        content: "Venez nous retrouver pour une vente de gâteaux de Noël préparés avec soin par les familles ! 🎄🍰 Une belle occasion de se faire plaisir, de partager un moment chaleureux entre parents et enfants et de soutenir les projets de l'association. Venez nombreux, petits et grands gourmands !",
+        type: "evenement",
+        date: "2026-12-18",
+        time: "16h30-18h30",
+        location: "Parvis de l'école",
+        color: "rose",
+        status: "upcoming",
+        affiche: venteNoel,
     },
     {
         id: "act-008",
