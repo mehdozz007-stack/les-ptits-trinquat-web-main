@@ -135,7 +135,7 @@ export function ActualitesPreview() {
                                         {/* Header avec badge */}
                                         <div className="flex items-start justify-between gap-3">
                                             <div className="flex-1">
-                                                <h3 className={`font-bold ${titleGradients[actualite.color]}`}>
+                                                <h3 className={`text-lg sm:text-xl font-bold ${titleGradients[actualite.color]}`}>
                                                     {actualite.title}
                                                 </h3>
                                             </div>
@@ -148,7 +148,7 @@ export function ActualitesPreview() {
                                         </div>
 
                                         {/* Description */}
-                                        <p className="text-sm text-muted-foreground flex-1">
+                                        <p className="text-base text-muted-foreground flex-1">
                                             {actualite.description}
                                         </p>
 
